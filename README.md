@@ -1,6 +1,7 @@
 <h1 align="center">Kaptos - KMP SDK for Aptos</h1>
 
-Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for interacting with Aptos services across multiple platforms.
+Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for interacting with Aptos services across
+multiple platforms.
 
 ![badge-android](http://img.shields.io/badge/Platform-Android-brightgreen.svg?logo=android)
 ![badge-ios](http://img.shields.io/badge/Platform-iOS-orange.svg?logo=apple)
@@ -12,16 +13,16 @@ Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for int
 ![badge-macos](http://img.shields.io/badge/Platform-macOS-orange.svg?logo=apple)
 ![badge-windows](http://img.shields.io/badge/Platform-Windows-blue.svg?logo=windows)
 
-
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
 <details>
 <summary><h2>Installation</h2></summary>
 
-Kaptos is available on [Maven Central][maven-central] as a Kotlin Multiplatform library. You can either add it to you 
+Kaptos is available on [Maven Central][maven-central] as a Kotlin Multiplatform library. You can either add it to you
 multiplatform project or add it to your platform-specific project.
 
 ### Multiplatform Project
@@ -87,7 +88,8 @@ dependencies {
 
 #### watchOS
 
-Kaptos provides artifacts for both watchOS arm32, arm64 and x64 architectures. You can add the following to your watchOS project:
+Kaptos provides artifacts for both watchOS arm32, arm64 and x64 architectures. You can add the following to your watchOS
+project:
 
 ```kotlin
 dependencies {
@@ -149,7 +151,37 @@ dependencies {
 
 </details>
 
-## License
+## Usage
+
+Initialize `Aptos` to access the SDK API.
+
+```kotlin
+val aptos = Aptos()
+```
+
+If you want to pass in a custom configuration, you can do so by passing in a `AptosConfig` object.
+
+```kotlin
+val config = AptosConfig(AptosSettings(network = Network.LOCAL))
+val aptos = Aptos(config)
+```
+
+### Reading Data from chain
+
+```kotlin
+val modules = aptos.getAccountModules("0x1".toAccountAddress())
+```
+
+## Testing
+
+To run the SDK tests, simply run from the root of this repository:
+
+> Note: for a better experience, make sure there is an aptos local node process up and running (can check if there is a
+> process running on port 8080).
+
+```shell
+./gradlew test 
+```
 
 ## License
 

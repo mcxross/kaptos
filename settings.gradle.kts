@@ -2,7 +2,10 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
         gradlePluginPortal()
+        maven(url = "../repo")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
     plugins {
         kotlin("jvm").version(extra["kotlin.version"] as String)
@@ -16,12 +19,22 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    }
+}
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }
 
 rootProject.name = "kaptos"
 
-include(":lib", ":sample")
+include(":lib", ":sample:kmp:composeApp")
 
 project(":lib").name = "kaptos"
+include("sample:jvmApp")
+findProject(":sample:jvmApp")?.name = "jvmApp"
