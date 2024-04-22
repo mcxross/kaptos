@@ -16,11 +16,11 @@
 
 package xyz.mcxross.kaptos.util
 
-import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.CoroutineScope
 
 expect fun <T> runBlocking(
   context: CoroutineContext = EmptyCoroutineContext,
-  block: suspend CoroutineScope.() -> T
+  block: suspend CoroutineScope.() -> T,
 )

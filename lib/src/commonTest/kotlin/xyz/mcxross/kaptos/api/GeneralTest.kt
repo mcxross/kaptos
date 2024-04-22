@@ -79,4 +79,22 @@ class GeneralTest {
       }
     }
   }
+
+  @Test
+  fun testGetChainTopUserTransactions() {
+    runBlocking {
+      val aptos = Aptos(AptosConfig(AptosSettings(network = Network.DEVNET)))
+      val limit = 10
+      when (val response = aptos.getChainTopUserTransactions(limit)) {
+        is Option.Some -> {
+          assertEquals(
+            response.value.user_transactions.size,
+            limit,
+            "Should return 10 transactions",
+          )
+        }
+        is Option.None -> assertTrue(false)
+      }
+    }
+  }
 }

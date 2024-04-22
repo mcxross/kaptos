@@ -18,8 +18,4 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class GraphqlQuery(
-    val query: String,
-    val variables: Map<String, Int>? = null
-)
+@Serializable data class GraphqlQuery(val query: String, val variables: Map<String, Int>? = null)

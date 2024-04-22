@@ -26,7 +26,7 @@ import kotlinx.serialization.json.Json
 actual fun httpClient(
   config: HttpClientConfig<*>.() -> Unit,
   engine: HttpClientEngine?,
-  userConfig:ClientConfig,
+  userConfig: ClientConfig,
 ) =
   HttpClient(Curl) {
     config(this)

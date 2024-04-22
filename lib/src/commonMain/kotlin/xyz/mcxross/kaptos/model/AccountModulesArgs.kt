@@ -17,11 +17,11 @@
 package xyz.mcxross.kaptos.model
 
 data class AccountModulesArgs(
-    val accountAddress: AccountAddressInput,
-    val options: Options? = null
+  val accountAddress: AccountAddressInput,
+  val options: Options? = null,
 ) {
-    data class Options(
-        val paginationArgs: PaginationArgs? = null,
-        val ledgerVersionArg: LedgerVersionArg? = null
-    )
+  data class Options(
+    val paginationArgs: PaginationArgs? = null,
+    val ledgerVersionArg: LedgerVersionArg? = null,
+  )
 }

@@ -21,8 +21,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccountData(
-    @SerialName("sequence_number")
-    val sequenceNumber: String,
-    @SerialName("authentication_key")
-    val authenticationKey: String
+  @SerialName("sequence_number") val sequenceNumber: String,
+  @SerialName("authentication_key") val authenticationKey: String,
 )

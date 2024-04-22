@@ -17,15 +17,17 @@
 package xyz.mcxross.kaptos.api
 
 import xyz.mcxross.kaptos.internal.*
-import xyz.mcxross.kaptos.internal.getInfo
-import xyz.mcxross.kaptos.internal.getModule
-import xyz.mcxross.kaptos.internal.getModules
-import xyz.mcxross.kaptos.internal.getResources
-import xyz.mcxross.kaptos.internal.getTransactions
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Account
+import xyz.mcxross.kaptos.util.APTOS_COIN
 
-class Account(private val config: AptosConfig) : Account {
+/**
+ * Account API namespace. This class provides functionality to reading and writing account related
+ * information.
+ *
+ * @property config AptosConfig object for configuration
+ */
+class Account(override val config: AptosConfig) : Account {
 
   /**
    * Queries the current state for an Aptos account given its account address
@@ -110,19 +112,58 @@ class Account(private val config: AptosConfig) : Account {
   }
 
   /**
-   * Queries a specific account resource given an account address and resource name
+   * Queries the current count of transactions submitted by an account
    *
-   * @param accountAddress Aptos account address
-   * @param resourceName Name of the resource
-   * @param param [LedgerVersionQueryParam] to optionally configure the ledger version.
-   * @returns [MoveResource]
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current count of transactions made by an account
    */
-  override suspend fun getAccountResource(
+  override suspend fun getAccountTransactionsCount(
     accountAddress: AccountAddressInput,
-    resourceName: String,
-    param: LedgerVersionQueryParam.() -> Unit,
-  ): Option<MoveResource> {
-    val ledgerVersionQueryParam = LedgerVersionQueryParam().apply(param)
-    return getResource(config, accountAddress, resourceName, ledgerVersionQueryParam.toMap())
-  }
+    minimumLedgerVersion: Long?,
+  ): Option<Long> = getAccountTransactionsCount(config, accountAddress, minimumLedgerVersion)
+
+  override suspend fun getAccountCoinsData(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long?,
+  ): Option<AccountCoinsData> = getAccountCoinsData(config, accountAddress, minimumLedgerVersion)
+
+  /**
+   * Queries the current count of an account's coins aggregated
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current count of the aggregated count of all account's coins
+   */
+  override suspend fun getAccountCoinsCount(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long?,
+  ): Option<Int> = getAccountCoinsCount(config, accountAddress, minimumLedgerVersion)
+
+  /**
+   * Queries the account's APT amount
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current amount of account's APT
+   */
+  override suspend fun getAccountAPTAmount(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long?,
+  ): Option<Int> =
+    getAccountCoinAmount(accountAddress, MoveValue.MoveStructId(APTOS_COIN), minimumLedgerVersion)
+
+  /**
+   * Queries the account's coin amount by the coin type
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param coinType The coin type to query
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current amount of account's coin
+   */
+  override suspend fun getAccountCoinAmount(
+    accountAddress: AccountAddressInput,
+    coinType: MoveValue.MoveStructId,
+    minimumLedgerVersion: Long?,
+  ): Option<Int> = getAccountCoinAmount(config, accountAddress, coinType, minimumLedgerVersion)
 }

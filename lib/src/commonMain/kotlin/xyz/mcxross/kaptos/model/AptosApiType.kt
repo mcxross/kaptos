@@ -17,5 +17,7 @@
 package xyz.mcxross.kaptos.model
 
 enum class AptosApiType {
-    FULLNODE, INDEXER, FAUCET
+  FULLNODE,
+  INDEXER,
+  FAUCET
 }

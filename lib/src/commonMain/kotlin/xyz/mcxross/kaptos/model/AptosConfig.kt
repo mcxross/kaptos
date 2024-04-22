@@ -16,6 +16,7 @@
 
 package xyz.mcxross.kaptos.model
 
+import xyz.mcxross.kaptos.client.ClientConfig
 import xyz.mcxross.kaptos.util.NetworkToFaucetAPI
 import xyz.mcxross.kaptos.util.NetworkToIndexerAPI
 import xyz.mcxross.kaptos.util.NetworkToNodeAPI
@@ -31,12 +32,12 @@ import xyz.mcxross.kaptos.util.NetworkToNodeAPI
  *   `AptosSettings`.
  * @property client The client configuration, defaults to a new `Client` instance with name
  *   "aptosClient" if not provided in `AptosSettings`.
- * @property fullnode The fullnode configuration, taken from `AptosSettings` if provided.
+ * @property fullNode The fullnode configuration, taken from `AptosSettings` if provided.
  * @property faucet The faucet configuration, taken from `AptosSettings` if provided.
  * @property indexer The indexer configuration, taken from `AptosSettings` if provided.
  * @property clientConfig The client configuration, defaults to a new `ClientConfig` instance if not
  *   provided in `AptosSettings`.
- * @property fullnodeConfig The fullnode configuration, defaults to a new `FullNodeConfig` instance
+ * @property fullNodeConfig The fullnode configuration, defaults to a new `FullNodeConfig` instance
  *   if not provided in `AptosSettings`.
  * @property indexerConfig The indexer configuration, defaults to a new `IndexerConfig` instance if
  *   not provided in `AptosSettings`.
@@ -45,32 +46,39 @@ import xyz.mcxross.kaptos.util.NetworkToNodeAPI
  */
 class AptosConfig(settings: AptosSettings? = null) {
   val network: Network = settings?.network ?: Network.DEVNET
-  val fullnode: String? = settings?.fullnode
+  val fullNode: String? = settings?.fullNode
   val faucet: String? = settings?.faucet
   val indexer: String? = settings?.indexer
   val clientConfig: ClientConfig = settings?.clientConfig ?: ClientConfig()
-  val fullnodeConfig: FullNodeConfig = settings?.fullnodeConfig ?: FullNodeConfig()
+  val fullNodeConfig: FullNodeConfig = settings?.fullNodeConfig ?: FullNodeConfig()
   val indexerConfig: IndexerConfig = settings?.indexerConfig ?: IndexerConfig()
   val faucetConfig: FaucetConfig = settings?.faucetConfig ?: FaucetConfig()
 
   fun getRequestUrl(apiType: AptosApiType): String {
     return when (apiType) {
       AptosApiType.FULLNODE -> {
-        fullnode
-          ?: if (network == Network.CUSTOM)
-            throw Exception("Please provide a custom full node url")
-          else NetworkToNodeAPI.getOrElse(network.name.toLowerCase()) { throw Exception("Invalid network") }
+        fullNode
+          ?: if (network == Network.CUSTOM) throw Exception("Please provide a custom full node url")
+          else
+            NetworkToNodeAPI.getOrElse(network.name.lowercase()) {
+              throw Exception("Invalid network")
+            }
       }
       AptosApiType.FAUCET -> {
         faucet
           ?: if (network == Network.CUSTOM) throw Exception("Please provide a custom faucet url")
-          else NetworkToFaucetAPI.getOrElse(network.name.toLowerCase()) { throw Exception("Invalid network") }
+          else
+            NetworkToFaucetAPI.getOrElse(network.name.lowercase()) {
+              throw Exception("Invalid network")
+            }
       }
       AptosApiType.INDEXER -> {
         indexer
-          ?: if (network == Network.CUSTOM)
-            throw Exception("Please provide a custom indexer url")
-          else NetworkToIndexerAPI.getOrElse(network.name.toLowerCase()) { throw Exception("Invalid network") }
+          ?: if (network == Network.CUSTOM) throw Exception("Please provide a custom indexer url")
+          else
+            NetworkToIndexerAPI.getOrElse(network.name.lowercase()) {
+              throw Exception("Invalid network")
+            }
       }
     }
   }

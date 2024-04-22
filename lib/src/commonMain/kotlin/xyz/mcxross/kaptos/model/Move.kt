@@ -19,8 +19,6 @@ package xyz.mcxross.kaptos.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-typealias MoveModuleId = String
-
 @Serializable
 enum class MoveVisibility {
   @SerialName("public") PUBLIC,

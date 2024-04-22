@@ -20,6 +20,7 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.protocol.getAccountResource
 import xyz.mcxross.kaptos.util.runBlocking
 
 class AccountTest {
@@ -74,6 +75,30 @@ class AccountTest {
       when (val response = aptos.getAccountResources(HexInput("0x1"))) {
         is Option.Some -> {
           assertTrue(response.value.isNotEmpty(), "Should have 1 resource")
+        }
+        is Option.None -> assertTrue(false)
+      }
+    }
+  }
+
+  @Test
+  fun testGetAccountResource() {
+    runBlocking {
+      val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
+      when (
+        val response =
+          aptos.getAccountResource<AccountResource>(HexInput("0x1"), "0x1::account::Account")
+      ) {
+        is Option.Some -> {
+          assertTrue(
+            response.value.data.sequenceNumber?.toInt() == 0,
+            "Sequence number should be 0",
+          )
+          assertTrue(
+            response.value.data.authenticationKey ==
+              "0x0000000000000000000000000000000000000000000000000000000000000001",
+            "Authentication key should be 0x0000000000000000000000000000000000000000000000000000000000000001)",
+          )
         }
         is Option.None -> assertTrue(false)
       }

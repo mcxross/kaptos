@@ -47,14 +47,14 @@ data class UserTransactionResponse(
   val success: Boolean,
   @SerialName("vm_status") val vmStatus: String,
   @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
-  //val changes: List<WriteSetChange>,
+  // val changes: List<WriteSetChange>,
   val sender: String,
   @SerialName("sequence_number") val sequenceNumber: String,
   @SerialName("max_gas_amount") val maxGasAmount: String,
   @SerialName("gas_unit_price") val gasUnitPrice: String,
   @SerialName("expiration_timestamp_secs") val expirationTimestampSecs: String,
-  //val payload: TransactionPayloadResponse,
-  //val signature: TransactionSignature?,
+  // val payload: TransactionPayloadResponse,
+  // val signature: TransactionSignature?,
   val events: List<Event>,
   val timestamp: String,
 ) : TransactionResponse()
@@ -104,16 +104,16 @@ data class TransactionEd25519Signature(
 
 @Serializable
 data class Guid(
-  @SerialName("creation_number") val creationNumber: String,
-  @SerialName("account_address") val accountAddress: String,
+  @SerialName("creation_number") val creationNumber: String? = null,
+  @SerialName("account_address") val accountAddress: String? = null,
 )
 
 @Serializable
 data class Event(
   val guid: Guid,
-  @SerialName("sequence_number") val sequenceNumber: String,
-  val type: String,
-  val data: JsonElement,
+  @SerialName("sequence_number") val sequenceNumber: String? = null,
+  val type: String? = null,
+  val data: JsonElement? = null,
 )
 
 @Serializable sealed class WriteSetChange

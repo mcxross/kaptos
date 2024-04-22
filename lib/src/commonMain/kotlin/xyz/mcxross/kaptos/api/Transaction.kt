@@ -25,6 +25,12 @@ import xyz.mcxross.kaptos.model.Option
 import xyz.mcxross.kaptos.model.TransactionResponse
 import xyz.mcxross.kaptos.protocol.Transaction
 
+/**
+ * Transaction API namespace. This class provides functionality to reading and writing transaction
+ * information.
+ *
+ * @property config AptosConfig object for configuration
+ */
 class Transaction(val config: AptosConfig) : Transaction {
 
   /**

@@ -17,6 +17,6 @@
 package xyz.mcxross.kaptos.model
 
 enum class UserAgent {
-    BROWSER,
-    CURL
+  BROWSER,
+  CURL
 }

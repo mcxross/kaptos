@@ -16,9 +16,18 @@
 
 package xyz.mcxross.kaptos.protocol
 
+import xyz.mcxross.kaptos.internal.getResource
 import xyz.mcxross.kaptos.model.*
 
+/**
+ * Account API namespace. This interface provides functionality to reading and writing account
+ * related information.
+ *
+ * @property config AptosConfig object for configuration
+ */
 interface Account {
+
+  val config: AptosConfig
 
   /**
    * Queries the current state for an Aptos account given its account address
@@ -83,16 +92,85 @@ interface Account {
   ): Option<List<Option<List<MoveResource>>>>
 
   /**
-   * Queries a specific account resource given an account address and resource name
+   * Queries the current count of transactions submitted by an account
    *
-   * @param accountAddress Aptos account address
-   * @param resourceName Name of the resource
-   * @param param [LedgerVersionQueryParam] to optionally configure the ledger version.
-   * @returns [MoveResource]
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current count of transactions made by an account
    */
-  suspend fun getAccountResource(
+  suspend fun getAccountTransactionsCount(
     accountAddress: AccountAddressInput,
-    resourceName: String,
-    param: LedgerVersionQueryParam.() -> Unit = {},
-  ): Option<MoveResource>
+    minimumLedgerVersion: Long? = null,
+  ): Option<Long>
+
+  /**
+   * Queries an account's coins data
+   *
+   * @param args.accountAddress The account address we want to get the coins data for
+   * @param args.minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @param args.options.offset optional. The number coin to start returning results from
+   * @param args.options.limit optional. The number of results to return
+   * @param args.options.orderBy optional. The order to sort the coins by
+   * @param args.options.where optional. Filter the results by
+   * @returns Array with the coins data
+   */
+  suspend fun getAccountCoinsData(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long? = null,
+  ): Option<AccountCoinsData>
+
+  /**
+   * Queries the current count of an account's coins aggregated
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current count of the aggregated count of all account's coins
+   */
+  suspend fun getAccountCoinsCount(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long? = null,
+  ): Option<Int>
+
+  /**
+   * Queries the account's APT amount
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current amount of account's APT
+   */
+  suspend fun getAccountAPTAmount(
+    accountAddress: AccountAddressInput,
+    minimumLedgerVersion: Long? = null,
+  ): Option<Int>
+
+  /**
+   * Queries the account's coin amount by the coin type
+   *
+   * @param accountAddress The account address we want to get the total count for
+   * @param coinType The coin type to query
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns Current amount of account's coin
+   */
+  suspend fun getAccountCoinAmount(
+    accountAddress: AccountAddressInput,
+    coinType: MoveValue.MoveStructId,
+    minimumLedgerVersion: Long? = null,
+  ): Option<Int>
+}
+
+/**
+ * Queries a specific account resource given an account address and resource name
+ *
+ * @param accountAddress Aptos account address
+ * @param resourceName Name of the resource
+ * @param param [LedgerVersionQueryParam] to optionally configure the ledger version.
+ * @returns [MoveResource]
+ */
+suspend inline fun <reified T> Account.getAccountResource(
+  accountAddress: AccountAddressInput,
+  resourceName: String,
+  param: LedgerVersionQueryParam.() -> Unit = {},
+): Option<T> {
+  val ledgerVersionQueryParam = LedgerVersionQueryParam().apply(param)
+  return getResource(this.config, accountAddress, resourceName, ledgerVersionQueryParam.toMap())
 }

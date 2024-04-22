@@ -19,10 +19,15 @@ package xyz.mcxross.kaptos.api
 import xyz.mcxross.kaptos.internal.getBlockByHeight
 import xyz.mcxross.kaptos.internal.getBlockByVersion
 import xyz.mcxross.kaptos.internal.getLedgerInfo
-import xyz.mcxross.kaptos.internal.getTableItem
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.General
 
+/**
+ * General API namespace. This interface provides functionality to reading and writing general
+ * ledger information.
+ *
+ * @property config AptosConfig object for configuration
+ */
 class General(override val config: AptosConfig) : General {
 
   /**
@@ -64,7 +69,6 @@ class General(override val config: AptosConfig) : General {
   override suspend fun getBlockByHeight(ledgerHeight: Long): Option<Block> =
     getBlockByHeight(config, ledgerHeight)
 
-  override suspend fun getChainTopUserTransactions(limit: Int) {
+  override suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions> =
     xyz.mcxross.kaptos.internal.getChainTopUserTransactions(config, limit)
-  }
 }

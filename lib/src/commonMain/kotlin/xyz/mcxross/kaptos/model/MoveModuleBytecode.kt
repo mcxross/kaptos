@@ -18,5 +18,4 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class MoveModuleBytecode(val bytecode: String, val abi: MoveModule? = null)
+@Serializable data class MoveModuleBytecode(val bytecode: String, val abi: MoveModule? = null)

@@ -16,12 +16,9 @@
 
 package xyz.mcxross.kaptos.util
 
-import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.CoroutineContext
 
-actual fun <T> runBlocking(
-  context: CoroutineContext,
-  block: suspend CoroutineScope.() -> T,
-) {
+actual fun <T> runBlocking(context: CoroutineContext, block: suspend CoroutineScope.() -> T) {
   kotlinx.coroutines.runBlocking(context, block)
 }

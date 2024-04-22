@@ -16,8 +16,15 @@
 
 package xyz.mcxross.kaptos.internal
 
+import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.client.getAptosFullNode
+import xyz.mcxross.kaptos.client.indexerClient
 import xyz.mcxross.kaptos.client.paginateWithCursor
+import xyz.mcxross.kaptos.exception.AptosException
+import xyz.mcxross.kaptos.generated.GetAccountCoinsData
+import xyz.mcxross.kaptos.generated.GetAccountTransactionsCount
+import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
+import xyz.mcxross.kaptos.generated.inputs.current_fungible_asset_balances_bool_exp
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getInfo(
@@ -132,13 +139,13 @@ internal suspend fun getResources(
   }
 }
 
-internal suspend fun getResource(
+suspend inline fun <reified T> getResource(
   aptosConfig: AptosConfig,
   accountAddress: AccountAddressInput,
   resourceType: String,
   params: Map<String, Any?>? = null,
-): Option<MoveResource> {
-  return getAptosFullNode<MoveResource>(
+): Option<T> {
+  return getAptosFullNode<T>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
         originMethod = "getResource",
@@ -147,4 +154,108 @@ internal suspend fun getResource(
       )
     )
     .second
+}
+
+internal suspend fun getAccountTransactionsCount(
+  config: AptosConfig,
+  accountAddressInput: AccountAddressInput,
+  minimumLedgerVersion: Long? = null,
+): Option<Long> {
+  val txCount =
+    GetAccountTransactionsCount(
+      GetAccountTransactionsCount.Variables(address = accountAddressInput.value)
+    )
+  val response: KotlinxGraphQLResponse<GetAccountTransactionsCount.Result> =
+    try {
+      indexerClient(config).execute(txCount)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
+
+  val data = response.data ?: return Option.None
+
+  return Option.Some(data.account_transactions_aggregate.aggregate?.count?.toLong() ?: 0)
+}
+
+internal suspend fun getAccountCoinsData(
+  config: AptosConfig,
+  accountAddress: AccountAddressInput,
+  minimumLedgerVersion: Long? = null,
+): Option<AccountCoinsData> {
+  val coinsData =
+    GetAccountCoinsData(
+      GetAccountCoinsData.Variables(
+        where_condition =
+          current_fungible_asset_balances_bool_exp(
+            owner_address = String_comparison_exp(_eq = accountAddress.value)
+          )
+      )
+    )
+
+  val response: KotlinxGraphQLResponse<AccountCoinsData> =
+    try {
+      indexerClient(config).execute(coinsData)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
+
+  val data = response.data ?: return Option.None
+
+  return Option.Some(data)
+}
+
+internal suspend fun getAccountCoinsCount(
+  config: AptosConfig,
+  accountAddress: AccountAddressInput,
+  minimumLedgerVersion: Long? = null,
+): Option<Int> {
+  val data =
+    GetAccountCoinsData(
+      GetAccountCoinsData.Variables(
+        where_condition =
+          current_fungible_asset_balances_bool_exp(
+            owner_address = String_comparison_exp(_eq = accountAddress.value)
+          )
+      )
+    )
+
+  val response: KotlinxGraphQLResponse<GetAccountCoinsData.Result> =
+    try {
+      indexerClient(config).execute(data)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
+
+  val result = response.data ?: return Option.None
+
+  return Option.Some(result.current_fungible_asset_balances.size)
+}
+
+internal suspend fun getAccountCoinAmount(
+  config: AptosConfig,
+  accountAddress: AccountAddressInput,
+  coinType: MoveValue.MoveStructId,
+  minimumLedgerVersion: Long? = null,
+): Option<Int> {
+  val data =
+    GetAccountCoinsData(
+      GetAccountCoinsData.Variables(
+        where_condition =
+          current_fungible_asset_balances_bool_exp(
+            owner_address = String_comparison_exp(_eq = accountAddress.value),
+            asset_type = String_comparison_exp(_eq = coinType.value),
+          )
+      )
+    )
+
+  val response: KotlinxGraphQLResponse<GetAccountCoinsData.Result> =
+    try {
+      indexerClient(config).execute(data)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
+
+  val result = response.data ?: return Option.None
+
+  return Option.Some(result.current_fungible_asset_balances.firstOrNull()?.amount?.toInt() ?: 0)
 }

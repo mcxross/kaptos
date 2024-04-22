@@ -20,15 +20,17 @@ import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Account
 import xyz.mcxross.kaptos.protocol.DigitalAsset
 import xyz.mcxross.kaptos.protocol.General
+import xyz.mcxross.kaptos.protocol.Staking
 import xyz.mcxross.kaptos.protocol.Transaction
 
 /**
  * [Aptos] is the main entry point to the SDK's APIs. Instantiate to access all functionalities.
  *
- * @param settings [AptosConfig] to configure the SDK.
+ * @param config [AptosConfig] to optionally configure the SDK.
  */
-class Aptos(settings: AptosConfig = AptosConfig()) :
-  Account by xyz.mcxross.kaptos.api.Account(settings),
-  General by xyz.mcxross.kaptos.api.General(settings),
-  Transaction by xyz.mcxross.kaptos.api.Transaction(settings),
-  DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(settings)
+class Aptos(override val config: AptosConfig = AptosConfig()) :
+  Account by xyz.mcxross.kaptos.api.Account(config),
+  General by xyz.mcxross.kaptos.api.General(config),
+  Transaction by xyz.mcxross.kaptos.api.Transaction(config),
+  Staking by xyz.mcxross.kaptos.api.Staking(config),
+  DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config)

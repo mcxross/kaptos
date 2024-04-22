@@ -27,12 +27,12 @@ actual fun httpClient(
   config: HttpClientConfig<*>.() -> Unit,
   engine: HttpClientEngine?,
   userConfig: ClientConfig,
-) = HttpClient(Darwin) {
-  config(this)
+) =
+  HttpClient(Darwin) {
+    config(this)
 
-  // Set the content negotiation. This is required for the client to know how to handle JSON.
-  install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
-
-}
+    // Set the content negotiation. This is required for the client to know how to handle JSON.
+    install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
+  }
 
 actual class ClientConfig

@@ -16,14 +16,16 @@
 
 package xyz.mcxross.kaptos.model
 
+import xyz.mcxross.kaptos.client.ClientConfig
+
 data class AptosSettings(
   val network: Network? = null,
-  val fullnode: String? = null,
+  val fullNode: String? = null,
   val faucet: String? = null,
   val indexer: String? = null,
   val client: Client? = null,
   val clientConfig: ClientConfig? = null,
-  val fullnodeConfig: FullNodeConfig? = null,
+  val fullNodeConfig: FullNodeConfig? = null,
   val indexerConfig: IndexerConfig? = null,
   val faucetConfig: FaucetConfig? = null,
 )

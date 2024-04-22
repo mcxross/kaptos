@@ -16,11 +16,13 @@
 
 package xyz.mcxross.kaptos.internal
 
-import io.ktor.client.statement.*
+import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.client.getAptosFullNode
+import xyz.mcxross.kaptos.client.indexerClient
 import xyz.mcxross.kaptos.client.postAptosFullNode
 import xyz.mcxross.kaptos.client.postAptosIndexer
-import xyz.mcxross.kaptos.generated.GET_CHAIN_TOP_USER_TRANSACTIONS
+import xyz.mcxross.kaptos.exception.AptosException
+import xyz.mcxross.kaptos.generated.GetChainTopUserTransactions
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Option<LedgerInfo> =
@@ -76,16 +78,29 @@ suspend inline fun <reified T> getTableItem(
   return response.second
 }
 
-internal suspend fun getChainTopUserTransactions(aptosConfig: AptosConfig, limit: Int) {
-  val graphqlQuery =
-    GraphqlQuery(query = GET_CHAIN_TOP_USER_TRANSACTIONS, variables = mapOf("limit" to limit))
-  val response = queryIndexer(aptosConfig, graphqlQuery)
+internal suspend fun getChainTopUserTransactions(
+  aptosConfig: AptosConfig,
+  limit: Int,
+): Option<ChainTopUserTransactions> {
+  val topUserTransactions =
+    GetChainTopUserTransactions(GetChainTopUserTransactions.Variables(limit = limit))
 
-  println(response.bodyAsText())
+  val response: KotlinxGraphQLResponse<ChainTopUserTransactions> =
+    try {
+      indexerClient(aptosConfig).execute(topUserTransactions)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
 
+  val data = response.data ?: return Option.None
+
+  return Option.Some(data)
 }
 
-internal suspend fun queryIndexer(aptosConfig: AptosConfig, graphqlQuery: GraphqlQuery) : AptosResponse {
+internal suspend fun queryIndexer(
+  aptosConfig: AptosConfig,
+  graphqlQuery: GraphqlQuery,
+): AptosResponse {
   return postAptosIndexer(
     RequestOptions.PostAptosRequestOptions(
       aptosConfig = aptosConfig,

@@ -21,7 +21,6 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.*
-import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.Option

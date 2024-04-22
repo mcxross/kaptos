@@ -27,5 +27,4 @@ actual fun <T> runBlocking(context: CoroutineContext, block: suspend CoroutineSc
     }
     .then { println("Promise completed successfully.") }
     .catch { e -> println("Promise failed with exception: $e") }
-
 }

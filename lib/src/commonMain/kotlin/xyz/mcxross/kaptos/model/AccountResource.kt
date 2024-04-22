@@ -16,6 +16,16 @@
 
 package xyz.mcxross.kaptos.model
 
-import io.ktor.client.statement.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-typealias AptosResponse = HttpResponse
+@Serializable
+data class Data(
+  @SerialName("authentication_key") val authenticationKey: String? = null,
+  @SerialName("coin_register_events") val coinRegisterEvents: Event? = null,
+  @SerialName("guid_creation_num") val guidCreationNum: String? = null,
+  @SerialName("key_rotation_events") val keyRotationEvents: Event? = null,
+  @SerialName("sequence_number") val sequenceNumber: String? = null,
+)
+
+@Serializable data class AccountResource(val type: String, val data: Data)

@@ -18,6 +18,10 @@ package xyz.mcxross.kaptos.protocol
 
 import xyz.mcxross.kaptos.model.*
 
+/**
+ * General API namespace. This interface provides functionality to reading and writing general
+ * information.
+ */
 interface General {
   val config: AptosConfig
   /**
@@ -50,7 +54,7 @@ interface General {
    */
   suspend fun getBlockByHeight(ledgerHeight: Long): Option<Block>
 
-  suspend fun getChainTopUserTransactions(limit: Int)
+  suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions>
 }
 
 suspend inline fun <reified T> General.getTableItem(

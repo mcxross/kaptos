@@ -20,6 +20,10 @@ import xyz.mcxross.kaptos.model.GasEstimation
 import xyz.mcxross.kaptos.model.Option
 import xyz.mcxross.kaptos.model.TransactionResponse
 
+/**
+ * Transaction API namespace. This interface provides functionality to reading and writing
+ * transactions.
+ */
 interface Transaction {
 
   /**

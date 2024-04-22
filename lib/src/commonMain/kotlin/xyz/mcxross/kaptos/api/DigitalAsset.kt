@@ -17,31 +17,57 @@
 package xyz.mcxross.kaptos.api
 
 import kotlin.coroutines.cancellation.CancellationException
-import xyz.mcxross.graphql.client.types.GraphQLClientResponse
-import xyz.mcxross.kaptos.client.indexerClient
 import xyz.mcxross.kaptos.exception.AptosException
-import xyz.mcxross.kaptos.generated.GetTokenData
-import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.Option
-import xyz.mcxross.kaptos.model.TokenData
+import xyz.mcxross.kaptos.internal.getCollectionData
+import xyz.mcxross.kaptos.internal.getCollectionDataByCollectionId
+import xyz.mcxross.kaptos.internal.getTokenData
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.DigitalAsset
 
-class DigitalAsset(val settings: AptosConfig) : DigitalAsset {
+/**
+ * Digital asset API namespace. This class provides functionality to reading and writing digital
+ * assets' related information.
+ *
+ * @property config AptosConfig object for configuration
+ */
+class DigitalAsset(val config: AptosConfig) : DigitalAsset {
+
+  /**
+   * Queries data of a specific collection by the collection creator address and the collection
+   * name.
+   *
+   * If, for some reason, a creator account has 2 collections with the same name in v1 and v2, can
+   * pass an optional `tokenStandard` parameter to query a specific standard
+   *
+   * @param creatorAddress the address of the collection's creator
+   * @param collectionName the name of the collection
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @param tokenStandard the token standard to query
+   * @returns [CollectionData] response type
+   */
+  override suspend fun getCollectionData(
+    creatorAddress: AccountAddressInput,
+    collectionName: String,
+    minimumLedgerVersion: Long?,
+    tokenStandard: TokenStandard?,
+  ): Option<CollectionData?> =
+    getCollectionData(config, creatorAddress, collectionName, tokenStandard)
+
+  /**
+   * Queries data of a specific collection by the collection ID.
+   *
+   * @param collectionId the ID of the collection, it's the same thing as the address of the
+   *   collection object
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
+   * @returns [CollectionData] response type
+   */
+  override suspend fun getCollectionDataByCollectionId(
+    collectionId: String,
+    minimumLedgerVersion: Long?,
+  ): Option<CollectionData?> =
+    getCollectionDataByCollectionId(config, collectionId, minimumLedgerVersion)
+
   @Throws(AptosException::class, CancellationException::class)
-  override suspend fun getTokenData(offset: Int?, limit: Int?): Option<TokenData> {
-
-    val tokenData = GetTokenData(GetTokenData.Variables(offset = offset, limit = limit))
-    indexerClient(settings).demo(tokenData)
-
-   /* val response: GraphQLClientResponse<GetTokenData.Result> =
-      try {
-        indexerClient(settings).demo()
-      } catch (e: Exception) {
-        throw AptosException("GraphQL query execution failed: $e")
-      }
-
-    val data = response.data ?: throw AptosException("GraphQL query returned no data")*/
-
-    return Option.None
-  }
+  override suspend fun getTokenData(offset: Int?, limit: Int?): Option<TokenData> =
+    getTokenData(config, offset, limit)
 }

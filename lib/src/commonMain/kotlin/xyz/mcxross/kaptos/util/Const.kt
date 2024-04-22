@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-package xyz.mcxross.kaptos.client
+package xyz.mcxross.kaptos.util
 
-import xyz.mcxross.graphql.client.GraphQLKtorClient
-import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.Client
-
-class Indexer(aptosConfig: AptosConfig) : GraphQLKtorClient(url = ""), Client
+const val APTOS_COIN = "0x1::aptos_coin::AptosCoin"

@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.client
 
 import io.ktor.client.*
 import io.ktor.client.engine.*
-import xyz.mcxross.graphql.client.GraphQLKtorClient
+import xyz.mcxross.graphql.client.DefaultGraphQLClient
 import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosConfig
 
@@ -31,11 +31,12 @@ import xyz.mcxross.kaptos.model.AptosConfig
 expect fun httpClient(
   config: HttpClientConfig<*>.() -> Unit = {},
   engine: HttpClientEngine? = null,
-  userConfig:ClientConfig,
+  userConfig: ClientConfig,
 ): HttpClient
 
 expect class ClientConfig()
 
 val client = httpClient(userConfig = ClientConfig())
 
-fun indexerClient(config: AptosConfig) = GraphQLKtorClient(config.getRequestUrl(AptosApiType.INDEXER))
+fun indexerClient(config: AptosConfig) =
+  DefaultGraphQLClient(config.getRequestUrl(AptosApiType.INDEXER))

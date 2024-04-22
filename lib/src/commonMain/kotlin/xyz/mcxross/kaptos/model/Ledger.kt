@@ -16,4 +16,20 @@
 
 package xyz.mcxross.kaptos.model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
 data class LedgerVersionArg(val ledgerVersion: Int? = null)
+
+@Serializable
+data class LedgerInfo(
+  @SerialName("chain_id") val chainId: Long,
+  val epoch: String,
+  @SerialName("ledger_version") val ledgerVersion: String,
+  @SerialName("oldest_ledger_version") val oldestLedgerVersion: String,
+  @SerialName("ledger_timestamp") val ledgerTimestamp: String,
+  @SerialName("node_role") val nodeRole: String,
+  @SerialName("oldest_block_height") val oldestBlockHeight: String,
+  @SerialName("block_height") val blockHeight: String,
+  @SerialName("git_hash") val gitHash: String,
+)

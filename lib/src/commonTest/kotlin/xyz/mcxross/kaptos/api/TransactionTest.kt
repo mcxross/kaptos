@@ -14,10 +14,22 @@
  * limitations under the License.
  */
 
-package xyz.mcxross.kaptos.model
+package xyz.mcxross.kaptos.api
 
-data class ClientConfig(
-  val HEADERS: Map<String, Any>? = null,
-  val WITH_CREDENTIALS: Boolean? = null,
-  val API_KEY: String? = null,
-)
+import kotlin.test.Test
+import kotlin.test.assertTrue
+import xyz.mcxross.kaptos.Aptos
+import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.util.runBlocking
+
+class TransactionTest {
+
+  @Test
+  fun testGetGasPriceEstimation() {
+    runBlocking {
+      val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
+      val response = aptos.getGasPriceEstimation()
+      assertTrue(response.gasEstimate > 0, "Gas estimate should be greater than 0")
+    }
+  }
+}

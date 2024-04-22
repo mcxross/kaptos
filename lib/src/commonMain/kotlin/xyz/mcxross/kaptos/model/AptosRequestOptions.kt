@@ -16,6 +16,8 @@
 
 package xyz.mcxross.kaptos.model
 
+import xyz.mcxross.kaptos.client.ClientConfig
+
 abstract class RequestOptions {
   abstract val aptosConfig: AptosConfig
   abstract val originMethod: String
