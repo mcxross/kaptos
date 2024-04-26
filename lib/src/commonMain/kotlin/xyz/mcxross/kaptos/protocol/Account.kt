@@ -106,14 +106,11 @@ interface Account {
   /**
    * Queries an account's coins data
    *
-   * @param args.accountAddress The account address we want to get the coins data for
-   * @param args.minimumLedgerVersion Optional ledger version to sync up to, before querying
-   * @param args.options.offset optional. The number coin to start returning results from
-   * @param args.options.limit optional. The number of results to return
-   * @param args.options.orderBy optional. The order to sort the coins by
-   * @param args.options.where optional. Filter the results by
+   * @param accountAddress The account address we want to get the coins data for
+   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
    * @returns Array with the coins data
    */
+  // TODO: Add more parameters to the query
   suspend fun getAccountCoinsData(
     accountAddress: AccountAddressInput,
     minimumLedgerVersion: Long? = null,
