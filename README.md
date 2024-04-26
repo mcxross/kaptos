@@ -31,7 +31,7 @@ Add the following to your common source set:
 
 ```kotlin
 commonMain.dependencies {
-    implementation("com.mcxross.kaptos:kaptos:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos:<version>")
 }
 ```
 
@@ -46,7 +46,7 @@ optimized for release builds, while the `kaptos-android-debug` flavor is optimiz
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-android:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-android:<version>")
 }
 ```
 
@@ -58,7 +58,7 @@ Kaptos provides artifacts for both iOS arm64 and x64 architectures. You can add 
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-iosArm64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-iosArm64:<version>")
 }
 ```
 
@@ -66,7 +66,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-iosX64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-iosX64:<version>")
 }
 ```
 
@@ -74,7 +74,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-macos:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-macos:<version>")
 }
 ```
 
@@ -82,7 +82,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-tvos:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-tvos:<version>")
 }
 ```
 
@@ -93,19 +93,19 @@ project:
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-watchosarm32:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-watchosarm32:<version>")
 }
 ```
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-watchosarm64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-watchosarm64:<version>")
 }
 ```
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-watchosx64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-watchosx64:<version>")
 }
 ```
 
@@ -113,7 +113,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-js:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-js:<version>")
 }
 ```
 
@@ -121,7 +121,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-jvm:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-jvm:<version>")
 }
 ```
 
@@ -131,13 +131,13 @@ Kaptos provides artifacts for both Linux arm64 and x64 architectures. You can ad
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-linuxarm64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-linuxarm64:<version>")
 }
 ```
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-linuxx64:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-linuxx64:<version>")
 }
 ```
 
@@ -145,7 +145,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("com.mcxross.kaptos:kaptos-mingw:<version>")
+    implementation("xyz.mcxross.kaptos:kaptos-mingw:<version>")
 }
 ```
 
@@ -199,5 +199,5 @@ To run the SDK tests, simply run from the root of this repository:
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[maven-central]: https://search.maven.org/search?q=g:com.mcxross.kaptos
+[maven-central]: https://search.maven.org/search?q=g:xyz.mcxross.kaptos
 
