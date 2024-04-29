@@ -18,11 +18,18 @@ multiple platforms.
 ![badge-macos](http://img.shields.io/badge/Platform-macOS-orange.svg?logo=apple)
 ![badge-windows](http://img.shields.io/badge/Platform-Windows-blue.svg?logo=windows)
 
+- [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Features
+
+- **Multiplatform**: Kaptos is a Kotlin Multiplatform library usable across various platforms.
+- **Aptos API**: Kaptos offers a unified API for Aptos services.
+- **Client Configuration**: Kaptos supports customizable client settings, such as proxy and network configurations.
 
 <details>
 <summary><h2>Installation</h2></summary>
@@ -187,6 +194,10 @@ To run the SDK tests, simply run from the root of this repository:
 ```shell
 ./gradlew test 
 ```
+
+## Contribution
+
+All contributions to Kaptos are welcome. Before opening a PR, please submit an issue detailing the bug or feature. When opening a PR, please ensure that your contribution builds on the KMM toolchain, has been linted with `ktfmt <GOOGLE (INTERNAL)>`, and contains tests when applicable. For more information, please see the [contribution guidelines](CONTRIBUTING.md).
 
 ## License
 
