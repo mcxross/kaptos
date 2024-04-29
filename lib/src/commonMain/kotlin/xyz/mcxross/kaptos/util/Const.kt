@@ -17,3 +17,7 @@
 package xyz.mcxross.kaptos.util
 
 const val APTOS_COIN = "0x1::aptos_coin::AptosCoin"
+
+val DEFAULT_CLIENT_HEADERS = mapOf(
+  "x-aptos-client" to "aptos-kmp-sdk/0.1.0"
+)

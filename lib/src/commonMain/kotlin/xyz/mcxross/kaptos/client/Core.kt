@@ -29,14 +29,12 @@ import xyz.mcxross.kaptos.model.AptosConfig
  * options.
  */
 expect fun httpClient(
-  config: HttpClientConfig<*>.() -> Unit = {},
-  engine: HttpClientEngine? = null,
-  userConfig: ClientConfig,
+  clientConfig: ClientConfig,
 ): HttpClient
 
 expect class ClientConfig()
 
-val client = httpClient(userConfig = ClientConfig())
+val client = httpClient(clientConfig = ClientConfig())
 
 fun indexerClient(config: AptosConfig) =
   DefaultGraphQLClient(config.getRequestUrl(AptosApiType.INDEXER))
