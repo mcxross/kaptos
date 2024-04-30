@@ -1,5 +1,5 @@
 group = "xyz.mcxross.kaptos"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.1-SNAPSHOT"
 
 plugins {
     id("xyz.mcxross.graphql") version "1.0.0-SNAPSHOT" apply false
