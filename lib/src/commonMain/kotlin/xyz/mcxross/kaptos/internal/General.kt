@@ -16,6 +16,8 @@
 
 package xyz.mcxross.kaptos.internal
 
+import io.ktor.client.call.*
+import io.ktor.http.*
 import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.indexerClient
@@ -100,18 +102,25 @@ internal suspend fun getChainTopUserTransactions(
   return Option.Some(data)
 }
 
-internal suspend fun queryIndexer(
+suspend inline fun <reified T> queryIndexer(
   aptosConfig: AptosConfig,
   graphqlQuery: GraphqlQuery,
-): AptosResponse {
-  return postAptosIndexer(
-    RequestOptions.PostAptosRequestOptions(
-      aptosConfig = aptosConfig,
-      originMethod = "queryIndexer",
-      path = "",
-      body = graphqlQuery,
+): Option<T> {
+  val response =
+    postAptosIndexer(
+      RequestOptions.PostAptosRequestOptions(
+        aptosConfig = aptosConfig,
+        originMethod = "queryIndexer",
+        path = "",
+        body = graphqlQuery,
+      )
     )
-  )
+
+  if (response.status != HttpStatusCode.OK) {
+    throw AptosException("GraphQL query execution failed: ${response.call}")
+  }
+
+  return Option.Some(response.body())
 }
 
 internal suspend fun getProcessorStatuses(aptosConfig: AptosConfig): Option<ProcessorStatus> {

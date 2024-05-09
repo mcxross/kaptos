@@ -87,3 +87,12 @@ suspend inline fun <reified T> General.getTableItem(
 ): T {
   return xyz.mcxross.kaptos.internal.getTableItem<T>(this.config, handle, data, param?.toMap())
 }
+
+/**
+ * A generic function for retrieving data from Aptos Indexer.
+ *
+ * @param query The GraphQL query to execute
+ * @returns an Option of the response type provided
+ */
+suspend inline fun <reified T> General.queryIndexer(query: GraphqlQuery): Option<T> =
+  xyz.mcxross.kaptos.internal.queryIndexer(this.config, query)
