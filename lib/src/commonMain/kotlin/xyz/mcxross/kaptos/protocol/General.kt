@@ -24,6 +24,7 @@ import xyz.mcxross.kaptos.model.*
  */
 interface General {
   val config: AptosConfig
+
   /**
    * Queries for the Aptos ledger info
    *
@@ -54,6 +55,12 @@ interface General {
    */
   suspend fun getBlockByHeight(ledgerHeight: Long): Option<Block>
 
+  /**
+   * Queries top user transactions
+   *
+   * @param limit The number of transactions to return
+   * @returns [ChainTopUserTransactions]
+   */
   suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions>
 }
 

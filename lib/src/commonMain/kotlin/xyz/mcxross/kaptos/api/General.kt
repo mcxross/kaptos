@@ -69,6 +69,12 @@ class General(override val config: AptosConfig) : General {
   override suspend fun getBlockByHeight(ledgerHeight: Long): Option<Block> =
     getBlockByHeight(config, ledgerHeight)
 
+  /**
+   * Queries top user transactions
+   *
+   * @param limit The number of transactions to return
+   * @returns [ChainTopUserTransactions]
+   */
   override suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions> =
     xyz.mcxross.kaptos.internal.getChainTopUserTransactions(config, limit)
 }
