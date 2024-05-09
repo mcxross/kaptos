@@ -18,12 +18,13 @@ package xyz.mcxross.kaptos.sample
 
 import kotlinx.coroutines.runBlocking
 import xyz.mcxross.kaptos.Aptos
+import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.util.toAccountAddress
 
 fun main() {
   val aptos = Aptos()
   runBlocking {
-    val modules = aptos.getAccountModules("0x1".toAccountAddress())
+    val modules = aptos.fundAccount(HexInput("0x088698359f12ef2b19ba3bda04e129173d0672b5de8d77ce9e8eb0a149c23f04"), 5000_000_000)
     println(modules)
   }
 }
