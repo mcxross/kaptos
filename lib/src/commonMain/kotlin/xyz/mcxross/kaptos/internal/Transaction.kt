@@ -16,7 +16,10 @@
 
 package xyz.mcxross.kaptos.internal
 
+import kotlinx.coroutines.delay
 import xyz.mcxross.kaptos.client.getAptosFullNode
+import xyz.mcxross.kaptos.exception.AptosException
+import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getGasPriceEstimation(config: AptosConfig): Option<GasEstimation> =
@@ -54,3 +57,64 @@ internal suspend fun getTransactionByHash(
       )
     )
     .second
+
+internal suspend fun waitForTransaction(
+  config: AptosConfig,
+  txnHash: String,
+  options: WaitForTransactionOptions,
+): Option<TransactionResponse> {
+  var isPending = true
+  var timeElapsed = 0
+  var lastTxn: TransactionResponse? = null
+  var lastError: AptosException? = null
+  var backoffIntervalMs = 200
+  val backoffMultiplier = 1.5
+
+  while (isPending) {
+    if (timeElapsed >= options.timeoutSecs) {
+      break
+    }
+
+    try {
+      lastTxn =
+        when (val txnResponse = getTransactionByHash(config, txnHash)) {
+          is Option.Some -> txnResponse.value
+          is Option.None -> null
+        }
+
+      isPending = lastTxn?.type == TransactionResponseType.PENDING
+
+      if (!isPending) {
+        break
+      }
+    } catch (e: AptosException) {
+      lastError = e
+    }
+
+    delay(backoffIntervalMs.toLong())
+    timeElapsed += backoffIntervalMs / 1000
+    backoffIntervalMs = (backoffIntervalMs * backoffMultiplier).toInt()
+  }
+
+  if (lastTxn == null) {
+    if (lastError != null) {
+      throw lastError
+    } else {
+      throw WaitForTransactionException(
+        "Fetching transaction $txnHash failed and timed out after ${options.timeoutSecs} seconds"
+      )
+    }
+  }
+
+  if (lastTxn.type == TransactionResponseType.PENDING) {
+    throw WaitForTransactionException(
+      "Transaction $txnHash timed out in pending state after ${options.timeoutSecs} seconds"
+    )
+  }
+
+  if (!options.checkSuccess) {
+    return Option.Some(lastTxn)
+  }
+
+  return Option.Some(lastTxn)
+}

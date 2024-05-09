@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-package xyz.mcxross.kaptos.util
+package xyz.mcxross.kaptos.model
 
-const val APTOS_COIN = "0x1::aptos_coin::AptosCoin"
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-val DEFAULT_CLIENT_HEADERS = mapOf(
-  "x-aptos-client" to "aptos-kmp-sdk/0.1.0"
-)
+@Serializable data class FaucetRequest(val address: String, val amount: Long)
 
-/**
- * The default number of seconds to wait for a transaction to be processed.
- *
- * This time is the amount of time that the SDK will wait for a transaction to be processed when waiting for
- * the results of the transaction.  It may take longer based on network connection and network load.
- */
-const val DEFAULT_TXN_TIMEOUT_SEC = 20;
+@Serializable data class FaucetResponse(@SerialName("txn_hashes") val txnHashes: List<String>)

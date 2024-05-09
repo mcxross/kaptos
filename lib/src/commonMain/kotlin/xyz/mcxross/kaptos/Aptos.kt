@@ -17,11 +17,7 @@
 package xyz.mcxross.kaptos
 
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.protocol.Account
-import xyz.mcxross.kaptos.protocol.DigitalAsset
-import xyz.mcxross.kaptos.protocol.General
-import xyz.mcxross.kaptos.protocol.Staking
-import xyz.mcxross.kaptos.protocol.Transaction
+import xyz.mcxross.kaptos.protocol.*
 
 /**
  * [Aptos] is the main entry point to the SDK's APIs. Instantiate to access all functionalities.
@@ -33,4 +29,5 @@ class Aptos(override val config: AptosConfig = AptosConfig()) :
   General by xyz.mcxross.kaptos.api.General(config),
   Transaction by xyz.mcxross.kaptos.api.Transaction(config),
   Staking by xyz.mcxross.kaptos.api.Staking(config),
-  DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config)
+  DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config),
+  Faucet by xyz.mcxross.kaptos.api.Faucet(config)
