@@ -32,3 +32,5 @@ typealias TokenData = GetTokenData.Result
 typealias NumberOfDelegators = GetNumberOfDelegators.Result
 
 typealias MoveModuleId = String
+
+typealias ProcessorStatus = GetProcessorStatus.Result

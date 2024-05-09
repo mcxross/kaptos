@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.api
 
 import xyz.mcxross.kaptos.internal.getBlockByHeight
 import xyz.mcxross.kaptos.internal.getBlockByVersion
+import xyz.mcxross.kaptos.internal.getIndexerLastSuccessVersion
 import xyz.mcxross.kaptos.internal.getLedgerInfo
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.General
@@ -77,4 +78,13 @@ class General(override val config: AptosConfig) : General {
    */
   override suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions> =
     xyz.mcxross.kaptos.internal.getChainTopUserTransactions(config, limit)
+
+  /**
+   * Queries for the last successful indexer version
+   *
+   * This is useful to tell what ledger version the indexer is updated to, as it can be behind the
+   * full nodes.
+   */
+  override suspend fun getIndexerLastSuccessVersion(): Option<Long> =
+    getIndexerLastSuccessVersion(config)
 }

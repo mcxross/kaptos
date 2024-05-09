@@ -62,6 +62,14 @@ interface General {
    * @returns [ChainTopUserTransactions]
    */
   suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions>
+
+  /**
+   * Queries for the last successful indexer version
+   *
+   * This is useful to tell what ledger version the indexer is updated to, as it can be behind the
+   * full nodes.
+   */
+  suspend fun getIndexerLastSuccessVersion(): Option<Long>
 }
 
 suspend inline fun <reified T> General.getTableItem(
