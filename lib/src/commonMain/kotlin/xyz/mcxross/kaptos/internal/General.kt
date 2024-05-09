@@ -24,6 +24,8 @@ import xyz.mcxross.kaptos.client.postAptosIndexer
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.generated.GetChainTopUserTransactions
 import xyz.mcxross.kaptos.generated.GetProcessorStatus
+import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
+import xyz.mcxross.kaptos.generated.inputs.processor_status_bool_exp
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Option<LedgerInfo> =
@@ -135,4 +137,25 @@ internal suspend fun getIndexerLastSuccessVersion(aptosConfig: AptosConfig): Opt
   } else {
     Option.None
   }
+}
+
+internal suspend fun getProcessorStatus(
+  aptosConfig: AptosConfig,
+  processorType: ProcessorType,
+): Option<ProcessorStatus> {
+
+  val condition =
+    processor_status_bool_exp(processor = String_comparison_exp(_eq = processorType.value))
+  val statuses = GetProcessorStatus(GetProcessorStatus.Variables(condition))
+
+  val response: KotlinxGraphQLResponse<ProcessorStatus> =
+    try {
+      indexerClient(aptosConfig).execute(statuses)
+    } catch (e: Exception) {
+      throw AptosException("GraphQL query execution failed: $e")
+    }
+
+  val data = response.data ?: return Option.None
+
+  return Option.Some(data)
 }

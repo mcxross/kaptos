@@ -70,6 +70,14 @@ interface General {
    * full nodes.
    */
   suspend fun getIndexerLastSuccessVersion(): Option<Long>
+
+  /**
+   * Query the processor status for a specific processor type.
+   *
+   * @param processorType The processor type to query
+   * @returns an Option of ProcessorStatus if found or None if not found
+   */
+  suspend fun getProcessorStatus(processorType: ProcessorType): Option<ProcessorStatus>
 }
 
 suspend inline fun <reified T> General.getTableItem(

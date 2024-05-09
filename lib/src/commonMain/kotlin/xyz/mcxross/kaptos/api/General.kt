@@ -20,6 +20,7 @@ import xyz.mcxross.kaptos.internal.getBlockByHeight
 import xyz.mcxross.kaptos.internal.getBlockByVersion
 import xyz.mcxross.kaptos.internal.getIndexerLastSuccessVersion
 import xyz.mcxross.kaptos.internal.getLedgerInfo
+import xyz.mcxross.kaptos.internal.getProcessorStatus
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.General
 
@@ -87,4 +88,13 @@ class General(override val config: AptosConfig) : General {
    */
   override suspend fun getIndexerLastSuccessVersion(): Option<Long> =
     getIndexerLastSuccessVersion(config)
+
+  /**
+   * Query the processor status for a specific processor type.
+   *
+   * @param processorType The processor type to query
+   * @returns an Option of ProcessorStatus if found or None if not found
+   */
+  override suspend fun getProcessorStatus(processorType: ProcessorType): Option<ProcessorStatus> =
+    getProcessorStatus(config, processorType)
 }
