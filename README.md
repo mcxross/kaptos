@@ -4,6 +4,7 @@ Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for int
 multiple platforms.
 
 [![Kotlin Version](https://img.shields.io/badge/Kotlin-1.9.23-B125EA?logo=kotlin)](https://kotlinlang.org)
+![Docs](https://github.com/mcxross/kaptos/actions/workflows/docs.yml/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/xyz.mcxross.kaptos/kaptos.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/xyz.mcxross.kaptos/kaptos)
 [![Snapshot](https://img.shields.io/nexus/s/xyz.mcxross.kaptos/kaptos?server=https%3A%2F%2Fs01.oss.sonatype.org&label=Snapshot)](https://s01.oss.sonatype.org/content/repositories/snapshots/xyz/mcxross/kaptos/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)

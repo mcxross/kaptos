@@ -1,4 +1,6 @@
+import java.net.URL
 import java.util.*
+import org.jetbrains.dokka.gradle.DokkaTask
 import xyz.mcxross.graphql.plugin.gradle.config.GraphQLSerializer
 import xyz.mcxross.graphql.plugin.gradle.graphql
 
@@ -8,6 +10,7 @@ plugins {
   kotlin("plugin.serialization")
   id("xyz.mcxross.graphql")
   id("maven-publish")
+  id("org.jetbrains.dokka")
 }
 
 group = "xyz.mcxross.kaptos"
@@ -113,6 +116,34 @@ if (secretPropsFile.exists()) {
   ext["sonatypePass"] = System.getenv("OSSRH_PASSWORD")
 }
 
+tasks.getByName<DokkaTask>("dokkaHtml") {
+  moduleName.set("Kaptos")
+  outputDirectory.set(file(layout.buildDirectory.dir("dokka").get().asFile))
+  dokkaSourceSets {
+    configureEach {
+      includes.from("Module.md")
+      sourceLink {
+        localDirectory.set(file("commonMain/kotlin"))
+        remoteUrl.set(
+          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
+        )
+        remoteLineSuffix.set("#L")
+      }
+    }
+  }
+}
+
+tasks.withType<DokkaTask>().configureEach {
+  notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/2231")
+}
+
+val javadocJar =
+  tasks.register<Jar>("javadocJar") {
+    archiveClassifier.set("javadoc")
+    dependsOn("dokkaHtml")
+    from(layout.buildDirectory.dir("dokka").get().asFile)
+  }
+
 publishing {
   if (hasProperty("sonatypeUser") && hasProperty("sonatypePass")) {
     repositories {
@@ -135,6 +166,7 @@ publishing {
   }
 
   publications.withType<MavenPublication> {
+    artifact(javadocJar.get())
     pom {
       name.set("Kaptos")
       description.set(
