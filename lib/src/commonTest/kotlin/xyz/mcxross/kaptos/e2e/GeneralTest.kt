@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package xyz.mcxross.kaptos.api
+package xyz.mcxross.kaptos.e2e
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlin.test.*
 import xyz.mcxross.kaptos.Aptos
-import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.AptosSettings
-import xyz.mcxross.kaptos.model.Network
-import xyz.mcxross.kaptos.model.Option
+import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.protocol.queryIndexer
 import xyz.mcxross.kaptos.util.runBlocking
 
 class GeneralTest {
@@ -74,6 +74,33 @@ class GeneralTest {
       when (val response = aptos.getBlockByVersion(version)) {
         is Option.Some -> {
           assertEquals(response.value.lastVersion.toLong(), version, "Block version should be 0")
+        }
+        is Option.None -> assertTrue(false)
+      }
+    }
+  }
+
+  @Serializable
+  data class LedgerInfo(@SerialName("chain_id") val chainId: Int)
+
+  @Serializable
+  data class Data(@SerialName("ledger_infos") val ledgerInfos: List<LedgerInfo>)
+
+  @Serializable
+  data class MyQueryResponse(val data: Data)
+
+  @Test
+  fun testGraphqlQuery() {
+    runBlocking {
+      val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
+      val query =
+        GraphqlQuery(
+          query = "query MyQuery {\nledger_infos {\nchain_id\n}\n}"
+        )
+
+      when (val response = aptos.queryIndexer<MyQueryResponse>(query)) {
+        is Option.Some -> {
+            assertEquals(response.value.data.ledgerInfos[0].chainId, 2, "Chain ID should be 2")
         }
         is Option.None -> assertTrue(false)
       }

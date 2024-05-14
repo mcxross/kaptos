@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package xyz.mcxross.kaptos.api
+package xyz.mcxross.kaptos.e2e
 
 import kotlin.test.Test
 import kotlin.test.assertTrue
