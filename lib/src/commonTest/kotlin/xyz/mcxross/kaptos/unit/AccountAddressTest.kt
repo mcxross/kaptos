@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.unit
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import xyz.mcxross.kaptos.exception.ParsingError
+import xyz.mcxross.kaptos.exception.ParsingException
 import xyz.mcxross.kaptos.model.AccountAddress
 
 class AccountAddressTest {
@@ -297,14 +297,14 @@ class AccountAddressTest {
       ADDRESS_ZERO["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_ZERO["longWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError>("Address must be 32 bytes long") {
+    assertFailsWith<ParsingException>("Address must be 32 bytes long") {
       AccountAddress.fromStringStrict(ADDRESS_ZERO["longWithout0x"].toString())
     }
     assertEquals(
       ADDRESS_ZERO["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_ZERO["shortWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_ZERO["shortWithout0x"].toString())
     }
 
@@ -312,14 +312,14 @@ class AccountAddressTest {
       ADDRESS_ONE["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_ONE["longWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_ONE["longWithout0x"].toString())
     }
     assertEquals(
       ADDRESS_ONE["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_ONE["shortWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_ONE["shortWithout0x"].toString())
     }
 
@@ -327,21 +327,21 @@ class AccountAddressTest {
       ADDRESS_F["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_F["longWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_F["longWithout0x"].toString())
     }
     assertEquals(
       ADDRESS_F["shortWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_F["shortWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_F["shortWithout0x"].toString())
     }
 
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_F_PADDED_SHORT_FORM["shortWith0x"].toString())
     }
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_F_PADDED_SHORT_FORM["shortWithout0x"].toString())
     }
 
@@ -349,13 +349,13 @@ class AccountAddressTest {
       ADDRESS_TEN["longWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_TEN["longWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_TEN["longWithout0x"].toString())
     }
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_TEN["shortWith0x"].toString())
     }
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_TEN["shortWithout0x"].toString())
     }
 
@@ -363,7 +363,7 @@ class AccountAddressTest {
       ADDRESS_OTHER["longWith0x"],
       AccountAddress.fromStringStrict(ADDRESS_OTHER["longWith0x"].toString()).toString(),
     )
-    assertFailsWith<ParsingError> {
+    assertFailsWith<ParsingException> {
       AccountAddress.fromStringStrict(ADDRESS_OTHER["longWithout0x"].toString())
     }
   }

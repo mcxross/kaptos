@@ -17,7 +17,7 @@
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
-import xyz.mcxross.kaptos.exception.ParsingError
+import xyz.mcxross.kaptos.exception.ParsingException
 
 /**
  * This enum is used to explain why an address was invalid.
@@ -73,14 +73,14 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
     hex.removePrefix("0x").let {
       // We need this to be as sensitive as possible to invalid hex characters
       if (it.length % 2 != 0)
-        throw ParsingError(AddressInvalidReason.INVALID_NUM_OF_HEX_CHARS.reason)
+        throw ParsingException(AddressInvalidReason.INVALID_NUM_OF_HEX_CHARS.reason)
       it.chunked(2).map { pair -> pair.toInt(16).toByte() }.toByteArray()
     }
   )
 
   init {
     if (data.size < LENGTH) {
-      throw ParsingError(
+      throw ParsingException(
         AddressInvalidReason.INCORRECT_NUMBER_OF_BYTES.reason +
           " Expected $LENGTH bytes, got ${data.size}."
       )
@@ -170,7 +170,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
      */
     fun fromStringStrict(input: String): AccountAddress {
       if (!input.startsWith("0x")) {
-        throw ParsingError(AddressInvalidReason.LEADING_ZERO_X_REQUIRED.reason)
+        throw ParsingException(AddressInvalidReason.LEADING_ZERO_X_REQUIRED.reason)
       }
 
       val address = fromString(input)
@@ -179,9 +179,9 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
       // special addresses, in which case we check it is in proper SHORT form.
       if (input.length != LONG_STRING_LENGTH + 2) {
         if (!address.isSpecial()) {
-          throw ParsingError(AddressInvalidReason.LONG_FORM_REQUIRED_UNLESS_SPECIAL.reason)
+          throw ParsingException(AddressInvalidReason.LONG_FORM_REQUIRED_UNLESS_SPECIAL.reason)
         } else if (input.length != 3) {
-          throw ParsingError(AddressInvalidReason.INVALID_PADDING_ZEROES.reason)
+          throw ParsingException(AddressInvalidReason.INVALID_PADDING_ZEROES.reason)
         }
       }
 
@@ -215,18 +215,18 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
       val parsedInput = input.removePrefix("0x")
 
       if (parsedInput.isEmpty()) {
-        throw ParsingError(AddressInvalidReason.TOO_SHORT.reason)
+        throw ParsingException(AddressInvalidReason.TOO_SHORT.reason)
       }
 
       if (parsedInput.length > 64) {
-        throw ParsingError(AddressInvalidReason.TOO_LONG.reason)
+        throw ParsingException(AddressInvalidReason.TOO_LONG.reason)
       }
 
       val paddedInput = parsedInput.padStart(64, '0')
       return try {
         AccountAddress(paddedInput.chunked(2).map { it.toInt(16).and(0xff).toByte() }.toByteArray())
       } catch (e: NumberFormatException) {
-        throw ParsingError(AddressInvalidReason.INVALID_HEX_CHARS.reason)
+        throw ParsingException(AddressInvalidReason.INVALID_HEX_CHARS.reason)
       }
     }
 
@@ -261,7 +261,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
           fromString(input)
         }
         true
-      } catch (e: ParsingError) {
+      } catch (e: ParsingException) {
         false
       }
     }
