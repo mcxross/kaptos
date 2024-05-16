@@ -16,4 +16,4 @@
 package xyz.mcxross.kaptos.exception
 
 /** This error is used to explain why parsing failed. */
-open class ParsingError(message: String) : Exception(message)
+open class ParsingException(message: String) : Exception(message)
