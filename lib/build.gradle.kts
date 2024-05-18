@@ -170,8 +170,8 @@ publishing {
           }
         )
         credentials {
-          username = property("sonatypeUser") as String
-          password = property("sonatypePass") as String
+          username = "" //property("sonatypeUser") as String
+          password = "" //property("sonatypePass") as String
         }
       }
     }
