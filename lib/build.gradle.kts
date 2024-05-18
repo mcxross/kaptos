@@ -23,10 +23,6 @@ repositories {
   google()
 }
 
-ext["sonatypeUser"] = null
-
-ext["sonatypePass"] = null
-
 kotlin {
   jvm {
     jvmToolchain(17)
@@ -55,8 +51,17 @@ kotlin {
 
   mingwX64()
 
+  applyDefaultHierarchyTemplate()
+
   sourceSets {
-    androidMain.dependencies { implementation(libs.ktor.client.okhttp) }
+    val androidJvmMain by creating {
+      dependsOn(commonMain.get())
+      dependencies { implementation(libs.bcprov.jdk15on) }
+    }
+    val androidMain by getting {
+      dependsOn(androidJvmMain)
+      dependencies { implementation(libs.ktor.client.okhttp) }
+    }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
       implementation(libs.graphql.multiplatform.client)
@@ -72,7 +77,10 @@ kotlin {
       implementation(libs.kotlinx.coroutines.core)
       implementation(libs.ktor.client.mock)
     }
-    jvmMain.dependencies { implementation(libs.ktor.client.cio) }
+    val jvmMain by getting {
+      dependsOn(androidJvmMain)
+      dependencies { implementation(libs.ktor.client.cio) }
+    }
     jsMain.dependencies { implementation(libs.ktor.client.js) }
     linuxMain.dependencies { implementation(libs.ktor.client.curl) }
     mingwMain.dependencies { implementation(libs.ktor.client.winhttp) }
@@ -103,6 +111,10 @@ android {
     }
   }
 }
+
+ext["sonatypeUser"] = null
+
+ext["sonatypePass"] = null
 
 val secretPropsFile = project.rootProject.file("local.properties")
 

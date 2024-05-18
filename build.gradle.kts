@@ -3,13 +3,12 @@ group = "xyz.mcxross.kaptos"
 version = "1.0.4-SNAPSHOT"
 
 plugins {
-  id("xyz.mcxross.graphql") version "1.0.0-SNAPSHOT" apply false
-  kotlin("plugin.serialization") apply false
-
   alias(libs.plugins.androidApplication) apply false
   alias(libs.plugins.androidLibrary) apply false
   alias(libs.plugins.jetbrainsCompose) apply false
   alias(libs.plugins.kotlinMultiplatform) apply false
+  alias(libs.plugins.graphqlMultiplatform) apply false
+  alias(libs.plugins.kotlinSerialization) apply false
   alias(libs.plugins.jvm) apply false
   alias(libs.plugins.dokka) apply false
 }
