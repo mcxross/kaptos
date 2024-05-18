@@ -166,7 +166,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
      * https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-40.md.
      *
      * @param input A hex string representing an account address.
-     * @returns An instance of [AccountAddress].
+     * @return An instance of [AccountAddress].
      */
     fun fromStringStrict(input: String): AccountAddress {
       if (!input.startsWith("0x")) {
@@ -209,7 +209,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
      * https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-40.md.
      *
      * @param input A hex string representing an account address.
-     * @returns An instance of [AccountAddress].
+     * @return An instance of [AccountAddress].
      */
     fun fromString(input: String): AccountAddress {
       val parsedInput = input.removePrefix("0x")
@@ -250,7 +250,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
      * @param input A hex string representing an account address.
      * @param strict If true, use strict parsing behavior. If false, use relaxed parsing behavior.
      *   Default is false.
-     * @returns valid = true if the string is valid, valid = false if not. If the string is not
+     * @return valid = true if the string is valid, valid = false if not. If the string is not
      *   valid, invalidReason will be set explaining why it is invalid.
      */
     fun isValid(input: String, strict: Boolean = false): Boolean {
@@ -271,5 +271,11 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
 data class HexInput(override val value: String) : AccountAddressInput {
   override fun toString(): String {
     return value
+  }
+
+  companion object {
+    fun fromByteArray(byteArray: ByteArray): HexInput {
+      return HexInput(byteArray.joinToString("") { it.toUByte().toString(16).padStart(2, '0') })
+    }
   }
 }

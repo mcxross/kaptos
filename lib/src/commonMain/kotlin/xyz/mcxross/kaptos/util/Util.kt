@@ -16,8 +16,23 @@
 
 package xyz.mcxross.kaptos.util
 
+import io.ktor.utils.io.charsets.*
+import io.ktor.utils.io.core.*
+import kotlin.String
 import xyz.mcxross.kaptos.model.HexInput
 
 fun String.toAccountAddress(): HexInput {
   return HexInput(this)
+}
+
+val HEX_ARRAY: ByteArray = "0123456789abcdef".toByteArray(Charsets.UTF_8)
+
+fun bytesToHex(bytes: ByteArray): String {
+  val hexChars = ByteArray(bytes.size * 2)
+  for (j in bytes.indices) {
+    val v = bytes[j].toInt() and 0xFF
+    hexChars[j * 2] = HEX_ARRAY[v ushr 4]
+    hexChars[j * 2 + 1] = HEX_ARRAY[v and 0x0F]
+  }
+  return String(hexChars, charset = Charsets.UTF_8)
 }
