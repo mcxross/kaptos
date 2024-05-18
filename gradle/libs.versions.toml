@@ -10,17 +10,19 @@ androidx-core-ktx = "1.12.0"
 androidx-espresso-core = "3.5.1"
 androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
+bcprovJdk15on = "1.68"
 compose = "1.6.5"
 compose-plugin = "1.6.1"
-graphqlMultiplatformClient = "1.0-SNAPSHOT"
 junit = "4.13.2"
 kotlin = "1.9.23"
 kotlinxSerializationCore = "1.6.3"
 ktor = "2.3.10"
 kaptos = "1.0.1-SNAPSHOT"
+graphqlMultiplatform = "0.1.0-beta01"
 
 [libraries]
-graphql-multiplatform-client = { module = "xyz.mcxross.graphql.client:graphql-multiplatform-client", version.ref = "graphqlMultiplatformClient" }
+bcprov-jdk15on = { module = "org.bouncycastle:bcprov-jdk15on", version.ref = "bcprovJdk15on" }
+graphql-multiplatform-client = { module = "xyz.mcxross.graphql.client:graphql-multiplatform-client", version.ref = "graphqlMultiplatform" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.8.0" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -54,5 +56,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
+graphqlMultiplatform = { id = "xyz.mcxross.graphql", version.ref = "graphqlMultiplatform" }
