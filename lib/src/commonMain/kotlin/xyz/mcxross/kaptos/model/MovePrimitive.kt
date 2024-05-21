@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
-}
+import kotlinx.serialization.Serializable
+
+@Serializable data class Bool(val value: Boolean) : TransactionArgument()
+
+@Serializable data class U8(val value: Byte) : TransactionArgument()
+
+@Serializable data class U16(val value: UShort) : TransactionArgument()
+
+@Serializable data class U32(val value: UInt) : TransactionArgument()
+
+@Serializable data class U64(val value: ULong) : TransactionArgument()
+
+@Serializable data class U128(val value: String) : TransactionArgument()
+
+@Serializable data class U256(val value: String) : TransactionArgument()

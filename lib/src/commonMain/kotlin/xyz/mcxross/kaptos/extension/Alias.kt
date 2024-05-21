@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package xyz.mcxross.kaptos.extension
 
-package xyz.mcxross.kaptos.model
+import xyz.mcxross.kaptos.model.MoveFunctionId
+import xyz.mcxross.kaptos.util.getFunctionParts
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
-}
+/** An extension function to convert a [MoveFunctionId] to its parts */
+fun MoveFunctionId.parts(): Triple<String, String, String> = getFunctionParts(this)

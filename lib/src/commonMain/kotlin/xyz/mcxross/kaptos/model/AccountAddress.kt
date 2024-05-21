@@ -56,7 +56,7 @@ interface AccountAddressInput {
  * @property data The data of the account address.
  */
 @Serializable
-data class AccountAddress(val data: ByteArray) : AccountAddressInput {
+data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountAddressInput {
 
   /**
    * This constructor is used to create an account address from a hex string.
@@ -268,6 +268,7 @@ data class AccountAddress(val data: ByteArray) : AccountAddressInput {
   }
 }
 
+@Serializable
 data class HexInput(override val value: String) : AccountAddressInput {
   override fun toString(): String {
     return value

@@ -96,3 +96,20 @@ suspend inline fun <reified T> General.getTableItem(
  */
 suspend inline fun <reified T> General.queryIndexer(query: GraphqlQuery): Option<T> =
   xyz.mcxross.kaptos.internal.queryIndexer(this.config, query)
+
+/**
+ * Queries for a Move view function
+ *
+ * @param payload Payload for the view function
+ * @param ledgerVersion The ledger version to query, if not provided it will get the latest version
+ * @returns an array of Move values
+ * @example ` const payload: ViewRequest = { function: "0x1::coin::balance", typeArguments:
+ *   ["0x1::aptos_coin::AptosCoin"], functionArguments: [accountAddress], }; `
+ */
+suspend inline fun <reified T : List<MoveValue>> General.view(
+  payload: InputViewFunctionData,
+  bcs: Boolean = false,
+  ledgerVersion: LedgerVersionArg? = null,
+): Option<T> {
+  return xyz.mcxross.kaptos.internal.view(config, payload, bcs, ledgerVersion)
+}

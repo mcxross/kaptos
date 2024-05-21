@@ -20,6 +20,7 @@ import io.ktor.utils.io.charsets.*
 import io.ktor.utils.io.core.*
 import kotlin.String
 import xyz.mcxross.kaptos.model.HexInput
+import xyz.mcxross.kaptos.model.MoveFunctionId
 
 fun String.toAccountAddress(): HexInput {
   return HexInput(this)
@@ -35,4 +36,12 @@ fun bytesToHex(bytes: ByteArray): String {
     hexChars[j * 2 + 1] = HEX_ARRAY[v and 0x0F]
   }
   return String(hexChars, charset = Charsets.UTF_8)
+}
+
+fun getFunctionParts(function: MoveFunctionId): Triple<String, String, String> {
+  val parts = function.split("::")
+
+  if (parts.size != 3) throw IllegalArgumentException("Invalid function id")
+
+  return Triple(parts[0], parts[1], parts[2])
 }

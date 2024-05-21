@@ -13,15 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : TransactionArgument()
+
+@Serializable
+data class MoveString(val value: String) : TransactionArgument() {
+  override fun toString(): String {
+    return value
+  }
+}
+
+@Serializable
+data class MoveOption<T : EntryFunctionArgument>(val value: T?) : TransactionArgument() {
+  fun unwrap(): T {
+    return value ?: throw IllegalArgumentException("Option is empty")
+  }
 }

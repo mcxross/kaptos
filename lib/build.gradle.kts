@@ -71,6 +71,7 @@ kotlin {
       implementation(libs.ktor.serialization.kotlinx.json)
       implementation(libs.ktor.client.auth)
       implementation(libs.kotlinx.serialization.core)
+      implementation(libs.bcs)
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
@@ -170,8 +171,8 @@ publishing {
           }
         )
         credentials {
-          username = "" //property("sonatypeUser") as String
-          password = "" //property("sonatypePass") as String
+          username = "" // property("sonatypeUser") as String
+          password = "" // property("sonatypePass") as String
         }
       }
     }

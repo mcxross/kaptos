@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package xyz.mcxross.kaptos.transaction
 
-package xyz.mcxross.kaptos.model
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.model.EntryFunctionArgument
+import xyz.mcxross.kaptos.model.Identifier
+import xyz.mcxross.kaptos.model.ModuleId
+import xyz.mcxross.kaptos.model.TypeTag
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
-}
+@Serializable
+data class EntryFunction(
+  @SerialName("module_name") val moduleName: ModuleId,
+  @SerialName("function_name") val functionName: Identifier,
+  @SerialName("type_args") val typeArgs: List<TypeTag>,
+  val args: List<EntryFunctionArgument>,
+)

@@ -18,13 +18,14 @@ package xyz.mcxross.kaptos.client
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import xyz.mcxross.kaptos.model.*
 
 suspend inline fun <reified V> post(options: RequestOptions.PostRequestOptions<V>): AptosResponse {
   return client.post(options.aptosConfig.getRequestUrl(options.type)) {
     url { appendPathSegments(options.path) }
-    contentType(ContentType.Application.Json)
+    contentType(ContentType.parse(options.contentType.type))
     setBody(options.body)
   }
 }
@@ -39,6 +40,7 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
         type = AptosApiType.FULLNODE,
         originMethod = options.originMethod,
         path = options.path,
+        contentType = options.contentType,
         body = options.body,
       )
     )
@@ -71,6 +73,7 @@ suspend inline fun <reified T> postAptosFaucet(
         type = AptosApiType.FAUCET,
         originMethod = options.originMethod,
         path = options.path,
+        contentType = options.contentType,
         body = options.body,
       )
     )

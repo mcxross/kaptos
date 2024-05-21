@@ -18,12 +18,16 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.serialize.MoveBoolSerializer
+import xyz.mcxross.kaptos.serialize.MoveListTypeSerializer
+import xyz.mcxross.kaptos.serialize.MoveUint8TypeSerializer
+import xyz.mcxross.kaptos.serialize.MoveStringSerializer
 
 @Serializable
 enum class MoveVisibility {
   @SerialName("public") PUBLIC,
   @SerialName("private") PRIVATE,
-  @SerialName("friend") FRIEND
+  @SerialName("friend") FRIEND,
 }
 
 @Serializable
@@ -31,7 +35,7 @@ enum class MoveAbility {
   @SerialName("store") STORE,
   @SerialName("drop") DROP,
   @SerialName("key") KEY,
-  @SerialName("copy") COPY
+  @SerialName("copy") COPY,
 }
 
 @Serializable data class MoveFunctionGenericTypeParam(val constraints: List<MoveAbility>)
@@ -69,29 +73,33 @@ data class MoveModule(
 
 @Serializable
 sealed class MoveValue {
-  @Serializable data class Bool(val value: Boolean) : MoveValue()
 
-  @Serializable data class Str(val value: String) : MoveValue()
+  @Serializable(with = MoveBoolSerializer::class) data class Bool(val value: Boolean) : MoveValue()
 
-  @Serializable data class MoveUint8Type(val value: Int) : MoveValue()
+  @Serializable(with = MoveStringSerializer::class)
+  data class String(val value: kotlin.String) : MoveValue()
+
+  @Serializable(with = MoveUint8TypeSerializer::class)
+  data class MoveUint8Type(val value: Int) : MoveValue()
 
   @Serializable data class MoveUint16Type(val value: Int) : MoveValue()
 
   @Serializable data class MoveUint32Type(val value: Int) : MoveValue()
 
-  @Serializable data class MoveUint64Type(val value: String) : MoveValue()
+  @Serializable data class MoveUint64Type(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveUint128Type(val value: String) : MoveValue()
+  @Serializable data class MoveUint128Type(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveUint256Type(val value: String) : MoveValue()
+  @Serializable data class MoveUint256Type(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveAddressType(val value: String) : MoveValue()
+  @Serializable data class MoveAddressType(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveObjectType(val value: String) : MoveValue()
+  @Serializable data class MoveObjectType(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveStructId(val value: String) : MoveValue()
+  @Serializable data class MoveStructId(val value: kotlin.String) : MoveValue()
 
   @Serializable data class MoveOptionType(val value: MoveValue?) : MoveValue()
 
-  @Serializable data class MoveListType(val value: List<MoveValue>) : MoveValue()
+  @Serializable(with = MoveListTypeSerializer::class)
+  data class MoveListType(val value: List<MoveValue>) : MoveValue()
 }
