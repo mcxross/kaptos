@@ -13,15 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
+import kotlinx.serialization.Serializable
+
+/**
+ * Representation of a ModuleId that can serialized and deserialized ModuleId means the module
+ * address (e.g "0x1") and the module name (e.g "coin")
+ *
+ * @param address The account address. e.g "0x1"
+ * @param name The module name under the "address". e.g "coin"
+ */
+@Serializable
+data class ModuleId(val address: AccountAddress, val name: Identifier) {
+  companion object {
+    fun fromString(moduleId: MoveModuleId): ModuleId {
+      val parts = moduleId.split("::")
+      return ModuleId(AccountAddress(parts[0]), Identifier(parts[1]))
+    }
+  }
 }

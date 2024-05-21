@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
-}
+import kotlinx.serialization.Serializable
+
+@Serializable sealed class TransactionArgument : EntryFunctionArgument()
+
+@Serializable sealed class EntryFunctionArgument : ScriptFunctionArgument()
+
+@Serializable sealed class ScriptFunctionArgument

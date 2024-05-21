@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-/** Enum class representing the network to connect to. */
-enum class Network {
-  MAINNET,
-  TESTNET,
-  DEVNET,
-  LOCAL,
-  CUSTOM,
-  RANDOMNET
+import kotlinx.serialization.Serializable
+
+/**
+ * Representation of an Identifier that can serialized and deserialized. We use Identifier to
+ * represent the module "name" in "ModuleId" and the "function name" in "EntryFunction"
+ */
+@Serializable
+data class Identifier(private val value: String) {
+  override fun toString(): String {
+    return value
+  }
 }

@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.internal
 
 import io.ktor.client.call.*
 import io.ktor.http.*
+import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.indexerClient
@@ -29,6 +30,7 @@ import xyz.mcxross.kaptos.generated.GetProcessorStatus
 import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
 import xyz.mcxross.kaptos.generated.inputs.processor_status_bool_exp
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.transaction.builder.generateViewFunctionPayload
 
 internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Option<LedgerInfo> =
   getAptosFullNode<LedgerInfo>(
@@ -167,4 +169,45 @@ internal suspend fun getProcessorStatus(
   val data = response.data ?: return Option.None
 
   return Option.Some(data)
+}
+
+suspend inline fun <reified T : List<MoveValue>> view(
+  aptosConfig: AptosConfig,
+  payload: InputViewFunctionData,
+  bcs: Boolean,
+  options: LedgerVersionArg?,
+): Option<T> {
+
+  if (bcs) {
+    val viewFunctionPayload = generateViewFunctionPayload(aptosConfig, payload)
+
+    val bytes = Bcs.encodeToByteArray(viewFunctionPayload)
+
+    val response =
+      postAptosFullNode<T, ByteArray>(
+        RequestOptions.PostAptosRequestOptions(
+          aptosConfig = aptosConfig,
+          originMethod = "view",
+          path = "view",
+          contentType = MimeType.BCS_VIEW_FUNCTION,
+          params = mapOf("ledger_version" to options?.ledgerVersion),
+          body = bytes,
+        )
+      )
+
+    return Option.Some(response.second)
+  }
+
+  val response =
+    postAptosFullNode<T, InputViewFunctionData>(
+      RequestOptions.PostAptosRequestOptions(
+        aptosConfig = aptosConfig,
+        originMethod = "view",
+        path = "view",
+        body = payload,
+        params = mapOf("ledger_version" to options?.ledgerVersion),
+      )
+    )
+
+  return Option.Some(response.second)
 }
