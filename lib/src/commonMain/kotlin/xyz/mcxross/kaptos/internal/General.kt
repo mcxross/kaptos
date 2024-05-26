@@ -144,7 +144,7 @@ internal suspend fun getIndexerLastSuccessVersion(aptosConfig: AptosConfig): Opt
   val statuses = getProcessorStatuses(aptosConfig)
 
   return if (statuses is Option.Some) {
-    Option.Some(statuses.value.processor_status.first().last_success_version)
+    Option.Some(statuses.value.processor_status.first().last_success_version.toLong())
   } else {
     Option.None
   }
