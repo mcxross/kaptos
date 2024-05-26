@@ -31,6 +31,9 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
         shell: bash
+      - name: Generate GraphQL Client
+        run: ./gradlew graphqlGenerateClient
+        shell: bash
       - name: Generate HTML docs
         run: ./gradlew dokkaHtml
         shell: bash
