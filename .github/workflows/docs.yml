@@ -24,6 +24,8 @@ jobs:
         with:
           java-version: 17
           distribution: zulu
+      - name: Clear Gradle Cache
+        run: rm -rf ~/.gradle/caches/
       - name: Cache Konan
         uses: ./.github/actions/cache-konan
       - name: Cache Gradle
@@ -32,10 +34,10 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
       - name: Generate GraphQL Client
-        run: ./gradlew graphqlGenerateClient
+        run: ./gradlew graphqlGenerateClient --refresh-dependencies
         shell: bash
       - name: Generate HTML docs
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaHtml --refresh-dependencies
         shell: bash
       - name: Deploy docs to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.6.0
