@@ -1,11 +1,10 @@
 package xyz.mcxross.kaptos.core.account
 
-import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.HexInput
+import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
+import xyz.mcxross.kaptos.core.crypto.PrivateKey
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
-import xyz.mcxross.kaptos.model.SigningScheme
-import xyz.mcxross.kaptos.model.SigningSchemeInput
+import xyz.mcxross.kaptos.model.*
 
 abstract class Account {
 
@@ -20,6 +19,7 @@ abstract class Account {
 
   /**
    * Sign the given message with the private key.
+   *
    * @param message in HexInput format
    * @returns AccountSignature
    */
@@ -34,6 +34,17 @@ abstract class Account {
         return Ed25519Account.generate()
       }
 
+      throw NotImplementedError("Only Ed25519 is supported at the moment")
+    }
+
+    fun fromPrivateKey(
+      privateKey: PrivateKey,
+      address: AccountAddressInput? = null,
+      legacy: Boolean = true,
+    ): Account {
+      if (privateKey is Ed25519PrivateKey && legacy) {
+        return Ed25519Account(privateKey, address)
+      }
       throw NotImplementedError("Only Ed25519 is supported at the moment")
     }
   }

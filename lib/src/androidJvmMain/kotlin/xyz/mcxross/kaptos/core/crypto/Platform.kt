@@ -1,6 +1,5 @@
 package xyz.mcxross.kaptos.core.crypto
 
-import java.security.KeyPairGenerator
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
 import java.util.*
@@ -12,22 +11,24 @@ import xyz.mcxross.kaptos.model.SigningScheme
 
 @Throws(NoSuchAlgorithmException::class)
 actual fun generateKeypair(scheme: SigningScheme): KeyPair {
-  val kpg = KeyPairGenerator.getInstance("Ed25519")
-  val kp = kpg.generateKeyPair()
-  val sk: ByteArray = kp.private.encoded
-  val pk: ByteArray = kp.public.encoded
-  return KeyPair(sk.copyOfRange(12, sk.size), pk.copyOfRange(12, pk.size))
+
+  when (scheme) {
+    SigningScheme.Ed25519 -> {
+      val kpg = Ed25519KeyPairGenerator()
+      kpg.init(Ed25519KeyGenerationParameters(SecureRandom()))
+      val kp = kpg.generateKeyPair()
+      val sk = kp.private as Ed25519PrivateKeyParameters
+      val pk = kp.public as Ed25519PublicKeyParameters
+      return KeyPair(sk.encoded, pk.encoded)
+    }
+    else -> throw NotImplementedError("Only Ed25519 is supported at the moment")
+  }
 }
 
 actual fun fromSeed(seed: ByteArray): KeyPair {
-  val secureRandom = SecureRandom(seed)
-  val keyGenParams = Ed25519KeyGenerationParameters(secureRandom)
-  val keyPairGenerator = Ed25519KeyPairGenerator()
-  keyPairGenerator.init(keyGenParams)
-  val keyPair = keyPairGenerator.generateKeyPair()
-  val privateKey = keyPair.private as Ed25519PrivateKeyParameters
-  val publicKey = keyPair.public as Ed25519PublicKeyParameters
-  return KeyPair(privateKey.encoded, publicKey.encoded)
+  val privateKeyParameters = Ed25519PrivateKeyParameters(seed, 0)
+  val publicKeyParameters = privateKeyParameters.generatePublicKey()
+  return KeyPair(privateKeyParameters.encoded, publicKeyParameters.encoded)
 }
 
 actual fun sha3Hash(input: ByteArray): ByteArray {

@@ -185,6 +185,39 @@ val aptos = Aptos(config)
 val modules = aptos.getAccountModules("0x1".toAccountAddress())
 ```
 
+### Account management (default to Ed25519)
+
+#### Generate new keys
+
+```kotlin
+val account = Account.generate()
+```
+
+#### Derive from private key
+```kotlin
+// Create a private key instance for Ed25519 scheme 
+val privateKey = Ed25519PrivateKey("myEd25519privatekeystring")
+
+// Derive an account from private key
+
+// This is used as a local calculation and therefore is used to instantiate an `Account`
+// that has not had its authentication key rotated
+val account = Account.fromPrivateKey(privateKey)
+```
+
+#### Derive from private key and address
+
+```kotlin
+// Create a private key instance for Ed25519 scheme 
+val privateKey = Ed25519PrivateKey("myEd25519privatekeystring")
+
+// Derive an account from private key and address
+
+// create an AccountAddress instance from the account address string
+val address = AccountAddress.fromString()
+
+```
+
 ## Testing
 
 To run the SDK tests, simply run from the root of this repository:
