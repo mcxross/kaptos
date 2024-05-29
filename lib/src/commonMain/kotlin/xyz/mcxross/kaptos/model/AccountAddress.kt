@@ -278,5 +278,9 @@ data class HexInput(override val value: String) : AccountAddressInput {
     fun fromByteArray(byteArray: ByteArray): HexInput {
       return HexInput(byteArray.joinToString("") { it.toUByte().toString(16).padStart(2, '0') })
     }
+
+    fun fromString(string: String): HexInput {
+      return HexInput(string)
+    }
   }
 }

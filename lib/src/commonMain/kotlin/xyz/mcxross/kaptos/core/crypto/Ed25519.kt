@@ -2,8 +2,8 @@ package xyz.mcxross.kaptos.core.crypto
 
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.core.Hex
-import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.AuthenticationKeyScheme
+import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
 
 /**
@@ -73,6 +73,8 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
     }
     signingKeyPair = KeyPair.fromSecretSeed(hex.toByteArray())
   }
+
+  constructor(data: String) : this(HexInput.fromString(data))
 
   /**
    * Sign the given message with the private key.

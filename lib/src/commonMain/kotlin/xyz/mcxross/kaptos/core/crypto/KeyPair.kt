@@ -3,10 +3,10 @@ package xyz.mcxross.kaptos.core.crypto
 /**
  * Represents a pair of signing keys: a public key and a private key.
  *
- * @property publicKey The public key in hex format.
- * @property privateKey The private key in hex format.
+ * @property privateKey The public key in hex format.
+ * @property publicKey The private key in hex format.
  */
-data class KeyPair(val publicKey: ByteArray, val privateKey: ByteArray) {
+data class KeyPair(val privateKey: ByteArray, val publicKey: ByteArray) {
 
   fun sign(message: ByteArray): Signature {
     TODO()
