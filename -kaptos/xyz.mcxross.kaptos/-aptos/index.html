@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Aptos</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Kaptos
+                    </a>
+            </div>
+            <div class="library-version">
+1.0.4-SNAPSHOT            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kaptos:dokkaHtml/commonMain">common</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos/Aptos///PointingToDeclaration//483702768">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos</a><span class="delimiter">/</span><span class="current">Aptos</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Aptos</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Aptos</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token operator"> = </span>AptosConfig()</span></span><span class="token punctuation">)</span> : <a href="../../xyz.mcxross.kaptos.protocol/-account/index.html">Account</a>, <a href="../../xyz.mcxross.kaptos.protocol/-general/index.html">General</a>, <a href="../../xyz.mcxross.kaptos.protocol/-transaction/index.html">Transaction</a>, <a href="../../xyz.mcxross.kaptos.protocol/-staking/index.html">Staking</a>, <a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/index.html">DigitalAsset</a>, <a href="../../xyz.mcxross.kaptos.protocol/-faucet/index.html">Faucet</a></div><p class="paragraph"><a href="index.html">Aptos</a> is the main entry point to the SDK's APIs. Instantiate to access all functionalities.</p><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>config</span></span></u></div></span></div><div><div class="title"><p class="paragraph"><a href="../../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a> to optionally configure the SDK.</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-2020767763%2FConstructors%2F483702768" anchor-label="Aptos" id="-2020767763%2FConstructors%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-aptos.html"><span><span>Aptos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2020767763%2FConstructors%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">config<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token operator"> = </span>AptosConfig()</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="3827720%2FProperties%2F483702768" anchor-label="config" id="3827720%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="config.html"><span><span>config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="3827720%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="config.html">config</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-655607693%2FFunctions%2F483702768" anchor-label="fundAccount" id="-655607693%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-faucet/fund-account.html"><span>fund</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-655607693%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-faucet/fund-account.html"><span class="token function">fundAccount</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">amount<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-wait-for-transaction-options/index.html">WaitForTransactionOptions</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-transaction-response/index.html">TransactionResponse</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">This creates an account if it does not exist and mints the specified amount of coins into that account</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1835685961%2FFunctions%2F483702768" anchor-label="getAccountAPTAmount" id="-1835685961%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-a-p-t-amount.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>APTAmount</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1835685961%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-a-p-t-amount.html"><span class="token function">getAccountAPTAmount</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries the account's APT amount</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1988618248%2FFunctions%2F483702768" anchor-label="getAccountCoinAmount" id="1988618248%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coin-amount.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coin</span><wbr></wbr><span><span>Amount</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1988618248%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coin-amount.html"><span class="token function">getAccountCoinAmount</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">coinType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-move-value/-move-struct-id/index.html">MoveValue.MoveStructId</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries the account's coin amount by the coin type</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-696668657%2FFunctions%2F483702768" anchor-label="getAccountCoinsCount" id="-696668657%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coins-count.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-696668657%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coins-count.html"><span class="token function">getAccountCoinsCount</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries the current count of an account's coins aggregated</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="354559462%2FFunctions%2F483702768" anchor-label="getAccountCoinsData" id="354559462%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coins-data.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="354559462%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-coins-data.html"><span class="token function">getAccountCoinsData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-account-coins-data/index.html">AccountCoinsData</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries an account's coins data</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-871616704%2FFunctions%2F483702768" anchor-label="getAccountInfo" id="-871616704%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-info.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-871616704%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-info.html"><span class="token function">getAccountInfo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">params<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-ledger-version-query-param/index.html">LedgerVersionQueryParam</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-account-data/index.html">AccountData</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries the current state for an Aptos account given its account address</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="270432441%2FFunctions%2F483702768" anchor-label="getAccountModule" id="270432441%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-module.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Module</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="270432441%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-module.html"><span class="token function">getAccountModule</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-ledger-version-query-param/index.html">LedgerVersionQueryParam</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-move-module-bytecode/index.html">MoveModuleBytecode</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for a specific account module given account address and module name</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1239892545%2FFunctions%2F483702768" anchor-label="getAccountModules" id="-1239892545%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-modules.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Modules</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1239892545%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-modules.html"><span class="token function">getAccountModules</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">params<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-specific-pagination-query-params/index.html">SpecificPaginationQueryParams</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-move-module-bytecode/index.html">MoveModuleBytecode</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for all modules in an account given an account address</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1254631461%2FFunctions%2F483702768" anchor-label="getAccountResource" id="-1254631461%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/get-account-resource.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Resource</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1254631461%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/get-account-resource.html">T</a><span class="token operator">&gt; </span><a href="../../xyz.mcxross.kaptos.protocol/-account/index.html">Account</a><span class="token punctuation">.</span><a href="../../xyz.mcxross.kaptos.protocol/get-account-resource.html"><span class="token function">getAccountResource</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">resourceName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-ledger-version-query-param/index.html">LedgerVersionQueryParam</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator"> = </span>{}</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/get-account-resource.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries a specific account resource given an account address and resource name</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1609722845%2FFunctions%2F483702768" anchor-label="getAccountResources" id="1609722845%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-resources.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Resources</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1609722845%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-resources.html"><span class="token function">getAccountResources</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">params<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-specific-pagination-query-params/index.html">SpecificPaginationQueryParams</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-move-resource/index.html">MoveResource</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries all account resources given an account address</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1172963367%2FFunctions%2F483702768" anchor-label="getAccountTransactions" id="1172963367%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-transactions.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span><span>Transactions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1172963367%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-transactions.html"><span class="token function">getAccountTransactions</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">params<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-pagination-query-params/index.html">PaginationQueryParams</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-transaction-response/index.html">TransactionResponse</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries account transactions given an account address</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="63834196%2FFunctions%2F483702768" anchor-label="getAccountTransactionsCount" id="63834196%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-transactions-count.html"><span>get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Transactions</span><wbr></wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="63834196%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-account/get-account-transactions-count.html"><span class="token function">getAccountTransactionsCount</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accountAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries the current count of transactions submitted by an account</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="785957955%2FFunctions%2F483702768" anchor-label="getBlockByHeight" id="785957955%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-block-by-height.html"><span>get</span><wbr></wbr><span>Block</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Height</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="785957955%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-block-by-height.html"><span class="token function">getBlockByHeight</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ledgerHeight<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-block/index.html">Block</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for block by height</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="286088436%2FFunctions%2F483702768" anchor-label="getBlockByVersion" id="286088436%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-block-by-version.html"><span>get</span><wbr></wbr><span>Block</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="286088436%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-block-by-version.html"><span class="token function">getBlockByVersion</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ledgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-block/index.html">Block</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for block by transaction version</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="25797029%2FFunctions%2F483702768" anchor-label="getChainId" id="25797029%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-chain-id.html"><span>get</span><wbr></wbr><span>Chain</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="25797029%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-chain-id.html"><span class="token function">getChainId</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for the chain id</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1350885309%2FFunctions%2F483702768" anchor-label="getChainTopUserTransactions" id="-1350885309%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-chain-top-user-transactions.html"><span>get</span><wbr></wbr><span>Chain</span><wbr></wbr><span>Top</span><wbr></wbr><span>User</span><wbr></wbr><span><span>Transactions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1350885309%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-chain-top-user-transactions.html"><span class="token function">getChainTopUserTransactions</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">limit<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-chain-top-user-transactions/index.html">ChainTopUserTransactions</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries top user transactions</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1031363788%2FFunctions%2F483702768" anchor-label="getCollectionData" id="-1031363788%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-collection-data.html"><span>get</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1031363788%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-collection-data.html"><span class="token function">getCollectionData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">creatorAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">collectionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">tokenStandard<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-token-standard/index.html">TokenStandard</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-collection-data/index.html">CollectionData</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries data of a specific collection by the collection creator address and the collection name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="423068736%2FFunctions%2F483702768" anchor-label="getCollectionDataByCollectionId" id="423068736%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-collection-data-by-collection-id.html"><span>get</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Data</span><wbr></wbr><span>By</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="423068736%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-collection-data-by-collection-id.html"><span class="token function">getCollectionDataByCollectionId</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">collectionId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-collection-data/index.html">CollectionData</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries data of a specific collection by the collection ID.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-410816728%2FFunctions%2F483702768" anchor-label="getGasPriceEstimation" id="-410816728%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-gas-price-estimation.html"><span>get</span><wbr></wbr><span>Gas</span><wbr></wbr><span>Price</span><wbr></wbr><span><span>Estimation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-410816728%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-gas-price-estimation.html"><span class="token function">getGasPriceEstimation</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-gas-estimation/index.html">GasEstimation</a></div><div class="brief "><p class="paragraph">Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable amount of time. For more information {@link https://api.mainnet.aptoslabs.com/v1/spec#/operations/estimate_gas_price}</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2057758007%2FFunctions%2F483702768" anchor-label="getIndexerLastSuccessVersion" id="2057758007%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-indexer-last-success-version.html"><span>get</span><wbr></wbr><span>Indexer</span><wbr></wbr><span>Last</span><wbr></wbr><span>Success</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2057758007%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-indexer-last-success-version.html"><span class="token function">getIndexerLastSuccessVersion</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for the last successful indexer version</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1128506046%2FFunctions%2F483702768" anchor-label="getLedgerInfo" id="-1128506046%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-ledger-info.html"><span>get</span><wbr></wbr><span>Ledger</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1128506046%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-ledger-info.html"><span class="token function">getLedgerInfo</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-ledger-info/index.html">LedgerInfo</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for the Aptos ledger info</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="197753601%2FFunctions%2F483702768" anchor-label="getNumberOfDelegators" id="197753601%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-staking/get-number-of-delegators.html"><span>get</span><wbr></wbr><span>Number</span><wbr></wbr><span>Of</span><wbr></wbr><span><span>Delegators</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="197753601%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-staking/get-number-of-delegators.html"><span class="token function">getNumberOfDelegators</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">poolAddress<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">minimumLedgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-number-of-delegators/index.html">NumberOfDelegators</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries current number of delegators in a pool. Throws an error if the pool is not found.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1103906302%2FFunctions%2F483702768" anchor-label="getProcessorStatus" id="-1103906302%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-general/get-processor-status.html"><span>get</span><wbr></wbr><span>Processor</span><wbr></wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1103906302%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-general/get-processor-status.html"><span class="token function">getProcessorStatus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">processorType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-processor-type/index.html">ProcessorType</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-processor-status/index.html">ProcessorStatus</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Query the processor status for a specific processor type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-332652765%2FFunctions%2F483702768" anchor-label="getTableItem" id="-332652765%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/get-table-item.html"><span>get</span><wbr></wbr><span>Table</span><wbr></wbr><span><span>Item</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-332652765%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/get-table-item.html">T</a><span class="token operator">&gt; </span><a href="../../xyz.mcxross.kaptos.protocol/-general/index.html">General</a><span class="token punctuation">.</span><a href="../../xyz.mcxross.kaptos.protocol/get-table-item.html"><span class="token function">getTableItem</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">handle<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-table-item-request/index.html">TableItemRequest</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-ledger-version-query-param/index.html">LedgerVersionQueryParam</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.protocol/get-table-item.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1409533081%2FFunctions%2F483702768" anchor-label="getTokenData" id="-1409533081%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-token-data.html"><span>get</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>Data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1409533081%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-digital-asset/get-token-data.html"><span class="token function">getTokenData</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">offset<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">limit<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-token-data/index.html">TokenData</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1892459728%2FFunctions%2F483702768" anchor-label="getTransactionByHash" id="1892459728%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-hash.html"><span>get</span><wbr></wbr><span>Transaction</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Hash</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1892459728%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-hash.html"><span class="token function">getTransactionByHash</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transactionHash<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-transaction-response/index.html">TransactionResponse</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries on-chain transaction by transaction hash. This function will return pending transactions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1720927673%2FFunctions%2F483702768" anchor-label="getTransactionByVersion" id="1720927673%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-version.html"><span>get</span><wbr></wbr><span>Transaction</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Version</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1720927673%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="../../xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-version.html"><span class="token function">getTransactionByVersion</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">ledgerVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-transaction-response/index.html">TransactionResponse</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries on-chain transaction by version. This function will not return pending transactions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="97223578%2FFunctions%2F483702768" anchor-label="queryIndexer" id="97223578%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/query-indexer.html"><span>query</span><wbr></wbr><span><span>Indexer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="97223578%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/query-indexer.html">T</a><span class="token operator">&gt; </span><a href="../../xyz.mcxross.kaptos.protocol/-general/index.html">General</a><span class="token punctuation">.</span><a href="../../xyz.mcxross.kaptos.protocol/query-indexer.html"><span class="token function">queryIndexer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">query<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-graphql-query/index.html">GraphqlQuery</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/query-indexer.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A generic function for retrieving data from Aptos Indexer.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1639488538%2FFunctions%2F483702768" anchor-label="view" id="1639488538%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../xyz.mcxross.kaptos.protocol/view.html"><span><span>view</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1639488538%2FFunctions%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/view.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-move-value/index.html">MoveValue</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="../../xyz.mcxross.kaptos.protocol/-general/index.html">General</a><span class="token punctuation">.</span><a href="../../xyz.mcxross.kaptos.protocol/view.html"><span class="token function">view</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">payload<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-input-view-function-data/index.html">InputViewFunctionData</a><span class="token punctuation">, </span></span><span class="parameter ">bcs<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter ">ledgerVersion<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-ledger-version-arg/index.html">LedgerVersionArg</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.protocol/view.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Queries for a Move view function</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

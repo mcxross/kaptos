@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ClientConfig</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Kaptos
+                    </a>
+            </div>
+            <div class="library-version">
+1.0.4-SNAPSHOT            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kaptos:dokkaHtml/commonMain">common</button>
+                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":kaptos:dokkaHtml/jsMain">js</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":kaptos:dokkaHtml/jvmMain">jvm</button>
+                <button class="platform-tag platform-selector native-like" data-active="" data-filter=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button>
+                <button class="platform-tag platform-selector native-like" data-active="" data-filter=":kaptos:dokkaHtml/mingwMain">mingw</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.client/ClientConfig///PointingToDeclaration//-738804546">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.client</a><span class="delimiter">/</span><span class="current">ClientConfig</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Client</span><wbr></wbr><span><span>Config</span></span></h1>
+    <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+      <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain" data-active="" data-toggle=":kaptos:dokkaHtml/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">class </span><a href="index.html">ClientConfig</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">ClientConfig</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">ClientConfig</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">ClientConfig</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">actual </span><span class="token keyword">class </span><a href="index.html">ClientConfig</a></div></div>    </div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-778769754%2FConstructors%2F-738804546" anchor-label="ClientConfig" id="-778769754%2FConstructors%2F-738804546" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain,:kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain,:kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain,:kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-client-config.html"><span>Client</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-778769754%2FConstructors%2F-738804546"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain" data-active="" data-toggle=":kaptos:dokkaHtml/commonMain">common</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">expect </span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="89355202%2FProperties%2F-465101662" anchor-label="agent" id="89355202%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/agent/#/PointingToDeclaration/"><span><span>agent</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="89355202%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]agent.html">agent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]agent.html">agent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Specifies the user agent. Default is <code class="lang-kotlin">Kaptos</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]agent.html">agent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Specifies the user agent. Default is <code class="lang-kotlin">Kaptos</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]agent.html">agent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Specifies the user agent. Default is <code class="lang-kotlin">Kaptos</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1182196251%2FProperties%2F-465101662" anchor-label="cache" id="-1182196251%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/cache/#/PointingToDeclaration/"><span><span>cache</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1182196251%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]cache.html">cache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Enables or disables caching. Default is <code class="lang-kotlin">false</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]cache.html">cache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Enables or disables caching. Default is <code class="lang-kotlin">false</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]cache.html">cache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]cache.html">cache</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Enables or disables caching. Default is <code class="lang-kotlin">false</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="319183447%2FProperties%2F-58985210" anchor-label="connectAttempts" id="319183447%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="connect-attempts.html"><span>connect</span><wbr></wbr><span><span>Attempts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="319183447%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="connect-attempts.html">connectAttempts</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies the number of connect attempts. Default is <code class="lang-kotlin">5</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="644542044%2FProperties%2F1960465640" anchor-label="connectTimeout" id="644542044%2FProperties%2F1960465640" data-filterable-set=":kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/connectTimeout/#/PointingToDeclaration/"><span>connect</span><wbr></wbr><span><span>Timeout</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="644542044%2FProperties%2F1960465640"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]connect-timeout.html">connectTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for establishing a connection with a node.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]connect-timeout.html">connectTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for establishing a connection with a node.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]connect-timeout.html">connectTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for establishing a connection with a node.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2115726474%2FProperties%2F-58985210" anchor-label="connectTimeoutMillis" id="-2115726474%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="connect-timeout-millis.html"><span>connect</span><wbr></wbr><span>Timeout</span><wbr></wbr><span><span>Millis</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2115726474%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="connect-timeout-millis.html">connectTimeoutMillis</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies the connect timeout in milliseconds. Default is <code class="lang-kotlin">10000L</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1888778753%2FProperties%2F-465101662" anchor-label="followRedirects" id="1888778753%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/followRedirects/#/PointingToDeclaration/"><span>follow</span><wbr></wbr><span><span>Redirects</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1888778753%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]follow-redirects.html">followRedirects</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]follow-redirects.html">followRedirects</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Specifies whether the client should follow redirects. Default is <code class="lang-kotlin">true</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]follow-redirects.html">followRedirects</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]follow-redirects.html">followRedirects</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1888483218%2FProperties%2F-58985210" anchor-label="keepAliveTime" id="1888483218%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="keep-alive-time.html"><span>keep</span><wbr></wbr><span>Alive</span><wbr></wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1888483218%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="keep-alive-time.html">keepAliveTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies the keep alive time in milliseconds. Default is <code class="lang-kotlin">5000L</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1253492793%2FProperties%2F-465101662" anchor-label="likeAgent" id="1253492793%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/likeAgent/#/PointingToDeclaration/"><span>like</span><wbr></wbr><span><span>Agent</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1253492793%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]like-agent.html">likeAgent</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-user-agent/index.html">UserAgent</a><span class="token operator">?</span></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]like-agent.html">likeAgent</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-user-agent/index.html">UserAgent</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Use a like agent. If this is set, the <code class="lang-kotlin">agent</code> field will be ignored.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]like-agent.html">likeAgent</a><span class="token operator">: </span><span data-unresolved-link="/&amp;lt;Error class: unknown class&amp;gt;///PointingToDeclaration/">&lt;Error class: unknown class&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Use a like agent. If this is set, the <code class="lang-kotlin">agent</code> field will be ignored.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]like-agent.html">likeAgent</a><span class="token operator">: </span><span data-unresolved-link="xyz.mcxross.kaptos.model/UserAgent///PointingToDeclaration/">UserAgent</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Use a like agent. If this is set, the <code class="lang-kotlin">agent</code> field will be ignored.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2137512663%2FProperties%2F-58985210" anchor-label="maxConnectionsCount" id="-2137512663%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-connections-count.html"><span>max</span><wbr></wbr><span>Connections</span><wbr></wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2137512663%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="max-connections-count.html">maxConnectionsCount</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies the maximum number of connections used to make requests. Default is <code class="lang-kotlin">1000</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1160522602%2FProperties%2F-58985210" anchor-label="maxConnectionsPerRoute" id="-1160522602%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-connections-per-route.html"><span>max</span><wbr></wbr><span>Connections</span><wbr></wbr><span>Per</span><wbr></wbr><span><span>Route</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1160522602%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="max-connections-per-route.html">maxConnectionsPerRoute</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies the maximum number of connections per route. Default is <code class="lang-kotlin">100</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="846343569%2FProperties%2F-465101662" anchor-label="maxRetries" id="846343569%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/maxRetries/#/PointingToDeclaration/"><span>max</span><wbr></wbr><span><span>Retries</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="846343569%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]max-retries.html">maxRetries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on connection errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]max-retries.html">maxRetries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on connection errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]max-retries.html">maxRetries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on connection errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]max-retries.html">maxRetries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on connection errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-334820988%2FProperties%2F-58985210" anchor-label="pipelineMaxSize" id="-334820988%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pipeline-max-size.html"><span>pipeline</span><wbr></wbr><span>Max</span><wbr></wbr><span><span>Size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-334820988%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="pipeline-max-size.html">pipelineMaxSize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies the maximum size of the pipeline. Default is <code class="lang-kotlin">20</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1345168532%2FProperties%2F-58985210" anchor-label="pipelining" id="1345168532%2FProperties%2F-58985210" data-filterable-set=":kaptos:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pipelining.html"><span><span>pipelining</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1345168532%2FProperties%2F-58985210"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-active="" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="pipelining.html">pipelining</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Specifies whether the client should use pipelining. Default is <code class="lang-kotlin">false</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2072779655%2FProperties%2F-465101662" anchor-label="proxy" id="-2072779655%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/proxy/#/PointingToDeclaration/"><span><span>proxy</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2072779655%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]proxy.html">proxy</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Specifies the proxy to use. Default is <code class="lang-kotlin">null</code>.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]proxy.html">proxy</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Specifies a proxy for the client to use.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]proxy.html">proxy</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Specifies the maximum number of connections the client can have.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]proxy.html">proxy</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Specifies the proxy to use. Default is <code class="lang-kotlin">null</code>.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1525519361%2FProperties%2F-465101662" anchor-label="requestTimeout" id="1525519361%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/requestTimeout/#/PointingToDeclaration/"><span>request</span><wbr></wbr><span><span>Timeout</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1525519361%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]request-timeout.html">requestTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]request-timeout.html">requestTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for a whole HTTP call, from sending a request to receiving a response.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]request-timeout.html">requestTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for a whole HTTP call, from sending a request to receiving a response.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]request-timeout.html">requestTimeout</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">Specifies a timeout for a whole HTTP call, from sending a request to receiving a response.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-899604878%2FProperties%2F-465101662" anchor-label="retryOnServerErrors" id="-899604878%2FProperties%2F-465101662" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/jsMain,:kaptos:dokkaHtml/jvmMain,:kaptos:dokkaHtml/linuxX64Main,:kaptos:dokkaHtml/mingwMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><span data-unresolved-link="xyz.mcxross.kaptos.client/ClientConfig/retryOnServerErrors/#/PointingToDeclaration/"><span>retry</span><wbr></wbr><span>On</span><wbr></wbr><span>Server</span><wbr></wbr><span><span>Errors</span></span></span></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-899604878%2FProperties%2F-465101662"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jsMain" data-filterable-set=":kaptos:dokkaHtml/jsMain" data-active="" data-toggle=":kaptos:dokkaHtml/jsMain">js</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/jvmMain" data-filterable-set=":kaptos:dokkaHtml/jvmMain" data-toggle=":kaptos:dokkaHtml/jvmMain">jvm</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/linuxX64Main" data-filterable-set=":kaptos:dokkaHtml/linuxX64Main" data-toggle=":kaptos:dokkaHtml/linuxX64Main">linuxX64</button><button class="platform-bookmark" data-filterable-current=":kaptos:dokkaHtml/mingwMain" data-filterable-set=":kaptos:dokkaHtml/mingwMain" data-toggle=":kaptos:dokkaHtml/mingwMain">mingw</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/jsMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[js]retry-on-server-errors.html">retryOnServerErrors</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on server errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[jvm]retry-on-server-errors.html">retryOnServerErrors</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on server errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/linuxX64Main"><div class="symbol monospace"><span class="token keyword">var </span><a href="[linux-x64]retry-on-server-errors.html">retryOnServerErrors</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on server errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div><div class="content sourceset-dependent-content" data-togglable=":kaptos:dokkaHtml/mingwMain"><div class="symbol monospace"><span class="token keyword">var </span><a href="[mingw]retry-on-server-errors.html">retryOnServerErrors</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Specifies how many times the client should retry on server errors. Default is <code class="lang-kotlin">-1</code>, which means no retries.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
