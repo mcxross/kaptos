@@ -38,6 +38,16 @@ multiple platforms.
 Kaptos is available on [Maven Central][maven-central] as a Kotlin Multiplatform library. You can either add it to you
 multiplatform project or add it to your platform-specific project.
 
+> [!IMPORTANT]
+> Kaptos is currently in development and is not yet available on Maven Central. You can use the latest snapshot version 
+> by adding the snapshot repository to your project as follows:
+
+```kotlin
+repositories {
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
+```
+
 ### Multiplatform Project
 
 Add the following to your common source set:
