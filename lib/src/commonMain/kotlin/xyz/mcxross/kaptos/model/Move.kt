@@ -18,10 +18,7 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import xyz.mcxross.kaptos.serialize.MoveBoolSerializer
-import xyz.mcxross.kaptos.serialize.MoveListTypeSerializer
-import xyz.mcxross.kaptos.serialize.MoveUint8TypeSerializer
-import xyz.mcxross.kaptos.serialize.MoveStringSerializer
+import xyz.mcxross.kaptos.serialize.*
 
 @Serializable
 enum class MoveVisibility {
@@ -80,17 +77,22 @@ sealed class MoveValue {
   data class String(val value: kotlin.String) : MoveValue()
 
   @Serializable(with = MoveUint8TypeSerializer::class)
-  data class MoveUint8Type(val value: Int) : MoveValue()
+  data class MoveUint8Type(val value: UByte) : MoveValue()
 
-  @Serializable data class MoveUint16Type(val value: Int) : MoveValue()
+  @Serializable(with = MoveUint16TypeSerializer::class)
+  data class MoveUint16Type(val value: UShort) : MoveValue()
 
-  @Serializable data class MoveUint32Type(val value: Int) : MoveValue()
+  @Serializable(with = MoveUint32TypeSerializer::class)
+  data class MoveUint32Type(val value: UInt) : MoveValue()
 
-  @Serializable data class MoveUint64Type(val value: kotlin.String) : MoveValue()
+  @Serializable(with = MoveUint64TypeSerializer::class)
+  data class MoveUint64Type(val value: Long) : MoveValue()
 
-  @Serializable data class MoveUint128Type(val value: kotlin.String) : MoveValue()
+  @Serializable(with = MoveUint128TypeSerializer::class)
+  data class MoveUint128Type(val value: kotlin.String) : MoveValue()
 
-  @Serializable data class MoveUint256Type(val value: kotlin.String) : MoveValue()
+  @Serializable(with = MoveUint256TypeSerializer::class)
+  data class MoveUint256Type(val value: kotlin.String) : MoveValue()
 
   @Serializable data class MoveAddressType(val value: kotlin.String) : MoveValue()
 
@@ -101,5 +103,5 @@ sealed class MoveValue {
   @Serializable data class MoveOptionType(val value: MoveValue?) : MoveValue()
 
   @Serializable(with = MoveListTypeSerializer::class)
-  data class MoveListType(val value: List<MoveValue>) : MoveValue()
+  data class MoveListType<T: MoveValue>(val value: List<T>) : MoveValue()
 }

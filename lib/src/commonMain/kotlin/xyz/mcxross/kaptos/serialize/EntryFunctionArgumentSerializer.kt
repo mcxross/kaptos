@@ -29,7 +29,20 @@ object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
     PrimitiveSerialDescriptor("EntryFunctionArgument", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: EntryFunctionArgument) {
-    encoder.encodeString(value.toString())
+    encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
+    hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
+  }
+
+  fun hexStringToByteArray(hexString: String): ByteArray {
+    var cleanedHexString = hexString.removePrefix("0x").replace(Regex("[^0-9A-Fa-f]"), "")
+    if (cleanedHexString.length % 2 != 0) {
+      cleanedHexString = "0$cleanedHexString"
+    }
+
+    return ByteArray(cleanedHexString.length / 2) { i ->
+      val index = i * 2
+      cleanedHexString.substring(index, index + 2).toInt(16).toByte()
+    }
   }
 
   override fun deserialize(decoder: Decoder): EntryFunctionArgument {

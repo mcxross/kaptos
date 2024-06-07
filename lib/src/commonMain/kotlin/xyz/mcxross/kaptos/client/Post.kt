@@ -20,6 +20,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.model.*
 
 suspend inline fun <reified V> post(options: RequestOptions.PostRequestOptions<V>): AptosResponse {
@@ -44,6 +45,11 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
         body = options.body,
       )
     )
+
+  if (response.status == HttpStatusCode.BadRequest) {
+    throw AptosException(response.bodyAsText())
+  }
+
   return Pair(response, response.body())
 }
 

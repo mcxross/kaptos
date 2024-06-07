@@ -108,7 +108,7 @@ suspend inline fun <reified T> General.queryIndexer(query: GraphqlQuery): Option
  */
 suspend inline fun <reified T : List<MoveValue>> General.view(
   payload: InputViewFunctionData,
-  bcs: Boolean = false,
+  bcs: Boolean = true,
   ledgerVersion: LedgerVersionArg? = null,
 ): Option<T> {
   return xyz.mcxross.kaptos.internal.view(config, payload, bcs, ledgerVersion)

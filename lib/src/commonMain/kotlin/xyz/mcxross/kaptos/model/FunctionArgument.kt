@@ -16,9 +16,11 @@
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.serialize.EntryFunctionArgumentSerializer
 
 @Serializable sealed class TransactionArgument : EntryFunctionArgument()
 
-@Serializable sealed class EntryFunctionArgument : ScriptFunctionArgument()
+@Serializable(with = EntryFunctionArgumentSerializer::class)
+sealed class EntryFunctionArgument : ScriptFunctionArgument()
 
 @Serializable sealed class ScriptFunctionArgument

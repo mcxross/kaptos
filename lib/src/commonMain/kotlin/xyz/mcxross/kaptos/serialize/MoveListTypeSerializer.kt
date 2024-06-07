@@ -23,15 +23,15 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import xyz.mcxross.kaptos.model.MoveValue
 
-object MoveListTypeSerializer : KSerializer<MoveValue.MoveListType> {
+object MoveListTypeSerializer : KSerializer<MoveValue.MoveListType<MoveValue>> {
   override val descriptor =
     PrimitiveSerialDescriptor("MoveValue.MoveListType", PrimitiveKind.STRING)
 
-  override fun serialize(encoder: Encoder, value: MoveValue.MoveListType) {
+  override fun serialize(encoder: Encoder, value: MoveValue.MoveListType<MoveValue>) {
     encoder.encodeString(value.toString())
   }
 
-  override fun deserialize(decoder: Decoder): MoveValue.MoveListType {
+  override fun deserialize(decoder: Decoder): MoveValue.MoveListType<MoveValue> {
     val a = decoder.decodeSerializableValue(VEC.serializer())
     return MoveValue.MoveListType(a.vec.map { MoveValue.String(it) })
   }
