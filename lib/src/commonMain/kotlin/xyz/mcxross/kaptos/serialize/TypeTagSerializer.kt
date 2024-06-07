@@ -22,13 +22,23 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import xyz.mcxross.kaptos.model.TypeTag
+import xyz.mcxross.kaptos.model.TypeTagStruct
 
 object TypeTagSerializer : KSerializer<TypeTag> {
   override val descriptor: SerialDescriptor =
     PrimitiveSerialDescriptor("TypeTag", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: TypeTag) {
-    encoder.encodeString(value.toString())
+
+    when (value) {
+      is TypeTagStruct -> {
+        encoder.beginStructure(descriptor).apply {
+          encodeSerializableElement(descriptor, 0, TypeTagStruct.serializer(), value)
+          endStructure(descriptor)
+        }
+      }
+      else -> encoder.encodeString(value.toString())
+    }
   }
 
   override fun deserialize(decoder: Decoder): TypeTag {

@@ -18,18 +18,20 @@ package xyz.mcxross.kaptos.serialize
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import xyz.mcxross.kaptos.model.MoveValue
+import xyz.mcxross.kaptos.model.AccountAddress
 
-object MoveUint8TypeSerializer : KSerializer<MoveValue.MoveUint8Type> {
-  override val descriptor = PrimitiveSerialDescriptor("MoveValue.MoveUint8Type", PrimitiveKind.INT)
+object AccountAddressSerializer : KSerializer<AccountAddress> {
+  override val descriptor: SerialDescriptor =
+    PrimitiveSerialDescriptor("AccountAddress", PrimitiveKind.STRING)
 
-  override fun serialize(encoder: Encoder, value: MoveValue.MoveUint8Type) {
-    encoder.encodeInt(value.value)
+  override fun serialize(encoder: Encoder, value: AccountAddress) {
+    value.data.map { encoder.encodeByte(it) }
   }
 
-  override fun deserialize(decoder: Decoder): MoveValue.MoveUint8Type {
-    return MoveValue.MoveUint8Type(decoder.decodeInt())
+  override fun deserialize(decoder: Decoder): AccountAddress {
+    return AccountAddress(ByteArray(0))
   }
 }

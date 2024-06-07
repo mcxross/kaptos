@@ -15,20 +15,22 @@
  */
 package xyz.mcxross.kaptos.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import xyz.mcxross.kaptos.serialize.EntryFunctionArgumentSerializer
-import xyz.mcxross.kaptos.serialize.TypeTagSerializer
 
-/** The data needed to generate a View Function payload */
 @Serializable
-data class InputViewFunctionData(
-  val function: MoveFunctionId,
-  @SerialName("type_arguments")
-  val typeArguments: List<TypeTag>,
-  @SerialName("arguments")
-  val functionArguments:
-    List<EntryFunctionArgument>,
-  @Transient val abi: ViewFunctionABI? = null,
-)
+enum class TypeTagVariants {
+  Bool,
+  U8,
+  U64,
+  U128,
+  Address,
+  Signer,
+  Vector,
+  Struct,
+  U16,
+  U32,
+  U256,
+  Reference, // This is specifically a placeholder and does not represent a real type
+  Generic,
+  // This is specifically a placeholder and does not represent a real type
+}

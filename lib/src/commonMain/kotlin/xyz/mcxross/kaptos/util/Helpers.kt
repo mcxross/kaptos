@@ -19,8 +19,9 @@ package xyz.mcxross.kaptos.util
 import io.ktor.utils.io.charsets.*
 import io.ktor.utils.io.core.*
 import kotlin.String
-import xyz.mcxross.kaptos.model.HexInput
-import xyz.mcxross.kaptos.model.MoveFunctionId
+import kotlinx.serialization.Serializable
+import xyz.mcxross.bcs.Bcs
+import xyz.mcxross.kaptos.model.*
 
 fun String.toAccountAddress(): HexInput {
   return HexInput(this)
@@ -45,3 +46,14 @@ fun getFunctionParts(function: MoveFunctionId): Triple<String, String, String> {
 
   return Triple(parts[0], parts[1], parts[2])
 }
+
+inline fun <reified T> bcs(accountAddress: T): ByteArray {
+  return Bcs.encodeToByteArray<T>(accountAddress)
+}
+
+@Serializable
+data class A(
+  val a: Int = 1,
+  val s: MoveString =
+    MoveString("0x7df36a50ed0af77f288c216b4db6e9feb71e4d1b6e5fbc4032d9daa2021fe94e"),
+)

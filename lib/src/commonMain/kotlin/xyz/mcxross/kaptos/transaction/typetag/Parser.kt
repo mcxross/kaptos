@@ -126,7 +126,7 @@ object TypeTagParser {
       "&signer" ->
         if (types.isNotEmpty())
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedPrimitiveTypeArguments)
-        else TypeTagReference(TypeTagSigner)
+        else TypeTagReference(ref = TypeTagSigner())
       "signer",
       "bool",
       "address",
@@ -139,25 +139,25 @@ object TypeTagParser {
         if (types.isNotEmpty())
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedPrimitiveTypeArguments)
         when (str) {
-          "signer" -> TypeTagSigner
-          "bool" -> TypeTagBool
-          "address" -> TypeTagAddress
-          "u8" -> TypeTagU8
-          "u16" -> TypeTagU16
-          "u32" -> TypeTagU32
-          "u64" -> TypeTagU64
-          "u128" -> TypeTagU128
-          "u256" -> TypeTagU256
+          "signer" -> TypeTagSigner()
+          "bool" -> TypeTagBool()
+          "address" -> TypeTagAddress()
+          "u8" -> TypeTagU8()
+          "u16" -> TypeTagU16()
+          "u32" -> TypeTagU32()
+          "u64" -> TypeTagU64()
+          "u128" -> TypeTagU128()
+          "u256" -> TypeTagU256()
           else -> throw IllegalArgumentException("Unknown primitive type")
         }
       }
       "vector" ->
         if (types.size != 1)
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedVectorTypeArgumentCount)
-        else TypeTagVector(types[0])
+        else TypeTagVector(type = types[0])
       else -> {
         if (isGeneric(str)) {
-          if (allowGenerics) TypeTagGeneric(str.substring(1).toInt())
+          if (allowGenerics) TypeTagGeneric(id = str.substring(1).toUShort())
           else throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedGenericType)
         } else {
           val structParts = str.split("::")
@@ -167,11 +167,14 @@ object TypeTagParser {
             throw TypeTagParserError(str, TypeTagParserErrorType.InvalidModuleNameCharacter)
           if (!isValidIdentifier(structParts[2]))
             throw TypeTagParserError(str, TypeTagParserErrorType.InvalidStructNameCharacter)
-          StructTag(
-            AccountAddress.fromString(structParts[0]),
-            structParts[1],
-            structParts[2],
-            types,
+          TypeTagStruct(
+            type =
+              StructTag(
+                address = AccountAddress.fromString(structParts[0]),
+                moduleName = structParts[1],
+                name = structParts[2],
+                typeArgs = types,
+              )
           )
         }
       }

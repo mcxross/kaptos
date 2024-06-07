@@ -22,7 +22,7 @@ import xyz.mcxross.kaptos.transaction.EntryFunction
 suspend fun generateViewFunctionPayload(
   aptosConfig: AptosConfig,
   inputViewFunctionData: InputViewFunctionData,
-) {
+): EntryFunction {
 
   val functionParts = inputViewFunctionData.function.parts()
 
@@ -45,6 +45,8 @@ suspend fun generateViewFunctionPayload(
           )
       }
     }
+
+  return generateViewFunctionPayloadWithABI(aptosConfig, inputViewFunctionData, functionAbi)
 }
 
 fun generateViewFunctionPayloadWithABI(
@@ -55,22 +57,22 @@ fun generateViewFunctionPayloadWithABI(
   val parts = inputViewFunctionData.function.parts()
 
   // Check the type argument count against the ABI
-  if ((inputViewFunctionData.typeArguments?.size ?: 0) != functionAbi.typeParameters.size) {
+  if (inputViewFunctionData.typeArguments.size != functionAbi.typeParameters.size) {
     throw IllegalArgumentException(
       "Type argument count does not match the function ABI for '${functionAbi}. Expected ${functionAbi.typeParameters.size}, got '${inputViewFunctionData.typeArguments?.size ?: 0}'"
     )
   }
 
-  if ((inputViewFunctionData.functionArguments?.size ?: 0) != functionAbi.parameters.size) {
+  if (inputViewFunctionData.functionArguments.size != functionAbi.parameters.size) {
     throw IllegalArgumentException(
       "Too few arguments for '${parts.first}::${parts.second}::${parts.third}', expected ${functionAbi.parameters.size} but got ${inputViewFunctionData.functionArguments?.size ?: 0}"
     )
   }
 
   return EntryFunction(
-    moduleName = ModuleId(AccountAddress(parts.first), Identifier(parts.second)),
+    moduleName = ModuleId(AccountAddress.fromString(parts.first), Identifier(parts.second)),
     functionName = Identifier(parts.third),
-    typeArgs = inputViewFunctionData.typeArguments ?: emptyList(),
-    args = inputViewFunctionData.functionArguments ?: emptyList(),
+    typeArgs = inputViewFunctionData.typeArguments,
+    args = inputViewFunctionData.functionArguments,
   )
 }

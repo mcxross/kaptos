@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.exception.ParsingException
+import xyz.mcxross.kaptos.serialize.AccountAddressSerializer
 
 /**
  * This enum is used to explain why an address was invalid.
@@ -55,7 +56,7 @@ interface AccountAddressInput {
  * @constructor Creates an account address from a hex string.
  * @property data The data of the account address.
  */
-@Serializable
+@Serializable(with = AccountAddressSerializer::class)
 data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountAddressInput {
 
   /**
@@ -114,7 +115,11 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
   fun toStringLong(): String = "0x${toStringLongWithoutPrefix()}"
 
   fun toStringLongWithoutPrefix(): String {
-    return data.joinToString("") { byte -> "${byte}${byte}" }
+      val hexString = data.joinToString("") { byte ->
+        val hex = byte.toInt().and(0xff).toString(16)
+        if (hex.length == 1) "0$hex" else hex
+      }
+      return hexString.padStart(64, '0')
   }
 
   override val value: String
