@@ -13,25 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package xyz.mcxross.kaptos.model
+package xyz.mcxross.kaptos.transaction.instances
 
 import kotlinx.serialization.Serializable
 
-sealed class Option<out T> {
-  @Serializable data class Some<T>(val value: T) : Option<T>()
-
-  @Serializable data object None : Option<Nothing>()
-
-  fun unwrap(message: String = "None.unwrap"): T =
-    when (this) {
-      is Some -> value
-      is None -> throw NoSuchElementException(message)
-    }
-
-  fun destruct(): T? =
-    when (this) {
-      is Some -> value
-      is None -> null
-    }
-}
+@Serializable data class ChainId(val chainId: UByte)

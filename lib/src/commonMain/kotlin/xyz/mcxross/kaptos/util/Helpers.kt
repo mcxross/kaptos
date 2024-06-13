@@ -19,8 +19,6 @@ package xyz.mcxross.kaptos.util
 import io.ktor.utils.io.charsets.*
 import io.ktor.utils.io.core.*
 import kotlin.String
-import kotlinx.serialization.Serializable
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.*
 
 fun String.toAccountAddress(): HexInput {
@@ -47,13 +45,19 @@ fun getFunctionParts(function: MoveFunctionId): Triple<String, String, String> {
   return Triple(parts[0], parts[1], parts[2])
 }
 
-inline fun <reified T> bcs(accountAddress: T): ByteArray {
-  return Bcs.encodeToByteArray<T>(accountAddress)
-}
+/**
+ * Finds first non-signer arg.
+ *
+ * A function is often defined with a `signer` or `&signer` arguments at the start, which are filled
+ * in by signatures, and not by the caller.
+ *
+ * @param functionAbi
+ */
+fun findFirstNonSignerArg(functionAbi: MoveFunction): Int {
+  val index = functionAbi.params.indexOfFirst { it != "signer" && it != "&signer" }
 
-@Serializable
-data class A(
-  val a: Int = 1,
-  val s: MoveString =
-    MoveString("0x7df36a50ed0af77f288c216b4db6e9feb71e4d1b6e5fbc4032d9daa2021fe94e"),
-)
+  if (index < 0) {
+    return functionAbi.params.size
+  }
+  return index
+}

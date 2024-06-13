@@ -13,25 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-import kotlinx.serialization.Serializable
+interface InputGenerateTransactionPayloadDataWithRemoteABI
 
-sealed class Option<out T> {
-  @Serializable data class Some<T>(val value: T) : Option<T>()
-
-  @Serializable data object None : Option<Nothing>()
-
-  fun unwrap(message: String = "None.unwrap"): T =
-    when (this) {
-      is Some -> value
-      is None -> throw NoSuchElementException(message)
-    }
-
-  fun destruct(): T? =
-    when (this) {
-      is Some -> value
-      is None -> null
-    }
-}
+data class InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI(
+  val inputEntryFunctionData: InputEntryFunctionData
+) : InputGenerateTransactionPayloadDataWithRemoteABI

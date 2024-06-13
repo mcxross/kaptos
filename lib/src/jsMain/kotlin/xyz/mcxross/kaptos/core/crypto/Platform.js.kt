@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
+import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.SigningScheme
 
 actual fun generateKeypair(scheme: SigningScheme): KeyPair {
@@ -26,5 +27,13 @@ actual fun fromSeed(seed: ByteArray): KeyPair {
 }
 
 actual fun sha3Hash(input: ByteArray): ByteArray {
+    TODO("Not yet implemented")
+}
+
+actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
+    TODO("Not yet implemented")
+}
+
+actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
     TODO("Not yet implemented")
 }

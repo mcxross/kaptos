@@ -13,25 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-import kotlinx.serialization.Serializable
+interface InputGenerateTransactionPayloadData
 
-sealed class Option<out T> {
-  @Serializable data class Some<T>(val value: T) : Option<T>()
-
-  @Serializable data object None : Option<Nothing>()
-
-  fun unwrap(message: String = "None.unwrap"): T =
-    when (this) {
-      is Some -> value
-      is None -> throw NoSuchElementException(message)
-    }
-
-  fun destruct(): T? =
-    when (this) {
-      is Some -> value
-      is None -> null
-    }
-}
+/** The data needed to generate an Entry Function payload */
+data class InputEntryFunctionData(
+  val function: MoveFunctionId,
+  val typeArguments: List<TypeTag>,
+  val functionArguments: List<EntryFunctionArgument>,
+  val abi: EntryFunctionABI? = null,
+) : InputGenerateTransactionPayloadData

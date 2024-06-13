@@ -21,16 +21,28 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.EntryFunctionArgument
 import xyz.mcxross.kaptos.model.MoveString
+import xyz.mcxross.kaptos.model.U64
 
 object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
   override val descriptor: SerialDescriptor =
     PrimitiveSerialDescriptor("EntryFunctionArgument", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: EntryFunctionArgument) {
-    encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
-    hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
+    when (value) {
+      is MoveString -> {
+        encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
+        hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
+      }
+      is U64 -> {
+        val length = Bcs.encodeToByteArray(value).size
+        encoder.beginCollection(descriptor, length)
+        encoder.encodeSerializableValue(U64.serializer(), value)
+      }
+      else -> throw IllegalArgumentException("Unimplemented transaction argument type")
+    }
   }
 
   fun hexStringToByteArray(hexString: String): ByteArray {

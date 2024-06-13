@@ -72,6 +72,7 @@ kotlin {
       implementation(libs.ktor.client.auth)
       implementation(libs.kotlinx.serialization.core)
       implementation(libs.bcs)
+      implementation(libs.kotlinx.datetime)
     }
     commonTest.dependencies {
       implementation(kotlin("test"))

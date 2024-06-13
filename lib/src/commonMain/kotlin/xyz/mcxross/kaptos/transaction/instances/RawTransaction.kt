@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package xyz.mcxross.kaptos.model
+package xyz.mcxross.kaptos.transaction.instances
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.model.AccountAddress
+import xyz.mcxross.kaptos.model.TransactionPayload
 
-sealed class Option<out T> {
-  @Serializable data class Some<T>(val value: T) : Option<T>()
+@Serializable open class AnyRawTransactionInstance
 
-  @Serializable data object None : Option<Nothing>()
-
-  fun unwrap(message: String = "None.unwrap"): T =
-    when (this) {
-      is Some -> value
-      is None -> throw NoSuchElementException(message)
-    }
-
-  fun destruct(): T? =
-    when (this) {
-      is Some -> value
-      is None -> null
-    }
-}
+@Serializable
+data class RawTransaction(
+  val sender: AccountAddress,
+  val sequenceNumber: Long,
+  val payload: TransactionPayload,
+  val maxGasAmount: Long,
+  val gasUnitPrice: Long,
+  val expirationTimestampSecs: Long,
+  val chainId: ChainId,
+  val zero: Byte = 0,
+) : AnyRawTransactionInstance()

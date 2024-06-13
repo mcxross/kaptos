@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.protocol
 
+import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.GasEstimation
 import xyz.mcxross.kaptos.model.Option
 import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
 /**
  * Transaction API namespace. This interface provides functionality to reading and writing
@@ -52,4 +54,13 @@ interface Transaction {
    * @returns [GasEstimation]
    */
   suspend fun getGasPriceEstimation(): GasEstimation
+
+  /**
+   * Sign a transaction that can later be submitted to chain
+   *
+   * @param signer The signer account
+   * @param transaction A raw transaction to sign on
+   * @returns [AccountAuthenticator]
+   */
+  fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
 }

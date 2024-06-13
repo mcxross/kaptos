@@ -15,14 +15,15 @@
  */
 package xyz.mcxross.kaptos.core.account
 
+import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
+import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
+import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.HexInput
-import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
-import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
-import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
-import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.SigningScheme
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorEd25519
 
 /**
  * Signer implementation for the Ed25519 authentication scheme. This extends an [Ed25519Account] by
@@ -51,7 +52,7 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
     get() = SigningScheme.Ed25519
 
   init {
-    this.publicKey = privateKey.publicKey() as Ed25519PublicKey
+    this.publicKey = privateKey.publicKey()
     this.accountAddress =
       if (address != null) {
         AccountAddress.from(address)
@@ -60,13 +61,20 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
       }
   }
 
-  fun signWithAuthenticator(message: HexInput): Ed25519Signature {
+  /**
+   * Sign a message using the available signing capabilities.
+   *
+   * @param message the signing message, as binary input
+   * @return the [AccountAuthenticator] containing the signature, together with the account's public
+   *   key
+   */
+  override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
     val signature = this.privateKey.sign(message)
-    TODO("Not yet implemented: We should call the actual Ed25519 sign")
+    return AccountAuthenticatorEd25519(this.publicKey, signature)
   }
 
   override fun sign(message: HexInput): Signature {
-    return this.signWithAuthenticator(message)
+    return (this.signWithAuthenticator(message) as AccountAuthenticatorEd25519).signature
   }
 
   companion object {
