@@ -1,5 +1,13 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/index.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Build///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-build/index.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Build/Build/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-build/-build.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Build/config/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-build/config.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Build/simple/#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.InputGenerateTransactionPayloadData#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions?#kotlin.Boolean/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-build/simple.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Submit///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-submit/index.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Submit/Submit/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-submit/-submit.html
+$dokka.location:xyz.mcxross.kaptos.api.txsubmission/Submit/simple/#xyz.mcxross.kaptos.model.AnyRawTransaction#xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator#xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api.txsubmission/-submit/simple.html
 $dokka.location:xyz.mcxross.kaptos.api////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/index.html
 $dokka.location:xyz.mcxross.kaptos.api/Account///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-account/index.html
 $dokka.location:xyz.mcxross.kaptos.api/Account/Account/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-account/-account.html
@@ -42,6 +50,7 @@ $dokka.location:xyz.mcxross.kaptos.api/Transaction/config/#/PointingToDeclaratio
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/getGasPriceEstimation/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/get-gas-price-estimation.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/getTransactionByHash/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/get-transaction-by-hash.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/getTransactionByVersion/#kotlin.Long/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/get-transaction-by-version.html
+$dokka.location:xyz.mcxross.kaptos.api/Transaction/sign/#xyz.mcxross.kaptos.core.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/sign.html
 $dokka.location:xyz.mcxross.kaptos.client////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/index.html
 $dokka.location:xyz.mcxross.kaptos.client//client/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/client.html
 $dokka.location:xyz.mcxross.kaptos.client//get/#xyz.mcxross.kaptos.model.RequestOptions.AptosRequestOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/get.html
@@ -80,6 +89,7 @@ $dokka.location:xyz.mcxross.kaptos.core.account/Account/Account/#/PointingToDecl
 $dokka.location:xyz.mcxross.kaptos.core.account/Account/accountAddress/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-account/account-address.html
 $dokka.location:xyz.mcxross.kaptos.core.account/Account/publicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-account/public-key.html
 $dokka.location:xyz.mcxross.kaptos.core.account/Account/sign/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-account/sign.html
+$dokka.location:xyz.mcxross.kaptos.core.account/Account/signWithAuthenticator/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-account/sign-with-authenticator.html
 $dokka.location:xyz.mcxross.kaptos.core.account/Account/signingScheme/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-account/signing-scheme.html
 $dokka.location:xyz.mcxross.kaptos.core.account/Ed25519Account.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-ed25519-account/-companion/index.html
 $dokka.location:xyz.mcxross.kaptos.core.account/Ed25519Account.Companion/generate/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.account/-ed25519-account/-companion/generate.html
@@ -95,7 +105,9 @@ $dokka.location:xyz.mcxross.kaptos.core.account/Ed25519Account/signingScheme/#/P
 $dokka.location:xyz.mcxross.kaptos.core.crypto////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/index.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//fromSeed/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/from-seed.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//generateKeypair/#xyz.mcxross.kaptos.model.SigningScheme/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/generate-keypair.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto//generateSigningMessage/#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/generate-signing-message.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//sha3Hash/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/sha3-hash.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto//sign/#kotlin.ByteArray#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/sign.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AccountPublicKey///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-account-public-key/index.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AccountPublicKey/AccountPublicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-account-public-key/-account-public-key.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AccountPublicKey/authKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-account-public-key/auth-key.html
@@ -239,6 +251,14 @@ $dokka.location:xyz.mcxross.kaptos.model/AccountAddress/toStringWithoutPrefix/#/
 $dokka.location:xyz.mcxross.kaptos.model/AccountAddress/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-address/value.html
 $dokka.location:xyz.mcxross.kaptos.model/AccountAddressInput///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-address-input/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AccountAddressInput/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-address-input/value.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant.Ed25519///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/-ed25519/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant.MultiEd25519///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/-multi-ed25519/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant.MultiKey///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/-multi-key/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant.SingleKey///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/-single-key/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/entries.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/value-of.html
+$dokka.location:xyz.mcxross.kaptos.model/AccountAuthenticatorVariant/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-authenticator-variant/values.html
 $dokka.location:xyz.mcxross.kaptos.model/AccountCoinsData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-coins-data/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AccountData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-data/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AccountData/AccountData/#kotlin.String#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-account-data/-account-data.html
@@ -269,6 +289,9 @@ $dokka.location:xyz.mcxross.kaptos.model/AddressInvalidReason/entries/#/Pointing
 $dokka.location:xyz.mcxross.kaptos.model/AddressInvalidReason/reason/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-address-invalid-reason/reason.html
 $dokka.location:xyz.mcxross.kaptos.model/AddressInvalidReason/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-address-invalid-reason/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/AddressInvalidReason/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-address-invalid-reason/values.html
+$dokka.location:xyz.mcxross.kaptos.model/AnyRawTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-raw-transaction/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AnyRawTransaction/AnyRawTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-raw-transaction/-any-raw-transaction.html
+$dokka.location:xyz.mcxross.kaptos.model/AnyTransactionPayloadInstance///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType.FAUCET///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/-f-a-u-c-e-t/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType.FULLNODE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/-f-u-l-l-n-o-d-e/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType.INDEXER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/-i-n-d-e-x-e-r/index.html
@@ -416,6 +439,48 @@ $dokka.location:xyz.mcxross.kaptos.model/Identifier/toString/#/PointingToDeclara
 $dokka.location:xyz.mcxross.kaptos.model/IndexerConfig///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-indexer-config/index.html
 $dokka.location:xyz.mcxross.kaptos.model/IndexerConfig/IndexerConfig/#kotlin.collections.Map[kotlin.String,kotlin.Any]?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-indexer-config/-indexer-config.html
 $dokka.location:xyz.mcxross.kaptos.model/IndexerConfig/headers/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-indexer-config/headers.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData/InputEntryFunctionData/#kotlin.String#kotlin.collections.List[xyz.mcxross.kaptos.model.TypeTag]#kotlin.collections.List[xyz.mcxross.kaptos.model.EntryFunctionArgument]#xyz.mcxross.kaptos.model.EntryFunctionABI?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/-input-entry-function-data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData/abi/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/abi.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData/function/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/function.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData/functionArguments/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/function-arguments.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionData/typeArguments/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-data/type-arguments.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-generate-transaction-payload-data-with-remote-a-b-i-with-remote-a-b-i/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI/InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI/#xyz.mcxross.kaptos.model.InputEntryFunctionData/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-generate-transaction-payload-data-with-remote-a-b-i-with-remote-a-b-i/-input-entry-function-generate-transaction-payload-data-with-remote-a-b-i-with-remote-a-b-i.html
+$dokka.location:xyz.mcxross.kaptos.model/InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI/inputEntryFunctionData/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-entry-function-generate-transaction-payload-data-with-remote-a-b-i-with-remote-a-b-i/input-entry-function-data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/InputGenerateMultiSignerRawTransactionData/#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.InputGenerateTransactionPayloadData#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions?#kotlin.Boolean#kotlin.collections.List[xyz.mcxross.kaptos.model.AccountAddressInput]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/-input-generate-multi-signer-raw-transaction-data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/data/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/options/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/options.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/secondarySignerAddresses/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/secondary-signer-addresses.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/sender/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/sender.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateMultiSignerRawTransactionData/withFeePayer/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-multi-signer-raw-transaction-data/with-fee-payer.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/InputGenerateSingleSignerRawTransactionData/#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.InputGenerateTransactionPayloadData#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions?#kotlin.Boolean#kotlin.Nothing?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/-input-generate-single-signer-raw-transaction-data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/data/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/options/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/options.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/secondarySignerAddresses/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/secondary-signer-addresses.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/sender/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/sender.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateSingleSignerRawTransactionData/withFeePayer/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-single-signer-raw-transaction-data/with-fee-payer.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionData/data/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-data/data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionData/options/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-data/options.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionData/sender/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-data/sender.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionData/withFeePayer/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-data/with-fee-payer.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions/InputGenerateTransactionOptions/#kotlin.Long#kotlin.Long?#kotlin.Long?#kotlin.Number?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/-input-generate-transaction-options.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions/accountSequenceNumber/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/account-sequence-number.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions/expireTimestamp/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/expire-timestamp.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions/gasUnitPrice/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/gas-unit-price.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionOptions/maxGasAmount/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-options/max-gas-amount.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionPayloadData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputGenerateTransactionPayloadDataWithRemoteABI///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data-with-remote-a-b-i/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/index.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData/InputSubmitTransactionData/#xyz.mcxross.kaptos.model.AnyRawTransaction#xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator#xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator?#kotlin.collections.List[xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator]?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/-input-submit-transaction-data.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData/additionalSignersAuthenticators/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/additional-signers-authenticators.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData/feePayerAuthenticator/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/fee-payer-authenticator.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData/senderAuthenticator/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/sender-authenticator.html
+$dokka.location:xyz.mcxross.kaptos.model/InputSubmitTransactionData/transaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-submit-transaction-data/transaction.html
 $dokka.location:xyz.mcxross.kaptos.model/InputViewFunctionData///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-view-function-data/index.html
 $dokka.location:xyz.mcxross.kaptos.model/InputViewFunctionData/InputViewFunctionData/#kotlin.String#kotlin.collections.List[xyz.mcxross.kaptos.model.TypeTag]#kotlin.collections.List[xyz.mcxross.kaptos.model.EntryFunctionArgument]#xyz.mcxross.kaptos.model.ViewFunctionABI?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-view-function-data/-input-view-function-data.html
 $dokka.location:xyz.mcxross.kaptos.model/InputViewFunctionData/abi/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-input-view-function-data/abi.html
@@ -560,6 +625,9 @@ $dokka.location:xyz.mcxross.kaptos.model/MoveVisibility///PointingToDeclaration/
 $dokka.location:xyz.mcxross.kaptos.model/MoveVisibility/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-visibility/entries.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVisibility/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-visibility/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVisibility/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-visibility/values.html
+$dokka.location:xyz.mcxross.kaptos.model/MultiAgentTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-multi-agent-transaction/index.html
+$dokka.location:xyz.mcxross.kaptos.model/MultiAgentTransaction/MultiAgentTransaction/#xyz.mcxross.kaptos.transaction.instances.RawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-multi-agent-transaction/-multi-agent-transaction.html
+$dokka.location:xyz.mcxross.kaptos.model/MultiAgentTransaction/rawTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-multi-agent-transaction/raw-transaction.html
 $dokka.location:xyz.mcxross.kaptos.model/Network.CUSTOM///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-network/-c-u-s-t-o-m/index.html
 $dokka.location:xyz.mcxross.kaptos.model/Network.DEVNET///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-network/-d-e-v-n-e-t/index.html
 $dokka.location:xyz.mcxross.kaptos.model/Network.LOCAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-network/-l-o-c-a-l/index.html
@@ -576,6 +644,8 @@ $dokka.location:xyz.mcxross.kaptos.model/Option.Some///PointingToDeclaration/-k
 $dokka.location:xyz.mcxross.kaptos.model/Option.Some/Some/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-option/-some/-some.html
 $dokka.location:xyz.mcxross.kaptos.model/Option.Some/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-option/-some/value.html
 $dokka.location:xyz.mcxross.kaptos.model/Option///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-option/index.html
+$dokka.location:xyz.mcxross.kaptos.model/Option/destruct/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-option/destruct.html
+$dokka.location:xyz.mcxross.kaptos.model/Option/unwrap/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-option/unwrap.html
 $dokka.location:xyz.mcxross.kaptos.model/PaginationArgs///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-args/index.html
 $dokka.location:xyz.mcxross.kaptos.model/PaginationArgs/PaginationArgs/#kotlin.Int?#kotlin.Int?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-args/-pagination-args.html
 $dokka.location:xyz.mcxross.kaptos.model/PaginationArgs/limit/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-args/limit.html
@@ -585,6 +655,10 @@ $dokka.location:xyz.mcxross.kaptos.model/PaginationQueryParams/PaginationQueryPa
 $dokka.location:xyz.mcxross.kaptos.model/PaginationQueryParams/limit/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-query-params/limit.html
 $dokka.location:xyz.mcxross.kaptos.model/PaginationQueryParams/offset/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-query-params/offset.html
 $dokka.location:xyz.mcxross.kaptos.model/PaginationQueryParams/toMap/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pagination-query-params/to-map.html
+$dokka.location:xyz.mcxross.kaptos.model/PendingTransactionResponse///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pending-transaction-response/index.html
+$dokka.location:xyz.mcxross.kaptos.model/PendingTransactionResponse/PendingTransactionResponse/#kotlin.String#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pending-transaction-response/-pending-transaction-response.html
+$dokka.location:xyz.mcxross.kaptos.model/PendingTransactionResponse/hash/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pending-transaction-response/hash.html
+$dokka.location:xyz.mcxross.kaptos.model/PendingTransactionResponse/sender/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-pending-transaction-response/sender.html
 $dokka.location:xyz.mcxross.kaptos.model/ProcessorStatus///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-processor-status/index.html
 $dokka.location:xyz.mcxross.kaptos.model/ProcessorType.ACCOUNT_TRANSACTION_PROCESSOR///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-processor-type/-a-c-c-o-u-n-t_-t-r-a-n-s-a-c-t-i-o-n_-p-r-o-c-e-s-s-o-r/index.html
 $dokka.location:xyz.mcxross.kaptos.model/ProcessorType.DEFAULT///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-processor-type/-d-e-f-a-u-l-t/index.html
@@ -672,6 +746,11 @@ $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/entries/#/PointingTo
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/value.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/values.html
+$dokka.location:xyz.mcxross.kaptos.model/SimpleTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-simple-transaction/index.html
+$dokka.location:xyz.mcxross.kaptos.model/SimpleTransaction/SimpleTransaction/#xyz.mcxross.kaptos.transaction.instances.RawTransaction#xyz.mcxross.kaptos.model.AccountAddress?#kotlin.Nothing?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-simple-transaction/-simple-transaction.html
+$dokka.location:xyz.mcxross.kaptos.model/SimpleTransaction/feePayerAddress/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-simple-transaction/fee-payer-address.html
+$dokka.location:xyz.mcxross.kaptos.model/SimpleTransaction/rawTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-simple-transaction/raw-transaction.html
+$dokka.location:xyz.mcxross.kaptos.model/SimpleTransaction/secondarySignerAddresses/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-simple-transaction/secondary-signer-addresses.html
 $dokka.location:xyz.mcxross.kaptos.model/SpecificPaginationQueryParams///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-specific-pagination-query-params/index.html
 $dokka.location:xyz.mcxross.kaptos.model/SpecificPaginationQueryParams/SpecificPaginationQueryParams/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-specific-pagination-query-params/-specific-pagination-query-params.html
 $dokka.location:xyz.mcxross.kaptos.model/SpecificPaginationQueryParams/ledgerVersion/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-specific-pagination-query-params/ledger-version.html
@@ -707,7 +786,20 @@ $dokka.location:xyz.mcxross.kaptos.model/TransactionEd25519Signature/Transaction
 $dokka.location:xyz.mcxross.kaptos.model/TransactionEd25519Signature/public_key/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-ed25519-signature/public_key.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionEd25519Signature/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-ed25519-signature/signature.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionEd25519Signature/type/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-ed25519-signature/type.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayload///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayload/TransactionPayload/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload/-transaction-payload.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadEntryFunction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-entry-function/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadEntryFunction/TransactionPayloadEntryFunction/#xyz.mcxross.kaptos.transaction.EntryFunction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-entry-function/-transaction-payload-entry-function.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadEntryFunction/entryFunction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-entry-function/entry-function.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadResponse///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-response/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants.EntryFunction///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/-entry-function/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants.Multisig///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/-multisig/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants.Script///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/-script/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/entries.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/value.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/value-of.html
+$dokka.location:xyz.mcxross.kaptos.model/TransactionPayloadVariants/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-payload-variants/values.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionQueryParams///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-query-params/index.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionQueryParams/TransactionQueryParams/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-query-params/-transaction-query-params.html
 $dokka.location:xyz.mcxross.kaptos.model/TransactionQueryParams/toMap/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-transaction-query-params/to-map.html
@@ -926,6 +1018,7 @@ $dokka.location:xyz.mcxross.kaptos.protocol/Transaction///PointingToDeclaration/
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getGasPriceEstimation/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/get-gas-price-estimation.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getTransactionByHash/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-hash.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getTransactionByVersion/#kotlin.Long/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-version.html
+$dokka.location:xyz.mcxross.kaptos.protocol/Transaction/sign/#xyz.mcxross.kaptos.core.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/sign.html
 $dokka.location:xyz.mcxross.kaptos.serialize////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/index.html
 $dokka.location:xyz.mcxross.kaptos.serialize/AccountAddressSerializer///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-account-address-serializer/index.html
 $dokka.location:xyz.mcxross.kaptos.serialize/AccountAddressSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-account-address-serializer/descriptor.html
@@ -972,6 +1065,10 @@ $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer///PointingT
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/descriptor.html
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/deserialize.html
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/serialize/#kotlinx.serialization.encoding.Encoder#xyz.mcxross.kaptos.model.MoveValue.MoveUint8Type/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/serialize.html
+$dokka.location:xyz.mcxross.kaptos.serialize/TransactionPayloadSerializer///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-payload-serializer/index.html
+$dokka.location:xyz.mcxross.kaptos.serialize/TransactionPayloadSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-payload-serializer/descriptor.html
+$dokka.location:xyz.mcxross.kaptos.serialize/TransactionPayloadSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-payload-serializer/deserialize.html
+$dokka.location:xyz.mcxross.kaptos.serialize/TransactionPayloadSerializer/serialize/#kotlinx.serialization.encoding.Encoder#xyz.mcxross.kaptos.model.TransactionPayload/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-payload-serializer/serialize.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TypeTagSerializer///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-type-tag-serializer/index.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TypeTagSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-type-tag-serializer/descriptor.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TypeTagSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-type-tag-serializer/deserialize.html
@@ -979,11 +1076,58 @@ $dokka.location:xyz.mcxross.kaptos.serialize/TypeTagSerializer/serialize/#kotlin
 $dokka.location:xyz.mcxross.kaptos.serialize/VEC///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-v-e-c/index.html
 $dokka.location:xyz.mcxross.kaptos.serialize/VEC/VEC/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-v-e-c/-v-e-c.html
 $dokka.location:xyz.mcxross.kaptos.serialize/VEC/vec/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-v-e-c/vec.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticator///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticator/AccountAuthenticator/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/-account-authenticator.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticator/isEd25519/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/is-ed25519.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/AccountAuthenticatorEd25519/#xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey#xyz.mcxross.kaptos.core.crypto.Ed25519Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/-account-authenticator-ed25519.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/publicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/public-key.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/signature.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator/TransactionAuthenticator/#xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey#xyz.mcxross.kaptos.core.crypto.Ed25519Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/-transaction-authenticator.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator/publicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/public-key.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/signature.html
 $dokka.location:xyz.mcxross.kaptos.transaction.builder////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//buildTransaction/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.InputGenerateTransactionData#xyz.mcxross.kaptos.model.TransactionPayload#xyz.mcxross.kaptos.model.AccountAddressInput?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/build-transaction.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//deriveTransactionType/#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/derive-transaction-type.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//fetchEntryFunctionAbi/#xyz.mcxross.kaptos.model.AptosConfig#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/fetch-entry-function-abi.html
 $dokka.location:xyz.mcxross.kaptos.transaction.builder//fetchFunctionAbi/#kotlin.String#kotlin.String#kotlin.String#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/fetch-function-abi.html
 $dokka.location:xyz.mcxross.kaptos.transaction.builder//fetchViewFunctionAbi/#xyz.mcxross.kaptos.model.AptosConfig#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/fetch-view-function-abi.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//generateRawTransaction/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.TransactionPayload#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions?#xyz.mcxross.kaptos.model.AccountAddressInput?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-raw-transaction.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//generateSignedTransaction/#xyz.mcxross.kaptos.model.InputSubmitTransactionData/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-signed-transaction.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//generateSigningMessage/#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-signing-message.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//generateTransactionPayload/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.InputGenerateTransactionPayloadDataWithRemoteABI/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-transaction-payload.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//generateTransactionPayloadWithABI/#xyz.mcxross.kaptos.model.InputGenerateTransactionPayloadDataWithRemoteABI/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-transaction-payload-with-a-b-i.html
 $dokka.location:xyz.mcxross.kaptos.transaction.builder//generateViewFunctionPayload/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.InputViewFunctionData/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-view-function-payload.html
 $dokka.location:xyz.mcxross.kaptos.transaction.builder//generateViewFunctionPayloadWithABI/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.InputViewFunctionData#xyz.mcxross.kaptos.model.FunctionABI/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/generate-view-function-payload-with-a-b-i.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder//sign/#xyz.mcxross.kaptos.core.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/sign.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S/S/#kotlin.ByteArray#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/-s.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S/equals/#kotlin.Any?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/equals.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S/hashCode/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/hash-code.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S/pk/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/pk.html
+$dokka.location:xyz.mcxross.kaptos.transaction.builder/S/sig/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.builder/-s/sig.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/AnyRawTransactionInstance///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-any-raw-transaction-instance/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/AnyRawTransactionInstance/AnyRawTransactionInstance/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-any-raw-transaction-instance/-any-raw-transaction-instance.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/ChainId///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-chain-id/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/ChainId/ChainId/#kotlin.UByte/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-chain-id/-chain-id.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/ChainId/chainId/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-chain-id/chain-id.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/RawTransaction/#xyz.mcxross.kaptos.model.AccountAddress#kotlin.Long#xyz.mcxross.kaptos.model.TransactionPayload#kotlin.Long#kotlin.Long#kotlin.Long#xyz.mcxross.kaptos.transaction.instances.ChainId#kotlin.Byte/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/-raw-transaction.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/chainId/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/chain-id.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/expirationTimestampSecs/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/expiration-timestamp-secs.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/gasUnitPrice/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/gas-unit-price.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/maxGasAmount/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/max-gas-amount.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/payload/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/payload.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/sender/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/sender.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/sequenceNumber/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/sequence-number.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/RawTransaction/zero/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-raw-transaction/zero.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/SignedTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-signed-transaction/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/SignedTransaction/SignedTransaction/#xyz.mcxross.kaptos.transaction.instances.RawTransaction#xyz.mcxross.kaptos.transaction.authenticatior.TransactionAuthenticator/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-signed-transaction/-signed-transaction.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/SignedTransaction/authenticator/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-signed-transaction/authenticator.html
+$dokka.location:xyz.mcxross.kaptos.transaction.instances/SignedTransaction/rawTxn/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.instances/-signed-transaction/raw-txn.html
 $dokka.location:xyz.mcxross.kaptos.transaction.typetag////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.typetag/index.html
 $dokka.location:xyz.mcxross.kaptos.transaction.typetag/TypeTagParser///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.typetag/-type-tag-parser/index.html
 $dokka.location:xyz.mcxross.kaptos.transaction.typetag/TypeTagParser/isGeneric/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.typetag/-type-tag-parser/is-generic.html
@@ -1026,6 +1170,8 @@ $dokka.location:xyz.mcxross.kaptos.transaction/EntryFunction/typeArgs/#/Pointing
 $dokka.location:xyz.mcxross.kaptos.util////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/index.html
 $dokka.location:xyz.mcxross.kaptos.util//APTOS_COIN/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-a-p-t-o-s_-c-o-i-n.html
 $dokka.location:xyz.mcxross.kaptos.util//DEFAULT_CLIENT_HEADERS/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-d-e-f-a-u-l-t_-c-l-i-e-n-t_-h-e-a-d-e-r-s.html
+$dokka.location:xyz.mcxross.kaptos.util//DEFAULT_MAX_GAS_AMOUNT/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-d-e-f-a-u-l-t_-m-a-x_-g-a-s_-a-m-o-u-n-t.html
+$dokka.location:xyz.mcxross.kaptos.util//DEFAULT_TXN_EXP_SEC_FROM_NOW/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-d-e-f-a-u-l-t_-t-x-n_-e-x-p_-s-e-c_-f-r-o-m_-n-o-w.html
 $dokka.location:xyz.mcxross.kaptos.util//DEFAULT_TXN_TIMEOUT_SEC/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-d-e-f-a-u-l-t_-t-x-n_-t-i-m-e-o-u-t_-s-e-c.html
 $dokka.location:xyz.mcxross.kaptos.util//HEX_ARRAY/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-h-e-x_-a-r-r-a-y.html
 $dokka.location:xyz.mcxross.kaptos.util//NetworkToChainId/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-network-to-chain-id.html
@@ -1033,21 +1179,20 @@ $dokka.location:xyz.mcxross.kaptos.util//NetworkToFaucetAPI/#/PointingToDeclarat
 $dokka.location:xyz.mcxross.kaptos.util//NetworkToIndexerAPI/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-network-to-indexer-a-p-i.html
 $dokka.location:xyz.mcxross.kaptos.util//NetworkToNetworkName/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-network-to-network-name.html
 $dokka.location:xyz.mcxross.kaptos.util//NetworkToNodeAPI/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-network-to-node-a-p-i.html
-$dokka.location:xyz.mcxross.kaptos.util//bcs/#TypeParam(bounds=[kotlin.Any?])/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/bcs.html
+$dokka.location:xyz.mcxross.kaptos.util//RAW_TRANSACTION_SALT/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-r-a-w_-t-r-a-n-s-a-c-t-i-o-n_-s-a-l-t.html
+$dokka.location:xyz.mcxross.kaptos.util//RAW_TRANSACTION_WITH_DATA_SALT/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-r-a-w_-t-r-a-n-s-a-c-t-i-o-n_-w-i-t-h_-d-a-t-a_-s-a-l-t.html
 $dokka.location:xyz.mcxross.kaptos.util//bytesToHex/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/bytes-to-hex.html
+$dokka.location:xyz.mcxross.kaptos.util//findFirstNonSignerArg/#xyz.mcxross.kaptos.model.MoveFunction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/find-first-non-signer-arg.html
 $dokka.location:xyz.mcxross.kaptos.util//getFunctionParts/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/get-function-parts.html
 $dokka.location:xyz.mcxross.kaptos.util//runBlocking/#kotlin.coroutines.CoroutineContext#kotlin.coroutines.SuspendFunction1[kotlinx.coroutines.CoroutineScope,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/run-blocking.html
 $dokka.location:xyz.mcxross.kaptos.util//toAccountAddress/kotlin.String#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/to-account-address.html
-$dokka.location:xyz.mcxross.kaptos.util/A///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-a/index.html
-$dokka.location:xyz.mcxross.kaptos.util/A/A/#kotlin.Int#xyz.mcxross.kaptos.model.MoveString/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-a/-a.html
-$dokka.location:xyz.mcxross.kaptos.util/A/a/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-a/a.html
-$dokka.location:xyz.mcxross.kaptos.util/A/s/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/-a/s.html
 $dokka.location:xyz.mcxross.kaptos////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/index.html
 $dokka.location:xyz.mcxross.kaptos/Aptos///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/index.html
 $dokka.location:xyz.mcxross.kaptos/Aptos/Aptos/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/-aptos.html
 $dokka.location:xyz.mcxross.kaptos/Aptos/config/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/config.html
 xyz.mcxross.kaptos
 xyz.mcxross.kaptos.api
+xyz.mcxross.kaptos.api.txsubmission
 xyz.mcxross.kaptos.client
 xyz.mcxross.kaptos.core
 xyz.mcxross.kaptos.core.account
@@ -1059,7 +1204,9 @@ xyz.mcxross.kaptos.model
 xyz.mcxross.kaptos.protocol
 xyz.mcxross.kaptos.serialize
 xyz.mcxross.kaptos.transaction
+xyz.mcxross.kaptos.transaction.authenticatior
 xyz.mcxross.kaptos.transaction.builder
+xyz.mcxross.kaptos.transaction.instances
 xyz.mcxross.kaptos.transaction.typetag
 xyz.mcxross.kaptos.util
 
