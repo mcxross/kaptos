@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.core
 
+import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.exception.ParsingException
 import xyz.mcxross.kaptos.model.HexInput
 
@@ -36,6 +37,7 @@ enum class HexInvalidReason(val reason: String) {
  * @constructor Creates a hex string from a string.
  * @property data The data of the hex string.
  */
+@Serializable
 class Hex() {
   private var data: ByteArray = byteArrayOf()
 

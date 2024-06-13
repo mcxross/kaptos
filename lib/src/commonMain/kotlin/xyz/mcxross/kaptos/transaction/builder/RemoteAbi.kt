@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.transaction.builder
 import xyz.mcxross.kaptos.internal.getModule
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.typetag.TypeTagParser
+import xyz.mcxross.kaptos.util.findFirstNonSignerArg
 
 /**
  * Fetches a function ABI from the on-chain module ABI. It doesn't validate whether it's a view or
@@ -47,6 +48,38 @@ suspend fun fetchFunctionAbi(
       Option.None
     }
   }
+}
+
+suspend fun fetchEntryFunctionAbi(
+  aptosConfig: AptosConfig,
+  moduleAddress: String,
+  moduleName: String,
+  functionName: String,
+): Option<EntryFunctionABI> {
+
+  val functionAbi =
+    fetchFunctionAbi(moduleAddress, moduleName, functionName, aptosConfig)
+      .unwrap(
+        "Could not find entry function ABI for '${moduleAddress}::${moduleName}::${functionName}"
+      )
+
+  if (!functionAbi.isEntry) {
+    throw IllegalArgumentException(
+      "Function '${moduleAddress}::${moduleName}::${functionName}' is not an entry function"
+    )
+  }
+
+  val numSigners = findFirstNonSignerArg(functionAbi)
+
+  val params: MutableList<TypeTag> = mutableListOf()
+
+  for (i in numSigners until functionAbi.params.size) {
+    params.add(TypeTagParser.parseTypeTag(functionAbi.params[i], true))
+  }
+
+  return Option.Some(
+    EntryFunctionABI(typeParameters = functionAbi.genericTypeParams, parameters = params)
+  )
 }
 
 /**

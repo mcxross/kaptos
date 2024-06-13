@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
+import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 
 @Serializable
 enum class TransactionResponseType {
@@ -26,7 +26,7 @@ enum class TransactionResponseType {
   @SerialName("genesis_transaction") GENESIS,
   @SerialName("block_metadata_transaction") BLOCK_METADATA,
   @SerialName("state_checkpoint_transaction") STATE_CHECKPOINT,
-  @SerialName("validator_transaction") VALIDATOR
+  @SerialName("validator_transaction") VALIDATOR,
 }
 
 @Serializable
@@ -126,3 +126,15 @@ data class WriteSetChangeDeleteModule(
   val state_key_hash: String,
   val module: String,
 ) : WriteSetChange()
+
+@Serializable abstract class AnyRawTransaction
+
+@Serializable
+data class MultiAgentTransaction(val rawTransaction: RawTransaction) : AnyRawTransaction()
+
+@Serializable
+data class SimpleTransaction(
+  val rawTransaction: RawTransaction,
+  val feePayerAddress: AccountAddress?,
+  val secondarySignerAddresses: Nothing? = null,
+) : AnyRawTransaction()

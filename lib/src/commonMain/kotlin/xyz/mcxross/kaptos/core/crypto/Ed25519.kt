@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
+import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.model.AuthenticationKeyScheme
@@ -30,7 +31,8 @@ import xyz.mcxross.kaptos.model.SigningScheme
  * Ed25519 scheme is represented in the SDK as `Legacy authentication key` and also as
  * `AnyPublicKey` that represents any `Unified authentication key`
  */
-class Ed25519PublicKey(data: HexInput) : AccountPublicKey() {
+@Serializable
+class Ed25519PublicKey(private val data: HexInput) : AccountPublicKey() {
 
   private var hex: Hex
 
@@ -97,9 +99,9 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
    * @param message in HexInput format
    * @return [Signature]
    */
-  override fun sign(message: HexInput): Signature {
+  override fun sign(message: HexInput): Ed25519Signature {
     val messageBytes = Hex.fromHexInput(message).toByteArray()
-    return signingKeyPair.sign(messageBytes)
+    return signingKeyPair.sign(messageBytes) as Ed25519Signature
   }
 
   /**
@@ -137,7 +139,8 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
 }
 
 /** A signature of a message signed using an Ed25519 private key */
-class Ed25519Signature(hexInput: HexInput) : Signature() {
+@Serializable
+class Ed25519Signature(private val hexInput: HexInput) : Signature() {
 
   private var data: Hex
 

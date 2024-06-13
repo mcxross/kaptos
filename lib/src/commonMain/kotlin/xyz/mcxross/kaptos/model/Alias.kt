@@ -36,3 +36,5 @@ typealias MoveModuleId = String
 typealias ProcessorStatus = GetProcessorStatus.Result
 
 typealias MoveFunctionId = MoveModuleId
+
+typealias AnyTransactionPayloadInstance = TransactionPayload

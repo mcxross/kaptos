@@ -20,6 +20,7 @@ import xyz.mcxross.kaptos.core.crypto.PrivateKey
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
 abstract class Account {
 
@@ -31,6 +32,15 @@ abstract class Account {
 
   /** Signing scheme used to sign transactions */
   abstract val signingScheme: SigningScheme
+
+  /**
+   * Sign a message using the available signing capabilities.
+   *
+   * @param message the signing message, as binary input
+   * @return the [AccountAuthenticator] containing the signature, together with the account's public
+   *   key
+   */
+  abstract fun signWithAuthenticator(message: HexInput): AccountAuthenticator
 
   /**
    * Sign the given message with the private key.

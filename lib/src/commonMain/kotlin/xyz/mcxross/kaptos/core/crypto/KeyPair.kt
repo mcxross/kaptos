@@ -15,6 +15,8 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
+import xyz.mcxross.kaptos.model.HexInput
+
 /**
  * Represents a pair of signing keys: a public key and a private key.
  *
@@ -24,7 +26,8 @@ package xyz.mcxross.kaptos.core.crypto
 data class KeyPair(val privateKey: ByteArray, val publicKey: ByteArray) {
 
   fun sign(message: ByteArray): Signature {
-    TODO()
+    val sigBytes = sign(message, privateKey)
+    return Ed25519Signature(HexInput.fromByteArray(sigBytes))
   }
 
   override fun equals(other: Any?): Boolean {

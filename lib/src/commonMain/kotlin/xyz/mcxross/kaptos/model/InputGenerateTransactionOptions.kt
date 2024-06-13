@@ -13,25 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.model
 
-import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.util.DEFAULT_MAX_GAS_AMOUNT
+import xyz.mcxross.kaptos.util.DEFAULT_TXN_EXP_SEC_FROM_NOW
 
-sealed class Option<out T> {
-  @Serializable data class Some<T>(val value: T) : Option<T>()
-
-  @Serializable data object None : Option<Nothing>()
-
-  fun unwrap(message: String = "None.unwrap"): T =
-    when (this) {
-      is Some -> value
-      is None -> throw NoSuchElementException(message)
-    }
-
-  fun destruct(): T? =
-    when (this) {
-      is Some -> value
-      is None -> null
-    }
-}
+/** Optional options to set when generating a transaction */
+data class InputGenerateTransactionOptions(
+  val maxGasAmount: Long = DEFAULT_MAX_GAS_AMOUNT,
+  val gasUnitPrice: Long? = null,
+  val expireTimestamp: Long? = DEFAULT_TXN_EXP_SEC_FROM_NOW,
+  val accountSequenceNumber: Number? = null,
+)

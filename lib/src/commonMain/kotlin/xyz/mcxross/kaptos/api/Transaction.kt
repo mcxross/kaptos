@@ -19,11 +19,10 @@ package xyz.mcxross.kaptos.api
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getTransactionByHash
 import xyz.mcxross.kaptos.internal.getTransactionByVersion
-import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.GasEstimation
-import xyz.mcxross.kaptos.model.Option
-import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.internal.signTransaction
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
 /**
  * Transaction API namespace. This class provides functionality to reading and writing transaction
@@ -68,4 +67,16 @@ class Transaction(val config: AptosConfig) : Transaction {
       throw Exception("Failed to get gas price estimation")
     }
   }
+
+  /**
+   * Sign a transaction that can later be submitted to chain
+   *
+   * @param signer The signer account
+   * @param transaction A raw transaction to sign on
+   * @returns [AccountAuthenticator]
+   */
+  override fun sign(
+    signer: xyz.mcxross.kaptos.core.account.Account,
+    transaction: AnyRawTransaction,
+  ): AccountAuthenticator = signTransaction(signer, transaction)
 }
