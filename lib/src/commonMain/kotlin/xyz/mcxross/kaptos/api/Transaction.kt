@@ -16,9 +16,11 @@
 
 package xyz.mcxross.kaptos.api
 
+import xyz.mcxross.kaptos.internal.*
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getTransactionByHash
 import xyz.mcxross.kaptos.internal.getTransactionByVersion
+import xyz.mcxross.kaptos.internal.isTransactionPending
 import xyz.mcxross.kaptos.internal.signTransaction
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
@@ -51,6 +53,21 @@ class Transaction(val config: AptosConfig) : Transaction {
    */
   override suspend fun getTransactionByHash(transactionHash: String): Option<TransactionResponse> =
     getTransactionByHash(config, transactionHash)
+
+  /**
+   * Defines if specified transaction is currently in pending state
+   *
+   * To create a transaction hash:
+   * 1. Create a hash message from the bytes: "Aptos::Transaction" bytes + the BCS-serialized
+   *    Transaction bytes.
+   * 2. Apply hash algorithm SHA3-256 to the hash message bytes.
+   * 3. Hex-encode the hash bytes with 0x prefix.
+   *
+   * @param transactionHash A hash of transaction
+   * @returns `true` if transaction is in pending state and `false` otherwise
+   */
+  override suspend fun isPendingTransaction(transactionHash: HexInput): Boolean =
+    isTransactionPending(config, transactionHash)
 
   /**
    * Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable

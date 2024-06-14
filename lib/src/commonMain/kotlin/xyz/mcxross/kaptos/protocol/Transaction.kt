@@ -16,10 +16,7 @@
 package xyz.mcxross.kaptos.protocol
 
 import xyz.mcxross.kaptos.core.account.Account
-import xyz.mcxross.kaptos.model.AnyRawTransaction
-import xyz.mcxross.kaptos.model.GasEstimation
-import xyz.mcxross.kaptos.model.Option
-import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
 /**
@@ -45,6 +42,20 @@ interface Transaction {
    * @returns [TransactionResponse] from mempool (pending) or on-chain (committed) transaction
    */
   suspend fun getTransactionByHash(transactionHash: String): Option<TransactionResponse>
+
+  /**
+   * Defines if specified transaction is currently in pending state
+   *
+   * To create a transaction hash:
+   * 1. Create a hash message from the bytes: "Aptos::Transaction" bytes + the BCS-serialized
+   *    Transaction bytes.
+   * 2. Apply hash algorithm SHA3-256 to the hash message bytes.
+   * 3. Hex-encode the hash bytes with 0x prefix.
+   *
+   * @param transactionHash A hash of transaction
+   * @returns `true` if transaction is in pending state and `false` otherwise
+   */
+  suspend fun isPendingTransaction(transactionHash: HexInput): Boolean
 
   /**
    * Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable
