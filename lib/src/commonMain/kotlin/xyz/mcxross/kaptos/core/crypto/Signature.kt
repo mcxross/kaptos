@@ -29,6 +29,8 @@ abstract class Signature {
   /** Get the raw signature bytes */
   abstract fun toByteArray(): ByteArray
 
+  abstract fun toBcs(): ByteArray
+
   /** Get the signature as a hex string with a 0x prefix e.g. 0x123456... */
   override fun toString(): String = Hex.fromHexInput(toByteArray()).toString()
 }
