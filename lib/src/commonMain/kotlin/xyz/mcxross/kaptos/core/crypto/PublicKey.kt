@@ -39,6 +39,9 @@ abstract class PublicKey {
   /** Get the raw public key bytes */
   abstract fun toByteArray(): ByteArray
 
+  /** Get the BCS bytes */
+  abstract fun toBcs(): ByteArray
+
   /** Get the public key as a hex string with a 0x prefix e.g. 0x123456... */
   override fun toString(): String =
     "0x${toByteArray().joinToString("") { it.toUByte().toString(16).padStart(2, '0') }}"

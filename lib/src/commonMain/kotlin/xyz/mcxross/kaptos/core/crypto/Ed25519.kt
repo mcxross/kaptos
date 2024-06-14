@@ -16,6 +16,7 @@
 package xyz.mcxross.kaptos.core.crypto
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.model.AuthenticationKeyScheme
@@ -68,6 +69,13 @@ class Ed25519PublicKey(private val data: HexInput) : AccountPublicKey() {
    * @return [ByteArray] representation of the public key
    */
   override fun toByteArray(): ByteArray = hex.toByteArray()
+
+  /**
+   * Get the public key in BCS bytes (ByteArray).
+   *
+   * @return [ByteArray] representation of the public key
+   */
+  override fun toBcs(): ByteArray = Bcs.encodeToByteArray(toByteArray())
 
   companion object {
     /** Length of an Ed25519 public key */
@@ -153,6 +161,8 @@ class Ed25519Signature(private val hexInput: HexInput) : Signature() {
   }
 
   override fun toByteArray(): ByteArray = data.toByteArray()
+
+  override fun toBcs(): ByteArray = Bcs.encodeToByteArray(toByteArray())
 
   override fun toString(): String = data.toString()
 
