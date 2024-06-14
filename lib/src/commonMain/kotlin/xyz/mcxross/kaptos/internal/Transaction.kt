@@ -58,6 +58,16 @@ internal suspend fun getTransactionByHash(
     )
     .second
 
+internal suspend fun isTransactionPending(config: AptosConfig, txnHash: HexInput): Boolean {
+  val txnResponse =
+    when (val txn = getTransactionByHash(config, txnHash.value)) {
+      is Option.Some -> txn.value
+      is Option.None -> throw AptosException("Transaction $txnHash not found")
+    }
+
+  return txnResponse.type == TransactionResponseType.PENDING
+}
+
 internal suspend fun waitForTransaction(
   config: AptosConfig,
   txnHash: String,
