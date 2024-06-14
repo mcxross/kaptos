@@ -16,10 +16,13 @@
 
 package xyz.mcxross.kaptos.model
 
+import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import xyz.mcxross.kaptos.generated.*
 
 typealias AptosResponse = HttpResponse
+
+typealias AptosRequest = HttpRequest
 
 typealias AccountCoinsData = GetAccountCoinsData.Result
 

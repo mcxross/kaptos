@@ -21,16 +21,29 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.*
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.Option
 import xyz.mcxross.kaptos.model.RequestOptions
 
-suspend fun get(options: RequestOptions.AptosRequestOptions): HttpResponse {
-  return client.get(options.aptosConfig.getRequestUrl(options.type)) {
-    url { appendPathSegments(options.path) }
-    options.params?.forEach { (k, v) -> parameter(k, v) }
+suspend fun get(options: RequestOptions.AptosRequestOptions): AptosResponse {
+
+  val aptosResponse =
+    client.get(options.aptosConfig.getRequestUrl(options.type)) {
+      url { appendPathSegments(options.path) }
+      options.params?.forEach { (k, v) -> parameter(k, v) }
+    }
+
+  if (aptosResponse.status == HttpStatusCode.Unauthorized) {
+    throw AptosApiError(
+      aptosResponse.call.request,
+      aptosResponse,
+      "Error: ${aptosResponse.bodyAsText()}",
+    )
   }
+
+  return aptosResponse
 }
 
 suspend inline fun <reified T> getAptosFullNode(
