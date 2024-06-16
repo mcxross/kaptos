@@ -16,11 +16,19 @@
 package xyz.mcxross.kaptos.transaction.authenticatior
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
+import xyz.mcxross.kaptos.model.AccountAuthenticatorVariant
+import xyz.mcxross.kaptos.serialize.TransactionAuthenticatorSerializer
 
-@Serializable
+@Serializable(with = TransactionAuthenticatorSerializer::class)
 data class TransactionAuthenticator(
+  val accountAuthenticatorVariant: AccountAuthenticatorVariant,
   val publicKey: Ed25519PublicKey,
   val signature: Ed25519Signature,
-)
+) {
+  fun toBcs(): ByteArray {
+    return Bcs.encodeToByteArray(this)
+  }
+}

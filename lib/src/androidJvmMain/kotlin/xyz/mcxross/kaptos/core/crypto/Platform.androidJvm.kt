@@ -22,19 +22,33 @@ import xyz.mcxross.kaptos.transaction.builder.deriveTransactionType
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 import xyz.mcxross.kaptos.util.RAW_TRANSACTION_SALT
 
+/**
+ * Generates a signing message for a given transaction
+ *
+ * @param transaction The transaction to generate a signing message for
+ * @return [ByteArray] The signing message
+ */
 actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
-  val rawTxn = deriveTransactionType(transaction)
+  val anyRawTxnInstance = deriveTransactionType(transaction)
+
   val hash = org.bouncycastle.jcajce.provider.digest.SHA3.Digest256()
 
-  if (transaction.instanceOf(RawTransaction::class)) {
+  if (anyRawTxnInstance.instanceOf(RawTransaction::class)) {
     hash.update(RAW_TRANSACTION_SALT.encodeToByteArray())
   }
 
-  val body = Bcs.encodeToByteArray<RawTransaction>(rawTxn as RawTransaction)
+  val body = Bcs.encodeToByteArray<RawTransaction>(anyRawTxnInstance as RawTransaction)
 
   return hash.digest() + body
 }
 
+/**
+ * Signs a message with a given private key
+ *
+ * @param message The message to sign
+ * @param privateKey The private key to sign the message with
+ * @return [ByteArray] The signed message
+ */
 actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
   val signer = org.bouncycastle.crypto.signers.Ed25519Signer()
   val privateKeyParameters =

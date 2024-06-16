@@ -138,7 +138,7 @@ interface Account {
   suspend fun getAccountAPTAmount(
     accountAddress: AccountAddressInput,
     minimumLedgerVersion: Long? = null,
-  ): Option<Int>
+  ): Option<Long>
 
   /**
    * Queries the account's coin amount by the coin type
@@ -152,7 +152,7 @@ interface Account {
     accountAddress: AccountAddressInput,
     coinType: MoveValue.MoveStructId,
     minimumLedgerVersion: Long? = null,
-  ): Option<Int>
+  ): Option<Long>
 }
 
 /**

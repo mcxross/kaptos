@@ -236,7 +236,7 @@ internal suspend fun getAccountCoinAmount(
   accountAddress: AccountAddressInput,
   coinType: MoveValue.MoveStructId,
   minimumLedgerVersion: Long? = null,
-): Option<Int> {
+): Option<Long> {
   val data =
     GetAccountCoinsData(
       GetAccountCoinsData.Variables(
@@ -257,5 +257,5 @@ internal suspend fun getAccountCoinAmount(
 
   val result = response.data ?: return Option.None
 
-  return Option.Some(result.current_fungible_asset_balances.firstOrNull()?.amount?.toInt() ?: 0)
+  return Option.Some(result.current_fungible_asset_balances.firstOrNull()?.amount ?: 0)
 }

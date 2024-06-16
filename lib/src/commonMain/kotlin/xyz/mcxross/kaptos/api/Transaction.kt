@@ -16,12 +16,10 @@
 
 package xyz.mcxross.kaptos.api
 
+import xyz.mcxross.kaptos.api.txsubmission.Build
+import xyz.mcxross.kaptos.api.txsubmission.Submit
+import xyz.mcxross.kaptos.core.account.Account
 import xyz.mcxross.kaptos.internal.*
-import xyz.mcxross.kaptos.internal.getGasPriceEstimation
-import xyz.mcxross.kaptos.internal.getTransactionByHash
-import xyz.mcxross.kaptos.internal.getTransactionByVersion
-import xyz.mcxross.kaptos.internal.isTransactionPending
-import xyz.mcxross.kaptos.internal.signTransaction
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
@@ -33,6 +31,9 @@ import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
  * @property config AptosConfig object for configuration
  */
 class Transaction(val config: AptosConfig) : Transaction {
+
+  override val buildTransaction: Build = Build(config)
+  override val submitTransaction: Submit = Submit(config)
 
   /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
@@ -69,6 +70,11 @@ class Transaction(val config: AptosConfig) : Transaction {
   override suspend fun isPendingTransaction(transactionHash: HexInput): Boolean =
     isTransactionPending(config, transactionHash)
 
+  override suspend fun waitForTransaction(
+    transactionHash: HexInput,
+    options: WaitForTransactionOptions,
+  ): Option<TransactionResponse> = waitForTransaction(config, transactionHash.value, options)
+
   /**
    * Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable
    * amount of time. For more information {@link
@@ -93,7 +99,28 @@ class Transaction(val config: AptosConfig) : Transaction {
    * @returns [AccountAuthenticator]
    */
   override fun sign(
-    signer: xyz.mcxross.kaptos.core.account.Account,
+    signer: Account,
     transaction: AnyRawTransaction,
   ): AccountAuthenticator = signTransaction(signer, transaction)
+
+  /**
+   * Sign and submit a single signer transaction to chain
+   *
+   * @param signer The signer account to sign the transaction
+   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
+   *
+   * ```
+   * {
+   *  rawTransaction: RawTransaction,
+   *  secondarySignerAddresses? : Array<AccountAddress>,
+   *  feePayerAddress?: AccountAddress
+   * }
+   * ```
+   *
+   * @return PendingTransactionResponse
+   */
+  override suspend fun signAndSubmitTransaction(
+    signer: Account,
+    transaction: AnyRawTransaction,
+  ): Option<PendingTransactionResponse> = signAndSubmitTransaction(config, signer, transaction)
 }

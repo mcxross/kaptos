@@ -64,6 +64,10 @@ class Hex() {
 
   companion object {
 
+    fun empty(): Hex {
+      return Hex()
+    }
+
     fun fromString(hex: String): Hex {
       val hexString = hex.removePrefix("0x")
       if (hexString.length % 2 != 0) {

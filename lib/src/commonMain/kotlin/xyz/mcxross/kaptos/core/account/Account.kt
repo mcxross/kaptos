@@ -62,6 +62,18 @@ abstract class Account {
       throw NotImplementedError("Only Ed25519 is supported at the moment")
     }
 
+    infix fun from(privateKey: PrivateKey): Account {
+      return fromPrivateKey(privateKey, null, true)
+    }
+
+    infix fun from(privateKeyInput: PrivateKeyInput): Account {
+      return fromPrivateKey(
+        privateKeyInput.privateKey,
+        privateKeyInput.address,
+        privateKeyInput.legacy,
+      )
+    }
+
     fun fromPrivateKey(
       privateKey: PrivateKey,
       address: AccountAddressInput? = null,

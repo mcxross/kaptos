@@ -115,11 +115,12 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
   fun toStringLong(): String = "0x${toStringLongWithoutPrefix()}"
 
   fun toStringLongWithoutPrefix(): String {
-      val hexString = data.joinToString("") { byte ->
+    val hexString =
+      data.joinToString("") { byte ->
         val hex = byte.toInt().and(0xff).toString(16)
         if (hex.length == 1) "0$hex" else hex
       }
-      return hexString.padStart(64, '0')
+    return hexString.padStart(64, '0')
   }
 
   override val value: String
@@ -277,6 +278,10 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
 data class HexInput(override val value: String) : AccountAddressInput {
   override fun toString(): String {
     return value
+  }
+
+  fun toByteArray(): ByteArray {
+    return value.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
   }
 
   companion object {

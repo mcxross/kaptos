@@ -150,7 +150,7 @@ class Account(override val config: AptosConfig) : Account {
   override suspend fun getAccountAPTAmount(
     accountAddress: AccountAddressInput,
     minimumLedgerVersion: Long?,
-  ): Option<Int> =
+  ): Option<Long> =
     getAccountCoinAmount(accountAddress, MoveValue.MoveStructId(APTOS_COIN), minimumLedgerVersion)
 
   /**
@@ -165,5 +165,5 @@ class Account(override val config: AptosConfig) : Account {
     accountAddress: AccountAddressInput,
     coinType: MoveValue.MoveStructId,
     minimumLedgerVersion: Long?,
-  ): Option<Int> = getAccountCoinAmount(config, accountAddress, coinType, minimumLedgerVersion)
+  ): Option<Long> = getAccountCoinAmount(config, accountAddress, coinType, minimumLedgerVersion)
 }
