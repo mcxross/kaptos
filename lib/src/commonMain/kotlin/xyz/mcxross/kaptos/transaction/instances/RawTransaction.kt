@@ -30,5 +30,4 @@ data class RawTransaction(
   val gasUnitPrice: Long,
   val expirationTimestampSecs: Long,
   val chainId: ChainId,
-  val zero: Byte = 0,
 ) : AnyRawTransactionInstance()

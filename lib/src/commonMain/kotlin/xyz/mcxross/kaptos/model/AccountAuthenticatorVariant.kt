@@ -15,6 +15,9 @@
  */
 package xyz.mcxross.kaptos.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class AccountAuthenticatorVariant {
   Ed25519,
   MultiEd25519,

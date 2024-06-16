@@ -15,6 +15,8 @@
  */
 package xyz.mcxross.kaptos.protocol
 
+import xyz.mcxross.kaptos.api.txsubmission.Build
+import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.core.account.Account
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
@@ -24,6 +26,12 @@ import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
  * transactions.
  */
 interface Transaction {
+
+  /** Builds a transaction to be submitted to the chain */
+  val buildTransaction: Build
+
+  /** Submits a transaction to the chain */
+  val submitTransaction: Submit
 
   /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
@@ -57,6 +65,11 @@ interface Transaction {
    */
   suspend fun isPendingTransaction(transactionHash: HexInput): Boolean
 
+  suspend fun waitForTransaction(
+    transactionHash: HexInput,
+    options: WaitForTransactionOptions = WaitForTransactionOptions(),
+  ): Option<TransactionResponse>
+
   /**
    * Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable
    * amount of time. For more information {@link
@@ -74,4 +87,25 @@ interface Transaction {
    * @returns [AccountAuthenticator]
    */
   fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
+
+  /**
+   * Sign and submit a single signer transaction to chain
+   *
+   * @param signer The signer account to sign the transaction
+   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
+   *
+   * ```
+   * {
+   *  rawTransaction: RawTransaction,
+   *  secondarySignerAddresses? : Array<AccountAddress>,
+   *  feePayerAddress?: AccountAddress
+   * }
+   * ```
+   *
+   * @return PendingTransactionResponse
+   */
+  suspend fun signAndSubmitTransaction(
+    signer: Account,
+    transaction: AnyRawTransaction,
+  ): Option<PendingTransactionResponse>
 }

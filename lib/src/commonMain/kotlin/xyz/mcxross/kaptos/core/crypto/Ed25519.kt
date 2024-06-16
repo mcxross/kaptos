@@ -16,6 +16,7 @@
 package xyz.mcxross.kaptos.core.crypto
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.core.Hex
@@ -33,9 +34,11 @@ import xyz.mcxross.kaptos.model.SigningScheme
  * `AnyPublicKey` that represents any `Unified authentication key`
  */
 @Serializable
-class Ed25519PublicKey(private val data: HexInput) : AccountPublicKey() {
+class Ed25519PublicKey(private val data: ByteArray) : AccountPublicKey() {
 
-  private var hex: Hex
+  @Transient private var hex: Hex = Hex.empty()
+
+  constructor(data: HexInput) : this(data.toByteArray())
 
   init {
     val hex = Hex.fromHexInput(data)
@@ -58,7 +61,7 @@ class Ed25519PublicKey(private val data: HexInput) : AccountPublicKey() {
 
     val messageBytes = Hex.fromHexInput(message).toByteArray()
     val signatureBytes = signature.toByteArray()
-    val publicKeyBytes = hex.toByteArray()
+    // val publicKeyBytes = hex.toByteArray()
 
     TODO("Not yet implemented: We should call the actual Ed25519 verify function here")
   }
@@ -99,7 +102,7 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
     signingKeyPair = KeyPair.fromSecretSeed(hex.toByteArray())
   }
 
-  constructor(data: String) : this(HexInput.fromString(data))
+  constructor(hex: String) : this(HexInput.fromString(hex))
 
   /**
    * Sign the given message with the private key.
@@ -148,9 +151,11 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
 
 /** A signature of a message signed using an Ed25519 private key */
 @Serializable
-class Ed25519Signature(private val hexInput: HexInput) : Signature() {
+class Ed25519Signature(private val hexInput: ByteArray) : Signature() {
 
-  private var data: Hex
+  constructor(hexInput: HexInput) : this(hexInput.toByteArray())
+
+  @Transient private var data: Hex = Hex.empty()
 
   init {
     val hex = Hex.fromHexInput(hexInput)

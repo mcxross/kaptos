@@ -17,7 +17,9 @@
 package xyz.mcxross.kaptos.internal
 
 import kotlinx.coroutines.delay
+import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.client.getAptosFullNode
+import xyz.mcxross.kaptos.core.account.Account
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
@@ -127,4 +129,14 @@ internal suspend fun waitForTransaction(
   }
 
   return Option.Some(lastTxn)
+}
+
+internal suspend fun signAndSubmitTransaction(
+  aptosConfig: AptosConfig,
+  signer: Account,
+  transaction: AnyRawTransaction,
+): Option<PendingTransactionResponse> {
+  val senderAuthenticator = signTransaction(signer, transaction)
+  val submit = Submit(aptosConfig)
+  return submit.simple(transaction = transaction, senderAuthenticator = senderAuthenticator)
 }

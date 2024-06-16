@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.extension
 
+import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.Bool
 
 fun Boolean.toMoveType(): Bool {
@@ -59,4 +60,16 @@ fun String.toMoveType(): xyz.mcxross.kaptos.model.U128 {
 
 fun String.toMoveType256(): xyz.mcxross.kaptos.model.U256 {
   return xyz.mcxross.kaptos.model.U256(this)
+}
+
+fun String.asPrivateKey(): xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey {
+  return xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey(this)
+}
+
+fun String.asAccountAddress(): AccountAddress {
+  return AccountAddress.fromString(this)
+}
+
+fun String.toStructTag(): xyz.mcxross.kaptos.model.StructTag {
+  return xyz.mcxross.kaptos.model.StructTag.fromString(this)
 }

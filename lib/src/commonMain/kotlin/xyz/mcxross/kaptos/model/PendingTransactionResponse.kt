@@ -15,6 +15,15 @@
  */
 package xyz.mcxross.kaptos.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable data class PendingTransactionResponse(val hash: String, val sender: String)
+@Serializable
+data class PendingTransactionResponse(
+  val hash: String,
+  val sender: String,
+  @SerialName("sequence_number") val sequenceNumber: String,
+  @SerialName("max_gas_amount") val maxGasAmount: String,
+  @SerialName("gas_unit_price") val gasUnitPrice: String,
+  @SerialName("expiration_timestamp_secs") val expirationTimestampSecs: String,
+)

@@ -26,6 +26,7 @@ import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.EntryFunction
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorEd25519
+import xyz.mcxross.kaptos.transaction.authenticatior.TransactionAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.AnyRawTransactionInstance
 import xyz.mcxross.kaptos.transaction.instances.ChainId
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
@@ -249,12 +250,15 @@ fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray =
 fun generateSignedTransaction(data: InputSubmitTransactionData): ByteArray {
   val transactionToSubmit = deriveTransactionType(data.transaction)
   val txnEd25519Authenticator = data.senderAuthenticator as AccountAuthenticatorEd25519
-  /*val txnAuthenticator =
-  TransactionAuthenticator(txnEd25519Authenticator.publicKey, txnEd25519Authenticator.signature)*/
 
-  return Bcs.encodeToByteArray(transactionToSubmit as RawTransaction) +
-    txnEd25519Authenticator.publicKey.toBcs() +
-    txnEd25519Authenticator.signature.toBcs()
+  val txnAuthenticator =
+    TransactionAuthenticator(
+      AccountAuthenticatorVariant.Ed25519,
+      txnEd25519Authenticator.publicKey,
+      txnEd25519Authenticator.signature,
+    )
+
+  return Bcs.encodeToByteArray(transactionToSubmit as RawTransaction) + txnAuthenticator.toBcs()
 }
 
 fun deriveTransactionType(transaction: AnyRawTransaction): AnyRawTransactionInstance {

@@ -24,3 +24,75 @@ data class InputEntryFunctionData(
   val functionArguments: List<EntryFunctionArgument>,
   val abi: EntryFunctionABI? = null,
 ) : InputGenerateTransactionPayloadData
+
+data class TypeArguments(val typeArguments: List<TypeTag>)
+
+class TypeArgumentsBuilder {
+  private var typeArguments: List<TypeTag>? = null
+
+  operator fun TypeTag.unaryPlus() {
+    if (typeArguments == null) {
+      typeArguments = mutableListOf()
+    }
+    typeArguments = typeArguments!! + this
+  }
+
+  fun build(): TypeArguments {
+    return TypeArguments(
+      typeArguments = typeArguments ?: throw IllegalArgumentException("typeArguments must be set")
+    )
+  }
+}
+
+fun typeArguments(block: TypeArgumentsBuilder.() -> Unit): TypeArguments {
+  return TypeArgumentsBuilder().apply(block).build()
+}
+
+data class FunctionArguments(val functionArguments: List<EntryFunctionArgument>)
+
+class FunctionArgumentsBuilder {
+  private var functionArguments: List<EntryFunctionArgument>? = null
+
+  operator fun EntryFunctionArgument.unaryPlus() {
+    if (functionArguments == null) {
+      functionArguments = mutableListOf()
+    }
+    functionArguments = functionArguments!! + this
+  }
+
+  fun build(): FunctionArguments {
+    return FunctionArguments(
+      functionArguments =
+        functionArguments ?: throw IllegalArgumentException("functionArguments must be set")
+    )
+  }
+}
+
+fun functionArguments(block: FunctionArgumentsBuilder.() -> Unit): FunctionArguments {
+  return FunctionArgumentsBuilder().apply(block).build()
+}
+
+class InputEntryFunctionDataBuilder {
+  var function: MoveFunctionId? = null
+  var typeArguments: TypeArguments? = null
+  var functionArguments: FunctionArguments? = null
+  var abi: EntryFunctionABI? = null
+
+  fun build(): InputEntryFunctionData {
+    return InputEntryFunctionData(
+      function = function ?: throw IllegalArgumentException("function must be set"),
+      typeArguments =
+        typeArguments?.typeArguments ?: throw IllegalArgumentException("typeArguments must be set"),
+      functionArguments =
+        functionArguments?.functionArguments
+          ?: throw IllegalArgumentException("functionArguments must be set"),
+      abi = abi,
+    )
+  }
+}
+
+fun inputEntryFunctionData(
+  block: InputEntryFunctionDataBuilder.() -> Unit
+): InputEntryFunctionData {
+  return InputEntryFunctionDataBuilder().apply(block).build()
+}
