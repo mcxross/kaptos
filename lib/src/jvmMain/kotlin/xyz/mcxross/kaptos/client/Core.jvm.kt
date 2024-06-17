@@ -89,7 +89,7 @@ actual fun httpClient(clientConfig: ClientConfig) =
     }
   }
 
-actual class ClientConfig {
+actual class ClientConfig actual constructor() {
 
   /** Specifies whether the client should use pipelining. Default is `false`. */
   var pipelining = false
@@ -144,4 +144,40 @@ actual class ClientConfig {
 
   /** Specifies a proxy for the client to use. */
   var proxy: String? = null
+
+  constructor(
+    pipelining: Boolean = false,
+    pipelineMaxSize: Int = 20,
+    followRedirects: Boolean = true,
+    maxConnectionsPerRoute: Int = 100,
+    maxConnectionsCount: Int = 1000,
+    connectTimeoutMillis: Long = 10000L,
+    keepAliveTime: Long = 5000L,
+    connectAttempts: Int = 5,
+    retryOnServerErrors: Int = -1,
+    maxRetries: Int = -1,
+    cache: Boolean = false,
+    agent: String = "Kaptos/JVM",
+    likeAgent: UserAgent? = null,
+    requestTimeout: Long = 10000L,
+    connectTimeout: Long = 10000L,
+    proxy: String? = null,
+  ) : this() {
+    this.pipelining = pipelining
+    this.pipelineMaxSize = pipelineMaxSize
+    this.followRedirects = followRedirects
+    this.maxConnectionsPerRoute = maxConnectionsPerRoute
+    this.maxConnectionsCount = maxConnectionsCount
+    this.connectTimeoutMillis = connectTimeoutMillis
+    this.keepAliveTime = keepAliveTime
+    this.connectAttempts = connectAttempts
+    this.retryOnServerErrors = retryOnServerErrors
+    this.maxRetries = maxRetries
+    this.cache = cache
+    this.agent = agent
+    this.likeAgent = likeAgent
+    this.requestTimeout = requestTimeout
+    this.connectTimeout = connectTimeout
+    this.proxy = proxy
+  }
 }
