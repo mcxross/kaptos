@@ -27,10 +27,7 @@ const val FUNDING_AMOUNT = 1_000_000_000L
 const val SEND_AMOUNT = 100_000_000UL
 
 suspend fun transfer() {
-  val settings = AptosSettings(network = Network.MAINNET, clientConfig = ClientConfig(maxRetries = 10))
-  val aptosConfig = AptosConfig(settings = settings)
-  val aptos =
-    Aptos(config = AptosConfig(AptosSettings(clientConfig = ClientConfig(maxRetries = 5))))
+  val aptos = Aptos()
 
   // Let's create a private key from a hex string
   val alicePrivateKey =
