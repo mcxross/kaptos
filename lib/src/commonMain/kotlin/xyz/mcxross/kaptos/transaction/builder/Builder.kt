@@ -44,7 +44,7 @@ suspend fun generateRawTransaction(
 
   val chainId: Long =
     if (NetworkToChainId[aptosConfig.network.name] == null) {
-      getLedgerInfo(aptosConfig).unwrap().chainId
+      getLedgerInfo(aptosConfig).expect("Could not fetch ledger info").chainId
     } else {
       NetworkToChainId[aptosConfig.network.name]?.toLong()
         ?: throw IllegalArgumentException(

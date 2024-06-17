@@ -23,7 +23,7 @@ sealed class Option<out T> {
 
   @Serializable data object None : Option<Nothing>()
 
-  fun unwrap(message: String = "None.unwrap"): T =
+  fun expect(message: String): T =
     when (this) {
       is Some -> value
       is None -> throw NoSuchElementException(message)

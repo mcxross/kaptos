@@ -59,7 +59,7 @@ suspend fun fetchEntryFunctionAbi(
 
   val functionAbi =
     fetchFunctionAbi(moduleAddress, moduleName, functionName, aptosConfig)
-      .unwrap(
+      .expect(
         "Could not find entry function ABI for '${moduleAddress}::${moduleName}::${functionName}"
       )
 
