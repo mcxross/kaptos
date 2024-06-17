@@ -37,10 +37,7 @@ multiple platforms.
 
 Kaptos is available on [Maven Central][maven-central] as a Kotlin Multiplatform library. You can either add it to you
 multiplatform project or add it to your platform-specific project.
-
-> [!IMPORTANT]
-> Kaptos is currently in development and is not yet available on Maven Central. You can use the latest snapshot version 
-> by adding the snapshot repository to your project as follows:
+> **IMPORTANT:** Kaptos is currently in development and is not yet available on Maven Central. You can use the latest snapshot version by adding the snapshot repository to your project as follows:
 
 ```kotlin
 repositories {
@@ -227,6 +224,42 @@ val privateKey = Ed25519PrivateKey("myEd25519privatekeystring")
 val address = AccountAddress.fromString()
 
 ```
+
+### Submit transaction
+
+Aptos provides Domain Specific Language (DSL) for building transactions. The following example demonstrates how to build
+a simple transaction to transfer coins from one account to another.
+
+```kotlin
+val aliceAccount = Account.generate()
+val bobAccount = Account.generate()
+
+// Creating account credentials does not automatically create an account on-chain.
+// You must explicitly create an account on-chain before you can interact with it.
+// To do this in testnet, you can use the faucet.
+val aliceAccountFaucet = aptos.fundAccount(aliceAccount.accountAddress, 1000000000)
+val bobAccountFaucet = aptos.fundAccount(bobAccount.accountAddress, 1000000000)
+
+val txn = aptos.buildTransaction.simple(
+    sender = aliceAccount.accountAddress,
+    data = inputEntryFunctionData {
+        function = "0x1::coin::transfer"
+        typeArguments = typeArguments {
+            +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
+        }
+        functionArguments = functionArguments {
+            +MoveString(bobAccount.accountAddress)
+            +U64(SEND_AMOUNT)
+        }
+    },
+)
+```
+
+## Documentation and examples
+
+- For full SDK documentation, check out the [Kotlin SDK documentation](https://preview.aptos.dev/sdks/kotlin-sdk/)
+- For reference documentation, check out the [API reference documentation](https://mcxross.github.io/kaptos/) for the associated version.
+- For in-depth examples, check out the [sample](./sample) folder with ready-made examples.
 
 ## Testing
 
