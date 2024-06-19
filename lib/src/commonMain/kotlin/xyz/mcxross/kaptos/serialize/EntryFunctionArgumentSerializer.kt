@@ -25,6 +25,7 @@ import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.EntryFunctionArgument
 import xyz.mcxross.kaptos.model.MoveString
 import xyz.mcxross.kaptos.model.U64
+import xyz.mcxross.kaptos.util.isHex
 
 object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
   override val descriptor: SerialDescriptor =
@@ -33,8 +34,14 @@ object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
   override fun serialize(encoder: Encoder, value: EntryFunctionArgument) {
     when (value) {
       is MoveString -> {
-        encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
-        hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
+        if (isHex(value.toString())) {
+          encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
+          hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
+        } else {
+          val length = Bcs.encodeToByteArray(value).size
+          encoder.beginCollection(descriptor, length)
+          encoder.encodeString(value.value)
+        }
       }
       is U64 -> {
         val length = Bcs.encodeToByteArray(value).size
