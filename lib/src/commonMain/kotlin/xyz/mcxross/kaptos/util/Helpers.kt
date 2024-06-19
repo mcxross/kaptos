@@ -61,3 +61,10 @@ fun findFirstNonSignerArg(functionAbi: MoveFunction): Int {
   }
   return index
 }
+
+// A really simple function to check if a string is a hex string. This
+// is currently used during function argument serialization to determine
+// if a MoveString should be serialized as a hex string or a regular string
+fun isHex(input: String): Boolean {
+  return input.matches(Regex("0x[0-9a-fA-F]+"))
+}

@@ -174,8 +174,8 @@ internal suspend fun getProcessorStatus(
 suspend inline fun <reified T : List<MoveValue>> view(
   aptosConfig: AptosConfig,
   payload: InputViewFunctionData,
-  bcs: Boolean,
-  options: LedgerVersionArg?,
+  bcs: Boolean = true,
+  options: LedgerVersionArg? = null,
 ): Option<T> {
 
   if (bcs) {

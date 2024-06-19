@@ -30,4 +30,5 @@ class Aptos(override val config: AptosConfig = AptosConfig()) :
   Transaction by xyz.mcxross.kaptos.api.Transaction(config),
   Staking by xyz.mcxross.kaptos.api.Staking(config),
   DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config),
-  Faucet by xyz.mcxross.kaptos.api.Faucet(config)
+  Faucet by xyz.mcxross.kaptos.api.Faucet(config),
+  Ans by xyz.mcxross.kaptos.api.Ans(config)

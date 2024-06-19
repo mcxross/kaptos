@@ -15,8 +15,7 @@
  */
 package xyz.mcxross.kaptos.internal
 
-import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.Network
+import xyz.mcxross.kaptos.model.*
 
 /**
  * Checks if a fragment of a name, either the domain or subdomain, is valid
@@ -89,4 +88,128 @@ fun getRouterAddress(aptosConfig: AptosConfig): String {
     NetworkToAnsContract[aptosConfig.network]
       ?: throw Error("The ANS contract is not deployed to ${aptosConfig.network}")
   return address
+}
+
+suspend fun getOwnerAddress(aptosConfig: AptosConfig, name: String): Option<AccountAddress> {
+  val routerAddress = getRouterAddress(aptosConfig)
+  val ansName = isValidANSName(name)
+
+  val viewFunctionData =
+    InputViewFunctionData(
+      function = "${routerAddress}::router::get_owner_addr",
+      typeArguments = emptyList(),
+      functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
+    )
+
+  val res =
+    view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
+
+  return when (res) {
+    is Option.None -> Option.None
+    is Option.Some -> {
+      Option.Some(AccountAddress.fromString(res.value[0].value[0].value))
+    }
+  }
+}
+
+suspend fun getExpiration(aptosConfig: AptosConfig, name: String): Option<Long> {
+  val routerAddress = getRouterAddress(aptosConfig)
+  val ansName = isValidANSName(name)
+
+  val viewFunctionData =
+    InputViewFunctionData(
+      function = "${routerAddress}::router::get_expiration",
+      typeArguments = emptyList(),
+      functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
+    )
+
+  return when (val res = view<List<MoveValue.String>>(aptosConfig, payload = viewFunctionData)) {
+    is Option.None -> Option.None
+    is Option.Some -> {
+      Option.Some(res.value[0].value.toLong())
+    }
+  }
+}
+
+suspend fun getTargetAddress(aptosConfig: AptosConfig, name: String): Option<AccountAddress> {
+  val routerAddress = getRouterAddress(aptosConfig)
+  val ansName = isValidANSName(name)
+
+  val viewFunctionData =
+    InputViewFunctionData(
+      function = "${routerAddress}::router::get_target_addr",
+      typeArguments = emptyList(),
+      functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
+    )
+
+  val res =
+    view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
+
+  return when (res) {
+    is Option.None -> Option.None
+    is Option.Some -> {
+      Option.Some(AccountAddress.fromString(res.value[0].value[0].value))
+    }
+  }
+}
+
+suspend fun setTargetAddress(
+  aptosConfig: AptosConfig,
+  sender: AccountAddress,
+  name: String,
+  address: AccountAddressInput,
+  options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
+): SimpleTransaction {
+  val routerAddress = getRouterAddress(aptosConfig)
+  val ansName = isValidANSName(name)
+
+  val inputEntryFunctionData =
+    InputEntryFunctionData(
+      function = "${routerAddress}::router::set_target_addr",
+      typeArguments = emptyList(),
+      functionArguments =
+        listOf(
+          MoveString(ansName.first),
+          MoveString(ansName.second ?: ""),
+          MoveString(address.value),
+        ),
+    )
+
+  val signerRawTransactionData =
+    InputGenerateSingleSignerRawTransactionData(
+      sender = sender,
+      data = inputEntryFunctionData,
+      options = options,
+      withFeePayer = false,
+      secondarySignerAddresses = null,
+    )
+
+  val transaction = generateTransaction(aptosConfig, signerRawTransactionData)
+
+  return transaction as SimpleTransaction
+}
+
+suspend fun getPrimaryName(aptosConfig: AptosConfig, address: AccountAddressInput): Option<String> {
+  val routerAddress = getRouterAddress(aptosConfig)
+
+  val viewFunctionData =
+    InputViewFunctionData(
+      function = "${routerAddress}::router::get_primary_name",
+      typeArguments = emptyList(),
+      functionArguments = listOf(MoveString(address.value)),
+    )
+
+  val res =
+    view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
+
+  return when (res) {
+    is Option.None -> Option.None
+    is Option.Some -> {
+      Option.Some(
+        res.value
+          .mapNotNull { if (it.value.isNotEmpty()) it.value[0].value else null }
+          .joinToString(".")
+      )
+    }
+  }
 }
