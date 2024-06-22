@@ -19,10 +19,13 @@ jobs:
         run: brew install aptos
 
       - name: Start Aptos Local Testnet
-        run: aptos node run-local-testnet
+        run: aptos node run-local-testnet & echo $! > aptos_pid.txt
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
       - name: Run tests
         run: ./gradlew test
+
+      - name: Stop Aptos Local Testnet
+        run: kill $(cat aptos_pid.txt)
