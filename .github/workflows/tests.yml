@@ -1,0 +1,28 @@
+name: tests
+run-name: Run tests
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tests:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update brew
+        run: brew update
+
+      - name: Install aptos
+        run: brew install aptos
+
+      - name: Start Aptos Local Testnet
+        run: aptos node run-local-testnet
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Run tests
+        run: ./gradlew test
