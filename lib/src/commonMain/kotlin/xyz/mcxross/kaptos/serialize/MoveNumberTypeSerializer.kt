@@ -58,9 +58,9 @@ object MoveUint32TypeSerializer : KSerializer<MoveValue.MoveUint32Type> {
   }
 }
 
-
 object MoveUint64TypeSerializer : KSerializer<MoveValue.MoveUint64Type> {
-  override val descriptor = PrimitiveSerialDescriptor("MoveValue.MoveUint64Type", PrimitiveKind.LONG)
+  override val descriptor =
+    PrimitiveSerialDescriptor("MoveValue.MoveUint64Type", PrimitiveKind.LONG)
 
   override fun serialize(encoder: Encoder, value: MoveValue.MoveUint64Type) {
     encoder.encodeLong(value.value)
@@ -71,9 +71,9 @@ object MoveUint64TypeSerializer : KSerializer<MoveValue.MoveUint64Type> {
   }
 }
 
-
 object MoveUint128TypeSerializer : KSerializer<MoveValue.MoveUint128Type> {
-  override val descriptor = PrimitiveSerialDescriptor("MoveValue.MoveUint128Type", PrimitiveKind.STRING)
+  override val descriptor =
+    PrimitiveSerialDescriptor("MoveValue.MoveUint128Type", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: MoveValue.MoveUint128Type) {
     encoder.encodeString(value.value)
@@ -84,9 +84,9 @@ object MoveUint128TypeSerializer : KSerializer<MoveValue.MoveUint128Type> {
   }
 }
 
-
 object MoveUint256TypeSerializer : KSerializer<MoveValue.MoveUint256Type> {
-  override val descriptor = PrimitiveSerialDescriptor("MoveValue.MoveUint256Type", PrimitiveKind.STRING)
+  override val descriptor =
+    PrimitiveSerialDescriptor("MoveValue.MoveUint256Type", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: MoveValue.MoveUint256Type) {
     encoder.encodeString(value.value)

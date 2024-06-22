@@ -24,9 +24,9 @@ import io.ktor.client.plugins.cache.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
+import java.util.concurrent.TimeUnit
 import kotlinx.serialization.json.Json
 import xyz.mcxross.kaptos.util.DEFAULT_CLIENT_HEADERS
-import java.util.concurrent.TimeUnit
 
 actual fun httpClient(clientConfig: ClientConfig) =
   HttpClient(OkHttp) {

@@ -23,5 +23,5 @@ enum class Network {
   DEVNET,
   LOCAL,
   CUSTOM,
-  RANDOMNET
+  RANDOMNET,
 }
