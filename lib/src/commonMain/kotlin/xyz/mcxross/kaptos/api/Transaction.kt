@@ -98,10 +98,8 @@ class Transaction(val config: AptosConfig) : Transaction {
    * @param transaction A raw transaction to sign on
    * @returns [AccountAuthenticator]
    */
-  override fun sign(
-    signer: Account,
-    transaction: AnyRawTransaction,
-  ): AccountAuthenticator = signTransaction(signer, transaction)
+  override fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator =
+    signTransaction(signer, transaction)
 
   /**
    * Sign and submit a single signer transaction to chain

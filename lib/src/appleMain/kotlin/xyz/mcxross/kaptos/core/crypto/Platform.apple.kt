@@ -32,9 +32,9 @@ actual fun sha3Hash(input: ByteArray): ByteArray {
 }
 
 actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }
 
 actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }

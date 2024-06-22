@@ -28,9 +28,7 @@ import xyz.mcxross.kaptos.model.AptosConfig
  * Each client is platform-specific with a different engine. Each engine has its own configuration
  * options.
  */
-expect fun httpClient(
-  clientConfig: ClientConfig,
-): HttpClient
+expect fun httpClient(clientConfig: ClientConfig): HttpClient
 
 expect class ClientConfig()
 

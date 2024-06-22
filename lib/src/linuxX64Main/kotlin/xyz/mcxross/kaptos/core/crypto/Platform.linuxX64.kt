@@ -18,13 +18,13 @@ package xyz.mcxross.kaptos.core.crypto
 import xyz.mcxross.kaptos.model.SigningScheme
 
 actual fun generateKeypair(scheme: SigningScheme): KeyPair {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }
 
 actual fun fromSeed(seed: ByteArray): KeyPair {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }
 
 actual fun sha3Hash(input: ByteArray): ByteArray {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }

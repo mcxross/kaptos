@@ -103,5 +103,5 @@ sealed class MoveValue {
   @Serializable data class MoveOptionType(val value: MoveValue?) : MoveValue()
 
   @Serializable(with = MoveListTypeSerializer::class)
-  data class MoveListType<T: MoveValue>(val value: List<T>) : MoveValue()
+  data class MoveListType<T : MoveValue>(val value: List<T>) : MoveValue()
 }
