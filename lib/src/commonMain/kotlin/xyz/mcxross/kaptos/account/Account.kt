@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package xyz.mcxross.kaptos.core.account
+package xyz.mcxross.kaptos.account
 
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.PrivateKey
