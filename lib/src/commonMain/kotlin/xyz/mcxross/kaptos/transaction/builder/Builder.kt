@@ -17,7 +17,7 @@ package xyz.mcxross.kaptos.transaction.builder
 
 import kotlinx.datetime.Clock
 import xyz.mcxross.bcs.Bcs
-import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo

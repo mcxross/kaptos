@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.api
 
 import xyz.mcxross.kaptos.api.txsubmission.Build
 import xyz.mcxross.kaptos.api.txsubmission.Submit
-import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.internal.*
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
@@ -118,7 +118,7 @@ class Transaction(val config: AptosConfig) : Transaction {
    * @return PendingTransactionResponse
    */
   override suspend fun signAndSubmitTransaction(
-    signer: Account,
-    transaction: AnyRawTransaction,
+      signer: Account,
+      transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse> = signAndSubmitTransaction(config, signer, transaction)
 }

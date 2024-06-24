@@ -16,7 +16,7 @@
 package xyz.mcxross.kaptos.internal
 
 import xyz.mcxross.kaptos.client.postAptosFullNode
-import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.builder.buildTransaction
@@ -72,8 +72,8 @@ internal fun isFeePayerTransactionInput(data: InputGenerateTransactionData): Boo
 }
 
 internal fun signTransaction(
-  signer: Account,
-  transaction: AnyRawTransaction,
+    signer: Account,
+    transaction: AnyRawTransaction,
 ): AccountAuthenticator {
   return sign(signer, transaction)
 }
