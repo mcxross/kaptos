@@ -16,8 +16,7 @@
 package xyz.mcxross.kaptos.sample
 
 import xyz.mcxross.kaptos.Aptos
-import xyz.mcxross.kaptos.client.ClientConfig
-import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.extension.asAccountAddress
 import xyz.mcxross.kaptos.extension.asPrivateKey
 import xyz.mcxross.kaptos.extension.toStructTag
@@ -84,10 +83,16 @@ suspend fun transfer() {
   val commitedTransaction = aptos.signAndSubmitTransaction(aliceAccount, txn)
 
   val executedTransaction =
-    aptos.waitForTransaction(HexInput.fromString(commitedTransaction.expect("Transaction failed").hash))
+    aptos.waitForTransaction(
+      HexInput.fromString(commitedTransaction.expect("Transaction failed").hash)
+    )
 
   println("Transaction wait response: $executedTransaction")
   println("=============================================")
-  println("Alice's new balance: ${aptos.getAccountAPTAmount(aliceAccount.accountAddress).expect("Alice's account does not exist")}")
-  println("Bob's new balance: ${aptos.getAccountAPTAmount(bobAccountAddress).expect("Bob's account does not exist")}")
+  println(
+    "Alice's new balance: ${aptos.getAccountAPTAmount(aliceAccount.accountAddress).expect("Alice's account does not exist")}"
+  )
+  println(
+    "Bob's new balance: ${aptos.getAccountAPTAmount(bobAccountAddress).expect("Bob's account does not exist")}"
+  )
 }
