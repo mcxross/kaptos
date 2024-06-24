@@ -28,34 +28,35 @@ fun App() {
       var errorMessage by remember { mutableStateOf("") }
 
       Button(
-          onClick = {
-            coroutineScope.launch {
-              isLoading = true
-              errorMessage = ""
-              try {
-                val result = Aptos().getAccountModules("0x1".toAccountAddress())
-                if (result is Option.Some) {
-                  val a =
-                      result.value.map {
-                        when (it) {
-                          is Option.Some -> it.value
-                          else -> throw Exception("Invalid module")
-                        }
-                      }
+        onClick = {
+          coroutineScope.launch {
+            isLoading = true
+            errorMessage = ""
+            try {
+              val result = Aptos().getAccountModules("0x1".toAccountAddress())
+              if (result is Option.Some) {
+                val a =
+                  result.value.map {
+                    when (it) {
+                      is Option.Some -> it.value
+                      else -> throw Exception("Invalid module")
+                    }
+                  }
 
-                  modules = a[0]
-                } else {
-                  errorMessage = "No modules found"
-                }
-              } catch (e: Exception) {
-                errorMessage = e.message ?: "An error occurred"
-              } finally {
-                isLoading = false
+                modules = a[0]
+              } else {
+                errorMessage = "No modules found"
               }
+            } catch (e: Exception) {
+              errorMessage = e.message ?: "An error occurred"
+            } finally {
+              isLoading = false
             }
-          }) {
-            Text("Load Modules")
           }
+        }
+      ) {
+        Text("Load Modules")
+      }
 
       if (isLoading) {
         CircularProgressIndicator()

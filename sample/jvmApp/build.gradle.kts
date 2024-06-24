@@ -1,24 +1,17 @@
-plugins {
-    alias(libs.plugins.jvm)
-}
+plugins { alias(libs.plugins.jvm) }
 
 group = "xyz.mcxross.kaptos.sample"
+
 version = "1.0.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
-    implementation(project(":kaptos"))
-    testImplementation(kotlin("test"))
+  implementation(libs.kotlinx.coroutines.core)
+  implementation(project(":kaptos"))
+  testImplementation(kotlin("test"))
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+tasks.test { useJUnitPlatform() }
 
-kotlin {
-    jvmToolchain(17)
-}
+kotlin { jvmToolchain(17) }
