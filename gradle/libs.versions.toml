@@ -19,7 +19,7 @@ kotlinxDatetime = "0.6.0"
 kotlinxSerializationCore = "1.6.3"
 ktor = "2.3.10"
 kaptos = "1.0.1-SNAPSHOT"
-graphqlMultiplatform = "0.1.0-beta03"
+graphqlMultiplatform = "0.1.0-beta04"
 
 [libraries]
 bcprov-jdk15on = { module = "org.bouncycastle:bcprov-jdk15on", version.ref = "bcprovJdk15on" }
