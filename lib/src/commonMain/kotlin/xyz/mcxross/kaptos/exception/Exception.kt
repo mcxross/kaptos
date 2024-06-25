@@ -15,4 +15,5 @@
  */
 package xyz.mcxross.kaptos.exception
 
-open class AptosException(message: String) : RuntimeException(message)
+class AbortedException :
+  AptosException("Concurrency conflict, such as read-modify-write conflict.")

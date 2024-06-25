@@ -15,4 +15,13 @@
  */
 package xyz.mcxross.kaptos.exception
 
-open class AptosException(message: String) : RuntimeException(message)
+import io.ktor.http.*
+
+enum class Error(private val code: Int, val message: String) {
+  // Move Standard Library Errors
+  ABORTED(409, "Concurrency conflict, such as read-modify-write conflict");
+
+  fun asHttpStatusCode(): HttpStatusCode {
+    return HttpStatusCode(code, message)
+  }
+}
