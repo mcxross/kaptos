@@ -62,12 +62,13 @@ suspend fun generateRawTransaction(
       }
 
   val sequenceNumber =
-    when (val response = getInfo(aptosConfig, sender)) {
-      is Option.None -> throw IllegalArgumentException("Could not fetch sequence number")
-      is Option.Some -> {
-        response.value.sequenceNumber
+    options?.accountSequenceNumber
+      ?: when (val response = getInfo(aptosConfig, sender)) {
+        is Option.None -> throw IllegalArgumentException("Could not fetch sequence number")
+        is Option.Some -> {
+          response.value.sequenceNumber.toLong()
+        }
       }
-    }
 
   return RawTransaction(
     sender = AccountAddress.from(sender),
