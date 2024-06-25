@@ -1,7 +1,6 @@
 import java.net.URL
 import java.util.*
 import org.jetbrains.dokka.gradle.DokkaTask
-import xyz.mcxross.graphql.plugin.gradle.config.GraphQLSerializer
 import xyz.mcxross.graphql.plugin.gradle.graphql
 
 plugins {
@@ -93,7 +92,6 @@ graphql {
   client {
     endpoint = "https://api.devnet.aptoslabs.com/v1/graphql"
     packageName = "xyz.mcxross.kaptos.generated"
-    serializer = GraphQLSerializer.KOTLINX
   }
 }
 
