@@ -26,6 +26,7 @@ import xyz.mcxross.kaptos.protocol.*
  */
 class Aptos(override val config: AptosConfig = AptosConfig()) :
   Account by xyz.mcxross.kaptos.api.Account(config),
+  Coin by xyz.mcxross.kaptos.api.Coin(config),
   General by xyz.mcxross.kaptos.api.General(config),
   Transaction by xyz.mcxross.kaptos.api.Transaction(config),
   Staking by xyz.mcxross.kaptos.api.Staking(config),
