@@ -17,7 +17,10 @@
 package xyz.mcxross.kaptos.internal
 
 import io.ktor.client.call.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import xyz.mcxross.kaptos.client.postAptosFaucet
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun fundAccount(
@@ -35,6 +38,10 @@ internal suspend fun fundAccount(
         body = FaucetRequest(address = accountAddress.value, amount = amount),
       )
     )
+
+  if (response.status == HttpStatusCode.InternalServerError) {
+    throw AptosApiError(response.call.request, response, "Error: ${response.bodyAsText()}")
+  }
 
   val faucetResponse: FaucetResponse = response.body()
 
