@@ -65,6 +65,10 @@ suspend inline fun <reified T> getAptosFullNode(
     return Pair(response, Option.None)
   }
 
+  if (response.status == HttpStatusCode.InternalServerError) {
+    throw AptosApiError(response.call.request, response, "Error: ${response.bodyAsText()}")
+  }
+
   return Pair(response, Option.Some(response.body()))
 }
 
