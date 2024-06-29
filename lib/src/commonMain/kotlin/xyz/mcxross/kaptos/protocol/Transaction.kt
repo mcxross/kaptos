@@ -15,9 +15,10 @@
  */
 package xyz.mcxross.kaptos.protocol
 
-import xyz.mcxross.kaptos.api.txsubmission.Build
-import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.api.txsubmission.Build
+import xyz.mcxross.kaptos.api.txsubmission.Simulate
+import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
@@ -32,6 +33,9 @@ interface Transaction {
 
   /** Submits a transaction to the chain */
   val submitTransaction: Submit
+
+  /** Simulate transaction before signing */
+  val simulateTransaction: Simulate
 
   /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
@@ -105,7 +109,7 @@ interface Transaction {
    * @return PendingTransactionResponse
    */
   suspend fun signAndSubmitTransaction(
-      signer: Account,
-      transaction: AnyRawTransaction,
+    signer: Account,
+    transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse>
 }

@@ -21,10 +21,7 @@ import xyz.mcxross.kaptos.exception.AbortedException
 import xyz.mcxross.kaptos.exception.Error
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
-import xyz.mcxross.kaptos.transaction.builder.buildTransaction
-import xyz.mcxross.kaptos.transaction.builder.generateSignedTransaction
-import xyz.mcxross.kaptos.transaction.builder.generateTransactionPayload
-import xyz.mcxross.kaptos.transaction.builder.sign
+import xyz.mcxross.kaptos.transaction.builder.*
 
 internal suspend fun generateTransaction(
   aptosConfig: AptosConfig,
@@ -100,6 +97,32 @@ internal suspend fun submitTransaction(
   if (response.first.status != Error.ABORTED.asHttpStatusCode()) {
     throw AbortedException()
   }
+
+  return Option.Some(response.second)
+}
+
+internal suspend fun simulateTransaction(
+  aptosConfig: AptosConfig,
+  data: InputSimulateTransactionData,
+): Option<List<UserTransactionResponse>> {
+  val signedTransaction = generateSignedTransactionForSimulation(data)
+
+  val response =
+    postAptosFullNode<List<UserTransactionResponse>, ByteArray>(
+      RequestOptions.PostAptosRequestOptions(
+        aptosConfig = aptosConfig,
+        originMethod = "simulateTransaction",
+        params =
+          mapOf(
+            "estimate_gas_unit_price" to data.options.estimateGasUnitPrice,
+            "estimate_max_gas_amount" to data.options.estimateMaxGasAmount,
+            "estimate_prioritized_gas_unit_price" to data.options.estimatePrioritizedGasUnitPrice,
+          ),
+        path = "transactions/simulate",
+        contentType = MimeType.BCS_SIGNED_TRANSACTION,
+        body = signedTransaction,
+      )
+    )
 
   return Option.Some(response.second)
 }
