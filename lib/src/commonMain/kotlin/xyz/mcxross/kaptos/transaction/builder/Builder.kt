@@ -18,6 +18,8 @@ package xyz.mcxross.kaptos.transaction.builder
 import kotlinx.datetime.Clock
 import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
+import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
 import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo
@@ -30,6 +32,7 @@ import xyz.mcxross.kaptos.transaction.authenticatior.TransactionAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.AnyRawTransactionInstance
 import xyz.mcxross.kaptos.transaction.instances.ChainId
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
+import xyz.mcxross.kaptos.transaction.instances.SignedTransaction
 import xyz.mcxross.kaptos.util.DEFAULT_MAX_GAS_AMOUNT
 import xyz.mcxross.kaptos.util.DEFAULT_TXN_EXP_SEC_FROM_NOW
 import xyz.mcxross.kaptos.util.NetworkToChainId
@@ -268,4 +271,17 @@ fun deriveTransactionType(transaction: AnyRawTransaction): AnyRawTransactionInst
     is SimpleTransaction -> transaction.rawTransaction
     else -> throw IllegalArgumentException("Unimplemented transaction type")
   }
+}
+
+fun generateSignedTransactionForSimulation(data: InputSimulateTransactionData): ByteArray {
+
+  val txnAuthenticator =
+    TransactionAuthenticator(
+      accountAuthenticatorVariant = AccountAuthenticatorVariant.Ed25519,
+      publicKey = Ed25519PublicKey(data.signerPublicKey.toByteArray()),
+      signature = Ed25519Signature(ByteArray(64)),
+    )
+  return Bcs.encodeToByteArray(
+    SignedTransaction((data.transaction as SimpleTransaction).rawTransaction, txnAuthenticator)
+  )
 }

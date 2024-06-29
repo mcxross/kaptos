@@ -37,7 +37,7 @@ sealed class TransactionResponse {
 @Serializable
 @SerialName("user_transaction")
 data class UserTransactionResponse(
-  override val type: TransactionResponseType,
+  override val type: TransactionResponseType = TransactionResponseType.USER,
   val version: String,
   val hash: String,
   @SerialName("state_change_hash") val stateChangeHash: String,

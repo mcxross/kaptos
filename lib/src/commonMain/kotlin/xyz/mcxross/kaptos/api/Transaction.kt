@@ -16,9 +16,10 @@
 
 package xyz.mcxross.kaptos.api
 
-import xyz.mcxross.kaptos.api.txsubmission.Build
-import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.api.txsubmission.Build
+import xyz.mcxross.kaptos.api.txsubmission.Simulate
+import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.internal.*
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
@@ -34,6 +35,7 @@ class Transaction(val config: AptosConfig) : Transaction {
 
   override val buildTransaction: Build = Build(config)
   override val submitTransaction: Submit = Submit(config)
+  override val simulateTransaction: Simulate = Simulate(config)
 
   /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
@@ -118,7 +120,7 @@ class Transaction(val config: AptosConfig) : Transaction {
    * @return PendingTransactionResponse
    */
   override suspend fun signAndSubmitTransaction(
-      signer: Account,
-      transaction: AnyRawTransaction,
+    signer: Account,
+    transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse> = signAndSubmitTransaction(config, signer, transaction)
 }
