@@ -17,10 +17,13 @@
 package xyz.mcxross.kaptos.client
 
 import io.ktor.client.*
-import io.ktor.client.engine.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import xyz.mcxross.graphql.client.DefaultGraphQLClient
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.AptosResponse
 
 /**
  * Create a new Ktor client with the given configuration.
@@ -36,3 +39,30 @@ val client = httpClient(clientConfig = ClientConfig())
 
 fun indexerClient(config: AptosConfig) =
   DefaultGraphQLClient(config.getRequestUrl(AptosApiType.INDEXER))
+
+suspend fun responseFitCheck(aptosResponse: AptosResponse, apiType: AptosApiType): AptosResponse {
+  if (aptosResponse.status == HttpStatusCode.Unauthorized) {
+    throw AptosApiError(
+      aptosResponse.call.request,
+      aptosResponse,
+      "Error: ${aptosResponse.bodyAsText()}",
+    )
+  }
+
+  if (aptosResponse.status.value in 200..299) {
+    return aptosResponse
+  }
+
+  val text: String = aptosResponse.bodyAsText()
+
+  val errorMessage =
+    if (text.contains("message") && text.contains("error_code")) {
+      text
+    } else if (errors.containsKey(aptosResponse.status.value)) {
+      errors[aptosResponse.status.value] ?: "Unknown error"
+    } else {
+      "Unhandled Error ${aptosResponse.status} : ${aptosResponse.bodyAsText()}"
+    }
+
+  throw AptosApiError(aptosResponse.call.request, aptosResponse, "$apiType error: $errorMessage")
+}

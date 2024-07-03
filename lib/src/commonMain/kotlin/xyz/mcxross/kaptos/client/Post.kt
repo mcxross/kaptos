@@ -23,12 +23,14 @@ import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.model.*
 
-suspend inline fun <reified V> post(options: RequestOptions.PostRequestOptions<V>): AptosResponse {
-  return client.post(options.aptosConfig.getRequestUrl(options.type)) {
-    url { appendPathSegments(options.path) }
-    contentType(ContentType.parse(options.contentType.type))
-    setBody(options.body)
-  }
+suspend inline fun <reified V> post(options: RequestOptions.PostRequestOptions<V>, apiType: AptosApiType): AptosResponse {
+  val aptosResponse =
+    client.post(options.aptosConfig.getRequestUrl(options.type)) {
+      url { appendPathSegments(options.path) }
+      contentType(ContentType.parse(options.contentType.type))
+      setBody(options.body)
+    }
+  return responseFitCheck(aptosResponse, apiType)
 }
 
 suspend inline fun <reified T, reified V> postAptosFullNode(
@@ -43,7 +45,8 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
         path = options.path,
         contentType = options.contentType,
         body = options.body,
-      )
+      ),
+        AptosApiType.FULLNODE
     )
 
   if (response.status == HttpStatusCode.BadRequest) {
@@ -64,7 +67,8 @@ suspend fun postAptosIndexer(
         originMethod = options.originMethod,
         path = "",
         body = options.body,
-      )
+      ),
+        AptosApiType.INDEXER
     )
   return response
 }
@@ -81,7 +85,8 @@ suspend inline fun <reified T> postAptosFaucet(
         path = options.path,
         contentType = options.contentType,
         body = options.body,
-      )
+      ),
+        AptosApiType.FAUCET
     )
   return response
 }
