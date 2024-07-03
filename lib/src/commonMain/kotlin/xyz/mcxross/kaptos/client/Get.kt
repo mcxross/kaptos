@@ -20,14 +20,29 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.serialization.*
 import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.Option
 import xyz.mcxross.kaptos.model.RequestOptions
 
-suspend fun get(options: RequestOptions.AptosRequestOptions): AptosResponse {
+/** Meaningful errors map */
+val errors: Map<Int, String> =
+  mapOf(
+    400 to "Bad Request",
+    401 to "Unauthorized",
+    403 to "Forbidden",
+    404 to "Not Found",
+    429 to "Too Many Requests",
+    500 to "Internal Server Error",
+    502 to "Bad Gateway",
+    503 to "Service Unavailable",
+  )
+
+suspend fun get(
+  options: RequestOptions.AptosRequestOptions,
+  apiType: AptosApiType = AptosApiType.FULLNODE,
+): AptosResponse {
 
   val aptosResponse =
     client.get(options.aptosConfig.getRequestUrl(options.type)) {
@@ -35,15 +50,7 @@ suspend fun get(options: RequestOptions.AptosRequestOptions): AptosResponse {
       options.params?.forEach { (k, v) -> parameter(k, v) }
     }
 
-  if (aptosResponse.status == HttpStatusCode.Unauthorized) {
-    throw AptosApiError(
-      aptosResponse.call.request,
-      aptosResponse,
-      "Error: ${aptosResponse.bodyAsText()}",
-    )
-  }
-
-  return aptosResponse
+  return responseFitCheck(aptosResponse, apiType)
 }
 
 suspend inline fun <reified T> getAptosFullNode(
