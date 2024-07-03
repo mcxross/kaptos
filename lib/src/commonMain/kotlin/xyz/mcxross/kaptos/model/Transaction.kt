@@ -60,6 +60,18 @@ data class UserTransactionResponse(
 ) : TransactionResponse()
 
 @Serializable
+@SerialName("pending_transaction")
+data class PendingTransactionResponse(
+  override val type: TransactionResponseType = TransactionResponseType.PENDING,
+  val hash: String,
+  val sender: String,
+  @SerialName("sequence_number") val sequenceNumber: String,
+  @SerialName("max_gas_amount") val maxGasAmount: String,
+  @SerialName("gas_unit_price") val gasUnitPrice: String,
+  @SerialName("expiration_timestamp_secs") val expirationTimestampSecs: String,
+) : TransactionResponse()
+
+@Serializable
 @SerialName("block_metadata_transaction")
 data class BlockMetadataTransactionResponse(
   override val type: TransactionResponseType,
