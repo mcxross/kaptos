@@ -17,9 +17,10 @@
 package xyz.mcxross.kaptos.internal
 
 import kotlinx.coroutines.delay
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.client.getAptosFullNode
-import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
@@ -70,6 +71,21 @@ internal suspend fun isTransactionPending(config: AptosConfig, txnHash: HexInput
   return txnResponse.type == TransactionResponseType.PENDING
 }
 
+internal suspend fun longWaitForTransaction(
+  config: AptosConfig,
+  txnHas: HexInput,
+): Option<TransactionResponse> {
+
+  return getAptosFullNode<TransactionResponse>(
+      RequestOptions.GetAptosRequestOptions(
+        aptosConfig = config,
+        originMethod = "longWaitForTransaction",
+        path = "transactions/wait_by_hash/${txnHas.value}",
+      )
+    )
+    .second
+}
+
 internal suspend fun waitForTransaction(
   config: AptosConfig,
   txnHash: String,
@@ -78,9 +94,36 @@ internal suspend fun waitForTransaction(
   var isPending = true
   var timeElapsed = 0
   var lastTxn: TransactionResponse? = null
-  var lastError: AptosException? = null
+  var lastError: AptosApiError? = null
   var backoffIntervalMs = 200
   val backoffMultiplier = 1.5
+
+  fun handleAPIError(e: Exception) {
+    val isAptosApiError = e is AptosApiError
+    if (!isAptosApiError) {
+      throw e // This would be unexpected
+    }
+
+    lastError = e as AptosApiError
+
+    val isRequestError = e.status != 404 && e.status >= 400 && e.status < 500
+
+    if (isRequestError) {
+      throw e
+    }
+  }
+
+  // check to see if the txn is already on the blockchain
+  try {
+    lastTxn =
+      when (val txnResponse = getTransactionByHash(config, txnHash)) {
+        is Option.Some -> txnResponse.value
+        is Option.None -> null
+      }
+    isPending = lastTxn?.type == TransactionResponseType.PENDING
+  } catch (e: Exception) {
+    handleAPIError(e)
+  }
 
   while (isPending) {
     if (timeElapsed >= options.timeoutSecs) {
@@ -99,7 +142,7 @@ internal suspend fun waitForTransaction(
       if (!isPending) {
         break
       }
-    } catch (e: AptosException) {
+    } catch (e: AptosApiError) {
       lastError = e
     }
 
@@ -110,7 +153,7 @@ internal suspend fun waitForTransaction(
 
   if (lastTxn == null) {
     if (lastError != null) {
-      throw lastError
+      throw lastError as AptosApiError
     } else {
       throw WaitForTransactionException(
         "Fetching transaction $txnHash failed and timed out after ${options.timeoutSecs} seconds"
@@ -132,9 +175,9 @@ internal suspend fun waitForTransaction(
 }
 
 internal suspend fun signAndSubmitTransaction(
-    aptosConfig: AptosConfig,
-    signer: Account,
-    transaction: AnyRawTransaction,
+  aptosConfig: AptosConfig,
+  signer: Account,
+  transaction: AnyRawTransaction,
 ): Option<PendingTransactionResponse> {
   val senderAuthenticator = signTransaction(signer, transaction)
   val submit = Submit(aptosConfig)

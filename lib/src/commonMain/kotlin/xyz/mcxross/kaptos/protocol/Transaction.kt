@@ -112,4 +112,23 @@ interface Transaction {
     signer: Account,
     transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse>
+
+  /**
+   * Generates a transaction to publish a move package to chain.
+   *
+   * To get the `metadataBytes` and `byteCode`, can compile using Aptos CLI with command `aptos move
+   * compile --save-metadata ...`,
+   *
+   * @param account The publisher account
+   * @param metadataBytes The package metadata bytes
+   * @param moduleBytecode An array of the bytecode of each module in the package in compiler output
+   *   order
+   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   */
+  suspend fun publishPackageTransaction(
+    account: AccountAddressInput,
+    metadataBytes: HexInput,
+    moduleBytecode: List<HexInput>,
+    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
+  ): SimpleTransaction
 }

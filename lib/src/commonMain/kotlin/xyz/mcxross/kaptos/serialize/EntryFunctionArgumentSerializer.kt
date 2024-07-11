@@ -21,10 +21,9 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.serializer
 import xyz.mcxross.bcs.Bcs
-import xyz.mcxross.kaptos.model.EntryFunctionArgument
-import xyz.mcxross.kaptos.model.MoveString
-import xyz.mcxross.kaptos.model.U64
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.util.isHex
 
 object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
@@ -47,6 +46,9 @@ object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
         val length = Bcs.encodeToByteArray(value).size
         encoder.beginCollection(descriptor, length)
         encoder.encodeSerializableValue(U64.serializer(), value)
+      }
+      is MoveVector<*> -> {
+        encoder.encodeSerializableValue(MoveVectorSerializer, value)
       }
       else -> throw IllegalArgumentException("Unimplemented transaction argument type")
     }

@@ -204,6 +204,13 @@ class TypeTagVector(
   override fun toString(): String {
     return "vector<${type}>"
   }
+
+  companion object {
+    fun u8() : TypeTagVector {
+      return TypeTagVector(type = TypeTagU8())
+    }
+  }
+
 }
 
 @Serializable
