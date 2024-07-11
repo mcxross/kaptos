@@ -101,6 +101,7 @@ $dokka.location:xyz.mcxross.kaptos.api/Transaction/getGasPriceEstimation/#/Point
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/getTransactionByHash/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/get-transaction-by-hash.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/getTransactionByVersion/#kotlin.Long/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/get-transaction-by-version.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/isPendingTransaction/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/is-pending-transaction.html
+$dokka.location:xyz.mcxross.kaptos.api/Transaction/publishPackageTransaction/#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.HexInput#kotlin.collections.List[xyz.mcxross.kaptos.model.HexInput]#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/publish-package-transaction.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/sign/#xyz.mcxross.kaptos.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/sign.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/signAndSubmitTransaction/#xyz.mcxross.kaptos.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/sign-and-submit-transaction.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/simulateTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/simulate-transaction.html
@@ -321,6 +322,7 @@ $dokka.location:xyz.mcxross.kaptos.internal//setTargetAddress/#xyz.mcxross.kapto
 $dokka.location:xyz.mcxross.kaptos.internal//view/#xyz.mcxross.kaptos.model.AptosConfig#xyz.mcxross.kaptos.model.InputViewFunctionData#kotlin.Boolean#xyz.mcxross.kaptos.model.LedgerVersionArg?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.internal/view.html
 $dokka.location:xyz.mcxross.kaptos.model////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/index.html
 $dokka.location:xyz.mcxross.kaptos.model//aptosCoinStructTag/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/aptos-coin-struct-tag.html
+$dokka.location:xyz.mcxross.kaptos.model//emptyTypeArguments/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/empty-type-arguments.html
 $dokka.location:xyz.mcxross.kaptos.model//functionArguments/#kotlin.Function1[xyz.mcxross.kaptos.model.FunctionArgumentsBuilder,kotlin.Unit]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/function-arguments.html
 $dokka.location:xyz.mcxross.kaptos.model//inputEntryFunctionData/#kotlin.Function1[xyz.mcxross.kaptos.model.InputEntryFunctionDataBuilder,kotlin.Unit]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/input-entry-function-data.html
 $dokka.location:xyz.mcxross.kaptos.model//objectStructTag/#xyz.mcxross.kaptos.model.TypeTag/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/object-struct-tag.html
@@ -750,6 +752,8 @@ $dokka.location:xyz.mcxross.kaptos.model/MoveValue.String///PointingToDeclaratio
 $dokka.location:xyz.mcxross.kaptos.model/MoveValue.String/String/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-value/-string/-string.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveValue.String/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-value/-string/value.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveValue///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-value/index.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/index.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u8/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u8.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/index.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector/MoveVector/#kotlin.collections.List[TypeParam(bounds=[xyz.mcxross.kaptos.model.EntryFunctionArgument])]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-move-vector.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/values.html
@@ -1068,6 +1072,8 @@ $dokka.location:xyz.mcxross.kaptos.model/TypeTagVariants///PointingToDeclaration
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVariants/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-variants/entries.html
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVariants/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-variants/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVariants/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-variants/values.html
+$dokka.location:xyz.mcxross.kaptos.model/TypeTagVector.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-vector/-companion/index.html
+$dokka.location:xyz.mcxross.kaptos.model/TypeTagVector.Companion/u8/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-vector/-companion/u8.html
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVector///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-vector/index.html
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVector/TypeTagVector/#xyz.mcxross.kaptos.model.TypeTagVariants#xyz.mcxross.kaptos.model.TypeTag/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-vector/-type-tag-vector.html
 $dokka.location:xyz.mcxross.kaptos.model/TypeTagVector/enumIndex/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-type-tag-vector/enum-index.html
@@ -1180,6 +1186,7 @@ $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getGasPriceEstimation/#/
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getTransactionByHash/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-hash.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/getTransactionByVersion/#kotlin.Long/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/get-transaction-by-version.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/isPendingTransaction/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/is-pending-transaction.html
+$dokka.location:xyz.mcxross.kaptos.protocol/Transaction/publishPackageTransaction/#xyz.mcxross.kaptos.model.AccountAddressInput#xyz.mcxross.kaptos.model.HexInput#kotlin.collections.List[xyz.mcxross.kaptos.model.HexInput]#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/publish-package-transaction.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/sign/#xyz.mcxross.kaptos.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/sign.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/signAndSubmitTransaction/#xyz.mcxross.kaptos.account.Account#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/sign-and-submit-transaction.html
 $dokka.location:xyz.mcxross.kaptos.protocol/Transaction/simulateTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.protocol/-transaction/simulate-transaction.html
@@ -1231,6 +1238,10 @@ $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer///PointingT
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/descriptor.html
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/deserialize.html
 $dokka.location:xyz.mcxross.kaptos.serialize/MoveUint8TypeSerializer/serialize/#kotlinx.serialization.encoding.Encoder#xyz.mcxross.kaptos.model.MoveValue.MoveUint8Type/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-uint8-type-serializer/serialize.html
+$dokka.location:xyz.mcxross.kaptos.serialize/MoveVectorSerializer///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-vector-serializer/index.html
+$dokka.location:xyz.mcxross.kaptos.serialize/MoveVectorSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-vector-serializer/descriptor.html
+$dokka.location:xyz.mcxross.kaptos.serialize/MoveVectorSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-vector-serializer/deserialize.html
+$dokka.location:xyz.mcxross.kaptos.serialize/MoveVectorSerializer/serialize/#kotlinx.serialization.encoding.Encoder#xyz.mcxross.kaptos.model.MoveVector[*]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-move-vector-serializer/serialize.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TransactionAuthenticatorSerializer///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-authenticator-serializer/index.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TransactionAuthenticatorSerializer/descriptor/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-authenticator-serializer/descriptor.html
 $dokka.location:xyz.mcxross.kaptos.serialize/TransactionAuthenticatorSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.serialize/-transaction-authenticator-serializer/deserialize.html
