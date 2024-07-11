@@ -16,12 +16,11 @@
 package xyz.mcxross.kaptos.model
 
 import xyz.mcxross.kaptos.util.DEFAULT_MAX_GAS_AMOUNT
-import xyz.mcxross.kaptos.util.DEFAULT_TXN_EXP_SEC_FROM_NOW
 
 /** Optional options to set when generating a transaction */
 data class InputGenerateTransactionOptions(
   val maxGasAmount: Long = DEFAULT_MAX_GAS_AMOUNT,
   val gasUnitPrice: Long? = null,
-  val expireTimestamp: Long? = DEFAULT_TXN_EXP_SEC_FROM_NOW,
+  val expireTimestamp: Long? = null,
   val accountSequenceNumber: Number? = null,
 )

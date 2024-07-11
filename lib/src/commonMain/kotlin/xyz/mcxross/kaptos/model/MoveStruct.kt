@@ -16,9 +16,21 @@
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.core.Hex
 
 @Serializable
-data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : TransactionArgument()
+data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : TransactionArgument() {
+
+  companion object {
+    /**
+     * Factory method to generate a MoveVector of U8s from an array of numbers.
+     *
+     * @returns a `MoveVector<U8>`
+     */
+    fun u8(value: HexInput): MoveVector<U8> =
+      MoveVector(Hex.fromHexInput(value).toByteArray().map { U8(it) })
+  }
+}
 
 @Serializable
 data class MoveString(val value: String) : TransactionArgument() {

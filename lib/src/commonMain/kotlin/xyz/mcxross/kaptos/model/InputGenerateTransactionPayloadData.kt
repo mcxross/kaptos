@@ -48,6 +48,10 @@ fun typeArguments(block: TypeArgumentsBuilder.() -> Unit): TypeArguments {
   return TypeArgumentsBuilder().apply(block).build()
 }
 
+fun emptyTypeArguments(): TypeArguments {
+  return TypeArguments(emptyList())
+}
+
 data class FunctionArguments(val functionArguments: List<EntryFunctionArgument>)
 
 class FunctionArgumentsBuilder {
@@ -81,8 +85,7 @@ class InputEntryFunctionDataBuilder {
   fun build(): InputEntryFunctionData {
     return InputEntryFunctionData(
       function = function ?: throw IllegalArgumentException("function must be set"),
-      typeArguments =
-        typeArguments?.typeArguments ?: throw IllegalArgumentException("typeArguments must be set"),
+      typeArguments = typeArguments?.typeArguments ?: emptyList(),
       functionArguments =
         functionArguments?.functionArguments
           ?: throw IllegalArgumentException("functionArguments must be set"),

@@ -126,3 +126,42 @@ internal suspend fun simulateTransaction(
 
   return Option.Some(response.second)
 }
+
+internal suspend fun publicPackageTransaction(
+  aptosConfig: AptosConfig,
+  account: AccountAddressInput,
+  metadataBytes: HexInput,
+  moduleBytecode: List<HexInput>,
+  options: InputGenerateTransactionOptions,
+): SimpleTransaction {
+  val totalByteCode = moduleBytecode.map { MoveVector.u8(it) }
+
+  val packagePublishAbi =
+    EntryFunctionABI(
+      emptyList(),
+      listOf(TypeTagVector.u8(), TypeTagVector(type = TypeTagVector.u8())),
+    )
+
+  val anyRawTxn =
+    generateTransaction(
+      aptosConfig = aptosConfig,
+      data =
+        InputGenerateSingleSignerRawTransactionData(
+          sender = account,
+          data =
+            inputEntryFunctionData {
+              function = "0x1::code::publish_package_txn"
+              functionArguments = functionArguments {
+                +MoveVector.u8(metadataBytes)
+                +MoveVector(totalByteCode)
+              }
+              abi = packagePublishAbi
+            },
+          options = options,
+          withFeePayer = false,
+          secondarySignerAddresses = null,
+        ),
+    )
+
+  return anyRawTxn as SimpleTransaction
+}
