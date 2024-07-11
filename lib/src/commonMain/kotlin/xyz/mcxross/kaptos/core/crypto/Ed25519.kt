@@ -23,6 +23,7 @@ import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.model.AuthenticationKeyScheme
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
+import xyz.mcxross.kaptos.model.SigningSchemeInput
 
 /**
  * Represents the public key of an Ed25519 key pair.
@@ -143,7 +144,7 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
 
     /** Generate a new Ed25519 key pair */
     fun generate(): Ed25519PrivateKey {
-      val keyPair = generateKeypair(SigningScheme.Ed25519)
+      val keyPair = generateKeypair(SigningSchemeInput.Ed25519)
       return Ed25519PrivateKey(HexInput.fromByteArray(keyPair.privateKey))
     }
   }

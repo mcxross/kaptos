@@ -16,9 +16,9 @@
 package xyz.mcxross.kaptos.core.crypto
 
 import xyz.mcxross.kaptos.model.AnyRawTransaction
-import xyz.mcxross.kaptos.model.SigningScheme
+import xyz.mcxross.kaptos.model.SigningSchemeInput
 
-expect fun generateKeypair(scheme: SigningScheme): KeyPair
+expect fun generateKeypair(scheme: SigningSchemeInput): KeyPair
 
 expect fun fromSeed(seed: ByteArray): KeyPair
 
