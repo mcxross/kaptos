@@ -13,25 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package xyz.mcxross.kaptos.sample.ui.component
 
-package xyz.mcxross.kaptos.kmm.sample
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import xyz.mcxross.kaptos.sample.App
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent { App() }
-  }
-}
-
-@Preview
 @Composable
-fun AppAndroidPreview() {
-  App()
+fun BalanceRefresher(updateTrigger: MutableState<Int>) {
+  val coroutineScope = rememberCoroutineScope()
+
+  DisposableEffect(Unit) {
+    val job =
+      coroutineScope.launch {
+        while (true) {
+          delay(5000)
+          updateTrigger.value += 1
+        }
+      }
+    onDispose { job.cancel() }
+  }
 }

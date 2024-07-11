@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package xyz.mcxross.kaptos.sample.ui.component
 
-package xyz.mcxross.kaptos.kmm.sample
-
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import xyz.mcxross.kaptos.sample.App
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 
-class MainActivity : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent { App() }
-  }
-}
-
-@Preview
 @Composable
-fun AppAndroidPreview() {
-  App()
+fun ShortenedAddress(address: String) {
+  Text(
+    text = "${address.take(14)}...${address.takeLast(14)}",
+    color = Color.White,
+    fontSize = 16.sp,
+  )
 }
