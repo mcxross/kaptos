@@ -108,10 +108,10 @@ $dokka.location:xyz.mcxross.kaptos.api/Transaction/simulateTransaction/#/Pointin
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/submitTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/submit-transaction.html
 $dokka.location:xyz.mcxross.kaptos.api/Transaction/waitForTransaction/#xyz.mcxross.kaptos.model.HexInput#xyz.mcxross.kaptos.model.WaitForTransactionOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.api/-transaction/wait-for-transaction.html
 $dokka.location:xyz.mcxross.kaptos.client////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/index.html
-$dokka.location:xyz.mcxross.kaptos.client//client/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/client.html
 $dokka.location:xyz.mcxross.kaptos.client//errors/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/errors.html
 $dokka.location:xyz.mcxross.kaptos.client//get/#xyz.mcxross.kaptos.model.RequestOptions.AptosRequestOptions#xyz.mcxross.kaptos.model.AptosApiType/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/get.html
 $dokka.location:xyz.mcxross.kaptos.client//getAptosFullNode/#xyz.mcxross.kaptos.model.RequestOptions.GetAptosRequestOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/get-aptos-full-node.html
+$dokka.location:xyz.mcxross.kaptos.client//getClient/#xyz.mcxross.kaptos.client.ClientConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/get-client.html
 $dokka.location:xyz.mcxross.kaptos.client//httpClient/#xyz.mcxross.kaptos.client.ClientConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/http-client.html
 $dokka.location:xyz.mcxross.kaptos.client//indexerClient/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/indexer-client.html
 $dokka.location:xyz.mcxross.kaptos.client//paginateWithCursor/#xyz.mcxross.kaptos.model.RequestOptions.AptosRequestOptions/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/paginate-with-cursor.html
@@ -120,9 +120,13 @@ $dokka.location:xyz.mcxross.kaptos.client//postAptosFaucet/#xyz.mcxross.kaptos.m
 $dokka.location:xyz.mcxross.kaptos.client//postAptosFullNode/#xyz.mcxross.kaptos.model.RequestOptions.PostAptosRequestOptions[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/post-aptos-full-node.html
 $dokka.location:xyz.mcxross.kaptos.client//postAptosIndexer/#xyz.mcxross.kaptos.model.RequestOptions.PostAptosRequestOptions[xyz.mcxross.kaptos.model.GraphqlQuery]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/post-aptos-indexer.html
 $dokka.location:xyz.mcxross.kaptos.client//responseFitCheck/#io.ktor.client.statement.HttpResponse#xyz.mcxross.kaptos.model.AptosApiType/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/response-fit-check.html
+$dokka.location:xyz.mcxross.kaptos.client/ClientConfig.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-companion/index.html
+$dokka.location:xyz.mcxross.kaptos.client/ClientConfig.Companion/default/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-companion/default.html
 $dokka.location:xyz.mcxross.kaptos.client/ClientConfig///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/index.html
-$dokka.location:xyz.mcxross.kaptos.client/ClientConfig/ClientConfig/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-client-config.html
+$dokka.location:xyz.mcxross.kaptos.client/ClientConfig/ClientConfig/#kotlin.Boolean#kotlin.Boolean#kotlin.String#[Error type: Unresolved type for xyz.mcxross.kaptos.model.UserAgent]?#kotlin.Int#kotlin.Int#kotlin.Long#kotlin.Long#kotlin.String?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-client-config.html
 $dokka.location:xyz.mcxross.kaptos.client/ClientConfig/ClientConfig/#kotlin.Boolean#kotlin.Int#kotlin.Boolean#kotlin.Int#kotlin.Int#kotlin.Long#kotlin.Long#kotlin.Int#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.String#xyz.mcxross.kaptos.model.UserAgent?#kotlin.Long#kotlin.Long#kotlin.String?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-client-config.html
+$dokka.location:xyz.mcxross.kaptos.client/ClientConfig/ClientConfig/#kotlin.Boolean#kotlin.String#xyz.mcxross.kaptos.model.UserAgent?#kotlin.Long#kotlin.Long#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.String?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-client-config.html
+$dokka.location:xyz.mcxross.kaptos.client/ClientConfig/ClientConfig/#kotlin.Boolean#xyz.mcxross.kaptos.model.UserAgent?#kotlin.String#kotlin.Long#kotlin.Int#kotlin.Int#kotlin.Boolean#kotlin.String?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/-client-config.html
 $dokka.location:xyz.mcxross.kaptos.client/ClientConfig/agent/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/[mingw]agent.html
 $dokka.location:xyz.mcxross.kaptos.client/ClientConfig/cache/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/[mingw]cache.html
 $dokka.location:xyz.mcxross.kaptos.client/ClientConfig/connectAttempts/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.client/-client-config/connect-attempts.html
@@ -410,7 +414,7 @@ $dokka.location:xyz.mcxross.kaptos.model/AptosApiType/entries/#/PointingToDeclar
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/values.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosConfig///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/index.html
-$dokka.location:xyz.mcxross.kaptos.model/AptosConfig/AptosConfig/#xyz.mcxross.kaptos.model.AptosSettings?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/-aptos-config.html
+$dokka.location:xyz.mcxross.kaptos.model/AptosConfig/AptosConfig/#xyz.mcxross.kaptos.model.AptosSettings/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/-aptos-config.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosConfig/clientConfig/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/client-config.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosConfig/faucet/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/faucet.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosConfig/faucetConfig/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-config/faucet-config.html
@@ -423,7 +427,7 @@ $dokka.location:xyz.mcxross.kaptos.model/AptosConfig/network/#/PointingToDeclara
 $dokka.location:xyz.mcxross.kaptos.model/AptosRequest///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-request/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosResponse///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-response/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosSettings///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/index.html
-$dokka.location:xyz.mcxross.kaptos.model/AptosSettings/AptosSettings/#xyz.mcxross.kaptos.model.Network?#kotlin.String?#kotlin.String?#kotlin.String?#xyz.mcxross.kaptos.model.Client?#xyz.mcxross.kaptos.client.ClientConfig?#xyz.mcxross.kaptos.model.FullNodeConfig?#xyz.mcxross.kaptos.model.IndexerConfig?#xyz.mcxross.kaptos.model.FaucetConfig?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/-aptos-settings.html
+$dokka.location:xyz.mcxross.kaptos.model/AptosSettings/AptosSettings/#xyz.mcxross.kaptos.model.Network?#kotlin.String?#kotlin.String?#kotlin.String?#xyz.mcxross.kaptos.model.Client?#xyz.mcxross.kaptos.client.ClientConfig#xyz.mcxross.kaptos.model.FullNodeConfig?#xyz.mcxross.kaptos.model.IndexerConfig?#xyz.mcxross.kaptos.model.FaucetConfig?/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/-aptos-settings.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosSettings/client/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/client.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosSettings/clientConfig/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/client-config.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosSettings/faucet/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-aptos-settings/faucet.html
