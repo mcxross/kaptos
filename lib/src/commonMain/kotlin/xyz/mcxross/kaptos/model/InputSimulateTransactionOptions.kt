@@ -16,7 +16,7 @@
 package xyz.mcxross.kaptos.model
 
 data class InputSimulateTransactionOptions(
-    val estimateGasUnitPrice: Boolean = false,
-    val estimateMaxGasAmount: Boolean = false,
-    val estimatePrioritizedGasUnitPrice: Boolean = false
+  val estimateGasUnitPrice: Boolean = false,
+  val estimateMaxGasAmount: Boolean = false,
+  val estimatePrioritizedGasUnitPrice: Boolean = false,
 )
