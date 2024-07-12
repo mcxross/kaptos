@@ -45,7 +45,9 @@ suspend fun get(
 ): AptosResponse {
 
   val aptosResponse =
-    client.get(options.aptosConfig.getRequestUrl(options.type)) {
+    getClient(options.aptosConfig.clientConfig).get(
+      options.aptosConfig.getRequestUrl(options.type)
+    ) {
       url { appendPathSegments(options.path) }
       options.params?.forEach { (k, v) -> parameter(k, v) }
     }

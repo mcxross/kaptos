@@ -71,35 +71,40 @@ actual fun httpClient(clientConfig: ClientConfig) =
     }
   }
 
-actual class ClientConfig {
+actual class ClientConfig(
 
   /** Specifies whether the client should follow redirects. Default is `true`. */
-  var followRedirects: Boolean = true
+  var followRedirects: Boolean = true,
 
   /** Specifies the user agent. Default is `Kaptos`. */
-  var agent: String = "Kaptos/Darwin"
+  var agent: String = "Kaptos/Darwin",
 
   /** Use a like agent. If this is set, the `agent` field will be ignored. */
-  var likeAgent: xyz.mcxross.kaptos.model.UserAgent? = null
+  var likeAgent: xyz.mcxross.kaptos.model.UserAgent? = null,
 
   /** Specifies a timeout for a whole HTTP call, from sending a request to receiving a response. */
-  var requestTimeout: Long = 10000L
+  var requestTimeout: Long = 10000L,
 
   /**
    * Specifies how many times the client should retry on server errors. Default is `-1`, which means
    * no retries.
    */
-  var retryOnServerErrors = -1
+  var retryOnServerErrors: Int = -1,
 
   /**
    * Specifies how many times the client should retry on connection errors. Default is `-1`, which
    * means no retries.
    */
-  var maxRetries = -1
+  var maxRetries: Int = -1,
 
   /** Enables or disables caching. Default is `false`. */
-  var cache: Boolean = false
+  var cache: Boolean = false,
 
   /** Specifies the proxy to use. Default is `null`. */
-  var proxy: String? = null
+  var proxy: String? = null,
+) {
+  actual companion object {
+    actual val default: ClientConfig
+      get() = ClientConfig()
+  }
 }

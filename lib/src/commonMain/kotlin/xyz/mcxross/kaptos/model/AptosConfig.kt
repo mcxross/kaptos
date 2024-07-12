@@ -30,8 +30,7 @@ import xyz.mcxross.kaptos.util.NetworkToNodeAPI
  *   provided, default values are used.
  * @property network The network configuration, defaults to `Network.DEVNET` if not provided in
  *   `AptosSettings`.
- * @property client The client configuration, defaults to a new `Client` instance with name
- *   "aptosClient" if not provided in `AptosSettings`.
+ * @property clientConfig The client configuration, taken from `AptosSettings` if provided.
  * @property fullNode The fullnode configuration, taken from `AptosSettings` if provided.
  * @property faucet The faucet configuration, taken from `AptosSettings` if provided.
  * @property indexer The indexer configuration, taken from `AptosSettings` if provided.
@@ -44,15 +43,15 @@ import xyz.mcxross.kaptos.util.NetworkToNodeAPI
  * @property faucetConfig The faucet configuration, defaults to a new `FaucetConfig` instance if not
  *   provided in `AptosSettings`.
  */
-class AptosConfig(settings: AptosSettings? = null) {
-  val network: Network = settings?.network ?: Network.DEVNET
-  val fullNode: String? = settings?.fullNode
-  val faucet: String? = settings?.faucet
-  val indexer: String? = settings?.indexer
-  val clientConfig: ClientConfig = settings?.clientConfig ?: ClientConfig()
-  val fullNodeConfig: FullNodeConfig = settings?.fullNodeConfig ?: FullNodeConfig()
-  val indexerConfig: IndexerConfig = settings?.indexerConfig ?: IndexerConfig()
-  val faucetConfig: FaucetConfig = settings?.faucetConfig ?: FaucetConfig()
+class AptosConfig(settings: AptosSettings = AptosSettings()) {
+  val network: Network = settings.network ?: Network.DEVNET
+  val fullNode: String? = settings.fullNode
+  val faucet: String? = settings.faucet
+  val indexer: String? = settings.indexer
+  val clientConfig: ClientConfig = settings.clientConfig
+  val fullNodeConfig: FullNodeConfig = settings.fullNodeConfig ?: FullNodeConfig()
+  val indexerConfig: IndexerConfig = settings.indexerConfig ?: IndexerConfig()
+  val faucetConfig: FaucetConfig = settings.faucetConfig ?: FaucetConfig()
 
   fun getRequestUrl(apiType: AptosApiType): String {
     return when (apiType) {
