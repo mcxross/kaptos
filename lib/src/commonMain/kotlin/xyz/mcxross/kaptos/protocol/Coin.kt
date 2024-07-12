@@ -17,7 +17,6 @@ package xyz.mcxross.kaptos.protocol
 
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.InputGenerateTransactionOptions
-import xyz.mcxross.kaptos.model.MoveValue
 import xyz.mcxross.kaptos.model.SimpleTransaction
 import xyz.mcxross.kaptos.util.APTOS_COIN
 

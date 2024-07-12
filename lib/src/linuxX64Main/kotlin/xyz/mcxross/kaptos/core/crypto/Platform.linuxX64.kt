@@ -15,7 +15,6 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
-import xyz.mcxross.kaptos.model.SigningScheme
 import xyz.mcxross.kaptos.model.SigningSchemeInput
 
 actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {

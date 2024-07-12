@@ -206,11 +206,10 @@ class TypeTagVector(
   }
 
   companion object {
-    fun u8() : TypeTagVector {
+    fun u8(): TypeTagVector {
       return TypeTagVector(type = TypeTagU8())
     }
   }
-
 }
 
 @Serializable
