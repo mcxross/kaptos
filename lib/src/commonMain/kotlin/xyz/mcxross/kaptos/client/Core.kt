@@ -33,9 +33,13 @@ import xyz.mcxross.kaptos.model.AptosResponse
  */
 expect fun httpClient(clientConfig: ClientConfig): HttpClient
 
-expect class ClientConfig()
+expect class ClientConfig {
+  companion object {
+    val default: ClientConfig
+  }
+}
 
-val client = httpClient(clientConfig = ClientConfig())
+fun getClient(clientConfig: ClientConfig) = httpClient(clientConfig)
 
 fun indexerClient(config: AptosConfig) =
   DefaultGraphQLClient(config.getRequestUrl(AptosApiType.INDEXER))

@@ -24,7 +24,7 @@ data class AptosSettings(
   val faucet: String? = null,
   val indexer: String? = null,
   val client: Client? = null,
-  val clientConfig: ClientConfig? = null,
+  val clientConfig: ClientConfig = ClientConfig.default,
   val fullNodeConfig: FullNodeConfig? = null,
   val indexerConfig: IndexerConfig? = null,
   val faucetConfig: FaucetConfig? = null,

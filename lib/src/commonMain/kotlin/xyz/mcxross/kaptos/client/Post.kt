@@ -23,9 +23,14 @@ import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.model.*
 
-suspend inline fun <reified V> post(options: RequestOptions.PostRequestOptions<V>, apiType: AptosApiType): AptosResponse {
+suspend inline fun <reified V> post(
+  options: RequestOptions.PostRequestOptions<V>,
+  apiType: AptosApiType,
+): AptosResponse {
   val aptosResponse =
-    client.post(options.aptosConfig.getRequestUrl(options.type)) {
+    getClient(options.aptosConfig.clientConfig).post(
+      options.aptosConfig.getRequestUrl(options.type)
+    ) {
       url { appendPathSegments(options.path) }
       contentType(ContentType.parse(options.contentType.type))
       setBody(options.body)
@@ -46,7 +51,7 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
         contentType = options.contentType,
         body = options.body,
       ),
-        AptosApiType.FULLNODE
+      AptosApiType.FULLNODE,
     )
 
   if (response.status == HttpStatusCode.BadRequest) {
@@ -68,7 +73,7 @@ suspend fun postAptosIndexer(
         path = "",
         body = options.body,
       ),
-        AptosApiType.INDEXER
+      AptosApiType.INDEXER,
     )
   return response
 }
@@ -86,7 +91,7 @@ suspend inline fun <reified T> postAptosFaucet(
         contentType = options.contentType,
         body = options.body,
       ),
-        AptosApiType.FAUCET
+      AptosApiType.FAUCET,
     )
   return response
 }
