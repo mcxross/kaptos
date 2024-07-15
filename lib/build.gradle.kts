@@ -1,6 +1,7 @@
 import java.net.URL
 import java.util.*
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import xyz.mcxross.graphql.plugin.gradle.graphql
 
 plugins {
@@ -32,9 +33,17 @@ kotlin {
 
   js { browser { commonWebpackConfig { cssSupport { enabled.set(true) } } } }
 
-  iosX64()
-  iosArm64()
-  iosSimulatorArm64()
+  val xcframeworkName = "AptosKit"
+  val xcf = XCFramework(xcframeworkName)
+
+  listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach {
+    it.binaries.framework {
+      baseName = xcframeworkName
+      binaryOption("bundleId", "xyz.mcxross.${xcframeworkName}")
+      xcf.add(this)
+      isStatic = true
+    }
+  }
 
   linuxX64()
 
