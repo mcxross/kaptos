@@ -30,7 +30,7 @@ internal suspend fun transferCoinTransaction(
     InputGenerateSingleSignerRawTransactionData(
       sender = from,
       data =
-        inputEntryFunctionData {
+        entryFunctionData {
           function = "0x1::coin::transfer"
           typeArguments = typeArguments { +TypeTagStruct(type = coinType.toStructTag()) }
           functionArguments = functionArguments {
