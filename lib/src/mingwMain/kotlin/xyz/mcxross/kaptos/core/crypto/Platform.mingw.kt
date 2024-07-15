@@ -37,3 +37,7 @@ actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
 actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
   TODO("Not yet implemented")
 }
+
+actual fun generateSecp256k1PublicKey(privateKey: ByteArray): ByteArray {
+  TODO("Not yet implemented")
+}

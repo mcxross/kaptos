@@ -59,7 +59,7 @@ abstract class Account {
         return Ed25519Account.generate()
       }
 
-      throw NotImplementedError("Only Ed25519 is supported at the moment")
+      return SingleKeyAccount.generate(scheme)
     }
 
     infix fun from(privateKey: PrivateKey): Account {

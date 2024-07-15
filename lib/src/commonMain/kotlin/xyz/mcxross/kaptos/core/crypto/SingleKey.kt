@@ -35,9 +35,7 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
     TODO("Not yet implemented")
   }
 
-  override fun toByteArray(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toByteArray(): ByteArray = publicKey.toByteArray()
 
   override fun toBcs(): ByteArray {
     TODO("Not yet implemented")
