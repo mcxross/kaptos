@@ -333,8 +333,8 @@ $dokka.location:xyz.mcxross.kaptos.internal//view/#xyz.mcxross.kaptos.model.Apto
 $dokka.location:xyz.mcxross.kaptos.model////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/index.html
 $dokka.location:xyz.mcxross.kaptos.model//aptosCoinStructTag/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/aptos-coin-struct-tag.html
 $dokka.location:xyz.mcxross.kaptos.model//emptyTypeArguments/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/empty-type-arguments.html
+$dokka.location:xyz.mcxross.kaptos.model//entryFunctionData/#kotlin.Function1[xyz.mcxross.kaptos.model.InputEntryFunctionDataBuilder,kotlin.Unit]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/entry-function-data.html
 $dokka.location:xyz.mcxross.kaptos.model//functionArguments/#kotlin.Function1[xyz.mcxross.kaptos.model.FunctionArgumentsBuilder,kotlin.Unit]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/function-arguments.html
-$dokka.location:xyz.mcxross.kaptos.model//inputEntryFunctionData/#kotlin.Function1[xyz.mcxross.kaptos.model.InputEntryFunctionDataBuilder,kotlin.Unit]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/input-entry-function-data.html
 $dokka.location:xyz.mcxross.kaptos.model//objectStructTag/#xyz.mcxross.kaptos.model.TypeTag/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/object-struct-tag.html
 $dokka.location:xyz.mcxross.kaptos.model//optionStructTag/#xyz.mcxross.kaptos.model.TypeTag/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/option-struct-tag.html
 $dokka.location:xyz.mcxross.kaptos.model//stringStructTag/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/string-struct-tag.html
