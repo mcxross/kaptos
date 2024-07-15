@@ -1377,8 +1377,9 @@ $dokka.location:xyz.mcxross.kaptos.util//runBlocking/#kotlin.coroutines.Coroutin
 $dokka.location:xyz.mcxross.kaptos.util//toAccountAddress/kotlin.String#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.util/to-account-address.html
 $dokka.location:xyz.mcxross.kaptos////PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/index.html
 $dokka.location:xyz.mcxross.kaptos/Aptos///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/index.html
-$dokka.location:xyz.mcxross.kaptos/Aptos/Aptos/#xyz.mcxross.kaptos.model.AptosConfig/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/-aptos.html
+$dokka.location:xyz.mcxross.kaptos/Aptos/Aptos/#xyz.mcxross.kaptos.model.AptosConfig#kotlin.Boolean/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/-aptos.html
 $dokka.location:xyz.mcxross.kaptos/Aptos/config/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/config.html
+$dokka.location:xyz.mcxross.kaptos/Aptos/isGraceFull/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos/-aptos/is-grace-full.html
 xyz.mcxross.kaptos
 xyz.mcxross.kaptos.account
 xyz.mcxross.kaptos.api
