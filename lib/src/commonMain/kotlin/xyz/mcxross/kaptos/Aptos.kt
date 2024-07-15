@@ -16,6 +16,7 @@
 
 package xyz.mcxross.kaptos
 
+import xyz.mcxross.kaptos.core.Application
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.*
 
@@ -24,7 +25,10 @@ import xyz.mcxross.kaptos.protocol.*
  *
  * @param config [AptosConfig] to optionally configure the SDK.
  */
-class Aptos(override val config: AptosConfig = AptosConfig()) :
+class Aptos(
+  override val config: AptosConfig = AptosConfig(),
+  graceFull: Boolean = Application.graceFull,
+) :
   Account by xyz.mcxross.kaptos.api.Account(config),
   Coin by xyz.mcxross.kaptos.api.Coin(config),
   General by xyz.mcxross.kaptos.api.General(config),
@@ -32,4 +36,18 @@ class Aptos(override val config: AptosConfig = AptosConfig()) :
   Staking by xyz.mcxross.kaptos.api.Staking(config),
   DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config),
   Faucet by xyz.mcxross.kaptos.api.Faucet(config),
-  Ans by xyz.mcxross.kaptos.api.Ans(config)
+  Ans by xyz.mcxross.kaptos.api.Ans(config) {
+
+  init {
+    Application.graceFull = graceFull
+  }
+
+  /**
+   * Returns the current graceFull setting.
+   *
+   * @return [Boolean] indicating if the SDK is in graceFull mode.
+   */
+  fun isGraceFull(): Boolean {
+    return Application.graceFull
+  }
+}
