@@ -17,7 +17,7 @@ plugins {
 
 group = "xyz.mcxross.kaptos"
 
-version = "1.5.0-SNAPSHOT"
+version = "0.1.0-beta"
 
 repositories {
   mavenCentral()
