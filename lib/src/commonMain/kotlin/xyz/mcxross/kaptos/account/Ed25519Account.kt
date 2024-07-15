@@ -81,7 +81,6 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
   companion object {
     fun generate(): Ed25519Account {
       val privateKey = Ed25519PrivateKey.generate()
-      println("Ed25519Account ${Hex.fromHexInput(HexInput.fromByteArray(privateKey.toByteArray()))}")
       return Ed25519Account(privateKey)
     }
   }
