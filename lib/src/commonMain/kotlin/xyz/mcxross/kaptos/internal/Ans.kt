@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.internal
 
+import xyz.mcxross.kaptos.exception.AccountAddressParseException
 import xyz.mcxross.kaptos.model.*
 
 /**
@@ -148,7 +149,12 @@ suspend fun getTargetAddress(aptosConfig: AptosConfig, name: String): Option<Acc
   return when (res) {
     is Option.None -> Option.None
     is Option.Some -> {
-      Option.Some(AccountAddress.fromString(res.value[0].value[0].value))
+      val accountAddressString = res.value.getOrNull(0)?.value?.getOrNull(0)?.value
+      if (accountAddressString != null) {
+        Option.Some(AccountAddress.fromString(accountAddressString))
+      } else {
+        throw AccountAddressParseException()
+      }
     }
   }
 }
