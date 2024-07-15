@@ -1,16 +1,18 @@
 import java.net.URL
-import java.util.*
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import xyz.mcxross.graphql.plugin.gradle.graphql
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
+import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-  kotlin("multiplatform")
-  id("com.android.library")
-  kotlin("plugin.serialization")
-  id("xyz.mcxross.graphql")
-  id("maven-publish")
-  id("org.jetbrains.dokka")
+  alias(libs.plugins.kotlin.multiplatform)
+  alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.graphql.multiplatform)
+  alias(libs.plugins.dokka)
+  alias(libs.plugins.maven.publish)
 }
 
 group = "xyz.mcxross.kaptos"
@@ -107,7 +109,7 @@ graphql {
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 android {
-  namespace = "mcxross.kaptos"
+  namespace = "xy.mcxross.kaptos"
   defaultConfig {
     minSdk = 24
     compileSdk = 33
@@ -119,22 +121,6 @@ android {
       res.srcDirs("src/androidMain/res", "src/commonMain/resources")
     }
   }
-}
-
-ext["sonatypeUser"] = null
-
-ext["sonatypePass"] = null
-
-val secretPropsFile = project.rootProject.file("local.properties")
-
-if (secretPropsFile.exists()) {
-  secretPropsFile
-    .reader()
-    .use { Properties().apply { load(it) } }
-    .onEach { (name, value) -> ext[name.toString()] = value }
-} else {
-  ext["sonatypeUser"] = System.getenv("OSSRH_USERNAME")
-  ext["sonatypePass"] = System.getenv("OSSRH_PASSWORD")
 }
 
 tasks.getByName<DokkaTask>("dokkaHtml") {
@@ -158,61 +144,45 @@ tasks.withType<DokkaTask>().configureEach {
   notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/2231")
 }
 
-val javadocJar =
-  tasks.register<Jar>("javadocJar") {
-    archiveClassifier.set("javadoc")
-    dependsOn("dokkaHtml")
-    from(layout.buildDirectory.dir("dokka").get().asFile)
-  }
+mavenPublishing {
+  coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
-publishing {
-  if (hasProperty("sonatypeUser") && hasProperty("sonatypePass")) {
-    repositories {
-      maven {
-        name = "sonatype"
-        val isSnapshot = version.toString().endsWith("-SNAPSHOT")
-        setUrl(
-          if (isSnapshot) {
-            "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-          } else {
-            "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-          }
-        )
-        credentials {
-          username = "" // property("sonatypeUser") as String
-          password = "" // property("sonatypePass") as String
-        }
+  configure(
+    KotlinMultiplatform(
+      javadocJar = JavadocJar.Dokka("dokkaHtml"),
+      sourcesJar = true,
+      androidVariantsToPublish = listOf("debug", "release"),
+    )
+  )
+
+  pom {
+    name.set("Kaptos")
+    description.set("Multiplatform SDK for integrating with the Aptos blockchain")
+    inceptionYear.set("2023")
+    url.set("https://github.com/mcxross")
+    licenses {
+      license {
+        name.set("The Apache License, Version 2.0")
+        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+        distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
       }
+    }
+    developers {
+      developer {
+        id.set("mcxross")
+        name.set("Mcxross")
+        email.set("oss@mcxross.xyz")
+        url.set("https://mcxross.xyz/")
+      }
+    }
+    scm {
+      url.set("https://github.com/mcxross/kaptos")
+      connection.set("scm:git:ssh://github.com/mcxross/kaptos.git")
+      developerConnection.set("scm:git:ssh://github.com/mcxross/kaptos.git")
     }
   }
 
-  publications.withType<MavenPublication> {
-    artifact(javadocJar.get())
-    pom {
-      name.set("Kaptos")
-      description.set(
-        "Kaptos is a Kotlin Multiplatform library for interacting with the Aptos blockchain."
-      )
-      url.set("https://github.com/mcxross")
+  publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 
-      licenses {
-        license {
-          name.set("Apache License, Version 2.0")
-          url.set("https://opensource.org/licenses/APACHE-2.0")
-        }
-      }
-      developers {
-        developer {
-          id.set("mcxross")
-          name.set("Mcxross")
-          email.set("oss@mcxross.xyz")
-        }
-      }
-      scm {
-        connection.set("scm:git:git://github.com/mcxross/kaptos.git")
-        developerConnection.set("scm:git:ssh://github.com/mcxross/kaptos.git")
-        url.set("https://github.com/mcxross/kaptos")
-      }
-    }
-  }
+  signAllPublications()
 }
