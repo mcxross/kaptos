@@ -42,9 +42,7 @@ class Secp256k1PublicKey(hexInput: HexInput) : PublicKey() {
     TODO("Not yet implemented")
   }
 
-  override fun toByteArray(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toByteArray(): ByteArray = hex.toByteArray()
 
   override fun toBcs(): ByteArray {
     TODO("Not yet implemented")
@@ -72,12 +70,15 @@ class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
     TODO("Not yet implemented")
   }
 
-  override fun publicKey(): PublicKey {
-    TODO("Not yet implemented")
+  override fun publicKey(): Secp256k1PublicKey {
+    val pk = generateSecp256k1PublicKey(hex.toByteArray())
+    return Secp256k1PublicKey(HexInput.fromByteArray(pk))
   }
 
-  override fun toByteArray(): ByteArray {
-    TODO("Not yet implemented")
+  override fun toByteArray(): ByteArray = hex.toByteArray()
+
+  override fun toString(): String {
+    return hex.toString()
   }
 
   companion object {

@@ -15,13 +15,8 @@
  */
 package xyz.mcxross.kaptos.account
 
-import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
-import xyz.mcxross.kaptos.core.crypto.Secp256k1PrivateKey
-import xyz.mcxross.kaptos.core.crypto.Signature
-import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.HexInput
-import xyz.mcxross.kaptos.model.SigningScheme
+import xyz.mcxross.kaptos.core.crypto.*
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
 /**
@@ -31,7 +26,7 @@ import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
  *
  * Note: Generating a signer instance does not create the account on-chain.
  */
-class SingleAccount(val privateKey: Secp256k1PrivateKey, val address: AccountAddressInput? = null) :
+class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressInput? = null) :
   Account() {
 
   override val publicKey: AnyPublicKey = AnyPublicKey(privateKey.publicKey())
@@ -53,5 +48,27 @@ class SingleAccount(val privateKey: Secp256k1PrivateKey, val address: AccountAdd
 
   override fun sign(message: HexInput): Signature {
     TODO("Not yet implemented")
+  }
+
+  companion object {
+
+    /**
+     * Derives an account from a randomly generated private key. Default generation is using an
+     * Ed25519 key
+     *
+     * @returns Account with the given signature scheme
+     */
+    fun generate(scheme: SigningSchemeInput): SingleKeyAccount {
+      val privateKey: PrivateKey =
+        when (scheme) {
+          SigningSchemeInput.Ed25519 -> {
+            Ed25519PrivateKey.generate()
+          }
+          SigningSchemeInput.Secp256k1Ecdsa -> {
+            Secp256k1PrivateKey.generate()
+          }
+        }
+      return SingleKeyAccount(privateKey)
+    }
   }
 }

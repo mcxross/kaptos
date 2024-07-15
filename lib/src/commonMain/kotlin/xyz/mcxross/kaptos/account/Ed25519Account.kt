@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.account
 
+import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
@@ -80,6 +81,7 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
   companion object {
     fun generate(): Ed25519Account {
       val privateKey = Ed25519PrivateKey.generate()
+      println("Ed25519Account ${Hex.fromHexInput(HexInput.fromByteArray(privateKey.toByteArray()))}")
       return Ed25519Account(privateKey)
     }
   }
