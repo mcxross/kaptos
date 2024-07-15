@@ -244,7 +244,7 @@ val bobAccountFaucet = aptos.fundAccount(bobAccount.accountAddress, 1000000000)
 
 val txn = aptos.buildTransaction.simple(
     sender = aliceAccount.accountAddress,
-    data = inputEntryFunctionData {
+    data = entryFunctionData {
         function = "0x1::coin::transfer"
         typeArguments = typeArguments {
             +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
