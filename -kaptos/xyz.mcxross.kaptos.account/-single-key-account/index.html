@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>SingleAccount</title>
+    <title>SingleKeyAccount</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
     <script>var pathToRoot = "../../../";</script>
     <script>document.documentElement.classList.replace("no-js","js");</script>
@@ -61,28 +61,47 @@
                 <div class="sidebar--inner" id="sideMenu"></div>
             </div>
             <div id="main">
-<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.account/SingleAccount///PointingToDeclaration//483702768">
-  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.account</a><span class="delimiter">/</span><span class="current">SingleAccount</span></div>
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.account/SingleKeyAccount///PointingToDeclaration//483702768">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.account</a><span class="delimiter">/</span><span class="current">SingleKeyAccount</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>Single</span><wbr></wbr><span><span>Account</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SingleAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-secp256k1-private-key/index.html">Secp256k1PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-account/index.html">Account</a></div><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1.</p><p class="paragraph">Note: Generating a signer instance does not create the account on-chain.</p></div></div>
+    <h1 class="cover"><span>Single</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Account</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SingleKeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-account/index.html">Account</a></div><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1.</p><p class="paragraph">Note: Generating a signer instance does not create the account on-chain.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
         <h2 class="">Constructors</h2>
-        <div class="table"><a data-name="-942063654%2FConstructors%2F483702768" anchor-label="SingleAccount" id="-942063654%2FConstructors%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+        <div class="table"><a data-name="-23479978%2FConstructors%2F483702768" anchor-label="SingleKeyAccount" id="-23479978%2FConstructors%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="-single-account.html"><span>Single</span><wbr></wbr><span><span>Account</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-942063654%2FConstructors%2F483702768"></span>
+                  <div><a href="-single-key-account.html"><span>Single</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-23479978%2FConstructors%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-secp256k1-private-key/index.html">Secp256k1PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter ">address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter ">address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="302552719%2FClasslikes%2F483702768" anchor-label="Companion" id="302552719%2FClasslikes%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="302552719%2FClasslikes%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -91,12 +110,12 @@
       </div>
       <div data-togglable="PROPERTY">
         <h2 class="">Properties</h2>
-        <div class="table"><a data-name="-2146842914%2FProperties%2F483702768" anchor-label="accountAddress" id="-2146842914%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+        <div class="table"><a data-name="1049713131%2FProperties%2F483702768" anchor-label="accountAddress" id="1049713131%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="account-address.html"><span>account</span><wbr></wbr><span><span>Address</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2146842914%2FProperties%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1049713131%2FProperties%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -106,12 +125,12 @@
               </div>
             </div>
           </div>
-<a data-name="1269602561%2FProperties%2F483702768" anchor-label="address" id="1269602561%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+<a data-name="1869392532%2FProperties%2F483702768" anchor-label="address" id="1869392532%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="address.html"><span><span>address</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1269602561%2FProperties%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1869392532%2FProperties%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -121,27 +140,27 @@
               </div>
             </div>
           </div>
-<a data-name="268776361%2FProperties%2F483702768" anchor-label="privateKey" id="268776361%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+<a data-name="1547851062%2FProperties%2F483702768" anchor-label="privateKey" id="1547851062%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="private-key.html"><span>private</span><wbr></wbr><span><span>Key</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268776361%2FProperties%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1547851062%2FProperties%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="private-key.html">privateKey</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-secp256k1-private-key/index.html">Secp256k1PrivateKey</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="private-key.html">privateKey</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-698464769%2FProperties%2F483702768" anchor-label="publicKey" id="-698464769%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+<a data-name="174079698%2FProperties%2F483702768" anchor-label="publicKey" id="174079698%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="public-key.html"><span>public</span><wbr></wbr><span><span>Key</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-698464769%2FProperties%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="174079698%2FProperties%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -151,12 +170,12 @@
               </div>
             </div>
           </div>
-<a data-name="275562667%2FProperties%2F483702768" anchor-label="signingScheme" id="275562667%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+<a data-name="240130046%2FProperties%2F483702768" anchor-label="signingScheme" id="240130046%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="signing-scheme.html"><span>signing</span><wbr></wbr><span><span>Scheme</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="275562667%2FProperties%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="240130046%2FProperties%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -170,12 +189,12 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="">Functions</h2>
-        <div class="table"><a data-name="490295546%2FFunctions%2F483702768" anchor-label="sign" id="490295546%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+        <div class="table"><a data-name="-1477402803%2FFunctions%2F483702768" anchor-label="sign" id="-1477402803%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="sign.html"><span><span>sign</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="490295546%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1477402803%2FFunctions%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
@@ -185,12 +204,12 @@
               </div>
             </div>
           </div>
-<a data-name="-403559139%2FFunctions%2F483702768" anchor-label="signWithAuthenticator" id="-403559139%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+<a data-name="1884090154%2FFunctions%2F483702768" anchor-label="signWithAuthenticator" id="1884090154%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
           <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="sign-with-authenticator.html"><span>sign</span><wbr></wbr><span>With</span><wbr></wbr><span><span>Authenticator</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-403559139%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1884090154%2FFunctions%2F483702768"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
