@@ -30,7 +30,7 @@ class SigningMessageTest {
         aptos.buildTransaction.simple(
           sender = alice.accountAddress,
           data =
-            inputEntryFunctionData {
+            entryFunctionData {
               function = "0x1::coin::transfer"
               typeArguments = typeArguments {
                 +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())

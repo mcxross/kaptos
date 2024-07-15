@@ -94,7 +94,7 @@ class InputEntryFunctionDataBuilder {
   }
 }
 
-fun inputEntryFunctionData(
+fun entryFunctionData(
   block: InputEntryFunctionDataBuilder.() -> Unit
 ): InputEntryFunctionData {
   return InputEntryFunctionDataBuilder().apply(block).build()
