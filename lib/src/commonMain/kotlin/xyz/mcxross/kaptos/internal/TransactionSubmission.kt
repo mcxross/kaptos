@@ -94,7 +94,7 @@ internal suspend fun submitTransaction(
       )
     )
 
-  if (response.first.status != Error.ABORTED.asHttpStatusCode()) {
+  if (response.first.status == Error.ABORTED.asHttpStatusCode()) {
     throw AbortedException()
   }
 
