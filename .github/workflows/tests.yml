@@ -15,11 +15,29 @@ jobs:
       - name: Update brew
         run: brew update
 
-      - name: Install aptos
-        run: brew install aptos
+      - name: Install dependencies
+        run: |
+          brew install aptos
+          brew install curl
 
       - name: Start Aptos Local Testnet
-        run: aptos node run-local-testnet & echo $! > aptos_pid.txt
+        run: |
+          aptos node run-localnet & echo $! > aptos_pid.txt
+          sleep 30  # Initial wait for services to start
+          # Poll the readiness endpoint until it's available
+          until curl -sSf http://127.0.0.1:8080/; do
+            echo "Waiting for Aptos Node API to be ready..."
+            sleep 5
+          done
+          until curl -sSf http://127.0.0.1:8081/; do
+            echo "Waiting for Faucet to be ready..."
+            sleep 5
+          done
+          until curl -sSf http://127.0.0.1:50051/; do
+            echo "Waiting for Transaction stream to be ready..."
+            sleep 5
+          done
+        shell: bash
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
