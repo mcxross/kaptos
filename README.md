@@ -35,18 +35,6 @@ multiple platforms.
 <details>
 <summary><h2>Installation</h2></summary>
 
-Kaptos is available on [Maven Central][maven-central] as a Kotlin Multiplatform library. You can either add it to you
-multiplatform project or add it to your platform-specific project.
-
-> [!WARNING] 
-> Kaptos is currently in development and is not yet available on Maven Central. You can use the latest snapshot version by adding the snapshot repository to your project as follows:
-
-```kotlin
-repositories {
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-}
-```
-
 ### Multiplatform Project
 
 Add the following to your common source set:
@@ -171,6 +159,15 @@ dependencies {
 }
 ```
 
+> [!NOTE]
+> Snapshots are available via the Sonatype snapshots repository. To use snapshots, add the following to your project:
+
+```kotlin
+repositories {
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+}
+```
+
 </details>
 
 ## Usage
@@ -268,7 +265,7 @@ val txn = aptos.buildTransaction.simple(
 To run the SDK tests, simply run from the root of this repository:
 
 > [!NOTE] 
-> for a better experience, make sure there is an aptos local node process up and running (can check if there is a
+> For a better experience, make sure there is an aptos local node process up and running (can check if there is a
 > process running on port 8080).
 
 ```shell
