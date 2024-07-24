@@ -20,6 +20,7 @@ import kotlin.test.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.Aptos
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.queryIndexer
@@ -290,7 +291,7 @@ class GeneralTest {
     runBlocking {
       val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
 
-      assertFailsWith(AptosException::class) {
+      assertFailsWith(AptosApiError::class) {
         aptos.view<List<MoveValue.MoveUint64Type>>(
           InputViewFunctionData(
             function = "0x1::account::get_sequence_number",
