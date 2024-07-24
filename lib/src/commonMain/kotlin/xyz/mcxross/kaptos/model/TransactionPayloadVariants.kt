@@ -15,6 +15,10 @@
  */
 package xyz.mcxross.kaptos.model
 
+import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.serialize.TransactionPayloadVariantsSerializer
+
+@Serializable(with = TransactionPayloadVariantsSerializer::class)
 enum class TransactionPayloadVariants(val value: Int) {
   Script(0),
   EntryFunction(2),

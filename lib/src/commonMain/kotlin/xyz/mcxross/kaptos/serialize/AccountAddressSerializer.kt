@@ -32,6 +32,6 @@ object AccountAddressSerializer : KSerializer<AccountAddress> {
   }
 
   override fun deserialize(decoder: Decoder): AccountAddress {
-    return AccountAddress(ByteArray(0))
+    return AccountAddress(ByteArray(32) { decoder.decodeByte() })
   }
 }
