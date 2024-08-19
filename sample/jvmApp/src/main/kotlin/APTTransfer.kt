@@ -67,7 +67,7 @@ fun main() = runBlocking {
             +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
           }
           functionArguments = functionArguments {
-            +MoveString(bob.accountAddress.toString())
+            +bob.accountAddress
             +U64(SEND_AMOUNT_UNITS.toULong())
           }
         },
