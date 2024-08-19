@@ -16,7 +16,11 @@
 package xyz.mcxross.kaptos.extension
 
 import xyz.mcxross.kaptos.model.MoveFunctionId
+import xyz.mcxross.kaptos.model.MoveStructId
 import xyz.mcxross.kaptos.util.getFunctionParts
 
 /** An extension function to convert a [MoveFunctionId] to its parts */
 fun MoveFunctionId.parts(): Triple<String, String, String> = getFunctionParts(this)
+
+fun MoveStructId.structParts(): Triple<String, String, String> =
+  this.split("::").let { Triple(it[0], it[1], it[2]) }

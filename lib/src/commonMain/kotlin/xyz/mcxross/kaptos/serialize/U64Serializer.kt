@@ -16,25 +16,23 @@
 package xyz.mcxross.kaptos.serialize
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import xyz.mcxross.kaptos.model.TransactionPayloadVariants
+import xyz.mcxross.bcs.Bcs
+import xyz.mcxross.kaptos.model.U64
 
-object TransactionPayloadVariantsSerializer : KSerializer<TransactionPayloadVariants> {
-  override val descriptor: SerialDescriptor =
-    PrimitiveSerialDescriptor("TransactionPayloadVariants", PrimitiveKind.INT)
+object U64Serializer : KSerializer<U64> {
+  override val descriptor = PrimitiveSerialDescriptor("U64", PrimitiveKind.LONG)
 
-  override fun serialize(encoder: Encoder, value: TransactionPayloadVariants) {
-    encoder.encodeEnum(descriptor, value.value)
+  override fun serialize(encoder: Encoder, value: U64) {
+    val length = Bcs.encodeToByteArray(value.value).size
+    encoder.beginCollection(descriptor, length)
+    encoder.encodeLong(value.value.toLong())
   }
 
-  override fun deserialize(decoder: Decoder): TransactionPayloadVariants {
-    val value = decoder.decodeEnum(descriptor)
-    return TransactionPayloadVariants.entries.firstOrNull { it.value == value }
-      ?: throw SerializationException("Unknown value: $value")
+  override fun deserialize(decoder: Decoder): U64 {
+    return U64(decoder.decodeLong().toULong())
   }
 }

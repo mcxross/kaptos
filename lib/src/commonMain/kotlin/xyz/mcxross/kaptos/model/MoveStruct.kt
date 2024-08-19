@@ -16,10 +16,20 @@
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.Hex
+import xyz.mcxross.kaptos.serialize.MoveStringSerializer
+import xyz.mcxross.kaptos.serialize.MoveVectorSerializer
 
-@Serializable
+@Serializable(with = MoveVectorSerializer::class)
 data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : TransactionArgument() {
+
+  fun serialize(): ByteArray {
+    if (values.isEmpty()) {
+      return byteArrayOf(0)
+    }
+    return Bcs.encodeToByteArray(values)
+  }
 
   companion object {
     /**
@@ -29,10 +39,15 @@ data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : Transact
      */
     fun u8(value: HexInput): MoveVector<U8> =
       MoveVector(Hex.fromHexInput(value).toByteArray().map { U8(it) })
+
+    fun u8(value: ByteArray): MoveVector<U8> = MoveVector(value.map { U8(it) })
+
+    fun string(value: List<String>): MoveVector<MoveString> =
+      MoveVector(value.map { MoveString(it) })
   }
 }
 
-@Serializable
+@Serializable(with = MoveStringSerializer::class)
 data class MoveString(val value: String) : TransactionArgument() {
   override fun toString(): String {
     return value

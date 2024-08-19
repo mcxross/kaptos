@@ -36,6 +36,8 @@ typealias NumberOfDelegators = GetNumberOfDelegators.Result
 
 typealias MoveModuleId = String
 
+typealias MoveStructId = String
+
 typealias ProcessorStatus = GetProcessorStatus.Result
 
 typealias MoveFunctionId = MoveModuleId
