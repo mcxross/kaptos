@@ -226,32 +226,39 @@ val address = AccountAddress.fromString()
 
 ### Submit transaction
 
-Aptos provides Domain Specific Language (DSL) for building transactions. The following example demonstrates how to build
+Kaptos provides Domain Specific Language (DSL) for building transactions. The following example demonstrates how to build
 a simple transaction to transfer coins from one account to another.
 
 ```kotlin
-val aliceAccount = Account.generate()
-val bobAccount = Account.generate()
+val alice = Account.generate()
+val bob = Account.generate()
 
 // Creating account credentials does not automatically create an account on-chain.
 // You must explicitly create an account on-chain before you can interact with it.
 // To do this in testnet, you can use the faucet.
-val aliceAccountFaucet = aptos.fundAccount(aliceAccount.accountAddress, 1000000000)
-val bobAccountFaucet = aptos.fundAccount(bobAccount.accountAddress, 1000000000)
+val aliceFaucet = aptos.fundAccount(alice.accountAddress, 1000000000)
+val bobFaucet = aptos.fundAccount(bob.accountAddress, 1000000000)
 
 val txn = aptos.buildTransaction.simple(
-    sender = aliceAccount.accountAddress,
+    sender = alice.accountAddress,
     data = entryFunctionData {
         function = "0x1::coin::transfer"
         typeArguments = typeArguments {
             +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
         }
         functionArguments = functionArguments {
-            +MoveString(bobAccount.accountAddress)
+            +bob.accountAddress
             +U64(SEND_AMOUNT)
         }
     },
 )
+```
+
+It also provides pre-built transaction builders for common transactions. For example, to transfer coins from one account
+to another, you can use the `transferCoinTransaction` builder.
+
+```kotlin
+val txn = aptos.transferCoinTransaction(alice.accountAddress, bob.accountAddress, 1_000_000UL)
 ```
 
 ## Documentation and examples
