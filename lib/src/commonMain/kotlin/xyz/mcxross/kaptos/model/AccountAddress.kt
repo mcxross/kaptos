@@ -19,6 +19,7 @@ package xyz.mcxross.kaptos.model
 import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.exception.ParsingException
 import xyz.mcxross.kaptos.serialize.AccountAddressSerializer
+import xyz.mcxross.kaptos.serialize.HexInputSerializer
 
 /**
  * This enum is used to explain why an address was invalid.
@@ -274,8 +275,8 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
   }
 }
 
-@Serializable
-data class HexInput(override val value: String) : AccountAddressInput {
+@Serializable(with = HexInputSerializer::class)
+data class HexInput(override val value: String) : TransactionArgument(), AccountAddressInput {
   override fun toString(): String {
     return value
   }

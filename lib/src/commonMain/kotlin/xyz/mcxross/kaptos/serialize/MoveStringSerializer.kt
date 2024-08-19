@@ -21,17 +21,21 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import xyz.mcxross.kaptos.model.MoveValue
+import xyz.mcxross.bcs.Bcs
+import xyz.mcxross.kaptos.model.MoveString
 
-object MoveStringSerializer : KSerializer<MoveValue.String> {
+object MoveStringSerializer : KSerializer<MoveString> {
+
   override val descriptor: SerialDescriptor =
-    PrimitiveSerialDescriptor("MoveValue.Str", PrimitiveKind.STRING)
+    PrimitiveSerialDescriptor("MoveString", PrimitiveKind.STRING)
 
-  override fun serialize(encoder: Encoder, value: MoveValue.String) {
-    encoder.encodeString(value.toString())
+  override fun serialize(encoder: Encoder, value: MoveString) {
+    val length = Bcs.encodeToByteArray(value.value).size
+    encoder.beginCollection(descriptor, length)
+    encoder.encodeString(value.value)
   }
 
-  override fun deserialize(decoder: Decoder): MoveValue.String {
-    return MoveValue.String(decoder.decodeString())
+  override fun deserialize(decoder: Decoder): MoveString {
+    return decoder.decodeSerializableValue(MoveString.serializer())
   }
 }

@@ -34,7 +34,7 @@ internal suspend fun transferCoinTransaction(
           function = "0x1::coin::transfer"
           typeArguments = typeArguments { +TypeTagStruct(type = coinType.toStructTag()) }
           functionArguments = functionArguments {
-            +MoveString(to.toString())
+            +HexInput(to.value)
             +U64(amount)
           }
         },
