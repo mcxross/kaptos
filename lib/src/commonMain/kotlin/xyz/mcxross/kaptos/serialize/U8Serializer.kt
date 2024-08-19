@@ -16,25 +16,20 @@
 package xyz.mcxross.kaptos.serialize
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import xyz.mcxross.kaptos.model.TransactionPayloadVariants
+import xyz.mcxross.kaptos.model.U8
 
-object TransactionPayloadVariantsSerializer : KSerializer<TransactionPayloadVariants> {
-  override val descriptor: SerialDescriptor =
-    PrimitiveSerialDescriptor("TransactionPayloadVariants", PrimitiveKind.INT)
+object U8Serializer : KSerializer<U8> {
+  override val descriptor = PrimitiveSerialDescriptor("U8", PrimitiveKind.BYTE)
 
-  override fun serialize(encoder: Encoder, value: TransactionPayloadVariants) {
-    encoder.encodeEnum(descriptor, value.value)
+  override fun serialize(encoder: Encoder, value: U8) {
+    encoder.encodeByte(value.value)
   }
 
-  override fun deserialize(decoder: Decoder): TransactionPayloadVariants {
-    val value = decoder.decodeEnum(descriptor)
-    return TransactionPayloadVariants.entries.firstOrNull { it.value == value }
-      ?: throw SerializationException("Unknown value: $value")
+  override fun deserialize(decoder: Decoder): U8 {
+    return U8(decoder.decodeByte())
   }
 }

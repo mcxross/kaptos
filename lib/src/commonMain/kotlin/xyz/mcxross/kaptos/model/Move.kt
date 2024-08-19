@@ -73,7 +73,7 @@ sealed class MoveValue {
 
   @Serializable(with = MoveBoolSerializer::class) data class Bool(val value: Boolean) : MoveValue()
 
-  @Serializable(with = MoveStringSerializer::class)
+  @Serializable(with = MoveValueStringSerializer::class)
   data class String(val value: kotlin.String) : MoveValue()
 
   @Serializable(with = MoveUint8TypeSerializer::class)

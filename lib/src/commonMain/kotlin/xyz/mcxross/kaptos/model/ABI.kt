@@ -19,7 +19,11 @@ package xyz.mcxross.kaptos.model
 open class FunctionABI(
   val typeParameters: List<MoveFunctionGenericTypeParam>,
   val parameters: List<TypeTag>,
-)
+) {
+  override fun toString(): String {
+    return "FunctionABI(typeParameters=$typeParameters, parameters=$parameters)"
+  }
+}
 
 /**
  * Interface of an Entry function's ABI.
@@ -31,7 +35,11 @@ class EntryFunctionABI(
   typeParameters: List<MoveFunctionGenericTypeParam>,
   parameters: List<TypeTag>,
   val signers: Int? = null,
-) : FunctionABI(typeParameters, parameters)
+) : FunctionABI(typeParameters, parameters) {
+  override fun toString(): String {
+    return "EntryFunctionABI(typeParameters=$typeParameters, parameters=$parameters, signers=$signers)"
+  }
+}
 
 /**
  * Interface of an View function's ABI.

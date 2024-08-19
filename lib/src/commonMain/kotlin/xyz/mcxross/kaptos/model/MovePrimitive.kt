@@ -16,16 +16,20 @@
 package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.serialize.BoolSerializer
+import xyz.mcxross.kaptos.serialize.U64Serializer
+import xyz.mcxross.kaptos.serialize.U8Serializer
 
-@Serializable data class Bool(val value: Boolean) : TransactionArgument()
+@Serializable(with = BoolSerializer::class)
+data class Bool(val value: Boolean) : TransactionArgument()
 
-@Serializable data class U8(val value: Byte) : TransactionArgument()
+@Serializable(with = U8Serializer::class) data class U8(val value: Byte) : TransactionArgument()
 
 @Serializable data class U16(val value: UShort) : TransactionArgument()
 
 @Serializable data class U32(val value: UInt) : TransactionArgument()
 
-@Serializable data class U64(val value: ULong) : TransactionArgument()
+@Serializable(with = U64Serializer::class) data class U64(val value: ULong) : TransactionArgument()
 
 @Serializable data class U128(val value: String) : TransactionArgument()
 

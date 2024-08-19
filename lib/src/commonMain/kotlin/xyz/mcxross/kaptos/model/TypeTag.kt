@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.model
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import xyz.mcxross.kaptos.extension.parts
-import xyz.mcxross.kaptos.serialize.TypeTagSerializer
+import xyz.mcxross.kaptos.serialize.*
 
 @Serializable(with = TypeTagSerializer::class)
 sealed class TypeTag {
@@ -217,6 +217,16 @@ class TypeTagStruct(
   override val enumIndex: TypeTagVariants = TypeTagVariants.Struct,
   val type: StructTag,
 ) : TypeTag() {
+
+  private fun isTypeTag(address: AccountAddress, moduleName: String, structName: String): Boolean {
+    return this.type.address == address &&
+      this.type.moduleName == moduleName &&
+      this.type.name == structName
+  }
+
+  fun isString(): Boolean {
+    return isTypeTag(AccountAddress.ONE, "string", "String")
+  }
 
   // We add this just to comply, but it's not used
   override val value: String
