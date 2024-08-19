@@ -21,10 +21,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.serializer
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.util.isHex
 
 object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
   override val descriptor: SerialDescriptor =
@@ -33,36 +30,33 @@ object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
   override fun serialize(encoder: Encoder, value: EntryFunctionArgument) {
     when (value) {
       is MoveString -> {
-        if (isHex(value.toString())) {
-          encoder.beginCollection(descriptor, hexStringToByteArray(value.toString()).size)
-          hexStringToByteArray(value.toString()).map { encoder.encodeByte(it) }
-        } else {
-          val length = Bcs.encodeToByteArray(value).size
-          encoder.beginCollection(descriptor, length)
-          encoder.encodeString(value.value)
-        }
+        encoder.encodeSerializableValue(MoveStringSerializer, value)
+      }
+      is Bool -> {
+        encoder.encodeSerializableValue(BoolSerializer, value)
+      }
+      is U8 -> {
+        encoder.encodeSerializableValue(U8Serializer, value)
       }
       is U64 -> {
-        val length = Bcs.encodeToByteArray(value).size
-        encoder.beginCollection(descriptor, length)
-        encoder.encodeSerializableValue(U64.serializer(), value)
+        encoder.encodeSerializableValue(U64Serializer, value)
+      }
+      is AccountAddress -> {
+        encoder.encodeSerializableValue(HexInputSerializer, HexInput(value.value))
+      }
+      is HexInput -> {
+        encoder.encodeSerializableValue(HexInputSerializer, value)
       }
       is MoveVector<*> -> {
-        encoder.encodeSerializableValue(MoveVectorSerializer, value)
+        encoder.encodeSerializableValue(
+          MoveVectorSerializer(EntryFunctionArgumentSerializer),
+          value as MoveVector<EntryFunctionArgument>,
+        )
       }
-      else -> throw IllegalArgumentException("Unimplemented transaction argument type")
-    }
-  }
-
-  fun hexStringToByteArray(hexString: String): ByteArray {
-    var cleanedHexString = hexString.removePrefix("0x").replace(Regex("[^0-9A-Fa-f]"), "")
-    if (cleanedHexString.length % 2 != 0) {
-      cleanedHexString = "0$cleanedHexString"
-    }
-
-    return ByteArray(cleanedHexString.length / 2) { i ->
-      val index = i * 2
-      cleanedHexString.substring(index, index + 2).toInt(16).toByte()
+      else ->
+        throw IllegalArgumentException(
+          "Unimplemented transaction argument type ${value::class.simpleName}"
+        )
     }
   }
 
