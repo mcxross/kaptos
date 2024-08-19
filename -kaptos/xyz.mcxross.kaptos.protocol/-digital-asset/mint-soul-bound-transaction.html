@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>mintSoulBoundTransaction</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Kaptos
+                    </a>
+            </div>
+            <div class="library-version">
+0.1.0-beta1            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kaptos:dokkaHtml/commonMain">common</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="member" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.protocol/DigitalAsset/mintSoulBoundTransaction/#xyz.mcxross.kaptos.account.Account#kotlin.String#kotlin.String#kotlin.String#kotlin.String#xyz.mcxross.kaptos.model.AccountAddressInput#kotlin.collections.List[kotlin.String]#kotlin.collections.List[kotlin.String]#kotlin.collections.List[kotlin.String]#xyz.mcxross.kaptos.model.InputGenerateTransactionOptions/PointingToDeclaration//483702768">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.protocol</a><span class="delimiter">/</span><a href="index.html">DigitalAsset</a><span class="delimiter">/</span><span class="current">mintSoulBoundTransaction</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>mint</span><wbr></wbr><span>Soul</span><wbr></wbr><span>Bound</span><wbr></wbr><span><span>Transaction</span></span></h1>
+  </div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="mint-soul-bound-transaction.html"><span class="token function">mintSoulBoundTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">account<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.account/-account/index.html">Account</a><span class="token punctuation">, </span></span><span class="parameter ">collection<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">recipient<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">propertyKeys<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">propertyTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">propertyValues<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-input-generate-transaction-options/index.html">InputGenerateTransactionOptions</a><span class="token operator"> = </span>InputGenerateTransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-simple-transaction/index.html">SimpleTransaction</a></div><p class="paragraph">Mint a soul bound digital asset.</p><span class="kdoc-tag"><h4 class="">Return</h4><p class="paragraph">A <a href="../../xyz.mcxross.kaptos.model/-simple-transaction/index.html">SimpleTransaction</a> that, when submitted, will mint the specified soul bound digital asset.</p></span><h4 class="">Parameters</h4><div class="table"><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>account</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The account that will mint the digital asset.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>collection</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The collection name.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>name</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The name of the digital asset.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>description</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The description of the digital asset.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>uri</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The URI of the digital asset.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>recipient</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The account address of the recipient.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>property</span><wbr></wbr><span><span>Keys</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The keys of the properties.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>property</span><wbr></wbr><span><span>Types</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The types of the properties.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>property</span><wbr></wbr><span><span>Values</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The values of the properties.</p></div></div></div></div><div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>options</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Optional parameters for generating the transaction.</p></div></div></div></div></div></div></div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

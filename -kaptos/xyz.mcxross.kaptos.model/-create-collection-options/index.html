@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>CreateCollectionOptions</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            Kaptos
+                    </a>
+            </div>
+            <div class="library-version">
+0.1.0-beta1            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kaptos:dokkaHtml/commonMain">common</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.model/CreateCollectionOptions///PointingToDeclaration//483702768">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.model</a><span class="delimiter">/</span><span class="current">CreateCollectionOptions</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Create</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Options</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">CreateCollectionOptions</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>maxSupply<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span>Long.MAX_VALUE<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableRoyalty<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableURI<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableTokenDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableTokenName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableTokenProperties<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutableTokenURI<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tokensBurnableByCreator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>tokensFreezableByCreator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>royaltyNumerator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">0</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>royaltyDenominator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Options for creating a new collection in an account.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-618588139%2FConstructors%2F483702768" anchor-label="CreateCollectionOptions" id="-618588139%2FConstructors%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-create-collection-options.html"><span>Create</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-618588139%2FConstructors%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">maxSupply<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span>Long.MAX_VALUE<span class="token punctuation">, </span></span><span class="parameter ">mutableDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableRoyalty<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableURI<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableTokenDescription<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableTokenName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableTokenProperties<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">mutableTokenURI<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">tokensBurnableByCreator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">tokensFreezableByCreator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter ">royaltyNumerator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">0</span><span class="token punctuation">, </span></span><span class="parameter ">royaltyDenominator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">1</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-2052586681%2FProperties%2F483702768" anchor-label="maxSupply" id="-2052586681%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-supply.html"><span>max</span><wbr></wbr><span><span>Supply</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2052586681%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="max-supply.html">maxSupply</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div><div class="brief "><p class="paragraph">The maximum supply of tokens in the collection. Defaults to <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/-m-a-x_-v-a-l-u-e.html">Long.MAX_VALUE</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-370336630%2FProperties%2F483702768" anchor-label="mutableDescription" id="-370336630%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-description.html"><span>mutable</span><wbr></wbr><span><span>Description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-370336630%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-description.html">mutableDescription</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the collection description can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1814139078%2FProperties%2F483702768" anchor-label="mutableRoyalty" id="-1814139078%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-royalty.html"><span>mutable</span><wbr></wbr><span><span>Royalty</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1814139078%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-royalty.html">mutableRoyalty</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the royalty information can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1439749425%2FProperties%2F483702768" anchor-label="mutableTokenDescription" id="1439749425%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-token-description.html"><span>mutable</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>Description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1439749425%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-token-description.html">mutableTokenDescription</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the token description can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-155232350%2FProperties%2F483702768" anchor-label="mutableTokenName" id="-155232350%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-token-name.html"><span>mutable</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-155232350%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-token-name.html">mutableTokenName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the token name can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-373897734%2FProperties%2F483702768" anchor-label="mutableTokenProperties" id="-373897734%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-token-properties.html"><span>mutable</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>Properties</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-373897734%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-token-properties.html">mutableTokenProperties</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the token properties can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1061193153%2FProperties%2F483702768" anchor-label="mutableTokenURI" id="1061193153%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-token-u-r-i.html"><span>mutable</span><wbr></wbr><span>Token</span><wbr></wbr><span><span>URI</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1061193153%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-token-u-r-i.html">mutableTokenURI</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the token URI can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-868076006%2FProperties%2F483702768" anchor-label="mutableURI" id="-868076006%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable-u-r-i.html"><span>mutable</span><wbr></wbr><span><span>URI</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-868076006%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable-u-r-i.html">mutableURI</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if the collection URI can be modified. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1101594874%2FProperties%2F483702768" anchor-label="royaltyDenominator" id="-1101594874%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="royalty-denominator.html"><span>royalty</span><wbr></wbr><span><span>Denominator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1101594874%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="royalty-denominator.html">royaltyDenominator</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">1</span></div><div class="brief "><p class="paragraph">The denominator for calculating royalties. Defaults to 1.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="438843395%2FProperties%2F483702768" anchor-label="royaltyNumerator" id="438843395%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="royalty-numerator.html"><span>royalty</span><wbr></wbr><span><span>Numerator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="438843395%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="royalty-numerator.html">royaltyNumerator</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span><span class="token constant">0</span></div><div class="brief "><p class="paragraph">The numerator for calculating royalties. Defaults to 0.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-832500440%2FProperties%2F483702768" anchor-label="tokensBurnableByCreator" id="-832500440%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tokens-burnable-by-creator.html"><span>tokens</span><wbr></wbr><span>Burnable</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Creator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-832500440%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tokens-burnable-by-creator.html">tokensBurnableByCreator</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if tokens can be burned by the creator. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-821523879%2FProperties%2F483702768" anchor-label="tokensFreezableByCreator" id="-821523879%2FProperties%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
+          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="tokens-freezable-by-creator.html"><span>tokens</span><wbr></wbr><span>Freezable</span><wbr></wbr><span>By</span><wbr></wbr><span><span>Creator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-821523879%2FProperties%2F483702768"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="tokens-freezable-by-creator.html">tokensFreezableByCreator</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></div><div class="brief "><p class="paragraph">Indicates if tokens can be frozen by the creator. Defaults to true.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
