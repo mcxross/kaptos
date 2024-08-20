@@ -95,6 +95,23 @@ data class BlockMetadataTransactionResponse(
   val timestamp: String,
 ) : TransactionResponse()
 
+@Serializable
+@SerialName("state_checkpoint_transaction")
+data class StateCheckpointTransactionResponse(
+  override val type: TransactionResponseType,
+  val version: String,
+  val hash: String,
+  @SerialName("state_change_hash") val stateChangeHash: String,
+  @SerialName("event_root_hash") val eventRootHash: String,
+  @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
+  @SerialName("gas_used") val gasUsed: String,
+  val success: Boolean,
+  @SerialName("vm_status") val vmStatus: String,
+  @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
+  // val changes: List<WriteSetChange>,
+  val timestamp: String,
+) : TransactionResponse()
+
 @Serializable sealed class TransactionPayloadResponse
 
 @Serializable
