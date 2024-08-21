@@ -21,7 +21,6 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.MoveString
 
 object MoveStringSerializer : KSerializer<MoveString> {
@@ -30,8 +29,12 @@ object MoveStringSerializer : KSerializer<MoveString> {
     PrimitiveSerialDescriptor("MoveString", PrimitiveKind.STRING)
 
   override fun serialize(encoder: Encoder, value: MoveString) {
-    val length = Bcs.encodeToByteArray(value.value).size
-    encoder.beginCollection(descriptor, length)
+    // Variable-length encoding requires the length of the BCS bytes to be encoded first using
+    // ULEB128,
+    // followed by the actual bytes. Since the serialization library does not directly support
+    // ULEB128 encoding,
+    // we achieve this by starting a collection, which internally uses ULEB128 encoding.
+    encoder.beginCollection(descriptor, value.bcsBytes().size)
     encoder.encodeString(value.value)
   }
 
