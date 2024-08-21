@@ -129,6 +129,13 @@ data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : Transact
 
 @Serializable(with = MoveStringSerializer::class)
 data class MoveString(val value: String) : TransactionArgument() {
+  // This is a workaround for the fact that the serialization library does not support ULEB128
+  // encoding. We use a collection to encode the length of the BCS bytes first, followed by the
+  // actual bytes.
+  fun bcsBytes(): ByteArray {
+    return Bcs.encodeToByteArray(value)
+  }
+
   override fun toString(): String {
     return value
   }
