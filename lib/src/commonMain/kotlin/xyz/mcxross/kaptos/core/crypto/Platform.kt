@@ -26,6 +26,8 @@ expect fun sha3Hash(input: ByteArray): ByteArray
 
 expect fun sign(message: ByteArray, privateKey: ByteArray): ByteArray
 
+expect fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray
+
 expect fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray
 
 expect fun generateSecp256k1PublicKey(privateKey: ByteArray) : ByteArray

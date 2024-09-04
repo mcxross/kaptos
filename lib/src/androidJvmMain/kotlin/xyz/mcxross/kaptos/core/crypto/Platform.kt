@@ -15,22 +15,18 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
-import org.bouncycastle.asn1.sec.SECNamedCurves
-import org.bouncycastle.crypto.AsymmetricCipherKeyPair
-import org.bouncycastle.crypto.generators.ECKeyPairGenerator
-import org.bouncycastle.crypto.generators.Ed25519KeyPairGenerator
-import org.bouncycastle.crypto.params.*
-import org.bouncycastle.jce.ECNamedCurveTable
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec
-import org.bouncycastle.math.ec.FixedPointCombMultiplier
-import xyz.mcxross.kaptos.model.SigningSchemeInput
 import java.math.BigInteger
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
 import java.security.Security
 import java.util.*
-
+import org.bouncycastle.asn1.sec.SECNamedCurves
+import org.bouncycastle.crypto.generators.ECKeyPairGenerator
+import org.bouncycastle.crypto.generators.Ed25519KeyPairGenerator
+import org.bouncycastle.crypto.params.*
+import org.bouncycastle.jce.provider.BouncyCastleProvider
+import org.bouncycastle.math.ec.FixedPointCombMultiplier
+import xyz.mcxross.kaptos.model.SigningSchemeInput
 
 @Throws(NoSuchAlgorithmException::class)
 actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
@@ -43,7 +39,7 @@ actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
       val pk = kp.public as Ed25519PublicKeyParameters
       KeyPair(sk.encoded, pk.encoded)
     }
-    SigningSchemeInput.Secp256k1Ecdsa -> {
+    SigningSchemeInput.Secp256k1 -> {
       generateSecp256k1KeyPair()
     }
     else -> throw NotImplementedError("Only Ed25519 and Secp256k1Ecdsa are supported at the moment")
@@ -51,28 +47,38 @@ actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
 }
 
 fun generateSecp256k1KeyPair(): KeyPair {
-  val curve: ECNamedCurveParameterSpec = ECNamedCurveTable.getParameterSpec("secp256k1")
-  val domainParams = ECDomainParameters(curve.curve, curve.g, curve.n, curve.h, curve.seed)
+  // Get the Secp256k1 domain parameters
+  val params = SECNamedCurves.getByName("secp256k1")
+  val domainParams = ECDomainParameters(params.curve, params.g, params.n, params.h)
 
-  val secureRandom = SecureRandom()
-  val keyParams = ECKeyGenerationParameters(domainParams, secureRandom)
+  // Initialize the key pair generator
+  val keyPairGenerator = ECKeyPairGenerator()
+  val keyGenParams = ECKeyGenerationParameters(domainParams, SecureRandom())
+  keyPairGenerator.init(keyGenParams)
 
-  val generator = ECKeyPairGenerator()
-  generator.init(keyParams)
-  val keyPair: AsymmetricCipherKeyPair = generator.generateKeyPair()
+  // Generate the key pair
+  val keyPair = keyPairGenerator.generateKeyPair()
 
-  val privKeyParams = keyPair.private as ECPrivateKeyParameters
-  val privateKey = adjustTo32Bytes(privKeyParams.d.toByteArray())
+  // Extract the public and private keys
+  val publicKey = keyPair.public as ECPublicKeyParameters
+  val privateKey = keyPair.private as ECPrivateKeyParameters
 
-  val pubkey = keyPair.public as ECPublicKeyParameters
-  val publicKey = pubkey.q.getEncoded(false)
+  // Convert the keys to byte arrays
+  val publicKeyBytes = publicKey.q.getEncoded(false)
+  val privateKeyBytes = privateKey.d.toByteArray()
 
-  return KeyPair(privateKey, publicKey)
+    // Normalize the private key
+  val normalizedPrivateKeyBytes = if (privateKeyBytes.size == 33 && privateKeyBytes[0].toInt() == 0) {
+    privateKeyBytes.copyOfRange(1, 33)
+  } else {
+    privateKeyBytes
+  }
+
+  // Return the key pair
+  return KeyPair(normalizedPrivateKeyBytes, publicKeyBytes)
 }
 
-/**
- * Adjusts the byte array to ensure it's exactly 32 bytes, adding leading zeros if necessary.
- */
+/** Adjusts the byte array to ensure it's exactly 32 bytes, adding leading zeros if necessary. */
 fun adjustTo32Bytes(original: ByteArray): ByteArray =
   if (original.size == 33 && original.first() == 0.toByte()) {
     original.copyOfRange(1, 33)

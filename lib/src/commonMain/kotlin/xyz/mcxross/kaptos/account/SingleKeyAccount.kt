@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.account
 import xyz.mcxross.kaptos.core.crypto.*
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorSingleKey
 
 /**
  * Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by
@@ -42,13 +43,10 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
   override val signingScheme: SigningScheme
     get() = SigningScheme.SingleKey
 
-  override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
-    TODO("Not yet implemented")
-  }
+  override fun signWithAuthenticator(message: HexInput): AccountAuthenticator =
+    AccountAuthenticatorSingleKey(publicKey = publicKey, signature = sign(message))
 
-  override fun sign(message: HexInput): Signature {
-    TODO("Not yet implemented")
-  }
+  override fun sign(message: HexInput): AnySignature = AnySignature(privateKey.sign(message))
 
   companion object {
 
@@ -64,7 +62,7 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
           SigningSchemeInput.Ed25519 -> {
             Ed25519PrivateKey.generate()
           }
-          SigningSchemeInput.Secp256k1Ecdsa -> {
+          SigningSchemeInput.Secp256k1 -> {
             Secp256k1PrivateKey.generate()
           }
         }

@@ -66,8 +66,10 @@ class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
     this.hex = hex
   }
 
-  override fun sign(message: HexInput): Signature {
-    TODO("Not yet implemented")
+  override fun sign(message: HexInput): Secp256k1Signature {
+    val messageBytes = Hex.fromHexInput(message).toByteArray()
+    val hash = sha3Hash(messageBytes)
+    return Secp256k1Signature(HexInput.fromByteArray(secp256k1Sign(hash, hex.toByteArray())))
   }
 
   override fun publicKey(): Secp256k1PublicKey {
@@ -85,7 +87,7 @@ class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
     const val LENGTH = 32
 
     fun generate(): Secp256k1PrivateKey {
-      val keyPair = generateKeypair(SigningSchemeInput.Secp256k1Ecdsa)
+      val keyPair = generateKeypair(SigningSchemeInput.Secp256k1)
       return Secp256k1PrivateKey(HexInput.fromByteArray(keyPair.privateKey))
     }
   }
@@ -103,9 +105,7 @@ class Secp256k1Signature(hexInput: HexInput) : Signature() {
     this.hex = hex
   }
 
-  override fun toByteArray(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toByteArray(): ByteArray = hex.toByteArray()
 
   override fun toBcs(): ByteArray {
     TODO("Not yet implemented")
