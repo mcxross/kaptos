@@ -57,3 +57,7 @@ actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
   signer.update(message, 0, message.size)
   return signer.generateSignature()
 }
+
+actual fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray {
+  TODO("Not yet implemented")
+}

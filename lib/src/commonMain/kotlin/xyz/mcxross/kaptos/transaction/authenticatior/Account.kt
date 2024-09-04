@@ -17,8 +17,11 @@ package xyz.mcxross.kaptos.transaction.authenticatior
 
 import io.ktor.util.reflect.*
 import kotlinx.serialization.Serializable
+import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
+import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
+import xyz.mcxross.kaptos.model.AccountAuthenticatorVariant
 
 @Serializable
 open class AccountAuthenticator {
@@ -29,4 +32,16 @@ open class AccountAuthenticator {
 data class AccountAuthenticatorEd25519(
   val publicKey: Ed25519PublicKey,
   val signature: Ed25519Signature,
+) : AccountAuthenticator()
+
+/**
+ * AccountAuthenticatorSingleKey for a single signer
+ *
+ * @param publicKey AnyPublicKey
+ * @param signature AnySignature
+ */
+data class AccountAuthenticatorSingleKey(
+  val variant: AccountAuthenticatorVariant = AccountAuthenticatorVariant.SingleKey,
+  val publicKey: AnyPublicKey,
+  val signature: AnySignature,
 ) : AccountAuthenticator()
