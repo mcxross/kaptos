@@ -164,6 +164,7 @@ $dokka.location:xyz.mcxross.kaptos.core.crypto//generateKeypair/#xyz.mcxross.kap
 $dokka.location:xyz.mcxross.kaptos.core.crypto//generateSecp256k1KeyPair/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/generate-secp256k1-key-pair.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//generateSecp256k1PublicKey/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/generate-secp256k1-public-key.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//generateSigningMessage/#xyz.mcxross.kaptos.model.AnyRawTransaction/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/generate-signing-message.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto//secp256k1Sign/#kotlin.ByteArray#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/secp256k1-sign.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//sha3Hash/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/sha3-hash.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto//sign/#kotlin.ByteArray#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/sign.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AccountPublicKey///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-account-public-key/index.html
@@ -177,6 +178,12 @@ $dokka.location:xyz.mcxross.kaptos.core.crypto/AnyPublicKey/toBcs/#/PointingToDe
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AnyPublicKey/toByteArray/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-public-key/to-byte-array.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AnyPublicKey/variant/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-public-key/variant.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/AnyPublicKey/verifySignature/#xyz.mcxross.kaptos.model.HexInput#xyz.mcxross.kaptos.core.crypto.Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-public-key/verify-signature.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/index.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature/AnySignature/#xyz.mcxross.kaptos.core.crypto.Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/-any-signature.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/signature.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature/toBcs/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/to-bcs.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature/toByteArray/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/to-byte-array.html
+$dokka.location:xyz.mcxross.kaptos.core.crypto/AnySignature/variant/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-any-signature/variant.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/Ed25519PrivateKey.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-ed25519-private-key/-companion/index.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/Ed25519PrivateKey.Companion/LENGTH/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-ed25519-private-key/-companion/-l-e-n-g-t-h.html
 $dokka.location:xyz.mcxross.kaptos.core.crypto/Ed25519PrivateKey.Companion/generate/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.core.crypto/-ed25519-private-key/-companion/generate.html
@@ -427,6 +434,14 @@ $dokka.location:xyz.mcxross.kaptos.model/AnyPublicKeyVariant/valueOf/#kotlin.Str
 $dokka.location:xyz.mcxross.kaptos.model/AnyPublicKeyVariant/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-public-key-variant/values.html
 $dokka.location:xyz.mcxross.kaptos.model/AnyRawTransaction///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-raw-transaction/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AnyRawTransaction/AnyRawTransaction/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-raw-transaction/-any-raw-transaction.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant.Ed25519///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/-ed25519/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant.Keyless///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/-keyless/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant.Secp256k1///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/-secp256k1/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/index.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/entries.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/value.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/value-of.html
+$dokka.location:xyz.mcxross.kaptos.model/AnySignatureVariant/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-signature-variant/values.html
 $dokka.location:xyz.mcxross.kaptos.model/AnyTransactionPayloadInstance///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType.FAUCET///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/-f-a-u-c-e-t/index.html
 $dokka.location:xyz.mcxross.kaptos.model/AptosApiType.FULLNODE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-aptos-api-type/-f-u-l-l-n-o-d-e/index.html
@@ -741,6 +756,7 @@ $dokka.location:xyz.mcxross.kaptos.model/MoveResource/MoveResource/#kotlin.Strin
 $dokka.location:xyz.mcxross.kaptos.model/MoveResource/type/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-resource/type.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveString///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-string/index.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveString/MoveString/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-string/-move-string.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveString/bcsBytes/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-string/bcs-bytes.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveString/toString/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-string/to-string.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveString/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-string/value.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveStruct///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-struct/index.html
@@ -796,7 +812,11 @@ $dokka.location:xyz.mcxross.kaptos.model/MoveValue.String/String/#kotlin.String/
 $dokka.location:xyz.mcxross.kaptos.model/MoveValue.String/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-value/-string/value.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveValue///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-value/index.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/index.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/bool/#kotlin.collections.List[kotlin.Boolean]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/bool.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/string/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/string.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u16/#kotlin.collections.List[kotlin.UShort]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u16.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u32/#kotlin.collections.List[kotlin.UInt]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u32.html
+$dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u64/#kotlin.collections.List[kotlin.ULong]/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u64.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u8/#kotlin.ByteArray/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u8.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector.Companion/u8/#xyz.mcxross.kaptos.model.HexInput/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/-companion/u8.html
 $dokka.location:xyz.mcxross.kaptos.model/MoveVector///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-move-vector/index.html
@@ -984,7 +1004,7 @@ $dokka.location:xyz.mcxross.kaptos.model/SigningScheme/value/#/PointingToDeclara
 $dokka.location:xyz.mcxross.kaptos.model/SigningScheme/valueOf/#kotlin.String/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme/value-of.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningScheme/values/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme/values.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput.Ed25519///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/-ed25519/index.html
-$dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput.Secp256k1Ecdsa///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/-secp256k1-ecdsa/index.html
+$dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput.Secp256k1///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/-secp256k1/index.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/index.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/entries/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/entries.html
 $dokka.location:xyz.mcxross.kaptos.model/SigningSchemeInput/value/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.model/-signing-scheme-input/value.html
@@ -1462,6 +1482,11 @@ $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticat
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/AccountAuthenticatorEd25519/#xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey#xyz.mcxross.kaptos.core.crypto.Ed25519Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/-account-authenticator-ed25519.html
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/publicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/public-key.html
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorEd25519/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-ed25519/signature.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorSingleKey///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-single-key/index.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorSingleKey/AccountAuthenticatorSingleKey/#xyz.mcxross.kaptos.model.AccountAuthenticatorVariant#xyz.mcxross.kaptos.core.crypto.AnyPublicKey#xyz.mcxross.kaptos.core.crypto.AnySignature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-single-key/-account-authenticator-single-key.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorSingleKey/publicKey/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-single-key/public-key.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorSingleKey/signature/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-single-key/signature.html
+$dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/AccountAuthenticatorSingleKey/variant/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator-single-key/variant.html
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator///PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/index.html
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator/TransactionAuthenticator/#xyz.mcxross.kaptos.model.AccountAuthenticatorVariant#xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey#xyz.mcxross.kaptos.core.crypto.Ed25519Signature/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/-transaction-authenticator.html
 $dokka.location:xyz.mcxross.kaptos.transaction.authenticatior/TransactionAuthenticator/accountAuthenticatorVariant/#/PointingToDeclaration/-kaptos/xyz.mcxross.kaptos.transaction.authenticatior/-transaction-authenticator/account-authenticator-variant.html
