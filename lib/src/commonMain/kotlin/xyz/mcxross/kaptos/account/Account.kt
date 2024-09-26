@@ -50,6 +50,10 @@ abstract class Account {
    */
   abstract fun sign(message: HexInput): Signature
 
+  override fun toString(): String {
+    return "${signingScheme}Account { address: $accountAddress, publicKey: $publicKey }"
+  }
+
   companion object {
     fun generate(
       scheme: SigningSchemeInput = SigningSchemeInput.Ed25519,
