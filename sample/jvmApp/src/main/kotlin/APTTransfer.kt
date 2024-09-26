@@ -17,7 +17,6 @@ package xyz.mcxross.kaptos.sample
 
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.util.runBlocking
 
@@ -63,9 +62,7 @@ fun main() = runBlocking {
       data =
         entryFunctionData {
           function = "0x1::coin::transfer"
-          typeArguments = typeArguments {
-            +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
-          }
+          typeArguments = typeArguments { +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin") }
           functionArguments = functionArguments {
             +bob.accountAddress
             +U64(SEND_AMOUNT_UNITS.toULong())
