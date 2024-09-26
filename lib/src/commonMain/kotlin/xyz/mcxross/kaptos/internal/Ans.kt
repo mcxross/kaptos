@@ -201,7 +201,14 @@ suspend fun getPrimaryName(aptosConfig: AptosConfig, address: AccountAddressInpu
     InputViewFunctionData(
       function = "${routerAddress}::router::get_primary_name",
       typeArguments = emptyList(),
-      functionArguments = listOf(MoveString(address.value)),
+      functionArguments =
+        when (address) {
+          is AccountAddress -> listOf(address)
+          is HexInput -> listOf(AccountAddress.fromString(address.value))
+          else -> {
+            throw Error("Unsupported address type")
+          }
+        },
     )
 
   val res =
