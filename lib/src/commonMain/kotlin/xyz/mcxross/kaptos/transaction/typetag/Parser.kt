@@ -126,7 +126,7 @@ object TypeTagParser {
       "&signer" ->
         if (types.isNotEmpty())
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedPrimitiveTypeArguments)
-        else TypeTagReference(ref = TypeTagSigner())
+        else TypeTagReference(ref = TypeTagSigner)
       "signer",
       "bool",
       "address",
@@ -139,15 +139,15 @@ object TypeTagParser {
         if (types.isNotEmpty())
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedPrimitiveTypeArguments)
         when (str) {
-          "signer" -> TypeTagSigner()
-          "bool" -> TypeTagBool()
-          "address" -> TypeTagAddress()
-          "u8" -> TypeTagU8()
-          "u16" -> TypeTagU16()
-          "u32" -> TypeTagU32()
-          "u64" -> TypeTagU64()
-          "u128" -> TypeTagU128()
-          "u256" -> TypeTagU256()
+          "signer" -> TypeTagSigner
+          "bool" -> TypeTagBool
+          "address" -> TypeTagAddress
+          "u8" -> TypeTagU8
+          "u16" -> TypeTagU16
+          "u32" -> TypeTagU32
+          "u64" -> TypeTagU64
+          "u128" -> TypeTagU128
+          "u256" -> TypeTagU256
           else -> throw IllegalArgumentException("Unknown primitive type")
         }
       }

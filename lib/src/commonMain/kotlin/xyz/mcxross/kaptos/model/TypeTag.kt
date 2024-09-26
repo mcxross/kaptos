@@ -24,8 +24,6 @@ import xyz.mcxross.kaptos.serialize.*
 @Serializable(with = TypeTagSerializer::class)
 sealed class TypeTag {
 
-  abstract val enumIndex: TypeTagVariants
-
   abstract val value: String
 
   fun isBool(): Boolean {
@@ -85,30 +83,29 @@ sealed class TypeTag {
 
     fun valueOf(string: String): TypeTag {
       return when (string) {
-        "address" -> TypeTagAddress()
-        "bool" -> TypeTagBool()
-        "signer" -> TypeTagSigner()
-        "u8" -> TypeTagU8()
-        "u16" -> TypeTagU16()
-        "u32" -> TypeTagU32()
-        "u64" -> TypeTagU64()
-        "u128" -> TypeTagU128()
-        "u256" -> TypeTagU256()
+        "address" -> TypeTagAddress
+        "bool" -> TypeTagBool
+        "signer" -> TypeTagSigner
+        "u8" -> TypeTagU8
+        "u16" -> TypeTagU16
+        "u32" -> TypeTagU32
+        "u64" -> TypeTagU64
+        "u128" -> TypeTagU128
+        "u256" -> TypeTagU256
         else -> throw IllegalArgumentException("Invalid TypeTag string: $string")
       }
     }
   }
 }
 
-data class TypeTagAddress(override val enumIndex: TypeTagVariants = TypeTagVariants.Address) :
-  TypeTag() {
+data object TypeTagAddress : TypeTag() {
 
   @Transient override val value: String = "address"
 
   override fun toString(): String = value
 }
 
-data class TypeTagBool(override val enumIndex: TypeTagVariants = TypeTagVariants.Bool) : TypeTag() {
+data object TypeTagBool : TypeTag() {
 
   override val value: String
     get() = "bool"
@@ -116,10 +113,7 @@ data class TypeTagBool(override val enumIndex: TypeTagVariants = TypeTagVariants
   override fun toString(): String = value
 }
 
-class TypeTagGeneric(
-  override val enumIndex: TypeTagVariants = TypeTagVariants.Generic,
-  val id: UShort,
-) : TypeTag() {
+class TypeTagGeneric(val id: UShort) : TypeTag() {
 
   override val value: String
     get() = "$id"
@@ -127,10 +121,7 @@ class TypeTagGeneric(
   override fun toString(): String = "T$value"
 }
 
-class TypeTagReference(
-  override val enumIndex: TypeTagVariants = TypeTagVariants.Reference,
-  @Transient val ref: TypeTag,
-) : TypeTag() {
+class TypeTagReference(@Transient val ref: TypeTag) : TypeTag() {
 
   override val value: String
     get() = "&$ref"
@@ -138,8 +129,7 @@ class TypeTagReference(
   override fun toString(): String = value
 }
 
-data class TypeTagSigner(override val enumIndex: TypeTagVariants = TypeTagVariants.Signer) :
-  TypeTag() {
+data object TypeTagSigner : TypeTag() {
 
   override val value: String
     get() = "signer"
@@ -147,7 +137,7 @@ data class TypeTagSigner(override val enumIndex: TypeTagVariants = TypeTagVarian
   override fun toString(): String = value
 }
 
-data class TypeTagU8(override val enumIndex: TypeTagVariants = TypeTagVariants.U8) : TypeTag() {
+data object TypeTagU8 : TypeTag() {
 
   override val value: String
     get() = "u8"
@@ -155,7 +145,7 @@ data class TypeTagU8(override val enumIndex: TypeTagVariants = TypeTagVariants.U
   override fun toString(): String = value
 }
 
-data class TypeTagU16(override val enumIndex: TypeTagVariants = TypeTagVariants.U16) : TypeTag() {
+data object TypeTagU16 : TypeTag() {
 
   override val value: String
     get() = "u16"
@@ -163,21 +153,21 @@ data class TypeTagU16(override val enumIndex: TypeTagVariants = TypeTagVariants.
   override fun toString(): String = value
 }
 
-data class TypeTagU32(override val enumIndex: TypeTagVariants = TypeTagVariants.U32) : TypeTag() {
+data object TypeTagU32 : TypeTag() {
   override val value: String
     get() = "u32"
 
   override fun toString(): String = value
 }
 
-data class TypeTagU64(override val enumIndex: TypeTagVariants = TypeTagVariants.U64) : TypeTag() {
+data object TypeTagU64 : TypeTag() {
   override val value: String
     get() = "u64"
 
   override fun toString(): String = value
 }
 
-data class TypeTagU128(override val enumIndex: TypeTagVariants = TypeTagVariants.U128) : TypeTag() {
+data object TypeTagU128 : TypeTag() {
 
   override val value: String
     get() = "u128"
@@ -187,17 +177,14 @@ data class TypeTagU128(override val enumIndex: TypeTagVariants = TypeTagVariants
   }
 }
 
-data class TypeTagU256(override val enumIndex: TypeTagVariants = TypeTagVariants.U256) : TypeTag() {
+data object TypeTagU256 : TypeTag() {
   override val value: String
     get() = "u256"
 
   override fun toString(): String = value
 }
 
-class TypeTagVector(
-  override val enumIndex: TypeTagVariants = TypeTagVariants.Vector,
-  val type: TypeTag,
-) : TypeTag() {
+class TypeTagVector(val type: TypeTag) : TypeTag() {
 
   override val value: String
     get() = type.toString()
@@ -208,16 +195,13 @@ class TypeTagVector(
 
   companion object {
     fun u8(): TypeTagVector {
-      return TypeTagVector(type = TypeTagU8())
+      return TypeTagVector(type = TypeTagU8)
     }
   }
 }
 
 @Serializable
-class TypeTagStruct(
-  override val enumIndex: TypeTagVariants = TypeTagVariants.Struct,
-  val type: StructTag,
-) : TypeTag() {
+class TypeTagStruct(val type: StructTag) : TypeTag() {
 
   constructor(type: String) : this(type = type.toStructTag())
 
