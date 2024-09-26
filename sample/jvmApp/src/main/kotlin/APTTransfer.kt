@@ -62,7 +62,7 @@ fun main() = runBlocking {
       data =
         entryFunctionData {
           function = "0x1::coin::transfer"
-          typeArguments = typeArguments { +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin") }
+          typeArguments = typeArguments { +TypeTagStruct("0x1::aptos_coin::AptosCoin") }
           functionArguments = functionArguments {
             +bob.accountAddress
             +U64(SEND_AMOUNT_UNITS.toULong())
