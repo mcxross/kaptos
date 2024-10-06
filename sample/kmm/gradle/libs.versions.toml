@@ -13,7 +13,7 @@ androidx-test-junit = "1.1.5"
 compose = "1.6.6"
 compose-plugin = "1.6.2"
 junit = "4.13.2"
-kaptos = "1.5.0-SNAPSHOT"
+kaptos = "1.5.2-SNAPSHOT"
 kotlin = "1.9.23"
 
 [libraries]

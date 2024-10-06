@@ -16,14 +16,14 @@
 package xyz.mcxross.kaptos.sample.model
 
 import xyz.mcxross.kaptos.Aptos
-import xyz.mcxross.kaptos.core.account.Account
+import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.MoveString
 import xyz.mcxross.kaptos.model.TypeTagStruct
 import xyz.mcxross.kaptos.model.U64
+import xyz.mcxross.kaptos.model.entryFunctionData
 import xyz.mcxross.kaptos.model.functionArguments
-import xyz.mcxross.kaptos.model.inputEntryFunctionData
 import xyz.mcxross.kaptos.model.typeArguments
 
 suspend fun transfer(aptos: Aptos, sender: Account, receiver: Account, amount: Int) {
@@ -31,7 +31,7 @@ suspend fun transfer(aptos: Aptos, sender: Account, receiver: Account, amount: I
     aptos.buildTransaction.simple(
       sender = sender.accountAddress,
       data =
-        inputEntryFunctionData {
+        entryFunctionData {
           function = "0x1::coin::transfer"
           typeArguments = typeArguments {
             +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
