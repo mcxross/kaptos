@@ -1,7 +1,6 @@
 # Kotlin Multiplatform (Mobile) Demo
 
-This demo shows how to work with **Kaptos** on a multiplatform project.
-It is meant to run on both Android and iOS, but only Android is currently supported.
+This demo shows how to work with **Kaptos** in a Kotlin Multiplatform project (iOS and Android)
 
 ## Setting up your development environment
 
