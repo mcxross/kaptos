@@ -87,6 +87,7 @@ kotlin {
     commonTest.dependencies {
       implementation(kotlin("test"))
       implementation(libs.kotlinx.coroutines.core)
+      implementation(libs.kotlinx.serialization.core)
       implementation(libs.ktor.client.mock)
     }
     val jvmMain by getting {
