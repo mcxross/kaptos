@@ -38,6 +38,18 @@ class Transaction(val config: AptosConfig) : Transaction {
   override val simulateTransaction: Simulate = Simulate(config)
 
   /**
+   * Queries on-chain transactions. This function will not return pending transactions. For that,
+   * use `getTransactionsByHash`.
+   *
+   * @param options.offset The number transaction to start with
+   * @param options.limit Number of results to return
+   * @returns Array of on-chain transactions
+   */
+  override suspend fun getTransactions(
+    options: PaginationArgs?
+  ): Option<List<Option<List<TransactionResponse>>>> = getTransactions(config, options)
+
+  /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
    *
    * @param ledgerVersion - Transaction version is an unsigned 64-bit number.

@@ -20,10 +20,35 @@ import kotlinx.coroutines.delay
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.client.getAptosFullNode
+import xyz.mcxross.kaptos.client.paginateWithCursor
 import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosException
 import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
+
+internal suspend fun getTransactions(
+  config: AptosConfig,
+  options: PaginationArgs?,
+): Option<List<Option<List<TransactionResponse>>>> {
+  val response =
+    paginateWithCursor<TransactionResponse>(
+      RequestOptions.AptosRequestOptions(
+        aptosConfig = config,
+        type = AptosApiType.FULLNODE,
+        originMethod = "getTransactions",
+        path = "transactions",
+        params = mapOf("start" to options?.offset, "limit" to options?.limit),
+      )
+    )
+  return when (response) {
+    is Option.Some -> {
+      Option.Some(response.value.map { it.second })
+    }
+    is Option.None -> {
+      Option.None
+    }
+  }
+}
 
 internal suspend fun getGasPriceEstimation(config: AptosConfig): Option<GasEstimation> =
   getAptosFullNode<GasEstimation>(
