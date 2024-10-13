@@ -38,6 +38,18 @@ interface Transaction {
   val simulateTransaction: Simulate
 
   /**
+   * Queries on-chain transactions. This function will not return pending transactions. For that,
+   * use `getTransactionsByHash`.
+   *
+   * @param options.offset The number transaction to start with
+   * @param options.limit Number of results to return
+   * @returns Array of on-chain transactions
+   */
+  suspend fun getTransactions(
+    options: PaginationArgs? = null
+  ): Option<List<Option<List<TransactionResponse>>>>
+
+  /**
    * Queries on-chain transaction by version. This function will not return pending transactions.
    *
    * @param ledgerVersion - Transaction version is an unsigned 64-bit number.

@@ -32,4 +32,14 @@ class TransactionTest {
       assertTrue(response.gasEstimate > 0, "Gas estimate should be greater than 0")
     }
   }
+
+  @Test
+  fun `it queries for transactions on the chain`() = runBlocking {
+    val aptos = Aptos()
+    val txns = aptos.getTransactions().expect("Couldn't retrieve transactions.")
+    assertTrue(
+      txns.isNotEmpty(),
+      "Transactions on the chain should have zero size of transactions.",
+    )
+  }
 }

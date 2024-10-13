@@ -27,6 +27,7 @@ enum class TransactionResponseType {
   @SerialName("block_metadata_transaction") BLOCK_METADATA,
   @SerialName("state_checkpoint_transaction") STATE_CHECKPOINT,
   @SerialName("validator_transaction") VALIDATOR,
+  @SerialName("block_epilogue_transaction") BLOCK_EPILOGUE,
 }
 
 @Serializable
@@ -109,6 +110,22 @@ data class StateCheckpointTransactionResponse(
   @SerialName("vm_status") val vmStatus: String,
   @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
   // val changes: List<WriteSetChange>,
+  val timestamp: String,
+) : TransactionResponse()
+
+@Serializable
+@SerialName("block_epilogue_transaction")
+data class BlockEpilogueTransactionResponse(
+  override val type: TransactionResponseType,
+  val version: String,
+  val hash: String,
+  @SerialName("state_change_hash") val stateChangeHash: String,
+  @SerialName("event_root_hash") val eventRootHash: String,
+  @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
+  @SerialName("gas_used") val gasUsed: String,
+  val success: Boolean,
+  @SerialName("vm_status") val vmStatus: String,
+  @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
   val timestamp: String,
 ) : TransactionResponse()
 
