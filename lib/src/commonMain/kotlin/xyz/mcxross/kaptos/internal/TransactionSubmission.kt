@@ -77,6 +77,17 @@ internal fun signTransaction(
   return sign(signer, transaction)
 }
 
+internal fun signAsFeePayer(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator {
+  val txn = transaction as SimpleTransaction
+  require(txn.feePayerAddress != null) {
+    "The transaction must contain at least one fee-payer address"
+  }
+
+  txn.feePayerAddress = signer.accountAddress
+
+  return signTransaction(signer, txn)
+}
+
 internal suspend fun submitTransaction(
   aptosConfig: AptosConfig,
   inputSubmitTransactionData: InputSubmitTransactionData,
@@ -99,6 +110,25 @@ internal suspend fun submitTransaction(
   }
 
   return Option.Some(response.second)
+}
+
+internal suspend fun signAndSubmitAsFeePayer(
+  aptosConfig: AptosConfig,
+  feePayer: Account,
+  senderAuthenticator: AccountAuthenticator,
+  transaction: AnyRawTransaction,
+): Option<PendingTransactionResponse> {
+
+  val feePayerAuthenticator = signAsFeePayer(feePayer, transaction)
+
+  return submitTransaction(
+    aptosConfig,
+    InputSubmitTransactionData(
+      transaction = transaction,
+      senderAuthenticator = senderAuthenticator,
+      feePayerAuthenticator = feePayerAuthenticator,
+    ),
+  )
 }
 
 internal suspend fun simulateTransaction(

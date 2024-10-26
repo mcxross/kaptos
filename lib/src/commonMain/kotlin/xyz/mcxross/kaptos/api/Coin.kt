@@ -29,6 +29,7 @@ class Coin(val aptosConfig: AptosConfig) : Coin {
    * @param to Recipient's account address.
    * @param amount Amount of coins to transfer.
    * @param coinType Optional Coin type to transfer. Defaults to `0x1::aptos_coin::AptosCoin`
+   * @param withFeePayer Optional flag whether transaction is sponsored or not. Defaults to `false`
    * @param options Optional parameters to generate the transaction. These include the max gas
    *   amount, gas unit price, and expiration time. Reasonable defaults are provided.
    * @return [SimpleTransaction] object that can be simulated and/or signed and submitted to the
@@ -39,6 +40,8 @@ class Coin(val aptosConfig: AptosConfig) : Coin {
     to: AccountAddressInput,
     amount: ULong,
     coinType: String,
+    withFeePayer: Boolean,
     options: InputGenerateTransactionOptions,
-  ): SimpleTransaction = transferCoinTransaction(aptosConfig, from, to, amount, coinType, options)
+  ): SimpleTransaction =
+    transferCoinTransaction(aptosConfig, from, to, amount, coinType, withFeePayer, options)
 }
