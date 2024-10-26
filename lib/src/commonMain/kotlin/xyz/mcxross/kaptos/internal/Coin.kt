@@ -24,6 +24,7 @@ internal suspend fun transferCoinTransaction(
   to: AccountAddressInput,
   amount: ULong,
   coinType: String,
+  withFeePayer: Boolean,
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   val data =
@@ -39,7 +40,7 @@ internal suspend fun transferCoinTransaction(
           }
         },
       options = options,
-      withFeePayer = false,
+      withFeePayer = withFeePayer,
       secondarySignerAddresses = null,
     )
   return generateTransaction(aptosConfig, data) as SimpleTransaction

@@ -180,7 +180,7 @@ data class MultiAgentTransaction(val rawTransaction: RawTransaction) : AnyRawTra
 
 @Serializable
 data class SimpleTransaction(
-  val rawTransaction: RawTransaction,
-  val feePayerAddress: AccountAddress?,
-  val secondarySignerAddresses: Nothing? = null,
+    val rawTransaction: RawTransaction,
+    var feePayerAddress: AccountAddress?,
+    val secondarySignerAddresses: Nothing? = null,
 ) : AnyRawTransaction()

@@ -21,6 +21,7 @@ import xyz.mcxross.kaptos.api.txsubmission.Build
 import xyz.mcxross.kaptos.api.txsubmission.Simulate
 import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.internal.*
+import xyz.mcxross.kaptos.internal.signAndSubmitAsFeePayer
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
@@ -116,6 +117,18 @@ class Transaction(val config: AptosConfig) : Transaction {
     signTransaction(signer, transaction)
 
   /**
+   * Sign a transaction as a fee payer that can later be submitted to chain
+   *
+   * @param signer The fee payer signer account
+   * @param transaction A raw transaction to sign on
+   * @returns [AccountAuthenticator]
+   */
+  override fun signAsFeePayer(
+    signer: Account,
+    transaction: AnyRawTransaction,
+  ): AccountAuthenticator = xyz.mcxross.kaptos.internal.signAsFeePayer(signer, transaction)
+
+  /**
    * Sign and submit a single signer transaction to chain
    *
    * @param signer The signer account to sign the transaction
@@ -135,6 +148,27 @@ class Transaction(val config: AptosConfig) : Transaction {
     signer: Account,
     transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse> = signAndSubmitTransaction(config, signer, transaction)
+
+  /**
+   * Sign and submit a single signer transaction as the fee payer to chain given an authenticator by
+   * the sender of the transaction.
+   *
+   * @param feePayer The fee payer account to sign the transaction
+   * @param senderAuthenticator The AccountAuthenticator signed by the sender of the transaction
+   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
+   * @return [Option<PendingTransactionResponse>]
+   */
+  override suspend fun signAndSubmitAsFeePayer(
+    feePayer: Account,
+    senderAuthenticator: AccountAuthenticator,
+    transaction: AnyRawTransaction,
+  ): Option<PendingTransactionResponse> =
+    signAndSubmitAsFeePayer(
+      aptosConfig = config,
+      feePayer = feePayer,
+      senderAuthenticator = senderAuthenticator,
+      transaction = transaction,
+    )
 
   /**
    * Generates a transaction to publish a move package to chain.

@@ -105,6 +105,15 @@ interface Transaction {
   fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
 
   /**
+   * Sign a transaction as a fee payer that can later be submitted to chain
+   *
+   * @param signer The fee payer signer account
+   * @param transaction A raw transaction to sign on
+   * @returns [AccountAuthenticator]
+   */
+  fun signAsFeePayer(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
+
+  /**
    * Sign and submit a single signer transaction to chain
    *
    * @param signer The signer account to sign the transaction
@@ -122,6 +131,21 @@ interface Transaction {
    */
   suspend fun signAndSubmitTransaction(
     signer: Account,
+    transaction: AnyRawTransaction,
+  ): Option<PendingTransactionResponse>
+
+  /**
+   * Sign and submit a single signer transaction as the fee payer to chain given an authenticator by
+   * the sender of the transaction.
+   *
+   * @param feePayer The fee payer account to sign the transaction
+   * @param senderAuthenticator The AccountAuthenticator signed by the sender of the transaction
+   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
+   * @return [Option<PendingTransactionResponse>]
+   */
+  suspend fun signAndSubmitAsFeePayer(
+    feePayer: Account,
+    senderAuthenticator: AccountAuthenticator,
     transaction: AnyRawTransaction,
   ): Option<PendingTransactionResponse>
 
