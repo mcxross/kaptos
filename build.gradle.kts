@@ -1,6 +1,6 @@
 group = "xyz.mcxross.kaptos"
 
-version = "0.1.1-beta"
+version = "0.1.2-beta"
 
 plugins {
   alias(libs.plugins.android.application) apply false
