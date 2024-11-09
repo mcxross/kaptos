@@ -86,16 +86,12 @@ class InputEntryFunctionDataBuilder {
     return InputEntryFunctionData(
       function = function ?: throw IllegalArgumentException("function must be set"),
       typeArguments = typeArguments?.typeArguments ?: emptyList(),
-      functionArguments =
-        functionArguments?.functionArguments
-          ?: throw IllegalArgumentException("functionArguments must be set"),
+      functionArguments = functionArguments?.functionArguments ?: emptyList(),
       abi = abi,
     )
   }
 }
 
-fun entryFunctionData(
-  block: InputEntryFunctionDataBuilder.() -> Unit
-): InputEntryFunctionData {
+fun entryFunctionData(block: InputEntryFunctionDataBuilder.() -> Unit): InputEntryFunctionData {
   return InputEntryFunctionDataBuilder().apply(block).build()
 }
