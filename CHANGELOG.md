@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+**[0.1.2-beta] - 2024-10-09**
+
+**Fixed**
+- Allow both entry and view functions to have no arguments (#7)
+
 ---
 **[0.1.1-beta] - 2024-10-09**
 
