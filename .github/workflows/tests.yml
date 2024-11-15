@@ -19,6 +19,7 @@ jobs:
         uses: aptos-labs/actions/run-local-testnet@main
         with:
           PNPM_VERSION: 8.9.0
+          WITH_INDEXER_API: false
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
