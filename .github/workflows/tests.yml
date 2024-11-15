@@ -15,25 +15,10 @@ jobs:
       - name: Update brew
         run: brew update
 
-      - name: Install dependencies
-        run: |
-          brew install aptos
-          brew install curl
-
-      - name: Start Aptos Local Testnet
-        run: |
-          aptos node run-local-testnet & echo $! > aptos_pid.txt
-          sleep 30  # Initial wait for services to start
-          # Poll the readiness endpoint until it's available
-          until curl -sSf http://127.0.0.1:8080/; do
-            echo "Waiting for Aptos Node API to be ready..."
-            sleep 5
-          done
-          until curl -sSf http://127.0.0.1:8081/; do
-            echo "Waiting for Faucet to be ready..."
-            sleep 5
-          done
-        shell: bash
+      - name: Run a local testnet in the background
+        uses: aptos-labs/actions/run-local-testnet@main
+        with:
+          PNPM_VERSION: 8.9.0
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
@@ -44,6 +29,3 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test
-
-      - name: Stop Aptos Local Testnet
-        run: kill $(cat aptos_pid.txt)
