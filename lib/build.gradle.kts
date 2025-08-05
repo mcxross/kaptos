@@ -26,10 +26,7 @@ repositories {
 }
 
 kotlin {
-  jvm {
-    jvmToolchain(17)
-    testRuns.named("test") { executionTask.configure { useJUnitPlatform() } }
-  }
+  jvm { testRuns["test"].executionTask.configure { useJUnitPlatform() } }
 
   androidTarget { publishLibraryVariants("release", "debug") }
 
