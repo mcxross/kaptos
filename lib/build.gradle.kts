@@ -1,7 +1,6 @@
 import java.net.URL
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-import xyz.mcxross.graphql.plugin.gradle.graphql
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 
@@ -9,7 +8,6 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.apollo.graphql)
   alias(libs.plugins.dokka)
-  alias(libs.plugins.graphql.multiplatform)
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.maven.publish)
@@ -68,7 +66,6 @@ kotlin {
     commonMain.dependencies {
       implementation(libs.apollo.runtime)
       implementation(libs.bcs)
-      implementation(libs.graphql.multiplatform.client)
       implementation(libs.ktor.client.auth)
       implementation(libs.ktor.client.content.negotiation)
       implementation(libs.ktor.client.core)
@@ -93,12 +90,12 @@ kotlin {
   }
 }
 
-graphql {
-  client {
-    endpoint = "https://api.devnet.aptoslabs.com/v1/graphql"
-    packageName = "xyz.mcxross.kaptos.generated"
+apollo {
+  service("service") {
+    packageName.set("xyz.mcxross.kaptos.generated")
   }
 }
+
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
