@@ -8,6 +8,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
   alias(libs.plugins.android.library)
+  alias(libs.plugins.apollo.graphql)
   alias(libs.plugins.dokka)
   alias(libs.plugins.graphql.multiplatform)
   alias(libs.plugins.kotlin.multiplatform)
