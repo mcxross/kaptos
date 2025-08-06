@@ -181,7 +181,7 @@ mavenPublishing {
     }
   }
 
-  publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+  publishToMavenCentral(automaticRelease = true)
 
   signAllPublications()
 }
