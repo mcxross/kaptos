@@ -45,19 +45,14 @@ kotlin {
     }
   }
 
-  linuxX64()
-
   macosArm64()
   macosX64()
 
   tvosX64()
   tvosArm64()
 
-  watchosX64()
   watchosArm32()
   watchosArm64()
-
-  mingwX64()
 
   applyDefaultHierarchyTemplate()
 
@@ -72,15 +67,16 @@ kotlin {
     }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
+      implementation(libs.apollo.runtime)
+      implementation(libs.bcs)
       implementation(libs.graphql.multiplatform.client)
+      implementation(libs.ktor.client.auth)
+      implementation(libs.ktor.client.content.negotiation)
       implementation(libs.ktor.client.core)
       implementation(libs.ktor.client.logging)
-      implementation(libs.ktor.client.content.negotiation)
       implementation(libs.ktor.serialization.kotlinx.json)
-      implementation(libs.ktor.client.auth)
-      implementation(libs.kotlinx.serialization.core)
-      implementation(libs.bcs)
       implementation(libs.kotlinx.datetime)
+      implementation(libs.kotlinx.serialization.core)
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
