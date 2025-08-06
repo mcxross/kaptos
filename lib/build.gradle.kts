@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import xyz.mcxross.graphql.plugin.gradle.graphql
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
   alias(libs.plugins.android.library)
