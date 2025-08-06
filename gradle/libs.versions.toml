@@ -3,7 +3,6 @@ agp = "8.2.2"
 apollo-runtime = "4.3.2"
 compose-plugin = "1.8.2"
 graphql-multiplatform = "0.1.0-beta05"
-kaptos = "1.0.1-SNAPSHOT"
 kotlin = "2.2.0"
 kotlinx-datetime = "0.6.2"
 kotlinx-serialization-core = "1.8.1"
@@ -14,7 +13,6 @@ apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.r
 bcprov-jdk15on = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.68" }
 bcs = { module = "xyz.mcxross.bcs:bcs", version = "0.1.2" }
 graphql-multiplatform-client = { module = "xyz.mcxross.graphql.client:graphql-multiplatform-client", version.ref = "graphql-multiplatform" }
-kaptos = { module = "xyz.mcxross.kaptos:kaptos", version.ref = "kaptos" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.8.0" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization-core" }
