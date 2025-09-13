@@ -16,198 +16,153 @@
 
 package xyz.mcxross.kaptos.internal
 
-import io.ktor.client.call.*
-import io.ktor.http.*
+import com.apollographql.apollo.api.Optional
+import com.apollographql.apollo.api.Query
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.andThen
 import xyz.mcxross.bcs.Bcs
-import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.client.getAptosFullNode
-import xyz.mcxross.kaptos.client.indexerClient
+import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.client.postAptosFullNode
-import xyz.mcxross.kaptos.client.postAptosIndexer
-import xyz.mcxross.kaptos.exception.AptosException
-import xyz.mcxross.kaptos.generated.GetChainTopUserTransactions
-import xyz.mcxross.kaptos.generated.GetProcessorStatus
-import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
-import xyz.mcxross.kaptos.generated.inputs.processor_status_bool_exp
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.exception.GraphQLError
+import xyz.mcxross.kaptos.generated.GetChainTopUserTransactionsQuery
+import xyz.mcxross.kaptos.generated.GetProcessorStatusQuery
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.model.types.processorStatusFilter
+import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.transaction.builder.generateViewFunctionPayload
+import xyz.mcxross.kaptos.util.toOptional
 
-internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Option<LedgerInfo> =
+internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Result<LedgerInfo, AptosSdkError> =
   getAptosFullNode<LedgerInfo>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
         originMethod = "getLedgerInfo",
-        path = "",
+        path = "/",
       )
     )
-    .second
+    .toResult()
 
 internal suspend fun getBlockByVersion(
   aptosConfig: AptosConfig,
   ledgerVersion: Long,
-): Option<Block> =
+  withTransactions: Boolean?,
+): Result<Block, AptosSdkError> =
   getAptosFullNode<Block>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
         originMethod = "getBlockByVersion",
         path = "blocks/by_version/${ledgerVersion}",
+        params = mapOf("with_transactions" to withTransactions),
       )
     )
-    .second
+    .toResult()
 
-internal suspend fun getBlockByHeight(aptosConfig: AptosConfig, ledgerHeight: Long): Option<Block> =
-  getAptosFullNode<Block>(
+internal suspend fun getBlockByHeight(
+  aptosConfig: AptosConfig,
+  ledgerHeight: Long,
+  withTransactions: Boolean?,
+): Result<Block, AptosSdkError> {
+
+  return getAptosFullNode<Block>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
         originMethod = "getBlockByHeight",
         path = "blocks/by_height/${ledgerHeight}",
+        params = mapOf("with_transactions" to withTransactions),
       )
     )
-    .second
-
-suspend inline fun <reified T> getTableItem(
-  aptosConfig: AptosConfig,
-  handle: String,
-  data: TableItemRequest,
-  param: Map<String, Any?>? = null,
-): T {
-  val response =
-    postAptosFullNode<T, TableItemRequest>(
-      RequestOptions.PostAptosRequestOptions(
-        aptosConfig = aptosConfig,
-        originMethod = "getTableItem",
-        path = "tables/${handle}/item",
-        body = data,
-        params = param,
-      )
-    )
-
-  return response.second
+    .toResult()
 }
 
 internal suspend fun getChainTopUserTransactions(
-  aptosConfig: AptosConfig,
+  config: AptosConfig,
   limit: Int,
-): Option<ChainTopUserTransactions> {
-  val topUserTransactions =
-    GetChainTopUserTransactions(GetChainTopUserTransactions.Variables(limit = limit))
+): Result<GetChainTopUserTransactionsQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(config).query(GetChainTopUserTransactionsQuery(limit.toOptional()))
+    }
+    .toResult()
 
-  val response: KotlinxGraphQLResponse<ChainTopUserTransactions> =
-    try {
-      indexerClient(aptosConfig).execute(topUserTransactions)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
+internal suspend fun getProcessorStatuses(
+  aptosConfig: AptosConfig
+): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
+  handleQuery { getGraphqlClient(aptosConfig).query(GetProcessorStatusQuery()) }.toResult()
+
+internal suspend fun getIndexerLastSuccessVersion(
+  aptosConfig: AptosConfig
+): Result<Long, AptosIndexerError> {
+  val statuses = getProcessorStatuses(aptosConfig).expect("Couldn't Retrieve Processor Statuses")
+
+  val version: Long? =
+    when (val v = statuses?.processor_status?.firstOrNull()?.last_success_version) {
+      is Long -> v
+      is Int -> v.toLong()
+      is Number -> v.toLong()
+      is String -> v.toLongOrNull()
+      else -> null
     }
 
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
-
-suspend inline fun <reified T> queryIndexer(
-  aptosConfig: AptosConfig,
-  graphqlQuery: GraphqlQuery,
-): Option<T> {
-  val response =
-    postAptosIndexer(
-      RequestOptions.PostAptosRequestOptions(
-        aptosConfig = aptosConfig,
-        originMethod = "queryIndexer",
-        path = "",
-        body = graphqlQuery,
+  return version?.let { v -> Result.Ok<Long>(v) }
+    ?: Result.Err(
+      AptosIndexerError.GraphQL(
+        listOf(GraphQLError(message = "No valid last_success_version found"))
       )
     )
-
-  if (response.status != HttpStatusCode.OK) {
-    throw AptosException("GraphQL query execution failed: ${response.call}")
-  }
-
-  return Option.Some(response.body())
-}
-
-internal suspend fun getProcessorStatuses(aptosConfig: AptosConfig): Option<ProcessorStatus> {
-  val statuses = GetProcessorStatus(GetProcessorStatus.Variables())
-
-  val response: KotlinxGraphQLResponse<ProcessorStatus> =
-    try {
-      indexerClient(aptosConfig).execute(statuses)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
-    }
-
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
-
-internal suspend fun getIndexerLastSuccessVersion(aptosConfig: AptosConfig): Option<Long> {
-  val statuses = getProcessorStatuses(aptosConfig)
-
-  return if (statuses is Option.Some) {
-    Option.Some(statuses.value.processor_status.first().last_success_version.toLong())
-  } else {
-    Option.None
-  }
 }
 
 internal suspend fun getProcessorStatus(
   aptosConfig: AptosConfig,
   processorType: ProcessorType,
-): Option<ProcessorStatus> {
-
-  val condition =
-    processor_status_bool_exp(processor = String_comparison_exp(_eq = processorType.value))
-  val statuses = GetProcessorStatus(GetProcessorStatus.Variables(condition))
-
-  val response: KotlinxGraphQLResponse<ProcessorStatus> =
-    try {
-      indexerClient(aptosConfig).execute(statuses)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
+): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(aptosConfig)
+        .query(
+          GetProcessorStatusQuery(
+            Optional.present(
+              processorStatusFilter {
+                processor = stringFilter { eq = processorType.value.lowercase() }
+              }
+            )
+          )
+        )
     }
-
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
+    .toResult()
 
 suspend inline fun <reified T : List<MoveValue>> view(
   aptosConfig: AptosConfig,
   payload: InputViewFunctionData,
   bcs: Boolean = true,
   options: LedgerVersionArg? = null,
-): Option<T> {
+): Result<T, AptosSdkError> {
 
-  if (bcs) {
-    val viewFunctionPayload = generateViewFunctionPayload(aptosConfig, payload)
-
-    val bytes = Bcs.encodeToByteArray(viewFunctionPayload)
-
-    val response =
+  val responseResult =
+    if (bcs) {
+      val viewFunctionPayload = generateViewFunctionPayload(aptosConfig, payload)
+      val bytes = Bcs.encodeToByteArray(viewFunctionPayload)
       postAptosFullNode<T, ByteArray>(
         RequestOptions.PostAptosRequestOptions(
           aptosConfig = aptosConfig,
           originMethod = "view",
           path = "view",
           contentType = MimeType.BCS_VIEW_FUNCTION,
-          params = mapOf("ledger_version" to options?.ledgerVersion),
+          params = options?.ledgerVersion?.let { mapOf("ledger_version" to it) },
           body = bytes,
         )
       )
-
-    return Option.Some(response.second)
-  }
-
-  val response =
-    postAptosFullNode<T, InputViewFunctionData>(
-      RequestOptions.PostAptosRequestOptions(
-        aptosConfig = aptosConfig,
-        originMethod = "view",
-        path = "view",
-        body = payload,
-        params = mapOf("ledger_version" to options?.ledgerVersion),
+    } else {
+      postAptosFullNode<T, InputViewFunctionData>(
+        RequestOptions.PostAptosRequestOptions(
+          aptosConfig = aptosConfig,
+          originMethod = "view",
+          path = "view",
+          body = payload,
+          params = options?.ledgerVersion?.let { mapOf("ledger_version" to it) },
+        )
       )
-    )
+    }
 
-  return Option.Some(response.second)
+  return responseResult.andThen { pair -> Ok(pair.second) }.toResult()
 }
