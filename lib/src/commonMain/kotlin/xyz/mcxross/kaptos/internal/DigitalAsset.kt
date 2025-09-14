@@ -17,88 +17,51 @@
 package xyz.mcxross.kaptos.internal
 
 import xyz.mcxross.bcs.Bcs
-import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.client.indexerClient
-import xyz.mcxross.kaptos.exception.AptosException
+import xyz.mcxross.kaptos.client.getGraphqlClient
+import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.extension.asAccountAddress
-import xyz.mcxross.kaptos.extension.structParts
-import xyz.mcxross.kaptos.generated.GetCollectionData
-import xyz.mcxross.kaptos.generated.GetTokenData
-import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
-import xyz.mcxross.kaptos.generated.inputs.current_collections_v2_bool_exp
+import xyz.mcxross.kaptos.generated.GetCollectionDataQuery
+import xyz.mcxross.kaptos.generated.GetCurrentTokenOwnershipQuery
+import xyz.mcxross.kaptos.generated.GetEventsQuery
+import xyz.mcxross.kaptos.generated.GetTokenDataQuery
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.model.types.currentCollectionsV2Filter
+import xyz.mcxross.kaptos.model.types.currentTokenOwnershipsV2Filter
+import xyz.mcxross.kaptos.model.types.numericFilter
+import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.transaction.typetag.TypeTagParser.parseTypeTag
+import xyz.mcxross.kaptos.util.toOptional
 
 suspend fun getCollectionData(
   config: AptosConfig,
-  creatorAddress: AccountAddressInput,
-  collectionName: String,
-  tokenStandard: TokenStandard?,
-): Option<CollectionData> {
-  val collectionData =
-    GetCollectionData(
-      GetCollectionData.Variables(
-        where_condition =
-          current_collections_v2_bool_exp(
-            creator_address = String_comparison_exp(_eq = creatorAddress.value),
-            collection_name = String_comparison_exp(_eq = collectionName),
-            token_standard = tokenStandard?.let { String_comparison_exp(_eq = it.name) },
-          )
-      )
-    )
-
-  val response: KotlinxGraphQLResponse<CollectionData> =
-    try {
-      indexerClient(config).execute(collectionData)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
-    }
-
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
+  filter: CollectionOwnershipV2Filter,
+): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
+  handleQuery { getGraphqlClient(config).query(GetCollectionDataQuery(filter)) }.toResult()
 
 suspend fun getCollectionDataByCollectionId(
   config: AptosConfig,
   collectionId: String,
-  minimumLedgerVersion: Long?,
-): Option<CollectionData> {
-  val collectionData =
-    GetCollectionData(
-      GetCollectionData.Variables(
-        where_condition =
-          current_collections_v2_bool_exp(collection_id = String_comparison_exp(_eq = collectionId))
-      )
-    )
-
-  val response: KotlinxGraphQLResponse<CollectionData> =
-    try {
-      indexerClient(config).execute(collectionData)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
+): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      val filter = currentCollectionsV2Filter {
+        this.collectionId = stringFilter { eq = collectionId }
+      }
+      getGraphqlClient(config).query(GetCollectionDataQuery(where_condition = filter))
     }
+    .toResult()
 
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
-
-suspend fun getTokenData(config: AptosConfig, offset: Int?, limit: Int?): Option<TokenData> {
-  val tokenData = GetTokenData(GetTokenData.Variables(offset = offset, limit = limit))
-
-  val response: KotlinxGraphQLResponse<GetTokenData.Result> =
-    try {
-      indexerClient(config).execute(tokenData)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
+suspend fun getTokenData(
+  config: AptosConfig,
+  page: PaginationArgs?,
+): Result<GetTokenDataQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(config)
+        .query(
+          GetTokenDataQuery(limit = page?.limit.toOptional(), offset = page?.offset.toOptional())
+        )
     }
-
-  val data = response.data ?: return Option.None
-
-  return Option.Some(data)
-}
+    .toResult()
 
 private val structTag = StructTag(AccountAddress.ONE, "string", "string", emptyList())
 
@@ -242,7 +205,7 @@ internal suspend fun transferDigitalAssetTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split(":::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -256,9 +219,9 @@ internal suspend fun transferDigitalAssetTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -335,7 +298,7 @@ internal suspend fun burnDigitalAssetTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -349,9 +312,9 @@ internal suspend fun burnDigitalAssetTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -377,7 +340,7 @@ internal suspend fun freezeDigitalAssetTransferTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -391,9 +354,9 @@ internal suspend fun freezeDigitalAssetTransferTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -419,7 +382,7 @@ internal suspend fun unfreezeDigitalAssetTransferTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -433,9 +396,9 @@ internal suspend fun unfreezeDigitalAssetTransferTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -463,7 +426,7 @@ suspend fun setDigitalAssetDescriptionTransaction(
 ): SimpleTransaction {
   require(description.length <= 2048) { "Description must be less than 2048 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -477,9 +440,9 @@ suspend fun setDigitalAssetDescriptionTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -508,7 +471,7 @@ suspend fun setDigitalAssetNameTransaction(
 ): SimpleTransaction {
   require(name.length <= 512) { "Name must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -522,9 +485,9 @@ suspend fun setDigitalAssetNameTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -553,7 +516,7 @@ suspend fun setDigitalAssetURITransaction(
 ): SimpleTransaction {
   require(uri.length <= 512) { "URI must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -567,9 +530,9 @@ suspend fun setDigitalAssetURITransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -601,7 +564,7 @@ internal suspend fun addDigitalAssetPropertyTransaction(
 
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -615,9 +578,9 @@ internal suspend fun addDigitalAssetPropertyTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -648,7 +611,7 @@ internal suspend fun removeDigitalAssetPropertyTransaction(
 ): SimpleTransaction {
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.structParts()
+  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -662,9 +625,9 @@ internal suspend fun removeDigitalAssetPropertyTransaction(
                 +TypeTagStruct(
                   type =
                     StructTag(
-                      moveStructParts.first.asAccountAddress(),
-                      moveStructParts.second,
-                      moveStructParts.third,
+                      moveStructParts.first().asAccountAddress(),
+                      moveStructParts[1],
+                      moveStructParts.last(),
                       emptyList(),
                     )
                 )
@@ -697,3 +660,35 @@ private fun getSinglePropertyValueRaw(
 
   throw Exception("Property value type not supported: $propertyType")
 }
+
+internal suspend fun getCurrentDigitalAssetOwnership(
+  config: AptosConfig,
+  digitalAssetAddress: AccountAddressInput,
+): Result<GetCurrentTokenOwnershipQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      val filter = currentTokenOwnershipsV2Filter {
+        tokenDataId = stringFilter { eq = digitalAssetAddress.value }
+        amount = numericFilter { gt = 0 }
+      }
+      getGraphqlClient(config).query(GetCurrentTokenOwnershipQuery(where_condition = filter))
+    }
+    .toResult()
+
+internal suspend fun getEvents(
+  config: AptosConfig,
+  filter: EventFilter?,
+  page: PaginationArgs?,
+  sortOrder: List<EventSortOrder>?,
+): Result<GetEventsQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(config)
+        .query(
+          GetEventsQuery(
+            where_condition = filter.toOptional(),
+            offset = page?.offset.toOptional(),
+            limit = page?.limit.toOptional(),
+            order_by = sortOrder.toOptional(),
+          )
+        )
+    }
+    .toResult()
