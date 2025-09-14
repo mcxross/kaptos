@@ -16,6 +16,7 @@
 
 package xyz.mcxross.kaptos.api
 
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.internal.fundAccount
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Faucet
@@ -28,17 +29,39 @@ import xyz.mcxross.kaptos.protocol.Faucet
 class Faucet(private val config: AptosConfig) : Faucet {
 
   /**
-   * This creates an account if it does not exist and mints the specified amount of coins into that
-   * account
+   * Requests test coins from the network's Faucet for a given account.
    *
-   * @param accountAddress Address of the account to fund
-   * @param amount Amount of tokens to fund the account with
-   * @param options Configuration options for waitForTransaction
-   * @returns Transaction hash of the transaction that funded the account
+   * If the account does not exist, this function will create it and then fund it with the specified
+   * amount of coins.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val address = AccountAddress.fromString("0x...")
+   * // Request 1 APT (100,000,000 Octas)
+   * val resolution = aptos.fundAccount(address, 100_000_000)
+   *
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val transaction = resolution.value
+   * println("Successfully funded account. Transaction: $transaction")
+   * }
+   * is Result.Err -> {
+   * println("Error funding account: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param accountAddress The address of the account to fund.
+   * @param amount The amount of coins (in Octas) to fund the account with.
+   * @param options Optional configuration for waiting for the funding transaction to be processed.
+   * @return A `Result` which is either `Result.Ok` containing the final [TransactionResponse], or
+   *   `Result.Err` containing an [AptosSdkError].
    */
   override suspend fun fundAccount(
     accountAddress: AccountAddressInput,
     amount: Long,
     options: WaitForTransactionOptions,
-  ): Option<TransactionResponse> = fundAccount(config, accountAddress, amount, options)
+  ): Result<TransactionResponse, AptosSdkError> =
+    fundAccount(config, accountAddress, amount, options)
 }
