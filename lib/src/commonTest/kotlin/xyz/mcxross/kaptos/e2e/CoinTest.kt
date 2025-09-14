@@ -26,9 +26,8 @@ import xyz.mcxross.kaptos.util.runBlocking
 
 class CoinTest {
 
-  // Generates a transfer coin transaction with AptosCoin coin type
   @Test
-  fun testTransferCoinTransaction() = runBlocking {
+  fun `it generates a transfer coin transaction with AptosCoin coin type`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
 
     val alice = Account.generate()
@@ -49,21 +48,22 @@ class CoinTest {
       throw Error("Transaction payload is not an entry function")
     }
 
-    val typeArg =
-      (rawTransaction.payload as TransactionPayloadEntryFunction).entryFunction.typeArgs[0]
+    val typeArg = rawTransaction.payload.entryFunction.typeArgs[0]
 
     if (!typeArg.isStruct()) {
       throw Error("Transaction payload type arg is not a struct")
     }
 
-    expect(true) { (typeArg as TypeTagStruct).type.address.toString() == "0x1" }
+    expect(true) {
+      (typeArg as TypeTagStruct).type.address.toString() ==
+        "0x0000000000000000000000000000000000000000000000000000000000000001"
+    }
     expect(true) { (typeArg as TypeTagStruct).type.moduleName == "aptos_coin" }
     expect(true) { (typeArg as TypeTagStruct).type.name == "AptosCoin" }
   }
 
-  // It generates a transfer coin transaction with a custom coin type
   @Test
-  fun testTransferCoinTransactionWithCoinType() = runBlocking {
+  fun ` it generates a transfer coin transaction with a custom coin type`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
 
     val alice = Account.generate()
@@ -85,20 +85,22 @@ class CoinTest {
       throw Error("Transaction payload is not an entry function")
     }
 
-    val typeArg =
-      (rawTransaction.payload as TransactionPayloadEntryFunction).entryFunction.typeArgs[0]
+    val typeArg = rawTransaction.payload.entryFunction.typeArgs[0]
 
     if (!typeArg.isStruct()) {
       throw Error("Transaction payload type arg is not a struct")
     }
 
-    expect(true) { (typeArg as TypeTagStruct).type.address.toString() == "0x1" }
+    expect(true) {
+      (typeArg as TypeTagStruct).type.address.toString() ==
+        "0x0000000000000000000000000000000000000000000000000000000000000001"
+    }
     expect(true) { (typeArg as TypeTagStruct).type.moduleName == "my_coin" }
     expect(true) { (typeArg as TypeTagStruct).type.name == "type" }
   }
 
   @Test
-  fun testTransfer() = runBlocking {
+  fun `it transfers APT coin amount from sender to recipient`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(network = Network.DEVNET)))
 
     val alice = Account.generate()
@@ -129,8 +131,8 @@ class CoinTest {
       aptos.getAccountCoinsData(bob.accountAddress).expect("Failed to get Bob's balance")
 
     expect(true) {
-      aliceBalanceAfter.current_fungible_asset_balances[0].amount?.toUInt()!! <
-        aliceBalanceBefore.current_fungible_asset_balances[0].amount?.toUInt()!!
+      aliceBalanceAfter?.current_fungible_asset_balances[0]?.amount?.toString()?.toUInt()!! <
+        aliceBalanceBefore?.current_fungible_asset_balances[0]?.amount?.toString()?.toUInt()!!
     }
   }
 }
