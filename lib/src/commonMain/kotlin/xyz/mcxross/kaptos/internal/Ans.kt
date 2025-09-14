@@ -15,6 +15,11 @@
  */
 package xyz.mcxross.kaptos.internal
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.andThen
+import xyz.mcxross.kaptos.exception.AptosApiError
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 
 /**
@@ -90,72 +95,137 @@ fun getRouterAddress(aptosConfig: AptosConfig): String {
   return address
 }
 
-suspend fun getOwnerAddress(aptosConfig: AptosConfig, name: String): Option<AccountAddress> {
-  val routerAddress = getRouterAddress(aptosConfig)
-  val ansName = isValidANSName(name)
+suspend fun getOwnerAddress(
+  aptosConfig: AptosConfig,
+  name: String,
+): Result<AccountAddress, AptosSdkError> {
+  val ansName =
+    try {
+      isValidANSName(name)
+    } catch (e: IllegalArgumentException) {
+      val apiError =
+        AptosApiError(
+          message = e.message ?: "Invalid ANS name provided.",
+          errorCode = "INVALID_INPUT",
+        )
+      return Err(AptosSdkError.ApiError(apiError)).toResult()
+    }
 
+  val routerAddress = getRouterAddress(aptosConfig)
   val viewFunctionData =
     InputViewFunctionData(
       function = "${routerAddress}::router::get_owner_addr",
       typeArguments = emptyList(),
       functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
     )
-
-  val res =
+  val viewResult =
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
+      .toInternalResult()
 
-  return when (res) {
-    is Option.None -> Option.None
-    is Option.Some -> {
-      Option.Some(AccountAddress.fromString(res.value[0].value[0].value))
+  val finalResult =
+    viewResult.andThen { moveValueList ->
+      val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
+
+      if (addressString != null) {
+        Ok(AccountAddress.fromString(addressString))
+      } else {
+        Err(
+          AptosSdkError.ApiError(
+            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
+          )
+        )
+      }
     }
-  }
+
+  return finalResult.toResult()
 }
 
-suspend fun getExpiration(aptosConfig: AptosConfig, name: String): Option<Long> {
-  val routerAddress = getRouterAddress(aptosConfig)
-  val ansName = isValidANSName(name)
+suspend fun getExpiration(aptosConfig: AptosConfig, name: String): Result<Long, AptosSdkError> {
+  val ansName =
+    try {
+      isValidANSName(name)
+    } catch (e: IllegalArgumentException) {
+      val apiError =
+        AptosApiError(
+          message = e.message ?: "Invalid ANS name provided.",
+          errorCode = "INVALID_INPUT",
+        )
+      return Err(AptosSdkError.ApiError(apiError)).toResult()
+    }
 
+  val routerAddress = getRouterAddress(aptosConfig)
   val viewFunctionData =
     InputViewFunctionData(
       function = "${routerAddress}::router::get_expiration",
       typeArguments = emptyList(),
       functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
     )
+  val viewResult =
+    view<List<MoveValue.String>>(aptosConfig, payload = viewFunctionData).toInternalResult()
 
-  return when (val res = view<List<MoveValue.String>>(aptosConfig, payload = viewFunctionData)) {
-    is Option.None -> Option.None
-    is Option.Some -> {
-      Option.Some(res.value[0].value.toLong())
+  val finalResult =
+    viewResult.andThen { moveValueList ->
+      val expirationString = (moveValueList.firstOrNull())?.value
+
+      if (expirationString != null) {
+        Ok(expirationString.toLong())
+      } else {
+        Err(
+          AptosSdkError.ApiError(
+            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
+          )
+        )
+      }
     }
-  }
+
+  return finalResult.toResult()
 }
 
-suspend fun getTargetAddress(aptosConfig: AptosConfig, name: String): Option<AccountAddress> {
-  val routerAddress = getRouterAddress(aptosConfig)
-  val ansName = isValidANSName(name)
+suspend fun getTargetAddress(
+  aptosConfig: AptosConfig,
+  name: String,
+): Result<AccountAddress, AptosSdkError> {
+  val ansName =
+    try {
+      isValidANSName(name)
+    } catch (e: IllegalArgumentException) {
+      val apiError =
+        AptosApiError(
+          message = e.message ?: "Invalid ANS name provided.",
+          errorCode = "INVALID_INPUT",
+        )
+      return Err(AptosSdkError.ApiError(apiError)).toResult()
+    }
 
+  val routerAddress = getRouterAddress(aptosConfig)
   val viewFunctionData =
     InputViewFunctionData(
       function = "${routerAddress}::router::get_target_addr",
       typeArguments = emptyList(),
       functionArguments = listOf(MoveString(ansName.first), MoveString(ansName.second ?: "")),
     )
-
-  val res =
+  val viewResult =
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
+      .toInternalResult()
 
-  return when (res) {
-    is Option.None -> Option.None
-    is Option.Some -> {
-      val accountAddressString = res.value.getOrNull(0)?.value?.getOrNull(0)?.value
-      if (accountAddressString != null) {
-        Option.Some(AccountAddress.fromString(accountAddressString))
+  println(viewResult)
+
+  val finalResult =
+    viewResult.andThen { moveValueList ->
+      val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
+
+      if (addressString != null) {
+        Ok(AccountAddress.fromString(addressString))
       } else {
-        Option.None
+        Err(
+          AptosSdkError.ApiError(
+            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
+          )
+        )
       }
     }
-  }
+
+  return finalResult.toResult()
 }
 
 suspend fun setTargetAddress(
@@ -194,7 +264,10 @@ suspend fun setTargetAddress(
   return transaction as SimpleTransaction
 }
 
-suspend fun getPrimaryName(aptosConfig: AptosConfig, address: AccountAddressInput): Option<String> {
+suspend fun getPrimaryName(
+  aptosConfig: AptosConfig,
+  address: AccountAddressInput,
+): Result<String, AptosSdkError> {
   val routerAddress = getRouterAddress(aptosConfig)
 
   val viewFunctionData =
@@ -215,13 +288,15 @@ suspend fun getPrimaryName(aptosConfig: AptosConfig, address: AccountAddressInpu
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
 
   return when (res) {
-    is Option.None -> Option.None
-    is Option.Some -> {
-      Option.Some(
+    is Result.Ok -> {
+      Result.Ok(
         res.value
           .mapNotNull { if (it.value.isNotEmpty()) it.value[0].value else null }
           .joinToString(".")
       )
+    }
+    is Result.Err -> {
+      return res
     }
   }
 }
