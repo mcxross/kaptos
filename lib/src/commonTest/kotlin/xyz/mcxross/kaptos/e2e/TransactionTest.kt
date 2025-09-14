@@ -17,70 +17,102 @@
 package xyz.mcxross.kaptos.e2e
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import xyz.mcxross.kaptos.Aptos
+import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.unit.TRANSFER_AMOUNT
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
+import xyz.mcxross.kaptos.util.getLocalNetwork
 import xyz.mcxross.kaptos.util.runBlocking
 
 class TransactionTest {
 
-  private val aptos = Aptos()
-  private val aptosLocal = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-
   @Test
   fun testGetGasPriceEstimation() = runBlocking {
-    val response = aptosLocal.getGasPriceEstimation()
-    assertTrue(response.gasEstimate > 0, "Gas estimate should be greater than 0")
+    val aptos = getLocalNetwork()
+    when (val resolution = aptos.getGasPriceEstimation()) {
+      is Result.Ok -> {
+        assertTrue(resolution.value.gasEstimate > 0, "Gas estimate should be greater than 0")
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   @Test
   fun `it queries for transactions on the chain`() = runBlocking {
-    val txns = aptos.getTransactions().expect("Couldn't retrieve transactions.")
-    assertTrue(txns.isNotEmpty(), "Chain should contain transactions.")
+    val aptos = getLocalNetwork()
+    when (val resolution = aptos.getTransactions()) {
+      is Result.Ok -> {
+        assertTrue(resolution.value.isNotEmpty(), "Chain should contain transactions.")
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   @Test
   fun `it queries for transactions by version`() = runBlocking {
+    val aptos = getLocalNetwork()
     val (alice, bob) = createAndFundAccounts()
     val wait = submitAndWaitForTransaction(alice, bob)
 
-    val respByVersion =
-      aptos
-        .getTransactionByVersion(wait.version.toLong())
-        .expect("Could not retrieve txn by version.")
-
-    assertTrue(respByVersion == wait)
+    when (val resolution = aptos.getTransactionByVersion(wait.version.toLong())) {
+      is Result.Ok -> {
+        assertEquals(resolution.value, wait, "Could not retrieve txn by version.")
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   @Test
   fun `it queries for transactions by hash`() = runBlocking {
+    val aptos = getLocalNetwork()
     val (alice, bob) = createAndFundAccounts()
     val wait = submitAndWaitForTransaction(alice, bob)
 
-    val resp = aptos.getTransactionByHash(wait.hash).expect("Unable to retrieve txn by hash.")
-
-    assertTrue(resp == wait)
+    when (val resolution = aptos.getTransactionByHash(wait.hash)) {
+      is Result.Ok -> {
+        assertEquals(resolution.value, wait, "Unable to retrieve txn by hash.")
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   @Test
   fun `it fetches block data by block height`() = runBlocking {
+    val aptos = getLocalNetwork()
     val blockHeight = 1L
-    val blockData = aptos.getBlockByHeight(blockHeight).expect("Cannot fetch block data by height.")
-    assertTrue(blockData.blockHeight.toLong() == blockHeight)
+    when (val resolution = aptos.getBlockByHeight(blockHeight)) {
+      is Result.Ok -> {
+        assertEquals(
+          resolution.value.blockHeight.toLong(),
+          blockHeight,
+          "Cannot fetch block data by height.",
+        )
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   @Test
   fun `it fetches block data by block version`() = runBlocking {
+    val aptos = getLocalNetwork()
     val blockVersion = 1L
-    val blockData =
-      aptos.getBlockByVersion(blockVersion).expect("Cannot fetch block data by version.")
-    assertTrue(blockData.blockHeight.toLong() == blockVersion)
+      when (val resolution = aptos.getBlockByVersion(blockVersion)) {
+      is Result.Ok -> {
+        assertEquals(
+          resolution.value.blockHeight.toLong(),
+          blockVersion,
+          "Cannot fetch block data by version.",
+        )
+      }
+      is Result.Err -> fail("")
+    }
   }
 
   private suspend fun createAndFundAccounts(): Pair<Account, Account> {
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
     val bob = Account.generate()
     aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
@@ -91,6 +123,7 @@ class TransactionTest {
     alice: Account,
     bob: Account,
   ): UserTransactionResponse {
+    val aptos = getLocalNetwork()
     val txn =
       aptos.transferCoinTransaction(alice.accountAddress, bob.accountAddress, TRANSFER_AMOUNT)
     val sub =

@@ -19,147 +19,249 @@ import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.api.txsubmission.Build
 import xyz.mcxross.kaptos.api.txsubmission.Simulate
 import xyz.mcxross.kaptos.api.txsubmission.Submit
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 
-/**
- * Transaction API namespace. This interface provides functionality to reading and writing
- * transactions.
- */
+/** An interface for reading and writing Aptos transactions. */
 interface Transaction {
 
-  /** Builds a transaction to be submitted to the chain */
+  /** Provides methods for building various transaction types. */
   val buildTransaction: Build
 
-  /** Submits a transaction to the chain */
+  /** Provides methods for submitting signed transactions. */
   val submitTransaction: Submit
 
-  /** Simulate transaction before signing */
+  /** Provides methods for simulating transactions. */
   val simulateTransaction: Simulate
 
   /**
-   * Queries on-chain transactions. This function will not return pending transactions. For that,
-   * use `getTransactionsByHash`.
+   * Queries for a list of committed on-chain transactions.
    *
-   * @param options.offset The number transaction to start with
-   * @param options.limit Number of results to return
-   * @returns Array of on-chain transactions
+   * Note: This function will not return pending transactions.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getTransactions(PaginationArgs(limit = 25))
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val transactions = resolution.value
+   * println("Fetched ${transactions.size} transactions.")
+   * }
+   * is Result.Err -> {
+   * println("Error fetching transactions: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param options Optional pagination arguments (`limit` and `offset`).
+   * @return A `Result` containing a list of [TransactionResponse]s or an [AptosSdkError].
    */
   suspend fun getTransactions(
     options: PaginationArgs? = null
-  ): Option<List<Option<List<TransactionResponse>>>>
+  ): Result<List<TransactionResponse>, AptosSdkError>
 
   /**
-   * Queries on-chain transaction by version. This function will not return pending transactions.
+   * Retrieves a committed on-chain transaction by its version number.
    *
-   * @param ledgerVersion - Transaction version is an unsigned 64-bit number.
-   * @returns [TransactionResponse] On-chain transaction. Only on-chain transactions have versions,
-   *   so this function cannot be used to query pending transactions.
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getTransactionByVersion(123456789)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val transaction = resolution.value
+   * println("Transaction hash: ${transaction.hash}")
+   * }
+   * is Result.Err -> {
+   * println("Error fetching transaction: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param ledgerVersion The version of the transaction to retrieve.
+   * @return A `Result` containing the [TransactionResponse] or an [AptosSdkError].
    */
-  suspend fun getTransactionByVersion(ledgerVersion: Long): Option<TransactionResponse>
+  suspend fun getTransactionByVersion(
+    ledgerVersion: Long
+  ): Result<TransactionResponse, AptosSdkError>
 
   /**
-   * Queries on-chain transaction by transaction hash. This function will return pending
-   * transactions.
+   * Retrieves a transaction by its hash.
    *
-   * @param transactionHash - Transaction hash should be hex-encoded bytes string with 0x prefix.
-   * @returns [TransactionResponse] from mempool (pending) or on-chain (committed) transaction
+   * Note: This function can return both pending (mempool) and committed transactions.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val hash = "0x..."
+   * val resolution = aptos.getTransactionByHash(hash)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val transaction = resolution.value
+   * println("Transaction success status: ${transaction.success}")
+   * }
+   * is Result.Err -> {
+   * println("Error fetching transaction: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param transactionHash The hex-encoded hash of the transaction.
+   * @return A `Result` containing the [TransactionResponse] or an [AptosSdkError].
    */
-  suspend fun getTransactionByHash(transactionHash: String): Option<TransactionResponse>
+  suspend fun getTransactionByHash(
+    transactionHash: String
+  ): Result<TransactionResponse, AptosSdkError>
 
   /**
-   * Defines if specified transaction is currently in pending state
+   * Checks if a transaction is currently in a pending state.
    *
-   * To create a transaction hash:
-   * 1. Create a hash message from the bytes: "Aptos::Transaction" bytes + the BCS-serialized
-   *    Transaction bytes.
-   * 2. Apply hash algorithm SHA3-256 to the hash message bytes.
-   * 3. Hex-encode the hash bytes with 0x prefix.
+   * ## Usage
    *
-   * @param transactionHash A hash of transaction
-   * @returns `true` if transaction is in pending state and `false` otherwise
+   * ```kotlin
+   * val hash = HexInput.fromString("0x...")
+   * val isPending = aptos.isPendingTransaction(hash)
+   * println("Is the transaction pending? $isPending")
+   * ```
+   *
+   * @param transactionHash The hash of the transaction.
+   * @return `true` if the transaction is pending, `false` otherwise.
    */
   suspend fun isPendingTransaction(transactionHash: HexInput): Boolean
 
+  /**
+   * Waits for a transaction to be successfully processed and included in the blockchain.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val hash = HexInput.fromString("0x...")
+   * val resolution = aptos.waitForTransaction(hash)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val transaction = resolution.value
+   * println("Transaction confirmed in version ${transaction.version}")
+   * }
+   * is Result.Err -> {
+   * println("Error waiting for transaction: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param transactionHash The hash of the transaction to wait for.
+   * @param options Optional configuration for the wait, such as timeout.
+   * @return A `Result` containing the confirmed [TransactionResponse] or an [Exception].
+   */
   suspend fun waitForTransaction(
     transactionHash: HexInput,
     options: WaitForTransactionOptions = WaitForTransactionOptions(),
-  ): Option<TransactionResponse>
+  ): Result<TransactionResponse, Exception>
 
   /**
-   * Gives an estimate of the gas unit price required to get a transaction on chain in a reasonable
-   * amount of time. For more information {@link
-   * https://api.mainnet.aptoslabs.com/v1/spec#/operations/estimate_gas_price}
+   * Retrieves a gas price estimation from the network.
    *
-   * @returns [GasEstimation]
+   * This is useful for setting a gas unit price that is likely to be accepted in a reasonable
+   * amount of time.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getGasPriceEstimation()
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val gasInfo = resolution.value
+   * println("Standard gas unit price: ${gasInfo.gasEstimate}")
+   * }
+   * is Result.Err -> {
+   * println("Error estimating gas price: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @return A `Result` containing [GasEstimation] data or an [AptosSdkError].
    */
-  suspend fun getGasPriceEstimation(): GasEstimation
+  suspend fun getGasPriceEstimation(): Result<GasEstimation, AptosSdkError>
 
   /**
-   * Sign a transaction that can later be submitted to chain
+   * Signs a raw transaction with a signer's account.
    *
-   * @param signer The signer account
-   * @param transaction A raw transaction to sign on
-   * @returns [AccountAuthenticator]
+   * ## Usage
+   *
+   * ```kotlin
+   * val alice = Account.generate()
+   * val rawTxn = aptos.buildTransaction.simple(...)
+   * val authenticator = aptos.sign(alice, rawTxn)
+   * println("Transaction signed.")
+   * ```
+   *
+   * @param signer The account to sign the transaction with.
+   * @param transaction The raw transaction to sign.
+   * @return An [AccountAuthenticator] containing the signature.
    */
   fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
 
   /**
-   * Sign a transaction as a fee payer that can later be submitted to chain
+   * Signs a raw transaction as the fee payer.
    *
-   * @param signer The fee payer signer account
-   * @param transaction A raw transaction to sign on
-   * @returns [AccountAuthenticator]
+   * @param signer The fee payer account to sign the transaction with.
+   * @param transaction The raw transaction to sign.
+   * @return An [AccountAuthenticator] containing the fee payer's signature.
    */
   fun signAsFeePayer(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator
 
   /**
-   * Sign and submit a single signer transaction to chain
+   * Signs and submits a single-signer transaction in one step.
    *
-   * @param signer The signer account to sign the transaction
-   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
+   * ## Usage
    *
-   * ```
-   * {
-   *  rawTransaction: RawTransaction,
-   *  secondarySignerAddresses? : Array<AccountAddress>,
-   *  feePayerAddress?: AccountAddress
+   * ```kotlin
+   * val alice = Account.generate()
+   * val rawTxn = aptos.buildTransaction.simple(...)
+   * val resolution = aptos.signAndSubmitTransaction(alice, rawTxn)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val pendingTx = resolution.value
+   * println("Transaction submitted with hash: ${pendingTx.hash}")
+   * }
+   * is Result.Err -> {
+   * println("Error signing and submitting: ${resolution.error.message}")
+   * }
    * }
    * ```
    *
-   * @return PendingTransactionResponse
+   * @param signer The account to sign the transaction with.
+   * @param transaction The raw transaction to sign and submit.
+   * @return A `Result` containing the [PendingTransactionResponse] or an [Exception].
    */
   suspend fun signAndSubmitTransaction(
     signer: Account,
     transaction: AnyRawTransaction,
-  ): Option<PendingTransactionResponse>
+  ): Result<PendingTransactionResponse, Exception>
 
   /**
-   * Sign and submit a single signer transaction as the fee payer to chain given an authenticator by
-   * the sender of the transaction.
+   * Signs a transaction as the fee payer and submits it to the network.
    *
-   * @param feePayer The fee payer account to sign the transaction
-   * @param senderAuthenticator The AccountAuthenticator signed by the sender of the transaction
-   * @param transaction An instance of a RawTransaction, plus optional secondary/fee payer addresses
-   * @return [Option<PendingTransactionResponse>]
+   * @param feePayer The fee payer account to sign the transaction with.
+   * @param senderAuthenticator The authenticator from the primary transaction sender.
+   * @param transaction The raw transaction to sign and submit.
+   * @return A `Result` containing the [PendingTransactionResponse] or an [Exception].
    */
   suspend fun signAndSubmitAsFeePayer(
     feePayer: Account,
     senderAuthenticator: AccountAuthenticator,
     transaction: AnyRawTransaction,
-  ): Option<PendingTransactionResponse>
+  ): Result<PendingTransactionResponse, Exception>
 
   /**
-   * Generates a transaction to publish a move package to chain.
+   * Builds a transaction to publish a new Move package.
    *
-   * To get the `metadataBytes` and `byteCode`, can compile using Aptos CLI with command `aptos move
-   * compile --save-metadata ...`,
-   *
-   * @param account The publisher account
-   * @param metadataBytes The package metadata bytes
-   * @param moduleBytecode An array of the bytecode of each module in the package in compiler output
-   *   order
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @param account The address of the publishing account.
+   * @param metadataBytes The serialized package metadata.
+   * @param moduleBytecode A list of serialized bytecodes for each module in the package.
+   * @param options Optional configuration for the transaction.
+   * @return A [SimpleTransaction] object ready to be signed and submitted.
    */
   suspend fun publishPackageTransaction(
     account: AccountAddressInput,
