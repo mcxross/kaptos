@@ -16,37 +16,46 @@
 package xyz.mcxross.kaptos.e2e
 
 import kotlin.test.Test
-import kotlin.test.assertTrue
-import kotlinx.serialization.Serializable
+import kotlin.test.assertEquals
+import kotlin.test.fail
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.protocol.getAccountResource
+import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.protocol.view
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
 import xyz.mcxross.kaptos.util.runBlocking
-
-@Serializable data class Data(val data: Coin)
-
-@Serializable data class Coin(val coin: CoinValue)
-
-@Serializable data class CoinValue(val value: String)
 
 class FaucetTest {
 
   @Test
-  fun `should fund account with faucet and verify balance`() = runBlocking {
-    val aptosClient = Aptos()
+  fun `it should fund account with faucet and verify balance`() = runBlocking {
+    val config = AptosConfig(AptosSettings(network = Network.LOCAL))
+    val aptos = Aptos(config)
     val aliceAccount = Account.generate()
 
-    aptosClient.fundAccount(aliceAccount.accountAddress, FUND_AMOUNT)
+    when (val fundResolution = aptos.fundAccount(aliceAccount.accountAddress, FUND_AMOUNT)) {
+      is Result.Ok -> {
+        val payload =
+          InputViewFunctionData(
+            function = "0x1::coin::balance",
+            typeArguments =
+              listOf(TypeTagStruct(type = StructTag.fromString("0x1::aptos_coin::AptosCoin"))),
+            functionArguments = listOf(aliceAccount.accountAddress),
+          )
 
-    val coinStoreResource =
-      aptosClient
-        .getAccountResource<Data>(
-          aliceAccount.accountAddress,
-          "0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>",
-        )
-        .expect("Failed to retrieve account resource: CoinStore<0x1::aptos_coin::AptosCoin>")
-
-    assertTrue(FUND_AMOUNT.toString() == coinStoreResource.data.coin.value)
+        when (val coinStoreResResolution = aptos.view<List<MoveValue.MoveUint64Type>>(payload)) {
+          is Result.Ok -> {
+            assertEquals(
+              FUND_AMOUNT,
+              coinStoreResResolution.value.firstOrNull()?.value ?: 0,
+              "CoinStore balance should match the funded amount",
+            )
+          }
+          is Result.Err ->
+            fail("getAccountResource failed: ${coinStoreResResolution.error.message}")
+        }
+      }
+      is Result.Err -> fail("fundAccount failed: ${fundResolution.error.message}")
+    }
   }
 }
