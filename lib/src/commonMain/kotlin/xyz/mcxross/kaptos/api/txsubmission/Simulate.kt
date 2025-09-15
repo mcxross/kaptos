@@ -25,7 +25,7 @@ class Simulate(val aptosConfig: AptosConfig) {
     transaction: AnyRawTransaction,
     feePayerPublicKey: PublicKey? = null,
     options: InputSimulateTransactionOptions = InputSimulateTransactionOptions(),
-  ): Option<List<UserTransactionResponse>> =
+  ): Result<List<UserTransactionResponse>, Exception> =
     simulateTransaction(
       aptosConfig = aptosConfig,
       data =

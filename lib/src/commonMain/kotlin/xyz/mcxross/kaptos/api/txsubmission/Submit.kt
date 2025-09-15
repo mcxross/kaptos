@@ -34,7 +34,7 @@ class Submit(private val aptosConfig: AptosConfig) {
     transaction: AnyRawTransaction,
     senderAuthenticator: AccountAuthenticator,
     feePayerAuthenticator: AccountAuthenticator? = null,
-  ): Option<PendingTransactionResponse> =
+  ): Result<PendingTransactionResponse, Exception> =
     submitTransaction(
       aptosConfig = aptosConfig,
       InputSubmitTransactionData(transaction, senderAuthenticator, feePayerAuthenticator),

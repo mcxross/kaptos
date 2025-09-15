@@ -17,8 +17,6 @@ package xyz.mcxross.kaptos.internal
 
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.postAptosFullNode
-import xyz.mcxross.kaptos.exception.AbortedException
-import xyz.mcxross.kaptos.exception.Error
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.builder.*
@@ -91,10 +89,10 @@ internal fun signAsFeePayer(signer: Account, transaction: AnyRawTransaction): Ac
 internal suspend fun submitTransaction(
   aptosConfig: AptosConfig,
   inputSubmitTransactionData: InputSubmitTransactionData,
-): Option<PendingTransactionResponse> {
+): Result<PendingTransactionResponse, Exception> {
   val signedTransaction = generateSignedTransaction(inputSubmitTransactionData)
 
-  val response =
+  val res =
     postAptosFullNode<PendingTransactionResponse, ByteArray>(
       RequestOptions.PostAptosRequestOptions(
         aptosConfig = aptosConfig,
@@ -105,11 +103,18 @@ internal suspend fun submitTransaction(
       )
     )
 
-  if (response.first.status == Error.ABORTED.asHttpStatusCode()) {
-    throw AbortedException()
-  }
+  /*when (res) {
+    is Result.Ok -> {
+      if (res.value.first.status == Error.ABORTED.asHttpStatusCode()) {
+        return Result.Err(AbortedException())
+      }
+    }
+    is Result.Err -> {
+        return Result.Err(AptosError())
+    }
+  }*/
 
-  return Option.Some(response.second)
+  return Result.Ok(res.value.second)
 }
 
 internal suspend fun signAndSubmitAsFeePayer(
@@ -117,7 +122,7 @@ internal suspend fun signAndSubmitAsFeePayer(
   feePayer: Account,
   senderAuthenticator: AccountAuthenticator,
   transaction: AnyRawTransaction,
-): Option<PendingTransactionResponse> {
+): Result<PendingTransactionResponse, Exception> {
 
   val feePayerAuthenticator = signAsFeePayer(feePayer, transaction)
 
@@ -134,10 +139,10 @@ internal suspend fun signAndSubmitAsFeePayer(
 internal suspend fun simulateTransaction(
   aptosConfig: AptosConfig,
   data: InputSimulateTransactionData,
-): Option<List<UserTransactionResponse>> {
+): Result<List<UserTransactionResponse>, Exception> {
   val signedTransaction = generateSignedTransactionForSimulation(data)
 
-  val response =
+  val resolution =
     postAptosFullNode<List<UserTransactionResponse>, ByteArray>(
       RequestOptions.PostAptosRequestOptions(
         aptosConfig = aptosConfig,
@@ -154,7 +159,11 @@ internal suspend fun simulateTransaction(
       )
     )
 
-  return Option.Some(response.second)
+  return if (resolution.isOk) {
+    Result.Ok(resolution.value.second)
+  } else {
+    Result.Err(resolution.error)
+  }
 }
 
 internal suspend fun publicPackageTransaction(

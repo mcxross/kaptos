@@ -15,6 +15,8 @@
  */
 package xyz.mcxross.kaptos.transaction.builder
 
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.GraphQLError
 import xyz.mcxross.kaptos.internal.getModule
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.typetag.TypeTagParser
@@ -34,19 +36,21 @@ suspend fun fetchFunctionAbi(
   moduleName: String,
   functionName: String,
   aptosConfig: AptosConfig,
-): Option<MoveFunction> {
+): Result<MoveFunction, Exception> {
   return when (val module = getModule(aptosConfig, HexInput(moduleAddress), moduleName)) {
-    is Option.Some -> {
-      val function = module.value.abi?.exposedFunctions?.find { it.name == functionName }
-      if (function != null) {
-        Option.Some(function)
+    is Result.Ok -> {
+      val fn = module.value.abi?.exposedFunctions?.find { it.name == functionName }
+      if (fn != null) {
+        Result.Ok(fn)
       } else {
-        Option.None
+        Result.Err(
+          AptosIndexerError.GraphQL(
+            listOf(GraphQLError("Function $functionName not found in module $moduleName"))
+          )
+        )
       }
     }
-    is Option.None -> {
-      Option.None
-    }
+    is Result.Err -> Result.Err(module.error)
   }
 }
 
@@ -55,7 +59,7 @@ suspend fun fetchEntryFunctionAbi(
   moduleAddress: String,
   moduleName: String,
   functionName: String,
-): Option<EntryFunctionABI> {
+): Result<EntryFunctionABI, Exception> {
 
   val functionAbi =
     fetchFunctionAbi(moduleAddress, moduleName, functionName, aptosConfig)
@@ -77,7 +81,7 @@ suspend fun fetchEntryFunctionAbi(
     params.add(TypeTagParser.parseTypeTag(functionAbi.params[i], true))
   }
 
-  return Option.Some(
+  return Result.Ok(
     EntryFunctionABI(typeParameters = functionAbi.genericTypeParams, parameters = params)
   )
 }
@@ -95,32 +99,36 @@ suspend fun fetchViewFunctionAbi(
   moduleAddress: String,
   moduleName: String,
   functionName: String,
-): Option<ViewFunctionABI> {
+): Result<ViewFunctionABI, Exception> {
+  return when (
+    val functionAbi = fetchFunctionAbi(moduleAddress, moduleName, functionName, aptosConfig)
+  ) {
+    is Result.Ok -> {
+      val fn = functionAbi.value
 
-  when (val functionAbi = fetchFunctionAbi(moduleAddress, moduleName, functionName, aptosConfig)) {
-    is Option.None -> {
-      throw IllegalArgumentException(
-        "Could not find view function ABI for '${moduleAddress}::${moduleName}::${functionName}"
-      )
-    }
-    is Option.Some -> {
-      if (!functionAbi.value.isView) {
-        throw IllegalArgumentException(
-          "Function '${moduleAddress}::${moduleName}::${functionName}' is not a view function"
+      if (!fn.isView) {
+        return Result.Err(
+          AptosIndexerError.GraphQL(
+            listOf(
+              GraphQLError(
+                "Function '${moduleAddress}::${moduleName}::${functionName}' is not a view function"
+              )
+            )
+          )
         )
       }
 
-      val params = functionAbi.value.params.map { TypeTagParser.parseTypeTag(it, true) }
+      val params = fn.params.map { TypeTagParser.parseTypeTag(it, true) }
+      val returnTypes = fn.`return`.map { TypeTagParser.parseTypeTag(it, true) }
 
-      val returnTypes = functionAbi.value.`return`.map { TypeTagParser.parseTypeTag(it, true) }
-
-      return Option.Some(
+      Result.Ok(
         ViewFunctionABI(
-          typeParameters = functionAbi.value.genericTypeParams,
+          typeParameters = fn.genericTypeParams,
           parameters = params,
           returnTypes = returnTypes,
         )
       )
     }
+    is Result.Err -> functionAbi
   }
 }

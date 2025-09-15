@@ -24,6 +24,7 @@ import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo
 import xyz.mcxross.kaptos.internal.getLedgerInfo
+import xyz.mcxross.kaptos.internal.toInternalResult
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.EntryFunction
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
@@ -58,19 +59,18 @@ suspend fun generateRawTransaction(
   val gasUnitPrice =
     options?.gasUnitPrice
       ?: getGasPriceEstimation(aptosConfig).let { response ->
-        when (response) {
-          is Option.None -> throw IllegalArgumentException("Could not fetch gas price")
-          is Option.Some -> response.value.gasEstimate
+        if (response.toInternalResult().isOk) {
+          response.toInternalResult().value.gasEstimate
+        } else {
+          throw IllegalArgumentException("Could not fetch gas price")
         }
       }
 
   val sequenceNumber =
     options?.accountSequenceNumber
       ?: when (val response = getInfo(aptosConfig, sender)) {
-        is Option.None -> throw IllegalArgumentException("Could not fetch sequence number")
-        is Option.Some -> {
-          response.value.sequenceNumber.toLong()
-        }
+        is Result.Ok -> response.value.sequenceNumber.toLong()
+        is Result.Err -> throw IllegalArgumentException("Could not fetch sequence number")
       }
 
   return RawTransaction(
@@ -117,8 +117,8 @@ suspend fun generateTransactionPayload(
       .function
       .parts()
 
-  val functionAbi: Option<EntryFunctionABI> =
-    data.inputEntryFunctionData.abi?.let { Option.Some(it) }
+  val functionAbi: Result<EntryFunctionABI, Exception> =
+    data.inputEntryFunctionData.abi?.let { Result.Ok(it) }
       ?: fetchEntryFunctionAbi(
         aptosConfig = aptosConfig,
         moduleAddress = functionParts.first,
@@ -127,7 +127,7 @@ suspend fun generateTransactionPayload(
       )
 
   return when (functionAbi) {
-    is Option.Some -> {
+    is Result.Ok -> {
       val inputEntryFunctionData =
         InputEntryFunctionData(
           function = data.inputEntryFunctionData.function,
@@ -141,7 +141,7 @@ suspend fun generateTransactionPayload(
         )
       generateTransactionPayloadWithABI(abiWithRemoteABI)
     }
-    is Option.None ->
+    is Result.Err ->
       throw IllegalArgumentException(
         "Could not find function ABI for '${functionParts.first}::${functionParts.second}::${functionParts.third}'"
       )
@@ -204,8 +204,8 @@ suspend fun generateViewFunctionPayload(
           functionParts.third,
         )
       when (response) {
-        is Option.Some -> response.value
-        is Option.None ->
+        is Result.Ok -> response.value
+        is Result.Err ->
           throw IllegalArgumentException(
             "Could not find view function ABI for '${functionParts.first}::${functionParts.second}::${functionParts.third}"
           )
