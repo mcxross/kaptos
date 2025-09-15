@@ -18,6 +18,8 @@ package xyz.mcxross.kaptos.util
 
 const val APTOS_COIN = "0x1::aptos_coin::AptosCoin"
 
+const val APTOS_FA = "0x000000000000000000000000000000000000000000000000000000000000000a"
+
 const val RAW_TRANSACTION_SALT = "APTOS::RawTransaction"
 
 const val RAW_TRANSACTION_WITH_DATA_SALT = "APTOS::RawTransactionWithData"
