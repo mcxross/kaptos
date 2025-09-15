@@ -22,6 +22,7 @@ package xyz.mcxross.kaptos.model
  * https://cloud.hasura.io/public/graphiql?endpoint=https://api.mainnet.aptoslabs.com/v1/graphql}
  */
 enum class ProcessorType(val value: String) {
+  ACCOUNT_RESTORATION_PROCESSOR("account_restoration_processor"),
   ACCOUNT_TRANSACTION_PROCESSOR("account_transactions_processor"),
   DEFAULT("default_processor"),
   EVENTS_PROCESSOR("events_processor"),
@@ -29,4 +30,5 @@ enum class ProcessorType(val value: String) {
   STAKE_PROCESSOR("stake_processor"),
   TOKEN_V2_PROCESSOR("token_v2_processor"),
   USER_TRANSACTION_PROCESSOR("user_transaction_processor"),
+  OBJECT_PROCESSOR("objects_processor")
 }
