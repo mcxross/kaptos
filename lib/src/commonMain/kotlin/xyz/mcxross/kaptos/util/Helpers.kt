@@ -16,9 +16,11 @@
 
 package xyz.mcxross.kaptos.util
 
+import com.apollographql.apollo.api.Optional
 import io.ktor.utils.io.charsets.*
 import io.ktor.utils.io.core.*
 import kotlin.String
+import xyz.mcxross.kaptos.internal.waitForIndexer
 import xyz.mcxross.kaptos.model.*
 
 fun String.toAccountAddress(): HexInput {
@@ -67,4 +69,17 @@ fun findFirstNonSignerArg(functionAbi: MoveFunction): Int {
 // if a MoveString should be serialized as a hex string or a regular string
 fun isHex(input: String): Boolean {
   return input.matches(Regex("0x[0-9a-fA-F]+"))
+}
+
+internal fun <T> T?.toOptional(): Optional<T?> =
+  if (this == null) Optional.Absent else Optional.Present(this)
+
+internal suspend fun waitForIndexerOnVersion(
+  config: AptosConfig,
+  minimumLedgerVersion: Long?,
+  processorType: ProcessorType,
+) {
+  if (minimumLedgerVersion != null) {
+    waitForIndexer(config, minimumLedgerVersion, processorType)
+  }
 }
