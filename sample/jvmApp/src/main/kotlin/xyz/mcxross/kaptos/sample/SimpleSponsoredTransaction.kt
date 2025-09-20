@@ -20,8 +20,7 @@ import kotlinx.coroutines.runBlocking
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.model.HexInput
-import xyz.mcxross.kaptos.model.Option
-import xyz.mcxross.kaptos.model.Option.Some
+import xyz.mcxross.kaptos.model.Result
 
 const val ALICE_INITIAL_BALANCE = 100_000_000L
 const val SPONSOR_INITIAL_BALANCE = 100_000_000L
@@ -50,15 +49,15 @@ fun main() = runBlocking {
   val sponsorBalanceBefore = aptos.getAccountCoinsData(sponsor.accountAddress)
 
   when (aliceBalanceBefore) {
-    is Some -> println("Alice's balance: $aliceBalanceBefore")
-    is Option.None -> throw Error("Alice's sponsor: None")
+    is Result.Ok -> println("Alice's balance: $aliceBalanceBefore")
+    is Result.Err -> throw Error("Alice's sponsor: None")
   }
 
   println("Bob's balance: $BOB_INITIAL_BALANCE")
 
   when (sponsorBalanceBefore) {
-    is Some -> println("Sponsor's balance: $sponsorBalanceBefore")
-    is Option.None -> throw Error("Sponsor's balance: None")
+    is Result.Ok -> println("Sponsor's balance: $sponsorBalanceBefore")
+    is Result.Err -> throw Error("Sponsor's balance: None")
   }
 
   println("\n=== Submitting Transaction ===")
