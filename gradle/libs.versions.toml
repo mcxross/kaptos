@@ -4,8 +4,9 @@ apollo-runtime = "4.3.2"
 compose-plugin = "1.8.2"
 kotlin = "2.2.0"
 kotlinx-datetime = "0.6.2"
-kotlinx-serialization-core = "1.8.1"
-ktor = "3.1.1"
+kotlin-result = "2.0.1"
+kotlinx-serialization-core = "1.9.0"
+ktor = "3.2.3"
 
 [libraries]
 apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo-runtime" }
@@ -13,9 +14,10 @@ bcprov-jdk15on = { module = "org.bouncycastle:bcprov-jdk15on", version = "1.68" 
 bcs = { module = "xyz.mcxross.bcs:bcs", version = "0.1.2" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.8.0" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "kotlin-result" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinx-serialization-core" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-ktor-client-cio = { module = "io.ktor:ktor-client-apache", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-curl = { module = "io.ktor:ktor-client-curl", version.ref = "ktor" }

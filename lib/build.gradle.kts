@@ -1,8 +1,8 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import java.net.URL
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
 
 plugins {
   alias(libs.plugins.android.library)
@@ -73,6 +73,7 @@ kotlin {
       implementation(libs.ktor.serialization.kotlinx.json)
       implementation(libs.kotlinx.datetime)
       implementation(libs.kotlinx.serialization.core)
+      implementation(libs.kotlin.result)
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
@@ -90,12 +91,7 @@ kotlin {
   }
 }
 
-apollo {
-  service("service") {
-    packageName.set("xyz.mcxross.kaptos.generated")
-  }
-}
-
+apollo { service("service") { packageName.set("xyz.mcxross.kaptos.generated") } }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -123,8 +119,7 @@ tasks.getByName<DokkaTask>("dokkaHtml") {
       sourceLink {
         localDirectory.set(file("commonMain/kotlin"))
         remoteUrl.set(
-          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
-        )
+            URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin"))
         remoteLineSuffix.set("#L")
       }
     }
@@ -139,12 +134,11 @@ mavenPublishing {
   coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
   configure(
-    KotlinMultiplatform(
-      javadocJar = JavadocJar.Dokka("dokkaHtml"),
-      sourcesJar = true,
-      androidVariantsToPublish = listOf("debug", "release"),
-    )
-  )
+      KotlinMultiplatform(
+          javadocJar = JavadocJar.Dokka("dokkaHtml"),
+          sourcesJar = true,
+          androidVariantsToPublish = listOf("debug", "release"),
+      ))
 
   pom {
     name.set("Kaptos")
