@@ -16,11 +16,10 @@
 
 package xyz.mcxross.kaptos.internal
 
-import io.ktor.client.call.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
 import xyz.mcxross.kaptos.client.postAptosFaucet
 import xyz.mcxross.kaptos.exception.AptosApiError
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun fundAccount(
@@ -28,8 +27,8 @@ internal suspend fun fundAccount(
   accountAddress: AccountAddressInput,
   amount: Long,
   options: WaitForTransactionOptions = WaitForTransactionOptions(),
-): Option<TransactionResponse> {
-  val response =
+): Result<TransactionResponse, AptosSdkError> {
+  val faucetResult =
     postAptosFaucet(
       RequestOptions.PostAptosRequestOptions(
         aptosConfig = aptosConfig,
@@ -39,13 +38,50 @@ internal suspend fun fundAccount(
       )
     )
 
-  if (response.status == HttpStatusCode.InternalServerError) {
-    throw AptosApiError(response.call.request, response, "Error: ${response.bodyAsText()}")
+  val txnHashes =
+    if (faucetResult.isOk) {
+      faucetResult.value
+    } else {
+      val error = faucetResult.error
+      return Result.Err(error)
+    }
+
+  val hashToWaitFor =
+    txnHashes.txnHashes.firstOrNull()
+      ?: return Result.Err(
+        AptosSdkError.ApiError(
+          AptosApiError(
+            message = "Faucet did not return any transaction hashes",
+            errorCode = "NO_TXN_HASH_RETURNED_FROM_FAUCET",
+          )
+        )
+      )
+
+  val waitResult: Result<TransactionResponse, AptosIndexerError> =
+    try {
+      waitForTransaction(aptosConfig, hashToWaitFor, options)
+    } catch (e: Exception) {
+      return Result.Err(
+        AptosSdkError.ApiError(
+          AptosApiError(
+            message = e.message ?: "waitForTransaction failed unexpectedly",
+            errorCode = "WAIT_FOR_TRANSACTION_THREW_EXCEPTION",
+          )
+        )
+      )
+    }
+
+  return when (waitResult) {
+    is Result.Ok -> Result.Ok(waitResult.value)
+    is Result.Err -> {
+      Result.Err(
+        AptosSdkError.ApiError(
+          AptosApiError(
+            message = waitResult.error.message ?: "waitForTransaction returned an error",
+            errorCode = "WAIT_FOR_TRANSACTION_FAILED",
+          )
+        )
+      )
+    }
   }
-
-  val faucetResponse: FaucetResponse = response.body()
-
-  val txResponse = waitForTransaction(aptosConfig, faucetResponse.txnHashes[0], options)
-
-  return txResponse
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 McXross
+ * Copyright 2025 McXross
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,33 +15,28 @@
  */
 package xyz.mcxross.kaptos.exception
 
-import xyz.mcxross.kaptos.model.AptosRequest
-import xyz.mcxross.kaptos.model.AptosResponse
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-/**
- * The type returned from an API error
- *
- * @property name - the error name "AptosApiError"
- * @property url the url the request was made to
- * @property status - the response status. i.e. 400
- * @property statusText - the response message
- * @property data the response data
- * @property request - the AptosRequest
- */
-class AptosApiError(val request: AptosRequest, val response: AptosResponse, message: String) :
-  Exception(message) {
+/** Represents a structured error response from the Aptos REST API. */
+@Serializable
+data class AptosApiError(
+  /** A descriptive message about the error. */
+  override val message: String,
 
-  val name: String = "AptosApiError"
+  /** A specific error code for more granular error information. */
+  @SerialName("error_code") val errorCode: String,
 
-  val url: String = response.call.request.url.toString()
+  /** Provides VM error details when submitting transactions. */
+  @SerialName("vm_error_code") val vmErrorCode: Long? = null,
+) : Exception(message) {
 
-  val status: Int = response.status.value
-
-  val statusText: String = response.status.description
-
-  val data: Any = "data currently not supported"
-
-  override fun toString(): String {
-    return "AptosApiError: $message - $url - $status - $statusText - $data"
-  }
+  /** A helper property to conveniently access the typed [AptosErrorCode]. */
+  val code: AptosErrorCode
+    get() =
+      try {
+        enumValueOf<AptosErrorCode>(errorCode.uppercase())
+      } catch (e: IllegalArgumentException) {
+        AptosErrorCode.UNKNOWN_ERROR_CODE
+      }
 }

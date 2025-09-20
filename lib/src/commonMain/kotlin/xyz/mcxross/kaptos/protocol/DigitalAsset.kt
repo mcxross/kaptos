@@ -16,9 +16,14 @@
 
 package xyz.mcxross.kaptos.protocol
 
+import kotlin.Long
 import kotlin.coroutines.cancellation.CancellationException
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.exception.AptosException
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.generated.GetCollectionDataQuery
+import xyz.mcxross.kaptos.generated.GetCurrentTokenOwnershipQuery
+import xyz.mcxross.kaptos.generated.GetTokenDataQuery
 import xyz.mcxross.kaptos.model.*
 
 /**
@@ -34,18 +39,12 @@ interface DigitalAsset {
    * If, for some reason, a creator account has 2 collections with the same name in v1 and v2, can
    * pass an optional `tokenStandard` parameter to query a specific standard
    *
-   * @param creatorAddress the address of the collection's creator
-   * @param collectionName the name of the collection
-   * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
-   * @param tokenStandard the token standard to query
-   * @returns GetCollectionDataResponse response type
+   * @param filter the address of the collection's creator
+   * @returns [Result] response type
    */
   suspend fun getCollectionData(
-    creatorAddress: AccountAddressInput,
-    collectionName: String,
-    minimumLedgerVersion: Long?,
-    tokenStandard: TokenStandard?,
-  ): Option<CollectionData?>
+    filter: CollectionOwnershipV2Filter
+  ): Result<GetCollectionDataQuery.Data?, AptosIndexerError>
 
   /**
    * Queries data of a specific collection by the collection ID.
@@ -53,15 +52,22 @@ interface DigitalAsset {
    * @param collectionId the ID of the collection, it's the same thing as the address of the
    *   collection object
    * @param minimumLedgerVersion Optional ledger version to sync up to, before querying
-   * @returns [CollectionData] response type
+   * @returns [Result] response type
    */
   suspend fun getCollectionDataByCollectionId(
     collectionId: String,
     minimumLedgerVersion: Long?,
-  ): Option<CollectionData?>
+  ): Result<GetCollectionDataQuery.Data?, AptosIndexerError>
 
-  @Throws(AptosException::class, CancellationException::class)
-  suspend fun getTokenData(offset: Int? = null, limit: Int? = null): Option<TokenData?>
+  @Throws(AptosSdkError::class, CancellationException::class)
+  suspend fun getTokenData(
+    page: PaginationArgs? = null
+  ): Result<GetTokenDataQuery.Data?, AptosIndexerError>
+
+  suspend fun getCurrentDigitalAssetOwnership(
+    digitalAssetAddress: AccountAddressInput,
+    minimumLedgerVersion: Long? = null,
+  ): Result<GetCurrentTokenOwnershipQuery.Data?, AptosIndexerError>
 
   /**
    * Creates a new collection within the specified account.
