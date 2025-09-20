@@ -16,39 +16,66 @@
 
 package xyz.mcxross.kaptos.internal
 
-import xyz.mcxross.graphql.client.types.KotlinxGraphQLResponse
-import xyz.mcxross.kaptos.client.indexerClient
-import xyz.mcxross.kaptos.exception.AptosException
-import xyz.mcxross.kaptos.generated.GetNumberOfDelegators
-import xyz.mcxross.kaptos.generated.inputs.String_comparison_exp
-import xyz.mcxross.kaptos.generated.inputs.num_active_delegator_per_pool_bool_exp
+import com.github.michaelbull.result.map
+import xyz.mcxross.kaptos.client.getGraphqlClient
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.generated.GetDelegatedStakingActivitiesQuery
+import xyz.mcxross.kaptos.generated.GetNumberOfDelegatorsQuery
+import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
+import xyz.mcxross.kaptos.model.ActiveDelegatorPerPoolOrder
 import xyz.mcxross.kaptos.model.AptosConfig
-import xyz.mcxross.kaptos.model.NumberOfDelegators
-import xyz.mcxross.kaptos.model.Option
+import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.types.numActiveDelegatorPerPoolFilter
+import xyz.mcxross.kaptos.model.types.stringFilter
+import xyz.mcxross.kaptos.util.toOptional
 
 internal suspend fun getNumberOfDelegators(
   aptosConfig: AptosConfig,
   poolAddress: AccountAddressInput,
-): Option<NumberOfDelegators> {
-  val delegators =
-    GetNumberOfDelegators(
-      GetNumberOfDelegators.Variables(
-        where_condition =
-          num_active_delegator_per_pool_bool_exp(
-            pool_address = String_comparison_exp(_eq = poolAddress.value)
+  sortOrder: List<ActiveDelegatorPerPoolOrder>?,
+): Result<Long, AptosIndexerError> =
+  handleQuery {
+      val filter = numActiveDelegatorPerPoolFilter {
+        this.poolAddress = stringFilter { eq = poolAddress.toString() }
+      }
+
+      getGraphqlClient(aptosConfig)
+        .query(
+          GetNumberOfDelegatorsQuery(
+            where_condition = filter.toOptional(),
+            order_by = sortOrder.toOptional(),
           )
-      )
-    )
-
-  val response: KotlinxGraphQLResponse<NumberOfDelegators> =
-    try {
-      indexerClient(aptosConfig).execute(delegators)
-    } catch (e: Exception) {
-      throw AptosException("GraphQL query execution failed: $e")
+        )
     }
+    .map { data ->
+      val count = data?.num_active_delegator_per_pool?.firstOrNull()?.num_active_delegator
+      count?.toString()?.toLong() ?: 0L
+    }
+    .toResult()
 
-  val data = response.data ?: return Option.None
+internal suspend fun getNumberOfDelegatorsForAllPools(
+  aptosConfig: AptosConfig,
+  sortOrder: List<ActiveDelegatorPerPoolOrder>?,
+): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(aptosConfig)
+        .query(GetNumberOfDelegatorsQuery(order_by = sortOrder.toOptional()))
+    }
+    .toResult()
 
-  return Option.Some(data)
-}
+internal suspend fun getDelegatedStakingActivities(
+  aptosConfig: AptosConfig,
+  poolAddress: AccountAddressInput,
+  delegatorAddress: AccountAddressInput,
+): Result<GetDelegatedStakingActivitiesQuery.Data?, AptosIndexerError> =
+  handleQuery {
+      getGraphqlClient(aptosConfig)
+        .query(
+          GetDelegatedStakingActivitiesQuery(
+            poolAddress = AccountAddress.from(poolAddress).toStringLong().toOptional(),
+            delegatorAddress = AccountAddress.from(delegatorAddress).toStringLong().toOptional(),
+          )
+        )
+    }
+    .toResult()

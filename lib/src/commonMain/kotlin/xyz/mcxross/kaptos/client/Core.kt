@@ -16,13 +16,14 @@
 
 package xyz.mcxross.kaptos.client
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import io.ktor.client.*
-import io.ktor.client.statement.*
+import io.ktor.client.call.*
 import io.ktor.http.*
-import xyz.mcxross.graphql.client.DefaultGraphQLClient
 import xyz.mcxross.kaptos.exception.AptosApiError
-import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.AptosResponse
 
 /**
@@ -41,32 +42,20 @@ expect class ClientConfig {
 
 fun getClient(clientConfig: ClientConfig) = httpClient(clientConfig)
 
-fun indexerClient(config: AptosConfig) =
-  DefaultGraphQLClient(config.getRequestUrl(AptosApiType.INDEXER))
-
-suspend fun responseFitCheck(aptosResponse: AptosResponse, apiType: AptosApiType): AptosResponse {
-  if (aptosResponse.status == HttpStatusCode.Unauthorized) {
-    throw AptosApiError(
-      aptosResponse.call.request,
-      aptosResponse,
-      "Error: ${aptosResponse.bodyAsText()}",
-    )
-  }
-
-  if (aptosResponse.status.value in 200..299) {
-    return aptosResponse
-  }
-
-  val text: String = aptosResponse.bodyAsText()
-
-  val errorMessage =
-    if (text.contains("message") && text.contains("error_code")) {
-      text
-    } else if (errors.containsKey(aptosResponse.status.value)) {
-      errors[aptosResponse.status.value] ?: "Unknown error"
-    } else {
-      "Unhandled Error ${aptosResponse.status} : ${aptosResponse.bodyAsText()}"
+/**
+ * Checks an HTTP response, returning a `Result` that is either the successful
+ * response or a structured error.
+ */
+suspend fun responseFitCheck(
+    aptosResponse: AptosResponse
+): Result<AptosResponse, AptosSdkError> {
+    if (aptosResponse.status.isSuccess()) {
+        return Ok(aptosResponse)
     }
-
-  throw AptosApiError(aptosResponse.call.request, aptosResponse, "$apiType error: $errorMessage")
+    return try {
+        val apiError = aptosResponse.body<AptosApiError>()
+        Err(AptosSdkError.ApiError(apiError))
+    } catch (e: Exception) {
+        Err(AptosSdkError.DeserializationError(e))
+    }
 }

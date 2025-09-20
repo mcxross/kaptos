@@ -25,7 +25,7 @@ import xyz.mcxross.kaptos.model.AccountAddress
 
 object AccountAddressSerializer : KSerializer<AccountAddress> {
   override val descriptor: SerialDescriptor =
-    PrimitiveSerialDescriptor("AccountAddress", PrimitiveKind.STRING)
+    PrimitiveSerialDescriptor("AccountAddress", PrimitiveKind.BYTE)
 
   override fun serialize(encoder: Encoder, value: AccountAddress) {
     value.data.map { encoder.encodeByte(it) }

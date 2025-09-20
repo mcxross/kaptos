@@ -16,85 +16,211 @@
 
 package xyz.mcxross.kaptos.api
 
+import com.github.michaelbull.result.map
+import com.github.michaelbull.result.mapError
+import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.generated.GetChainTopUserTransactionsQuery
+import xyz.mcxross.kaptos.generated.GetProcessorStatusQuery
 import xyz.mcxross.kaptos.internal.getBlockByHeight
 import xyz.mcxross.kaptos.internal.getBlockByVersion
+import xyz.mcxross.kaptos.internal.getChainTopUserTransactions
 import xyz.mcxross.kaptos.internal.getIndexerLastSuccessVersion
 import xyz.mcxross.kaptos.internal.getLedgerInfo
 import xyz.mcxross.kaptos.internal.getProcessorStatus
+import xyz.mcxross.kaptos.internal.toInternalResult
+import xyz.mcxross.kaptos.internal.toResult
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.General
 
 /**
- * General API namespace. This interface provides functionality to reading and writing general
- * ledger information.
+ * A class to handle reading and writing general ledger information.
  *
- * @property config AptosConfig object for configuration
+ * @property config AptosConfig object for configuration.
  */
 class General(override val config: AptosConfig) : General {
 
   /**
-   * Queries for the Aptos ledger info
+   * Retrieves the latest ledger information from a fullnode.
    *
-   * @returns [LedgerInfo]
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getLedgerInfo()
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val ledgerInfo = resolution.value
+   * println("Current ledger version: ${ledgerInfo.ledgerVersion}")
+   * }
+   * is Result.Err -> {
+   * println("Error retrieving ledger info: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @return A `Result` which is either `Result.Ok` containing the [LedgerInfo], or `Result.Err`
+   *   containing an [AptosSdkError].
    */
-  override suspend fun getLedgerInfo(): Option<LedgerInfo> = getLedgerInfo(config)
+  override suspend fun getLedgerInfo(): Result<LedgerInfo, AptosSdkError> = getLedgerInfo(config)
 
   /**
-   * Queries for the chain id
+   * Retrieves the chain ID of the network.
    *
-   * @returns [Long] chain id
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getChainId()
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val chainId = resolution.value
+   * println("Network Chain ID: $chainId")
+   * }
+   * is Result.Err -> {
+   * println("Error retrieving chain ID: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @return A `Result` which is either `Result.Ok` containing the chain ID as a `Long`, or
+   *   `Result.Err` containing an [AptosSdkError].
    */
-  override suspend fun getChainId(): Option<Long> {
-    val ledgerInfo = getLedgerInfo(config)
-    return if (ledgerInfo is Option.Some) {
-      Option.Some(ledgerInfo.value.chainId)
-    } else {
-      Option.None
-    }
+  override suspend fun getChainId(): Result<Long, AptosSdkError> {
+    return getLedgerInfo(config).toInternalResult().map { it.chainId }.mapError { it }.toResult()
   }
 
   /**
-   * Queries for block by transaction version
+   * Retrieves a block by its transaction version number.
    *
-   * @param ledgerVersion Ledger version to lookup block information for
-   * @returns [Block] information
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getBlockByVersion(123456)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val block = resolution.value
+   * println("Block found at version: ${block.blockHeight}")
+   * }
+   * is Result.Err -> {
+   * println("Error retrieving block: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param ledgerVersion Ledger version to look up block information for.
+   * @param withTransactions Whether to include the full transaction data in the response.
+   * @return A `Result` which is either `Result.Ok` containing the [Block] information, or
+   *   `Result.Err` containing an [AptosSdkError].
    */
-  override suspend fun getBlockByVersion(ledgerVersion: Long): Option<Block> =
-    getBlockByVersion(config, ledgerVersion)
+  override suspend fun getBlockByVersion(
+    ledgerVersion: Long,
+    withTransactions: Boolean?,
+  ): Result<Block, AptosSdkError> = getBlockByVersion(config, ledgerVersion, withTransactions)
 
   /**
-   * Queries for block by height
+   * Retrieves a block by its height.
    *
-   * @param ledgerHeight Ledger height to lookup block information for
-   * @returns [Block] information
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getBlockByHeight(100)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val block = resolution.value
+   * println("Block version is: ${block.ledgerVersion}")
+   * }
+   * is Result.Err -> {
+   * println("Error retrieving block: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param ledgerHeight Ledger height to look up block information for.
+   * @param withTransactions Whether to include the full transaction data in the response.
+   * @return A `Result` which is either `Result.Ok` containing the [Block] information, or
+   *   `Result.Err` containing an [AptosSdkError].
    */
-  override suspend fun getBlockByHeight(ledgerHeight: Long): Option<Block> =
-    getBlockByHeight(config, ledgerHeight)
+  override suspend fun getBlockByHeight(
+    ledgerHeight: Long,
+    withTransactions: Boolean?,
+  ): Result<Block, AptosSdkError> = getBlockByHeight(config, ledgerHeight, withTransactions)
 
   /**
-   * Queries top user transactions
+   * Queries the indexer for the top user transactions by gas unit.
    *
-   * @param limit The number of transactions to return
-   * @returns [ChainTopUserTransactions]
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getChainTopUserTransactions(limit = 5)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val data = resolution.value
+   * println("Retrieved top user transactions data: $data")
+   * }
+   * is Result.Err -> {
+   * println("Error querying transactions: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param limit The number of transactions to return.
+   * @return A `Result` which is either `Result.Ok` containing the query data, or `Result.Err`
+   *   containing an [AptosIndexerError].
    */
-  override suspend fun getChainTopUserTransactions(limit: Int): Option<ChainTopUserTransactions> =
-    xyz.mcxross.kaptos.internal.getChainTopUserTransactions(config, limit)
+  override suspend fun getChainTopUserTransactions(
+    limit: Int
+  ): Result<GetChainTopUserTransactionsQuery.Data?, AptosIndexerError> =
+    getChainTopUserTransactions(config, limit)
 
   /**
-   * Queries for the last successful indexer version
+   * Queries the indexer for the last ledger version it has successfully processed.
    *
-   * This is useful to tell what ledger version the indexer is updated to, as it can be behind the
-   * full nodes.
+   * This is useful for checking if the indexer is up-to-date with the fullnodes.
+   *
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getIndexerLastSuccessVersion()
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val version = resolution.value
+   * println("Indexer is synced to version: $version")
+   * }
+   * is Result.Err -> {
+   * println("Error querying indexer status: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @return A `Result` which is either `Result.Ok` containing the last indexed version as a `Long`,
+   *   or `Result.Err` containing an [AptosIndexerError].
    */
-  override suspend fun getIndexerLastSuccessVersion(): Option<Long> =
+  override suspend fun getIndexerLastSuccessVersion(): Result<Long, AptosIndexerError> =
     getIndexerLastSuccessVersion(config)
 
   /**
-   * Query the processor status for a specific processor type.
+   * Queries the status of a specific indexer processor.
    *
-   * @param processorType The processor type to query
-   * @returns an Option of ProcessorStatus if found or None if not found
+   * ## Usage
+   *
+   * ```kotlin
+   * val resolution = aptos.getProcessorStatus(ProcessorType.ACCOUNT_TRANSACTION_PROCESSOR)
+   * when (resolution) {
+   * is Result.Ok -> {
+   * val data = resolution.value
+   * println("Processor status data: $data")
+   * }
+   * is Result.Err -> {
+   * println("Error querying processor status: ${resolution.error.message}")
+   * }
+   * }
+   * ```
+   *
+   * @param processorType The processor type to query.
+   * @return A `Result` which is either `Result.Ok` containing the query data, or `Result.Err`
+   *   containing an [AptosIndexerError].
    */
-  override suspend fun getProcessorStatus(processorType: ProcessorType): Option<ProcessorStatus> =
+  override suspend fun getProcessorStatus(
+    processorType: ProcessorType
+  ): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
     getProcessorStatus(config, processorType)
 }

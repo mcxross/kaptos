@@ -1,17 +1,15 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import java.net.URL
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-import xyz.mcxross.graphql.plugin.gradle.graphql
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-  alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.android.library)
-  alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.graphql.multiplatform)
+  alias(libs.plugins.apollo.graphql)
   alias(libs.plugins.dokka)
+  alias(libs.plugins.kotlin.multiplatform)
+  alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.maven.publish)
 }
 
@@ -26,10 +24,7 @@ repositories {
 }
 
 kotlin {
-  jvm {
-    jvmToolchain(17)
-    testRuns.named("test") { executionTask.configure { useJUnitPlatform() } }
-  }
+  jvm { testRuns["test"].executionTask.configure { useJUnitPlatform() } }
 
   androidTarget { publishLibraryVariants("release", "debug") }
 
@@ -47,19 +42,14 @@ kotlin {
     }
   }
 
-  linuxX64()
-
   macosArm64()
   macosX64()
 
   tvosX64()
   tvosArm64()
 
-  watchosX64()
   watchosArm32()
   watchosArm64()
-
-  mingwX64()
 
   applyDefaultHierarchyTemplate()
 
@@ -74,15 +64,16 @@ kotlin {
     }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
-      implementation(libs.graphql.multiplatform.client)
+      implementation(libs.apollo.runtime)
+      implementation(libs.bcs)
+      implementation(libs.ktor.client.auth)
+      implementation(libs.ktor.client.content.negotiation)
       implementation(libs.ktor.client.core)
       implementation(libs.ktor.client.logging)
-      implementation(libs.ktor.client.content.negotiation)
       implementation(libs.ktor.serialization.kotlinx.json)
-      implementation(libs.ktor.client.auth)
-      implementation(libs.kotlinx.serialization.core)
-      implementation(libs.bcs)
       implementation(libs.kotlinx.datetime)
+      implementation(libs.kotlinx.serialization.core)
+      implementation(libs.kotlin.result)
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
@@ -100,12 +91,7 @@ kotlin {
   }
 }
 
-graphql {
-  client {
-    endpoint = "https://api.devnet.aptoslabs.com/v1/graphql"
-    packageName = "xyz.mcxross.kaptos.generated"
-  }
-}
+apollo { service("service") { packageName.set("xyz.mcxross.kaptos.generated") } }
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -133,8 +119,7 @@ tasks.getByName<DokkaTask>("dokkaHtml") {
       sourceLink {
         localDirectory.set(file("commonMain/kotlin"))
         remoteUrl.set(
-          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
-        )
+            URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin"))
         remoteLineSuffix.set("#L")
       }
     }
@@ -149,12 +134,11 @@ mavenPublishing {
   coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
   configure(
-    KotlinMultiplatform(
-      javadocJar = JavadocJar.Dokka("dokkaHtml"),
-      sourcesJar = true,
-      androidVariantsToPublish = listOf("debug", "release"),
-    )
-  )
+      KotlinMultiplatform(
+          javadocJar = JavadocJar.Dokka("dokkaHtml"),
+          sourcesJar = true,
+          androidVariantsToPublish = listOf("debug", "release"),
+      ))
 
   pom {
     name.set("Kaptos")
@@ -183,7 +167,7 @@ mavenPublishing {
     }
   }
 
-  publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+  publishToMavenCentral(automaticRelease = true)
 
   signAllPublications()
 }

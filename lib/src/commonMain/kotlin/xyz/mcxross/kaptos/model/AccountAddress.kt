@@ -54,8 +54,8 @@ interface AccountAddressInput {
  * - 0x1
  * - 0xaa86fe99004361f747f91342ca13c426ca0cccb0c1217677180c9493bad6ef0c
  *
- * @constructor Creates an account address from a hex string.
  * @property data The data of the account address.
+ * @constructor Creates an account address from a hex string.
  */
 @Serializable(with = AccountAddressSerializer::class)
 data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountAddressInput {
@@ -94,7 +94,7 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
       this.data[this.data.size - 1].toInt() < 0b10000
   }
 
-  override fun toString(): String = "0x${toStringWithoutPrefix()}"
+  override fun toString(): String = "0x${toStringLongWithoutPrefix()}"
 
   fun toStringWithoutPrefix(): String {
     val hex =
@@ -114,6 +114,10 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
   }
 
   fun toStringLong(): String = "0x${toStringLongWithoutPrefix()}"
+
+  fun toLongAddress(): AccountAddress {
+    return AccountAddress(toStringLong())
+  }
 
   fun toStringLongWithoutPrefix(): String {
     val hexString =

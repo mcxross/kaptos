@@ -367,6 +367,55 @@ class AccountAddressTest {
       AccountAddress.fromStringStrict(ADDRESS_OTHER["longWithout0x"].toString())
     }
   }
+
+  @Test
+  fun testByteArrayConstructor() {
+    val validBytes = ByteArray(32) { (it % 256).toByte() }
+    val accountAddress = AccountAddress(validBytes)
+    assertEquals(validBytes.contentToString(), accountAddress.data.contentToString())
+
+    val invalidBytes = ByteArray(31) { (it % 256).toByte() }
+    assertFailsWith<ParsingException>("Should fail with incorrect number of bytes") {
+      AccountAddress(invalidBytes)
+    }
+  }
+
+  @Test
+  fun testHexConstructor() {
+    val hexString = "ca843279e3427144cead5e4d5999a3d0ca843279e3427144cead5e4d5999a3d0"
+    val accountAddress = AccountAddress(hexString)
+    assertEquals("0x$hexString", accountAddress.toString())
+
+    assertFailsWith<ParsingException>("Should fail with odd number of hex chars") {
+      AccountAddress("ca843279e3427144cead5e4d5999a3d0ca843279e3427144cead5e4d5999a3d")
+    }
+  }
+
+  @Test
+  fun testToStringWithoutPrefix() {
+    val longAddress =
+      AccountAddress.fromString(
+        "0xca843279e3427144cead5e4d5999a3d0ca843279e3427144cead5e4d5999a3d0"
+      )
+    assertEquals(
+      "ca843279e3427144cead5e4d5999a3d0ca843279e3427144cead5e4d5999a3d0",
+      longAddress.toStringWithoutPrefix(),
+    )
+
+    val specialAddress = AccountAddress.fromString("0x1")
+    assertEquals("1", specialAddress.toStringWithoutPrefix())
+  }
+
+  @Test
+  fun testToStringLongAndToLongAddress() {
+    val shortAddress = AccountAddress.fromString("0x1")
+    val longForm = "0x0000000000000000000000000000000000000000000000000000000000000001"
+    assertEquals(longForm, shortAddress.toStringLong())
+    assertEquals(longForm.removePrefix("0x"), shortAddress.toStringLongWithoutPrefix())
+
+    val convertedAddress = shortAddress.toLongAddress()
+    assertEquals(shortAddress, convertedAddress)
+  }
 }
 
 typealias Addresses = Map<String, Any>

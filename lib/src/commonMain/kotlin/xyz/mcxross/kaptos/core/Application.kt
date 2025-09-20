@@ -15,13 +15,13 @@
  */
 package xyz.mcxross.kaptos.core
 
-import xyz.mcxross.kaptos.model.Option
+import xyz.mcxross.kaptos.model.Result
 
 /**
  * The [Application] object is used to store global state for the SDK.
  *
  * @property graceFull [Boolean] indicating if the SDK is in graceFull mode. This is used to
- *   determine if the SDK should throw exceptions or return [Option.None].
+ *   determine if the SDK should throw exceptions or return [Result.Err].
  */
 internal object Application {
   var graceFull: Boolean = false
