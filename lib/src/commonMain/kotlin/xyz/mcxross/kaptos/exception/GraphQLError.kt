@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 McXross
+ * Copyright 2025 McXross
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package xyz.mcxross.kaptos.exception
 
-import io.ktor.http.*
+data class GraphQLError(
+    val message: String,
+    val locations: List<ErrorLocation>? = null,
+    val path: List<Any>? = null,
+    val extensions: Map<String, Any?>? = null,
+)
 
-enum class Error(private val code: Int, val message: String) {
-  // Move Standard Library Errors
-  ABORTED(409, "Concurrency conflict, such as read-modify-write conflict");
-
-  fun asHttpStatusCode(): HttpStatusCode {
-    return HttpStatusCode(code, message)
-  }
-}
+data class ErrorLocation(val line: Int, val column: Int)

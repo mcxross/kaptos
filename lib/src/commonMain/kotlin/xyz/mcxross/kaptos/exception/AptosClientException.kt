@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 McXross
+ * Copyright 2025 McXross
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,5 +15,10 @@
  */
 package xyz.mcxross.kaptos.exception
 
-class AbortedException :
-  AptosException("Concurrency conflict, such as read-modify-write conflict.")
+/**
+ * The base class for all exceptions originating from the Aptos client SDK.
+ *
+ * Catching this exception allows you to handle any known error from the client in a single block.
+ */
+open class AptosClientException(message: String, cause: Throwable? = null) :
+    Exception(message, cause)
