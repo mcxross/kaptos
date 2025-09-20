@@ -33,9 +33,12 @@ class Aptos(
   Coin by xyz.mcxross.kaptos.api.Coin(config),
   General by xyz.mcxross.kaptos.api.General(config),
   Transaction by xyz.mcxross.kaptos.api.Transaction(config),
+  Table by xyz.mcxross.kaptos.api.Table(config),
+  Object by xyz.mcxross.kaptos.api.Object(config),
   Staking by xyz.mcxross.kaptos.api.Staking(config),
   DigitalAsset by xyz.mcxross.kaptos.api.DigitalAsset(config),
   Faucet by xyz.mcxross.kaptos.api.Faucet(config),
+  FungibleAsset by xyz.mcxross.kaptos.api.FungibleAsset(config),
   Ans by xyz.mcxross.kaptos.api.Ans(config) {
 
   init {
