@@ -45,3 +45,9 @@ data class AccountAuthenticatorSingleKey(
   val publicKey: AnyPublicKey,
   val signature: AnySignature,
 ) : AccountAuthenticator()
+
+data class AccountAuthenticatorMultiKey(
+  val variant: AccountAuthenticatorVariant = AccountAuthenticatorVariant.MultiKey,
+  val pubKeys: List<AnyPublicKey>,
+  val sigs: List<AnySignature>,
+) : AccountAuthenticator()
