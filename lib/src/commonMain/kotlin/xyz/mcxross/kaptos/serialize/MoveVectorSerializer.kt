@@ -21,6 +21,7 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.listSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.decodeStructure
 import kotlinx.serialization.encoding.encodeCollection
 import xyz.mcxross.kaptos.model.EntryFunctionArgument
 import xyz.mcxross.kaptos.model.MoveVector
@@ -40,6 +41,13 @@ class MoveVectorSerializer<T : EntryFunctionArgument>(
   }
 
   override fun deserialize(decoder: Decoder): MoveVector<T> {
-    return MoveVector(listOf())
+    return MoveVector(
+        decoder.decodeStructure(descriptor) {
+            val size = decodeCollectionSize(descriptor)
+            List(size) { i ->
+                decodeSerializableElement(descriptor, i, elementSerializer)
+            }
+        }
+    )
   }
 }
