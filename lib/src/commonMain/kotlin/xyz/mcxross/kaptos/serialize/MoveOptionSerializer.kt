@@ -1,0 +1,57 @@
+/*
+ * Copyright 2024 McXross
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package xyz.mcxross.kaptos.serialize
+
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.listSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.decodeStructure
+import kotlinx.serialization.encoding.encodeCollection
+import xyz.mcxross.kaptos.model.EntryFunctionArgument
+import xyz.mcxross.kaptos.model.MoveOption
+
+class MoveOptionSerializer<T : EntryFunctionArgument>(
+  private val elementSerializer: KSerializer<T>
+) : KSerializer<MoveOption<T>> {
+  @OptIn(ExperimentalSerializationApi::class)
+  override val descriptor: SerialDescriptor = listSerialDescriptor(elementSerializer.descriptor)
+
+  override fun serialize(encoder: Encoder, value: MoveOption<T>) {
+     value.value?.let {
+         encoder.encodeCollection(descriptor, 1) { elementSerializer.serialize(encoder, it) }
+     } ?: run {
+         encoder.encodeByte(0)
+     }
+  }
+
+  override fun deserialize(decoder: Decoder): MoveOption<T> {
+      return MoveOption(
+          decoder.decodeStructure(descriptor) {
+              val isSome = decodeCollectionSize(descriptor)
+              require(isSome < 2) { "Expected length of 0 or 1 for MoveOption, found $isSome" }
+
+              if (isSome == 1) {
+                  decodeSerializableElement(descriptor, 0, elementSerializer)
+              } else {
+                  null
+              }
+          }
+      )
+  }
+}

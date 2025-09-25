@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.model
 import kotlinx.serialization.Serializable
 import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.Hex
+import xyz.mcxross.kaptos.serialize.MoveOptionSerializer
 import xyz.mcxross.kaptos.serialize.MoveStringSerializer
 import xyz.mcxross.kaptos.serialize.MoveVectorSerializer
 
@@ -141,7 +142,7 @@ data class MoveString(val value: String) : TransactionArgument() {
   }
 }
 
-@Serializable
+@Serializable(with = MoveOptionSerializer::class)
 data class MoveOption<T : EntryFunctionArgument>(val value: T?) : TransactionArgument() {
   fun unwrap(): T {
     return value ?: throw IllegalArgumentException("Option is empty")
