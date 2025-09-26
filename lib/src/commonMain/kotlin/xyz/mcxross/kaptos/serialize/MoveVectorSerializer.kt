@@ -32,7 +32,6 @@ class MoveVectorSerializer<T : EntryFunctionArgument>(
   override val descriptor: SerialDescriptor = listSerialDescriptor(elementSerializer.descriptor)
 
   override fun serialize(encoder: Encoder, value: MoveVector<T>) {
-    encoder.encodeCollection(descriptor, value.serialize().size) {}
     encoder.encodeCollection(descriptor, value.values.size) {
       for (element in value.values) {
         elementSerializer.serialize(encoder, element)
