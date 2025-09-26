@@ -24,6 +24,19 @@ import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
 
 class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : AbstractMultiKey(pks) {
+
+  init {
+    if (signaturesRequired < 1) {
+      throw IllegalArgumentException("The number of required signatures needs to be greater than 0")
+    }
+
+    if (publicKeys.size < signaturesRequired) {
+      throw IllegalArgumentException(
+        "Provided ${publicKeys.size} public keys is smaller than the $signaturesRequired required signatures"
+      )
+    }
+  }
+
   override fun getSigsRequired(): Int {
     TODO("Not yet implemented")
   }
