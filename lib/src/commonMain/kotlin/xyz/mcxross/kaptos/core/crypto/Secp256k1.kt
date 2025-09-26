@@ -28,6 +28,8 @@ class Secp256k1PublicKey(hexInput: HexInput) : PublicKey() {
 
   private val hex: Hex
 
+  constructor(pk: String) : this(HexInput.fromString(pk))
+
   init {
     val hex = Hex.fromHexInput(hexInput)
 

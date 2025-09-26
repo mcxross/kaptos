@@ -41,6 +41,8 @@ class Ed25519PublicKey(private val data: ByteArray) : AccountPublicKey() {
 
   constructor(data: HexInput) : this(data.toByteArray())
 
+  constructor(pk: String) : this(HexInput.fromString(pk))
+
   init {
     val hex = Hex.fromHexInput(data)
     if (hex.toByteArray().size != LENGTH) {
