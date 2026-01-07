@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package xyz.mcxross.kaptos.core.crypto
 
 import io.ktor.util.reflect.*
+import java.security.NoSuchAlgorithmException
+import java.security.SecureRandom
 import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.SigningSchemeInput
 import xyz.mcxross.kaptos.transaction.builder.deriveTransactionType
@@ -30,26 +31,22 @@ import xyz.mcxross.fastkrypto.ed25519Verify
 import xyz.mcxross.fastkrypto.secp256k1Sign
 import xyz.mcxross.fastkrypto.secp256k1PublicKeyFromPrivate
 import xyz.mcxross.fastkrypto.secp256k1Verify
-import xyz.mcxross.fastkrypto.mnemonicGenerate
-import xyz.mcxross.fastkrypto.mnemonicToSeed
 import xyz.mcxross.fastkrypto.sha3256
 
+@Throws(NoSuchAlgorithmException::class)
 actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
   return when (scheme) {
     SigningSchemeInput.Ed25519 -> {
-        val mnemonic = mnemonicGenerate(12)
-        val seed = mnemonicToSeed(mnemonic, "")
-        // Ed25519 seed is 32 bytes.
-        val privateKey = seed.copyOfRange(0, 32)
-        val pk = ed25519PublicKeyFromPrivate(privateKey)
-        KeyPair(privateKey, pk)
+        val seed = ByteArray(32)
+        SecureRandom().nextBytes(seed)
+        val pk = ed25519PublicKeyFromPrivate(seed)
+        KeyPair(seed, pk)
     }
     SigningSchemeInput.Secp256k1 -> {
-        val mnemonic = mnemonicGenerate(12)
-        val seed = mnemonicToSeed(mnemonic, "")
-        val privateKey = seed.copyOfRange(0, 32)
-        val pk = secp256k1PublicKeyFromPrivate(privateKey)
-        KeyPair(privateKey, pk)
+        val seed = ByteArray(32)
+        SecureRandom().nextBytes(seed)
+        val pk = secp256k1PublicKeyFromPrivate(seed)
+        KeyPair(seed, pk)
     }
     else -> throw NotImplementedError("Only Ed25519 and Secp256k1 are supported at the moment")
   }
@@ -100,9 +97,11 @@ actual fun verifySignature(
     is Ed25519PublicKey -> {
         ed25519Verify(publicKey.data, message, signature)
     }
+
     is Secp256k1PublicKey -> {
         secp256k1Verify(publicKey.hexInput.toByteArray(), message, signature)
     }
+
     else -> false
   }
 }

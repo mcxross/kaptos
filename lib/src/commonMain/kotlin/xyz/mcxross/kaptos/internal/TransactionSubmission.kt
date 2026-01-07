@@ -20,6 +20,8 @@ import xyz.mcxross.kaptos.client.postAptosFullNode
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.builder.*
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 
 internal suspend fun generateTransaction(
   aptosConfig: AptosConfig,
@@ -114,7 +116,13 @@ internal suspend fun submitTransaction(
     }
   }*/
 
-  return Result.Ok(res.value.second)
+  val value = res.get()
+  return if (value != null) {
+    Result.Ok(value.second)
+  } else {
+    val error = res.getError() ?: Exception("Unknown error")
+    Result.Err(Exception(error.toString()))
+  }
 }
 
 internal suspend fun signAndSubmitAsFeePayer(
