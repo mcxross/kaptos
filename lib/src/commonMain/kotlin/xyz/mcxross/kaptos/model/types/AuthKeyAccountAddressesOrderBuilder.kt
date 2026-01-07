@@ -10,14 +10,14 @@ class AuthKeyAccountAddressesOrderBuilder {
   var lastTransactionVersion: OrderBy? = null
 
   internal fun build(): Auth_key_account_addresses_order_by =
-      Auth_key_account_addresses_order_by(
-          account_address = accountAddress?.generated.toOptional(),
-          auth_key = authKey?.generated.toOptional(),
-          is_auth_key_used = isAuthKeyUsed?.generated.toOptional(),
-          last_transaction_version = lastTransactionVersion?.generated.toOptional(),
-      )
+    Auth_key_account_addresses_order_by(
+      account_address = accountAddress?.generated.toOptional(),
+      auth_key = authKey?.generated.toOptional(),
+      is_auth_key_used = isAuthKeyUsed?.generated.toOptional(),
+      last_transaction_version = lastTransactionVersion?.generated.toOptional(),
+    )
 }
 
 fun authKeyAccountAddressesOrder(
-    init: AuthKeyAccountAddressesOrderBuilder.() -> Unit
+  init: AuthKeyAccountAddressesOrderBuilder.() -> Unit
 ): Auth_key_account_addresses_order_by = AuthKeyAccountAddressesOrderBuilder().apply(init).build()

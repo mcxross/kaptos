@@ -15,17 +15,18 @@ class BigintFilterBuilder {
   var nin: List<Any>? = null
 
   internal fun build(): Bigint_comparison_exp =
-      Bigint_comparison_exp(
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _in = inList.toOptional(),
-          _is_null = isNull.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nin = nin.toOptional())
+    Bigint_comparison_exp(
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _in = inList.toOptional(),
+      _is_null = isNull.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nin = nin.toOptional(),
+    )
 }
 
 fun bigintFilter(init: BigintFilterBuilder.() -> Unit): Bigint_comparison_exp =
-    BigintFilterBuilder().apply(init).build()
+  BigintFilterBuilder().apply(init).build()

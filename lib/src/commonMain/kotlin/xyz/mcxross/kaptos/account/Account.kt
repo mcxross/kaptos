@@ -52,6 +52,8 @@ abstract class Account {
 
   abstract fun signTransaction(tx: AnyRawTransaction): Signature
 
+  abstract fun verifySignature(message: HexInput, signature: Signature): Boolean
+
   override fun toString(): String {
     return "${signingScheme}Account { address: $accountAddress, publicKey: $publicKey }"
   }

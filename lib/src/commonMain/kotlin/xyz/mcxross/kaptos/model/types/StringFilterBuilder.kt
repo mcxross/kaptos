@@ -25,28 +25,28 @@ class StringFilterBuilder {
   var similar: String? = null
 
   internal fun build(): String_comparison_exp =
-      String_comparison_exp(
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _ilike = ilike.toOptional(),
-          _in = inList.toOptional(),
-          _iregex = iregex.toOptional(),
-          _is_null = isNull.toOptional(),
-          _like = like.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nilike = nilike.toOptional(),
-          _nin = nin.toOptional(),
-          _niregex = niregex.toOptional(),
-          _nlike = nlike.toOptional(),
-          _nregex = nregex.toOptional(),
-          _nsimilar = nsimilar.toOptional(),
-          _regex = regex.toOptional(),
-          _similar = similar.toOptional(),
-      )
+    String_comparison_exp(
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _ilike = ilike.toOptional(),
+      _in = inList.toOptional(),
+      _iregex = iregex.toOptional(),
+      _is_null = isNull.toOptional(),
+      _like = like.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nilike = nilike.toOptional(),
+      _nin = nin.toOptional(),
+      _niregex = niregex.toOptional(),
+      _nlike = nlike.toOptional(),
+      _nregex = nregex.toOptional(),
+      _nsimilar = nsimilar.toOptional(),
+      _regex = regex.toOptional(),
+      _similar = similar.toOptional(),
+    )
 }
 
 fun stringFilter(init: StringFilterBuilder.() -> Unit): String_comparison_exp =
-    StringFilterBuilder().apply(init).build()
+  StringFilterBuilder().apply(init).build()

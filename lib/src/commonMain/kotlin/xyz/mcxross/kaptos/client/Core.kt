@@ -43,19 +43,17 @@ expect class ClientConfig {
 fun getClient(clientConfig: ClientConfig) = httpClient(clientConfig)
 
 /**
- * Checks an HTTP response, returning a `Result` that is either the successful
- * response or a structured error.
+ * Checks an HTTP response, returning a `Result` that is either the successful response or a
+ * structured error.
  */
-suspend fun responseFitCheck(
-    aptosResponse: AptosResponse
-): Result<AptosResponse, AptosSdkError> {
-    if (aptosResponse.status.isSuccess()) {
-        return Ok(aptosResponse)
-    }
-    return try {
-        val apiError = aptosResponse.body<AptosApiError>()
-        Err(AptosSdkError.ApiError(apiError))
-    } catch (e: Exception) {
-        Err(AptosSdkError.DeserializationError(e))
-    }
+suspend fun responseFitCheck(aptosResponse: AptosResponse): Result<AptosResponse, AptosSdkError> {
+  if (aptosResponse.status.isSuccess()) {
+    return Ok(aptosResponse)
+  }
+  return try {
+    val apiError = aptosResponse.body<AptosApiError>()
+    Err(AptosSdkError.ApiError(apiError))
+  } catch (e: Exception) {
+    Err(AptosSdkError.DeserializationError(e))
+  }
 }

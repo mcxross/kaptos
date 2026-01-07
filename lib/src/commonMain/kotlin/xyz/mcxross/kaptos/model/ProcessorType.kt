@@ -30,5 +30,5 @@ enum class ProcessorType(val value: String) {
   STAKE_PROCESSOR("stake_processor"),
   TOKEN_V2_PROCESSOR("token_v2_processor"),
   USER_TRANSACTION_PROCESSOR("user_transaction_processor"),
-  OBJECT_PROCESSOR("objects_processor")
+  OBJECT_PROCESSOR("objects_processor"),
 }

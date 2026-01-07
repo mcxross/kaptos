@@ -18,6 +18,7 @@ package xyz.mcxross.kaptos.account
 import io.ktor.util.reflect.instanceOf
 import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.PublicKey
+import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKeySignature
 import xyz.mcxross.kaptos.model.AccountAddress
@@ -51,7 +52,7 @@ class MultiKeyAccount(
   init {
     val bitPositions: MutableList<Int> = mutableListOf()
 
-    signers.forEach { bitPositions.plus((this.publicKey as MultiKey).index(it)) }
+    signers.forEach { bitPositions.plus((this.publicKey as MultiKey).index(it.publicKey)) }
 
     val signerAndBitKeys: List<Pair<Account, Int>> =
       signers.mapIndexed { index, acc -> acc to index }.sortedBy { it.second }
@@ -67,6 +68,9 @@ class MultiKeyAccount(
     signers.forEach { sigs.plus(it.signTransaction(tx)) }
     return MultiKeySignature(sigs, signaturesBitmap)
   }
+
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
+    publicKey.verifySignature(message, signature)
 
   override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
     return AccountAuthenticatorMultiKey(pubKeys = emptyList(), sigs = emptyList())

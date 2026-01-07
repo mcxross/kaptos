@@ -17,9 +17,10 @@ class CurrentAptosNamesAggregateBoolExpCountBuilder(private val predicate: Int_c
   }
 
   internal fun build(): Current_aptos_names_aggregate_bool_exp_count =
-      Current_aptos_names_aggregate_bool_exp_count(
-          predicate = predicate,
-          arguments = arguments.toOptional(),
-          distinct = distinct.toOptional(),
-          filter = filter.toOptional())
+    Current_aptos_names_aggregate_bool_exp_count(
+      predicate = predicate,
+      arguments = arguments.toOptional(),
+      distinct = distinct.toOptional(),
+      filter = filter.toOptional(),
+    )
 }

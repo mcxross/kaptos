@@ -8,13 +8,13 @@ class NumActiveDelegatorPerPoolOrderBuilder {
   var poolAddress: OrderBy? = null
 
   internal fun build(): Num_active_delegator_per_pool_order_by =
-      Num_active_delegator_per_pool_order_by(
-          num_active_delegator = numActiveDelegator?.generated.toOptional(),
-          pool_address = poolAddress?.generated.toOptional(),
-      )
+    Num_active_delegator_per_pool_order_by(
+      num_active_delegator = numActiveDelegator?.generated.toOptional(),
+      pool_address = poolAddress?.generated.toOptional(),
+    )
 }
 
 fun numActiveDelegatorPerPoolOrder(
-    init: NumActiveDelegatorPerPoolOrderBuilder.() -> Unit
+  init: NumActiveDelegatorPerPoolOrderBuilder.() -> Unit
 ): Num_active_delegator_per_pool_order_by =
-    NumActiveDelegatorPerPoolOrderBuilder().apply(init).build()
+  NumActiveDelegatorPerPoolOrderBuilder().apply(init).build()

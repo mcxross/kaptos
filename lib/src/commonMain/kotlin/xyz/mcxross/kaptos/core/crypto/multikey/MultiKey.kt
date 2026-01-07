@@ -52,7 +52,22 @@ class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : Abstract
   }
 
   override fun verifySignature(message: HexInput, signature: Signature): Boolean {
-    TODO("Not yet implemented")
+    val signerIndices = (signature as MultiKeySignature).bitMapToSignerIndices()
+
+    val signatureIndexPairs = signature.signatures.zip(signerIndices)
+
+    for ((singleSignature, keyIndex) in signatureIndexPairs) {
+      if (keyIndex >= publicKeys.size) {
+        return false
+      }
+      val publicKey = this.publicKeys[keyIndex]
+
+      if (!publicKey.verifySignature(message, singleSignature)) {
+        return false
+      }
+    }
+
+    return true
   }
 
   override fun toByteArray(): ByteArray {
@@ -64,8 +79,7 @@ class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : Abstract
     TODO("Not yet implemented")
   }
 
-    fun index(pubKey: PublicKey) : Int {
-        return super.index(pubKey)
-    }
-
+  /*fun index(pubKey: PublicKey): Int {
+    return super.index(pubKey)
+  }*/
 }

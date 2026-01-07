@@ -24,7 +24,7 @@ import xyz.mcxross.kaptos.model.SigningSchemeInput
  *
  * Secp256k1 authentication key is represented in the SDK as `AnyPublicKey`.
  */
-class Secp256k1PublicKey(hexInput: HexInput) : PublicKey() {
+class Secp256k1PublicKey(val hexInput: HexInput) : PublicKey() {
 
   private val hex: Hex
 
@@ -40,9 +40,8 @@ class Secp256k1PublicKey(hexInput: HexInput) : PublicKey() {
     this.hex = hex
   }
 
-  override fun verifySignature(message: HexInput, signature: Signature): Boolean {
-    TODO("Not yet implemented")
-  }
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
+    verifySignature(this, message.toByteArray(), signature.toByteArray())
 
   override fun toByteArray(): ByteArray = hex.toByteArray()
 

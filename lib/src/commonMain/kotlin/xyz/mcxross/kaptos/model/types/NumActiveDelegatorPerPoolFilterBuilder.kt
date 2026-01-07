@@ -24,15 +24,16 @@ class NumActiveDelegatorPerPoolFilterBuilder {
   }
 
   internal fun build(): Num_active_delegator_per_pool_bool_exp =
-      Num_active_delegator_per_pool_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          num_active_delegator = numActiveDelegator.toOptional(),
-          pool_address = poolAddress.toOptional())
+    Num_active_delegator_per_pool_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      num_active_delegator = numActiveDelegator.toOptional(),
+      pool_address = poolAddress.toOptional(),
+    )
 }
 
 fun numActiveDelegatorPerPoolFilter(
-    init: NumActiveDelegatorPerPoolFilterBuilder.() -> Unit
+  init: NumActiveDelegatorPerPoolFilterBuilder.() -> Unit
 ): Num_active_delegator_per_pool_bool_exp =
-    NumActiveDelegatorPerPoolFilterBuilder().apply(init).build()
+  NumActiveDelegatorPerPoolFilterBuilder().apply(init).build()

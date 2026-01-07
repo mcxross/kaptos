@@ -36,20 +36,21 @@ class EventsFilterBuilder {
   }
 
   internal fun build(): Events_bool_exp =
-      Events_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          account_address = accountAddress.toOptional(),
-          creation_number = creationNumber.toOptional(),
-          `data` = data.toOptional(),
-          event_index = eventIndex.toOptional(),
-          indexed_type = indexedType.toOptional(),
-          sequence_number = sequenceNumber.toOptional(),
-          transaction_block_height = transactionBlockHeight.toOptional(),
-          transaction_version = transactionVersion.toOptional(),
-          type = type.toOptional())
+    Events_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      account_address = accountAddress.toOptional(),
+      creation_number = creationNumber.toOptional(),
+      `data` = data.toOptional(),
+      event_index = eventIndex.toOptional(),
+      indexed_type = indexedType.toOptional(),
+      sequence_number = sequenceNumber.toOptional(),
+      transaction_block_height = transactionBlockHeight.toOptional(),
+      transaction_version = transactionVersion.toOptional(),
+      type = type.toOptional(),
+    )
 }
 
 fun eventsFilter(init: EventsFilterBuilder.() -> Unit): Events_bool_exp =
-    EventsFilterBuilder().apply(init).build()
+  EventsFilterBuilder().apply(init).build()

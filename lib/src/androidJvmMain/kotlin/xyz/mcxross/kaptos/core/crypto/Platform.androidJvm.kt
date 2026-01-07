@@ -16,6 +16,11 @@
 package xyz.mcxross.kaptos.core.crypto
 
 import io.ktor.util.reflect.*
+import java.math.BigInteger
+import org.bouncycastle.crypto.ec.CustomNamedCurves
+import org.bouncycastle.crypto.params.ECDomainParameters
+import org.bouncycastle.crypto.params.ECPublicKeyParameters
+import org.bouncycastle.crypto.signers.ECDSASigner
 import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.transaction.builder.deriveTransactionType
@@ -60,4 +65,52 @@ actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
 
 actual fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray {
   TODO("Not yet implemented")
+}
+
+actual fun verifySignature(
+  publicKey: PublicKey,
+  message: ByteArray,
+  signature: ByteArray,
+): Boolean {
+  return when (publicKey) {
+    is Ed25519PublicKey -> {
+      val signer = org.bouncycastle.crypto.signers.Ed25519Signer()
+      val publicKeyParameters =
+        org.bouncycastle.crypto.params.Ed25519PublicKeyParameters(publicKey.data, 0)
+      signer.init(false, publicKeyParameters)
+      signer.update(message, 0, message.size)
+      signer.verifySignature(signature)
+    }
+
+    is Secp256k1PublicKey -> {
+      verifyEcdsa(publicKey.hexInput.toByteArray(), "secp256k1", message, signature)
+    }
+
+    else -> false
+  }
+}
+
+private fun verifyEcdsa(
+  publicKeyBytes: ByteArray,
+  curveName: String,
+  message: ByteArray,
+  signature: ByteArray,
+): Boolean {
+  require(signature.size == 64) { "Signature must be 64 bytes long" }
+
+  val messageHash = org.bouncycastle.jcajce.provider.digest.SHA256.Digest().digest(message)
+
+  val r = BigInteger(1, signature.copyOfRange(0, 32))
+  val s = BigInteger(1, signature.copyOfRange(32, 64))
+
+  val params = CustomNamedCurves.getByName(curveName)
+  val curveParams = ECDomainParameters(params.curve, params.g, params.n, params.h)
+
+  val q = curveParams.curve.decodePoint(publicKeyBytes)
+  val pubKeyParams = ECPublicKeyParameters(q, curveParams)
+
+  val signer = ECDSASigner()
+  signer.init(false, pubKeyParams)
+
+  return signer.verifySignature(messageHash, r, s)
 }

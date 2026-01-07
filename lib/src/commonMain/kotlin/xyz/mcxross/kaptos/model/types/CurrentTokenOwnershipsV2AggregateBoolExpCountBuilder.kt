@@ -7,7 +7,7 @@ import xyz.mcxross.kaptos.generated.type.Int_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
 class CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(
-    private val predicate: Int_comparison_exp
+  private val predicate: Int_comparison_exp
 ) {
   var arguments: List<Current_token_ownerships_v2_select_column>? = null
   var distinct: Boolean? = null
@@ -18,10 +18,10 @@ class CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(
   }
 
   internal fun build(): Current_token_ownerships_v2_aggregate_bool_exp_count =
-      Current_token_ownerships_v2_aggregate_bool_exp_count(
-          predicate = predicate,
-          arguments = arguments.toOptional(),
-          distinct = distinct.toOptional(),
-          filter = filter.toOptional(),
-      )
+    Current_token_ownerships_v2_aggregate_bool_exp_count(
+      predicate = predicate,
+      arguments = arguments.toOptional(),
+      distinct = distinct.toOptional(),
+      filter = filter.toOptional(),
+    )
 }

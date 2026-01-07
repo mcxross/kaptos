@@ -18,7 +18,6 @@ package xyz.mcxross.kaptos.core.crypto.multikey
 import xyz.mcxross.kaptos.core.crypto.AccountPublicKey
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 
-
 const val BITMAP_SIZE_IN_BYTES = 4
 const val MAX_SIGNATURES_SUPPORTED = BITMAP_SIZE_IN_BYTES * 8
 
@@ -71,31 +70,31 @@ abstract class AbstractMultiKey(open val publicKeys: List<PublicKey>) : AccountP
     return bitmap
   }
 
-    /**
-     * Gets the number of signatures required for this multi-key set.
-     *
-     * @return The number of required signatures.
-     */
-    abstract fun getSigsRequired(): Int
+  /**
+   * Gets the number of signatures required for this multi-key set.
+   *
+   * @return The number of required signatures.
+   */
+  abstract fun getSigsRequired(): Int
 
-    /**
-     * Gets the index of the provided public key.
-     *
-     * This function retrieves the index of a specified public key within the MultiKey.
-     * If the public key does not exist, it throws an error.
-     *
-     * @param publicKey The public key to find the index for. Can be any type whose `toString()`
-     * representation matches one in the `publicKeys` list.
-     * @return The corresponding index of the public key, if it exists.
-     * @throws IllegalArgumentException If the public key is not found in the MultiKey.
-     */
-    fun index(publicKey: Any): Int {
-        val index = publicKeys.indexOfFirst { it.toString() == publicKey.toString() }
+  /**
+   * Gets the index of the provided public key.
+   *
+   * This function retrieves the index of a specified public key within the MultiKey. If the public
+   * key does not exist, it throws an error.
+   *
+   * @param publicKey The public key to find the index for. Can be any type whose `toString()`
+   *   representation matches one in the `publicKeys` list.
+   * @return The corresponding index of the public key, if it exists.
+   * @throws IllegalArgumentException If the public key is not found in the MultiKey.
+   */
+  fun index(publicKey: PublicKey): Int {
+    println(publicKey.toString())
+    val index = publicKeys.indexOfFirst { it.toString() == publicKey.toString() }
 
-        if (index != -1) {
-            return index
-        }
-        throw IllegalArgumentException("Public key '$publicKey' not found in multi key set.")
+    if (index != -1) {
+      return index
     }
+    throw IllegalArgumentException("Public key '$publicKey' not found in multi key set.")
+  }
 }
-

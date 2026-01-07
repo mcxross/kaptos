@@ -37,11 +37,11 @@ interface Coin {
    *   chain.
    */
   suspend fun transferCoinTransaction(
-      from: AccountAddressInput,
-      to: AccountAddressInput,
-      amount: ULong,
-      coinType: String = APTOS_COIN,
-      withFeePayer: Boolean = false,
-      options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
+    from: AccountAddressInput,
+    to: AccountAddressInput,
+    amount: ULong,
+    coinType: String = APTOS_COIN,
+    withFeePayer: Boolean = false,
+    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
   ): SimpleTransaction
 }

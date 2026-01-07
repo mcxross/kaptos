@@ -57,32 +57,33 @@ class FungibleAssetActivitiesFilterBuilder {
   }
 
   internal fun build(): Fungible_asset_activities_bool_exp =
-      Fungible_asset_activities_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          amount = amount.toOptional(),
-          asset_type = assetType.toOptional(),
-          block_height = blockHeight.toOptional(),
-          entry_function_id_str = entryFunctionIdStr.toOptional(),
-          event_index = eventIndex.toOptional(),
-          gas_fee_payer_address = gasFeePayerAddress.toOptional(),
-          is_frozen = isFrozen.toOptional(),
-          is_gas_fee = isGasFee.toOptional(),
-          is_transaction_success = isTransactionSuccess.toOptional(),
-          metadata = metadata.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          owner_aptos_names = ownerAptosNames.toOptional(),
-          owner_aptos_names_aggregate = ownerAptosNamesAggregate.toOptional(),
-          storage_id = storageId.toOptional(),
-          storage_refund_amount = storageRefundAmount.toOptional(),
-          token_standard = tokenStandard.toOptional(),
-          transaction_timestamp = transactionTimestamp.toOptional(),
-          transaction_version = transactionVersion.toOptional(),
-          type = type.toOptional())
+    Fungible_asset_activities_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      amount = amount.toOptional(),
+      asset_type = assetType.toOptional(),
+      block_height = blockHeight.toOptional(),
+      entry_function_id_str = entryFunctionIdStr.toOptional(),
+      event_index = eventIndex.toOptional(),
+      gas_fee_payer_address = gasFeePayerAddress.toOptional(),
+      is_frozen = isFrozen.toOptional(),
+      is_gas_fee = isGasFee.toOptional(),
+      is_transaction_success = isTransactionSuccess.toOptional(),
+      metadata = metadata.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      owner_aptos_names = ownerAptosNames.toOptional(),
+      owner_aptos_names_aggregate = ownerAptosNamesAggregate.toOptional(),
+      storage_id = storageId.toOptional(),
+      storage_refund_amount = storageRefundAmount.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+      transaction_timestamp = transactionTimestamp.toOptional(),
+      transaction_version = transactionVersion.toOptional(),
+      type = type.toOptional(),
+    )
 }
 
 /** Public DSL entrypoint for building Fungible_asset_activities_bool_exp. */
 fun fungibleAssetActivitiesFilter(
-    init: FungibleAssetActivitiesFilterBuilder.() -> Unit
+  init: FungibleAssetActivitiesFilterBuilder.() -> Unit
 ): Fungible_asset_activities_bool_exp = FungibleAssetActivitiesFilterBuilder().apply(init).build()

@@ -25,23 +25,24 @@ class CurrentAptosNamesOrderBuilder {
   }
 
   internal fun build(): Current_aptos_names_order_by =
-      Current_aptos_names_order_by(
-          domain = domain?.generated.toOptional(),
-          domain_expiration_timestamp = domainExpirationTimestamp?.generated.toOptional(),
-          domain_with_suffix = domainWithSuffix?.generated.toOptional(),
-          expiration_timestamp = expirationTimestamp?.generated.toOptional(),
-          is_active = isActive?.generated.toOptional(),
-          is_domain_owner = isDomainOwner.toOptional(),
-          is_primary = isPrimary?.generated.toOptional(),
-          last_transaction_version = lastTransactionVersion?.generated.toOptional(),
-          owner_address = ownerAddress?.generated.toOptional(),
-          registered_address = registeredAddress?.generated.toOptional(),
-          subdomain = subdomain?.generated.toOptional(),
-          subdomain_expiration_policy = subdomainExpirationPolicy?.generated.toOptional(),
-          token_name = tokenName?.generated.toOptional(),
-          token_standard = tokenStandard?.generated.toOptional())
+    Current_aptos_names_order_by(
+      domain = domain?.generated.toOptional(),
+      domain_expiration_timestamp = domainExpirationTimestamp?.generated.toOptional(),
+      domain_with_suffix = domainWithSuffix?.generated.toOptional(),
+      expiration_timestamp = expirationTimestamp?.generated.toOptional(),
+      is_active = isActive?.generated.toOptional(),
+      is_domain_owner = isDomainOwner.toOptional(),
+      is_primary = isPrimary?.generated.toOptional(),
+      last_transaction_version = lastTransactionVersion?.generated.toOptional(),
+      owner_address = ownerAddress?.generated.toOptional(),
+      registered_address = registeredAddress?.generated.toOptional(),
+      subdomain = subdomain?.generated.toOptional(),
+      subdomain_expiration_policy = subdomainExpirationPolicy?.generated.toOptional(),
+      token_name = tokenName?.generated.toOptional(),
+      token_standard = tokenStandard?.generated.toOptional(),
+    )
 }
 
 fun currentAptosNamesOrder(
-    init: CurrentAptosNamesOrderBuilder.() -> Unit
+  init: CurrentAptosNamesOrderBuilder.() -> Unit
 ): Current_aptos_names_order_by = CurrentAptosNamesOrderBuilder().apply(init).build()

@@ -35,7 +35,7 @@ import xyz.mcxross.kaptos.model.SigningSchemeInput
  * `AnyPublicKey` that represents any `Unified authentication key`
  */
 @Serializable
-class Ed25519PublicKey(private val data: ByteArray) : AccountPublicKey() {
+class Ed25519PublicKey(val data: ByteArray) : AccountPublicKey() {
 
   @Transient private var hex: Hex = Hex.empty()
 
@@ -62,11 +62,7 @@ class Ed25519PublicKey(private val data: ByteArray) : AccountPublicKey() {
       return false
     }
 
-    val messageBytes = Hex.fromHexInput(message).toByteArray()
-    val signatureBytes = signature.toByteArray()
-    // val publicKeyBytes = hex.toByteArray()
-
-    TODO("Not yet implemented: We should call the actual Ed25519 verify function here")
+    return verifySignature(this, message.toByteArray(), signature.toByteArray())
   }
 
   /**

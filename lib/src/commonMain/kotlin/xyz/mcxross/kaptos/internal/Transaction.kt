@@ -23,91 +23,96 @@ import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.paginateWithCursor
 import xyz.mcxross.kaptos.exception.AptosApiErrorV1
-import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.exception.AptosIndexerError
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getTransactions(
-    config: AptosConfig,
-    options: PaginationArgs?,
+  config: AptosConfig,
+  options: PaginationArgs?,
 ): Result<List<TransactionResponse>, AptosSdkError> {
   val params =
-      mutableMapOf<String, Any>().apply {
-        options?.offset?.let { put("start", it) }
-        options?.limit?.let { put("limit", it) }
-      }
+    mutableMapOf<String, Any>().apply {
+      options?.offset?.let { put("start", it) }
+      options?.limit?.let { put("limit", it) }
+    }
 
   return paginateWithCursor<TransactionResponse>(
-          RequestOptions.AptosRequestOptions(
-              aptosConfig = config,
-              type = AptosApiType.FULLNODE,
-              originMethod = "getTransactions",
-              path = "transactions",
-              params = params.ifEmpty { null },
-          ))
-      .toResult()
+      RequestOptions.AptosRequestOptions(
+        aptosConfig = config,
+        type = AptosApiType.FULLNODE,
+        originMethod = "getTransactions",
+        path = "transactions",
+        params = params.ifEmpty { null },
+      )
+    )
+    .toResult()
 }
 
 internal suspend fun getGasPriceEstimation(
-    config: AptosConfig
+  config: AptosConfig
 ): Result<GasEstimation, AptosSdkError> =
-    getAptosFullNode<GasEstimation>(
-            RequestOptions.GetAptosRequestOptions(
-                aptosConfig = config,
-                originMethod = "getGasPriceEstimation",
-                path = "estimate_gas_price",
-            ))
-        .toResult()
+  getAptosFullNode<GasEstimation>(
+      RequestOptions.GetAptosRequestOptions(
+        aptosConfig = config,
+        originMethod = "getGasPriceEstimation",
+        path = "estimate_gas_price",
+      )
+    )
+    .toResult()
 
 internal suspend fun getTransactionByVersion(
-    config: AptosConfig,
-    ledgerVersion: Long,
+  config: AptosConfig,
+  ledgerVersion: Long,
 ): Result<TransactionResponse, AptosSdkError> =
-    getAptosFullNode<TransactionResponse>(
-            RequestOptions.GetAptosRequestOptions(
-                aptosConfig = config,
-                originMethod = "getTransactionByVersion",
-                path = "transactions/by_version/${ledgerVersion}",
-            ))
-        .toResult()
+  getAptosFullNode<TransactionResponse>(
+      RequestOptions.GetAptosRequestOptions(
+        aptosConfig = config,
+        originMethod = "getTransactionByVersion",
+        path = "transactions/by_version/${ledgerVersion}",
+      )
+    )
+    .toResult()
 
 internal suspend fun getTransactionByHash(
-    config: AptosConfig,
-    ledgerHash: String,
+  config: AptosConfig,
+  ledgerHash: String,
 ): Result<TransactionResponse, AptosSdkError> =
-    getAptosFullNode<TransactionResponse>(
-            RequestOptions.GetAptosRequestOptions(
-                aptosConfig = config,
-                originMethod = "getTransactionByHash",
-                path = "transactions/by_hash/${ledgerHash}",
-            ))
-        .toResult()
+  getAptosFullNode<TransactionResponse>(
+      RequestOptions.GetAptosRequestOptions(
+        aptosConfig = config,
+        originMethod = "getTransactionByHash",
+        path = "transactions/by_hash/${ledgerHash}",
+      )
+    )
+    .toResult()
 
 internal suspend fun isTransactionPending(config: AptosConfig, txnHash: HexInput): Boolean =
-    getTransactionByHash(config, txnHash.value)
-        .toInternalResult()
-        .expect { "Failed to fetch transaction $txnHash" }
-        .type == TransactionResponseType.PENDING
+  getTransactionByHash(config, txnHash.value)
+    .toInternalResult()
+    .expect { "Failed to fetch transaction $txnHash" }
+    .type == TransactionResponseType.PENDING
 
 internal suspend fun longWaitForTransaction(
-    config: AptosConfig,
-    txnHas: HexInput,
+  config: AptosConfig,
+  txnHas: HexInput,
 ): Result<TransactionResponse, AptosSdkError> {
 
   return getAptosFullNode<TransactionResponse>(
-          RequestOptions.GetAptosRequestOptions(
-              aptosConfig = config,
-              originMethod = "longWaitForTransaction",
-              path = "transactions/wait_by_hash/${txnHas.value}",
-          ))
-      .toResult()
+      RequestOptions.GetAptosRequestOptions(
+        aptosConfig = config,
+        originMethod = "longWaitForTransaction",
+        path = "transactions/wait_by_hash/${txnHas.value}",
+      )
+    )
+    .toResult()
 }
 
 internal suspend fun waitForTransaction(
-    config: AptosConfig,
-    txnHash: String,
-    options: WaitForTransactionOptions,
+  config: AptosConfig,
+  txnHash: String,
+  options: WaitForTransactionOptions,
 ): Result<TransactionResponse, AptosIndexerError> {
   var isPending = true
   var timeElapsed = 0
@@ -179,13 +184,15 @@ internal suspend fun waitForTransaction(
       throw lastError
     } else {
       throw WaitForTransactionException(
-          "Fetching transaction $txnHash failed and timed out after ${options.timeoutSecs} seconds")
+        "Fetching transaction $txnHash failed and timed out after ${options.timeoutSecs} seconds"
+      )
     }
   }
 
   if (lastTxn.type == TransactionResponseType.PENDING) {
     throw WaitForTransactionException(
-        "Transaction $txnHash timed out in pending state after ${options.timeoutSecs} seconds")
+      "Transaction $txnHash timed out in pending state after ${options.timeoutSecs} seconds"
+    )
   }
 
   if (!options.checkSuccess) {
@@ -196,9 +203,9 @@ internal suspend fun waitForTransaction(
 }
 
 internal suspend fun signAndSubmitTransaction(
-    aptosConfig: AptosConfig,
-    signer: Account,
-    transaction: AnyRawTransaction,
+  aptosConfig: AptosConfig,
+  signer: Account,
+  transaction: AnyRawTransaction,
 ): Result<PendingTransactionResponse, Exception> {
   val senderAuthenticator = signTransaction(signer, transaction)
   val submit = Submit(aptosConfig)

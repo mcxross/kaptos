@@ -36,26 +36,27 @@ class FungibleAssetMetadataFilterBuilder {
   }
 
   internal fun build(): Fungible_asset_metadata_bool_exp =
-      Fungible_asset_metadata_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          asset_type = assetType.toOptional(),
-          creator_address = creatorAddress.toOptional(),
-          decimals = decimals.toOptional(),
-          icon_uri = iconUri.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          maximum_v2 = maximumV2.toOptional(),
-          name = name.toOptional(),
-          project_uri = projectUri.toOptional(),
-          supply_aggregator_table_handle_v1 = supplyAggregatorTableHandleV1.toOptional(),
-          supply_aggregator_table_key_v1 = supplyAggregatorTableKeyV1.toOptional(),
-          supply_v2 = supplyV2.toOptional(),
-          symbol = symbol.toOptional(),
-          token_standard = tokenStandard.toOptional())
+    Fungible_asset_metadata_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      asset_type = assetType.toOptional(),
+      creator_address = creatorAddress.toOptional(),
+      decimals = decimals.toOptional(),
+      icon_uri = iconUri.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      maximum_v2 = maximumV2.toOptional(),
+      name = name.toOptional(),
+      project_uri = projectUri.toOptional(),
+      supply_aggregator_table_handle_v1 = supplyAggregatorTableHandleV1.toOptional(),
+      supply_aggregator_table_key_v1 = supplyAggregatorTableKeyV1.toOptional(),
+      supply_v2 = supplyV2.toOptional(),
+      symbol = symbol.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+    )
 }
 
 fun fungibleAssetMetadataFilter(
-    init: FungibleAssetMetadataFilterBuilder.() -> Unit
+  init: FungibleAssetMetadataFilterBuilder.() -> Unit
 ): Fungible_asset_metadata_bool_exp = FungibleAssetMetadataFilterBuilder().apply(init).build()

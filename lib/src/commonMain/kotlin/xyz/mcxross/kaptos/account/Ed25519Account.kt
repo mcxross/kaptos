@@ -83,6 +83,9 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
     return this.sign(HexInput.fromByteArray(generateSigningMessageForTransaction(tx)))
   }
 
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
+    publicKey.verifySignature(message, signature)
+
   companion object {
     fun generate(): Ed25519Account {
       val privateKey = Ed25519PrivateKey.generate()

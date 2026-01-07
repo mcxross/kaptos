@@ -28,19 +28,19 @@ class CurrentTokenRoyaltyV1FilterBuilder {
   }
 
   internal fun build(): Current_token_royalty_v1_bool_exp =
-      Current_token_royalty_v1_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          payee_address = payeeAddress.toOptional(),
-          royalty_points_denominator = royaltyPointsDenominator.toOptional(),
-          royalty_points_numerator = royaltyPointsNumerator.toOptional(),
-          token_data_id = tokenDataId.toOptional(),
-      )
+    Current_token_royalty_v1_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      payee_address = payeeAddress.toOptional(),
+      royalty_points_denominator = royaltyPointsDenominator.toOptional(),
+      royalty_points_numerator = royaltyPointsNumerator.toOptional(),
+      token_data_id = tokenDataId.toOptional(),
+    )
 }
 
 fun currentTokenRoyaltyV1Filter(
-    init: CurrentTokenRoyaltyV1FilterBuilder.() -> Unit
+  init: CurrentTokenRoyaltyV1FilterBuilder.() -> Unit
 ): Current_token_royalty_v1_bool_exp = CurrentTokenRoyaltyV1FilterBuilder().apply(init).build()

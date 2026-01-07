@@ -9,11 +9,12 @@ class TableMetadatasOrderBuilder {
   var valueType: OrderBy? = null
 
   internal fun build(): Table_metadatas_order_by =
-      Table_metadatas_order_by(
-          handle = handle?.generated.toOptional(),
-          key_type = keyType?.generated.toOptional(),
-          value_type = valueType?.generated.toOptional())
+    Table_metadatas_order_by(
+      handle = handle?.generated.toOptional(),
+      key_type = keyType?.generated.toOptional(),
+      value_type = valueType?.generated.toOptional(),
+    )
 }
 
 fun tableMetadatasOrder(init: TableMetadatasOrderBuilder.() -> Unit): Table_metadatas_order_by =
-    TableMetadatasOrderBuilder().apply(init).build()
+  TableMetadatasOrderBuilder().apply(init).build()
