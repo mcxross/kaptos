@@ -54,21 +54,21 @@ internal suspend fun getTableItemsData(
     }
     .toResult()
 
-
 internal suspend fun getTableItemsMetadata(
-    config: AptosConfig,
-    filter: TableMetadataFilter,
-    sortOrder: List<TableMetadataSortOrder>?,
-    page: PaginationArgs?,
+  config: AptosConfig,
+  filter: TableMetadataFilter,
+  sortOrder: List<TableMetadataSortOrder>?,
+  page: PaginationArgs?,
 ): Result<GetTableItemsMetadataQuery.Data?, AptosIndexerError> =
-    handleQuery {
-        getGraphqlClient(config)
-            .query(
-                GetTableItemsMetadataQuery(
-                    where_condition = filter,
-                    offset = page?.offset.toOptional(),
-                    limit = page?.limit.toOptional(),
-                    order_by = sortOrder.toOptional(),
-                ))
+  handleQuery {
+      getGraphqlClient(config)
+        .query(
+          GetTableItemsMetadataQuery(
+            where_condition = filter,
+            offset = page?.offset.toOptional(),
+            limit = page?.limit.toOptional(),
+            order_by = sortOrder.toOptional(),
+          )
+        )
     }
-        .toResult()
+    .toResult()

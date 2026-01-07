@@ -42,92 +42,79 @@ import xyz.mcxross.kaptos.sample.ui.component.ShortenedAddress
 
 @Composable
 fun AccountDetails(
-    alice: Account?,
-    aliceBalance: Long,
-    bob: Account?,
-    bobBalance: Long,
-    transferAmount: Int,
-    onTransferAmountChange: (Int) -> Unit,
-    onFundAlice: () -> Unit,
-    onFundBob: () -> Unit,
-    onTransfer: () -> Unit
+  alice: Account?,
+  aliceBalance: Long,
+  bob: Account?,
+  bobBalance: Long,
+  transferAmount: Int,
+  onTransferAmountChange: (Int) -> Unit,
+  onFundAlice: () -> Unit,
+  onFundBob: () -> Unit,
+  onTransfer: () -> Unit,
 ) {
-    Column(modifier = Modifier.padding(10.dp)) {
-        Row {
-            Text("Alice:   ", fontSize = 16.sp, color = Color.White)
-            alice?.let { ShortenedAddress(it.accountAddress.toString()) }
-        }
-
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            Text(
-                "$aliceBalance",
-                modifier = Modifier.align(Alignment.Center),
-                fontSize = 56.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-            )
-        }
-
-        Divider(modifier = Modifier.padding(10.dp), color = Color.DarkGray)
-
-        Row {
-            Text("Bob:   ", fontSize = 16.sp, color = Color.White)
-            bob?.let { ShortenedAddress(it.accountAddress.toString()) }
-        }
-
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-            Text(
-                "$bobBalance",
-                modifier = Modifier.align(Alignment.Center),
-                fontSize = 56.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-            )
-        }
+  Column(modifier = Modifier.padding(10.dp)) {
+    Row {
+      Text("Alice:   ", fontSize = 16.sp, color = Color.White)
+      alice?.let { ShortenedAddress(it.accountAddress.toString()) }
     }
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(
-            Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(
-                onClick = onFundAlice,
-                text = "Fund Alice",
-                tint = Color.White,
-            )
-
-            Button(
-                onClick = onFundBob,
-                text = "Fund Bob",
-                tint = Color.White,
-            )
-
-            Divider(modifier = Modifier.padding(10.dp), color = Color.DarkGray)
-
-            TextField(
-                value = transferAmount.toString(),
-                onValueChange = { onTransferAmountChange(it.toIntOrNull() ?: 0) },
-                textStyle = MaterialTheme.typography.body2,
-                colors =
-                TextFieldDefaults.textFieldColors(
-                    textColor = Color.White,
-                    backgroundColor = Color.DarkGray,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                ),
-                label = { Text("Transfer Amount", color = Color.White) },
-                keyboardOptions =
-                KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.padding(10.dp),
-            )
-
-            Button(
-                onClick = onTransfer,
-                text = "Transfer",
-                tint = Color.White,
-            )
-        }
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+      Text(
+        "$aliceBalance",
+        modifier = Modifier.align(Alignment.Center),
+        fontSize = 56.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+      )
     }
+
+    Divider(modifier = Modifier.padding(10.dp), color = Color.DarkGray)
+
+    Row {
+      Text("Bob:   ", fontSize = 16.sp, color = Color.White)
+      bob?.let { ShortenedAddress(it.accountAddress.toString()) }
+    }
+
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+      Text(
+        "$bobBalance",
+        modifier = Modifier.align(Alignment.Center),
+        fontSize = 56.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+      )
+    }
+  }
+
+  Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Column(
+      Modifier.fillMaxWidth(),
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Button(onClick = onFundAlice, text = "Fund Alice", tint = Color.White)
+
+      Button(onClick = onFundBob, text = "Fund Bob", tint = Color.White)
+
+      Divider(modifier = Modifier.padding(10.dp), color = Color.DarkGray)
+
+      TextField(
+        value = transferAmount.toString(),
+        onValueChange = { onTransferAmountChange(it.toIntOrNull() ?: 0) },
+        textStyle = MaterialTheme.typography.body2,
+        colors =
+          TextFieldDefaults.textFieldColors(
+            textColor = Color.White,
+            backgroundColor = Color.DarkGray,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+          ),
+        label = { Text("Transfer Amount", color = Color.White) },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        modifier = Modifier.padding(10.dp),
+      )
+
+      Button(onClick = onTransfer, text = "Transfer", tint = Color.White)
+    }
+  }
 }

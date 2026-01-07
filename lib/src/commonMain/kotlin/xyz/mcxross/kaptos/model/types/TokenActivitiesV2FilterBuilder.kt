@@ -68,33 +68,34 @@ class TokenActivitiesV2FilterBuilder {
   }
 
   internal fun build(): Token_activities_v2_bool_exp =
-      Token_activities_v2_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          after_value = afterValue.toOptional(),
-          aptos_names_from = aptosNamesFrom.toOptional(),
-          aptos_names_from_aggregate = aptosNamesFromAggregate.toOptional(),
-          aptos_names_to = aptosNamesTo.toOptional(),
-          aptos_names_to_aggregate = aptosNamesToAggregate.toOptional(),
-          before_value = beforeValue.toOptional(),
-          current_token_data = currentTokenData.toOptional(),
-          entry_function_id_str = entryFunctionIdStr.toOptional(),
-          event_account_address = eventAccountAddress.toOptional(),
-          event_index = eventIndex.toOptional(),
-          from_address = fromAddress.toOptional(),
-          is_fungible_v2 = isFungibleV2.toOptional(),
-          property_version_v1 = propertyVersionV1.toOptional(),
-          to_address = toAddress.toOptional(),
-          token_amount = tokenAmount.toOptional(),
-          token_data_id = tokenDataId.toOptional(),
-          token_standard = tokenStandard.toOptional(),
-          transaction_timestamp = transactionTimestamp.toOptional(),
-          transaction_version = transactionVersion.toOptional(),
-          type = type.toOptional())
+    Token_activities_v2_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      after_value = afterValue.toOptional(),
+      aptos_names_from = aptosNamesFrom.toOptional(),
+      aptos_names_from_aggregate = aptosNamesFromAggregate.toOptional(),
+      aptos_names_to = aptosNamesTo.toOptional(),
+      aptos_names_to_aggregate = aptosNamesToAggregate.toOptional(),
+      before_value = beforeValue.toOptional(),
+      current_token_data = currentTokenData.toOptional(),
+      entry_function_id_str = entryFunctionIdStr.toOptional(),
+      event_account_address = eventAccountAddress.toOptional(),
+      event_index = eventIndex.toOptional(),
+      from_address = fromAddress.toOptional(),
+      is_fungible_v2 = isFungibleV2.toOptional(),
+      property_version_v1 = propertyVersionV1.toOptional(),
+      to_address = toAddress.toOptional(),
+      token_amount = tokenAmount.toOptional(),
+      token_data_id = tokenDataId.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+      transaction_timestamp = transactionTimestamp.toOptional(),
+      transaction_version = transactionVersion.toOptional(),
+      type = type.toOptional(),
+    )
 }
 
 /** Public DSL entrypoint for building Token_activities_v2_bool_exp. */
 fun tokenActivitiesV2Filter(
-    init: TokenActivitiesV2FilterBuilder.() -> Unit
+  init: TokenActivitiesV2FilterBuilder.() -> Unit
 ): Token_activities_v2_bool_exp = TokenActivitiesV2FilterBuilder().apply(init).build()

@@ -119,7 +119,8 @@ tasks.getByName<DokkaTask>("dokkaHtml") {
       sourceLink {
         localDirectory.set(file("commonMain/kotlin"))
         remoteUrl.set(
-            URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin"))
+          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
+        )
         remoteLineSuffix.set("#L")
       }
     }
@@ -134,11 +135,12 @@ mavenPublishing {
   coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
   configure(
-      KotlinMultiplatform(
-          javadocJar = JavadocJar.Dokka("dokkaHtml"),
-          sourcesJar = true,
-          androidVariantsToPublish = listOf("debug", "release"),
-      ))
+    KotlinMultiplatform(
+      javadocJar = JavadocJar.Dokka("dokkaHtml"),
+      sourcesJar = true,
+      androidVariantsToPublish = listOf("debug", "release"),
+    )
+  )
 
   pom {
     name.set("Kaptos")

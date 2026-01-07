@@ -41,26 +41,27 @@ class CurrentAptosNamesFilterBuilder {
   }
 
   internal fun build(): Current_aptos_names_bool_exp =
-      Current_aptos_names_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          domain = domain.toOptional(),
-          domain_expiration_timestamp = domainExpirationTimestamp.toOptional(),
-          domain_with_suffix = domainWithSuffix.toOptional(),
-          expiration_timestamp = expirationTimestamp.toOptional(),
-          is_active = isActive.toOptional(),
-          is_domain_owner = isDomainOwner.toOptional(),
-          is_primary = isPrimary.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          registered_address = registeredAddress.toOptional(),
-          subdomain = subdomain.toOptional(),
-          subdomain_expiration_policy = subdomainExpirationPolicy.toOptional(),
-          token_name = tokenName.toOptional(),
-          token_standard = tokenStandard.toOptional())
+    Current_aptos_names_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      domain = domain.toOptional(),
+      domain_expiration_timestamp = domainExpirationTimestamp.toOptional(),
+      domain_with_suffix = domainWithSuffix.toOptional(),
+      expiration_timestamp = expirationTimestamp.toOptional(),
+      is_active = isActive.toOptional(),
+      is_domain_owner = isDomainOwner.toOptional(),
+      is_primary = isPrimary.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      registered_address = registeredAddress.toOptional(),
+      subdomain = subdomain.toOptional(),
+      subdomain_expiration_policy = subdomainExpirationPolicy.toOptional(),
+      token_name = tokenName.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+    )
 }
 
 fun currentAptosNamesFilter(
-    init: CurrentAptosNamesFilterBuilder.() -> Unit
+  init: CurrentAptosNamesFilterBuilder.() -> Unit
 ): Current_aptos_names_bool_exp = CurrentAptosNamesFilterBuilder().apply(init).build()

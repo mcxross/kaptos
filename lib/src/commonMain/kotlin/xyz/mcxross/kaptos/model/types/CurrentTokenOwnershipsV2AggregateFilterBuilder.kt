@@ -9,42 +9,42 @@ class CurrentTokenOwnershipsV2AggregateFilterBuilder {
   private var boolOr: Current_token_ownerships_v2_aggregate_bool_exp_bool_or? = null
 
   fun count(
-      predicate: Int_comparison_exp,
-      block: CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder.() -> Unit = {},
+    predicate: Int_comparison_exp,
+    block: CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder.() -> Unit = {},
   ) {
     this.count =
-        CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(predicate).apply(block).build()
+      CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(predicate).apply(block).build()
   }
 
   fun boolAnd(
-      arguments:
-          Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns,
-      predicate: Boolean_comparison_exp,
-      block: CurrentTokenOwnershipsV2AggregateBoolAndBuilder.() -> Unit = {},
+    arguments:
+      Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns,
+    predicate: Boolean_comparison_exp,
+    block: CurrentTokenOwnershipsV2AggregateBoolAndBuilder.() -> Unit = {},
   ) {
     this.boolAnd =
-        CurrentTokenOwnershipsV2AggregateBoolAndBuilder(arguments, predicate).apply(block).build()
+      CurrentTokenOwnershipsV2AggregateBoolAndBuilder(arguments, predicate).apply(block).build()
   }
 
   fun boolOr(
-      arguments:
-          Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_or_arguments_columns,
-      predicate: Boolean_comparison_exp,
-      block: CurrentTokenOwnershipsV2AggregateBoolOrBuilder.() -> Unit = {},
+    arguments:
+      Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_or_arguments_columns,
+    predicate: Boolean_comparison_exp,
+    block: CurrentTokenOwnershipsV2AggregateBoolOrBuilder.() -> Unit = {},
   ) {
     this.boolOr =
-        CurrentTokenOwnershipsV2AggregateBoolOrBuilder(arguments, predicate).apply(block).build()
+      CurrentTokenOwnershipsV2AggregateBoolOrBuilder(arguments, predicate).apply(block).build()
   }
 
   internal fun build(): Current_token_ownerships_v2_aggregate_bool_exp =
-      Current_token_ownerships_v2_aggregate_bool_exp(
-          count = count.toOptional(),
-          bool_and = boolAnd.toOptional(),
-          bool_or = boolOr.toOptional(),
-      )
+    Current_token_ownerships_v2_aggregate_bool_exp(
+      count = count.toOptional(),
+      bool_and = boolAnd.toOptional(),
+      bool_or = boolOr.toOptional(),
+    )
 }
 
 fun currentTokenOwnershipsV2AggregateFilter(
-    init: CurrentTokenOwnershipsV2AggregateFilterBuilder.() -> Unit
+  init: CurrentTokenOwnershipsV2AggregateFilterBuilder.() -> Unit
 ): Current_token_ownerships_v2_aggregate_bool_exp =
-    CurrentTokenOwnershipsV2AggregateFilterBuilder().apply(init).build()
+  CurrentTokenOwnershipsV2AggregateFilterBuilder().apply(init).build()

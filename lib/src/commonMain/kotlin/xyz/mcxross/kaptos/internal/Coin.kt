@@ -19,29 +19,29 @@ import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun transferCoinTransaction(
-    aptosConfig: AptosConfig,
-    from: AccountAddressInput,
-    to: AccountAddressInput,
-    amount: ULong,
-    coinType: String,
-    withFeePayer: Boolean,
-    options: InputGenerateTransactionOptions,
+  aptosConfig: AptosConfig,
+  from: AccountAddressInput,
+  to: AccountAddressInput,
+  amount: ULong,
+  coinType: String,
+  withFeePayer: Boolean,
+  options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   val data =
-      InputGenerateSingleSignerRawTransactionData(
-          sender = from,
-          data =
-              entryFunctionData {
-                function = "0x1::coin::transfer"
-                typeArguments = typeArguments { +TypeTagStruct(type = coinType.toStructTag()) }
-                functionArguments = functionArguments {
-                  +HexInput(to.value)
-                  +U64(amount)
-                }
-              },
-          options = options,
-          withFeePayer = withFeePayer,
-          secondarySignerAddresses = null,
-      )
+    InputGenerateSingleSignerRawTransactionData(
+      sender = from,
+      data =
+        entryFunctionData {
+          function = "0x1::coin::transfer"
+          typeArguments = typeArguments { +TypeTagStruct(type = coinType.toStructTag()) }
+          functionArguments = functionArguments {
+            +HexInput(to.value)
+            +U64(amount)
+          }
+        },
+      options = options,
+      withFeePayer = withFeePayer,
+      secondarySignerAddresses = null,
+    )
   return generateTransaction(aptosConfig, data) as SimpleTransaction
 }

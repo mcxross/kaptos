@@ -15,32 +15,30 @@
  */
 package xyz.mcxross.kaptos.exception
 
-/**
- * A typed representation of the specific error codes returned by the Aptos API.
- */
+/** A typed representation of the specific error codes returned by the Aptos API. */
 enum class AptosErrorCode {
-    ACCOUNT_NOT_FOUND,
-    RESOURCE_NOT_FOUND,
-    MODULE_NOT_FOUND,
-    STRUCT_FIELD_NOT_FOUND,
-    VERSION_NOT_FOUND,
-    TRANSACTION_NOT_FOUND,
-    TABLE_ITEM_NOT_FOUND,
-    BLOCK_NOT_FOUND,
-    STATE_VALUE_NOT_FOUND,
-    VERSION_PRUNED,
-    BLOCK_PRUNED,
-    INVALID_INPUT,
-    INVALID_TRANSACTION_UPDATE,
-    SEQUENCE_NUMBER_TOO_OLD,
-    VM_ERROR,
-    REJECTED_BY_FILTER,
-    HEALTH_CHECK_FAILED,
-    MEMPOOL_IS_FULL,
-    INTERNAL_ERROR,
-    WEB_FRAMEWORK_ERROR,
-    BCS_NOT_SUPPORTED,
-    API_DISABLED,
-    // A fallback for any codes not yet included in this enum
-    UNKNOWN_ERROR_CODE
+  ACCOUNT_NOT_FOUND,
+  RESOURCE_NOT_FOUND,
+  MODULE_NOT_FOUND,
+  STRUCT_FIELD_NOT_FOUND,
+  VERSION_NOT_FOUND,
+  TRANSACTION_NOT_FOUND,
+  TABLE_ITEM_NOT_FOUND,
+  BLOCK_NOT_FOUND,
+  STATE_VALUE_NOT_FOUND,
+  VERSION_PRUNED,
+  BLOCK_PRUNED,
+  INVALID_INPUT,
+  INVALID_TRANSACTION_UPDATE,
+  SEQUENCE_NUMBER_TOO_OLD,
+  VM_ERROR,
+  REJECTED_BY_FILTER,
+  HEALTH_CHECK_FAILED,
+  MEMPOOL_IS_FULL,
+  INTERNAL_ERROR,
+  WEB_FRAMEWORK_ERROR,
+  BCS_NOT_SUPPORTED,
+  API_DISABLED,
+  // A fallback for any codes not yet included in this enum
+  UNKNOWN_ERROR_CODE,
 }

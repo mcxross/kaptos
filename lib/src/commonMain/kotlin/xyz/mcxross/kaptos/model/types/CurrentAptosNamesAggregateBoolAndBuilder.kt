@@ -7,9 +7,9 @@ import xyz.mcxross.kaptos.generated.type.Current_aptos_names_select_column_curre
 import xyz.mcxross.kaptos.util.toOptional
 
 class CurrentAptosNamesAggregateBoolAndBuilder(
-    private val arguments:
-        Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns,
-    private val predicate: Boolean_comparison_exp,
+  private val arguments:
+    Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns,
+  private val predicate: Boolean_comparison_exp,
 ) {
   var distinct: Boolean? = null
   private var filter: Current_aptos_names_bool_exp? = null
@@ -19,10 +19,10 @@ class CurrentAptosNamesAggregateBoolAndBuilder(
   }
 
   internal fun build(): Current_aptos_names_aggregate_bool_exp_bool_and =
-      Current_aptos_names_aggregate_bool_exp_bool_and(
-          arguments = arguments,
-          predicate = predicate,
-          distinct = distinct.toOptional(),
-          filter = filter.toOptional(),
-      )
+    Current_aptos_names_aggregate_bool_exp_bool_and(
+      arguments = arguments,
+      predicate = predicate,
+      distinct = distinct.toOptional(),
+      filter = filter.toOptional(),
+    )
 }

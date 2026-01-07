@@ -37,17 +37,18 @@ class TableItemsFilterBuilder {
   }
 
   internal fun build(): Table_items_bool_exp =
-      Table_items_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          decoded_key = decodedKey.toOptional(),
-          decoded_value = decodedValue.toOptional(),
-          key = key.toOptional(),
-          table_handle = tableHandle.toOptional(),
-          transaction_version = transactionVersion.toOptional(),
-          write_set_change_index = writeSetChangeIndex.toOptional())
+    Table_items_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      decoded_key = decodedKey.toOptional(),
+      decoded_value = decodedValue.toOptional(),
+      key = key.toOptional(),
+      table_handle = tableHandle.toOptional(),
+      transaction_version = transactionVersion.toOptional(),
+      write_set_change_index = writeSetChangeIndex.toOptional(),
+    )
 }
 
 fun tableItemsFilter(init: TableItemsFilterBuilder.() -> Unit): Table_items_bool_exp =
-    TableItemsFilterBuilder().apply(init).build()
+  TableItemsFilterBuilder().apply(init).build()

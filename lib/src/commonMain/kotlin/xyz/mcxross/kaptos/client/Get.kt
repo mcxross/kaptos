@@ -35,7 +35,6 @@ import xyz.mcxross.kaptos.model.AptosConfig
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.RequestOptions
 
-
 /**
  * Executes a GET request to an Aptos API endpoint using a configurable Ktor client.
  *

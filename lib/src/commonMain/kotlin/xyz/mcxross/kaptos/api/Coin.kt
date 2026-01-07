@@ -36,12 +36,12 @@ class Coin(val aptosConfig: AptosConfig) : Coin {
    *   chain.
    */
   override suspend fun transferCoinTransaction(
-      from: AccountAddressInput,
-      to: AccountAddressInput,
-      amount: ULong,
-      coinType: String,
-      withFeePayer: Boolean,
-      options: InputGenerateTransactionOptions,
+    from: AccountAddressInput,
+    to: AccountAddressInput,
+    amount: ULong,
+    coinType: String,
+    withFeePayer: Boolean,
+    options: InputGenerateTransactionOptions,
   ): SimpleTransaction =
-      transferCoinTransaction(aptosConfig, from, to, amount, coinType, withFeePayer, options)
+    transferCoinTransaction(aptosConfig, from, to, amount, coinType, withFeePayer, options)
 }

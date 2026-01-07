@@ -29,18 +29,19 @@ class CurrentObjectsFilterBuilder {
   }
 
   internal fun build(): Current_objects_bool_exp =
-      Current_objects_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          allow_ungated_transfer = allowUngatedTransfer.toOptional(),
-          is_deleted = isDeleted.toOptional(),
-          last_guid_creation_num = lastGuidCreationNum.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          object_address = objectAddress.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          state_key_hash = stateKeyHash.toOptional())
+    Current_objects_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      allow_ungated_transfer = allowUngatedTransfer.toOptional(),
+      is_deleted = isDeleted.toOptional(),
+      last_guid_creation_num = lastGuidCreationNum.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      object_address = objectAddress.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      state_key_hash = stateKeyHash.toOptional(),
+    )
 }
 
 fun currentObjectsFilter(init: CurrentObjectsFilterBuilder.() -> Unit): Current_objects_bool_exp =
-    CurrentObjectsFilterBuilder().apply(init).build()
+  CurrentObjectsFilterBuilder().apply(init).build()

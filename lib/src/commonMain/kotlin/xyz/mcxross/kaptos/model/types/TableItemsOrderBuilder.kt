@@ -12,14 +12,15 @@ class TableItemsOrderBuilder {
   var writeSetChangeIndex: OrderBy? = null
 
   internal fun build(): Table_items_order_by =
-      Table_items_order_by(
-          decoded_key = decodedKey?.generated.toOptional(),
-          decoded_value = decodedValue?.generated.toOptional(),
-          key = key?.generated.toOptional(),
-          table_handle = tableHandle?.generated.toOptional(),
-          transaction_version = transactionVersion?.generated.toOptional(),
-          write_set_change_index = writeSetChangeIndex?.generated.toOptional())
+    Table_items_order_by(
+      decoded_key = decodedKey?.generated.toOptional(),
+      decoded_value = decodedValue?.generated.toOptional(),
+      key = key?.generated.toOptional(),
+      table_handle = tableHandle?.generated.toOptional(),
+      transaction_version = transactionVersion?.generated.toOptional(),
+      write_set_change_index = writeSetChangeIndex?.generated.toOptional(),
+    )
 }
 
 fun tableItemsOrder(init: TableItemsOrderBuilder.() -> Unit): Table_items_order_by =
-    TableItemsOrderBuilder().apply(init).build()
+  TableItemsOrderBuilder().apply(init).build()

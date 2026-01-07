@@ -15,17 +15,18 @@ class TimestampFilterBuilder {
   var nin: List<Any>? = null
 
   internal fun build(): Timestamp_comparison_exp =
-      Timestamp_comparison_exp(
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _in = inList.toOptional(),
-          _is_null = isNull.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nin = nin.toOptional())
+    Timestamp_comparison_exp(
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _in = inList.toOptional(),
+      _is_null = isNull.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nin = nin.toOptional(),
+    )
 }
 
 fun timestampFilter(init: TimestampFilterBuilder.() -> Unit) =
-    TimestampFilterBuilder().apply(init).build()
+  TimestampFilterBuilder().apply(init).build()

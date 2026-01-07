@@ -52,6 +52,10 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
     TODO("Not yet implemented")
   }
 
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean {
+    TODO("Not yet implemented")
+  }
+
   companion object {
 
     /**

@@ -45,31 +45,32 @@ class CurrentFungibleAssetBalancesFilterBuilder {
   }
 
   internal fun build(): Current_fungible_asset_balances_bool_exp =
-      Current_fungible_asset_balances_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          amount = amount.toOptional(),
-          amount_v1 = amountV1.toOptional(),
-          amount_v2 = amountV2.toOptional(),
-          asset_type = assetType.toOptional(),
-          asset_type_v1 = assetTypeV1.toOptional(),
-          asset_type_v2 = assetTypeV2.toOptional(),
-          is_frozen = isFrozen.toOptional(),
-          is_primary = isPrimary.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_timestamp_v1 = lastTransactionTimestampV1.toOptional(),
-          last_transaction_timestamp_v2 = lastTransactionTimestampV2.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          last_transaction_version_v1 = lastTransactionVersionV1.toOptional(),
-          last_transaction_version_v2 = lastTransactionVersionV2.toOptional(),
-          metadata = metadata.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          storage_id = storageId.toOptional(),
-          token_standard = tokenStandard.toOptional())
+    Current_fungible_asset_balances_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      amount = amount.toOptional(),
+      amount_v1 = amountV1.toOptional(),
+      amount_v2 = amountV2.toOptional(),
+      asset_type = assetType.toOptional(),
+      asset_type_v1 = assetTypeV1.toOptional(),
+      asset_type_v2 = assetTypeV2.toOptional(),
+      is_frozen = isFrozen.toOptional(),
+      is_primary = isPrimary.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_timestamp_v1 = lastTransactionTimestampV1.toOptional(),
+      last_transaction_timestamp_v2 = lastTransactionTimestampV2.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      last_transaction_version_v1 = lastTransactionVersionV1.toOptional(),
+      last_transaction_version_v2 = lastTransactionVersionV2.toOptional(),
+      metadata = metadata.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      storage_id = storageId.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+    )
 }
 
 fun currentFungibleAssetBalancesFilter(
-    init: CurrentFungibleAssetBalancesFilterBuilder.() -> Unit
+  init: CurrentFungibleAssetBalancesFilterBuilder.() -> Unit
 ): Current_fungible_asset_balances_bool_exp =
-    CurrentFungibleAssetBalancesFilterBuilder().apply(init).build()
+  CurrentFungibleAssetBalancesFilterBuilder().apply(init).build()

@@ -67,12 +67,13 @@ fun generateSecp256k1KeyPair(): KeyPair {
   val publicKeyBytes = publicKey.q.getEncoded(false)
   val privateKeyBytes = privateKey.d.toByteArray()
 
-    // Normalize the private key
-  val normalizedPrivateKeyBytes = if (privateKeyBytes.size == 33 && privateKeyBytes[0].toInt() == 0) {
-    privateKeyBytes.copyOfRange(1, 33)
-  } else {
-    privateKeyBytes
-  }
+  // Normalize the private key
+  val normalizedPrivateKeyBytes =
+    if (privateKeyBytes.size == 33 && privateKeyBytes[0].toInt() == 0) {
+      privateKeyBytes.copyOfRange(1, 33)
+    } else {
+      privateKeyBytes
+    }
 
   // Return the key pair
   return KeyPair(normalizedPrivateKeyBytes, publicKeyBytes)

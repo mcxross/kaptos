@@ -9,39 +9,40 @@ class CurrentAptosNamesAggregateFilterBuilder {
   private var boolOr: Current_aptos_names_aggregate_bool_exp_bool_or? = null
 
   fun count(
-      predicate: Int_comparison_exp,
-      block: CurrentAptosNamesAggregateBoolExpCountBuilder.() -> Unit = {}
+    predicate: Int_comparison_exp,
+    block: CurrentAptosNamesAggregateBoolExpCountBuilder.() -> Unit = {},
   ) {
     this.count = CurrentAptosNamesAggregateBoolExpCountBuilder(predicate).apply(block).build()
   }
 
   fun boolAnd(
-      arguments:
-          Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns,
-      predicate: Boolean_comparison_exp,
-      block: CurrentAptosNamesAggregateBoolAndBuilder.() -> Unit = {}
+    arguments:
+      Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns,
+    predicate: Boolean_comparison_exp,
+    block: CurrentAptosNamesAggregateBoolAndBuilder.() -> Unit = {},
   ) {
     this.boolAnd =
-        CurrentAptosNamesAggregateBoolAndBuilder(arguments, predicate).apply(block).build()
+      CurrentAptosNamesAggregateBoolAndBuilder(arguments, predicate).apply(block).build()
   }
 
   fun boolOr(
-      arguments:
-          Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_or_arguments_columns,
-      predicate: Boolean_comparison_exp,
-      block: CurrentAptosNamesAggregateBoolOrBuilder.() -> Unit = {}
+    arguments:
+      Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_or_arguments_columns,
+    predicate: Boolean_comparison_exp,
+    block: CurrentAptosNamesAggregateBoolOrBuilder.() -> Unit = {},
   ) {
     this.boolOr = CurrentAptosNamesAggregateBoolOrBuilder(arguments, predicate).apply(block).build()
   }
 
   internal fun build(): Current_aptos_names_aggregate_bool_exp =
-      Current_aptos_names_aggregate_bool_exp(
-          count = count.toOptional(),
-          bool_and = boolAnd.toOptional(),
-          bool_or = boolOr.toOptional())
+    Current_aptos_names_aggregate_bool_exp(
+      count = count.toOptional(),
+      bool_and = boolAnd.toOptional(),
+      bool_or = boolOr.toOptional(),
+    )
 }
 
 fun currentAptosNamesAggregateFilter(
-    init: CurrentAptosNamesAggregateFilterBuilder.() -> Unit
+  init: CurrentAptosNamesAggregateFilterBuilder.() -> Unit
 ): Current_aptos_names_aggregate_bool_exp =
-    CurrentAptosNamesAggregateFilterBuilder().apply(init).build()
+  CurrentAptosNamesAggregateFilterBuilder().apply(init).build()

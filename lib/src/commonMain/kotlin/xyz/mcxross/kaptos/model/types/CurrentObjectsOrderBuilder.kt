@@ -13,15 +13,16 @@ class CurrentObjectsOrderBuilder {
   var stateKeyHash: OrderBy? = null
 
   internal fun build(): Current_objects_order_by =
-      Current_objects_order_by(
-          allow_ungated_transfer = allowUngatedTransfer?.generated.toOptional(),
-          is_deleted = isDeleted?.generated.toOptional(),
-          last_guid_creation_num = lastGuidCreationNum?.generated.toOptional(),
-          last_transaction_version = lastTransactionVersion?.generated.toOptional(),
-          object_address = objectAddress?.generated.toOptional(),
-          owner_address = ownerAddress?.generated.toOptional(),
-          state_key_hash = stateKeyHash?.generated.toOptional())
+    Current_objects_order_by(
+      allow_ungated_transfer = allowUngatedTransfer?.generated.toOptional(),
+      is_deleted = isDeleted?.generated.toOptional(),
+      last_guid_creation_num = lastGuidCreationNum?.generated.toOptional(),
+      last_transaction_version = lastTransactionVersion?.generated.toOptional(),
+      object_address = objectAddress?.generated.toOptional(),
+      owner_address = ownerAddress?.generated.toOptional(),
+      state_key_hash = stateKeyHash?.generated.toOptional(),
+    )
 }
 
 fun currentObjectsOrder(init: CurrentObjectsOrderBuilder.() -> Unit): Current_objects_order_by =
-    CurrentObjectsOrderBuilder().apply(init).build()
+  CurrentObjectsOrderBuilder().apply(init).build()

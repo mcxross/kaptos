@@ -31,22 +31,23 @@ class NftMetadataCrawlerParsedAssetUrisFilterBuilder {
   }
 
   internal fun build(): Nft_metadata_crawler_parsed_asset_uris_bool_exp =
-      Nft_metadata_crawler_parsed_asset_uris_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          animation_optimizer_retry_count = animationOptimizerRetryCount.toOptional(),
-          asset_uri = assetUri.toOptional(),
-          cdn_animation_uri = cdnAnimationUri.toOptional(),
-          cdn_image_uri = cdnImageUri.toOptional(),
-          cdn_json_uri = cdnJsonUri.toOptional(),
-          image_optimizer_retry_count = imageOptimizerRetryCount.toOptional(),
-          json_parser_retry_count = jsonParserRetryCount.toOptional(),
-          raw_animation_uri = rawAnimationUri.toOptional(),
-          raw_image_uri = rawImageUri.toOptional())
+    Nft_metadata_crawler_parsed_asset_uris_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      animation_optimizer_retry_count = animationOptimizerRetryCount.toOptional(),
+      asset_uri = assetUri.toOptional(),
+      cdn_animation_uri = cdnAnimationUri.toOptional(),
+      cdn_image_uri = cdnImageUri.toOptional(),
+      cdn_json_uri = cdnJsonUri.toOptional(),
+      image_optimizer_retry_count = imageOptimizerRetryCount.toOptional(),
+      json_parser_retry_count = jsonParserRetryCount.toOptional(),
+      raw_animation_uri = rawAnimationUri.toOptional(),
+      raw_image_uri = rawImageUri.toOptional(),
+    )
 }
 
 fun nftMetadataCrawlerParsedAssetUrisFilter(
-    init: NftMetadataCrawlerParsedAssetUrisFilterBuilder.() -> Unit
+  init: NftMetadataCrawlerParsedAssetUrisFilterBuilder.() -> Unit
 ): Nft_metadata_crawler_parsed_asset_uris_bool_exp =
-    NftMetadataCrawlerParsedAssetUrisFilterBuilder().apply(init).build()
+  NftMetadataCrawlerParsedAssetUrisFilterBuilder().apply(init).build()

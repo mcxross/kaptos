@@ -15,17 +15,18 @@ class NumericFilterBuilder {
   var nin: List<Any>? = null
 
   internal fun build(): Numeric_comparison_exp =
-      Numeric_comparison_exp(
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _in = inList.toOptional(),
-          _is_null = isNull.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nin = nin.toOptional())
+    Numeric_comparison_exp(
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _in = inList.toOptional(),
+      _is_null = isNull.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nin = nin.toOptional(),
+    )
 }
 
 fun numericFilter(init: NumericFilterBuilder.() -> Unit): Numeric_comparison_exp =
-    NumericFilterBuilder().apply(init).build()
+  NumericFilterBuilder().apply(init).build()
