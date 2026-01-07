@@ -33,8 +33,8 @@ class Secp256k1PublicKey(val hexInput: HexInput) : PublicKey() {
   init {
     val hex = Hex.fromHexInput(hexInput)
 
-    if (hex.toByteArray().size != LENGTH) {
-      throw IllegalArgumentException("Secp256k1 public key must be 65 bytes")
+    if (hex.toByteArray().size != LENGTH && hex.toByteArray().size != 33) {
+      throw IllegalArgumentException("Secp256k1 public key must be 65 or 33 bytes")
     }
 
     this.hex = hex

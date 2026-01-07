@@ -56,11 +56,13 @@ kotlin {
   sourceSets {
     val androidJvmMain by creating {
       dependsOn(commonMain.get())
-      dependencies { implementation(libs.bcprov.jdk15on) }
     }
     val androidMain by getting {
       dependsOn(androidJvmMain)
-      dependencies { implementation(libs.ktor.client.okhttp) }
+      dependencies {
+        implementation(libs.ktor.client.okhttp)
+        implementation(libs.fastkrypto.android)
+      }
     }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
@@ -83,11 +85,19 @@ kotlin {
     }
     val jvmMain by getting {
       dependsOn(androidJvmMain)
-      dependencies { implementation(libs.ktor.client.cio) }
+      dependencies {
+        implementation(libs.ktor.client.cio)
+        implementation(libs.fastkrypto.jvm)
+      }
     }
     jsMain.dependencies { implementation(libs.ktor.client.js) }
     linuxMain.dependencies { implementation(libs.ktor.client.curl) }
     mingwMain.dependencies { implementation(libs.ktor.client.winhttp) }
+    iosArm64Main.dependencies { implementation(libs.fastkrypto.iosarm64) }
+    iosX64Main.dependencies { implementation(libs.fastkrypto.iosx64) }
+    iosSimulatorArm64Main.dependencies { implementation(libs.fastkrypto.iossimulatorarm64) }
+    macosArm64Main.dependencies { implementation(libs.fastkrypto.macosarm64) }
+    macosX64Main.dependencies { implementation(libs.fastkrypto.macosx64) }
   }
 }
 
