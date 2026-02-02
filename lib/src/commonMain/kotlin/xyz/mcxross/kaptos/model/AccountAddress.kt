@@ -94,7 +94,7 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
       this.data[this.data.size - 1].toInt() < 0b10000
   }
 
-  override fun toString(): String = "0x${toStringLongWithoutPrefix()}"
+  override fun toString(): String = "0x${toStringWithoutPrefix()}"
 
   fun toStringWithoutPrefix(): String {
     val hex =

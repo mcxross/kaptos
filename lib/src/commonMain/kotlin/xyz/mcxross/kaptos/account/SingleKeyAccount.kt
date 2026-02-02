@@ -48,6 +48,14 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
 
   override fun sign(message: HexInput): AnySignature = AnySignature(privateKey.sign(message))
 
+  override fun signTransaction(tx: AnyRawTransaction): Signature {
+    TODO("Not yet implemented")
+  }
+
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean {
+    TODO("Not yet implemented")
+  }
+
   companion object {
 
     /**

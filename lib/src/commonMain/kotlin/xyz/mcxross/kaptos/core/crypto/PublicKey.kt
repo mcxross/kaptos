@@ -18,8 +18,6 @@ package xyz.mcxross.kaptos.core.crypto
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.model.HexInput
 
-data class VerifySignatureArgs(val message: HexInput, val signature: Signature)
-
 /**
  * An abstract representation of a public key.
  *

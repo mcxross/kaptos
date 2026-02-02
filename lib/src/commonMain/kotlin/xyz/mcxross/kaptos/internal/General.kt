@@ -17,7 +17,6 @@
 package xyz.mcxross.kaptos.internal
 
 import com.apollographql.apollo.api.Optional
-import com.apollographql.apollo.api.Query
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.andThen
 import xyz.mcxross.bcs.Bcs

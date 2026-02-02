@@ -104,17 +104,11 @@ actual class ClientConfig(
   /** Use a like agent. If this is set, the `agent` field will be ignored. */
   var likeAgent: xyz.mcxross.kaptos.model.UserAgent? = null,
 
-  /**
-   * Specifies how many times the client should retry on server errors. Default is `-1`, which means
-   * no retries.
-   */
-  var retryOnServerErrors: Int = -1,
+  /** Specifies how many times the client should retry on server errors. Default is `0`. */
+  var retryOnServerErrors: Int = 0,
 
-  /**
-   * Specifies how many times the client should retry on connection errors. Default is `-1`, which
-   * means no retries.
-   */
-  var maxRetries: Int = -1,
+  /** Specifies how many times the client should retry on connection errors. Default is `0`. */
+  var maxRetries: Int = 0,
 
   /** Enables or disables caching. Default is `false`. */
   var cache: Boolean = false,

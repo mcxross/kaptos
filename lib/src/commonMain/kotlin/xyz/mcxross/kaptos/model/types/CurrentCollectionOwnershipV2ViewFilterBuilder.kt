@@ -36,22 +36,23 @@ class CurrentCollectionOwnershipV2ViewFilterBuilder {
   }
 
   internal fun build(): Current_collection_ownership_v2_view_bool_exp =
-      Current_collection_ownership_v2_view_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          collection_id = collectionId.toOptional(),
-          collection_name = collectionName.toOptional(),
-          collection_uri = collectionUri.toOptional(),
-          creator_address = creatorAddress.toOptional(),
-          current_collection = currentCollection.toOptional(),
-          distinct_tokens = distinctTokens.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          single_token_uri = singleTokenUri.toOptional())
+    Current_collection_ownership_v2_view_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      collection_id = collectionId.toOptional(),
+      collection_name = collectionName.toOptional(),
+      collection_uri = collectionUri.toOptional(),
+      creator_address = creatorAddress.toOptional(),
+      current_collection = currentCollection.toOptional(),
+      distinct_tokens = distinctTokens.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      single_token_uri = singleTokenUri.toOptional(),
+    )
 }
 
 fun currentCollectionOwnershipV2ViewFilter(
-    init: CurrentCollectionOwnershipV2ViewFilterBuilder.() -> Unit
+  init: CurrentCollectionOwnershipV2ViewFilterBuilder.() -> Unit
 ): Current_collection_ownership_v2_view_bool_exp =
-    CurrentCollectionOwnershipV2ViewFilterBuilder().apply(init).build()
+  CurrentCollectionOwnershipV2ViewFilterBuilder().apply(init).build()

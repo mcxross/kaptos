@@ -19,14 +19,11 @@ package xyz.mcxross.kaptos.internal
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result as InternalResult
+import com.github.michaelbull.result.fold
 import xyz.mcxross.kaptos.model.Result
 
 fun <V, E> InternalResult<V, E>.toResult(): Result<V, E> {
-  return if (this.isOk) {
-    Result.Ok(this.value)
-  } else {
-    Result.Err(this.error)
-  }
+  return fold(success = { Result.Ok(it) }, failure = { Result.Err(it) })
 }
 
 fun <V, E> Result<V, E>.toInternalResult(): InternalResult<V, E> {

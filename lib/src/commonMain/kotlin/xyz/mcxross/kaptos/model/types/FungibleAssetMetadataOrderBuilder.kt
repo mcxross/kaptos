@@ -20,24 +20,24 @@ class FungibleAssetMetadataOrderBuilder {
   var tokenStandard: OrderBy? = null
 
   internal fun build(): Fungible_asset_metadata_order_by =
-      Fungible_asset_metadata_order_by(
-          asset_type = assetType?.generated.toOptional(),
-          creator_address = creatorAddress?.generated.toOptional(),
-          decimals = decimals?.generated.toOptional(),
-          icon_uri = iconUri?.generated.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp?.generated.toOptional(),
-          last_transaction_version = lastTransactionVersion?.generated.toOptional(),
-          maximum_v2 = maximumV2?.generated.toOptional(),
-          name = name?.generated.toOptional(),
-          project_uri = projectUri?.generated.toOptional(),
-          supply_aggregator_table_handle_v1 = supplyAggregatorTableHandleV1?.generated.toOptional(),
-          supply_aggregator_table_key_v1 = supplyAggregatorTableKeyV1?.generated.toOptional(),
-          supply_v2 = supplyV2?.generated.toOptional(),
-          symbol = symbol?.generated.toOptional(),
-          token_standard = tokenStandard?.generated.toOptional(),
-      )
+    Fungible_asset_metadata_order_by(
+      asset_type = assetType?.generated.toOptional(),
+      creator_address = creatorAddress?.generated.toOptional(),
+      decimals = decimals?.generated.toOptional(),
+      icon_uri = iconUri?.generated.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp?.generated.toOptional(),
+      last_transaction_version = lastTransactionVersion?.generated.toOptional(),
+      maximum_v2 = maximumV2?.generated.toOptional(),
+      name = name?.generated.toOptional(),
+      project_uri = projectUri?.generated.toOptional(),
+      supply_aggregator_table_handle_v1 = supplyAggregatorTableHandleV1?.generated.toOptional(),
+      supply_aggregator_table_key_v1 = supplyAggregatorTableKeyV1?.generated.toOptional(),
+      supply_v2 = supplyV2?.generated.toOptional(),
+      symbol = symbol?.generated.toOptional(),
+      token_standard = tokenStandard?.generated.toOptional(),
+    )
 }
 
 fun fungibleAssetMetadataOrder(
-    init: FungibleAssetMetadataOrderBuilder.() -> Unit
+  init: FungibleAssetMetadataOrderBuilder.() -> Unit
 ): Fungible_asset_metadata_order_by = FungibleAssetMetadataOrderBuilder().apply(init).build()

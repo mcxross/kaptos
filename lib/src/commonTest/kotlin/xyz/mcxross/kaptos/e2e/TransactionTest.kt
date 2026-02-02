@@ -99,7 +99,7 @@ class TransactionTest {
   fun `it fetches block data by block version`() = runBlocking {
     val aptos = getLocalNetwork()
     val blockVersion = 1L
-      when (val resolution = aptos.getBlockByVersion(blockVersion)) {
+    when (val resolution = aptos.getBlockByVersion(blockVersion)) {
       is Result.Ok -> {
         assertEquals(
           resolution.value.blockHeight.toLong(),

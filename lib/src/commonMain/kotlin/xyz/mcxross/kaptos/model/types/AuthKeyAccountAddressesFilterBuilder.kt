@@ -26,16 +26,17 @@ class AuthKeyAccountAddressesFilterBuilder {
   }
 
   internal fun build(): Auth_key_account_addresses_bool_exp =
-      Auth_key_account_addresses_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          account_address = accountAddress.toOptional(),
-          auth_key = authKey.toOptional(),
-          is_auth_key_used = isAuthKeyUsed.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional())
+    Auth_key_account_addresses_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      account_address = accountAddress.toOptional(),
+      auth_key = authKey.toOptional(),
+      is_auth_key_used = isAuthKeyUsed.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+    )
 }
 
 fun authKeyAccountAddressesFilter(
-    init: AuthKeyAccountAddressesFilterBuilder.() -> Unit
+  init: AuthKeyAccountAddressesFilterBuilder.() -> Unit
 ): Auth_key_account_addresses_bool_exp = AuthKeyAccountAddressesFilterBuilder().apply(init).build()

@@ -15,16 +15,17 @@
  */
 package xyz.mcxross.kaptos.account
 
-import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
+import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorEd25519
+import xyz.mcxross.kaptos.transaction.builder.generateSigningMessageForTransaction
 
 /**
  * Signer implementation for the Ed25519 authentication scheme. This extends an [Ed25519Account] by
@@ -77,6 +78,13 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
   override fun sign(message: HexInput): Signature {
     return (this.signWithAuthenticator(message) as AccountAuthenticatorEd25519).signature
   }
+
+  override fun signTransaction(tx: AnyRawTransaction): Signature {
+    return this.sign(HexInput.fromByteArray(generateSigningMessageForTransaction(tx)))
+  }
+
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
+    publicKey.verifySignature(message, signature)
 
   companion object {
     fun generate(): Ed25519Account {

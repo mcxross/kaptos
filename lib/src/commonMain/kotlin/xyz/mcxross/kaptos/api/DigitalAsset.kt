@@ -44,8 +44,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     collectionId: String,
     minimumLedgerVersion: Long?,
   ): Result<GetCollectionDataQuery.Data?, AptosIndexerError> {
-      waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.TOKEN_V2_PROCESSOR)
-      return getCollectionDataByCollectionId(config, collectionId)
+    waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.TOKEN_V2_PROCESSOR)
+    return getCollectionDataByCollectionId(config, collectionId)
   }
 
   @Throws(AptosSdkError::class, CancellationException::class)

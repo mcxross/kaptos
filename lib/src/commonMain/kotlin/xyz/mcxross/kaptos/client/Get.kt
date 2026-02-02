@@ -21,6 +21,8 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.andThen
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.mapError
 import io.ktor.client.call.*
@@ -34,7 +36,6 @@ import xyz.mcxross.kaptos.model.AptosApiType
 import xyz.mcxross.kaptos.model.AptosConfig
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.RequestOptions
-
 
 /**
  * Executes a GET request to an Aptos API endpoint using a configurable Ktor client.
@@ -217,11 +218,11 @@ suspend inline fun <reified T> paginateWithCursor(
     val result = get(options.copy(params = currentParams))
 
     val response =
-      if (result.isOk) {
-        result.value
-      } else {
-        return Err(AptosSdkError.NetworkError(result.error))
-      }
+      result.get()
+        ?: return Err(
+          result.getError()
+            ?: AptosSdkError.UnknownError(IllegalStateException("No response from GET request"))
+        )
 
     val pageItems =
       try {

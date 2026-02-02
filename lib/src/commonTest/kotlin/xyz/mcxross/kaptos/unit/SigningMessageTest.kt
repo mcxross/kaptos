@@ -36,7 +36,7 @@ class SigningMessageTest {
                 +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
               }
               functionArguments = functionArguments {
-                +MoveString(alice.accountAddress.value)
+                +alice.accountAddress
                 +U64(TRANSFER_AMOUNT)
               }
             },
@@ -293,7 +293,8 @@ class SigningMessageTest {
           4,
         )
 
-      assertTrue { message.contentEquals(list.map { it.toByte() }.toByteArray()) }
+      val expected = list.map { it.toByte() }.toByteArray()
+      assertTrue { message.contentEquals(expected) }
     }
   }
 }

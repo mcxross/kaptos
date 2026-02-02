@@ -32,23 +32,19 @@ import xyz.mcxross.kaptos.sample.ui.component.Button
 
 @Composable
 fun CreateAccountsScreen(onCreateAccounts: () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(
-            Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                "This Demo app demonstrates the use of Kaptos. We create accounts and transfer funds between them.",
-                modifier = Modifier.padding(20.dp),
-                fontWeight = FontWeight.ExtraLight,
-                color = Color.White,
-            )
-            Button(
-                onClick = onCreateAccounts,
-                text = "Create Accounts",
-                tint = Color.White,
-            )
-        }
+  Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Column(
+      Modifier.fillMaxWidth(),
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Text(
+        "This Demo app demonstrates the use of Kaptos. We create accounts and transfer funds between them.",
+        modifier = Modifier.padding(20.dp),
+        fontWeight = FontWeight.ExtraLight,
+        color = Color.White,
+      )
+      Button(onClick = onCreateAccounts, text = "Create Accounts", tint = Color.White)
     }
+  }
 }

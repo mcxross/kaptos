@@ -22,23 +22,24 @@ class JsonbFilterBuilder {
   var nin: List<Any>? = null
 
   internal fun build(): Jsonb_comparison_exp =
-      Jsonb_comparison_exp(
-          _cast = cast.toOptional(),
-          _contained_in = containedIn.toOptional(),
-          _contains = contains.toOptional(),
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _has_key = hasKey.toOptional(),
-          _has_keys_all = hasKeysAll.toOptional(),
-          _has_keys_any = hasKeysAny.toOptional(),
-          _in = inList.toOptional(),
-          _is_null = isNull.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nin = nin.toOptional())
+    Jsonb_comparison_exp(
+      _cast = cast.toOptional(),
+      _contained_in = containedIn.toOptional(),
+      _contains = contains.toOptional(),
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _has_key = hasKey.toOptional(),
+      _has_keys_all = hasKeysAll.toOptional(),
+      _has_keys_any = hasKeysAny.toOptional(),
+      _in = inList.toOptional(),
+      _is_null = isNull.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nin = nin.toOptional(),
+    )
 }
 
 fun jsonbFilter(init: JsonbFilterBuilder.() -> Unit): Jsonb_comparison_exp =
-    JsonbFilterBuilder().apply(init).build()
+  JsonbFilterBuilder().apply(init).build()

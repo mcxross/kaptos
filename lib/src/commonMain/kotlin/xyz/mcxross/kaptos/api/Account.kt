@@ -329,6 +329,22 @@ class Account(override val config: AptosConfig) : Account {
     getAccountCoinAmount(config, accountAddress, coinType, page)
 
   /**
+   * Queries the account's coin amount directly from smart contracts (view function), matching the
+   * TS SDK behavior.
+   *
+   * @param accountAddress The account address to query.
+   * @param coinType Optional coin type.
+   * @param faMetadataAddress Optional fungible asset metadata address.
+   * @returns Current amount of account's coin from on-chain view execution.
+   */
+  override suspend fun getAccountCoinAmountFromSmartContract(
+    accountAddress: AccountAddressInput,
+    coinType: MoveValue.MoveStructId?,
+    faMetadataAddress: AccountAddressInput?,
+  ): Result<Long, AptosSdkError> =
+    getAccountCoinAmountFromSmartContract(config, accountAddress, coinType, faMetadataAddress)
+
+  /**
    * Queries for all collections that an account currently has tokens for.
    *
    * This includes NFTs, fungible tokens, and soulbound tokens. This function first ensures the

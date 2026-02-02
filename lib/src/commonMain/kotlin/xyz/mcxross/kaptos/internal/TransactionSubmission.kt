@@ -15,6 +15,8 @@
  */
 package xyz.mcxross.kaptos.internal
 
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.postAptosFullNode
 import xyz.mcxross.kaptos.model.*
@@ -114,7 +116,13 @@ internal suspend fun submitTransaction(
     }
   }*/
 
-  return Result.Ok(res.value.second)
+  val value = res.get()
+  return if (value != null) {
+    Result.Ok(value.second)
+  } else {
+    val error = res.getError() ?: Exception("Unknown error")
+    Result.Err(Exception(error.toString()))
+  }
 }
 
 internal suspend fun signAndSubmitAsFeePayer(
@@ -159,10 +167,11 @@ internal suspend fun simulateTransaction(
       )
     )
 
-  return if (resolution.isOk) {
-    Result.Ok(resolution.value.second)
+  val simulated = resolution.get()
+  return if (simulated != null) {
+    Result.Ok(simulated.second)
   } else {
-    Result.Err(resolution.error)
+    Result.Err(resolution.getError() ?: Exception("Unknown error"))
   }
 }
 

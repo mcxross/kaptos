@@ -29,19 +29,20 @@ class PublicKeyAuthKeysFilterBuilder {
   }
 
   internal fun build(): Public_key_auth_keys_bool_exp =
-      Public_key_auth_keys_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          account_public_key = accountPublicKey.toOptional(),
-          auth_key = authKey.toOptional(),
-          is_public_key_used = isPublicKeyUsed.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          public_key = publicKey.toOptional(),
-          public_key_type = publicKeyType.toOptional(),
-          signature_type = signatureType.toOptional())
+    Public_key_auth_keys_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      account_public_key = accountPublicKey.toOptional(),
+      auth_key = authKey.toOptional(),
+      is_public_key_used = isPublicKeyUsed.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      public_key = publicKey.toOptional(),
+      public_key_type = publicKeyType.toOptional(),
+      signature_type = signatureType.toOptional(),
+    )
 }
 
 fun publicKeyAuthKeysFilter(
-    init: PublicKeyAuthKeysFilterBuilder.() -> Unit
+  init: PublicKeyAuthKeysFilterBuilder.() -> Unit
 ): Public_key_auth_keys_bool_exp = PublicKeyAuthKeysFilterBuilder().apply(init).build()

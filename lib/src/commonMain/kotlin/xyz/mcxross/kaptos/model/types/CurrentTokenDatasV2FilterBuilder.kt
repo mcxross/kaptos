@@ -14,7 +14,7 @@ class CurrentTokenDatasV2FilterBuilder {
   private var currentRoyaltyV1: Current_token_royalty_v1_bool_exp? = null
   private var currentTokenOwnerships: Current_token_ownerships_v2_bool_exp? = null
   private var currentTokenOwnershipsAggregate: Current_token_ownerships_v2_aggregate_bool_exp? =
-      null
+    null
   private var tokenProperties: Jsonb_comparison_exp? = null
 
   var collectionId: String_comparison_exp? = null
@@ -65,7 +65,7 @@ class CurrentTokenDatasV2FilterBuilder {
   }
 
   fun currentTokenOwnershipsAggregate(
-      block: CurrentTokenOwnershipsV2AggregateFilterBuilder.() -> Unit
+    block: CurrentTokenOwnershipsV2AggregateFilterBuilder.() -> Unit
   ) {
     this.currentTokenOwnershipsAggregate = currentTokenOwnershipsV2AggregateFilter(block)
   }
@@ -75,33 +75,34 @@ class CurrentTokenDatasV2FilterBuilder {
   }
 
   internal fun build(): Current_token_datas_v2_bool_exp =
-      Current_token_datas_v2_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          aptos_name = aptosName.toOptional(),
-          cdn_asset_uris = cdnAssetUris.toOptional(),
-          collection_id = collectionId.toOptional(),
-          current_collection = currentCollection.toOptional(),
-          current_royalty_v1 = currentRoyaltyV1.toOptional(),
-          current_token_ownerships = currentTokenOwnerships.toOptional(),
-          current_token_ownerships_aggregate = currentTokenOwnershipsAggregate.toOptional(),
-          decimals = decimals.toOptional(),
-          description = description.toOptional(),
-          is_deleted_v2 = isDeletedV2.toOptional(),
-          is_fungible_v2 = isFungibleV2.toOptional(),
-          largest_property_version_v1 = largestPropertyVersionV1.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          maximum = maximum.toOptional(),
-          supply = supply.toOptional(),
-          token_data_id = tokenDataId.toOptional(),
-          token_name = tokenName.toOptional(),
-          token_properties = tokenProperties.toOptional(),
-          token_standard = tokenStandard.toOptional(),
-          token_uri = tokenUri.toOptional())
+    Current_token_datas_v2_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      aptos_name = aptosName.toOptional(),
+      cdn_asset_uris = cdnAssetUris.toOptional(),
+      collection_id = collectionId.toOptional(),
+      current_collection = currentCollection.toOptional(),
+      current_royalty_v1 = currentRoyaltyV1.toOptional(),
+      current_token_ownerships = currentTokenOwnerships.toOptional(),
+      current_token_ownerships_aggregate = currentTokenOwnershipsAggregate.toOptional(),
+      decimals = decimals.toOptional(),
+      description = description.toOptional(),
+      is_deleted_v2 = isDeletedV2.toOptional(),
+      is_fungible_v2 = isFungibleV2.toOptional(),
+      largest_property_version_v1 = largestPropertyVersionV1.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      maximum = maximum.toOptional(),
+      supply = supply.toOptional(),
+      token_data_id = tokenDataId.toOptional(),
+      token_name = tokenName.toOptional(),
+      token_properties = tokenProperties.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+      token_uri = tokenUri.toOptional(),
+    )
 }
 
 fun currentTokenDatasV2Filter(
-    init: CurrentTokenDatasV2FilterBuilder.() -> Unit
+  init: CurrentTokenDatasV2FilterBuilder.() -> Unit
 ): Current_token_datas_v2_bool_exp = CurrentTokenDatasV2FilterBuilder().apply(init).build()

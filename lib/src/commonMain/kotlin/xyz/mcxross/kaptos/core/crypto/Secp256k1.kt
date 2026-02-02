@@ -24,29 +24,28 @@ import xyz.mcxross.kaptos.model.SigningSchemeInput
  *
  * Secp256k1 authentication key is represented in the SDK as `AnyPublicKey`.
  */
-class Secp256k1PublicKey(hexInput: HexInput) : PublicKey() {
+class Secp256k1PublicKey(val hexInput: HexInput) : PublicKey() {
 
   private val hex: Hex
+
+  constructor(pk: String) : this(HexInput.fromString(pk))
 
   init {
     val hex = Hex.fromHexInput(hexInput)
 
-    if (hex.toByteArray().size != LENGTH) {
-      throw IllegalArgumentException("Secp256k1 public key must be 65 bytes")
+    if (hex.toByteArray().size != LENGTH && hex.toByteArray().size != 33) {
+      throw IllegalArgumentException("Secp256k1 public key must be 65 or 33 bytes")
     }
 
     this.hex = hex
   }
 
-  override fun verifySignature(message: HexInput, signature: Signature): Boolean {
-    TODO("Not yet implemented")
-  }
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
+    verifySignature(this, message.toByteArray(), signature.toByteArray())
 
   override fun toByteArray(): ByteArray = hex.toByteArray()
 
-  override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toBcs(): ByteArray = encodeBcsBytes(toByteArray())
 
   companion object {
     const val LENGTH = 65
@@ -107,9 +106,7 @@ class Secp256k1Signature(hexInput: HexInput) : Signature() {
 
   override fun toByteArray(): ByteArray = hex.toByteArray()
 
-  override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toBcs(): ByteArray = encodeBcsBytes(toByteArray())
 
   companion object {
     /** Secp256k1 ecdsa signatures are 256-bit. */

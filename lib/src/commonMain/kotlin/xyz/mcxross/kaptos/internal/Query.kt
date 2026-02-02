@@ -26,7 +26,7 @@ import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.GraphQLError
 
 internal suspend fun <D : Operation.Data> handleQuery(
-    queryCall: suspend () -> ApolloCall<D>
+  queryCall: suspend () -> ApolloCall<D>
 ): Result<D?, AptosIndexerError> {
   try {
     val response = queryCall().execute()
@@ -43,14 +43,19 @@ internal suspend fun <D : Operation.Data> handleQuery(
     }
 
     return Err(
-        AptosIndexerError.GraphQL(
-            listOf(
-                GraphQLError(
-                    message =
-                        "Unknown error: no data and no errors returned from GraphQL server"))))
+      AptosIndexerError.GraphQL(
+        listOf(
+          GraphQLError(
+            message = "Unknown error: no data and no errors returned from GraphQL server"
+          )
+        )
+      )
+    )
   } catch (e: ApolloException) {
     return Err(
-        AptosIndexerError.GraphQL(
-            listOf(GraphQLError(message = "GraphQL client request failed: ${e.message}"))))
+      AptosIndexerError.GraphQL(
+        listOf(GraphQLError(message = "GraphQL client request failed: ${e.message}"))
+      )
+    )
   }
 }

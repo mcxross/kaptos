@@ -42,7 +42,7 @@ object EntryFunctionArgumentSerializer : KSerializer<EntryFunctionArgument> {
         encoder.encodeSerializableValue(U64Serializer, value)
       }
       is AccountAddress -> {
-        encoder.encodeSerializableValue(HexInputSerializer, HexInput(value.value))
+        encoder.encodeSerializableValue(HexInputSerializer, HexInput(value.toStringLong()))
       }
       is HexInput -> {
         encoder.encodeSerializableValue(HexInputSerializer, value)

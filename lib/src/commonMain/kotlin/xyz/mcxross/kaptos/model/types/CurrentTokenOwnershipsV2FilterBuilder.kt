@@ -48,29 +48,30 @@ class CurrentTokenOwnershipsV2FilterBuilder {
   }
 
   internal fun build(): Current_token_ownerships_v2_bool_exp =
-      Current_token_ownerships_v2_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          amount = amount.toOptional(),
-          composed_nfts = composedNfts.toOptional(),
-          composed_nfts_aggregate = composedNftsAggregate.toOptional(),
-          current_token_data = currentTokenData.toOptional(),
-          is_fungible_v2 = isFungibleV2.toOptional(),
-          is_soulbound_v2 = isSoulboundV2.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          non_transferrable_by_owner = nonTransferrableByOwner.toOptional(),
-          owner_address = ownerAddress.toOptional(),
-          property_version_v1 = propertyVersionV1.toOptional(),
-          storage_id = storageId.toOptional(),
-          table_type_v1 = tableTypeV1.toOptional(),
-          token_data_id = tokenDataId.toOptional(),
-          token_properties_mutated_v1 = tokenPropertiesMutatedV1.toOptional(),
-          token_standard = tokenStandard.toOptional())
+    Current_token_ownerships_v2_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      amount = amount.toOptional(),
+      composed_nfts = composedNfts.toOptional(),
+      composed_nfts_aggregate = composedNftsAggregate.toOptional(),
+      current_token_data = currentTokenData.toOptional(),
+      is_fungible_v2 = isFungibleV2.toOptional(),
+      is_soulbound_v2 = isSoulboundV2.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      non_transferrable_by_owner = nonTransferrableByOwner.toOptional(),
+      owner_address = ownerAddress.toOptional(),
+      property_version_v1 = propertyVersionV1.toOptional(),
+      storage_id = storageId.toOptional(),
+      table_type_v1 = tableTypeV1.toOptional(),
+      token_data_id = tokenDataId.toOptional(),
+      token_properties_mutated_v1 = tokenPropertiesMutatedV1.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+    )
 }
 
 fun currentTokenOwnershipsV2Filter(
-    init: CurrentTokenOwnershipsV2FilterBuilder.() -> Unit
+  init: CurrentTokenOwnershipsV2FilterBuilder.() -> Unit
 ): Current_token_ownerships_v2_bool_exp =
-    CurrentTokenOwnershipsV2FilterBuilder().apply(init).build()
+  CurrentTokenOwnershipsV2FilterBuilder().apply(init).build()

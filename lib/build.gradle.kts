@@ -54,13 +54,13 @@ kotlin {
   applyDefaultHierarchyTemplate()
 
   sourceSets {
-    val androidJvmMain by creating {
-      dependsOn(commonMain.get())
-      dependencies { implementation(libs.bcprov.jdk15on) }
-    }
+    val androidJvmMain by creating { dependsOn(commonMain.get()) }
     val androidMain by getting {
       dependsOn(androidJvmMain)
-      dependencies { implementation(libs.ktor.client.okhttp) }
+      dependencies {
+        implementation(libs.ktor.client.okhttp)
+        implementation(libs.fastkrypto.android)
+      }
     }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
@@ -77,17 +77,33 @@ kotlin {
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
+      implementation(libs.kotest.assertions.core)
+      implementation(libs.kotest.framework.engine)
       implementation(libs.kotlinx.coroutines.core)
       implementation(libs.kotlinx.serialization.core)
       implementation(libs.ktor.client.mock)
     }
     val jvmMain by getting {
       dependsOn(androidJvmMain)
-      dependencies { implementation(libs.ktor.client.cio) }
+      dependencies {
+        implementation(libs.ktor.client.cio)
+        implementation(libs.fastkrypto.jvm)
+      }
+    }
+    val jvmTest by getting {
+      dependencies {
+        implementation(libs.kotest.runner.junit5)
+        implementation(libs.kotlin.test.junit5)
+      }
     }
     jsMain.dependencies { implementation(libs.ktor.client.js) }
     linuxMain.dependencies { implementation(libs.ktor.client.curl) }
     mingwMain.dependencies { implementation(libs.ktor.client.winhttp) }
+    iosArm64Main.dependencies { implementation(libs.fastkrypto.iosarm64) }
+    iosX64Main.dependencies { implementation(libs.fastkrypto.iosx64) }
+    iosSimulatorArm64Main.dependencies { implementation(libs.fastkrypto.iossimulatorarm64) }
+    macosArm64Main.dependencies { implementation(libs.fastkrypto.macosarm64) }
+    macosX64Main.dependencies { implementation(libs.fastkrypto.macosx64) }
   }
 }
 
@@ -119,7 +135,8 @@ tasks.getByName<DokkaTask>("dokkaHtml") {
       sourceLink {
         localDirectory.set(file("commonMain/kotlin"))
         remoteUrl.set(
-            URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin"))
+          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
+        )
         remoteLineSuffix.set("#L")
       }
     }
@@ -134,11 +151,12 @@ mavenPublishing {
   coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
   configure(
-      KotlinMultiplatform(
-          javadocJar = JavadocJar.Dokka("dokkaHtml"),
-          sourcesJar = true,
-          androidVariantsToPublish = listOf("debug", "release"),
-      ))
+    KotlinMultiplatform(
+      javadocJar = JavadocJar.Dokka("dokkaHtml"),
+      sourcesJar = true,
+      androidVariantsToPublish = listOf("debug", "release"),
+    )
+  )
 
   pom {
     name.set("Kaptos")

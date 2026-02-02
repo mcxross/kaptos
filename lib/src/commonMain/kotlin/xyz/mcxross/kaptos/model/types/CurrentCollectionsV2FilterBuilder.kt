@@ -43,28 +43,29 @@ class CurrentCollectionsV2FilterBuilder {
   }
 
   internal fun build(): Current_collections_v2_bool_exp =
-      Current_collections_v2_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          cdn_asset_uris = cdnAssetUris.toOptional(),
-          collection_id = collectionId.toOptional(),
-          collection_name = collectionName.toOptional(),
-          collection_properties = collectionProperties.toOptional(),
-          creator_address = creatorAddress.toOptional(),
-          current_supply = currentSupply.toOptional(),
-          description = description.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_transaction_version = lastTransactionVersion.toOptional(),
-          max_supply = maxSupply.toOptional(),
-          mutable_description = mutableDescription.toOptional(),
-          mutable_uri = mutableUri.toOptional(),
-          table_handle_v1 = tableHandleV1.toOptional(),
-          token_standard = tokenStandard.toOptional(),
-          total_minted_v2 = totalMintedV2.toOptional(),
-          uri = uri.toOptional())
+    Current_collections_v2_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      cdn_asset_uris = cdnAssetUris.toOptional(),
+      collection_id = collectionId.toOptional(),
+      collection_name = collectionName.toOptional(),
+      collection_properties = collectionProperties.toOptional(),
+      creator_address = creatorAddress.toOptional(),
+      current_supply = currentSupply.toOptional(),
+      description = description.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_transaction_version = lastTransactionVersion.toOptional(),
+      max_supply = maxSupply.toOptional(),
+      mutable_description = mutableDescription.toOptional(),
+      mutable_uri = mutableUri.toOptional(),
+      table_handle_v1 = tableHandleV1.toOptional(),
+      token_standard = tokenStandard.toOptional(),
+      total_minted_v2 = totalMintedV2.toOptional(),
+      uri = uri.toOptional(),
+    )
 }
 
 fun currentCollectionsV2Filter(
-    init: CurrentCollectionsV2FilterBuilder.() -> Unit
+  init: CurrentCollectionsV2FilterBuilder.() -> Unit
 ): Current_collections_v2_bool_exp = CurrentCollectionsV2FilterBuilder().apply(init).build()

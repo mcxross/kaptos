@@ -26,10 +26,10 @@ fun Any.longOrNull(): Long? {
 }
 
 fun String.isValidAptosAddress(): Boolean {
-    val hexString = this.removePrefix("0x")
+  val hexString = this.removePrefix("0x")
 
-    if (hexString.length > 64 || hexString.isEmpty()) {
-        return false
-    }
-    return hexString.matches("^[0-9a-fA-F]+$".toRegex())
+  if (hexString.length > 64 || hexString.isEmpty()) {
+    return false
+  }
+  return hexString.matches("^[0-9a-fA-F]+$".toRegex())
 }

@@ -21,11 +21,15 @@ import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
 import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
+import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
+import xyz.mcxross.kaptos.core.crypto.multikey.MultiKeySignature
 import xyz.mcxross.kaptos.model.AccountAuthenticatorVariant
 
 @Serializable
 open class AccountAuthenticator {
   fun isEd25519(): Boolean = this.instanceOf(AccountAuthenticatorEd25519::class)
+
+  fun isMultiKey(): Boolean = this.instanceOf(AccountAuthenticatorMultiKey::class)
 }
 
 @Serializable
@@ -44,4 +48,10 @@ data class AccountAuthenticatorSingleKey(
   val variant: AccountAuthenticatorVariant = AccountAuthenticatorVariant.SingleKey,
   val publicKey: AnyPublicKey,
   val signature: AnySignature,
+) : AccountAuthenticator()
+
+data class AccountAuthenticatorMultiKey(
+  val variant: AccountAuthenticatorVariant = AccountAuthenticatorVariant.MultiKey,
+  val multiKey: MultiKey,
+  val signature: MultiKeySignature,
 ) : AccountAuthenticator()

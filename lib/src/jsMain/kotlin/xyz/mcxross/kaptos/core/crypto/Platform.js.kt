@@ -39,9 +39,9 @@ actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
 }
 
 actual fun generateSecp256k1PublicKey(privateKey: ByteArray): ByteArray {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }
 
 actual fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray {
-    TODO("Not yet implemented")
+  TODO("Not yet implemented")
 }

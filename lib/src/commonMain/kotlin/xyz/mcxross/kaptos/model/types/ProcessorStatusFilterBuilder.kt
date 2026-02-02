@@ -26,16 +26,17 @@ class ProcessorStatusFilterBuilder {
   }
 
   internal fun build(): Processor_status_bool_exp =
-      Processor_status_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          last_success_version = lastSuccessVersion.toOptional(),
-          last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
-          last_updated = lastUpdated.toOptional(),
-          processor = processor.toOptional())
+    Processor_status_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      last_success_version = lastSuccessVersion.toOptional(),
+      last_transaction_timestamp = lastTransactionTimestamp.toOptional(),
+      last_updated = lastUpdated.toOptional(),
+      processor = processor.toOptional(),
+    )
 }
 
 fun processorStatusFilter(
-    init: ProcessorStatusFilterBuilder.() -> Unit
+  init: ProcessorStatusFilterBuilder.() -> Unit
 ): Processor_status_bool_exp = ProcessorStatusFilterBuilder().apply(init).build()

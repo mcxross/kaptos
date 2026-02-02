@@ -15,17 +15,18 @@ class IntFilterBuilder {
   var nin: List<Int>? = null
 
   internal fun build(): Int_comparison_exp =
-      Int_comparison_exp(
-          _eq = eq.toOptional(),
-          _gt = gt.toOptional(),
-          _gte = gte.toOptional(),
-          _in = inList.toOptional(),
-          _is_null = isNull.toOptional(),
-          _lt = lt.toOptional(),
-          _lte = lte.toOptional(),
-          _neq = neq.toOptional(),
-          _nin = nin.toOptional())
+    Int_comparison_exp(
+      _eq = eq.toOptional(),
+      _gt = gt.toOptional(),
+      _gte = gte.toOptional(),
+      _in = inList.toOptional(),
+      _is_null = isNull.toOptional(),
+      _lt = lt.toOptional(),
+      _lte = lte.toOptional(),
+      _neq = neq.toOptional(),
+      _nin = nin.toOptional(),
+    )
 }
 
 fun intFilter(init: IntFilterBuilder.() -> Unit): Int_comparison_exp =
-    IntFilterBuilder().apply(init).build()
+  IntFilterBuilder().apply(init).build()

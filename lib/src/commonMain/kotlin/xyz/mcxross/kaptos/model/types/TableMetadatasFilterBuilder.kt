@@ -25,14 +25,15 @@ class TableMetadatasFilterBuilder {
   }
 
   internal fun build(): Table_metadatas_bool_exp =
-      Table_metadatas_bool_exp(
-          _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
-          _not = notCondition.toOptional(),
-          handle = handle.toOptional(),
-          key_type = keyType.toOptional(),
-          value_type = valueType.toOptional())
+    Table_metadatas_bool_exp(
+      _and = andConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _or = orConditions.takeIf { it.isNotEmpty() }.toOptional(),
+      _not = notCondition.toOptional(),
+      handle = handle.toOptional(),
+      key_type = keyType.toOptional(),
+      value_type = valueType.toOptional(),
+    )
 }
 
 fun tableMetadatasFilter(init: TableMetadatasFilterBuilder.() -> Unit): Table_metadatas_bool_exp =
-    TableMetadatasFilterBuilder().apply(init).build()
+  TableMetadatasFilterBuilder().apply(init).build()
