@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>xyz.mcxross.kaptos.transaction.builder</title>
     <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
-    <script>var pathToRoot = "../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
@@ -25,43 +25,86 @@
 <link href="../../styles/main.css" rel="Stylesheet">
 <link href="../../styles/prism.css" rel="Stylesheet">
 <link href="../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
-<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
 <script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
 <script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
-<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
 </head>
 <body>
-    <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
-                    <a class="library-name--link" href="../../index.html">
-                            Kaptos
-                    </a>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div class="library-version">
-0.1.2-beta            </div>
-        </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector common-like" data-active="" data-filter=":kaptos:dokkaHtml/commonMain">common</button>
-        </div>
-    </div>
-    <div class="navigation-controls">
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
             </div>
-            <div id="main">
-<div class="main-content" data-page-type="package" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.transaction.builder////PointingToDeclaration//483702768">
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.transaction.builder////PointingToDeclaration//791495369">
   <div class="breadcrumbs"><a href="../../index.html">Kaptos</a><span class="delimiter">/</span><span class="current">xyz.mcxross.kaptos.transaction.builder</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
@@ -70,228 +113,228 @@
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
-        <div class="table"><a data-name="1516623573%2FFunctions%2F483702768" anchor-label="buildTransaction" id="1516623573%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1516623573%2FFunctions%2F791495369" anchor-label="buildTransaction" id="1516623573%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="build-transaction.html"><span>build</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1516623573%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1516623573%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-transaction.html"><span class="token function">buildTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputGenerateTransactionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-data/index.html">InputGenerateTransactionData</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a><span class="token punctuation">, </span></span><span class="parameter ">feePayerAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-transaction.html"><span class="token function">buildTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputGenerateTransactionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-data/index.html">InputGenerateTransactionData</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a><span class="token punctuation">, </span></span><span class="parameter ">feePayerAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1946870886%2FFunctions%2F483702768" anchor-label="deriveTransactionType" id="-1946870886%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-1946870886%2FFunctions%2F791495369" anchor-label="deriveTransactionType" id="-1946870886%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="derive-transaction-type.html"><span>derive</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Type</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1946870886%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1946870886%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="derive-transaction-type.html"><span class="token function">deriveTransactionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.instances/-any-raw-transaction-instance/index.html">AnyRawTransactionInstance</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="derive-transaction-type.html"><span class="token function">deriveTransactionType</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.instances/-any-raw-transaction-instance/index.html">AnyRawTransactionInstance</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1369231655%2FFunctions%2F483702768" anchor-label="fetchEntryFunctionAbi" id="-1369231655%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-1369231655%2FFunctions%2F791495369" anchor-label="fetchEntryFunctionAbi" id="-1369231655%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-entry-function-abi.html"><span>fetch</span><wbr></wbr><span>Entry</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Abi</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1369231655%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1369231655%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-entry-function-abi.html"><span class="token function">fetchEntryFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-entry-function-a-b-i/index.html">EntryFunctionABI</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-entry-function-abi.html"><span class="token function">fetchEntryFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-entry-function-a-b-i/index.html">EntryFunctionABI</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-exception/index.html">Exception</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="703772703%2FFunctions%2F483702768" anchor-label="fetchFunctionAbi" id="703772703%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="703772703%2FFunctions%2F791495369" anchor-label="fetchFunctionAbi" id="703772703%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-function-abi.html"><span>fetch</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Abi</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="703772703%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="703772703%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-function-abi.html"><span class="token function">fetchFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-move-function/index.html">MoveFunction</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetches a function ABI from the on-chain module ABI. It doesn't validate whether it's a view or entry function.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-function-abi.html"><span class="token function">fetchFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-move-function/index.html">MoveFunction</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-exception/index.html">Exception</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetches a function ABI from the on-chain module ABI. It doesn't validate whether it's a view or entry function.</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-326721694%2FFunctions%2F483702768" anchor-label="fetchViewFunctionAbi" id="-326721694%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-326721694%2FFunctions%2F791495369" anchor-label="fetchViewFunctionAbi" id="-326721694%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="fetch-view-function-abi.html"><span>fetch</span><wbr></wbr><span>View</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Abi</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-326721694%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-326721694%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-view-function-abi.html"><span class="token function">fetchViewFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-option/index.html">Option</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-view-function-a-b-i/index.html">ViewFunctionABI</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetches the ABI for a view function from the module</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="fetch-view-function-abi.html"><span class="token function">fetchViewFunctionAbi</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">moduleAddress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">functionName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-result/index.html">Result</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.model/-view-function-a-b-i/index.html">ViewFunctionABI</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-exception/index.html">Exception</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Fetches the ABI for a view function from the module</p></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1928603266%2FFunctions%2F483702768" anchor-label="generateRawTransaction" id="-1928603266%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-1928603266%2FFunctions%2F791495369" anchor-label="generateRawTransaction" id="-1928603266%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-raw-transaction.html"><span>generate</span><wbr></wbr><span>Raw</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1928603266%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1928603266%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-raw-transaction.html"><span class="token function">generateRawTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">sender<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a><span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-options/index.html">InputGenerateTransactionOptions</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">feePayerAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.instances/-raw-transaction/index.html">RawTransaction</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-raw-transaction.html"><span class="token function">generateRawTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">sender<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">payload<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a><span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-options/index.html">InputGenerateTransactionOptions</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">feePayerAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.instances/-raw-transaction/index.html">RawTransaction</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1272329244%2FFunctions%2F483702768" anchor-label="generateSignedTransaction" id="1272329244%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="1272329244%2FFunctions%2F791495369" anchor-label="generateSignedTransaction" id="1272329244%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-signed-transaction.html"><span>generate</span><wbr></wbr><span>Signed</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1272329244%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1272329244%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signed-transaction.html"><span class="token function">generateSignedTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-submit-transaction-data/index.html">InputSubmitTransactionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signed-transaction.html"><span class="token function">generateSignedTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-submit-transaction-data/index.html">InputSubmitTransactionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1304411876%2FFunctions%2F483702768" anchor-label="generateSignedTransactionForSimulation" id="-1304411876%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-1304411876%2FFunctions%2F791495369" anchor-label="generateSignedTransactionForSimulation" id="-1304411876%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-signed-transaction-for-simulation.html"><span>generate</span><wbr></wbr><span>Signed</span><wbr></wbr><span>Transaction</span><wbr></wbr><span>For</span><wbr></wbr><span><span>Simulation</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1304411876%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1304411876%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signed-transaction-for-simulation.html"><span class="token function">generateSignedTransactionForSimulation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-simulate-transaction-data/index.html">InputSimulateTransactionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signed-transaction-for-simulation.html"><span class="token function">generateSignedTransactionForSimulation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-simulate-transaction-data/index.html">InputSimulateTransactionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="332673334%2FFunctions%2F483702768" anchor-label="generateSigningMessage" id="332673334%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="332673334%2FFunctions%2F791495369" anchor-label="generateSigningMessage" id="332673334%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-signing-message.html"><span>generate</span><wbr></wbr><span>Signing</span><wbr></wbr><span><span>Message</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="332673334%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="332673334%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signing-message.html"><span class="token function">generateSigningMessage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signing-message.html"><span class="token function">generateSigningMessage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-556268255%2FFunctions%2F483702768" anchor-label="generateSigningMessageForTransaction" id="-556268255%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="-556268255%2FFunctions%2F791495369" anchor-label="generateSigningMessageForTransaction" id="-556268255%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-signing-message-for-transaction.html"><span>generate</span><wbr></wbr><span>Signing</span><wbr></wbr><span>Message</span><wbr></wbr><span>For</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-556268255%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-556268255%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signing-message-for-transaction.html"><span class="token function">generateSigningMessageForTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-signing-message-for-transaction.html"><span class="token function">generateSigningMessageForTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2045634158%2FFunctions%2F483702768" anchor-label="generateTransactionPayload" id="2045634158%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="2045634158%2FFunctions%2F791495369" anchor-label="generateTransactionPayload" id="2045634158%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-transaction-payload.html"><span>generate</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Payload</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2045634158%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2045634158%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-transaction-payload.html"><span class="token function">generateTransactionPayload</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data-with-remote-a-b-i/index.html">InputGenerateTransactionPayloadDataWithRemoteABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-transaction-payload.html"><span class="token function">generateTransactionPayload</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data-with-remote-a-b-i/index.html">InputGenerateTransactionPayloadDataWithRemoteABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1492106863%2FFunctions%2F483702768" anchor-label="generateTransactionPayloadWithABI" id="1492106863%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="1492106863%2FFunctions%2F791495369" anchor-label="generateTransactionPayloadWithABI" id="1492106863%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-transaction-payload-with-a-b-i.html"><span>generate</span><wbr></wbr><span>Transaction</span><wbr></wbr><span>Payload</span><wbr></wbr><span>With</span><wbr></wbr><span><span>ABI</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1492106863%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1492106863%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-transaction-payload-with-a-b-i.html"><span class="token function">generateTransactionPayloadWithABI</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data-with-remote-a-b-i/index.html">InputGenerateTransactionPayloadDataWithRemoteABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-transaction-payload-with-a-b-i.html"><span class="token function">generateTransactionPayloadWithABI</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-generate-transaction-payload-data-with-remote-a-b-i/index.html">InputGenerateTransactionPayloadDataWithRemoteABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-transaction-payload-instance/index.html">AnyTransactionPayloadInstance</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1982220633%2FFunctions%2F483702768" anchor-label="generateViewFunctionPayload" id="1982220633%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="1982220633%2FFunctions%2F791495369" anchor-label="generateViewFunctionPayload" id="1982220633%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-view-function-payload.html"><span>generate</span><wbr></wbr><span>View</span><wbr></wbr><span>Function</span><wbr></wbr><span><span>Payload</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1982220633%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1982220633%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-view-function-payload.html"><span class="token function">generateViewFunctionPayload</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputViewFunctionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-view-function-data/index.html">InputViewFunctionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction/-entry-function/index.html">EntryFunction</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="generate-view-function-payload.html"><span class="token function">generateViewFunctionPayload</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputViewFunctionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-view-function-data/index.html">InputViewFunctionData</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction/-entry-function/index.html">EntryFunction</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1209392511%2FFunctions%2F483702768" anchor-label="generateViewFunctionPayloadWithABI" id="1209392511%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="1209392511%2FFunctions%2F791495369" anchor-label="generateViewFunctionPayloadWithABI" id="1209392511%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="generate-view-function-payload-with-a-b-i.html"><span>generate</span><wbr></wbr><span>View</span><wbr></wbr><span>Function</span><wbr></wbr><span>Payload</span><wbr></wbr><span>With</span><wbr></wbr><span><span>ABI</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1209392511%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1209392511%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-view-function-payload-with-a-b-i.html"><span class="token function">generateViewFunctionPayloadWithABI</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputViewFunctionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-view-function-data/index.html">InputViewFunctionData</a><span class="token punctuation">, </span></span><span class="parameter ">functionAbi<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-function-a-b-i/index.html">FunctionABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction/-entry-function/index.html">EntryFunction</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="generate-view-function-payload-with-a-b-i.html"><span class="token function">generateViewFunctionPayloadWithABI</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">aptosConfig<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token punctuation">, </span></span><span class="parameter ">inputViewFunctionData<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-input-view-function-data/index.html">InputViewFunctionData</a><span class="token punctuation">, </span></span><span class="parameter ">functionAbi<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-function-a-b-i/index.html">FunctionABI</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction/-entry-function/index.html">EntryFunction</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1962465869%2FFunctions%2F483702768" anchor-label="sign" id="1962465869%2FFunctions%2F483702768" data-filterable-set=":kaptos:dokkaHtml/commonMain"></a>
-          <div class="table-row" data-filterable-current=":kaptos:dokkaHtml/commonMain" data-filterable-set=":kaptos:dokkaHtml/commonMain">
+<a data-name="1962465869%2FFunctions%2F791495369" anchor-label="sign" id="1962465869%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="sign.html"><span><span>sign</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1962465869%2FFunctions%2F483702768"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1962465869%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos:dokkaHtml/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="sign.html"><span class="token function">sign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">signer<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.account/-account/index.html">Account</a><span class="token punctuation">, </span></span><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/index.html">AccountAuthenticator</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="sign.html"><span class="token function">sign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">signer<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.account/-account/index.html">Account</a><span class="token punctuation">, </span></span><span class="parameter ">transaction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/index.html">AccountAuthenticator</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -301,13 +344,22 @@
     </div>
   </div>
 </div>
-      <div class="footer">
-        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
-                class="pull-right"><span>Generated by </span><a
-                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
-      </div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

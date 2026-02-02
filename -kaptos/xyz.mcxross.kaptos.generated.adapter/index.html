@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>xyz.mcxross.kaptos.generated.adapter</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.generated.adapter////PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../index.html">Kaptos</a><span class="delimiter">/</span><span class="current">xyz.mcxross.kaptos.generated.adapter</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1364615448%2FClasslikes%2F791495369" anchor-label="GetAccountAddressesForAuthKeyQuery_ResponseAdapter" id="-1364615448%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-addresses-for-auth-key-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span>For</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1364615448%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-addresses-for-auth-key-query_-response-adapter/index.html">GetAccountAddressesForAuthKeyQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-443046092%2FClasslikes%2F791495369" anchor-label="GetAccountAddressesForAuthKeyQuery_VariablesAdapter" id="-443046092%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-addresses-for-auth-key-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span>For</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-443046092%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-addresses-for-auth-key-query_-variables-adapter/index.html">GetAccountAddressesForAuthKeyQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1925087607%2FClasslikes%2F791495369" anchor-label="GetAccountCoinsCountQuery_ResponseAdapter" id="-1925087607%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-coins-count-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1925087607%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-coins-count-query_-response-adapter/index.html">GetAccountCoinsCountQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-637813837%2FClasslikes%2F791495369" anchor-label="GetAccountCoinsCountQuery_VariablesAdapter" id="-637813837%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-coins-count-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-637813837%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-coins-count-query_-variables-adapter/index.html">GetAccountCoinsCountQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1670961564%2FClasslikes%2F791495369" anchor-label="GetAccountCoinsDataQuery_ResponseAdapter" id="-1670961564%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-coins-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1670961564%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-coins-data-query_-response-adapter/index.html">GetAccountCoinsDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1349841096%2FClasslikes%2F791495369" anchor-label="GetAccountCoinsDataQuery_VariablesAdapter" id="-1349841096%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-coins-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Coins</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1349841096%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-coins-data-query_-variables-adapter/index.html">GetAccountCoinsDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-301851200%2FClasslikes%2F791495369" anchor-label="GetAccountCollectionsWithOwnedTokensQuery_ResponseAdapter" id="-301851200%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-collections-with-owned-tokens-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Collections</span><wbr></wbr><span>With</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-301851200%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-collections-with-owned-tokens-query_-response-adapter/index.html">GetAccountCollectionsWithOwnedTokensQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1857092772%2FClasslikes%2F791495369" anchor-label="GetAccountCollectionsWithOwnedTokensQuery_VariablesAdapter" id="-1857092772%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-collections-with-owned-tokens-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Collections</span><wbr></wbr><span>With</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1857092772%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-collections-with-owned-tokens-query_-variables-adapter/index.html">GetAccountCollectionsWithOwnedTokensQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-399340055%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensByTokenDataQuery_ResponseAdapter" id="-399340055%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-by-token-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>By</span><wbr></wbr><span>Token</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-399340055%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-by-token-data-query_-response-adapter/index.html">GetAccountOwnedTokensByTokenDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-584279981%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensByTokenDataQuery_VariablesAdapter" id="-584279981%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-by-token-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>By</span><wbr></wbr><span>Token</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-584279981%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-by-token-data-query_-variables-adapter/index.html">GetAccountOwnedTokensByTokenDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="598692031%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensFromCollectionQuery_ResponseAdapter" id="598692031%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-from-collection-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>From</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="598692031%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-from-collection-query_-response-adapter/index.html">GetAccountOwnedTokensFromCollectionQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="289943613%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensFromCollectionQuery_VariablesAdapter" id="289943613%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-from-collection-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>From</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="289943613%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-from-collection-query_-variables-adapter/index.html">GetAccountOwnedTokensFromCollectionQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="229940087%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensQuery_ResponseAdapter" id="229940087%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="229940087%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-query_-response-adapter/index.html">GetAccountOwnedTokensQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1743535237%2FClasslikes%2F791495369" anchor-label="GetAccountOwnedTokensQuery_VariablesAdapter" id="1743535237%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-owned-tokens-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Owned</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1743535237%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-owned-tokens-query_-variables-adapter/index.html">GetAccountOwnedTokensQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-297790483%2FClasslikes%2F791495369" anchor-label="GetAccountTokensCountQuery_ResponseAdapter" id="-297790483%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-tokens-count-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-297790483%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-tokens-count-query_-response-adapter/index.html">GetAccountTokensCountQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1731210545%2FClasslikes%2F791495369" anchor-label="GetAccountTokensCountQuery_VariablesAdapter" id="-1731210545%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-tokens-count-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Tokens</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1731210545%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-tokens-count-query_-variables-adapter/index.html">GetAccountTokensCountQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1324931630%2FClasslikes%2F791495369" anchor-label="GetAccountTransactionsCountQuery_ResponseAdapter" id="-1324931630%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-transactions-count-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Transactions</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1324931630%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-transactions-count-query_-response-adapter/index.html">GetAccountTransactionsCountQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="787152266%2FClasslikes%2F791495369" anchor-label="GetAccountTransactionsCountQuery_VariablesAdapter" id="787152266%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-account-transactions-count-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Account</span><wbr></wbr><span>Transactions</span><wbr></wbr><span>Count</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="787152266%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-account-transactions-count-query_-variables-adapter/index.html">GetAccountTransactionsCountQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1956128114%2FClasslikes%2F791495369" anchor-label="GetAuthKeysForPublicKeyQuery_ResponseAdapter" id="-1956128114%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-auth-keys-for-public-key-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span>For</span><wbr></wbr><span>Public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1956128114%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-auth-keys-for-public-key-query_-response-adapter/index.html">GetAuthKeysForPublicKeyQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1600069554%2FClasslikes%2F791495369" anchor-label="GetAuthKeysForPublicKeyQuery_VariablesAdapter" id="-1600069554%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-auth-keys-for-public-key-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span>For</span><wbr></wbr><span>Public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1600069554%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-auth-keys-for-public-key-query_-variables-adapter/index.html">GetAuthKeysForPublicKeyQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-696239303%2FClasslikes%2F791495369" anchor-label="GetChainTopUserTransactionsQuery_ResponseAdapter" id="-696239303%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-chain-top-user-transactions-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Chain</span><wbr></wbr><span>Top</span><wbr></wbr><span>User</span><wbr></wbr><span>Transactions</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-696239303%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-chain-top-user-transactions-query_-response-adapter/index.html">GetChainTopUserTransactionsQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1198222077%2FClasslikes%2F791495369" anchor-label="GetChainTopUserTransactionsQuery_VariablesAdapter" id="-1198222077%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-chain-top-user-transactions-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Chain</span><wbr></wbr><span>Top</span><wbr></wbr><span>User</span><wbr></wbr><span>Transactions</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1198222077%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-chain-top-user-transactions-query_-variables-adapter/index.html">GetChainTopUserTransactionsQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-355395155%2FClasslikes%2F791495369" anchor-label="GetCollectionDataQuery_ResponseAdapter" id="-355395155%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-collection-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-355395155%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-collection-data-query_-response-adapter/index.html">GetCollectionDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="778011919%2FClasslikes%2F791495369" anchor-label="GetCollectionDataQuery_VariablesAdapter" id="778011919%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-collection-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="778011919%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-collection-data-query_-variables-adapter/index.html">GetCollectionDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2126965049%2FClasslikes%2F791495369" anchor-label="GetCurrentFungibleAssetBalancesQuery_ResponseAdapter" id="2126965049%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-current-fungible-asset-balances-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2126965049%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-current-fungible-asset-balances-query_-response-adapter/index.html">GetCurrentFungibleAssetBalancesQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="421766915%2FClasslikes%2F791495369" anchor-label="GetCurrentFungibleAssetBalancesQuery_VariablesAdapter" id="421766915%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-current-fungible-asset-balances-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="421766915%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-current-fungible-asset-balances-query_-variables-adapter/index.html">GetCurrentFungibleAssetBalancesQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1721861538%2FClasslikes%2F791495369" anchor-label="GetCurrentTokenOwnershipQuery_ResponseAdapter" id="-1721861538%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-current-token-ownership-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownership</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1721861538%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-current-token-ownership-query_-response-adapter/index.html">GetCurrentTokenOwnershipQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1367227006%2FClasslikes%2F791495369" anchor-label="GetCurrentTokenOwnershipQuery_VariablesAdapter" id="1367227006%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-current-token-ownership-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownership</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1367227006%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-current-token-ownership-query_-variables-adapter/index.html">GetCurrentTokenOwnershipQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1315616330%2FClasslikes%2F791495369" anchor-label="GetDelegatedStakingActivitiesQuery_ResponseAdapter" id="1315616330%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-delegated-staking-activities-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Delegated</span><wbr></wbr><span>Staking</span><wbr></wbr><span>Activities</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1315616330%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-delegated-staking-activities-query_-response-adapter/index.html">GetDelegatedStakingActivitiesQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1039760402%2FClasslikes%2F791495369" anchor-label="GetDelegatedStakingActivitiesQuery_VariablesAdapter" id="1039760402%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-delegated-staking-activities-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Delegated</span><wbr></wbr><span>Staking</span><wbr></wbr><span>Activities</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1039760402%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-delegated-staking-activities-query_-variables-adapter/index.html">GetDelegatedStakingActivitiesQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="9147550%2FClasslikes%2F791495369" anchor-label="GetEventsQuery_ResponseAdapter" id="9147550%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-events-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Events</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="9147550%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-events-query_-response-adapter/index.html">GetEventsQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-806066114%2FClasslikes%2F791495369" anchor-label="GetEventsQuery_VariablesAdapter" id="-806066114%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-events-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Events</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-806066114%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-events-query_-variables-adapter/index.html">GetEventsQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1390375762%2FClasslikes%2F791495369" anchor-label="GetFungibleAssetActivitiesQuery_ResponseAdapter" id="1390375762%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-fungible-asset-activities-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Activities</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1390375762%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-fungible-asset-activities-query_-response-adapter/index.html">GetFungibleAssetActivitiesQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-937664502%2FClasslikes%2F791495369" anchor-label="GetFungibleAssetActivitiesQuery_VariablesAdapter" id="-937664502%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-fungible-asset-activities-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Activities</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-937664502%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-fungible-asset-activities-query_-variables-adapter/index.html">GetFungibleAssetActivitiesQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1070211628%2FClasslikes%2F791495369" anchor-label="GetFungibleAssetMetadataQuery_ResponseAdapter" id="-1070211628%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-fungible-asset-metadata-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1070211628%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-fungible-asset-metadata-query_-response-adapter/index.html">GetFungibleAssetMetadataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="93537736%2FClasslikes%2F791495369" anchor-label="GetFungibleAssetMetadataQuery_VariablesAdapter" id="93537736%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-fungible-asset-metadata-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="93537736%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-fungible-asset-metadata-query_-variables-adapter/index.html">GetFungibleAssetMetadataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1087978345%2FClasslikes%2F791495369" anchor-label="GetNamesQuery_ResponseAdapter" id="-1087978345%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-names-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Names</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1087978345%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-names-query_-response-adapter/index.html">GetNamesQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-457230491%2FClasslikes%2F791495369" anchor-label="GetNamesQuery_VariablesAdapter" id="-457230491%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-names-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Names</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-457230491%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-names-query_-variables-adapter/index.html">GetNamesQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2029920757%2FClasslikes%2F791495369" anchor-label="GetNumberOfDelegatorsQuery_ResponseAdapter" id="2029920757%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-number-of-delegators-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Number</span><wbr></wbr><span>Of</span><wbr></wbr><span>Delegators</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2029920757%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-number-of-delegators-query_-response-adapter/index.html">GetNumberOfDelegatorsQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1708361159%2FClasslikes%2F791495369" anchor-label="GetNumberOfDelegatorsQuery_VariablesAdapter" id="1708361159%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-number-of-delegators-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Number</span><wbr></wbr><span>Of</span><wbr></wbr><span>Delegators</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1708361159%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-number-of-delegators-query_-variables-adapter/index.html">GetNumberOfDelegatorsQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2064556430%2FClasslikes%2F791495369" anchor-label="GetObjectDataQuery_ResponseAdapter" id="2064556430%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-object-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Object</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2064556430%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-object-data-query_-response-adapter/index.html">GetObjectDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1512900274%2FClasslikes%2F791495369" anchor-label="GetObjectDataQuery_VariablesAdapter" id="-1512900274%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-object-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Object</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1512900274%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-object-data-query_-variables-adapter/index.html">GetObjectDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="39057715%2FClasslikes%2F791495369" anchor-label="GetProcessorStatusQuery_ResponseAdapter" id="39057715%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-processor-status-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Processor</span><wbr></wbr><span>Status</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="39057715%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-processor-status-query_-response-adapter/index.html">GetProcessorStatusQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="121149001%2FClasslikes%2F791495369" anchor-label="GetProcessorStatusQuery_VariablesAdapter" id="121149001%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-processor-status-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Processor</span><wbr></wbr><span>Status</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="121149001%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-processor-status-query_-variables-adapter/index.html">GetProcessorStatusQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1953002145%2FClasslikes%2F791495369" anchor-label="GetTableItemsDataQuery_ResponseAdapter" id="1953002145%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-table-items-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1953002145%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-table-items-data-query_-response-adapter/index.html">GetTableItemsDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-676115813%2FClasslikes%2F791495369" anchor-label="GetTableItemsDataQuery_VariablesAdapter" id="-676115813%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-table-items-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-676115813%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-table-items-data-query_-variables-adapter/index.html">GetTableItemsDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1721559322%2FClasslikes%2F791495369" anchor-label="GetTableItemsMetadataQuery_ResponseAdapter" id="-1721559322%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-table-items-metadata-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1721559322%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-table-items-metadata-query_-response-adapter/index.html">GetTableItemsMetadataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1376595702%2FClasslikes%2F791495369" anchor-label="GetTableItemsMetadataQuery_VariablesAdapter" id="1376595702%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-table-items-metadata-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1376595702%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-table-items-metadata-query_-variables-adapter/index.html">GetTableItemsMetadataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2122954633%2FClasslikes%2F791495369" anchor-label="GetTokenActivityQuery_ResponseAdapter" id="-2122954633%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-token-activity-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Token</span><wbr></wbr><span>Activity</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2122954633%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-token-activity-query_-response-adapter/index.html">GetTokenActivityQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1818242949%2FClasslikes%2F791495369" anchor-label="GetTokenActivityQuery_VariablesAdapter" id="1818242949%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-token-activity-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Token</span><wbr></wbr><span>Activity</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1818242949%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-token-activity-query_-variables-adapter/index.html">GetTokenActivityQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2085778642%2FClasslikes%2F791495369" anchor-label="GetTokenDataQuery_ResponseAdapter" id="2085778642%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-token-data-query_-response-adapter/index.html"><span>Get</span><wbr></wbr><span>Token</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Response</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2085778642%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-token-data-query_-response-adapter/index.html">GetTokenDataQuery_ResponseAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-855011702%2FClasslikes%2F791495369" anchor-label="GetTokenDataQuery_VariablesAdapter" id="-855011702%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-get-token-data-query_-variables-adapter/index.html"><span>Get</span><wbr></wbr><span>Token</span><wbr></wbr><span>Data</span><wbr></wbr><span>Query_</span><wbr></wbr><span>Variables</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-855011702%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-get-token-data-query_-variables-adapter/index.html">GetTokenDataQuery_VariablesAdapter</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

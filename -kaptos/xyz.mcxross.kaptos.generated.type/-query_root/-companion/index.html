@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Companion</title>
+    <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.generated.type/Query_root.Companion///PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../../index.html">xyz.mcxross.kaptos.generated.type</a><span class="delimiter">/</span><a href="../index.html">Query_root</a><span class="delimiter">/</span><span class="current">Companion</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Companion</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Companion</a></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1276924640%2FProperties%2F791495369" anchor-label="__account_transactions_aggregate_where" id="1276924640%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__account_transactions_aggregate_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>account_</span><wbr></wbr><span>transactions_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1276924640%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__account_transactions_aggregate_where.html">__account_transactions_aggregate_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1554415389%2FProperties%2F791495369" anchor-label="__auth_key_account_addresses_order_by" id="1554415389%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__auth_key_account_addresses_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>auth_</span><wbr></wbr><span>key_</span><wbr></wbr><span>account_</span><wbr></wbr><span>addresses_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1554415389%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__auth_key_account_addresses_order_by.html">__auth_key_account_addresses_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-734336914%2FProperties%2F791495369" anchor-label="__auth_key_account_addresses_where" id="-734336914%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__auth_key_account_addresses_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>auth_</span><wbr></wbr><span>key_</span><wbr></wbr><span>account_</span><wbr></wbr><span>addresses_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-734336914%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__auth_key_account_addresses_where.html">__auth_key_account_addresses_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2023747913%2FProperties%2F791495369" anchor-label="__current_aptos_names_aggregate_where" id="-2023747913%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_aptos_names_aggregate_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>aptos_</span><wbr></wbr><span>names_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2023747913%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_aptos_names_aggregate_where.html">__current_aptos_names_aggregate_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="750582051%2FProperties%2F791495369" anchor-label="__current_aptos_names_limit" id="750582051%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_aptos_names_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>aptos_</span><wbr></wbr><span>names_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="750582051%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_aptos_names_limit.html">__current_aptos_names_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-234485271%2FProperties%2F791495369" anchor-label="__current_aptos_names_offset" id="-234485271%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_aptos_names_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>aptos_</span><wbr></wbr><span>names_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-234485271%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_aptos_names_offset.html">__current_aptos_names_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-139530892%2FProperties%2F791495369" anchor-label="__current_aptos_names_order_by" id="-139530892%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_aptos_names_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>aptos_</span><wbr></wbr><span>names_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-139530892%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_aptos_names_order_by.html">__current_aptos_names_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1819144567%2FProperties%2F791495369" anchor-label="__current_aptos_names_where" id="1819144567%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_aptos_names_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>aptos_</span><wbr></wbr><span>names_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1819144567%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_aptos_names_where.html">__current_aptos_names_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="643230870%2FProperties%2F791495369" anchor-label="__current_collection_ownership_v2_view_limit" id="643230870%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_collection_ownership_v2_view_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>collection_</span><wbr></wbr><span>ownership_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>view_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="643230870%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_collection_ownership_v2_view_limit.html">__current_collection_ownership_v2_view_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="732595414%2FProperties%2F791495369" anchor-label="__current_collection_ownership_v2_view_offset" id="732595414%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_collection_ownership_v2_view_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>collection_</span><wbr></wbr><span>ownership_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>view_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="732595414%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_collection_ownership_v2_view_offset.html">__current_collection_ownership_v2_view_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1512071457%2FProperties%2F791495369" anchor-label="__current_collection_ownership_v2_view_order_by" id="1512071457%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_collection_ownership_v2_view_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>collection_</span><wbr></wbr><span>ownership_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>view_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1512071457%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_collection_ownership_v2_view_order_by.html">__current_collection_ownership_v2_view_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1711793386%2FProperties%2F791495369" anchor-label="__current_collection_ownership_v2_view_where" id="1711793386%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_collection_ownership_v2_view_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>collection_</span><wbr></wbr><span>ownership_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>view_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1711793386%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_collection_ownership_v2_view_where.html">__current_collection_ownership_v2_view_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1408094459%2FProperties%2F791495369" anchor-label="__current_collections_v2_where" id="1408094459%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_collections_v2_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>collections_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1408094459%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_collections_v2_where.html">__current_collections_v2_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1376665054%2FProperties%2F791495369" anchor-label="__current_fungible_asset_balances_aggregate_where" id="1376665054%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_fungible_asset_balances_aggregate_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>balances_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1376665054%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_fungible_asset_balances_aggregate_where.html">__current_fungible_asset_balances_aggregate_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="524131594%2FProperties%2F791495369" anchor-label="__current_fungible_asset_balances_limit" id="524131594%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_fungible_asset_balances_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>balances_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="524131594%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_fungible_asset_balances_limit.html">__current_fungible_asset_balances_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1335485154%2FProperties%2F791495369" anchor-label="__current_fungible_asset_balances_offset" id="1335485154%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_fungible_asset_balances_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>balances_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1335485154%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_fungible_asset_balances_offset.html">__current_fungible_asset_balances_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1068526637%2FProperties%2F791495369" anchor-label="__current_fungible_asset_balances_order_by" id="1068526637%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_fungible_asset_balances_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>balances_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1068526637%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_fungible_asset_balances_order_by.html">__current_fungible_asset_balances_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1592694110%2FProperties%2F791495369" anchor-label="__current_fungible_asset_balances_where" id="1592694110%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_fungible_asset_balances_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>balances_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1592694110%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_fungible_asset_balances_where.html">__current_fungible_asset_balances_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1313925153%2FProperties%2F791495369" anchor-label="__current_objects_limit" id="1313925153%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_objects_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>objects_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1313925153%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_objects_limit.html">__current_objects_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="49281707%2FProperties%2F791495369" anchor-label="__current_objects_offset" id="49281707%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_objects_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>objects_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="49281707%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_objects_offset.html">__current_objects_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1977595318%2FProperties%2F791495369" anchor-label="__current_objects_order_by" id="1977595318%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_objects_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>objects_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1977595318%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_objects_order_by.html">__current_objects_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1912479627%2FProperties%2F791495369" anchor-label="__current_objects_where" id="-1912479627%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_objects_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>objects_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1912479627%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_objects_where.html">__current_objects_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1250260011%2FProperties%2F791495369" anchor-label="__current_token_datas_v2_limit" id="-1250260011%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_datas_v2_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>datas_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1250260011%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_datas_v2_limit.html">__current_token_datas_v2_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2131047049%2FProperties%2F791495369" anchor-label="__current_token_datas_v2_offset" id="-2131047049%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_datas_v2_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>datas_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2131047049%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_datas_v2_offset.html">__current_token_datas_v2_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1669266046%2FProperties%2F791495369" anchor-label="__current_token_datas_v2_order_by" id="-1669266046%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_datas_v2_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>datas_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1669266046%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_datas_v2_order_by.html">__current_token_datas_v2_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-181697495%2FProperties%2F791495369" anchor-label="__current_token_datas_v2_where" id="-181697495%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_datas_v2_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>datas_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-181697495%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_datas_v2_where.html">__current_token_datas_v2_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1915980196%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_aggregate_limit" id="1915980196%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_aggregate_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1915980196%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_aggregate_limit.html">__current_token_ownerships_v2_aggregate_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1533118856%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_aggregate_offset" id="1533118856%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_aggregate_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1533118856%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_aggregate_offset.html">__current_token_ownerships_v2_aggregate_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1310424584%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_aggregate_where" id="-1310424584%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_aggregate_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>aggregate_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1310424584%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_aggregate_where.html">__current_token_ownerships_v2_aggregate_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="578509220%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_limit" id="578509220%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="578509220%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_limit.html">__current_token_ownerships_v2_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1273775736%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_offset" id="-1273775736%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1273775736%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_offset.html">__current_token_ownerships_v2_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1829712211%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_order_by" id="1829712211%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1829712211%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_order_by.html">__current_token_ownerships_v2_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1647071736%2FProperties%2F791495369" anchor-label="__current_token_ownerships_v2_where" id="1647071736%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__current_token_ownerships_v2_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>current_</span><wbr></wbr><span>token_</span><wbr></wbr><span>ownerships_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1647071736%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__current_token_ownerships_v2_where.html">__current_token_ownerships_v2_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1032232722%2FProperties%2F791495369" anchor-label="__delegated_staking_activities_where" id="1032232722%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__delegated_staking_activities_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>delegated_</span><wbr></wbr><span>staking_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1032232722%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__delegated_staking_activities_where.html">__delegated_staking_activities_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1121292582%2FProperties%2F791495369" anchor-label="__events_limit" id="-1121292582%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__events_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>events_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1121292582%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__events_limit.html">__events_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1866943250%2FProperties%2F791495369" anchor-label="__events_offset" id="1866943250%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__events_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>events_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1866943250%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__events_offset.html">__events_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="698648669%2FProperties%2F791495369" anchor-label="__events_order_by" id="698648669%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__events_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>events_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="698648669%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__events_order_by.html">__events_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-52730066%2FProperties%2F791495369" anchor-label="__events_where" id="-52730066%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__events_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>events_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-52730066%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__events_where.html">__events_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1700251282%2FProperties%2F791495369" anchor-label="__fungible_asset_activities_limit" id="-1700251282%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_activities_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1700251282%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_activities_limit.html">__fungible_asset_activities_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1099092734%2FProperties%2F791495369" anchor-label="__fungible_asset_activities_offset" id="1099092734%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_activities_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1099092734%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_activities_offset.html">__fungible_asset_activities_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-631688766%2FProperties%2F791495369" anchor-label="__fungible_asset_activities_where" id="-631688766%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_activities_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-631688766%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_activities_where.html">__fungible_asset_activities_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1806493804%2FProperties%2F791495369" anchor-label="__fungible_asset_metadata_limit" id="1806493804%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_metadata_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>metadata_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1806493804%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_metadata_limit.html">__fungible_asset_metadata_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1860959296%2FProperties%2F791495369" anchor-label="__fungible_asset_metadata_offset" id="-1860959296%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_metadata_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>metadata_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1860959296%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_metadata_offset.html">__fungible_asset_metadata_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1419910976%2FProperties%2F791495369" anchor-label="__fungible_asset_metadata_where" id="-1419910976%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__fungible_asset_metadata_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>fungible_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>metadata_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1419910976%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__fungible_asset_metadata_where.html">__fungible_asset_metadata_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1914948798%2FProperties%2F791495369" anchor-label="__num_active_delegator_per_pool_order_by" id="-1914948798%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__num_active_delegator_per_pool_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>num_</span><wbr></wbr><span>active_</span><wbr></wbr><span>delegator_</span><wbr></wbr><span>per_</span><wbr></wbr><span>pool_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1914948798%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__num_active_delegator_per_pool_order_by.html">__num_active_delegator_per_pool_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1399509399%2FProperties%2F791495369" anchor-label="__num_active_delegator_per_pool_where" id="-1399509399%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__num_active_delegator_per_pool_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>num_</span><wbr></wbr><span>active_</span><wbr></wbr><span>delegator_</span><wbr></wbr><span>per_</span><wbr></wbr><span>pool_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1399509399%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__num_active_delegator_per_pool_where.html">__num_active_delegator_per_pool_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-685720376%2FProperties%2F791495369" anchor-label="__processor_status_where" id="-685720376%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__processor_status_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>processor_</span><wbr></wbr><span>status_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-685720376%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__processor_status_where.html">__processor_status_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1035919175%2FProperties%2F791495369" anchor-label="__public_key_auth_keys_order_by" id="-1035919175%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__public_key_auth_keys_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>public_</span><wbr></wbr><span>key_</span><wbr></wbr><span>auth_</span><wbr></wbr><span>keys_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1035919175%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__public_key_auth_keys_order_by.html">__public_key_auth_keys_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1825502126%2FProperties%2F791495369" anchor-label="__public_key_auth_keys_where" id="-1825502126%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__public_key_auth_keys_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>public_</span><wbr></wbr><span>key_</span><wbr></wbr><span>auth_</span><wbr></wbr><span>keys_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1825502126%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__public_key_auth_keys_where.html">__public_key_auth_keys_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2019779392%2FProperties%2F791495369" anchor-label="__table_items_limit" id="2019779392%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_items_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>items_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2019779392%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_items_limit.html">__table_items_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="455926636%2FProperties%2F791495369" anchor-label="__table_items_offset" id="455926636%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_items_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>items_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="455926636%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_items_offset.html">__table_items_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1921348151%2FProperties%2F791495369" anchor-label="__table_items_order_by" id="1921348151%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_items_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>items_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1921348151%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_items_order_by.html">__table_items_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1206625388%2FProperties%2F791495369" anchor-label="__table_items_where" id="-1206625388%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_items_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>items_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1206625388%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_items_where.html">__table_items_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1231330268%2FProperties%2F791495369" anchor-label="__table_metadatas_limit" id="1231330268%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_metadatas_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>metadatas_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1231330268%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_metadatas_limit.html">__table_metadatas_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1783807568%2FProperties%2F791495369" anchor-label="__table_metadatas_offset" id="1783807568%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_metadatas_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>metadatas_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1783807568%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_metadatas_offset.html">__table_metadatas_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1885330405%2FProperties%2F791495369" anchor-label="__table_metadatas_order_by" id="-1885330405%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_metadatas_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>metadatas_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1885330405%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_metadatas_order_by.html">__table_metadatas_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1995074512%2FProperties%2F791495369" anchor-label="__table_metadatas_where" id="-1995074512%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__table_metadatas_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>table_</span><wbr></wbr><span>metadatas_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1995074512%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__table_metadatas_where.html">__table_metadatas_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1444984345%2FProperties%2F791495369" anchor-label="__token_activities_v2_limit" id="-1444984345%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__token_activities_v2_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>token_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1444984345%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__token_activities_v2_limit.html">__token_activities_v2_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="422433189%2FProperties%2F791495369" anchor-label="__token_activities_v2_offset" id="422433189%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__token_activities_v2_offset.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>token_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>offset</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="422433189%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__token_activities_v2_offset.html">__token_activities_v2_offset</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-201083344%2FProperties%2F791495369" anchor-label="__token_activities_v2_order_by" id="-201083344%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__token_activities_v2_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>token_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-201083344%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__token_activities_v2_order_by.html">__token_activities_v2_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-376421829%2FProperties%2F791495369" anchor-label="__token_activities_v2_where" id="-376421829%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__token_activities_v2_where.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>token_</span><wbr></wbr><span>activities_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>where</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-376421829%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__token_activities_v2_where.html">__token_activities_v2_where</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2031135814%2FProperties%2F791495369" anchor-label="__user_transactions_limit" id="2031135814%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__user_transactions_limit.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>user_</span><wbr></wbr><span>transactions_</span><wbr></wbr><span>limit</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2031135814%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__user_transactions_limit.html">__user_transactions_limit</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="938099569%2FProperties%2F791495369" anchor-label="__user_transactions_order_by" id="938099569%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="__user_transactions_order_by.html"><span>_</span><wbr></wbr><span>_</span><wbr></wbr><span>user_</span><wbr></wbr><span>transactions_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="938099569%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="__user_transactions_order_by.html">__user_transactions_order_by</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/CompiledArgumentDefinition///PointingToDeclaration/">CompiledArgumentDefinition</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1151507787%2FProperties%2F791495369" anchor-label="type" id="-1151507787%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="type.html"><span><span>type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1151507787%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="type.html">type</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/ObjectType///PointingToDeclaration/">ObjectType</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

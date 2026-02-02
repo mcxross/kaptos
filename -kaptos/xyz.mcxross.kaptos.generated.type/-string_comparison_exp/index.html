@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>String_comparison_exp</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.generated.type/String_comparison_exp///PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.generated.type</a><span class="delimiter">/</span><span class="current">String_comparison_exp</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>String_</span><wbr></wbr><span>comparison_</span><wbr></wbr><span>exp</span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">String_comparison_exp</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>_eq<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_gt<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_gte<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_ilike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_in<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_iregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_is_null<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_like<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_lt<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_lte<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_neq<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_nilike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_nin<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_niregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_nlike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_nregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_nsimilar<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_regex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>_similar<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent</span></span><span class="token punctuation">)</span></div><p class="paragraph">Boolean expression to compare columns of type &quot;String&quot;. All fields are combined with logical 'AND'.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>ilike</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column match the given case-insensitive pattern</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>iregex</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column match the given POSIX regular expression, case insensitive</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>like</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column match the given pattern</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>nilike</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column NOT match the given case-insensitive pattern</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>niregex</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column NOT match the given POSIX regular expression, case insensitive</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>nlike</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column NOT match the given pattern</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>nregex</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column NOT match the given POSIX regular expression, case sensitive</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>nsimilar</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column NOT match the given SQL regular expression</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>regex</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column match the given POSIX regular expression, case sensitive</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>_</span><wbr></wbr><span>similar</span></u></div></span></div><div><div class="title"><p class="paragraph">does the column match the given SQL regular expression</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1695030772%2FConstructors%2F791495369" anchor-label="String_comparison_exp" id="1695030772%2FConstructors%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-string_comparison_exp.html"><span>String_</span><wbr></wbr><span>comparison_</span><wbr></wbr><span>exp</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1695030772%2FConstructors%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">_eq<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_gt<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_gte<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_ilike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_in<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_iregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_is_null<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_like<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_lt<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_lte<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_neq<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_nilike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_nin<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_niregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_nlike<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_nregex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_nsimilar<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_regex<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">_similar<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-647960170%2FProperties%2F791495369" anchor-label="_eq" id="-647960170%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_eq.html"><span>_</span><wbr></wbr><span>eq</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-647960170%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_eq.html">_eq</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1368327285%2FProperties%2F791495369" anchor-label="_gt" id="1368327285%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_gt.html"><span>_</span><wbr></wbr><span>gt</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1368327285%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_gt.html">_gt</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="600450368%2FProperties%2F791495369" anchor-label="_gte" id="600450368%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_gte.html"><span>_</span><wbr></wbr><span>gte</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="600450368%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_gte.html">_gte</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1695683304%2FProperties%2F791495369" anchor-label="_ilike" id="-1695683304%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_ilike.html"><span>_</span><wbr></wbr><span>ilike</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1695683304%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_ilike.html">_ilike</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column match the given case-insensitive pattern</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1189530819%2FProperties%2F791495369" anchor-label="_in" id="-1189530819%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_in.html"><span>_</span><wbr></wbr><span>in</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1189530819%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_in.html">_in</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-990784892%2FProperties%2F791495369" anchor-label="_iregex" id="-990784892%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_iregex.html"><span>_</span><wbr></wbr><span>iregex</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-990784892%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_iregex.html">_iregex</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column match the given POSIX regular expression, case insensitive</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1191047716%2FProperties%2F791495369" anchor-label="_is_null" id="-1191047716%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_is_null.html"><span>_</span><wbr></wbr><span>is_</span><wbr></wbr><span>null</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1191047716%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_is_null.html">_is_null</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1718462411%2FProperties%2F791495369" anchor-label="_like" id="1718462411%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_like.html"><span>_</span><wbr></wbr><span>like</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1718462411%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_like.html">_like</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column match the given pattern</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1881430074%2FProperties%2F791495369" anchor-label="_lt" id="1881430074%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_lt.html"><span>_</span><wbr></wbr><span>lt</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1881430074%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_lt.html">_lt</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-673232357%2FProperties%2F791495369" anchor-label="_lte" id="-673232357%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_lte.html"><span>_</span><wbr></wbr><span>lte</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-673232357%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_lte.html">_lte</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1945191166%2FProperties%2F791495369" anchor-label="_neq" id="1945191166%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_neq.html"><span>_</span><wbr></wbr><span>neq</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1945191166%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_neq.html">_neq</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1593981616%2FProperties%2F791495369" anchor-label="_nilike" id="1593981616%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_nilike.html"><span>_</span><wbr></wbr><span>nilike</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1593981616%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_nilike.html">_nilike</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column NOT match the given case-insensitive pattern</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1403620517%2FProperties%2F791495369" anchor-label="_nin" id="1403620517%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_nin.html"><span>_</span><wbr></wbr><span>nin</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1403620517%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_nin.html">_nin</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2090387476%2FProperties%2F791495369" anchor-label="_niregex" id="-2090387476%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_niregex.html"><span>_</span><wbr></wbr><span>niregex</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2090387476%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_niregex.html">_niregex</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column NOT match the given POSIX regular expression, case insensitive</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1639102669%2FProperties%2F791495369" anchor-label="_nlike" id="-1639102669%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_nlike.html"><span>_</span><wbr></wbr><span>nlike</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1639102669%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_nlike.html">_nlike</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column NOT match the given pattern</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="763214793%2FProperties%2F791495369" anchor-label="_nregex" id="763214793%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_nregex.html"><span>_</span><wbr></wbr><span>nregex</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="763214793%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_nregex.html">_nregex</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column NOT match the given POSIX regular expression, case sensitive</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1574378011%2FProperties%2F791495369" anchor-label="_nsimilar" id="-1574378011%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_nsimilar.html"><span>_</span><wbr></wbr><span>nsimilar</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1574378011%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_nsimilar.html">_nsimilar</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column NOT match the given SQL regular expression</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1768517169%2FProperties%2F791495369" anchor-label="_regex" id="1768517169%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_regex.html"><span>_</span><wbr></wbr><span>regex</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1768517169%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_regex.html">_regex</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column match the given POSIX regular expression, case sensitive</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1846436275%2FProperties%2F791495369" anchor-label="_similar" id="-1846436275%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="_similar.html"><span>_</span><wbr></wbr><span>similar</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1846436275%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="_similar.html">_similar</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">does the column match the given SQL regular expression</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

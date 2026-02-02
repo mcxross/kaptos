@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>xyz.mcxross.kaptos.model.types</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.model.types////PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../index.html">Kaptos</a><span class="delimiter">/</span><span class="current">xyz.mcxross.kaptos.model.types</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="41437683%2FClasslikes%2F791495369" anchor-label="AuthKeyAccountAddressesFilterBuilder" id="41437683%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auth-key-account-addresses-filter-builder/index.html"><span>Auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="41437683%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-auth-key-account-addresses-filter-builder/index.html">AuthKeyAccountAddressesFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1069198943%2FClasslikes%2F791495369" anchor-label="AuthKeyAccountAddressesOrderBuilder" id="1069198943%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-auth-key-account-addresses-order-builder/index.html"><span>Auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1069198943%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-auth-key-account-addresses-order-builder/index.html">AuthKeyAccountAddressesOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="590707364%2FClasslikes%2F791495369" anchor-label="BigintFilterBuilder" id="590707364%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bigint-filter-builder/index.html"><span>Bigint</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="590707364%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-bigint-filter-builder/index.html">BigintFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1358931601%2FClasslikes%2F791495369" anchor-label="BooleanFilterBuilder" id="-1358931601%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-boolean-filter-builder/index.html"><span>Boolean</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1358931601%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-boolean-filter-builder/index.html">BooleanFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="344294773%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesAggregateBoolAndBuilder" id="344294773%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-aggregate-bool-and-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="344294773%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-aggregate-bool-and-builder/index.html">CurrentAptosNamesAggregateBoolAndBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">arguments<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns/index.html">Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_and_arguments_columns</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2138995584%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesAggregateBoolExpCountBuilder" id="-2138995584%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-aggregate-bool-exp-count-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>Exp</span><wbr></wbr><span>Count</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2138995584%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-aggregate-bool-exp-count-builder/index.html">CurrentAptosNamesAggregateBoolExpCountBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-int_comparison_exp/index.html">Int_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1065658225%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesAggregateBoolOrBuilder" id="1065658225%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-aggregate-bool-or-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1065658225%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-aggregate-bool-or-builder/index.html">CurrentAptosNamesAggregateBoolOrBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">arguments<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_or_arguments_columns/index.html">Current_aptos_names_select_column_current_aptos_names_aggregate_bool_exp_bool_or_arguments_columns</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1772311676%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesAggregateFilterBuilder" id="1772311676%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-aggregate-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Aggregate</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1772311676%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-aggregate-filter-builder/index.html">CurrentAptosNamesAggregateFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="119447135%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesFilterBuilder" id="119447135%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="119447135%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-filter-builder/index.html">CurrentAptosNamesFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1006494605%2FClasslikes%2F791495369" anchor-label="CurrentAptosNamesOrderBuilder" id="-1006494605%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-aptos-names-order-builder/index.html"><span>Current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1006494605%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-aptos-names-order-builder/index.html">CurrentAptosNamesOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1821617394%2FClasslikes%2F791495369" anchor-label="CurrentCollectionOwnershipV2ViewFilterBuilder" id="-1821617394%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-collection-ownership-v2-view-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Ownership</span><wbr></wbr><span>V2View</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1821617394%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-collection-ownership-v2-view-filter-builder/index.html">CurrentCollectionOwnershipV2ViewFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="208692909%2FClasslikes%2F791495369" anchor-label="CurrentCollectionsV2FilterBuilder" id="208692909%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-collections-v2-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Collections</span><wbr></wbr><span>V2Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="208692909%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-collections-v2-filter-builder/index.html">CurrentCollectionsV2FilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1008774121%2FClasslikes%2F791495369" anchor-label="CurrentFungibleAssetBalancesFilterBuilder" id="1008774121%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-fungible-asset-balances-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1008774121%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-fungible-asset-balances-filter-builder/index.html">CurrentFungibleAssetBalancesFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1931687337%2FClasslikes%2F791495369" anchor-label="CurrentFungibleAssetBalancesOrderBuilder" id="1931687337%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-fungible-asset-balances-order-builder/index.html"><span>Current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1931687337%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-fungible-asset-balances-order-builder/index.html">CurrentFungibleAssetBalancesOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="25578768%2FClasslikes%2F791495369" anchor-label="CurrentObjectsFilterBuilder" id="25578768%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-objects-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Objects</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="25578768%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-objects-filter-builder/index.html">CurrentObjectsFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2038518690%2FClasslikes%2F791495369" anchor-label="CurrentObjectsOrderBuilder" id="2038518690%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-objects-order-builder/index.html"><span>Current</span><wbr></wbr><span>Objects</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2038518690%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-objects-order-builder/index.html">CurrentObjectsOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1793913780%2FClasslikes%2F791495369" anchor-label="CurrentTokenDatasV2FilterBuilder" id="-1793913780%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-datas-v2-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Datas</span><wbr></wbr><span>V2Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1793913780%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-datas-v2-filter-builder/index.html">CurrentTokenDatasV2FilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-620440725%2FClasslikes%2F791495369" anchor-label="CurrentTokenOwnershipsV2AggregateBoolAndBuilder" id="-620440725%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-ownerships-v2-aggregate-bool-and-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>And</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-620440725%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-ownerships-v2-aggregate-bool-and-builder/index.html">CurrentTokenOwnershipsV2AggregateBoolAndBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">arguments<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns/index.html">Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-95256502%2FClasslikes%2F791495369" anchor-label="CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder" id="-95256502%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-ownerships-v2-aggregate-bool-exp-count-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>Exp</span><wbr></wbr><span>Count</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-95256502%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-ownerships-v2-aggregate-bool-exp-count-builder/index.html">CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-int_comparison_exp/index.html">Int_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1182219589%2FClasslikes%2F791495369" anchor-label="CurrentTokenOwnershipsV2AggregateBoolOrBuilder" id="-1182219589%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-ownerships-v2-aggregate-bool-or-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1182219589%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-ownerships-v2-aggregate-bool-or-builder/index.html">CurrentTokenOwnershipsV2AggregateBoolOrBuilder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">arguments<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_or_arguments_columns/index.html">Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_or_arguments_columns</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-475566138%2FClasslikes%2F791495369" anchor-label="CurrentTokenOwnershipsV2AggregateFilterBuilder" id="-475566138%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-ownerships-v2-aggregate-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-475566138%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-ownerships-v2-aggregate-filter-builder/index.html">CurrentTokenOwnershipsV2AggregateFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-862795819%2FClasslikes%2F791495369" anchor-label="CurrentTokenOwnershipsV2FilterBuilder" id="-862795819%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-ownerships-v2-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-862795819%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-ownerships-v2-filter-builder/index.html">CurrentTokenOwnershipsV2FilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="263986574%2FClasslikes%2F791495369" anchor-label="CurrentTokenRoyaltyV1FilterBuilder" id="263986574%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current-token-royalty-v1-filter-builder/index.html"><span>Current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Royalty</span><wbr></wbr><span>V1Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="263986574%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-current-token-royalty-v1-filter-builder/index.html">CurrentTokenRoyaltyV1FilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="39219534%2FClasslikes%2F791495369" anchor-label="EventsFilterBuilder" id="39219534%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-events-filter-builder/index.html"><span>Events</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="39219534%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-events-filter-builder/index.html">EventsFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-870535260%2FClasslikes%2F791495369" anchor-label="EventsOrderBuilder" id="-870535260%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-events-order-builder/index.html"><span>Events</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-870535260%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-events-order-builder/index.html">EventsOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1782825078%2FClasslikes%2F791495369" anchor-label="FungibleAssetActivitiesFilterBuilder" id="-1782825078%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-fungible-asset-activities-filter-builder/index.html"><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Activities</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1782825078%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-fungible-asset-activities-filter-builder/index.html">FungibleAssetActivitiesFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-916529908%2FClasslikes%2F791495369" anchor-label="FungibleAssetMetadataFilterBuilder" id="-916529908%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-fungible-asset-metadata-filter-builder/index.html"><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-916529908%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-fungible-asset-metadata-filter-builder/index.html">FungibleAssetMetadataFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="345560102%2FClasslikes%2F791495369" anchor-label="FungibleAssetMetadataOrderBuilder" id="345560102%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-fungible-asset-metadata-order-builder/index.html"><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="345560102%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-fungible-asset-metadata-order-builder/index.html">FungibleAssetMetadataOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1702538358%2FClasslikes%2F791495369" anchor-label="IntFilterBuilder" id="1702538358%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-int-filter-builder/index.html"><span>Int</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1702538358%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-int-filter-builder/index.html">IntFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="603660929%2FClasslikes%2F791495369" anchor-label="JsonbFilterBuilder" id="603660929%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-jsonb-filter-builder/index.html"><span>Jsonb</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="603660929%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-jsonb-filter-builder/index.html">JsonbFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="712247300%2FClasslikes%2F791495369" anchor-label="NftMetadataCrawlerParsedAssetUrisFilterBuilder" id="712247300%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-nft-metadata-crawler-parsed-asset-uris-filter-builder/index.html"><span>Nft</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Crawler</span><wbr></wbr><span>Parsed</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Uris</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="712247300%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-nft-metadata-crawler-parsed-asset-uris-filter-builder/index.html">NftMetadataCrawlerParsedAssetUrisFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1683692649%2FClasslikes%2F791495369" anchor-label="NumActiveDelegatorPerPoolFilterBuilder" id="1683692649%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-num-active-delegator-per-pool-filter-builder/index.html"><span>Num</span><wbr></wbr><span>Active</span><wbr></wbr><span>Delegator</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pool</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1683692649%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-num-active-delegator-per-pool-filter-builder/index.html">NumActiveDelegatorPerPoolFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="429438249%2FClasslikes%2F791495369" anchor-label="NumActiveDelegatorPerPoolOrderBuilder" id="429438249%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-num-active-delegator-per-pool-order-builder/index.html"><span>Num</span><wbr></wbr><span>Active</span><wbr></wbr><span>Delegator</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pool</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="429438249%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-num-active-delegator-per-pool-order-builder/index.html">NumActiveDelegatorPerPoolOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1143753580%2FClasslikes%2F791495369" anchor-label="NumericFilterBuilder" id="-1143753580%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-numeric-filter-builder/index.html"><span>Numeric</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1143753580%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-numeric-filter-builder/index.html">NumericFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="451506259%2FClasslikes%2F791495369" anchor-label="OrderBy" id="451506259%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-order-by/index.html"><span>Order</span><wbr></wbr><span><span>By</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="451506259%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-order-by/index.html">OrderBy</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-order-by/index.html">OrderBy</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-582682005%2FClasslikes%2F791495369" anchor-label="ProcessorStatusFilterBuilder" id="-582682005%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-processor-status-filter-builder/index.html"><span>Processor</span><wbr></wbr><span>Status</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-582682005%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-processor-status-filter-builder/index.html">ProcessorStatusFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1183650919%2FClasslikes%2F791495369" anchor-label="PublicKeyAuthKeysFilterBuilder" id="-1183650919%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-public-key-auth-keys-filter-builder/index.html"><span>Public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1183650919%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-public-key-auth-keys-filter-builder/index.html">PublicKeyAuthKeysFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2018361351%2FClasslikes%2F791495369" anchor-label="PublicKeyAuthKeysOrderBuilder" id="-2018361351%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-public-key-auth-keys-order-builder/index.html"><span>Public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2018361351%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-public-key-auth-keys-order-builder/index.html">PublicKeyAuthKeysOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="184874566%2FClasslikes%2F791495369" anchor-label="StringFilterBuilder" id="184874566%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-string-filter-builder/index.html"><span>String</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="184874566%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-string-filter-builder/index.html">StringFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1053843833%2FClasslikes%2F791495369" anchor-label="TableItemsFilterBuilder" id="-1053843833%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-table-items-filter-builder/index.html"><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1053843833%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-table-items-filter-builder/index.html">TableItemsFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1321437365%2FClasslikes%2F791495369" anchor-label="TableItemsOrderBuilder" id="-1321437365%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-table-items-order-builder/index.html"><span>Table</span><wbr></wbr><span>Items</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1321437365%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-table-items-order-builder/index.html">TableItemsOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1542307221%2FClasslikes%2F791495369" anchor-label="TableMetadatasFilterBuilder" id="-1542307221%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-table-metadatas-filter-builder/index.html"><span>Table</span><wbr></wbr><span>Metadatas</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1542307221%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-table-metadatas-filter-builder/index.html">TableMetadatasFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1891383577%2FClasslikes%2F791495369" anchor-label="TableMetadatasOrderBuilder" id="-1891383577%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-table-metadatas-order-builder/index.html"><span>Table</span><wbr></wbr><span>Metadatas</span><wbr></wbr><span>Order</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1891383577%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-table-metadatas-order-builder/index.html">TableMetadatasOrderBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-794545763%2FClasslikes%2F791495369" anchor-label="TimestampFilterBuilder" id="-794545763%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-timestamp-filter-builder/index.html"><span>Timestamp</span><wbr></wbr><span>Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-794545763%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-timestamp-filter-builder/index.html">TimestampFilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1002571369%2FClasslikes%2F791495369" anchor-label="TokenActivitiesV2FilterBuilder" id="1002571369%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-token-activities-v2-filter-builder/index.html"><span>Token</span><wbr></wbr><span>Activities</span><wbr></wbr><span>V2Filter</span><wbr></wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1002571369%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-token-activities-v2-filter-builder/index.html">TokenActivitiesV2FilterBuilder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-60852649%2FFunctions%2F791495369" anchor-label="authKeyAccountAddressesFilter" id="-60852649%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="auth-key-account-addresses-filter.html"><span>auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-60852649%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="auth-key-account-addresses-filter.html"><span class="token function">authKeyAccountAddressesFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-auth-key-account-addresses-filter-builder/index.html">AuthKeyAccountAddressesFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-auth_key_account_addresses_bool_exp/index.html">Auth_key_account_addresses_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1552015517%2FFunctions%2F791495369" anchor-label="authKeyAccountAddressesOrder" id="1552015517%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="auth-key-account-addresses-order.html"><span>auth</span><wbr></wbr><span>Key</span><wbr></wbr><span>Account</span><wbr></wbr><span>Addresses</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1552015517%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="auth-key-account-addresses-order.html"><span class="token function">authKeyAccountAddressesOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-auth-key-account-addresses-order-builder/index.html">AuthKeyAccountAddressesOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-auth_key_account_addresses_order_by/index.html">Auth_key_account_addresses_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1118732947%2FFunctions%2F791495369" anchor-label="bigintFilter" id="1118732947%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="bigint-filter.html"><span>bigint</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1118732947%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="bigint-filter.html"><span class="token function">bigintFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-bigint-filter-builder/index.html">BigintFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-bigint_comparison_exp/index.html">Bigint_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1609858089%2FFunctions%2F791495369" anchor-label="booleanFilter" id="-1609858089%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boolean-filter.html"><span>boolean</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1609858089%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="boolean-filter.html"><span class="token function">booleanFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-boolean-filter-builder/index.html">BooleanFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2029365475%2FFunctions%2F791495369" anchor-label="currentAptosNamesAggregateFilter" id="2029365475%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-aptos-names-aggregate-filter.html"><span>current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span>Aggregate</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2029365475%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-aptos-names-aggregate-filter.html"><span class="token function">currentAptosNamesAggregateFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-aptos-names-aggregate-filter-builder/index.html">CurrentAptosNamesAggregateFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_aptos_names_aggregate_bool_exp/index.html">Current_aptos_names_aggregate_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-357443561%2FFunctions%2F791495369" anchor-label="currentAptosNamesFilter" id="-357443561%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-aptos-names-filter.html"><span>current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-357443561%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-aptos-names-filter.html"><span class="token function">currentAptosNamesFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-aptos-names-filter-builder/index.html">CurrentAptosNamesFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_aptos_names_bool_exp/index.html">Current_aptos_names_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="695638069%2FFunctions%2F791495369" anchor-label="currentAptosNamesOrder" id="695638069%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-aptos-names-order.html"><span>current</span><wbr></wbr><span>Aptos</span><wbr></wbr><span>Names</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="695638069%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-aptos-names-order.html"><span class="token function">currentAptosNamesOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-aptos-names-order-builder/index.html">CurrentAptosNamesOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_aptos_names_order_by/index.html">Current_aptos_names_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="750644287%2FFunctions%2F791495369" anchor-label="currentCollectionOwnershipV2ViewFilter" id="750644287%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-collection-ownership-v2-view-filter.html"><span>current</span><wbr></wbr><span>Collection</span><wbr></wbr><span>Ownership</span><wbr></wbr><span>V2View</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="750644287%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-collection-ownership-v2-view-filter.html"><span class="token function">currentCollectionOwnershipV2ViewFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-collection-ownership-v2-view-filter-builder/index.html">CurrentCollectionOwnershipV2ViewFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_collection_ownership_v2_view_bool_exp/index.html">Current_collection_ownership_v2_view_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1719110719%2FFunctions%2F791495369" anchor-label="currentCollectionsV2Filter" id="-1719110719%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-collections-v2-filter.html"><span>current</span><wbr></wbr><span>Collections</span><wbr></wbr><span><span>V2Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1719110719%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-collections-v2-filter.html"><span class="token function">currentCollectionsV2Filter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-collections-v2-filter-builder/index.html">CurrentCollectionsV2FilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_collections_v2_bool_exp/index.html">Current_collections_v2_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1104891575%2FFunctions%2F791495369" anchor-label="currentFungibleAssetBalancesFilter" id="-1104891575%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-fungible-asset-balances-filter.html"><span>current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1104891575%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-fungible-asset-balances-filter.html"><span class="token function">currentFungibleAssetBalancesFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-fungible-asset-balances-filter-builder/index.html">CurrentFungibleAssetBalancesFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_fungible_asset_balances_bool_exp/index.html">Current_fungible_asset_balances_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-184787305%2FFunctions%2F791495369" anchor-label="currentFungibleAssetBalancesOrder" id="-184787305%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-fungible-asset-balances-order.html"><span>current</span><wbr></wbr><span>Fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Balances</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-184787305%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-fungible-asset-balances-order.html"><span class="token function">currentFungibleAssetBalancesOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-fungible-asset-balances-order-builder/index.html">CurrentFungibleAssetBalancesOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_fungible_asset_balances_order_by/index.html">Current_fungible_asset_balances_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1963877445%2FFunctions%2F791495369" anchor-label="currentObjectsFilter" id="-1963877445%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-objects-filter.html"><span>current</span><wbr></wbr><span>Objects</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1963877445%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-objects-filter.html"><span class="token function">currentObjectsFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-objects-filter-builder/index.html">CurrentObjectsFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_objects_bool_exp/index.html">Current_objects_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1035530167%2FFunctions%2F791495369" anchor-label="currentObjectsOrder" id="1035530167%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-objects-order.html"><span>current</span><wbr></wbr><span>Objects</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1035530167%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-objects-order.html"><span class="token function">currentObjectsOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-objects-order-builder/index.html">CurrentObjectsOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_objects_order_by/index.html">Current_objects_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="538815351%2FFunctions%2F791495369" anchor-label="currentTokenDatasV2Filter" id="538815351%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-token-datas-v2-filter.html"><span>current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Datas</span><wbr></wbr><span><span>V2Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="538815351%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-token-datas-v2-filter.html"><span class="token function">currentTokenDatasV2Filter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-token-datas-v2-filter-builder/index.html">CurrentTokenDatasV2FilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_datas_v2_bool_exp/index.html">Current_token_datas_v2_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1435235511%2FFunctions%2F791495369" anchor-label="currentTokenOwnershipsV2AggregateBoolAnd" id="-1435235511%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-token-ownerships-v2-aggregate-bool-and.html"><span>current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span>Bool</span><wbr></wbr><span><span>And</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1435235511%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-token-ownerships-v2-aggregate-bool-and.html"><span class="token function">currentTokenOwnershipsV2AggregateBoolAnd</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">arguments<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns/index.html">Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns</a><span class="token punctuation">, </span></span><span class="parameter ">predicate<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-boolean_comparison_exp/index.html">Boolean_comparison_exp</a><span class="token punctuation">, </span></span><span class="parameter ">init<span class="token operator">: </span><a href="-current-token-ownerships-v2-aggregate-bool-and-builder/index.html">CurrentTokenOwnershipsV2AggregateBoolAndBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator"> = </span>{}</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_aggregate_bool_exp_bool_and/index.html">Current_token_ownerships_v2_aggregate_bool_exp_bool_and</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1329435593%2FFunctions%2F791495369" anchor-label="currentTokenOwnershipsV2AggregateFilter" id="-1329435593%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-token-ownerships-v2-aggregate-filter.html"><span>current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span>V2Aggregate</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1329435593%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-token-ownerships-v2-aggregate-filter.html"><span class="token function">currentTokenOwnershipsV2AggregateFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-token-ownerships-v2-aggregate-filter-builder/index.html">CurrentTokenOwnershipsV2AggregateFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_aggregate_bool_exp/index.html">Current_token_ownerships_v2_aggregate_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-324598287%2FFunctions%2F791495369" anchor-label="currentTokenOwnershipsV2Filter" id="-324598287%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-token-ownerships-v2-filter.html"><span>current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Ownerships</span><wbr></wbr><span><span>V2Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-324598287%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-token-ownerships-v2-filter.html"><span class="token function">currentTokenOwnershipsV2Filter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-token-ownerships-v2-filter-builder/index.html">CurrentTokenOwnershipsV2FilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_ownerships_v2_bool_exp/index.html">Current_token_ownerships_v2_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="259510839%2FFunctions%2F791495369" anchor-label="currentTokenRoyaltyV1Filter" id="259510839%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-token-royalty-v1-filter.html"><span>current</span><wbr></wbr><span>Token</span><wbr></wbr><span>Royalty</span><wbr></wbr><span><span>V1Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="259510839%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-token-royalty-v1-filter.html"><span class="token function">currentTokenRoyaltyV1Filter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-current-token-royalty-v1-filter-builder/index.html">CurrentTokenRoyaltyV1FilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-current_token_royalty_v1_bool_exp/index.html">Current_token_royalty_v1_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1011296705%2FFunctions%2F791495369" anchor-label="eventsFilter" id="-1011296705%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="events-filter.html"><span>events</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1011296705%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="events-filter.html"><span class="token function">eventsFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-events-filter-builder/index.html">EventsFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-events_bool_exp/index.html">Events_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-236513673%2FFunctions%2F791495369" anchor-label="eventsOrder" id="-236513673%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="events-order.html"><span>events</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-236513673%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="events-order.html"><span class="token function">eventsOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-events-order-builder/index.html">EventsOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-events_order_by/index.html">Events_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1815917769%2FFunctions%2F791495369" anchor-label="fungibleAssetActivitiesFilter" id="-1815917769%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="fungible-asset-activities-filter.html"><span>fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Activities</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1815917769%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="fungible-asset-activities-filter.html"><span class="token function">fungibleAssetActivitiesFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-fungible-asset-activities-filter-builder/index.html">FungibleAssetActivitiesFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-fungible_asset_activities_bool_exp/index.html">Fungible_asset_activities_bool_exp</a></div><div class="brief "><p class="paragraph">Public DSL entrypoint for building Fungible_asset_activities_bool_exp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1848128137%2FFunctions%2F791495369" anchor-label="fungibleAssetMetadataFilter" id="-1848128137%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="fungible-asset-metadata-filter.html"><span>fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1848128137%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="fungible-asset-metadata-filter.html"><span class="token function">fungibleAssetMetadataFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-fungible-asset-metadata-filter-builder/index.html">FungibleAssetMetadataFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-fungible_asset_metadata_bool_exp/index.html">Fungible_asset_metadata_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2137248527%2FFunctions%2F791495369" anchor-label="fungibleAssetMetadataOrder" id="2137248527%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="fungible-asset-metadata-order.html"><span>fungible</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Metadata</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2137248527%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="fungible-asset-metadata-order.html"><span class="token function">fungibleAssetMetadataOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-fungible-asset-metadata-order-builder/index.html">FungibleAssetMetadataOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-fungible_asset_metadata_order_by/index.html">Fungible_asset_metadata_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-916396617%2FFunctions%2F791495369" anchor-label="intFilter" id="-916396617%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="int-filter.html"><span>int</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-916396617%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="int-filter.html"><span class="token function">intFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-int-filter-builder/index.html">IntFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-int_comparison_exp/index.html">Int_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="793511255%2FFunctions%2F791495369" anchor-label="jsonbFilter" id="793511255%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="jsonb-filter.html"><span>jsonb</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="793511255%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="jsonb-filter.html"><span class="token function">jsonbFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-jsonb-filter-builder/index.html">JsonbFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-jsonb_comparison_exp/index.html">Jsonb_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2146844041%2FFunctions%2F791495369" anchor-label="nftMetadataCrawlerParsedAssetUrisFilter" id="-2146844041%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="nft-metadata-crawler-parsed-asset-uris-filter.html"><span>nft</span><wbr></wbr><span>Metadata</span><wbr></wbr><span>Crawler</span><wbr></wbr><span>Parsed</span><wbr></wbr><span>Asset</span><wbr></wbr><span>Uris</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2146844041%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="nft-metadata-crawler-parsed-asset-uris-filter.html"><span class="token function">nftMetadataCrawlerParsedAssetUrisFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-nft-metadata-crawler-parsed-asset-uris-filter-builder/index.html">NftMetadataCrawlerParsedAssetUrisFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-nft_metadata_crawler_parsed_asset_uris_bool_exp/index.html">Nft_metadata_crawler_parsed_asset_uris_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2068967465%2FFunctions%2F791495369" anchor-label="numActiveDelegatorPerPoolFilter" id="-2068967465%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="num-active-delegator-per-pool-filter.html"><span>num</span><wbr></wbr><span>Active</span><wbr></wbr><span>Delegator</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pool</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2068967465%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="num-active-delegator-per-pool-filter.html"><span class="token function">numActiveDelegatorPerPoolFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-num-active-delegator-per-pool-filter-builder/index.html">NumActiveDelegatorPerPoolFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-num_active_delegator_per_pool_bool_exp/index.html">Num_active_delegator_per_pool_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2111686071%2FFunctions%2F791495369" anchor-label="numActiveDelegatorPerPoolOrder" id="-2111686071%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="num-active-delegator-per-pool-order.html"><span>num</span><wbr></wbr><span>Active</span><wbr></wbr><span>Delegator</span><wbr></wbr><span>Per</span><wbr></wbr><span>Pool</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2111686071%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="num-active-delegator-per-pool-order.html"><span class="token function">numActiveDelegatorPerPoolOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-num-active-delegator-per-pool-order-builder/index.html">NumActiveDelegatorPerPoolOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-num_active_delegator_per_pool_order_by/index.html">Num_active_delegator_per_pool_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1312815223%2FFunctions%2F791495369" anchor-label="numericFilter" id="1312815223%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="numeric-filter.html"><span>numeric</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1312815223%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="numeric-filter.html"><span class="token function">numericFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-numeric-filter-builder/index.html">NumericFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-numeric_comparison_exp/index.html">Numeric_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1077099607%2FFunctions%2F791495369" anchor-label="processorStatusFilter" id="1077099607%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="processor-status-filter.html"><span>processor</span><wbr></wbr><span>Status</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1077099607%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="processor-status-filter.html"><span class="token function">processorStatusFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-processor-status-filter-builder/index.html">ProcessorStatusFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-processor_status_bool_exp/index.html">Processor_status_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-777027881%2FFunctions%2F791495369" anchor-label="publicKeyAuthKeysFilter" id="-777027881%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="public-key-auth-keys-filter.html"><span>public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-777027881%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="public-key-auth-keys-filter.html"><span class="token function">publicKeyAuthKeysFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-public-key-auth-keys-filter-builder/index.html">PublicKeyAuthKeysFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-public_key_auth_keys_bool_exp/index.html">Public_key_auth_keys_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1614907305%2FFunctions%2F791495369" anchor-label="publicKeyAuthKeysOrder" id="1614907305%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="public-key-auth-keys-order.html"><span>public</span><wbr></wbr><span>Key</span><wbr></wbr><span>Auth</span><wbr></wbr><span>Keys</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1614907305%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="public-key-auth-keys-order.html"><span class="token function">publicKeyAuthKeysOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-public-key-auth-keys-order-builder/index.html">PublicKeyAuthKeysOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-public_key_auth_keys_order_by/index.html">Public_key_auth_keys_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1486837839%2FFunctions%2F791495369" anchor-label="stringFilter" id="1486837839%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="string-filter.html"><span>string</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1486837839%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="string-filter.html"><span class="token function">stringFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-string-filter-builder/index.html">StringFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-string_comparison_exp/index.html">String_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1736926771%2FFunctions%2F791495369" anchor-label="tableItemsFilter" id="-1736926771%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table-items-filter.html"><span>table</span><wbr></wbr><span>Items</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1736926771%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="table-items-filter.html"><span class="token function">tableItemsFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-table-items-filter-builder/index.html">TableItemsFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-table_items_bool_exp/index.html">Table_items_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1880294807%2FFunctions%2F791495369" anchor-label="tableItemsOrder" id="1880294807%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table-items-order.html"><span>table</span><wbr></wbr><span>Items</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1880294807%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="table-items-order.html"><span class="token function">tableItemsOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-table-items-order-builder/index.html">TableItemsOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-table_items_order_by/index.html">Table_items_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-748309627%2FFunctions%2F791495369" anchor-label="tableMetadatasFilter" id="-748309627%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table-metadatas-filter.html"><span>table</span><wbr></wbr><span>Metadatas</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-748309627%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="table-metadatas-filter.html"><span class="token function">tableMetadatasFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-table-metadatas-filter-builder/index.html">TableMetadatasFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-table_metadatas_bool_exp/index.html">Table_metadatas_bool_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2130366615%2FFunctions%2F791495369" anchor-label="tableMetadatasOrder" id="2130366615%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table-metadatas-order.html"><span>table</span><wbr></wbr><span>Metadatas</span><wbr></wbr><span><span>Order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2130366615%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="table-metadatas-order.html"><span class="token function">tableMetadatasOrder</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-table-metadatas-order-builder/index.html">TableMetadatasOrderBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-table_metadatas_order_by/index.html">Table_metadatas_order_by</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-766557353%2FFunctions%2F791495369" anchor-label="timestampFilter" id="-766557353%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="timestamp-filter.html"><span>timestamp</span><wbr></wbr><span><span>Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-766557353%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="timestamp-filter.html"><span class="token function">timestampFilter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-timestamp-filter-builder/index.html">TimestampFilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-timestamp_comparison_exp/index.html">Timestamp_comparison_exp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="589927639%2FFunctions%2F791495369" anchor-label="tokenActivitiesV2Filter" id="589927639%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="token-activities-v2-filter.html"><span>token</span><wbr></wbr><span>Activities</span><wbr></wbr><span><span>V2Filter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="589927639%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="token-activities-v2-filter.html"><span class="token function">tokenActivitiesV2Filter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">init<span class="token operator">: </span><a href="-token-activities-v2-filter-builder/index.html">TokenActivitiesV2FilterBuilder</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../xyz.mcxross.kaptos.generated.type/-token_activities_v2_bool_exp/index.html">Token_activities_v2_bool_exp</a></div><div class="brief "><p class="paragraph">Public DSL entrypoint for building Token_activities_v2_bool_exp.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Current_collections_v2_order_by</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.1.2-beta        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.generated.type/Current_collections_v2_order_by///PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.generated.type</a><span class="delimiter">/</span><span class="current">Current_collections_v2_order_by</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Current_</span><wbr></wbr><span>collections_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">Current_collections_v2_order_by</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>cdn_asset_uris<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-nft_metadata_crawler_parsed_asset_uris_order_by/index.html">Nft_metadata_crawler_parsed_asset_uris_order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>collection_id<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>collection_name<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>collection_properties<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>creator_address<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>current_supply<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>description<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>last_transaction_timestamp<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>last_transaction_version<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>max_supply<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutable_description<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>mutable_uri<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>table_handle_v1<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>token_standard<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>total_minted_v2<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>uri<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent</span></span><span class="token punctuation">)</span></div><p class="paragraph">Ordering options when selecting data from &quot;current_collections_v2&quot;.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-1035132308%2FConstructors%2F791495369" anchor-label="Current_collections_v2_order_by" id="-1035132308%2FConstructors%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-current_collections_v2_order_by.html"><span>Current_</span><wbr></wbr><span>collections_</span><wbr></wbr><span>v2_</span><wbr></wbr><span>order_</span><wbr></wbr><span>by</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1035132308%2FConstructors%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">cdn_asset_uris<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-nft_metadata_crawler_parsed_asset_uris_order_by/index.html">Nft_metadata_crawler_parsed_asset_uris_order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">collection_id<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">collection_name<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">collection_properties<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">creator_address<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">current_supply<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">last_transaction_timestamp<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">last_transaction_version<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">max_supply<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">mutable_description<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">mutable_uri<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">table_handle_v1<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">token_standard<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">total_minted_v2<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent<span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator"> = </span>Optional.Absent</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1254082103%2FProperties%2F791495369" anchor-label="cdn_asset_uris" id="1254082103%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cdn_asset_uris.html"><span>cdn_</span><wbr></wbr><span>asset_</span><wbr></wbr><span>uris</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1254082103%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="cdn_asset_uris.html">cdn_asset_uris</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-nft_metadata_crawler_parsed_asset_uris_order_by/index.html">Nft_metadata_crawler_parsed_asset_uris_order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1906440031%2FProperties%2F791495369" anchor-label="collection_id" id="1906440031%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="collection_id.html"><span>collection_</span><wbr></wbr><span>id</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1906440031%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="collection_id.html">collection_id</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-960895825%2FProperties%2F791495369" anchor-label="collection_name" id="-960895825%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="collection_name.html"><span>collection_</span><wbr></wbr><span>name</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-960895825%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="collection_name.html">collection_name</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-729508537%2FProperties%2F791495369" anchor-label="collection_properties" id="-729508537%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="collection_properties.html"><span>collection_</span><wbr></wbr><span>properties</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-729508537%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="collection_properties.html">collection_properties</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2003140346%2FProperties%2F791495369" anchor-label="creator_address" id="2003140346%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="creator_address.html"><span>creator_</span><wbr></wbr><span>address</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2003140346%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="creator_address.html">creator_address</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1741596714%2FProperties%2F791495369" anchor-label="current_supply" id="1741596714%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current_supply.html"><span>current_</span><wbr></wbr><span>supply</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1741596714%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="current_supply.html">current_supply</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1535744705%2FProperties%2F791495369" anchor-label="description" id="-1535744705%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="description.html"><span><span>description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1535744705%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="description.html">description</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1284694899%2FProperties%2F791495369" anchor-label="last_transaction_timestamp" id="1284694899%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last_transaction_timestamp.html"><span>last_</span><wbr></wbr><span>transaction_</span><wbr></wbr><span>timestamp</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1284694899%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="last_transaction_timestamp.html">last_transaction_timestamp</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1026613489%2FProperties%2F791495369" anchor-label="last_transaction_version" id="1026613489%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="last_transaction_version.html"><span>last_</span><wbr></wbr><span>transaction_</span><wbr></wbr><span>version</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1026613489%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="last_transaction_version.html">last_transaction_version</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1669655275%2FProperties%2F791495369" anchor-label="max_supply" id="-1669655275%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max_supply.html"><span>max_</span><wbr></wbr><span>supply</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1669655275%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="max_supply.html">max_supply</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2106993848%2FProperties%2F791495369" anchor-label="mutable_description" id="2106993848%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable_description.html"><span>mutable_</span><wbr></wbr><span><span>description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2106993848%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable_description.html">mutable_description</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1494626232%2FProperties%2F791495369" anchor-label="mutable_uri" id="-1494626232%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mutable_uri.html"><span>mutable_</span><wbr></wbr><span>uri</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1494626232%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="mutable_uri.html">mutable_uri</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1519481114%2FProperties%2F791495369" anchor-label="table_handle_v1" id="1519481114%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table_handle_v1.html"><span>table_</span><wbr></wbr><span>handle_</span><wbr></wbr><span>v1</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1519481114%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="table_handle_v1.html">table_handle_v1</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1728064540%2FProperties%2F791495369" anchor-label="token_standard" id="1728064540%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="token_standard.html"><span>token_</span><wbr></wbr><span>standard</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1728064540%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="token_standard.html">token_standard</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-928226340%2FProperties%2F791495369" anchor-label="total_minted_v2" id="-928226340%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="total_minted_v2.html"><span>total_</span><wbr></wbr><span>minted_</span><wbr></wbr><span>v2</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-928226340%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="total_minted_v2.html">total_minted_v2</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1037205455%2FProperties%2F791495369" anchor-label="uri" id="1037205455%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="uri.html"><span><span>uri</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1037205455%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="uri.html">uri</a><span class="token operator">: </span><span data-unresolved-link="com.apollographql.apollo.api/Optional///PointingToDeclaration/">Optional</span><span class="token operator">&lt;</span><a href="../-order_by/index.html">Order_by</a><span class="token operator">?</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
