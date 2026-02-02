@@ -1,6 +1,5 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
-import java.net.URL
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
@@ -122,25 +121,24 @@ tasks.withType<Test>().configureEach {
   }
 }
 
-tasks.getByName<DokkaTask>("dokkaHtml") {
+tasks.withType<DokkaTask>().configureEach {
+  notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/2231")
+}
+
+dokka {
   moduleName.set("Kaptos")
-  outputDirectory.set(file(layout.buildDirectory.dir("dokka").get().asFile))
+  dokkaPublications.html { suppressInheritedMembers.set(true) }
   dokkaSourceSets {
     configureEach {
       includes.from("Module.md")
       sourceLink {
         localDirectory.set(file("commonMain/kotlin"))
-        remoteUrl.set(
-          URL("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
-        )
+        remoteUrl("https://github.com/mcxross/kaptos/blob/master/lib/src/commonMain/kotlin")
         remoteLineSuffix.set("#L")
       }
     }
   }
-}
-
-tasks.withType<DokkaTask>().configureEach {
-  notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/2231")
+  dokkaPublications.html { outputDirectory.set(layout.buildDirectory.dir("dokka")) }
 }
 
 mavenPublishing {
@@ -148,7 +146,7 @@ mavenPublishing {
 
   configure(
     KotlinMultiplatform(
-      javadocJar = JavadocJar.Dokka("dokkaHtml"),
+      javadocJar = JavadocJar.Dokka("dokkaGenerate"),
       sourcesJar = true,
       androidVariantsToPublish = listOf("debug", "release"),
     )

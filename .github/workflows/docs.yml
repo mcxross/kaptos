@@ -37,7 +37,7 @@ jobs:
         run: ./gradlew generateApolloSources --refresh-dependencies
         shell: bash
       - name: Generate HTML docs
-        run: ./gradlew dokkaHtml --refresh-dependencies
+        run: ./gradlew dokkaGenerate --refresh-dependencies
         shell: bash
       - name: Deploy docs to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4.8.0
