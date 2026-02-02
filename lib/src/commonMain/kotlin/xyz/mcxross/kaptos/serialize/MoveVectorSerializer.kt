@@ -42,12 +42,10 @@ class MoveVectorSerializer<T : EntryFunctionArgument>(
 
   override fun deserialize(decoder: Decoder): MoveVector<T> {
     return MoveVector(
-        decoder.decodeStructure(descriptor) {
-            val size = decodeCollectionSize(descriptor)
-            List(size) { i ->
-                decodeSerializableElement(descriptor, i, elementSerializer)
-            }
-        }
+      decoder.decodeStructure(descriptor) {
+        val size = decodeCollectionSize(descriptor)
+        List(size) { i -> decodeSerializableElement(descriptor, i, elementSerializer) }
+      }
     )
   }
 }

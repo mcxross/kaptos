@@ -1,0 +1,70 @@
+name: "run kaptos tests"
+description: |
+  Run Kaptos JVM tests against a local Aptos testnet with indexer enabled.
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: .node-version
+        registry-url: "https://registry.npmjs.org"
+
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 8.9.0
+
+    - name: Install Aptos CLI and wait-on
+      run: pnpm install -g @aptos-labs/aptos-cli wait-on
+      shell: bash
+
+    - name: Run a local testnet in the background
+      env:
+        TMPDIR: ${{ runner.temp }}
+      run: |
+        aptos node run-local-testnet \
+          --assume-yes \
+          --force-restart \
+          --with-indexer-api \
+          --log-to-stdout >& "${{ runner.temp }}/local-testnet-logs.txt" &
+      shell: bash
+
+    - name: Wait for local testnet
+      env:
+        TMPDIR: ${{ runner.temp }}
+      run: |
+        wait-on --verbose --interval 1500 --timeout 300000 --httpTimeout 120000 http-get://127.0.0.1:8070
+      shell: bash
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      shell: bash
+
+    - name: Generate GraphQL client
+      run: ./gradlew generateApolloSources
+      shell: bash
+
+    - uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # pin@v3
+      name: gradle-jvm-tests
+      env:
+        TMPDIR: ${{ runner.temp }}
+      with:
+        max_attempts: 3
+        timeout_minutes: 30
+        command: ./gradlew :kaptos:jvmTest
+
+    - name: Print local testnet logs on failure
+      shell: bash
+      if: failure()
+      run: |
+        if [ -f "${{ runner.temp }}/local-testnet-logs.txt" ]; then
+          cat "${{ runner.temp }}/local-testnet-logs.txt"
+        else
+          echo "No local testnet logs found at ${{ runner.temp }}/local-testnet-logs.txt"
+        fi

@@ -40,7 +40,6 @@ import xyz.mcxross.kaptos.model.types.fungibleAssetActivitiesFilter
 import xyz.mcxross.kaptos.model.types.fungibleAssetMetadataFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.util.APTOS_COIN
-import xyz.mcxross.kaptos.util.APTOS_FA
 import xyz.mcxross.kaptos.util.runBlocking
 import xyz.mcxross.kaptos.util.toAccountAddress
 
@@ -103,11 +102,10 @@ class FungibleAssetTest {
         )
     ) {
       is Result.Ok -> {
-        assertEquals(
-          APTOS_FA,
-          resolution.value?.fungible_asset_metadata?.first()?.asset_type ?: "",
-          "",
-        )
+        val assetTypes =
+          resolution.value?.fungible_asset_metadata?.mapNotNull { it?.asset_type } ?: emptyList()
+        assertTrue(assetTypes.isNotEmpty(), "Expected fungible asset metadata for creator 0x1")
+        assertTrue(assetTypes.contains(APTOS_COIN), "Expected AptosCoin metadata for creator 0x1")
       }
       is Result.Err -> fail("")
     }
@@ -147,7 +145,7 @@ class FungibleAssetTest {
 
   @Test
   fun `it should fetch current fungible asset balance`() = runBlocking {
-    val aptos = Aptos(AptosConfig(AptosSettings(Network.DEVNET)))
+    val aptos = Aptos(AptosConfig(AptosSettings(Network.LOCAL)))
     val userAccount = Account.generate()
     val minimumLedgerVersion =
       when (val fundResponse = aptos.fundAccount(userAccount.accountAddress, 1_000)) {

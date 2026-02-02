@@ -153,7 +153,7 @@ class AccountTest {
 
   @Test
   fun `it fetches account transactions count`() = runBlocking {
-    val aptos = Aptos()
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
     val minimumLedgerVersion =
       when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
@@ -177,7 +177,7 @@ class AccountTest {
 
   @Test
   fun `it fetches account coins data`() = runBlocking {
-    val aptos = Aptos()
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
     val minimumLedgerVersion =
       when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
@@ -212,7 +212,7 @@ class AccountTest {
 
   @Test
   fun `it fetches account coins count`() = runBlocking {
-    val aptos = Aptos()
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
     val minimumLedgerVersion =
       when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
@@ -236,7 +236,7 @@ class AccountTest {
 
   @Test
   fun `it fetches account's coin amount`() = runBlocking {
-    val aptos = Aptos()
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
     val minimumLedgerVersion =
       when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
@@ -303,7 +303,7 @@ class AccountTest {
 
   @Test
   fun `it fetches account's coin amount from smart contract`() = runBlocking {
-    val aptos = Aptos()
+    val aptos = getLocalNetwork()
     val alice = Account.generate()
 
     when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {

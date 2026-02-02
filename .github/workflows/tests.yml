@@ -1,32 +1,17 @@
-name: tests
-run-name: Run tests
+name: "run tests (jvm + e2e) with local testnet"
 on:
+  pull_request:
+    types: [labeled, opened, synchronize, reopened, auto_merge_enabled]
   push:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
-  tests:
-    runs-on: macos-latest
+  run-tests:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Update brew
-        run: brew update
-
-      - name: Run a local testnet in the background
-        uses: aptos-labs/actions/run-local-testnet@main
-        with:
-          PNPM_VERSION: 8.9.0
-          WITH_INDEXER_API: false
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Generate GraphQL Client
-        run: ./gradlew generateApolloSources
-        shell: bash
-
-      - name: Run tests
-        run: ./gradlew test
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/run-tests

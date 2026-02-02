@@ -38,7 +38,6 @@ actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
     SigningSchemeInput.Ed25519 -> {
       val mnemonic = mnemonicGenerate(12)
       val seed = mnemonicToSeed(mnemonic, "")
-      // Ed25519 seed is 32 bytes.
       val privateKey = seed.copyOfRange(0, 32)
       val pk = ed25519PublicKeyFromPrivate(privateKey)
       KeyPair(privateKey, pk)
@@ -66,7 +65,6 @@ actual fun sha3Hash(input: ByteArray): ByteArray {
 actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
   val anyRawTxnInstance = deriveTransactionType(transaction)
 
-  // Concatenate prefix and body for hashing
   val prefix =
     if (anyRawTxnInstance.instanceOf(RawTransaction::class)) {
       sha3256(RAW_TRANSACTION_SALT.encodeToByteArray())

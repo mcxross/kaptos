@@ -114,7 +114,7 @@ class CoinTest {
 
   @Test
   fun `it transfers APT coin amount from sender to recipient`() = runBlocking {
-    val aptos = Aptos(AptosConfig(AptosSettings(network = Network.DEVNET)))
+    val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
 
     val alice = Account.generate()
     val bob = Account.generate()

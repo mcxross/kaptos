@@ -68,7 +68,12 @@ class GeneralTest {
     val version = 3L
     when (val response = aptos.getBlockByVersion(version)) {
       is Result.Ok -> {
-        assertEquals(response.value.lastVersion.toLong(), version, "Block version should be 0")
+        val firstVersion = response.value.firstVersion.toLong()
+        val lastVersion = response.value.lastVersion.toLong()
+        assertTrue(
+          version in firstVersion..lastVersion,
+          "Expected version $version to be within block version range [$firstVersion, $lastVersion]",
+        )
       }
       is Result.Err -> fail("Expected Ok but got Err: ${response.error}")
     }

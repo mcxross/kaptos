@@ -33,25 +33,23 @@ class MoveOptionSerializer<T : EntryFunctionArgument>(
   override val descriptor: SerialDescriptor = listSerialDescriptor(elementSerializer.descriptor)
 
   override fun serialize(encoder: Encoder, value: MoveOption<T>) {
-     value.value?.let {
-         encoder.encodeCollection(descriptor, 1) { elementSerializer.serialize(encoder, it) }
-     } ?: run {
-         encoder.encodeByte(0)
-     }
+    value.value?.let {
+      encoder.encodeCollection(descriptor, 1) { elementSerializer.serialize(encoder, it) }
+    } ?: run { encoder.encodeByte(0) }
   }
 
   override fun deserialize(decoder: Decoder): MoveOption<T> {
-      return MoveOption(
-          decoder.decodeStructure(descriptor) {
-              val isSome = decodeCollectionSize(descriptor)
-              require(isSome < 2) { "Expected length of 0 or 1 for MoveOption, found $isSome" }
+    return MoveOption(
+      decoder.decodeStructure(descriptor) {
+        val isSome = decodeCollectionSize(descriptor)
+        require(isSome < 2) { "Expected length of 0 or 1 for MoveOption, found $isSome" }
 
-              if (isSome == 1) {
-                  decodeSerializableElement(descriptor, 0, elementSerializer)
-              } else {
-                  null
-              }
-          }
-      )
+        if (isSome == 1) {
+          decodeSerializableElement(descriptor, 0, elementSerializer)
+        } else {
+          null
+        }
+      }
+    )
   }
 }

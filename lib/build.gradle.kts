@@ -28,8 +28,6 @@ kotlin {
 
   androidTarget { publishLibraryVariants("release", "debug") }
 
-  js { browser { commonWebpackConfig { cssSupport { enabled.set(true) } } } }
-
   val xcframeworkName = "AptosKit"
   val xcf = XCFramework(xcframeworkName)
 
@@ -44,12 +42,6 @@ kotlin {
 
   macosArm64()
   macosX64()
-
-  tvosX64()
-  tvosArm64()
-
-  watchosArm32()
-  watchosArm64()
 
   applyDefaultHierarchyTemplate()
 
@@ -96,9 +88,6 @@ kotlin {
         implementation(libs.kotlin.test.junit5)
       }
     }
-    jsMain.dependencies { implementation(libs.ktor.client.js) }
-    linuxMain.dependencies { implementation(libs.ktor.client.curl) }
-    mingwMain.dependencies { implementation(libs.ktor.client.winhttp) }
     iosArm64Main.dependencies { implementation(libs.fastkrypto.iosarm64) }
     iosX64Main.dependencies { implementation(libs.fastkrypto.iosx64) }
     iosSimulatorArm64Main.dependencies { implementation(libs.fastkrypto.iossimulatorarm64) }
@@ -123,6 +112,13 @@ android {
       manifest.srcFile("src/androidMain/AndroidManifest.xml")
       res.srcDirs("src/androidMain/res", "src/commonMain/resources")
     }
+  }
+}
+
+// fastkrypto's android native artifacts are for device/emulator, not host JVM unit tests.
+tasks.withType<Test>().configureEach {
+  if (name.endsWith("UnitTest")) {
+    enabled = false
   }
 }
 
