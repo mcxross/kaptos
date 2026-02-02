@@ -45,9 +45,7 @@ class Secp256k1PublicKey(val hexInput: HexInput) : PublicKey() {
 
   override fun toByteArray(): ByteArray = hex.toByteArray()
 
-  override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toBcs(): ByteArray = encodeBcsBytes(toByteArray())
 
   companion object {
     const val LENGTH = 65
@@ -108,9 +106,7 @@ class Secp256k1Signature(hexInput: HexInput) : Signature() {
 
   override fun toByteArray(): ByteArray = hex.toByteArray()
 
-  override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
-  }
+  override fun toBcs(): ByteArray = encodeBcsBytes(toByteArray())
 
   companion object {
     /** Secp256k1 ecdsa signatures are 256-bit. */

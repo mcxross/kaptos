@@ -292,6 +292,24 @@ interface Account {
   ): Result<GetAccountCoinsDataQuery.Data?, AptosIndexerError>
 
   /**
+   * Queries an account's coin balance directly from on-chain smart contracts using a view call.
+   *
+   * This mirrors the TS SDK's smart-contract path:
+   * - `0x1::coin::balance<T>` when `coinType` is provided (or inferred for APT FA metadata)
+   * - `0x1::primary_fungible_store::balance` when only `faMetadataAddress` is provided
+   *
+   * @param accountAddress The account address to query.
+   * @param coinType Optional coin type (e.g. `0x1::aptos_coin::AptosCoin`).
+   * @param faMetadataAddress Optional fungible asset metadata address.
+   * @return The balance amount, or an [AptosSdkError] when the view call fails/inputs are invalid.
+   */
+  suspend fun getAccountCoinAmountFromSmartContract(
+    accountAddress: AccountAddressInput,
+    coinType: MoveValue.MoveStructId? = null,
+    faMetadataAddress: AccountAddressInput? = null,
+  ): Result<Long, AptosSdkError>
+
+  /**
    * Queries for all collections that an account currently has tokens for.
    *
    * This includes NFTs, fungible tokens, and soulbound tokens. This function first ensures the

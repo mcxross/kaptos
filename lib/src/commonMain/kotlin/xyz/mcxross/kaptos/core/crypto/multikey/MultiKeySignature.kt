@@ -18,6 +18,8 @@ package xyz.mcxross.kaptos.core.crypto.multikey
 import kotlin.IllegalArgumentException
 import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.Signature
+import xyz.mcxross.kaptos.core.crypto.encodeBcsBytes
+import xyz.mcxross.kaptos.core.crypto.encodeUleb128
 
 /**
  * Represents a multi-signature transaction using Ed25519 signatures. This class allows for the
@@ -61,11 +63,10 @@ class MultiKeySignature(val signatures: List<AnySignature>, val bitmap: ByteArra
    * @return The serialized byte array.
    */
   override fun toBcs(): ByteArray {
-    // KMP-safe way to concatenate byte arrays without JVM streams.
-    // We fold the signature list into a single ByteArray, then append the bitmap.
+    // BCS encoding for vector<AnySignature> followed by BCS bytes(bitmap).
     val allSignaturesBytes =
-      signatures.fold(ByteArray(0)) { acc, signature -> acc + signature.toByteArray() }
-    return allSignaturesBytes + bitmap
+      signatures.fold(ByteArray(0)) { acc, signature -> acc + signature.toBcs() }
+    return encodeUleb128(signatures.size) + allSignaturesBytes + encodeBcsBytes(bitmap)
   }
 
   /** Returns the raw byte representation of the signature. This is an alias for `toBcs()`. */

@@ -15,19 +15,27 @@
  */
 package xyz.mcxross.kaptos.core.crypto.multikey
 
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.AuthenticationKey
+import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
+import xyz.mcxross.kaptos.core.crypto.encodeUleb128
 import xyz.mcxross.kaptos.model.AuthenticationKeyScheme
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
 
-class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : AbstractMultiKey(pks) {
+class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) :
+  AbstractMultiKey(pks.map { if (it is AnyPublicKey) it else AnyPublicKey(it) }) {
+
+  @Suppress("UNCHECKED_CAST")
+  override val publicKeys: List<AnyPublicKey> = super.publicKeys as List<AnyPublicKey>
 
   init {
     if (signaturesRequired < 1) {
       throw IllegalArgumentException("The number of required signatures needs to be greater than 0")
+    }
+    if (signaturesRequired > UByte.MAX_VALUE.toInt()) {
+      throw IllegalArgumentException("The number of required signatures must fit in a single byte")
     }
 
     if (publicKeys.size < signaturesRequired) {
@@ -37,22 +45,23 @@ class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : Abstract
     }
   }
 
-  override fun getSigsRequired(): Int {
-    TODO("Not yet implemented")
-  }
+  override fun getSigsRequired(): Int = signaturesRequired
 
   override fun authKey(): AuthenticationKey {
     return AuthenticationKey.fromSchemeAndBytes(
       AuthenticationKeyScheme.Signing(SigningScheme.MultiKey),
-      HexInput.fromByteArray(
-        Bcs.encodeToByteArray(publicKeys.map { it.toByteArray() }) +
-          Bcs.encodeToByteArray(signaturesRequired.toUByte())
-      ),
+      HexInput.fromByteArray(toBcs()),
     )
   }
 
   override fun verifySignature(message: HexInput, signature: Signature): Boolean {
-    val signerIndices = (signature as MultiKeySignature).bitMapToSignerIndices()
+    if (signature !is MultiKeySignature) return false
+
+    if (signature.signatures.size != signaturesRequired) {
+      return false
+    }
+
+    val signerIndices = signature.bitMapToSignerIndices()
 
     val signatureIndexPairs = signature.signatures.zip(signerIndices)
 
@@ -70,16 +79,18 @@ class MultiKey(val pks: List<PublicKey>, val signaturesRequired: Int) : Abstract
     return true
   }
 
-  override fun toByteArray(): ByteArray {
-    return Bcs.encodeToByteArray(publicKeys.map { it.toByteArray() }) +
-      Bcs.encodeToByteArray(signaturesRequired.toUByte())
-  }
+  override fun toByteArray(): ByteArray = toBcs()
 
   override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
+    val encodedPublicKeys =
+      publicKeys.fold(ByteArray(0)) { acc, publicKey -> acc + publicKey.toBcs() }
+
+    return encodeUleb128(publicKeys.size) +
+      encodedPublicKeys +
+      byteArrayOf(signaturesRequired.toByte())
   }
 
-  /*fun index(pubKey: PublicKey): Int {
-    return super.index(pubKey)
-  }*/
+  companion object {
+    fun isInstance(publicKey: PublicKey): Boolean = publicKey is MultiKey
+  }
 }

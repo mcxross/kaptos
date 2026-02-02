@@ -27,7 +27,3 @@ fun main() = runBlocking {
 
   println(acc.verifySignature(HexInput.fromByteArray("simple message".toByteArray()), sig))
 }
-
-// 0xa7e183adbf853de5681e17f2bd96276dcbbd243c9897019df9c9091913a588c2
-// 0x8931ea8bda16d9bb1d99211099a19f359e49162fd182d438a8a223a3efee6bd8
-// 0xc2d640b0ecbe2c5355d672e9199fb523ef43a49d045f111682494feceae9f594

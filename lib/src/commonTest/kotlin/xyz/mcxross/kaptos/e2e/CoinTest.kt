@@ -18,13 +18,32 @@ package xyz.mcxross.kaptos.e2e
 
 import kotlin.test.Test
 import kotlin.test.expect
+import kotlin.test.fail
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.extension.longOrNull
+import xyz.mcxross.kaptos.generated.GetAccountCoinsDataQuery
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
+import xyz.mcxross.kaptos.util.APTOS_COIN
 import xyz.mcxross.kaptos.util.runBlocking
 
 class CoinTest {
+  private fun ledgerVersionOf(txn: TransactionResponse): Long? =
+    when (txn) {
+      is UserTransactionResponse -> txn.version.toLongOrNull()
+      is BlockMetadataTransactionResponse -> txn.version.toLongOrNull()
+      is StateCheckpointTransactionResponse -> txn.version.toLongOrNull()
+      is BlockEpilogueTransactionResponse -> txn.version.toLongOrNull()
+      is PendingTransactionResponse -> null
+    }
+
+  private fun aptAmount(data: GetAccountCoinsDataQuery.Data?): ULong {
+    val amount =
+      data?.current_fungible_asset_balances?.firstOrNull { it?.asset_type == APTOS_COIN }?.amount
+        ?: return 0UL
+    return amount.longOrNull()?.toULong() ?: 0UL
+  }
 
   @Test
   fun `it generates a transfer coin transaction with AptosCoin coin type`() = runBlocking {
@@ -54,10 +73,7 @@ class CoinTest {
       throw Error("Transaction payload type arg is not a struct")
     }
 
-    expect(true) {
-      (typeArg as TypeTagStruct).type.address.toString() ==
-        "0x0000000000000000000000000000000000000000000000000000000000000001"
-    }
+    expect(true) { (typeArg as TypeTagStruct).type.address.toString() == "0x1" }
     expect(true) { (typeArg as TypeTagStruct).type.moduleName == "aptos_coin" }
     expect(true) { (typeArg as TypeTagStruct).type.name == "AptosCoin" }
   }
@@ -91,10 +107,7 @@ class CoinTest {
       throw Error("Transaction payload type arg is not a struct")
     }
 
-    expect(true) {
-      (typeArg as TypeTagStruct).type.address.toString() ==
-        "0x0000000000000000000000000000000000000000000000000000000000000001"
-    }
+    expect(true) { (typeArg as TypeTagStruct).type.address.toString() == "0x1" }
     expect(true) { (typeArg as TypeTagStruct).type.moduleName == "my_coin" }
     expect(true) { (typeArg as TypeTagStruct).type.name == "type" }
   }
@@ -106,10 +119,14 @@ class CoinTest {
     val alice = Account.generate()
     val bob = Account.generate()
 
-    aptos.fundAccount(alice.accountAddress, 100_000_000).expect("Failed to fund Alice's account")
+    val fundingResponse =
+      aptos.fundAccount(alice.accountAddress, 100_000_000).expect("Failed to fund Alice's account")
+    val fundingVersion = ledgerVersionOf(fundingResponse)
 
     val aliceBalanceBefore =
-      aptos.getAccountCoinsData(alice.accountAddress).expect("Failed to get Alice's balance")
+      aptos
+        .getAccountCoinsData(alice.accountAddress, minimumLedgerVersion = fundingVersion)
+        .expect("Failed to get Alice's balance")
 
     val txn =
       aptos.transferCoinTransaction(
@@ -118,21 +135,35 @@ class CoinTest {
         amount = 10U,
       )
 
-    val commitedTransaction = aptos.signAndSubmitTransaction(alice, txn)
+    val committedTransaction = aptos.signAndSubmitTransaction(alice, txn)
 
     val executedTransaction =
       aptos.waitForTransaction(
-        HexInput.fromString(commitedTransaction.expect("Transaction failed").hash)
+        HexInput.fromString(committedTransaction.expect("Transaction failed").hash)
       )
 
-    val aliceBalanceAfter =
-      aptos.getAccountCoinsData(alice.accountAddress).expect("Failed to get Alice's balance")
-    val bobBalance =
-      aptos.getAccountCoinsData(bob.accountAddress).expect("Failed to get Bob's balance")
+    val executedVersion =
+      when (executedTransaction) {
+        is Result.Ok -> {
+          val response = executedTransaction.value
+          if (response is UserTransactionResponse) {
+            expect(true) { response.success }
+          }
+          ledgerVersionOf(response)
+        }
+        is Result.Err -> fail("waitForTransaction failed: ${executedTransaction.error.message}")
+      }
 
-    expect(true) {
-      aliceBalanceAfter?.current_fungible_asset_balances[0]?.amount?.toString()?.toUInt()!! <
-        aliceBalanceBefore?.current_fungible_asset_balances[0]?.amount?.toString()?.toUInt()!!
-    }
+    val aliceBalanceAfter =
+      aptos
+        .getAccountCoinsData(alice.accountAddress, minimumLedgerVersion = executedVersion)
+        .expect("Failed to get Alice's balance")
+    val bobBalance =
+      aptos
+        .getAccountCoinsData(bob.accountAddress, minimumLedgerVersion = executedVersion)
+        .expect("Failed to get Bob's balance")
+
+    expect(true) { aptAmount(aliceBalanceAfter) < aptAmount(aliceBalanceBefore) }
+    expect(true) { aptAmount(bobBalance) >= 10UL }
   }
 }

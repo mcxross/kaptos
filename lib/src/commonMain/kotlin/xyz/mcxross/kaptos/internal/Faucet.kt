@@ -16,6 +16,8 @@
 
 package xyz.mcxross.kaptos.internal
 
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 import xyz.mcxross.kaptos.client.postAptosFaucet
 import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosIndexerError
@@ -39,12 +41,13 @@ internal suspend fun fundAccount(
     )
 
   val txnHashes =
-    if (faucetResult.isOk) {
-      faucetResult.value
-    } else {
-      val error = faucetResult.error
-      return Result.Err(error)
-    }
+    faucetResult.get()
+      ?: return Result.Err(
+        faucetResult.getError()
+          ?: AptosSdkError.UnknownError(
+            IllegalStateException("Faucet request failed without an error")
+          )
+      )
 
   val hashToWaitFor =
     txnHashes.txnHashes.firstOrNull()

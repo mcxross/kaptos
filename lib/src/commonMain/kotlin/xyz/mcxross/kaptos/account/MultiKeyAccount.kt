@@ -15,77 +15,97 @@
  */
 package xyz.mcxross.kaptos.account
 
-import io.ktor.util.reflect.instanceOf
+import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
 import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKeySignature
-import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.AnyRawTransaction
-import xyz.mcxross.kaptos.model.HexInput
-import xyz.mcxross.kaptos.model.SigningScheme
+import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorMultiKey
 
 class MultiKeyAccount(
   val multiKey: MultiKey,
-  signers: List<Account> = emptyList(),
+  val signers: List<Account>,
   address: AccountAddressInput? = null,
 ) : Account() {
-  override val publicKey: PublicKey
-    get() = multiKey
 
-  override val accountAddress: AccountAddress
-    get() = multiKey.authKey().deriveAddress()
+  override val publicKey: MultiKey = multiKey
 
-  override val signingScheme: SigningScheme
-    get() = SigningScheme.MultiKey
+  override val accountAddress: AccountAddress =
+    address?.let { AccountAddress.from(it) } ?: publicKey.authKey().deriveAddress()
 
-  var signers: List<Account>
+  override val signingScheme: SigningScheme = SigningScheme.MultiKey
 
-  var signerIndicies: List<Int>
-
-  var signaturesBitmap: ByteArray = byteArrayOf()
+  private val sortedSigners: List<Account>
+  private val signaturesBitmap: ByteArray
 
   init {
-    val bitPositions: MutableList<Int> = mutableListOf()
+    if (multiKey.signaturesRequired > signers.size) {
+      throw IllegalArgumentException(
+        "Not enough signers provided to satisfy the required signatures. Need ${multiKey.signaturesRequired} signers, but only ${signers.size} provided"
+      )
+    } else if (multiKey.signaturesRequired < signers.size) {
+      throw IllegalArgumentException(
+        "More signers provided than required. Need ${multiKey.signaturesRequired} signers, but ${signers.size} provided"
+      )
+    }
 
-    signers.forEach { bitPositions.plus((this.publicKey as MultiKey).index(it.publicKey)) }
+    // For each signer, find its corresponding position in the MultiKey's public keys array
+    val bitPositions =
+      signers.map { signer ->
+        val anyPubKey =
+          if (signer.publicKey is AnyPublicKey) signer.publicKey as AnyPublicKey
+          else AnyPublicKey(signer.publicKey)
+        multiKey.index(anyPubKey)
+      }
 
-    val signerAndBitKeys: List<Pair<Account, Int>> =
-      signers.mapIndexed { index, acc -> acc to index }.sortedBy { it.second }
+    // Create pairs of [signer, position] and sort them by position
+    val signersAndBitPosition = signers.zip(bitPositions).sortedBy { it.second }
 
-    this.signers = signerAndBitKeys.map { it.first }
-    this.signerIndicies = signerAndBitKeys.map { it.second }
+    // Extract the sorted signers
+    this.sortedSigners = signersAndBitPosition.map { it.first }
 
-    this.signaturesBitmap = (this.publicKey as MultiKey).createBitmap(bitPositions)
+    // Create a bitmap representing which public keys from the MultiKey are being used
+    this.signaturesBitmap = multiKey.createBitmap(bitPositions)
   }
-
-  override fun signTransaction(tx: AnyRawTransaction): MultiKeySignature {
-    val sigs: List<AnySignature> = emptyList()
-    signers.forEach { sigs.plus(it.signTransaction(tx)) }
-    return MultiKeySignature(sigs, signaturesBitmap)
-  }
-
-  override fun verifySignature(message: HexInput, signature: Signature): Boolean =
-    publicKey.verifySignature(message, signature)
 
   override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
-    return AccountAuthenticatorMultiKey(pubKeys = emptyList(), sigs = emptyList())
+    return AccountAuthenticatorMultiKey(multiKey = multiKey, signature = sign(message))
   }
 
   override fun sign(message: HexInput): MultiKeySignature {
-    val sigs: List<AnySignature> = emptyList()
-    signers.forEach { sigs.plus(it.sign(message)) }
+    val signatures =
+      sortedSigners.map { signer ->
+        val sig = signer.sign(message)
+        if (sig is AnySignature) sig else AnySignature(sig)
+      }
+    return MultiKeySignature(signatures, signaturesBitmap)
+  }
 
-    return MultiKeySignature(sigs, this.signaturesBitmap)
+  override fun signTransaction(tx: AnyRawTransaction): MultiKeySignature {
+    val signatures =
+      sortedSigners.map { signer ->
+        val sig = signer.signTransaction(tx)
+        if (sig is AnySignature) sig else AnySignature(sig)
+      }
+    return MultiKeySignature(signatures, signaturesBitmap)
+  }
+
+  override fun verifySignature(message: HexInput, signature: Signature): Boolean {
+    return multiKey.verifySignature(message, signature)
   }
 
   companion object {
-    fun isMultiKeySigner(account: xyz.mcxross.kaptos.protocol.Account): Boolean {
-      return account.instanceOf(MultiKeyAccount::class)
+    fun fromPublicKeysAndSigners(
+      publicKeys: List<PublicKey>,
+      signaturesRequired: Int,
+      signers: List<Account>,
+      address: AccountAddressInput? = null,
+    ): MultiKeyAccount {
+      val multiKey = MultiKey(publicKeys, signaturesRequired)
+      return MultiKeyAccount(multiKey, signers, address)
     }
   }
 }

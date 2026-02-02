@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.dokka) apply false
   alias(libs.plugins.jetbrains.compose) apply false
   alias(libs.plugins.jvm) apply false
+  alias(libs.plugins.kotest) apply false
   alias(libs.plugins.kotlin.multiplatform) apply false
   alias(libs.plugins.kotlin.serialization) apply false
 }
