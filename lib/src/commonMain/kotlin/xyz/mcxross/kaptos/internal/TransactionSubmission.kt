@@ -15,13 +15,13 @@
  */
 package xyz.mcxross.kaptos.internal
 
+import com.github.michaelbull.result.get
+import com.github.michaelbull.result.getError
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.postAptosFullNode
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.builder.*
-import com.github.michaelbull.result.get
-import com.github.michaelbull.result.getError
 
 internal suspend fun generateTransaction(
   aptosConfig: AptosConfig,
@@ -167,10 +167,11 @@ internal suspend fun simulateTransaction(
       )
     )
 
-  return if (resolution.isOk) {
-    Result.Ok(resolution.value.second)
+  val simulated = resolution.get()
+  return if (simulated != null) {
+    Result.Ok(simulated.second)
   } else {
-    Result.Err(resolution.error)
+    Result.Err(resolution.getError() ?: Exception("Unknown error"))
   }
 }
 

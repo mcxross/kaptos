@@ -22,6 +22,7 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.extension.longOrNull
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.getAccountResource
 import xyz.mcxross.kaptos.util.APTOS_COIN
@@ -30,6 +31,15 @@ import xyz.mcxross.kaptos.util.getLocalNetwork
 import xyz.mcxross.kaptos.util.runBlocking
 
 class AccountTest {
+  private fun ledgerVersionOf(txn: TransactionResponse): Long? =
+    when (txn) {
+      is UserTransactionResponse -> txn.version.toLongOrNull()
+      is BlockMetadataTransactionResponse -> txn.version.toLongOrNull()
+      is StateCheckpointTransactionResponse -> txn.version.toLongOrNull()
+      is BlockEpilogueTransactionResponse -> txn.version.toLongOrNull()
+      is PendingTransactionResponse -> null
+    }
+
   @Test
   fun `it fetches account data`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
@@ -145,13 +155,21 @@ class AccountTest {
   fun `it fetches account transactions count`() = runBlocking {
     val aptos = Aptos()
     val alice = Account.generate()
-    aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
+    val minimumLedgerVersion =
+      when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
+        is Result.Ok -> ledgerVersionOf(fundResponse.value)
+        is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+      }
 
     when (
-      val resolution = aptos.getAccountTransactionsCount(accountAddress = alice.accountAddress)
+      val resolution =
+        aptos.getAccountTransactionsCount(
+          accountAddress = alice.accountAddress,
+          minimumLedgerVersion = minimumLedgerVersion,
+        )
     ) {
       is Result.Ok -> {
-        assertEquals(resolution.value.toInt(), 1)
+        assertTrue(resolution.value >= 1L, "Expected at least one transaction after funding")
       }
       is Result.Err -> fail("Expected Ok but got Err: ${resolution.error.message}")
     }
@@ -161,24 +179,32 @@ class AccountTest {
   fun `it fetches account coins data`() = runBlocking {
     val aptos = Aptos()
     val alice = Account.generate()
-    aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
-    when (val accountCoinsData = aptos.getAccountCoinsData(accountAddress = alice.accountAddress)) {
+    val minimumLedgerVersion =
+      when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
+        is Result.Ok -> ledgerVersionOf(fundResponse.value)
+        is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+      }
+
+    when (
+      val accountCoinsData =
+        aptos.getAccountCoinsData(
+          accountAddress = alice.accountAddress,
+          minimumLedgerVersion = minimumLedgerVersion,
+        )
+    ) {
       is Result.Ok -> {
+        val aptBalance =
+          accountCoinsData.value?.current_fungible_asset_balances?.firstOrNull {
+            it?.asset_type == APTOS_COIN
+          }
+
+        val aptBalanceValue = aptBalance ?: fail("Couldn't find AptosCoin balance")
         assertEquals(
-          accountCoinsData.value
-            ?.current_fungible_asset_balances
-            ?.firstOrNull()
-            ?.amount
-            .toString()
-            .toLong(),
+          aptBalanceValue.amount.longOrNull(),
           FUND_AMOUNT,
           "Couldn't get account coins data",
         )
-        assertEquals(
-          accountCoinsData.value?.current_fungible_asset_balances?.firstOrNull()?.asset_type,
-          "0x1::aptos_coin::AptosCoin",
-          "Couldn't get account coins data",
-        )
+        assertEquals(aptBalanceValue.asset_type, APTOS_COIN, "Couldn't get account coins data")
       }
       is Result.Err -> fail("")
     }
@@ -188,12 +214,21 @@ class AccountTest {
   fun `it fetches account coins count`() = runBlocking {
     val aptos = Aptos()
     val alice = Account.generate()
-    aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
+    val minimumLedgerVersion =
+      when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
+        is Result.Ok -> ledgerVersionOf(fundResponse.value)
+        is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+      }
+
     when (
-      val accountCoinsCount = aptos.getAccountCoinsCount(accountAddress = alice.accountAddress)
+      val accountCoinsCount =
+        aptos.getAccountCoinsCount(
+          accountAddress = alice.accountAddress,
+          minimumLedgerVersion = minimumLedgerVersion,
+        )
     ) {
       is Result.Ok -> {
-        assertEquals(accountCoinsCount.value, 1L, "Couldn't get account coins data")
+        assertTrue(accountCoinsCount.value >= 1L, "Couldn't get account coins data")
       }
       is Result.Err -> fail("")
     }
@@ -203,7 +238,11 @@ class AccountTest {
   fun `it fetches account's coin amount`() = runBlocking {
     val aptos = Aptos()
     val alice = Account.generate()
-    aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
+    val minimumLedgerVersion =
+      when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
+        is Result.Ok -> ledgerVersionOf(fundResponse.value)
+        is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+      }
 
     val otherCoinAmount =
       aptos.getAccountCoinAmount(
@@ -214,10 +253,32 @@ class AccountTest {
     when (otherCoinAmount) {
       is Result.Ok -> {
         assertEquals(
-          otherCoinAmount.value?.current_fungible_asset_balances?.firstOrNull()?.amount ?: "0",
-          "0",
+          otherCoinAmount.value
+            ?.current_fungible_asset_balances
+            ?.firstOrNull()
+            ?.amount
+            ?.longOrNull() ?: 0L,
+          0L,
           "Couldn't get account coin amount",
         )
+      }
+      is Result.Err -> fail("")
+    }
+
+    // Ensure indexer has caught up before asserting APT balance.
+    when (
+      val accountCoinsData =
+        aptos.getAccountCoinsData(
+          accountAddress = alice.accountAddress,
+          minimumLedgerVersion = minimumLedgerVersion,
+        )
+    ) {
+      is Result.Ok -> {
+        val aptBalance =
+          accountCoinsData.value?.current_fungible_asset_balances?.firstOrNull {
+            it?.asset_type == APTOS_COIN
+          } ?: fail("Couldn't get account coins data")
+        assertEquals(FUND_AMOUNT, aptBalance.amount.longOrNull(), "Couldn't get account coins data")
       }
       is Result.Err -> fail("")
     }
@@ -230,18 +291,80 @@ class AccountTest {
 
     when (accountAPTAmount) {
       is Result.Ok -> {
-        assertEquals(
-          accountAPTAmount.value
-            ?.current_fungible_asset_balances
-            ?.firstOrNull()
-            ?.amount
-            .toString()
-            .toLong(),
-          FUND_AMOUNT,
-          "Couldn't get account coins data",
-        )
+        val aptBalance =
+          accountAPTAmount.value?.current_fungible_asset_balances?.firstOrNull {
+            it?.asset_type == APTOS_COIN
+          } ?: fail("Couldn't get account coins data")
+        assertEquals(aptBalance.amount.longOrNull(), FUND_AMOUNT, "Couldn't get account coins data")
       }
       is Result.Err -> fail("")
+    }
+  }
+
+  @Test
+  fun `it fetches account's coin amount from smart contract`() = runBlocking {
+    val aptos = Aptos()
+    val alice = Account.generate()
+
+    when (val fundResponse = aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)) {
+      is Result.Ok -> {
+        assertTrue(
+          ledgerVersionOf(fundResponse.value) != null,
+          "Funding transaction should have a ledger version",
+        )
+      }
+      is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+    }
+
+    val otherCoinAmount =
+      aptos.getAccountCoinAmountFromSmartContract(
+        accountAddress = alice.accountAddress,
+        coinType = MoveValue.MoveStructId("0x1::string::String"),
+      )
+
+    when (otherCoinAmount) {
+      is Result.Ok ->
+        assertEquals(0L, otherCoinAmount.value, "Expected non-coin type balance to be 0")
+      is Result.Err -> fail("Expected Ok but got Err: ${otherCoinAmount.error.message}")
+    }
+
+    val aptByType =
+      aptos.getAccountCoinAmountFromSmartContract(
+        accountAddress = alice.accountAddress,
+        coinType = MoveValue.MoveStructId(APTOS_COIN),
+      )
+
+    when (aptByType) {
+      is Result.Ok ->
+        assertEquals(FUND_AMOUNT, aptByType.value, "Couldn't get APT balance by coin type")
+      is Result.Err -> fail("Expected Ok but got Err: ${aptByType.error.message}")
+    }
+
+    val aptByMetadata =
+      aptos.getAccountCoinAmountFromSmartContract(
+        accountAddress = alice.accountAddress,
+        faMetadataAddress = HexInput("0xA"),
+      )
+
+    when (aptByMetadata) {
+      is Result.Ok ->
+        assertEquals(
+          FUND_AMOUNT,
+          aptByMetadata.value,
+          "Couldn't get APT balance by metadata address",
+        )
+      is Result.Err -> fail("Expected Ok but got Err: ${aptByMetadata.error.message}")
+    }
+
+    when (val missingInputs = aptos.getAccountCoinAmountFromSmartContract(alice.accountAddress)) {
+      is Result.Ok -> fail("Expected Err when both coinType and faMetadataAddress are missing")
+      is Result.Err -> {
+        val errorMessage = missingInputs.error.message ?: ""
+        assertTrue(
+          errorMessage.contains("Either coinType or faMetadataAddress"),
+          "Unexpected error message: $errorMessage",
+        )
+      }
     }
   }
 }

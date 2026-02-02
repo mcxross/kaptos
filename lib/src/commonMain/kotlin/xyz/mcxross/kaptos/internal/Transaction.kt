@@ -138,12 +138,13 @@ internal suspend fun waitForTransaction(
 
   // check to see if the txn is already on the blockchain
   try {
-    val txnResponse = getTransactionByHash(config, txnHash).toInternalResult()
-
-    if (txnResponse.isOk) {
-      lastTxn = txnResponse.value
-    } else {
-      return Result.Err(AptosIndexerError.GraphQL(listOf()))
+    when (val txnResponse = getTransactionByHash(config, txnHash)) {
+      is Result.Ok -> {
+        lastTxn = txnResponse.value
+      }
+      is Result.Err -> {
+        return Result.Err(AptosIndexerError.GraphQL(listOf()))
+      }
     }
     isPending = lastTxn.type == TransactionResponseType.PENDING
   } catch (e: Exception) {
@@ -156,13 +157,13 @@ internal suspend fun waitForTransaction(
     }
 
     try {
-
-      val txnResponse = getTransactionByHash(config, txnHash).toInternalResult()
-
-      if (txnResponse.isOk) {
-        lastTxn = txnResponse.value
-      } else {
-        Result.Err(AptosIndexerError.GraphQL(listOf()))
+      when (val txnResponse = getTransactionByHash(config, txnHash)) {
+        is Result.Ok -> {
+          lastTxn = txnResponse.value
+        }
+        is Result.Err -> {
+          return Result.Err(AptosIndexerError.GraphQL(listOf()))
+        }
       }
 
       isPending = lastTxn?.type == TransactionResponseType.PENDING

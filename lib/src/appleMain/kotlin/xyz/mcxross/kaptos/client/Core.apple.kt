@@ -85,17 +85,11 @@ actual class ClientConfig(
   /** Specifies a timeout for a whole HTTP call, from sending a request to receiving a response. */
   var requestTimeout: Long = 10000L,
 
-  /**
-   * Specifies how many times the client should retry on server errors. Default is `-1`, which means
-   * no retries.
-   */
-  var retryOnServerErrors: Int = -1,
+  /** Specifies how many times the client should retry on server errors. Default is `0`. */
+  var retryOnServerErrors: Int = 0,
 
-  /**
-   * Specifies how many times the client should retry on connection errors. Default is `-1`, which
-   * means no retries.
-   */
-  var maxRetries: Int = -1,
+  /** Specifies how many times the client should retry on connection errors. Default is `0`. */
+  var maxRetries: Int = 0,
 
   /** Enables or disables caching. Default is `false`. */
   var cache: Boolean = false,

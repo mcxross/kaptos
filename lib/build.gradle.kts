@@ -54,9 +54,7 @@ kotlin {
   applyDefaultHierarchyTemplate()
 
   sourceSets {
-    val androidJvmMain by creating {
-      dependsOn(commonMain.get())
-    }
+    val androidJvmMain by creating { dependsOn(commonMain.get()) }
     val androidMain by getting {
       dependsOn(androidJvmMain)
       dependencies {
@@ -79,6 +77,8 @@ kotlin {
     }
     commonTest.dependencies {
       implementation(kotlin("test"))
+      implementation(libs.kotest.assertions.core)
+      implementation(libs.kotest.framework.engine)
       implementation(libs.kotlinx.coroutines.core)
       implementation(libs.kotlinx.serialization.core)
       implementation(libs.ktor.client.mock)
@@ -88,6 +88,12 @@ kotlin {
       dependencies {
         implementation(libs.ktor.client.cio)
         implementation(libs.fastkrypto.jvm)
+      }
+    }
+    val jvmTest by getting {
+      dependencies {
+        implementation(libs.kotest.runner.junit5)
+        implementation(libs.kotlin.test.junit5)
       }
     }
     jsMain.dependencies { implementation(libs.ktor.client.js) }

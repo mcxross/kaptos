@@ -62,7 +62,7 @@ abstract class AbstractMultiKey(open val publicKeys: List<PublicKey>) : AccountP
 
       var byteValue = bitmap[byteOffset].toInt() and 0xFF
 
-      byteValue = byteValue or (firstBitInByte shr (bit % 8))
+      byteValue = byteValue or (firstBitInByte ushr (bit % 8))
 
       bitmap[byteOffset] = byteValue.toByte()
     }
@@ -89,7 +89,6 @@ abstract class AbstractMultiKey(open val publicKeys: List<PublicKey>) : AccountP
    * @throws IllegalArgumentException If the public key is not found in the MultiKey.
    */
   fun index(publicKey: PublicKey): Int {
-    println(publicKey.toString())
     val index = publicKeys.indexOfFirst { it.toString() == publicKey.toString() }
 
     if (index != -1) {

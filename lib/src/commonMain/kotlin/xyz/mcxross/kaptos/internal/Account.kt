@@ -28,6 +28,7 @@ import kotlinx.coroutines.withTimeout
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.client.paginateWithCursor
+import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.extension.longOrNull
@@ -52,6 +53,8 @@ import xyz.mcxross.kaptos.model.types.currentTokenDatasV2Filter
 import xyz.mcxross.kaptos.model.types.currentTokenOwnershipsV2Filter
 import xyz.mcxross.kaptos.model.types.numericFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
+import xyz.mcxross.kaptos.util.APTOS_COIN
+import xyz.mcxross.kaptos.util.APTOS_FA
 import xyz.mcxross.kaptos.util.toOptional
 
 internal suspend fun getInfo(
@@ -185,10 +188,9 @@ internal suspend fun lookupOriginalAccountAddress(
       ),
     )
 
-  return if (originalAddress.toInternalResult().isOk) {
-    Result.Ok(AccountAddress.fromString(originalAddress.toInternalResult().value))
-  } else {
-    Result.Ok(authenticationKey)
+  return when (originalAddress) {
+    is Result.Ok -> Result.Ok(AccountAddress.fromString(originalAddress.value))
+    is Result.Err -> Result.Ok(authenticationKey)
   }
 }
 
@@ -284,6 +286,77 @@ internal suspend fun getAccountCoinAmount(
         )
     }
     .toResult()
+}
+
+internal suspend fun getAccountCoinAmountFromSmartContract(
+  config: AptosConfig,
+  accountAddress: AccountAddressInput,
+  coinType: MoveValue.MoveStructId?,
+  faMetadataAddress: AccountAddressInput?,
+): Result<Long, AptosSdkError> {
+  val senderAddress = AccountAddress.from(accountAddress)
+  val normalizedFaAddress = faMetadataAddress?.let { AccountAddress.from(it).toStringLong() }
+
+  val effectiveCoinType =
+    coinType
+      ?: if (normalizedFaAddress == APTOS_FA) {
+        MoveValue.MoveStructId(APTOS_COIN)
+      } else {
+        null
+      }
+
+  val balanceResult =
+    if (effectiveCoinType != null) {
+      val typeTag =
+        try {
+          TypeTagStruct(type = StructTag.fromString(effectiveCoinType.value))
+        } catch (e: IllegalArgumentException) {
+          return Result.Err(
+            AptosSdkError.ApiError(
+              AptosApiError(
+                message = "Invalid coinType: ${effectiveCoinType.value}",
+                errorCode = "INVALID_INPUT",
+              )
+            )
+          )
+        }
+
+      view<List<MoveValue.String>>(
+        config,
+        InputViewFunctionData(
+          function = "0x1::coin::balance",
+          typeArguments = listOf(typeTag),
+          functionArguments = listOf(senderAddress),
+        ),
+      )
+    } else if (faMetadataAddress != null) {
+      view<List<MoveValue.String>>(
+        config,
+        InputViewFunctionData(
+          function = "0x1::primary_fungible_store::balance",
+          typeArguments =
+            listOf(TypeTagStruct(type = StructTag.fromString("0x1::object::ObjectCore"))),
+          functionArguments = listOf(senderAddress, AccountAddress.from(faMetadataAddress)),
+        ),
+      )
+    } else {
+      return Result.Err(
+        AptosSdkError.ApiError(
+          AptosApiError(
+            message = "Either coinType or faMetadataAddress must be provided",
+            errorCode = "INVALID_INPUT",
+          )
+        )
+      )
+    }
+
+  return when (balanceResult) {
+    is Result.Ok -> {
+      val amount = balanceResult.value.firstOrNull()?.value?.toLongOrNull() ?: 0L
+      Result.Ok(amount)
+    }
+    is Result.Err -> balanceResult
+  }
 }
 
 internal suspend fun getAccountAddressesForAuthKey(

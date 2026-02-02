@@ -15,7 +15,7 @@
  */
 package xyz.mcxross.kaptos.transaction.builder
 
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
@@ -24,7 +24,6 @@ import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo
 import xyz.mcxross.kaptos.internal.getLedgerInfo
-import xyz.mcxross.kaptos.internal.toInternalResult
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.EntryFunction
 import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
@@ -58,12 +57,9 @@ suspend fun generateRawTransaction(
 
   val gasUnitPrice =
     options?.gasUnitPrice
-      ?: getGasPriceEstimation(aptosConfig).let { response ->
-        if (response.toInternalResult().isOk) {
-          response.toInternalResult().value.gasEstimate
-        } else {
-          throw IllegalArgumentException("Could not fetch gas price")
-        }
+      ?: when (val response = getGasPriceEstimation(aptosConfig)) {
+        is Result.Ok -> response.value.gasEstimate
+        is Result.Err -> throw IllegalArgumentException("Could not fetch gas price")
       }
 
   val sequenceNumber =

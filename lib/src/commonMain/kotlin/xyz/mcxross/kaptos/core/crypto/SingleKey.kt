@@ -15,7 +15,6 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.model.*
 
@@ -40,20 +39,24 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
   override fun authKey(): AuthenticationKey {
     return AuthenticationKey.fromSchemeAndBytes(
       AuthenticationKeyScheme.Signing(SigningScheme.SingleKey),
-      HexInput.fromByteArray(
-        Bcs.encodeToByteArray(variant) + Bcs.encodeToByteArray(publicKey.toByteArray())
-      ),
+      HexInput.fromByteArray(toBcs()),
     )
   }
 
   override fun verifySignature(message: HexInput, signature: Signature): Boolean {
-    TODO("Not yet implemented")
+    val actualSignature = if (signature is AnySignature) signature.signature else signature
+    return publicKey.verifySignature(message, actualSignature)
   }
 
-  override fun toByteArray(): ByteArray = publicKey.toByteArray()
+  override fun toByteArray(): ByteArray = toBcs()
 
   override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
+    val variantIndex =
+      when (variant) {
+        AnyPublicKeyVariant.Ed25519 -> 0
+        AnyPublicKeyVariant.Secp256k1 -> 1
+      }
+    return encodeUleb128(variantIndex) + publicKey.toBcs()
   }
 }
 
@@ -70,10 +73,9 @@ class AnySignature(val signature: Signature) : Signature() {
       else -> throw IllegalArgumentException("Unsupported signature type")
     }
 
-  override fun toByteArray(): ByteArray =
-    Bcs.encodeToByteArray(variant.value) + signature.toByteArray()
+  override fun toByteArray(): ByteArray = toBcs()
 
   override fun toBcs(): ByteArray {
-    TODO("Not yet implemented")
+    return encodeUleb128(variant.value) + signature.toBcs()
   }
 }

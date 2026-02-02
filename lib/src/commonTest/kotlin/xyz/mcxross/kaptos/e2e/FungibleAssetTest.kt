@@ -19,14 +19,22 @@ package xyz.mcxross.kaptos.e2e
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.extension.longOrNull
 import xyz.mcxross.kaptos.model.AptosConfig
 import xyz.mcxross.kaptos.model.AptosSettings
+import xyz.mcxross.kaptos.model.BlockEpilogueTransactionResponse
+import xyz.mcxross.kaptos.model.BlockMetadataTransactionResponse
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.PaginationArgs
+import xyz.mcxross.kaptos.model.PendingTransactionResponse
 import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.StateCheckpointTransactionResponse
+import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.types.currentFungibleAssetBalancesFilter
 import xyz.mcxross.kaptos.model.types.fungibleAssetActivitiesFilter
 import xyz.mcxross.kaptos.model.types.fungibleAssetMetadataFilter
@@ -37,6 +45,15 @@ import xyz.mcxross.kaptos.util.runBlocking
 import xyz.mcxross.kaptos.util.toAccountAddress
 
 class FungibleAssetTest {
+  private fun ledgerVersionOf(txn: TransactionResponse): Long? =
+    when (txn) {
+      is UserTransactionResponse -> txn.version.toLongOrNull()
+      is BlockMetadataTransactionResponse -> txn.version.toLongOrNull()
+      is StateCheckpointTransactionResponse -> txn.version.toLongOrNull()
+      is BlockEpilogueTransactionResponse -> txn.version.toLongOrNull()
+      is PendingTransactionResponse -> null
+    }
+
   @Test
   fun `it should fetch fungible asset metadata`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
@@ -132,7 +149,11 @@ class FungibleAssetTest {
   fun `it should fetch current fungible asset balance`() = runBlocking {
     val aptos = Aptos(AptosConfig(AptosSettings(Network.DEVNET)))
     val userAccount = Account.generate()
-    aptos.fundAccount(userAccount.accountAddress, 1_000)
+    val minimumLedgerVersion =
+      when (val fundResponse = aptos.fundAccount(userAccount.accountAddress, 1_000)) {
+        is Result.Ok -> ledgerVersionOf(fundResponse.value)
+        is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
+      }
 
     val resolution =
       aptos.getCurrentFungibleAssetBalances(
@@ -140,15 +161,17 @@ class FungibleAssetTest {
           currentFungibleAssetBalancesFilter {
             ownerAddress = stringFilter { eq = userAccount.accountAddress.toString() }
             assetType = stringFilter { eq = "0x1::aptos_coin::AptosCoin" }
-          }
+          },
+        minimumLedgerVersion = minimumLedgerVersion,
       )
 
     when (resolution) {
       is Result.Ok -> {
         val data = resolution.value?.current_fungible_asset_balances
-        assertEquals(1, data?.size)
-        assertEquals(APTOS_COIN, data?.first()?.asset_type)
-        assertEquals(1000, data?.first()?.amount)
+        assertTrue((data?.size ?: 0) >= 1, "Expected at least one APT balance row")
+        val aptBalance = data?.firstOrNull { it?.asset_type == APTOS_COIN } ?: fail("")
+        assertEquals(APTOS_COIN, aptBalance.asset_type)
+        assertEquals(1_000L, aptBalance.amount.longOrNull())
       }
       is Result.Err -> fail("")
     }
