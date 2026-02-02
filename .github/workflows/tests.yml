@@ -3,7 +3,7 @@ run-name: Run tests
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   tests:
@@ -25,7 +25,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Generate GraphQL Client
-        run: ./gradlew graphqlGenerateClient
+        run: ./gradlew generateApolloSources
         shell: bash
 
       - name: Run tests

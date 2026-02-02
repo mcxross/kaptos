@@ -2,9 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 permissions:
   contents: write
@@ -34,7 +34,7 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
       - name: Generate GraphQL Client
-        run: ./gradlew graphqlGenerateClient --refresh-dependencies
+        run: ./gradlew generateApolloSources --refresh-dependencies
         shell: bash
       - name: Generate HTML docs
         run: ./gradlew dokkaHtml --refresh-dependencies
