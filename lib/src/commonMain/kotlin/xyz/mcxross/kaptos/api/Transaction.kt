@@ -95,4 +95,26 @@ class Transaction(val config: AptosConfig) : Transaction {
     options: InputGenerateTransactionOptions,
   ): SimpleTransaction =
     publicPackageTransaction(config, account, metadataBytes, moduleBytecode, options)
+
+  override suspend fun buildSimpleTransaction(
+    sender: AccountAddressInput,
+    options: InputGenerateTransactionOptions?,
+    withFeePayer: Boolean,
+    builder: InputEntryFunctionDataBuilder.() -> Unit,
+  ): SimpleTransaction = buildTransaction.simple(
+    sender = sender,
+    data = entryFunctionData(builder),
+    options = options,
+    withFeePayer = withFeePayer,
+  )
+
+  override suspend fun execute(
+    signer: Account,
+    options: InputGenerateTransactionOptions?,
+    withFeePayer: Boolean,
+    builder: InputEntryFunctionDataBuilder.() -> Unit,
+  ): Result<PendingTransactionResponse, Exception> {
+    val txn = buildSimpleTransaction(signer.accountAddress, options, withFeePayer, builder)
+    return signAndSubmitTransaction(signer, txn)
+  }
 }

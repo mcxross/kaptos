@@ -199,10 +199,7 @@ internal suspend fun publicPackageTransaction(
           data =
             entryFunctionData {
               function = "0x1::code::publish_package_txn"
-              functionArguments = functionArguments {
-                +MoveVector.u8(metadataBytes)
-                +MoveVector(totalByteCode)
-              }
+              args(MoveVector.u8(metadataBytes), MoveVector(totalByteCode))
               abi = packagePublishAbi
             },
           options = options,

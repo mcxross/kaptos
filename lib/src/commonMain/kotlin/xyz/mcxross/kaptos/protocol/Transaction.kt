@@ -269,4 +269,18 @@ interface Transaction {
     moduleBytecode: List<HexInput>,
     options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
   ): SimpleTransaction
+
+  suspend fun buildSimpleTransaction(
+    sender: AccountAddressInput,
+    options: InputGenerateTransactionOptions? = null,
+    withFeePayer: Boolean = false,
+    builder: InputEntryFunctionDataBuilder.() -> Unit,
+  ): SimpleTransaction
+
+  suspend fun execute(
+    signer: Account,
+    options: InputGenerateTransactionOptions? = null,
+    withFeePayer: Boolean = false,
+    builder: InputEntryFunctionDataBuilder.() -> Unit,
+  ): Result<PendingTransactionResponse, Exception>
 }

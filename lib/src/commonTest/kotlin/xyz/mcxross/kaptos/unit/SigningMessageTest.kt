@@ -5,7 +5,6 @@ import kotlin.test.assertTrue
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
-import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.builder.generateSigningMessageForTransaction
 import xyz.mcxross.kaptos.util.runBlocking
@@ -27,22 +26,15 @@ class SigningMessageTest {
     println(alice.accountAddress.value)
     runBlocking {
       val txn =
-        aptos.buildTransaction.simple(
+        aptos.buildSimpleTransaction(
           sender = alice.accountAddress,
-          data =
-            entryFunctionData {
-              function = "0x1::coin::transfer"
-              typeArguments = typeArguments {
-                +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
-              }
-              functionArguments = functionArguments {
-                +alice.accountAddress
-                +U64(TRANSFER_AMOUNT)
-              }
-            },
           options =
             InputGenerateTransactionOptions(accountSequenceNumber = 1, expireTimestamp = 100),
-        )
+        ) {
+          function = "0x1::coin::transfer"
+          typeArgs("0x1::aptos_coin::AptosCoin")
+          args(alice.accountAddress, TRANSFER_AMOUNT)
+        }
 
       val message = generateSigningMessageForTransaction(txn)
 

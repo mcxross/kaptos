@@ -15,7 +15,6 @@
  */
 package xyz.mcxross.kaptos.internal
 
-import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun transferCoinTransaction(
@@ -33,11 +32,8 @@ internal suspend fun transferCoinTransaction(
       data =
         entryFunctionData {
           function = "0x1::coin::transfer"
-          typeArguments = typeArguments { +TypeTagStruct(type = coinType.toStructTag()) }
-          functionArguments = functionArguments {
-            +HexInput(to.value)
-            +U64(amount)
-          }
+          typeArgs(coinType)
+          args(HexInput(to.value), amount)
         },
       options = options,
       withFeePayer = withFeePayer,

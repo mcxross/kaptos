@@ -239,19 +239,11 @@ val bob = Account.generate()
 val aliceFaucet = aptos.fundAccount(alice.accountAddress, 1000000000)
 val bobFaucet = aptos.fundAccount(bob.accountAddress, 1000000000)
 
-val txn = aptos.buildTransaction.simple(
-    sender = alice.accountAddress,
-    data = entryFunctionData {
-        function = "0x1::coin::transfer"
-        typeArguments = typeArguments {
-            +TypeTagStruct(type = "0x1::aptos_coin::AptosCoin".toStructTag())
-        }
-        functionArguments = functionArguments {
-            +bob.accountAddress
-            +U64(SEND_AMOUNT)
-        }
-    },
-)
+val txn = aptos.buildSimpleTransaction(sender = alice.accountAddress) {
+    function = "0x1::coin::transfer"
+    typeArgs("0x1::aptos_coin::AptosCoin")
+    args(bob.accountAddress, SEND_AMOUNT)
+}
 ```
 
 It also provides pre-built transaction builders for common transactions. For example, to transfer coins from one account

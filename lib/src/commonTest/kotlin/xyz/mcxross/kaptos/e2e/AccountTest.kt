@@ -116,17 +116,10 @@ class AccountTest {
     aptos.fundAccount(alice.accountAddress, FUND_AMOUNT)
     val bob = Account.generate()
     val rawTxn =
-      aptos.buildTransaction.simple(
-        sender = alice.accountAddress,
-        data =
-          entryFunctionData {
-            function = "0x1::aptos_account::transfer"
-            functionArguments = functionArguments {
-              +bob.accountAddress
-              +U64(10UL)
-            }
-          },
-      )
+      aptos.buildSimpleTransaction(sender = alice.accountAddress) {
+        function = "0x1::aptos_account::transfer"
+        args(bob.accountAddress, 10UL)
+      }
 
     val authenticator = aptos.sign(alice, rawTxn)
     when (val response = aptos.submitTransaction.simple(rawTxn, authenticator)) {

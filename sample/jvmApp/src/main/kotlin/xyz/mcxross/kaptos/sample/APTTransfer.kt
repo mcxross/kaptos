@@ -61,18 +61,11 @@ fun main() = runBlocking {
   )
 
   val txn =
-    aptos.buildTransaction.simple(
-      sender = alice.accountAddress,
-      data =
-        entryFunctionData {
-          function = "0x1::coin::transfer"
-          typeArguments = typeArguments { +TypeTagStruct("0x1::aptos_coin::AptosCoin") }
-          functionArguments = functionArguments {
-            +bob.accountAddress
-            +U64(SEND_AMOUNT_UNITS.toULong())
-          }
-        },
-    )
+    aptos.buildSimpleTransaction(sender = alice.accountAddress) {
+      function = "0x1::coin::transfer"
+      typeArgs("0x1::aptos_coin::AptosCoin")
+      args(bob.accountAddress, SEND_AMOUNT_UNITS.toULong())
+    }
 
   // Sign and submit the transaction
   val commitedTransaction = aptos.signAndSubmitTransaction(alice, txn)

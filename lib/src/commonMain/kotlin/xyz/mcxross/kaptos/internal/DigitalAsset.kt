@@ -20,7 +20,6 @@ import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.exception.AptosIndexerError
-import xyz.mcxross.kaptos.extension.asAccountAddress
 import xyz.mcxross.kaptos.generated.GetCollectionDataQuery
 import xyz.mcxross.kaptos.generated.GetCurrentTokenOwnershipQuery
 import xyz.mcxross.kaptos.generated.GetEventsQuery
@@ -110,23 +109,23 @@ internal suspend fun createCollectionTransaction(
             // Don't alter the order of the arguments
             entryFunctionData {
               function = "0x4::aptos_token::create_collection"
-              functionArguments = functionArguments {
-                +MoveString(description)
-                +U64(collectionOptions.maxSupply.toULong())
-                +MoveString(name)
-                +MoveString(uri)
-                +Bool(collectionOptions.mutableDescription)
-                +Bool(collectionOptions.mutableRoyalty)
-                +Bool(collectionOptions.mutableURI)
-                +Bool(collectionOptions.mutableTokenDescription)
-                +Bool(collectionOptions.mutableTokenName)
-                +Bool(collectionOptions.mutableTokenProperties)
-                +Bool(collectionOptions.mutableTokenURI)
-                +Bool(collectionOptions.tokensBurnableByCreator)
-                +Bool(collectionOptions.tokensFreezableByCreator)
-                +U64(collectionOptions.royaltyNumerator.toULong())
-                +U64(collectionOptions.royaltyDenominator.toULong())
-              }
+              args(
+                description,
+                collectionOptions.maxSupply.toULong(),
+                name,
+                uri,
+                collectionOptions.mutableDescription,
+                collectionOptions.mutableRoyalty,
+                collectionOptions.mutableURI,
+                collectionOptions.mutableTokenDescription,
+                collectionOptions.mutableTokenName,
+                collectionOptions.mutableTokenProperties,
+                collectionOptions.mutableTokenURI,
+                collectionOptions.tokensBurnableByCreator,
+                collectionOptions.tokensFreezableByCreator,
+                collectionOptions.royaltyNumerator.toULong(),
+                collectionOptions.royaltyDenominator.toULong(),
+              )
               abi = collectionAbi
             },
           options = options,
@@ -176,15 +175,15 @@ internal suspend fun mintDigitalAssetTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::mint"
-              functionArguments = functionArguments {
-                +MoveString(collection)
-                +MoveString(description)
-                +MoveString(name)
-                +MoveString(uri)
-                +MoveVector.string(listOf())
-                +MoveVector.string(listOf())
-                +MoveVector.string(listOf())
-              }
+              args(
+                collection,
+                description,
+                name,
+                uri,
+                MoveVector.string(listOf()),
+                MoveVector.string(listOf()),
+                MoveVector.string(listOf()),
+              )
               abi = mintDigitalAssetAbi
             },
           options = options,
@@ -205,7 +204,6 @@ internal suspend fun transferDigitalAssetTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split(":::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -215,21 +213,11 @@ internal suspend fun transferDigitalAssetTransaction(
           data =
             entryFunctionData {
               function = "0x1::object::transfer"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +AccountAddress.fromString(recipient.value)
-              }
+              typeArgs(digitalAssetType)
+              args(
+                AccountAddress.fromString(digitalAssetAddress.value),
+                AccountAddress.fromString(recipient.value),
+              )
             },
           options = options,
           withFeePayer = false,
@@ -270,16 +258,16 @@ internal suspend fun mintSoulBoundTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::mint_soul_bound"
-              functionArguments = functionArguments {
-                +MoveString(collection)
-                +MoveString(description)
-                +MoveString(name)
-                +MoveString(uri)
-                +MoveVector.string(listOf())
-                +MoveVector.string(listOf())
-                +MoveVector.string(listOf())
-                +AccountAddress.fromString(recipient.value)
-              }
+              args(
+                collection,
+                description,
+                name,
+                uri,
+                MoveVector.string(listOf()),
+                MoveVector.string(listOf()),
+                MoveVector.string(listOf()),
+                AccountAddress.fromString(recipient.value),
+              )
             },
           options = options,
           withFeePayer = false,
@@ -298,7 +286,6 @@ internal suspend fun burnDigitalAssetTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -308,20 +295,8 @@ internal suspend fun burnDigitalAssetTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::burn"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value))
             },
           options = options,
           withFeePayer = false,
@@ -340,7 +315,6 @@ internal suspend fun freezeDigitalAssetTransferTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -350,20 +324,8 @@ internal suspend fun freezeDigitalAssetTransferTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::freeze_transfer"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value))
             },
           options = options,
           withFeePayer = false,
@@ -382,7 +344,6 @@ internal suspend fun unfreezeDigitalAssetTransferTransaction(
   options: InputGenerateTransactionOptions,
 ): SimpleTransaction {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -392,20 +353,8 @@ internal suspend fun unfreezeDigitalAssetTransferTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::unfreeze_transfer"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value))
             },
           options = options,
           withFeePayer = false,
@@ -426,7 +375,6 @@ suspend fun setDigitalAssetDescriptionTransaction(
 ): SimpleTransaction {
   require(description.length <= 2048) { "Description must be less than 2048 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -436,21 +384,8 @@ suspend fun setDigitalAssetDescriptionTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::set_description"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +MoveString(description)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value), description)
             },
           options = options,
           withFeePayer = false,
@@ -471,7 +406,6 @@ suspend fun setDigitalAssetNameTransaction(
 ): SimpleTransaction {
   require(name.length <= 512) { "Name must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -481,21 +415,8 @@ suspend fun setDigitalAssetNameTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::set_name"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +MoveString(name)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value), name)
             },
           options = options,
           withFeePayer = false,
@@ -516,7 +437,6 @@ suspend fun setDigitalAssetURITransaction(
 ): SimpleTransaction {
   require(uri.length <= 512) { "URI must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -526,21 +446,8 @@ suspend fun setDigitalAssetURITransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::set_uri"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +MoveString(uri)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value), uri)
             },
           options = options,
           withFeePayer = false,
@@ -564,7 +471,6 @@ internal suspend fun addDigitalAssetPropertyTransaction(
 
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -574,23 +480,13 @@ internal suspend fun addDigitalAssetPropertyTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::add_property"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +MoveString(propertyKey)
-                +MoveString(propertyType.toString())
-                +MoveVector.u8(getSinglePropertyValueRaw(propertyValue, propertyType.toString()))
-              }
+              typeArgs(digitalAssetType)
+              args(
+                AccountAddress.fromString(digitalAssetAddress.value),
+                propertyKey,
+                propertyType.toString(),
+                MoveVector.u8(getSinglePropertyValueRaw(propertyValue, propertyType.toString())),
+              )
             },
           options = options,
           withFeePayer = false,
@@ -611,7 +507,6 @@ internal suspend fun removeDigitalAssetPropertyTransaction(
 ): SimpleTransaction {
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
-  val moveStructParts = digitalAssetType.split("::")
   val txn =
     generateTransaction(
       aptosConfig = config,
@@ -621,21 +516,8 @@ internal suspend fun removeDigitalAssetPropertyTransaction(
           data =
             entryFunctionData {
               function = "0x4::aptos_token::remove_property"
-              typeArguments = typeArguments {
-                +TypeTagStruct(
-                  type =
-                    StructTag(
-                      moveStructParts.first().asAccountAddress(),
-                      moveStructParts[1],
-                      moveStructParts.last(),
-                      emptyList(),
-                    )
-                )
-              }
-              functionArguments = functionArguments {
-                +AccountAddress.fromString(digitalAssetAddress.value)
-                +MoveString(propertyKey)
-              }
+              typeArgs(digitalAssetType)
+              args(AccountAddress.fromString(digitalAssetAddress.value), propertyKey)
             },
           options = options,
           withFeePayer = false,

@@ -35,18 +35,10 @@ class SimulationTest {
       aptos.fundAccount(sender.accountAddress, 100_000_000L).expect("Failed to fund sender")
 
       val rawTxn =
-        aptos.buildTransaction.simple(
-          sender = sender.accountAddress,
-          data =
-            entryFunctionData {
-              function = "0x1::aptos_account::transfer"
-              typeArguments = emptyTypeArguments()
-              functionArguments = functionArguments {
-                +receiverAccounts[0].accountAddress
-                +U64(1UL)
-              }
-            },
-        )
+        aptos.buildSimpleTransaction(sender = sender.accountAddress) {
+          function = "0x1::aptos_account::transfer"
+          args(receiverAccounts[0].accountAddress, 1UL)
+        }
 
       val response = aptos.simulateTransaction.simple(sender.publicKey, rawTxn)
 
