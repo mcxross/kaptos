@@ -3,10 +3,10 @@
 Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for interacting with Aptos services across
 multiple platforms.
 
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-1.9.23-B125EA?logo=kotlin)](https://kotlinlang.org)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.3.0-B125EA?logo=kotlin)](https://kotlinlang.org)
 ![Docs](https://github.com/mcxross/kaptos/actions/workflows/docs.yml/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/xyz.mcxross.kaptos/kaptos.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/xyz.mcxross.kaptos/kaptos)
-[![Snapshot](https://img.shields.io/nexus/s/xyz.mcxross.kaptos/kaptos?server=https%3A%2F%2Fs01.oss.sonatype.org&label=Snapshot)](https://s01.oss.sonatype.org/content/repositories/snapshots/xyz/mcxross/kaptos/)
+[![Snapshot](https://img.shields.io/nexus/s/xyz.mcxross.kaptos/kaptos?server=https%3A%2F%2Fcentral.sonatype.com&nexusVersion=3&label=Snapshot)](https://central.sonatype.com/repository/maven-snapshots/xyz/mcxross/kaptos/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 ![badge-android](http://img.shields.io/badge/Platform-Android-brightgreen.svg?logo=android)
@@ -160,11 +160,11 @@ dependencies {
 ```
 
 > [!NOTE]
-> Snapshots are available via the Sonatype snapshots repository. To use snapshots, add the following to your project:
+> Snapshots are available via Sonatype Central's snapshots repository. To use snapshots, add the following to your project:
 
 ```kotlin
 repositories {
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+    maven("https://central.sonatype.com/repository/maven-snapshots/")
 }
 ```
 
@@ -292,4 +292,3 @@ All contributions to Kaptos are welcome. Before opening a PR, please submit an i
     limitations under the License.
 
 [maven-central]: https://search.maven.org/search?q=g:xyz.mcxross.kaptos
-
