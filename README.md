@@ -239,10 +239,10 @@ val bob = Account.generate()
 val aliceFaucet = aptos.fundAccount(alice.accountAddress, 1000000000)
 val bobFaucet = aptos.fundAccount(bob.accountAddress, 1000000000)
 
-val txn = aptos.buildSimpleTransaction(sender = alice.accountAddress) {
+val txn = aptos.execute(alice) {
     function = "0x1::coin::transfer"
     typeArgs("0x1::aptos_coin::AptosCoin")
-    args(bob.accountAddress, SEND_AMOUNT)
+    args(bob.accountAddress, 1_000_000UL)
 }
 ```
 
