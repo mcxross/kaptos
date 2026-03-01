@@ -36,14 +36,14 @@ import xyz.mcxross.kaptos.util.RAW_TRANSACTION_SALT
 actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
   return when (scheme) {
     SigningSchemeInput.Ed25519 -> {
-      val mnemonic = mnemonicGenerate(12)
+      val mnemonic = mnemonicGenerate(12u)
       val seed = mnemonicToSeed(mnemonic, "")
       val privateKey = seed.copyOfRange(0, 32)
       val pk = ed25519PublicKeyFromPrivate(privateKey)
       KeyPair(privateKey, pk)
     }
     SigningSchemeInput.Secp256k1 -> {
-      val mnemonic = mnemonicGenerate(12)
+      val mnemonic = mnemonicGenerate(12u)
       val seed = mnemonicToSeed(mnemonic, "")
       val privateKey = seed.copyOfRange(0, 32)
       val pk = secp256k1PublicKeyFromPrivate(privateKey)
