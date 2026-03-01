@@ -124,16 +124,23 @@ internal fun coerceToEntryFunctionArgument(value: Any): EntryFunctionArgument =
     is String -> MoveString(value)
     is ByteArray -> MoveVector.u8(value)
     is List<*> -> coerceList(value)
-    else -> throw IllegalArgumentException(
-      "Cannot coerce ${value::class.simpleName} to EntryFunctionArgument. " +
-        "Supported types: Boolean, Byte, UByte, Short, UShort, Int, UInt, Long, ULong, " +
-        "String, ByteArray, List, AccountAddress, HexInput, and EntryFunctionArgument subtypes."
-    )
+    else ->
+      throw IllegalArgumentException(
+        "Cannot coerce ${value::class.simpleName} to EntryFunctionArgument. " +
+          "Supported types: Boolean, Byte, UByte, Short, UShort, Int, UInt, Long, ULong, " +
+          "String, ByteArray, List, AccountAddress, HexInput, and EntryFunctionArgument subtypes."
+      )
   }
 
 private fun coerceList(list: List<*>): MoveVector<EntryFunctionArgument> {
   if (list.isEmpty()) return MoveVector(emptyList())
-  return MoveVector(list.map { coerceToEntryFunctionArgument(it ?: throw IllegalArgumentException("null elements in list are not supported")) })
+  return MoveVector(
+    list.map {
+      coerceToEntryFunctionArgument(
+        it ?: throw IllegalArgumentException("null elements in list are not supported")
+      )
+    }
+  )
 }
 
 fun entryFunctionData(block: InputEntryFunctionDataBuilder.() -> Unit): InputEntryFunctionData {

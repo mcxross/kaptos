@@ -101,12 +101,13 @@ class Transaction(val config: AptosConfig) : Transaction {
     options: InputGenerateTransactionOptions?,
     withFeePayer: Boolean,
     builder: InputEntryFunctionDataBuilder.() -> Unit,
-  ): SimpleTransaction = buildTransaction.simple(
-    sender = sender,
-    data = entryFunctionData(builder),
-    options = options,
-    withFeePayer = withFeePayer,
-  )
+  ): SimpleTransaction =
+    buildTransaction.simple(
+      sender = sender,
+      data = entryFunctionData(builder),
+      options = options,
+      withFeePayer = withFeePayer,
+    )
 
   override suspend fun execute(
     signer: Account,
