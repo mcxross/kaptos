@@ -14,14 +14,6 @@ plugins {
 
 group = "xyz.mcxross.kaptos"
 
-version = "0.1.2-beta"
-
-repositories {
-  mavenCentral()
-  mavenLocal()
-  google()
-}
-
 kotlin {
   jvm { testRuns["test"].executionTask.configure { useJUnitPlatform() } }
 

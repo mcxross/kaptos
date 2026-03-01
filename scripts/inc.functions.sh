@@ -38,5 +38,9 @@ function sed2() {
 }
 
 function get_version_name() {
-  echo $(grep "version = " $1 | xargs | cut -d"=" -f2)
+  if grep -qE '^version=' "$1"; then
+    echo "$(grep -E '^version=' "$1" | head -n 1 | cut -d'=' -f2- | xargs)"
+  else
+    echo "$(grep "version = " "$1" | xargs | cut -d"=" -f2)"
+  fi
 }

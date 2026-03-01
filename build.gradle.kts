@@ -1,7 +1,5 @@
 group = "xyz.mcxross.kaptos"
 
-version = "0.1.2-beta"
-
 plugins {
   alias(libs.plugins.android.application) apply false
   alias(libs.plugins.android.library) apply false
@@ -14,11 +12,4 @@ plugins {
   alias(libs.plugins.kotlin.serialization) apply false
 }
 
-allprojects {
-  repositories {
-    mavenCentral()
-    mavenLocal()
-    google()
-    maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
-  }
-}
+subprojects { version = rootProject.version }

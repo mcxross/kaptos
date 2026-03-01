@@ -10,9 +10,12 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
     google()
     mavenCentral()
+    mavenLocal()
+    maven("https://central.sonatype.com/repository/maven-snapshots/")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }
 }
