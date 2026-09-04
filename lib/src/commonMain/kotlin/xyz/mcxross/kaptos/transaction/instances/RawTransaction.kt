@@ -1,33 +1,51 @@
 /*
- * Copyright 2024 McXross
+ * Copyright 2026 McXross
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 package xyz.mcxross.kaptos.transaction.instances
 
-import kotlinx.serialization.Serializable
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.transactionPayload
+import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
+import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 
-@Serializable open class AnyRawTransactionInstance
-
-@Serializable
 data class RawTransaction(
   val sender: AccountAddress,
-  val sequenceNumber: Long,
+  val sequenceNumber: ULong,
   val payload: TransactionPayload,
-  val maxGasAmount: Long,
-  val gasUnitPrice: Long,
-  val expirationTimestampSecs: Long,
+  val maxGasAmount: ULong,
+  val gasUnitPrice: ULong,
+  val expirationTimestampSecs: ULong,
   val chainId: ChainId,
-) : AnyRawTransactionInstance()
+) {
+  fun toBcs(): ByteArray = AptosBcsWriter().also { encode(it) }.toByteArray()
+
+  internal fun encode(writer: AptosBcsWriter) {
+    writer.accountAddress(sender)
+    writer.u64(sequenceNumber)
+    writer.fixed(payload.toBcs())
+    writer.u64(maxGasAmount)
+    writer.u64(gasUnitPrice)
+    writer.u64(expirationTimestampSecs)
+    writer.u8(chainId.chainId)
+  }
+
+  companion object {
+    fun fromBcs(bytes: ByteArray): RawTransaction =
+      AptosBcsReader(bytes).let { reader -> reader.rawTransaction().also { reader.ensureFinished() } }
+
+    internal fun AptosBcsReader.rawTransaction(): RawTransaction =
+      RawTransaction(
+        sender = accountAddress(),
+        sequenceNumber = u64(),
+        payload = transactionPayload(),
+        maxGasAmount = u64(),
+        gasUnitPrice = u64(),
+        expirationTimestampSecs = u64(),
+        chainId = ChainId(u8()),
+      )
+  }
+}

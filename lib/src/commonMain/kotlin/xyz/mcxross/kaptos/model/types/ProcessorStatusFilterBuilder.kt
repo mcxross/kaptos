@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class ProcessorStatusFilterBuilder {
+internal class ProcessorStatusFilterBuilder {
   private val andConditions = mutableListOf<Processor_status_bool_exp>()
   private val orConditions = mutableListOf<Processor_status_bool_exp>()
   private var notCondition: Processor_status_bool_exp? = null
@@ -37,6 +37,6 @@ class ProcessorStatusFilterBuilder {
     )
 }
 
-fun processorStatusFilter(
+internal fun processorStatusFilter(
   init: ProcessorStatusFilterBuilder.() -> Unit
 ): Processor_status_bool_exp = ProcessorStatusFilterBuilder().apply(init).build()

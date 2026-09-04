@@ -17,9 +17,6 @@
 package xyz.mcxross.kaptos.util
 
 import com.apollographql.apollo.api.Optional
-import io.ktor.utils.io.charsets.*
-import io.ktor.utils.io.core.*
-import kotlin.String
 import xyz.mcxross.kaptos.internal.waitForIndexer
 import xyz.mcxross.kaptos.model.*
 
@@ -27,7 +24,7 @@ fun String.toAccountAddress(): HexInput {
   return HexInput(this)
 }
 
-val HEX_ARRAY: ByteArray = "0123456789abcdef".toByteArray(Charsets.UTF_8)
+val HEX_ARRAY: ByteArray = "0123456789abcdef".encodeToByteArray()
 
 fun bytesToHex(bytes: ByteArray): String {
   val hexChars = ByteArray(bytes.size * 2)
@@ -36,7 +33,7 @@ fun bytesToHex(bytes: ByteArray): String {
     hexChars[j * 2] = HEX_ARRAY[v ushr 4]
     hexChars[j * 2 + 1] = HEX_ARRAY[v and 0x0F]
   }
-  return String(hexChars, charset = Charsets.UTF_8)
+  return hexChars.decodeToString()
 }
 
 fun getFunctionParts(function: MoveFunctionId): Triple<String, String, String> {
@@ -75,7 +72,7 @@ internal fun <T> T?.toOptional(): Optional<T?> =
   if (this == null) Optional.Absent else Optional.Present(this)
 
 internal suspend fun waitForIndexerOnVersion(
-  config: AptosConfig,
+  config: TransportConfig,
   minimumLedgerVersion: Long?,
   processorType: ProcessorType,
 ) {

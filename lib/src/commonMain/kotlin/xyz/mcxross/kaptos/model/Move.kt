@@ -54,6 +54,8 @@ data class MoveFunction(
 data class MoveStruct(
   val name: String,
   @SerialName("is_native") val isNative: Boolean,
+  @SerialName("is_event") val isEvent: Boolean = false,
+  @SerialName("is_enum") val isEnum: Boolean = false,
   val abilities: List<MoveAbility>,
   @SerialName("generic_type_params") val genericTypeParams: List<MoveFunctionGenericTypeParam>,
   val fields: List<MoveStructField>,

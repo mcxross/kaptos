@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentTokenOwnershipsV2AggregateBoolAndBuilder(
+internal class CurrentTokenOwnershipsV2AggregateBoolAndBuilder(
   private val arguments:
     Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns,
   private val predicate: Boolean_comparison_exp,
@@ -24,7 +24,7 @@ class CurrentTokenOwnershipsV2AggregateBoolAndBuilder(
     )
 }
 
-fun currentTokenOwnershipsV2AggregateBoolAnd(
+internal fun currentTokenOwnershipsV2AggregateBoolAnd(
   arguments:
     Current_token_ownerships_v2_select_column_current_token_ownerships_v2_aggregate_bool_exp_bool_and_arguments_columns,
   predicate: Boolean_comparison_exp,

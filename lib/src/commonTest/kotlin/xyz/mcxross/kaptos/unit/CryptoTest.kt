@@ -2,6 +2,7 @@ package xyz.mcxross.kaptos.unit
 
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.sha3Hash
 import xyz.mcxross.kaptos.model.HexInput
@@ -51,7 +52,7 @@ class CryptoTest {
     val actual = sha3Hash(input)
     assertTrue(
       actual.contentEquals(expected),
-      "SHA3 hash mismatch. Actual: ${actual.joinToString("") { "%02x".format(it) }}",
+      "SHA3 hash mismatch. Actual: ${Hex(actual)}",
     )
   }
 
@@ -72,9 +73,10 @@ class CryptoTest {
     // Seed: 0x... (32 bytes)
     // This validates compatibility with standard Ed25519
 
-    val seed =
-      HexInput.fromString("0x0000000000000000000000000000000000000000000000000000000000000000")
-    val privateKey = Ed25519PrivateKey(seed)
+    val privateKey =
+      Ed25519PrivateKey.fromLegacyHex(
+        "0x0000000000000000000000000000000000000000000000000000000000000000"
+      )
     val message = ByteArray(0) // Empty message
     val signature = privateKey.sign(HexInput.fromByteArray(message))
 

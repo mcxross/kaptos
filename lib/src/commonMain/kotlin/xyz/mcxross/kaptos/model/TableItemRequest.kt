@@ -18,10 +18,30 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
 
 @Serializable
 data class TableItemRequest(
   @SerialName("key_type") val key_type: String,
   @SerialName("value_type") val value_type: String,
-  val key: String,
-)
+  val key: JsonElement,
+) {
+  constructor(
+    key_type: String,
+    value_type: String,
+    key: String,
+  ) : this(key_type, value_type, JsonPrimitive(key))
+
+  constructor(
+    key_type: String,
+    value_type: String,
+    key: Number,
+  ) : this(key_type, value_type, JsonPrimitive(key))
+
+  constructor(
+    key_type: String,
+    value_type: String,
+    key: Boolean,
+  ) : this(key_type, value_type, JsonPrimitive(key))
+}

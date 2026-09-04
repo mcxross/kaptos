@@ -1,10 +1,12 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
+import com.vanniktech.maven.publish.SourcesJar
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  alias(libs.plugins.android.library)
+  alias(libs.plugins.android.kotlin.multiplatform.library)
   alias(libs.plugins.apollo.graphql)
   alias(libs.plugins.dokka)
   alias(libs.plugins.kotlin.multiplatform)
@@ -17,7 +19,17 @@ group = "xyz.mcxross.kaptos"
 kotlin {
   jvm { testRuns["test"].executionTask.configure { useJUnitPlatform() } }
 
-  androidTarget { publishLibraryVariants("release", "debug") }
+  android {
+    namespace = "xyz.mcxross.kaptos"
+    compileSdk {
+      version = release(37) { minorApiLevel = 0 }
+    }
+    minSdk = 24
+    compilerOptions.jvmTarget = JvmTarget.JVM_17
+    withDeviceTestBuilder { sourceSetTreeName = "test" }.configure {
+      instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+  }
 
   val xcframeworkName = "AptosKit"
   val xcf = XCFramework(xcframeworkName)
@@ -45,17 +57,24 @@ kotlin {
         implementation(libs.fastkrypto.android)
       }
     }
+    val androidDeviceTest by getting {
+      dependencies {
+        implementation(libs.androidx.test.ext.junit)
+        implementation(libs.androidx.test.runner)
+      }
+    }
     appleMain.dependencies { implementation(libs.ktor.client.darwin) }
     commonMain.dependencies {
       implementation(libs.apollo.runtime)
       implementation(libs.bcs)
       implementation(libs.ktor.client.auth)
       implementation(libs.ktor.client.content.negotiation)
-      implementation(libs.ktor.client.core)
+      api(libs.ktor.client.core)
       implementation(libs.ktor.client.logging)
       implementation(libs.ktor.serialization.kotlinx.json)
       implementation(libs.kotlinx.datetime)
-      implementation(libs.kotlinx.serialization.core)
+      api(libs.kotlinx.coroutines.core)
+      api(libs.kotlinx.serialization.core)
       implementation(libs.kotlin.result)
     }
     commonTest.dependencies {
@@ -87,24 +106,14 @@ kotlin {
   }
 }
 
-apollo { service("service") { packageName.set("xyz.mcxross.kaptos.generated") } }
-
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-
-android {
-  namespace = "xy.mcxross.kaptos"
-  defaultConfig {
-    minSdk = 24
-    compileSdk = 33
-  }
-
-  sourceSets {
-    named("main") {
-      manifest.srcFile("src/androidMain/AndroidManifest.xml")
-      res.srcDirs("src/androidMain/res", "src/commonMain/resources")
-    }
+apollo {
+  service("service") {
+    packageName.set("xyz.mcxross.kaptos.generated")
+    generateAsInternal.set(true)
   }
 }
+
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 // fastkrypto's android native artifacts are for device/emulator, not host JVM unit tests.
 tasks.withType<Test>().configureEach {
@@ -134,13 +143,15 @@ dokka {
 }
 
 mavenPublishing {
+  val enableSigning =
+    providers.gradleProperty("enableSigning").orNull?.toBooleanStrictOrNull() ?: true
+
   coordinates("xyz.mcxross.kaptos", "kaptos", version.toString())
 
   configure(
     KotlinMultiplatform(
       javadocJar = JavadocJar.Dokka("dokkaGenerate"),
-      sourcesJar = true,
-      androidVariantsToPublish = listOf("debug", "release"),
+      sourcesJar = SourcesJar.Sources(),
     )
   )
 
@@ -173,5 +184,7 @@ mavenPublishing {
 
   publishToMavenCentral(automaticRelease = true)
 
-  signAllPublications()
+  if (enableSigning) {
+    signAllPublications()
+  }
 }

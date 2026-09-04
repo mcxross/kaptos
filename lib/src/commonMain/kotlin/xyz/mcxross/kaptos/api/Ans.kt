@@ -25,7 +25,7 @@ import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Ans
 
 /** A class to handle all Aptos Name Service (ANS) operations. */
-class Ans(val config: AptosConfig) : Ans {
+internal class Ans(val config: TransportConfig) : Ans {
 
   override suspend fun getOwnerAddress(name: String): Result<AccountAddress, AptosSdkError> =
     getOwnerAddress(config, name)
@@ -40,8 +40,8 @@ class Ans(val config: AptosConfig) : Ans {
     sender: AccountAddress,
     name: String,
     address: AccountAddressInput,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction = setTargetAddress(config, sender, name, address, options)
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple = setTargetAddress(config, sender, name, address, options)
 
   override suspend fun getPrimaryName(address: AccountAddressInput): Result<String, AptosSdkError> =
     getPrimaryName(config, address)

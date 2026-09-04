@@ -22,8 +22,7 @@ import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKeySignature
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorMultiKey
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
 class MultiKeyAccount(
   val multiKey: MultiKey,
@@ -37,6 +36,11 @@ class MultiKeyAccount(
     address?.let { AccountAddress.from(it) } ?: publicKey.authKey().deriveAddress()
 
   override val signingScheme: SigningScheme = SigningScheme.MultiKey
+
+  override val isPrivateKeyCleared: Boolean
+    get() = signers.all(Account::isPrivateKeyCleared)
+
+  override fun clearPrivateKey() = signers.forEach(Account::clearPrivateKey)
 
   private val sortedSigners: List<Account>
   private val signaturesBitmap: ByteArray
@@ -72,7 +76,7 @@ class MultiKeyAccount(
   }
 
   override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
-    return AccountAuthenticatorMultiKey(multiKey = multiKey, signature = sign(message))
+    return AccountAuthenticator.MultiKey(publicKey = multiKey, signature = sign(message))
   }
 
   override fun sign(message: HexInput): MultiKeySignature {
@@ -84,10 +88,10 @@ class MultiKeyAccount(
     return MultiKeySignature(signatures, signaturesBitmap)
   }
 
-  override fun signTransaction(tx: AnyRawTransaction): MultiKeySignature {
+  override fun signTransactionSignature(tx: UnsignedTransaction): MultiKeySignature {
     val signatures =
       sortedSigners.map { signer ->
-        val sig = signer.signTransaction(tx)
+        val sig = signer.signTransactionSignature(tx)
         if (sig is AnySignature) sig else AnySignature(sig)
       }
     return MultiKeySignature(signatures, signaturesBitmap)

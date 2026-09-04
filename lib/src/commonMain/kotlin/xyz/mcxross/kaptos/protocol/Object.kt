@@ -19,15 +19,15 @@ package xyz.mcxross.kaptos.protocol
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetObjectDataQuery
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.ObjectSortOrder
 import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.Result
 
 /** An interface for querying Aptos `Object` related data from the indexer. */
-interface Object {
+internal interface Object {
 
-  val config: AptosConfig
+  val config: TransportConfig
 
   /**
    * Queries for object data based on a specified object address.
@@ -37,20 +37,6 @@ interface Object {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val objectAddress = AccountAddress.fromString("0x000000000000000000000000000000000000000000000000000000000000000a")
-   * val resolution = aptos.getObjectDataByObjectAddress(objectAddress)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved object data: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving object data: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param objectAddress The address of the object to retrieve data for.
    * @param sortOrder An optional list of sorting options for the results.

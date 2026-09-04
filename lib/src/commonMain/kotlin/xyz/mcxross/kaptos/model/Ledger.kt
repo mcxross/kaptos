@@ -31,5 +31,6 @@ data class LedgerInfo(
   @SerialName("node_role") val nodeRole: String,
   @SerialName("oldest_block_height") val oldestBlockHeight: String,
   @SerialName("block_height") val blockHeight: String,
-  @SerialName("git_hash") val gitHash: String,
+  @SerialName("git_hash") val gitHash: String = "",
+  @SerialName("encryption_key") val encryptionKey: String? = null,
 )

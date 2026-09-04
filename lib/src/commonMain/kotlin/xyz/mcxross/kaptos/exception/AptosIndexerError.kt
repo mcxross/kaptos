@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.exception
 
 import com.apollographql.apollo.api.Error
 
-sealed class AptosIndexerError(message: String, cause: Throwable? = null) :
+internal sealed class AptosIndexerError(message: String, cause: Throwable? = null) :
   Exception(message, cause) {
 
   /**

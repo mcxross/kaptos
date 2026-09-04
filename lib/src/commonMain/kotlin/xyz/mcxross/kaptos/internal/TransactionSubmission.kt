@@ -19,79 +19,72 @@ import com.github.michaelbull.result.get
 import com.github.michaelbull.result.getError
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.postAptosFullNode
+import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.builder.*
 
 internal suspend fun generateTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   data: InputGenerateTransactionData,
-): AnyRawTransaction {
+): UnsignedTransaction {
   val payload = buildTransactionPayload(aptosConfig, data)
   return buildRawTransaction(aptosConfig, data, payload)
 }
 
 internal suspend fun buildTransactionPayload(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   data: InputGenerateTransactionData,
-): AnyTransactionPayloadInstance {
+): TransactionPayload {
   val generateTransactionPayloadData: InputGenerateTransactionPayloadDataWithRemoteABI
-  val payload: AnyTransactionPayloadInstance
+  val payload: TransactionPayload
 
-  when (data) {
-    is InputGenerateSingleSignerRawTransactionData -> {
-      generateTransactionPayloadData =
-        InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI(
-          data.data as InputEntryFunctionData
-        )
-      payload = generateTransactionPayload(aptosConfig, generateTransactionPayloadData)
-    }
-    else -> throw IllegalArgumentException("Unimplemented transaction data type")
-  }
+  generateTransactionPayloadData =
+    InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI(
+      data.data as InputEntryFunctionData
+    )
+  payload = generateTransactionPayload(aptosConfig, generateTransactionPayloadData)
 
   return payload
 }
 
 internal suspend fun buildRawTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   data: InputGenerateTransactionData,
-  payload: AnyTransactionPayloadInstance,
-): AnyRawTransaction {
-
-  var feePayerAddress: AccountAddressInput? = null
-  if (isFeePayerTransactionInput(data)) {
-    feePayerAddress = AccountAddress.ONE
-  }
-
-  return buildTransaction(aptosConfig, data, payload, feePayerAddress)
+  payload: TransactionPayload,
+): UnsignedTransaction {
+  return buildTransaction(aptosConfig, data, payload, feePayerAddress = null)
 }
 
 internal fun isFeePayerTransactionInput(data: InputGenerateTransactionData): Boolean {
-  return data is InputGenerateSingleSignerRawTransactionData && data.withFeePayer
+  return data.withFeePayer
 }
 
 internal fun signTransaction(
   signer: Account,
-  transaction: AnyRawTransaction,
+  transaction: UnsignedTransaction,
 ): AccountAuthenticator {
   return sign(signer, transaction)
 }
 
-internal fun signAsFeePayer(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator {
-  val txn = transaction as SimpleTransaction
-  require(txn.feePayerAddress != null) {
-    "The transaction must contain at least one fee-payer address"
+internal fun signAsFeePayer(
+  signer: Account,
+  transaction: UnsignedTransaction,
+): FeePayerSignature {
+  require(transaction is UnsignedTransaction.FeePayer) {
+    "The transaction must be built as a fee-payer transaction"
   }
-
-  txn.feePayerAddress = signer.accountAddress
-
-  return signTransaction(signer, txn)
+  val sponsored = transaction.copy(feePayerAddress = signer.accountAddress)
+  return FeePayerSignature(
+    transaction = sponsored,
+    authenticator = signTransaction(signer, sponsored),
+  )
 }
 
 internal suspend fun submitTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   inputSubmitTransactionData: InputSubmitTransactionData,
-): Result<PendingTransactionResponse, Exception> {
+): Result<PendingTransactionResponse, AptosSdkError> {
   val signedTransaction = generateSignedTransaction(inputSubmitTransactionData)
 
   val res =
@@ -105,49 +98,40 @@ internal suspend fun submitTransaction(
       )
     )
 
-  /*when (res) {
-    is Result.Ok -> {
-      if (res.value.first.status == Error.ABORTED.asHttpStatusCode()) {
-        return Result.Err(AbortedException())
-      }
-    }
-    is Result.Err -> {
-        return Result.Err(AptosError())
-    }
-  }*/
-
   val value = res.get()
   return if (value != null) {
     Result.Ok(value.second)
   } else {
-    val error = res.getError() ?: Exception("Unknown error")
-    Result.Err(Exception(error.toString()))
+    Result.Err(
+      res.getError()
+        ?: AptosSdkError.UnknownError(IllegalStateException("Missing transaction response"))
+    )
   }
 }
 
 internal suspend fun signAndSubmitAsFeePayer(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   feePayer: Account,
   senderAuthenticator: AccountAuthenticator,
-  transaction: AnyRawTransaction,
+  transaction: UnsignedTransaction,
 ): Result<PendingTransactionResponse, Exception> {
 
-  val feePayerAuthenticator = signAsFeePayer(feePayer, transaction)
+  val sponsorship = signAsFeePayer(feePayer, transaction)
 
   return submitTransaction(
     aptosConfig,
     InputSubmitTransactionData(
-      transaction = transaction,
+      transaction = sponsorship.transaction,
       senderAuthenticator = senderAuthenticator,
-      feePayerAuthenticator = feePayerAuthenticator,
+      feePayerAuthenticator = sponsorship.authenticator,
     ),
   )
 }
 
 internal suspend fun simulateTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   data: InputSimulateTransactionData,
-): Result<List<UserTransactionResponse>, Exception> {
+): Result<List<UserTransactionResponse>, AptosSdkError> {
   val signedTransaction = generateSignedTransactionForSimulation(data)
 
   val resolution =
@@ -171,17 +155,20 @@ internal suspend fun simulateTransaction(
   return if (simulated != null) {
     Result.Ok(simulated.second)
   } else {
-    Result.Err(resolution.getError() ?: Exception("Unknown error"))
+    Result.Err(
+      resolution.getError()
+        ?: AptosSdkError.UnknownError(IllegalStateException("Missing simulation response"))
+    )
   }
 }
 
 internal suspend fun publicPackageTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   account: AccountAddressInput,
   metadataBytes: HexInput,
   moduleBytecode: List<HexInput>,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   val totalByteCode = moduleBytecode.map { MoveVector.u8(it) }
 
   val packagePublishAbi =
@@ -204,9 +191,8 @@ internal suspend fun publicPackageTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return anyRawTxn as SimpleTransaction
+  return anyRawTxn as UnsignedTransaction.Simple
 }

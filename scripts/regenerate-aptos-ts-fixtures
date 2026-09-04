@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Copyright 2026 McXross
+# SPDX-License-Identifier: Apache-2.0
+set -euo pipefail
+
+readonly SDK_COMMIT="82b310449d7adf184540730ffdd754ada18d8ca6"
+readonly PNPM_VERSION="11.21.0"
+readonly REPOSITORY="https://github.com/aptos-labs/aptos-ts-sdk.git"
+readonly SCRIPT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly PROJECT_DIRECTORY="$(cd -- "${SCRIPT_DIRECTORY}/.." && pwd)"
+readonly OUTPUT="${PROJECT_DIRECTORY}/lib/src/commonTest/resources/fixtures/aptos-ts-sdk-7.3.1/transactions.json"
+readonly CONFIDENTIAL_OUTPUT="${PROJECT_DIRECTORY}/lib/src/commonTest/resources/fixtures/aptos-ts-sdk-7.3.1/confidential-assets.json"
+readonly TEMP_DIRECTORY="$(mktemp -d -t kaptos-aptos-ts-sdk.XXXXXX)"
+
+cleanup() {
+  rm -rf -- "${TEMP_DIRECTORY}"
+}
+trap cleanup EXIT
+
+git clone --filter=blob:none --no-checkout --depth=1 "${REPOSITORY}" "${TEMP_DIRECTORY}/sdk"
+git -C "${TEMP_DIRECTORY}/sdk" fetch --depth=1 origin "${SDK_COMMIT}"
+git -C "${TEMP_DIRECTORY}/sdk" checkout --detach "${SDK_COMMIT}"
+
+npx --yes "pnpm@${PNPM_VERSION}" --dir "${TEMP_DIRECTORY}/sdk" install --frozen-lockfile
+node "${TEMP_DIRECTORY}/sdk/node_modules/typescript/lib/tsc.js" \
+  -p "${TEMP_DIRECTORY}/sdk/tsconfig.build.json"
+node "${SCRIPT_DIRECTORY}/generate-aptos-ts-fixtures.mjs" \
+  "${TEMP_DIRECTORY}/sdk" \
+  "${OUTPUT}"
+
+npx --yes "pnpm@${PNPM_VERSION}" --dir "${TEMP_DIRECTORY}/sdk/confidential-asset" \
+  install --frozen-lockfile --fetch-timeout 300000
+cp "${SCRIPT_DIRECTORY}/generate-confidential-assets-fixtures.ts" \
+  "${TEMP_DIRECTORY}/sdk/confidential-asset/.kaptos-fixture.ts"
+"${TEMP_DIRECTORY}/sdk/confidential-asset/node_modules/.bin/tsc" \
+  --ignoreConfig \
+  --noCheck \
+  --types node \
+  --module NodeNext \
+  --moduleResolution NodeNext \
+  --target ES2022 \
+  --outDir "${TEMP_DIRECTORY}/sdk/confidential-asset/.kaptos-fixture-dist" \
+  "${TEMP_DIRECTORY}/sdk/confidential-asset/.kaptos-fixture.ts"
+node "${TEMP_DIRECTORY}/sdk/confidential-asset/.kaptos-fixture-dist/.kaptos-fixture.js" \
+  "${CONFIDENTIAL_OUTPUT}"
+
+echo "Updated ${OUTPUT} from Aptos TS SDK ${SDK_COMMIT}"
+echo "Updated ${CONFIDENTIAL_OUTPUT} from Confidential Assets SDK 2.0.0"

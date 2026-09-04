@@ -135,7 +135,13 @@ object TypeTagParser {
       "u32",
       "u64",
       "u128",
-      "u256" -> {
+      "u256",
+      "i8",
+      "i16",
+      "i32",
+      "i64",
+      "i128",
+      "i256" -> {
         if (types.isNotEmpty())
           throw TypeTagParserError(str, TypeTagParserErrorType.UnexpectedPrimitiveTypeArguments)
         when (str) {
@@ -148,6 +154,12 @@ object TypeTagParser {
           "u64" -> TypeTagU64
           "u128" -> TypeTagU128
           "u256" -> TypeTagU256
+          "i8" -> TypeTagI8
+          "i16" -> TypeTagI16
+          "i32" -> TypeTagI32
+          "i64" -> TypeTagI64
+          "i128" -> TypeTagI128
+          "i256" -> TypeTagI256
           else -> throw IllegalArgumentException("Unknown primitive type")
         }
       }

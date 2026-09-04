@@ -15,8 +15,6 @@
  */
 package xyz.mcxross.kaptos.model
 
-import xyz.mcxross.bcs.Bcs
-
 sealed class PropertyType {
   data object U8 : PropertyType() {
     override fun toString(): String {
@@ -84,37 +82,30 @@ sealed class PropertyValue {
   abstract fun toByteArray(): ByteArray
 
   data class BooleanValue(val value: Boolean) : PropertyValue() {
-    override fun toByteArray(): ByteArray {
-      TODO("Not yet implemented")
-    }
+    override fun toByteArray(): ByteArray = byteArrayOf(if (value) 1 else 0)
   }
 
   data class NumberValue(val value: Number) : PropertyValue() {
-    override fun toByteArray(): ByteArray {
-      TODO("Not yet implemented")
-    }
+    override fun toByteArray(): ByteArray = encodeUnsignedDecimal(value.toString(), 8)
   }
 
   data class BigIntValue(val value: String) : PropertyValue() {
-    override fun toByteArray(): ByteArray {
-      TODO("Not yet implemented")
-    }
+    override fun toByteArray(): ByteArray = encodeUnsignedDecimal(value, 16)
   }
 
   data class StringValue(val value: String) : PropertyValue() {
-    override fun toByteArray(): ByteArray = Bcs.encodeToByteArray(MoveString(value))
+    override fun toByteArray(): ByteArray {
+      val utf8 = value.encodeToByteArray()
+      return encodeUleb128(utf8.size) + utf8
+    }
   }
 
   data class AccountAddressValue(val value: AccountAddress) : PropertyValue() {
-    override fun toByteArray(): ByteArray {
-      TODO("Not yet implemented")
-    }
+    override fun toByteArray(): ByteArray = value.data.copyOf()
   }
 
   data class Uint8ArrayValue(val value: ByteArray) : PropertyValue() {
-    override fun toByteArray(): ByteArray {
-      TODO("Not yet implemented")
-    }
+    override fun toByteArray(): ByteArray = encodeUleb128(value.size) + value
 
     override fun equals(other: Any?): Boolean {
       if (this === other) return true
@@ -129,4 +120,67 @@ sealed class PropertyValue {
       return value.contentHashCode()
     }
   }
+}
+
+internal fun PropertyValue.encodeAs(type: PropertyType): ByteArray =
+  when (type) {
+    PropertyType.BOOLEAN ->
+      (this as? PropertyValue.BooleanValue)?.toByteArray()
+        ?: propertyTypeMismatch(type)
+    PropertyType.U8 -> encodeNumber(this, 1, type)
+    PropertyType.U16 -> encodeNumber(this, 2, type)
+    PropertyType.U32 -> encodeNumber(this, 4, type)
+    PropertyType.U64 -> encodeNumber(this, 8, type)
+    PropertyType.U128 -> encodeNumber(this, 16, type)
+    PropertyType.U256 -> encodeNumber(this, 32, type)
+    PropertyType.ADDRESS ->
+      (this as? PropertyValue.AccountAddressValue)?.toByteArray()
+        ?: propertyTypeMismatch(type)
+    PropertyType.STRING ->
+      (this as? PropertyValue.StringValue)?.toByteArray()
+        ?: propertyTypeMismatch(type)
+    PropertyType.ARRAY ->
+      (this as? PropertyValue.Uint8ArrayValue)?.toByteArray()
+        ?: propertyTypeMismatch(type)
+  }
+
+private fun encodeNumber(value: PropertyValue, width: Int, type: PropertyType): ByteArray {
+  val decimal =
+    when (value) {
+      is PropertyValue.NumberValue -> value.value.toString()
+      is PropertyValue.BigIntValue -> value.value
+      else -> propertyTypeMismatch(type)
+    }
+  return encodeUnsignedDecimal(decimal, width)
+}
+
+private fun propertyTypeMismatch(expected: PropertyType): Nothing =
+  throw IllegalArgumentException("Property value does not match type $expected")
+
+private fun encodeUnsignedDecimal(value: String, width: Int): ByteArray {
+  require(value.isNotEmpty() && value.all(Char::isDigit)) { "Invalid unsigned integer: $value" }
+  val bytes = ByteArray(width)
+  value.forEach { digitChar ->
+    var carry = digitChar.digitToInt()
+    for (index in bytes.indices) {
+      val next = (bytes[index].toInt() and 0xff) * 10 + carry
+      bytes[index] = (next and 0xff).toByte()
+      carry = next ushr 8
+    }
+    require(carry == 0) { "Unsigned integer does not fit in ${width * 8} bits: $value" }
+  }
+  return bytes
+}
+
+private fun encodeUleb128(value: Int): ByteArray {
+  require(value >= 0)
+  var remaining = value
+  val output = mutableListOf<Byte>()
+  do {
+    var byte = remaining and 0x7f
+    remaining = remaining ushr 7
+    if (remaining != 0) byte = byte or 0x80
+    output += byte.toByte()
+  } while (remaining != 0)
+  return output.toByteArray()
 }

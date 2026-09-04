@@ -1,0 +1,356 @@
+public abstract class xyz/mcxross/kaptos/keyless/AbstractKeylessAccount : xyz/mcxross/kaptos/account/Account {
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[BLxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Lkotlinx/coroutines/Deferred;[BLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun awaitProof (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun clearPrivateKey ()V
+	public final fun getAccountAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun getAudience ()Ljava/lang/String;
+	public final fun getEphemeralKeyPair ()Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+	public final fun getJwt ()Ljava/lang/String;
+	public fun getKind ()Lxyz/mcxross/kaptos/account/TransactionSignerKind;
+	public final fun getPepper ()[B
+	public final fun getProof ()Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;
+	public fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;
+	public synthetic fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/PublicKey;
+	public fun getSigningScheme ()Lxyz/mcxross/kaptos/model/SigningScheme;
+	public final fun getUidKey ()Ljava/lang/String;
+	public final fun getUidValue ()Ljava/lang/String;
+	public final fun getVerificationKeyHash ()[B
+	public final fun isExpired ()Z
+	public fun isPrivateKeyCleared ()Z
+	public synthetic fun sign (Lxyz/mcxross/kaptos/model/HexInput;)Lxyz/mcxross/kaptos/core/crypto/Signature;
+	public fun sign (Lxyz/mcxross/kaptos/model/HexInput;)Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+	public fun signTransaction (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public synthetic fun signTransactionSignature (Lxyz/mcxross/kaptos/model/UnsignedTransaction;)Lxyz/mcxross/kaptos/core/crypto/Signature;
+	public fun signTransactionSignature (Lxyz/mcxross/kaptos/model/UnsignedTransaction;)Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+	public fun signWithAuthenticator (Lxyz/mcxross/kaptos/model/HexInput;)Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;
+	public final fun toBcs ()[B
+	public fun verifySignature (Lxyz/mcxross/kaptos/model/HexInput;Lxyz/mcxross/kaptos/core/crypto/Signature;)Z
+}
+
+public final class xyz/mcxross/kaptos/keyless/EphemeralKeyPair : java/lang/AutoCloseable {
+	public static final field BLINDER_LENGTH I
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair$Companion;
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/core/crypto/Ed25519PrivateKey;J[BILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/core/crypto/Ed25519PrivateKey;J[BLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public fun close ()V
+	public final fun getBlinder ()[B
+	public final fun getExpiryDateSecs-s-VKNKU ()J
+	public final fun getNonce ()Ljava/lang/String;
+	public final fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;
+	public final fun isCleared ()Z
+	public final fun isExpired (J)Z
+	public static synthetic fun isExpired$default (Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;JILjava/lang/Object;)Z
+	public final fun sign ([B)Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;
+	public final fun toBcs ()[B
+}
+
+public final class xyz/mcxross/kaptos/keyless/EphemeralKeyPair$Companion {
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+	public final fun generate-VKZWuLQ (J)Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+	public static synthetic fun generate-VKZWuLQ$default (Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair$Companion;JILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+}
+
+public final class xyz/mcxross/kaptos/keyless/EphemeralKeyPairKt {
+	public static final fun ephemeralKeyPair (Lxyz/mcxross/kaptos/Aptos;)Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+	public static final fun ephemeralKeyPair-2TYgG_w (Lxyz/mcxross/kaptos/Aptos;J)Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;
+}
+
+public final class xyz/mcxross/kaptos/keyless/FederatedKeylessAccount : xyz/mcxross/kaptos/keyless/AbstractKeylessAccount {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/FederatedKeylessAccount$Companion;
+	public synthetic fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;
+	public synthetic fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/PublicKey;
+	public fun getPublicKey ()Lxyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey;
+}
+
+public final class xyz/mcxross/kaptos/keyless/FederatedKeylessAccount$Companion {
+	public final fun create (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;[B)Lxyz/mcxross/kaptos/keyless/FederatedKeylessAccount;
+	public static synthetic fun create$default (Lxyz/mcxross/kaptos/keyless/FederatedKeylessAccount$Companion;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;[BILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/FederatedKeylessAccount;
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/FederatedKeylessAccount;
+}
+
+public final class xyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey : xyz/mcxross/kaptos/core/crypto/AccountPublicKey, xyz/mcxross/kaptos/core/crypto/AnyPublicKeyCompatible, xyz/mcxross/kaptos/core/crypto/SimulationSignatureProvider {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey$Companion;
+	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;)V
+	public fun authKey ()Lxyz/mcxross/kaptos/core/AuthenticationKey;
+	public fun getAnyPublicKeyVariant ()Lxyz/mcxross/kaptos/model/AnyPublicKeyVariant;
+	public final fun getJwkAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun getKeylessPublicKey ()Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+	public synthetic fun simulationSignature ()Lxyz/mcxross/kaptos/core/crypto/Signature;
+	public fun simulationSignature ()Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+	public fun toAnyPublicKeyBcs ()[B
+	public fun toBcs ()[B
+	public fun toByteArray ()[B
+	public fun verifySignature (Lxyz/mcxross/kaptos/model/HexInput;Lxyz/mcxross/kaptos/core/crypto/Signature;)Z
+}
+
+public final class xyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey$Companion {
+	public final fun fromJwt (Ljava/lang/String;[BLxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;)Lxyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey;
+	public static synthetic fun fromJwt$default (Lxyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey$Companion;Ljava/lang/String;[BLxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/FederatedKeylessPublicKey;
+}
+
+public final class xyz/mcxross/kaptos/keyless/Groth16Proof {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/Groth16Proof$Companion;
+	public fun <init> ([B[B[B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getA ()[B
+	public final fun getB ()[B
+	public final fun getC ()[B
+	public fun hashCode ()I
+	public final fun toBcs ()[B
+}
+
+public final class xyz/mcxross/kaptos/keyless/Groth16Proof$Companion {
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/Groth16Proof;
+}
+
+public final class xyz/mcxross/kaptos/keyless/Groth16VerificationKey {
+	public fun <init> ([B[B[BLjava/util/List;[B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlphaG1 ()[B
+	public final fun getBetaG2 ()[B
+	public final fun getDeltaG2 ()[B
+	public final fun getGammaAbcG1 ()Ljava/util/List;
+	public final fun getGammaG2 ()[B
+	public final fun hash ()[B
+	public fun hashCode ()I
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessAccount : xyz/mcxross/kaptos/keyless/AbstractKeylessAccount {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/KeylessAccount$Companion;
+	public synthetic fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;
+	public synthetic fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/PublicKey;
+	public fun getPublicKey ()Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessAccount$Companion {
+	public final fun create (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;[B)Lxyz/mcxross/kaptos/keyless/KeylessAccount;
+	public static synthetic fun create$default (Lxyz/mcxross/kaptos/keyless/KeylessAccount$Companion;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;[BILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessAccount;
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/KeylessAccount;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessClientConfig {
+	public fun <init> ()V
+	public fun <init> (Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Ljava/util/Map;Lio/ktor/client/HttpClient;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Ljava/util/Map;Lio/ktor/client/HttpClient;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public final fun component2 ()Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public final fun component3 ()Ljava/util/Map;
+	public final fun component4 ()Lio/ktor/client/HttpClient;
+	public final fun copy (Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Ljava/util/Map;Lio/ktor/client/HttpClient;)Lxyz/mcxross/kaptos/keyless/KeylessClientConfig;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/keyless/KeylessClientConfig;Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Ljava/util/Map;Lio/ktor/client/HttpClient;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessClientConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommonHeaders ()Ljava/util/Map;
+	public final fun getHttpClient ()Lio/ktor/client/HttpClient;
+	public final fun getPepperService ()Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public final fun getProverService ()Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessConfiguration {
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;JLxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;IIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;JLxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;
+	public final fun component2-s-VKNKU ()J
+	public final fun component3 ()Lxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;
+	public final fun component4 ()I
+	public final fun component5 ()I
+	public final fun component6 ()I
+	public final fun component7 ()I
+	public final fun copy-11MsVeg (Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;JLxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;IIII)Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;
+	public static synthetic fun copy-11MsVeg$default (Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;JLxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;IIIIILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxCommittedEphemeralPublicKeyBytes ()I
+	public final fun getMaxExpirationHorizonSecs-s-VKNKU ()J
+	public final fun getMaxExtraFieldBytes ()I
+	public final fun getMaxIssuerBytes ()I
+	public final fun getMaxJwtHeaderBase64Bytes ()I
+	public final fun getTrainingWheelsPublicKey ()Lxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;
+	public final fun getVerificationKey ()Lxyz/mcxross/kaptos/keyless/Groth16VerificationKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessCryptoKt {
+	public static final field KEYLESS_ID_COMMITMENT_LENGTH I
+	public static final field KEYLESS_PEPPER_LENGTH I
+	public static final fun verifyKeylessSignature-CoGd6hE (Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;[BLxyz/mcxross/kaptos/keyless/KeylessSignature;Lxyz/mcxross/kaptos/keyless/MoveJwk;Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;J)Z
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessEndpointConfig {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessEndpointConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHeaders ()Ljava/util/Map;
+	public final fun getUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessPublicKey : xyz/mcxross/kaptos/core/crypto/AccountPublicKey, xyz/mcxross/kaptos/core/crypto/AnyPublicKeyCompatible, xyz/mcxross/kaptos/core/crypto/SimulationSignatureProvider {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/KeylessPublicKey$Companion;
+	public fun <init> (Ljava/lang/String;[B)V
+	public fun authKey ()Lxyz/mcxross/kaptos/core/AuthenticationKey;
+	public fun getAnyPublicKeyVariant ()Lxyz/mcxross/kaptos/model/AnyPublicKeyVariant;
+	public final fun getIdCommitment ()[B
+	public final fun getIssuer ()Ljava/lang/String;
+	public synthetic fun simulationSignature ()Lxyz/mcxross/kaptos/core/crypto/Signature;
+	public fun simulationSignature ()Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+	public fun toAnyPublicKeyBcs ()[B
+	public fun toBcs ()[B
+	public fun toByteArray ()[B
+	public fun verifySignature (Lxyz/mcxross/kaptos/model/HexInput;Lxyz/mcxross/kaptos/core/crypto/Signature;)Z
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessPublicKey$Companion {
+	public final fun create (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;[B)Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+	public final fun fromJwt (Ljava/lang/String;[BLjava/lang/String;)Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+	public static synthetic fun fromJwt$default (Lxyz/mcxross/kaptos/keyless/KeylessPublicKey$Companion;Ljava/lang/String;[BLjava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessPublicKey;
+}
+
+public abstract interface class xyz/mcxross/kaptos/keyless/KeylessService : java/lang/AutoCloseable {
+	public abstract fun buildFederatedJwkUpdate (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildFederatedJwkUpdate$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun checkValidity (Lxyz/mcxross/kaptos/keyless/AbstractKeylessAccount;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun configuration (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun configuration$default (Lxyz/mcxross/kaptos/keyless/KeylessService;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun deriveFederatedAccount (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Lxyz/mcxross/kaptos/model/AccountAddressInput;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deriveFederatedAccount$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Lxyz/mcxross/kaptos/model/AccountAddressInput;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun deriveStandardAccount (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deriveStandardAccount$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getPepper (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getPepper$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getPepperBase (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getPepperBase$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getProof (Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getProof$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun jwks (Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun jwks$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun verify (Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;[BLxyz/mcxross/kaptos/keyless/KeylessSignature;Lxyz/mcxross/kaptos/keyless/MoveJwk;Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;[BLxyz/mcxross/kaptos/keyless/KeylessSignature;Lxyz/mcxross/kaptos/keyless/MoveJwk;Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessService$DefaultImpls {
+	public static synthetic fun buildFederatedJwkUpdate$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun configuration$default (Lxyz/mcxross/kaptos/keyless/KeylessService;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun deriveFederatedAccount$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Lxyz/mcxross/kaptos/model/AccountAddressInput;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun deriveStandardAccount$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lxyz/mcxross/kaptos/keyless/ProofFetchMode;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getPepper$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getPepperBase$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getProof$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Ljava/lang/String;Lxyz/mcxross/kaptos/keyless/EphemeralKeyPair;[BLjava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun jwks$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lxyz/mcxross/kaptos/keyless/KeylessService;Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;[BLxyz/mcxross/kaptos/keyless/KeylessSignature;Lxyz/mcxross/kaptos/keyless/MoveJwk;Lxyz/mcxross/kaptos/keyless/KeylessConfiguration;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessServiceKt {
+	public static final fun keyless (Lxyz/mcxross/kaptos/Aptos;Lxyz/mcxross/kaptos/keyless/KeylessClientConfig;)Lxyz/mcxross/kaptos/keyless/KeylessService;
+	public static synthetic fun keyless$default (Lxyz/mcxross/kaptos/Aptos;Lxyz/mcxross/kaptos/keyless/KeylessClientConfig;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/KeylessService;
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessSignature : xyz/mcxross/kaptos/core/crypto/Signature, xyz/mcxross/kaptos/core/crypto/AnySignatureCompatible {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/KeylessSignature$Companion;
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Ljava/lang/String;JLxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getAnySignatureVariant ()Lxyz/mcxross/kaptos/model/AnySignatureVariant;
+	public final fun getEphemeralPublicKey ()Lxyz/mcxross/kaptos/core/crypto/Ed25519PublicKey;
+	public final fun getEphemeralSignature ()Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;
+	public final fun getExpiryDateSecs-s-VKNKU ()J
+	public final fun getJwtHeader ()Ljava/lang/String;
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun getProof ()Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;
+	public fun toAnySignatureBcs ()[B
+	public fun toBcs ()[B
+	public fun toByteArray ()[B
+}
+
+public final class xyz/mcxross/kaptos/keyless/KeylessSignature$Companion {
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+	public final fun simulation ()Lxyz/mcxross/kaptos/keyless/KeylessSignature;
+}
+
+public final class xyz/mcxross/kaptos/keyless/MoveJwk {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/MoveJwk$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lxyz/mcxross/kaptos/keyless/MoveJwk;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/keyless/MoveJwk;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/MoveJwk;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Ljava/lang/String;
+	public final fun getExponent ()Ljava/lang/String;
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun getKeyType ()Ljava/lang/String;
+	public final fun getModulus ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/MoveJwk$Companion {
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/MoveJwk;
+}
+
+public final class xyz/mcxross/kaptos/keyless/ProofFetchMode : java/lang/Enum {
+	public static final field Await Lxyz/mcxross/kaptos/keyless/ProofFetchMode;
+	public static final field Background Lxyz/mcxross/kaptos/keyless/ProofFetchMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lxyz/mcxross/kaptos/keyless/ProofFetchMode;
+	public static fun values ()[Lxyz/mcxross/kaptos/keyless/ProofFetchMode;
+}
+
+public abstract interface class xyz/mcxross/kaptos/keyless/ProofFetchStatus {
+}
+
+public final class xyz/mcxross/kaptos/keyless/ProofFetchStatus$Failed : xyz/mcxross/kaptos/keyless/ProofFetchStatus {
+	public fun <init> (Lxyz/mcxross/kaptos/model/AptosError;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/AptosError;
+	public final fun copy (Lxyz/mcxross/kaptos/model/AptosError;)Lxyz/mcxross/kaptos/keyless/ProofFetchStatus$Failed;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/keyless/ProofFetchStatus$Failed;Lxyz/mcxross/kaptos/model/AptosError;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/ProofFetchStatus$Failed;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lxyz/mcxross/kaptos/model/AptosError;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/ProofFetchStatus$Success : xyz/mcxross/kaptos/keyless/ProofFetchStatus {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/keyless/ProofFetchStatus$Success;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature {
+	public static final field Companion Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature$Companion;
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/Groth16Proof;JLjava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/keyless/Groth16Proof;JLjava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/keyless/Groth16Proof;
+	public final fun component2-s-VKNKU ()J
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;
+	public final fun copy-lhpF3nk (Lxyz/mcxross/kaptos/keyless/Groth16Proof;JLjava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;)Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;
+	public static synthetic fun copy-lhpF3nk$default (Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;Lxyz/mcxross/kaptos/keyless/Groth16Proof;JLjava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;ILjava/lang/Object;)Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpirationHorizonSecs-s-VKNKU ()J
+	public final fun getExtraField ()Ljava/lang/String;
+	public final fun getOverrideAudience ()Ljava/lang/String;
+	public final fun getProof ()Lxyz/mcxross/kaptos/keyless/Groth16Proof;
+	public final fun getTrainingWheelsSignature ()Lxyz/mcxross/kaptos/core/crypto/Ed25519Signature;
+	public fun hashCode ()I
+	public final fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature$Companion {
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/keyless/ZeroKnowledgeSignature;
+}
+

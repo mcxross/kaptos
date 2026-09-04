@@ -41,7 +41,9 @@ data class AccountData(
    * string to avoid precision loss in languages like JavaScript, which do not natively support
    * 64-bit integers in JSON.
    */
-  @SerialName("sequence_number") val sequenceNumber: String,
+  @SerialName("sequence_number")
+  @Serializable(with = AptosDecimalStringULongSerializer::class)
+  val sequenceNumber: ULong,
 
   /**
    * Authentication key for the account, represented as a hex-encoded string.

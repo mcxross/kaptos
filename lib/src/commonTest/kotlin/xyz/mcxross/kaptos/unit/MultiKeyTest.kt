@@ -5,8 +5,8 @@ import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
-import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.account.MultiKeyAccount
+import xyz.mcxross.kaptos.account.SingleKeyAccount
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Secp256k1PublicKey
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
@@ -83,9 +83,9 @@ class MultiKeyTest {
 
   @Test
   fun `should derive multikey account address from auth key`() = runBlocking {
-    val account1 = Account.generate(SigningSchemeInput.Ed25519)
-    val account2 = Account.generate(SigningSchemeInput.Secp256k1)
-    val account3 = Account.generate(SigningSchemeInput.Ed25519)
+    val account1 = SingleKeyAccount.generate(SigningSchemeInput.Ed25519)
+    val account2 = SingleKeyAccount.generate(SigningSchemeInput.Secp256k1)
+    val account3 = SingleKeyAccount.generate(SigningSchemeInput.Ed25519)
 
     val multiKey = MultiKey(listOf(account1.publicKey, account2.publicKey, account3.publicKey), 2)
 

@@ -5,7 +5,7 @@ import xyz.mcxross.kaptos.generated.GetTableItemsDataQuery
 import xyz.mcxross.kaptos.generated.GetTableItemsMetadataQuery
 import xyz.mcxross.kaptos.internal.getTableItemsData
 import xyz.mcxross.kaptos.internal.getTableItemsMetadata
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.ProcessorType
 import xyz.mcxross.kaptos.model.Result
@@ -19,9 +19,9 @@ import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 /**
  * A class for querying Aptos `Table` related data.
  *
- * @property config The [AptosConfig] for connecting to the network.
+ * @property config The [TransportConfig] for connecting to the network.
  */
-class Table(override val config: AptosConfig) : Table {
+internal class Table(override val config: TransportConfig) : Table {
 
   /**
    * Queries for table items data with optional filtering and pagination.

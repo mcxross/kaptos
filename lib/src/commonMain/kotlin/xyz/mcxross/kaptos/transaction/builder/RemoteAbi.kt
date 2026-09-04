@@ -31,11 +31,11 @@ import xyz.mcxross.kaptos.util.findFirstNonSignerArg
  * @param functionName
  * @param aptosConfig
  */
-suspend fun fetchFunctionAbi(
+internal suspend fun fetchFunctionAbi(
   moduleAddress: String,
   moduleName: String,
   functionName: String,
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
 ): Result<MoveFunction, Exception> {
   return when (val module = getModule(aptosConfig, HexInput(moduleAddress), moduleName)) {
     is Result.Ok -> {
@@ -54,8 +54,8 @@ suspend fun fetchFunctionAbi(
   }
 }
 
-suspend fun fetchEntryFunctionAbi(
-  aptosConfig: AptosConfig,
+internal suspend fun fetchEntryFunctionAbi(
+  aptosConfig: TransportConfig,
   moduleAddress: String,
   moduleName: String,
   functionName: String,
@@ -94,8 +94,8 @@ suspend fun fetchEntryFunctionAbi(
  * @param functionName
  * @param aptosConfig
  */
-suspend fun fetchViewFunctionAbi(
-  aptosConfig: AptosConfig,
+internal suspend fun fetchViewFunctionAbi(
+  aptosConfig: TransportConfig,
   moduleAddress: String,
   moduleName: String,
   functionName: String,

@@ -15,25 +15,24 @@
  */
 package xyz.mcxross.kaptos.model
 
-interface InputGenerateTransactionData {
+internal interface InputGenerateTransactionData {
   val sender: AccountAddressInput
   val data: InputGenerateTransactionPayloadData
-  val options: InputGenerateTransactionOptions?
+  val options: TransactionOptions?
   val withFeePayer: Boolean
 }
 
-data class InputGenerateSingleSignerRawTransactionData(
+internal data class InputGenerateSingleSignerRawTransactionData(
   override val sender: AccountAddressInput,
   override val data: InputGenerateTransactionPayloadData,
-  override val options: InputGenerateTransactionOptions?,
-  override val withFeePayer: Boolean,
-  val secondarySignerAddresses: Nothing?,
+  override val options: TransactionOptions? = null,
+  override val withFeePayer: Boolean = false,
 ) : InputGenerateTransactionData
 
-data class InputGenerateMultiSignerRawTransactionData(
+internal data class InputGenerateMultiSignerRawTransactionData(
   override val sender: AccountAddressInput,
   override val data: InputGenerateTransactionPayloadData,
-  override val options: InputGenerateTransactionOptions?,
-  override val withFeePayer: Boolean,
+  override val options: TransactionOptions? = null,
+  override val withFeePayer: Boolean = false,
   val secondarySignerAddresses: List<AccountAddressInput>,
 ) : InputGenerateTransactionData

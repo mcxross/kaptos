@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentTokenRoyaltyV1FilterBuilder {
+internal class CurrentTokenRoyaltyV1FilterBuilder {
   private val andConditions = mutableListOf<Current_token_royalty_v1_bool_exp>()
   private val orConditions = mutableListOf<Current_token_royalty_v1_bool_exp>()
   private var notCondition: Current_token_royalty_v1_bool_exp? = null
@@ -41,6 +41,6 @@ class CurrentTokenRoyaltyV1FilterBuilder {
     )
 }
 
-fun currentTokenRoyaltyV1Filter(
+internal fun currentTokenRoyaltyV1Filter(
   init: CurrentTokenRoyaltyV1FilterBuilder.() -> Unit
 ): Current_token_royalty_v1_bool_exp = CurrentTokenRoyaltyV1FilterBuilder().apply(init).build()

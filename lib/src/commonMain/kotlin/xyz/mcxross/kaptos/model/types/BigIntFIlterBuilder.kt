@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Bigint_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class BigintFilterBuilder {
+internal class BigintFilterBuilder {
   var eq: Any? = null
   var gt: Any? = null
   var gte: Any? = null
@@ -28,5 +28,5 @@ class BigintFilterBuilder {
     )
 }
 
-fun bigintFilter(init: BigintFilterBuilder.() -> Unit): Bigint_comparison_exp =
+internal fun bigintFilter(init: BigintFilterBuilder.() -> Unit): Bigint_comparison_exp =
   BigintFilterBuilder().apply(init).build()

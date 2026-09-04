@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Events_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class EventsOrderBuilder {
+internal class EventsOrderBuilder {
   var accountAddress: OrderBy? = null
   var creationNumber: OrderBy? = null
   var data: OrderBy? = null
@@ -28,5 +28,5 @@ class EventsOrderBuilder {
     )
 }
 
-fun eventsOrder(init: EventsOrderBuilder.() -> Unit): Events_order_by =
+internal fun eventsOrder(init: EventsOrderBuilder.() -> Unit): Events_order_by =
   EventsOrderBuilder().apply(init).build()

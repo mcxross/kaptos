@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Table_metadatas_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class TableMetadatasOrderBuilder {
+internal class TableMetadatasOrderBuilder {
   var handle: OrderBy? = null
   var keyType: OrderBy? = null
   var valueType: OrderBy? = null
@@ -16,5 +16,5 @@ class TableMetadatasOrderBuilder {
     )
 }
 
-fun tableMetadatasOrder(init: TableMetadatasOrderBuilder.() -> Unit): Table_metadatas_order_by =
+internal fun tableMetadatasOrder(init: TableMetadatasOrderBuilder.() -> Unit): Table_metadatas_order_by =
   TableMetadatasOrderBuilder().apply(init).build()

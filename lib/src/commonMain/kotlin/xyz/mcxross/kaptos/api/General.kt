@@ -36,9 +36,9 @@ import xyz.mcxross.kaptos.protocol.General
 /**
  * A class to handle reading and writing general ledger information.
  *
- * @property config AptosConfig object for configuration.
+ * @property config TransportConfig object for configuration.
  */
-class General(override val config: AptosConfig) : General {
+internal class General(override val config: TransportConfig) : General {
 
   /**
    * Retrieves the latest ledger information from a fullnode.

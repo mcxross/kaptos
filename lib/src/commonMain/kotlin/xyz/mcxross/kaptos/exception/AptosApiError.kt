@@ -20,7 +20,7 @@ import kotlinx.serialization.Serializable
 
 /** Represents a structured error response from the Aptos REST API. */
 @Serializable
-data class AptosApiError(
+internal data class AptosApiError(
   /** A descriptive message about the error. */
   override val message: String,
 

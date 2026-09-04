@@ -16,7 +16,7 @@
 
 package xyz.mcxross.kaptos.model
 
-enum class AptosApiType {
+internal enum class AptosApiType {
   FULLNODE,
   INDEXER,
   FAUCET,

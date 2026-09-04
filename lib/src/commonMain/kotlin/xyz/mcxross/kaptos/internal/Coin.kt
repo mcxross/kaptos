@@ -18,14 +18,14 @@ package xyz.mcxross.kaptos.internal
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun transferCoinTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   from: AccountAddressInput,
   to: AccountAddressInput,
   amount: ULong,
   coinType: String,
   withFeePayer: Boolean,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   val data =
     InputGenerateSingleSignerRawTransactionData(
       sender = from,
@@ -37,7 +37,6 @@ internal suspend fun transferCoinTransaction(
         },
       options = options,
       withFeePayer = withFeePayer,
-      secondarySignerAddresses = null,
     )
-  return generateTransaction(aptosConfig, data) as SimpleTransaction
+  return generateTransaction(aptosConfig, data) as UnsignedTransaction.Simple
 }

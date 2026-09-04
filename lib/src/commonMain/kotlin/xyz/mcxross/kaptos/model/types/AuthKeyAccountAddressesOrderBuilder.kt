@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Auth_key_account_addresses_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class AuthKeyAccountAddressesOrderBuilder {
+internal class AuthKeyAccountAddressesOrderBuilder {
   var accountAddress: OrderBy? = null
   var authKey: OrderBy? = null
   var isAuthKeyUsed: OrderBy? = null
@@ -18,6 +18,6 @@ class AuthKeyAccountAddressesOrderBuilder {
     )
 }
 
-fun authKeyAccountAddressesOrder(
+internal fun authKeyAccountAddressesOrder(
   init: AuthKeyAccountAddressesOrderBuilder.() -> Unit
 ): Auth_key_account_addresses_order_by = AuthKeyAccountAddressesOrderBuilder().apply(init).build()

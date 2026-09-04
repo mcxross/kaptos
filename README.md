@@ -3,7 +3,7 @@
 Kaptos is a Kotlin Multiplatform SDK for Aptos. It provides a common API for interacting with Aptos services across
 multiple platforms.
 
-[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.3.0-B125EA?logo=kotlin)](https://kotlinlang.org)
+[![Kotlin Version](https://img.shields.io/badge/Kotlin-2.4.10-B125EA?logo=kotlin)](https://kotlinlang.org)
 ![Docs](https://github.com/mcxross/kaptos/actions/workflows/docs.yml/badge.svg)
 [![Maven Central](https://img.shields.io/maven-central/v/xyz.mcxross.kaptos/kaptos.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/xyz.mcxross.kaptos/kaptos)
 [![Snapshot](https://img.shields.io/nexus/s/xyz.mcxross.kaptos/kaptos?server=https%3A%2F%2Fcentral.sonatype.com&nexusVersion=3&label=Snapshot)](https://central.sonatype.com/repository/maven-snapshots/xyz/mcxross/kaptos/)
@@ -11,13 +11,8 @@ multiple platforms.
 
 ![badge-android](http://img.shields.io/badge/Platform-Android-brightgreen.svg?logo=android)
 ![badge-ios](http://img.shields.io/badge/Platform-iOS-orange.svg?logo=apple)
-![badge-tvos](http://img.shields.io/badge/Platform-tvOS-lightgrey.svg?logo=apple)
-![badge-watchos](http://img.shields.io/badge/Platform-watchOS-lightgrey.svg?logo=apple)
-![badge-js](http://img.shields.io/badge/Platform-NodeJS-yellow.svg?logo=javascript)
 ![badge-jvm](http://img.shields.io/badge/Platform-JVM-red.svg?logo=openjdk)
-![badge-linux](http://img.shields.io/badge/Platform-Linux-lightgrey.svg?logo=linux)
 ![badge-macos](http://img.shields.io/badge/Platform-macOS-orange.svg?logo=apple)
-![badge-windows](http://img.shields.io/badge/Platform-Windows-blue.svg?logo=windows)
 
 - [Features](#features)
 - [Installation](#installation)
@@ -28,9 +23,13 @@ multiple platforms.
 
 ## Features
 
-- **Multiplatform**: Kaptos is a Kotlin Multiplatform library usable across various platforms.
-- **Aptos API**: Kaptos offers a unified API for Aptos services.
-- **Client Configuration**: Kaptos supports customizable client settings, such as proxy and network configurations.
+- **Kotlin-native API**: namespaced services, coroutines, sealed models, unsigned Aptos values, and
+  typed results.
+- **Modern transactions**: standard, sponsored, multi-agent, orderless, script, multisig-v2, and
+  account-abstraction flows.
+- **Multiplatform**: Android, JVM, iOS, and macOS are compiled and tested release targets.
+- **Optional cryptography**: matching artifacts provide Keyless, batch-encrypted transactions, and
+  Confidential Assets without increasing the core dependency surface.
 
 <details>
 <summary><h2>Installation</h2></summary>
@@ -42,6 +41,30 @@ Add the following to your common source set:
 ```kotlin
 commonMain.dependencies {
     implementation("xyz.mcxross.kaptos:kaptos:<version>")
+}
+```
+
+Encrypted transaction construction is deliberately optional:
+
+```kotlin
+commonMain.dependencies {
+    implementation("xyz.mcxross.kaptos:kaptos-encrypted-transactions:<version>")
+}
+```
+
+Keyless account support is also optional:
+
+```kotlin
+commonMain.dependencies {
+    implementation("xyz.mcxross.kaptos:kaptos-keyless:<version>")
+}
+```
+
+Confidential balances, proofs, and asset operations are provided by a separate artifact:
+
+```kotlin
+commonMain.dependencies {
+    implementation("xyz.mcxross.kaptos:kaptos-confidential-assets:<version>")
 }
 ```
 
@@ -88,74 +111,11 @@ dependencies {
 }
 ```
 
-#### tvOS
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-tvos:<version>")
-}
-```
-
-#### watchOS
-
-Kaptos provides artifacts for both watchOS arm32, arm64 and x64 architectures. You can add the following to your watchOS
-project:
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-watchosarm32:<version>")
-}
-```
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-watchosarm64:<version>")
-}
-```
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-watchosx64:<version>")
-}
-```
-
-#### Js
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-js:<version>")
-}
-```
-
 #### JVM
 
 ```kotlin
 dependencies {
     implementation("xyz.mcxross.kaptos:kaptos-jvm:<version>")
-}
-```
-
-#### Linux
-
-Kaptos provides artifacts for both Linux arm64 and x64 architectures. You can add the following to your Linux project:
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-linuxarm64:<version>")
-}
-```
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-linuxx64:<version>")
-}
-```
-
-#### Windows
-
-```kotlin
-dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-mingw:<version>")
 }
 ```
 
@@ -172,86 +132,125 @@ repositories {
 
 ## Usage
 
-Initialize `Aptos` to access the SDK API.
+Use the scoped `aptos` entry point for one workflow. It closes the shared transport and clears
+accounts created through the client, whether the workflow succeeds or fails.
 
 ```kotlin
-val aptos = Aptos()
-```
-
-If you want to pass in a custom configuration, you can do so by passing in a `AptosConfig` object.
-
-```kotlin
-val config = AptosConfig(AptosSettings(network = Network.LOCAL))
-val aptos = Aptos(config)
-```
-
-### Reading Data from chain
-
-```kotlin
-val modules = aptos.getAccountModules("0x1".toAccountAddress())
-```
-
-### Account management (default to Ed25519)
-
-#### Generate new keys
-
-```kotlin
-val account = Account.generate()
-```
-
-#### Derive from private key
-```kotlin
-// Create a private key instance for Ed25519 scheme 
-val privateKey = Ed25519PrivateKey("myEd25519privatekeystring")
-
-// Derive an account from private key
-
-// This is used as a local calculation and therefore is used to instantiate an `Account`
-// that has not had its authentication key rotated
-val account = Account.fromPrivateKey(privateKey)
-```
-
-#### Derive from private key and address
-
-```kotlin
-// Create a private key instance for Ed25519 scheme 
-val privateKey = Ed25519PrivateKey("myEd25519privatekeystring")
-
-// Derive an account from private key and address
-
-// create an AccountAddress instance from the account address string
-val address = AccountAddress.fromString()
-
-```
-
-### Submit transaction
-
-Kaptos provides Domain Specific Language (DSL) for building transactions. The following example demonstrates how to build
-a simple transaction to transfer coins from one account to another.
-
-```kotlin
-val alice = Account.generate()
-val bob = Account.generate()
-
-// Creating account credentials does not automatically create an account on-chain.
-// You must explicitly create an account on-chain before you can interact with it.
-// To do this in testnet, you can use the faucet.
-val aliceFaucet = aptos.fundAccount(alice.accountAddress, 1000000000)
-val bobFaucet = aptos.fundAccount(bob.accountAddress, 1000000000)
-
-val txn = aptos.execute(alice) {
-    function = "0x1::coin::transfer"
-    typeArgs("0x1::aptos_coin::AptosCoin")
-    args(bob.accountAddress, 1_000_000UL)
+suspend fun main() = aptos(AptosConfig(network = Network.TESTNET)) {
+    val ledger = ledger.info()
+    println("Chain ${ledger.getOrNull()?.chainId}")
 }
 ```
 
-It also provides pre-built transaction builders for common transactions. For example, to transfer coins from one account
-to another, you can use the `transferCoinTransaction` builder.
+Services are grouped by domain and share one configured transport. Construct `Aptos`
+directly only when its lifetime is managed by a long-lived application scope.
 
 ```kotlin
-val txn = aptos.transferCoinTransaction(alice.accountAddress, bob.accountAddress, 1_000_000UL)
+aptos {
+    val framework = AccountAddress.fromString("0x1")
+    val account = accounts.get(framework)
+    val ledger = ledger.info()
+    val names = names.getAccountNames(framework)
+}
 ```
+
+### Read an account balance
+
+```kotlin
+aptos {
+    accounts.getBalance(
+        address = framework,
+        asset = AccountAsset.coin("0x1::aptos_coin::AptosCoin"),
+    ).fold(
+        onSuccess = { println("Balance: $it octas") },
+        onFailure = { println("Balance lookup failed: ${it.message}") },
+    )
+}
+```
+
+### Account lifecycle
+
+```kotlin
+aptos {
+    val generated = account()
+    val imported = ed25519Account("ed25519-priv-0x...")
+    val message = "hello, Aptos"
+    val signature = imported.signText(message)
+        .getOrElse { failure -> error(failure.message) }
+    check(imported.verifySignature(message.encodeToByteArray(), signature))
+}
+```
+
+`generated` and `imported` are SDK-owned and cleared at the end of the block. An account supplied
+by an external wallet remains caller-owned; Kaptos does not unexpectedly invalidate it.
+
+### Submit transaction
+
+The same service composes building, signing, submission, and confirmation. Amounts remain unsigned
+throughout the call.
+
+```kotlin
+aptos(AptosConfig(network = Network.TESTNET)) {
+    val alice = ed25519Account("ed25519-priv-0x...")
+    val payload = TransactionPayload.entryFunction(
+        function = "0x1::aptos_account::transfer",
+        arguments = listOf(
+            MoveArgument.Address(recipient),
+            MoveArgument.U64(1_000_000u),
+        ),
+    )
+    val committed = transactions.submitAndWait(alice, payload)
+        .getOrElse { failure -> error(failure.message) }
+
+    println("Committed ${committed.hash}")
+}
+```
+
+### Solana derivable account abstraction
+
+The framework-native helper derives the Aptos account address and constructs the exact SIWS
+message from each entry-function transaction. A local Ed25519 account is convenient for tests;
+production applications can provide a `SolanaMessageSigner` backed by their wallet UI.
+
+```kotlin
+aptos(AptosConfig(network = Network.TESTNET)) {
+    val fundingAccount = ed25519Account("ed25519-priv-0x...")
+    val abstracted = SolanaDerivableAccount.fromEd25519(
+        signer = fundingAccount,
+        domain = "wallet.example",
+    )
+
+    transactions.submitAndWait(
+        signer = abstracted,
+        payload = TransactionPayload.entryFunction(
+            function = "0x1::aptos_account::transfer",
+            arguments = listOf(
+                MoveArgument.Address(recipient),
+                MoveArgument.U64(1_000_000u),
+            ),
+        ),
+    )
+}
+```
+
+The derivable account must be funded before it can reserve transaction fees. Aptos removed
+permissioned signers; do not use `0x1::permissioned_delegation::authenticate` for new flows.
+
+Runnable standard, sponsored, orderless, abstraction, Keyless, encrypted-transaction, and
+Confidential Asset examples are in [`sample/jvmApp`](sample/jvmApp).
+
+Run a JVM example directly with Gradle. `standard` is the default when `--args` is omitted:
+
+```shell
+APTOS_PRIVATE_KEY='ed25519-priv-0x...' \
+APTOS_RECIPIENT='0x...' \
+APTOS_NETWORK='TESTNET' \
+./gradlew :sample:jvmApp:run --args=standard
+```
+
+Other accepted names are `sponsored`, `orderless`, `abstraction`, `keyless`, `encrypted`,
+`confidential`, `account`, and `multi-key`. Each sample reports any additional environment values
+it requires.
 
 ## Documentation and examples
 

@@ -23,8 +23,8 @@ import xyz.mcxross.kaptos.generated.GetProcessorStatusQuery
 import xyz.mcxross.kaptos.model.*
 
 /** An interface for reading general information from the Aptos blockchain. */
-interface General {
-  val config: AptosConfig
+internal interface General {
+  val config: TransportConfig
 
   /**
    * Retrieves the latest ledger information from a fullnode.
@@ -33,20 +33,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-   * val resolution = aptos.getLedgerInfo()
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val ledgerInfo = resolution.value
-   * println("Current chain ID: ${ledgerInfo.chainId}")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving ledger info: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @return A `Result` which is either `Result.Ok` containing the [LedgerInfo], or `Result.Err`
    *   containing an [AptosSdkError].
@@ -58,21 +44,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-   * val resolution = aptos.getChainId()
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val chainId = resolution.value
-   * // Expected for localnet: 4
-   * println("Network Chain ID: $chainId")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving chain ID: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @return A `Result` which is either `Result.Ok` containing the chain ID as a `Long`, or
    *   `Result.Err` containing an [AptosSdkError].
@@ -84,20 +55,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-   * val resolution = aptos.getBlockByVersion(2L)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val block = resolution.value
-   * println("Block height is: ${block.blockHeight}")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving block: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param ledgerVersion The ledger version to look up block information for.
    * @param withTransactions If set to true, includes all transactions in the block.
@@ -114,20 +71,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-   * val resolution = aptos.getBlockByHeight(1L)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val block = resolution.value
-   * println("Ledger version for block is: ${block.lastVersion}")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving block: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param ledgerHeight The block height to look up, starting at 0.
    * @param withTransactions If set to true, includes all transactions in the block.
@@ -144,20 +87,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.MAINNET)))
-   * val resolution = aptos.getChainTopUserTransactions(limit = 5)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Retrieved top user transactions data: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error querying transactions: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param limit The number of transactions to return.
    * @return A `Result` which is either `Result.Ok` containing the query data, or `Result.Err`
@@ -174,18 +103,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val resolution = aptos.getIndexerLastSuccessVersion()
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val version = resolution.value
-   * println("Indexer is synced to version: $version")
-   * }
-   * is Result.Err -> {
-   * println("Error querying indexer status: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @return A `Result` which is either `Result.Ok` containing the last indexed version as a `Long`,
    *   or `Result.Err` containing an [AptosIndexerError].
@@ -197,18 +114,6 @@ interface General {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val resolution = aptos.getProcessorStatus(ProcessorType.ACCOUNT_TRANSACTION_PROCESSOR)
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Processor status data: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error querying processor status: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param processorType The processor type to query.
    * @return A `Result` which is either `Result.Ok` containing the query data, or `Result.Err`
@@ -226,25 +131,6 @@ interface General {
  *
  * ## Usage
  *
- * ```kotlin
- * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
- * val payload = InputViewFunctionData(
- * function = "0x1::chain_id::get",
- * typeArguments = emptyList(),
- * functionArguments = emptyList(),
- * )
- * val resolution = aptos.view<List<MoveValue.MoveUint64Type>>(payload)
- *
- * when (resolution) {
- * is Result.Ok -> {
- * val data = resolution.value
- * println("View function returned: $data")
- * }
- * is Result.Err -> {
- * println("Error calling view function: ${resolution.error.message}")
- * }
- * }
- * ```
  *
  * @param payload The description of the view function to call.
  * @param bcs If true, uses BCS for the request payload. Defaults to true.
@@ -252,7 +138,7 @@ interface General {
  * @return A `Result` which is either `Result.Ok` containing an array of [MoveValue]s, or
  *   `Result.Err` containing an [AptosSdkError].
  */
-suspend inline fun <reified T : List<MoveValue>> General.view(
+internal suspend inline fun <reified T : List<MoveValue>> General.view(
   payload: InputViewFunctionData,
   bcs: Boolean = true,
   ledgerVersion: LedgerVersionArg? = null,

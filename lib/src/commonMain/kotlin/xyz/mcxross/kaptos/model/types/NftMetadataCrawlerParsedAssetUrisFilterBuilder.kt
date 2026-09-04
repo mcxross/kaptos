@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class NftMetadataCrawlerParsedAssetUrisFilterBuilder {
+internal class NftMetadataCrawlerParsedAssetUrisFilterBuilder {
   private val andConditions = mutableListOf<Nft_metadata_crawler_parsed_asset_uris_bool_exp>()
   private val orConditions = mutableListOf<Nft_metadata_crawler_parsed_asset_uris_bool_exp>()
   private var notCondition: Nft_metadata_crawler_parsed_asset_uris_bool_exp? = null
@@ -47,7 +47,7 @@ class NftMetadataCrawlerParsedAssetUrisFilterBuilder {
     )
 }
 
-fun nftMetadataCrawlerParsedAssetUrisFilter(
+internal fun nftMetadataCrawlerParsedAssetUrisFilter(
   init: NftMetadataCrawlerParsedAssetUrisFilterBuilder.() -> Unit
 ): Nft_metadata_crawler_parsed_asset_uris_bool_exp =
   NftMetadataCrawlerParsedAssetUrisFilterBuilder().apply(init).build()

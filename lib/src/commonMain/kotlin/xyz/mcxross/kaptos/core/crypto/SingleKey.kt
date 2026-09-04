@@ -19,6 +19,34 @@ import xyz.mcxross.kaptos.core.AuthenticationKey
 import xyz.mcxross.kaptos.model.*
 
 /**
+ * Implemented by optional authentication modules whose public keys are encoded inside Aptos'
+ * `AnyPublicKey` enum. The payload returned by [toAnyPublicKeyBcs] excludes the enum variant.
+ */
+interface AnyPublicKeyCompatible {
+  val anyPublicKeyVariant: AnyPublicKeyVariant
+
+  fun toAnyPublicKeyBcs(): ByteArray
+}
+
+/**
+ * Implemented by optional authentication modules whose signatures are encoded inside Aptos'
+ * `AnySignature` enum. The payload returned by [toAnySignatureBcs] excludes the enum variant.
+ */
+interface AnySignatureCompatible {
+  val anySignatureVariant: AnySignatureVariant
+
+  fun toAnySignatureBcs(): ByteArray
+}
+
+/**
+ * Implemented by optional public-key families that need a scheme-specific placeholder signature
+ * for fullnode simulation.
+ */
+interface SimulationSignatureProvider {
+  fun simulationSignature(): Signature
+}
+
+/**
  * Represents any public key supported by Aptos.
  *
  * Since [AIP-55](https://github.com/aptos-foundation/AIPs/pull/263) Aptos supports `Legacy` and
@@ -33,6 +61,8 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
       when (publicKey) {
         is Ed25519PublicKey -> AnyPublicKeyVariant.Ed25519
         is Secp256k1PublicKey -> AnyPublicKeyVariant.Secp256k1
+        is Secp256r1PublicKey -> AnyPublicKeyVariant.Secp256r1
+        is AnyPublicKeyCompatible -> publicKey.anyPublicKeyVariant
         else -> throw IllegalArgumentException("Unsupported public key type")
       }
 
@@ -51,12 +81,10 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
   override fun toByteArray(): ByteArray = toBcs()
 
   override fun toBcs(): ByteArray {
-    val variantIndex =
-      when (variant) {
-        AnyPublicKeyVariant.Ed25519 -> 0
-        AnyPublicKeyVariant.Secp256k1 -> 1
-      }
-    return encodeUleb128(variantIndex) + publicKey.toBcs()
+    val payload =
+      if (publicKey is AnyPublicKeyCompatible) publicKey.toAnyPublicKeyBcs()
+      else publicKey.toBcs()
+    return encodeUleb128(variant.value) + payload
   }
 }
 
@@ -66,16 +94,21 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
  */
 class AnySignature(val signature: Signature) : Signature() {
 
-  var variant: AnySignatureVariant =
+  val variant: AnySignatureVariant =
     when (signature) {
       is Ed25519Signature -> AnySignatureVariant.Ed25519
       is Secp256k1Signature -> AnySignatureVariant.Secp256k1
+      is WebAuthnSignature -> AnySignatureVariant.WebAuthn
+      is AnySignatureCompatible -> signature.anySignatureVariant
       else -> throw IllegalArgumentException("Unsupported signature type")
     }
 
   override fun toByteArray(): ByteArray = toBcs()
 
   override fun toBcs(): ByteArray {
-    return encodeUleb128(variant.value) + signature.toBcs()
+    val payload =
+      if (signature is AnySignatureCompatible) signature.toAnySignatureBcs()
+      else signature.toBcs()
+    return encodeUleb128(variant.value) + payload
   }
 }

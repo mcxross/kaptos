@@ -16,12 +16,12 @@
 package xyz.mcxross.kaptos.protocol
 
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.InputGenerateTransactionOptions
-import xyz.mcxross.kaptos.model.SimpleTransaction
+import xyz.mcxross.kaptos.model.TransactionOptions
+import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.util.APTOS_COIN
 
 /** An interface to handle all coin related operations. */
-interface Coin {
+internal interface Coin {
 
   /**
    * Generates a Transaction that can be simulated and/or signed and submitted to the chain.
@@ -33,7 +33,7 @@ interface Coin {
    * @param withFeePayer Optional flag whether transaction is sponsored or not. Defaults to `false`
    * @param options Optional parameters to generate the transaction. These include the max gas
    *   amount, gas unit price, and expiration time. Reasonable defaults are provided.
-   * @return [SimpleTransaction] object that can be simulated and/or signed and submitted to the
+   * @return [UnsignedTransaction.Simple] object that can be simulated and/or signed and submitted to the
    *   chain.
    */
   suspend fun transferCoinTransaction(
@@ -42,6 +42,6 @@ interface Coin {
     amount: ULong,
     coinType: String = APTOS_COIN,
     withFeePayer: Boolean = false,
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 }

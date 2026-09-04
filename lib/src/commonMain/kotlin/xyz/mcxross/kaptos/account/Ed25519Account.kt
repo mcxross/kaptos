@@ -17,15 +17,15 @@ package xyz.mcxross.kaptos.account
 
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
+import xyz.mcxross.kaptos.core.crypto.MnemonicPhrase
+import xyz.mcxross.kaptos.core.crypto.AptosDerivationPath
 import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.AnyRawTransaction
+import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.SigningScheme
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorEd25519
-import xyz.mcxross.kaptos.transaction.builder.generateSigningMessageForTransaction
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
 /**
  * Signer implementation for the Ed25519 authentication scheme. This extends an [Ed25519Account] by
@@ -37,31 +37,20 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
   Account() {
 
   /** Public key associated with the account */
-  override var publicKey: Ed25519PublicKey
-    get() = privateKey.publicKey()
+  override val publicKey: Ed25519PublicKey = privateKey.publicKey()
 
   /** Account address associated with the account */
-  override var accountAddress: AccountAddress
-    get() =
-      if (address != null) {
-        AccountAddress.from(address)
-      } else {
-        publicKey.authKey().deriveAddress()
-      }
+  override val accountAddress: AccountAddress =
+    address?.let(AccountAddress::from) ?: publicKey.authKey().deriveAddress()
 
   /** Signing scheme used to sign transactions */
   override val signingScheme: SigningScheme
     get() = SigningScheme.Ed25519
 
-  init {
-    this.publicKey = privateKey.publicKey()
-    this.accountAddress =
-      if (address != null) {
-        AccountAddress.from(address)
-      } else {
-        this.publicKey.authKey().deriveAddress()
-      }
-  }
+  override val isPrivateKeyCleared: Boolean
+    get() = privateKey.isCleared
+
+  override fun clearPrivateKey() = privateKey.clear()
 
   /**
    * Sign a message using the available signing capabilities.
@@ -72,15 +61,15 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
    */
   override fun signWithAuthenticator(message: HexInput): AccountAuthenticator {
     val signature = this.privateKey.sign(message)
-    return AccountAuthenticatorEd25519(this.publicKey, signature)
+    return AccountAuthenticator.Ed25519(this.publicKey, signature)
   }
 
   override fun sign(message: HexInput): Signature {
-    return (this.signWithAuthenticator(message) as AccountAuthenticatorEd25519).signature
+    return privateKey.sign(message)
   }
 
-  override fun signTransaction(tx: AnyRawTransaction): Signature {
-    return this.sign(HexInput.fromByteArray(generateSigningMessageForTransaction(tx)))
+  override fun signTransactionSignature(tx: UnsignedTransaction): Signature {
+    return sign(HexInput.fromByteArray(tx.signingMessage()))
   }
 
   override fun verifySignature(message: HexInput, signature: Signature): Boolean =
@@ -91,5 +80,12 @@ class Ed25519Account(val privateKey: Ed25519PrivateKey, val address: AccountAddr
       val privateKey = Ed25519PrivateKey.generate()
       return Ed25519Account(privateKey)
     }
+
+    /** Derive a legacy Ed25519 account from an Aptos BIP-44 path. */
+    fun fromMnemonic(
+      mnemonic: MnemonicPhrase,
+      path: AptosDerivationPath.Ed25519 = AptosDerivationPath.Ed25519(),
+      passphrase: String = "",
+    ): Ed25519Account = Ed25519Account(mnemonic.derivePrivateKey(path, passphrase))
   }
 }

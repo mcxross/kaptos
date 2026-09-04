@@ -43,7 +43,13 @@ const val DEFAULT_TXN_TIMEOUT_SEC = 20
  * Note that max gas amount varies based on the transaction. A larger transaction will go over this
  * default gas amount, and the value will need to be changed for the specific transaction.
  */
-const val DEFAULT_MAX_GAS_AMOUNT = 200000L
+const val DEFAULT_MAX_GAS_AMOUNT = 2_000_000L
+
+/** Nodes reject transactions whose maximum gas amount is below this protocol floor. */
+const val MIN_MAX_GAS_AMOUNT = 2_000L
+
+/** Encrypted transactions require at least this gas-unit price. */
+const val MIN_ENCRYPTED_GAS_UNIT_PRICE = 200L
 
 /**
  * The default transaction expiration seconds from now.

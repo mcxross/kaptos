@@ -28,7 +28,7 @@ import xyz.mcxross.kaptos.model.*
  * @param fragment A fragment of a name, either the domain or subdomain
  * @return boolean indicating if the fragment is a valid fragment
  */
-fun isValidANSSegment(fragment: String): Boolean {
+internal fun isValidANSSegment(fragment: String): Boolean {
   if (fragment.isEmpty()) return false
   if (fragment.length < 3) return false
   if (fragment.length > 63) return false
@@ -38,7 +38,7 @@ fun isValidANSSegment(fragment: String): Boolean {
   return true
 }
 
-val VALIDATION_RULES_DESCRIPTION =
+internal val VALIDATION_RULES_DESCRIPTION =
   listOf(
       "A name must be between 3 and 63 characters long,",
       "and can only contain lowercase a-z, 0-9, and hyphens.",
@@ -52,7 +52,7 @@ val VALIDATION_RULES_DESCRIPTION =
  * @param name A string of the domain name, can include or exclude the .apt suffix
  * @return a Pair containing the domain name and optionally the subdomain name
  */
-fun isValidANSName(name: String): Pair<String, String?> {
+internal fun isValidANSName(name: String): Pair<String, String?> {
   val parts = name.replace("\\.apt$".toRegex(), "").split(".")
 
   if (parts.size > 2) {
@@ -74,29 +74,27 @@ fun isValidANSName(name: String): Pair<String, String?> {
   return Pair(second ?: first, if (second != null) first else null)
 }
 
-val LOCAL_ANS_ACCOUNT_PK = "0x37368b46ce665362562c6d1d4ec01a08c8644c488690df5a17e13ba163e20221"
-const val LOCAL_ANS_ACCOUNT_ADDRESS =
+internal val LOCAL_ANS_ACCOUNT_PK = "0x37368b46ce665362562c6d1d4ec01a08c8644c488690df5a17e13ba163e20221"
+internal const val LOCAL_ANS_ACCOUNT_ADDRESS =
   "0x585fc9f0f0c54183b039ffc770ca282ebd87307916c215a3e692f2f8e4305e82"
 
-val NetworkToAnsContract: Map<Network, String?> =
+internal val NetworkToAnsContract: Map<Network, String?> =
   mapOf(
     Network.TESTNET to "0x5f8fd2347449685cf41d4db97926ec3a096eaf381332be4f1318ad4d16a8497c",
     Network.MAINNET to "0x867ed1f6bf916171b1de3ee92849b8978b7d1b9e0a8cc982a3d19d535dfd9c0c",
     Network.LOCAL to LOCAL_ANS_ACCOUNT_ADDRESS,
     Network.CUSTOM to null,
     Network.DEVNET to null,
-    Network.RANDOMNET to null,
+    Network.SHELBYNET to null,
+    Network.NETNA to null,
   )
 
-fun getRouterAddress(aptosConfig: AptosConfig): String {
-  val address =
-    NetworkToAnsContract[aptosConfig.network]
-      ?: throw Error("The ANS contract is not deployed to ${aptosConfig.network}")
-  return address
-}
+internal fun getRouterAddress(aptosConfig: TransportConfig): String =
+  NetworkToAnsContract[aptosConfig.network]
+    ?: throw IllegalStateException("The ANS contract is not deployed to ${aptosConfig.network}")
 
-suspend fun getOwnerAddress(
-  aptosConfig: AptosConfig,
+internal suspend fun getOwnerAddress(
+  aptosConfig: TransportConfig,
   name: String,
 ): Result<AccountAddress, AptosSdkError> {
   val ansName =
@@ -140,7 +138,7 @@ suspend fun getOwnerAddress(
   return finalResult.toResult()
 }
 
-suspend fun getExpiration(aptosConfig: AptosConfig, name: String): Result<Long, AptosSdkError> {
+internal suspend fun getExpiration(aptosConfig: TransportConfig, name: String): Result<Long, AptosSdkError> {
   val ansName =
     try {
       isValidANSName(name)
@@ -181,8 +179,8 @@ suspend fun getExpiration(aptosConfig: AptosConfig, name: String): Result<Long, 
   return finalResult.toResult()
 }
 
-suspend fun getTargetAddress(
-  aptosConfig: AptosConfig,
+internal suspend fun getTargetAddress(
+  aptosConfig: TransportConfig,
   name: String,
 ): Result<AccountAddress, AptosSdkError> {
   val ansName =
@@ -208,8 +206,6 @@ suspend fun getTargetAddress(
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
       .toInternalResult()
 
-  println(viewResult)
-
   val finalResult =
     viewResult.andThen { moveValueList ->
       val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
@@ -228,13 +224,13 @@ suspend fun getTargetAddress(
   return finalResult.toResult()
 }
 
-suspend fun setTargetAddress(
-  aptosConfig: AptosConfig,
+internal suspend fun setTargetAddress(
+  aptosConfig: TransportConfig,
   sender: AccountAddress,
   name: String,
   address: AccountAddressInput,
-  options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-): SimpleTransaction {
+  options: TransactionOptions = TransactionOptions(),
+): UnsignedTransaction.Simple {
   val routerAddress = getRouterAddress(aptosConfig)
   val ansName = isValidANSName(name)
 
@@ -256,32 +252,38 @@ suspend fun setTargetAddress(
       data = inputEntryFunctionData,
       options = options,
       withFeePayer = false,
-      secondarySignerAddresses = null,
     )
 
   val transaction = generateTransaction(aptosConfig, signerRawTransactionData)
 
-  return transaction as SimpleTransaction
+  return transaction as UnsignedTransaction.Simple
 }
 
-suspend fun getPrimaryName(
-  aptosConfig: AptosConfig,
+internal suspend fun getPrimaryName(
+  aptosConfig: TransportConfig,
   address: AccountAddressInput,
 ): Result<String, AptosSdkError> {
   val routerAddress = getRouterAddress(aptosConfig)
+  val accountAddress =
+    when (address) {
+      is AccountAddress -> address
+      is HexInput -> AccountAddress.fromString(address.value)
+      else ->
+        return Err(
+            AptosSdkError.UnknownError(
+              IllegalArgumentException(
+                "Unsupported account-address input: ${address::class.simpleName}"
+              )
+            )
+          )
+          .toResult()
+    }
 
   val viewFunctionData =
     InputViewFunctionData(
       function = "${routerAddress}::router::get_primary_name",
       typeArguments = emptyList(),
-      functionArguments =
-        when (address) {
-          is AccountAddress -> listOf(address)
-          is HexInput -> listOf(AccountAddress.fromString(address.value))
-          else -> {
-            throw Error("Unsupported address type")
-          }
-        },
+      functionArguments = listOf(accountAddress),
     )
 
   val res =

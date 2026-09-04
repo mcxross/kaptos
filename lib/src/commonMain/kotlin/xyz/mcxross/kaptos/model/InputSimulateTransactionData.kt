@@ -17,9 +17,10 @@ package xyz.mcxross.kaptos.model
 
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 
-data class InputSimulateTransactionData(
+internal data class InputSimulateTransactionData(
   val signerPublicKey: PublicKey,
-  val transaction: AnyRawTransaction,
-  val feePayerPublicKey: PublicKey?,
-  val options: InputSimulateTransactionOptions,
+  val transaction: UnsignedTransaction,
+  val secondarySignerPublicKeys: List<PublicKey> = emptyList(),
+  val feePayerPublicKey: PublicKey? = null,
+  val options: SimulationOptions = SimulationOptions(),
 )

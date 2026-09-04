@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentObjectsFilterBuilder {
+internal class CurrentObjectsFilterBuilder {
   private val andConditions = mutableListOf<Current_objects_bool_exp>()
   private val orConditions = mutableListOf<Current_objects_bool_exp>()
   private var notCondition: Current_objects_bool_exp? = null
@@ -43,5 +43,5 @@ class CurrentObjectsFilterBuilder {
     )
 }
 
-fun currentObjectsFilter(init: CurrentObjectsFilterBuilder.() -> Unit): Current_objects_bool_exp =
+internal fun currentObjectsFilter(init: CurrentObjectsFilterBuilder.() -> Unit): Current_objects_bool_exp =
   CurrentObjectsFilterBuilder().apply(init).build()

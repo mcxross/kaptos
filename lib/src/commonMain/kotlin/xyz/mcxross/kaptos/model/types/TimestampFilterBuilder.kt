@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Timestamp_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class TimestampFilterBuilder {
+internal class TimestampFilterBuilder {
   var eq: Any? = null
   var gt: Any? = null
   var gte: Any? = null
@@ -28,5 +28,5 @@ class TimestampFilterBuilder {
     )
 }
 
-fun timestampFilter(init: TimestampFilterBuilder.() -> Unit) =
+internal fun timestampFilter(init: TimestampFilterBuilder.() -> Unit) =
   TimestampFilterBuilder().apply(init).build()

@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Table_items_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class TableItemsOrderBuilder {
+internal class TableItemsOrderBuilder {
   var decodedKey: OrderBy? = null
   var decodedValue: OrderBy? = null
   var key: OrderBy? = null
@@ -22,5 +22,5 @@ class TableItemsOrderBuilder {
     )
 }
 
-fun tableItemsOrder(init: TableItemsOrderBuilder.() -> Unit): Table_items_order_by =
+internal fun tableItemsOrder(init: TableItemsOrderBuilder.() -> Unit): Table_items_order_by =
   TableItemsOrderBuilder().apply(init).build()

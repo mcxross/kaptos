@@ -1,0 +1,285 @@
+public final class xyz/mcxross/kaptos/confidential/ConfidentialActivityQuery {
+	public fun <init> ()V
+	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/Set;Lxyz/mcxross/kaptos/model/PageRequest;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/Set;Lxyz/mcxross/kaptos/model/PageRequest;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun component2 ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun component3 ()Ljava/util/Set;
+	public final fun component4 ()Lxyz/mcxross/kaptos/model/PageRequest;
+	public final fun copy (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/Set;Lxyz/mcxross/kaptos/model/PageRequest;)Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/Set;Lxyz/mcxross/kaptos/model/PageRequest;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAsset ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun getOwner ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun getPage ()Lxyz/mcxross/kaptos/model/PageRequest;
+	public final fun getTypes ()Ljava/util/Set;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialActivityType : java/lang/Enum {
+	public static final field AllowListingChanged Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field AssetSpecificAuditorChanged Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Companion Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType$Companion;
+	public static final field ConfidentialityForAssetTypeChanged Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Deposited Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field GlobalAuditorChanged Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field IncomingTransfersPauseChanged Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field KeyRotated Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Normalized Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Registered Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field RolledOver Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Transferred Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static final field Withdrawn Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getWireName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public static fun values ()[Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialActivityType$Companion {
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAmount {
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun fitsInULong ()Z
+	public final fun getChunks ()Ljava/util/List;
+	public final fun getDecimal ()Ljava/lang/String;
+	public final fun getNormalizedChunks ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun toULong-s-VKNKU ()J
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAssetActivity {
+	public synthetic fun <init> (JJLxyz/mcxross/kaptos/confidential/ConfidentialActivityType;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/ULong;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;JZLjava/lang/String;Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-s-VKNKU ()J
+	public final fun component10 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component12-s-VKNKU ()J
+	public final fun component13 ()Z
+	public final fun component14 ()Ljava/lang/String;
+	public final fun component15 ()Ljava/lang/String;
+	public final fun component2-s-VKNKU ()J
+	public final fun component3 ()Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public final fun component4 ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun component7 ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9-6VbMDqA ()Lkotlin/ULong;
+	public final fun copy-U9R7dos (JJLxyz/mcxross/kaptos/confidential/ConfidentialActivityType;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/ULong;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;JZLjava/lang/String;Ljava/lang/String;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetActivity;
+	public static synthetic fun copy-U9R7dos$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetActivity;JJLxyz/mcxross/kaptos/confidential/ConfidentialActivityType;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/ULong;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;JZLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetActivity;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAmount-6VbMDqA ()Lkotlin/ULong;
+	public final fun getAsset ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun getBlockHeight-s-VKNKU ()J
+	public final fun getCounterparty ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun getCounterpartyPrimaryName ()Ljava/lang/String;
+	public final fun getEntryFunction ()Ljava/lang/String;
+	public final fun getEventData ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getEventDataVersion ()Ljava/lang/String;
+	public final fun getEventIndex-s-VKNKU ()J
+	public final fun getOwner ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun getOwnerPrimaryName ()Ljava/lang/String;
+	public final fun getTimestamp ()Ljava/lang/String;
+	public final fun getTransactionSucceeded ()Z
+	public final fun getTransactionVersion-s-VKNKU ()J
+	public final fun getType ()Lxyz/mcxross/kaptos/confidential/ConfidentialActivityType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAssetConfig {
+	public fun <init> ()V
+	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun copy (Lxyz/mcxross/kaptos/model/AccountAddress;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetConfig;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetConfig;Lxyz/mcxross/kaptos/model/AccountAddress;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetConfig;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getModuleAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class xyz/mcxross/kaptos/confidential/ConfidentialAssetService {
+	public abstract fun buildDeposit-bdvP6-E (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildDeposit-bdvP6-E$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildNormalizeBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildNormalizeBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildRegisterBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRegisterBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildRolloverPendingBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRolloverPendingBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildRotateEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRotateEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildSetIncomingTransfersPaused (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildTransfer-7Np0EYI (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer-7Np0EYI$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun buildWithdraw-GPQ0J6g (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildWithdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun clearCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun deposit-bdvP6-E (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deposit-bdvP6-E$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getActivities (Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getActivities$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getAssetAuditorEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getAssetAuditorEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getEffectiveAuditorHint (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getStatus (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun isEmergencyPaused (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun normalizeBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun normalizeBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun registerBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun registerBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun rolloverPendingBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun rolloverPendingBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun rotateEncryptionKey (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun rotateEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun setIncomingTransfersPaused (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun setIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun transfer-7Np0EYI (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun transfer-7Np0EYI$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun withdraw-GPQ0J6g (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAssetService$DefaultImpls {
+	public static synthetic fun buildDeposit-bdvP6-E$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildNormalizeBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildRegisterBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildRolloverPendingBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildRotateEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildSetIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer-7Np0EYI$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun buildWithdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun deposit-bdvP6-E$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getActivities$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getAssetAuditorEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun normalizeBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun registerBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun rolloverPendingBalance$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun rotateEncryptionKey$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun setIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun transfer-7Np0EYI$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun withdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAssetServiceKt {
+	public static final fun confidentialAssets (Lxyz/mcxross/kaptos/Aptos;Lxyz/mcxross/kaptos/confidential/ConfidentialAssetConfig;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;
+	public static synthetic fun confidentialAssets$default (Lxyz/mcxross/kaptos/Aptos;Lxyz/mcxross/kaptos/confidential/ConfidentialAssetConfig;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetService;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialAssetStatus {
+	public fun <init> (ZZZ)V
+	public final fun component1 ()Z
+	public final fun component2 ()Z
+	public final fun component3 ()Z
+	public final fun copy (ZZZ)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetStatus;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialAssetStatus;ZZZILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialAssetStatus;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIncomingTransfersPaused ()Z
+	public final fun getNormalized ()Z
+	public final fun getRegistered ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialBalance {
+	public fun <init> (Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public final fun component4 ()Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public final fun copy (Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;)Lxyz/mcxross/kaptos/confidential/ConfidentialBalance;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialBalance;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialBalance;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAvailable ()Ljava/util/List;
+	public final fun getAvailableAmount ()Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public final fun getPending ()Ljava/util/List;
+	public final fun getPendingAmount ()Lxyz/mcxross/kaptos/confidential/ConfidentialAmount;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialCiphertext {
+	public fun <init> ([B[B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommitment ()[B
+	public final fun getHandle ()[B
+	public fun hashCode ()I
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey : java/lang/AutoCloseable {
+	public static final field Companion Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey$Companion;
+	public synthetic fun <init> ([BLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public fun close ()V
+	public final fun getEncryptionKey ()Lxyz/mcxross/kaptos/confidential/ConfidentialEncryptionKey;
+	public final fun isCleared ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey$Companion {
+	public final fun fromBytes ([B)Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;
+	public final fun fromSignature ([B)Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;
+	public final fun generate ()Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialEncryptionKey {
+	public fun <init> ([B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun toByteArray ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions {
+	public fun <init> ()V
+	public fun <init> (Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/TransactionOptions;
+	public final fun component2 ()Lxyz/mcxross/kaptos/account/TransactionSigner;
+	public final fun component3 ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun copy (Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;)Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExternalFeePayerAddress ()Lxyz/mcxross/kaptos/model/AccountAddressInput;
+	public final fun getFeePayer ()Lxyz/mcxross/kaptos/account/TransactionSigner;
+	public final fun getTransaction ()Lxyz/mcxross/kaptos/model/TransactionOptions;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/confidential/ConfidentialTypesKt {
+	public static final field AVAILABLE_BALANCE_CHUNK_COUNT I
+	public static final field CONFIDENTIAL_CHUNK_BITS I
+	public static final field TRANSFER_AMOUNT_CHUNK_COUNT I
+	public static final fun confidentialDecryptionKey (Lxyz/mcxross/kaptos/Aptos;)Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;
+}
+
+public final class xyz/mcxross/kaptos/confidential/EffectiveAuditorHint {
+	public synthetic fun <init> (ZJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Z
+	public final fun component2-s-VKNKU ()J
+	public final fun copy-2TYgG_w (ZJ)Lxyz/mcxross/kaptos/confidential/EffectiveAuditorHint;
+	public static synthetic fun copy-2TYgG_w$default (Lxyz/mcxross/kaptos/confidential/EffectiveAuditorHint;ZJILjava/lang/Object;)Lxyz/mcxross/kaptos/confidential/EffectiveAuditorHint;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEpoch-s-VKNKU ()J
+	public fun hashCode ()I
+	public final fun isGlobal ()Z
+	public fun toString ()Ljava/lang/String;
+}
+

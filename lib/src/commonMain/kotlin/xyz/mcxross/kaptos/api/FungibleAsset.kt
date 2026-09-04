@@ -32,7 +32,7 @@ import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.protocol.FungibleAsset
 import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 
-class FungibleAsset(val config: AptosConfig) : FungibleAsset {
+internal class FungibleAsset(val config: TransportConfig) : FungibleAsset {
   override suspend fun getFungibleAssetMetadata(
     filter: FungibleAssetMetadataFilter,
     page: PaginationArgs?,

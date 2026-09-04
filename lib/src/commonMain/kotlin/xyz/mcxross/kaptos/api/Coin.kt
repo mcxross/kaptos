@@ -20,7 +20,7 @@ import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Coin
 
 /** An implementation to handle all coin related operations. */
-class Coin(val aptosConfig: AptosConfig) : Coin {
+internal class Coin(val aptosConfig: TransportConfig) : Coin {
 
   /**
    * Generates a Transaction that can be simulated and/or signed and submitted to the chain.
@@ -32,7 +32,7 @@ class Coin(val aptosConfig: AptosConfig) : Coin {
    * @param withFeePayer Optional flag whether transaction is sponsored or not. Defaults to `false`
    * @param options Optional parameters to generate the transaction. These include the max gas
    *   amount, gas unit price, and expiration time. Reasonable defaults are provided.
-   * @return [SimpleTransaction] object that can be simulated and/or signed and submitted to the
+   * @return [UnsignedTransaction.Simple] object that can be simulated and/or signed and submitted to the
    *   chain.
    */
   override suspend fun transferCoinTransaction(
@@ -41,7 +41,7 @@ class Coin(val aptosConfig: AptosConfig) : Coin {
     amount: ULong,
     coinType: String,
     withFeePayer: Boolean,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     transferCoinTransaction(aptosConfig, from, to, amount, coinType, withFeePayer, options)
 }

@@ -16,7 +16,6 @@
 
 package xyz.mcxross.kaptos.internal
 
-import com.github.michaelbull.result.map
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetDelegatedStakingActivitiesQuery
@@ -24,20 +23,34 @@ import xyz.mcxross.kaptos.generated.GetNumberOfDelegatorsQuery
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.ActiveDelegatorPerPoolOrder
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.types.numActiveDelegatorPerPoolFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.util.toOptional
 
 internal suspend fun getNumberOfDelegators(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   poolAddress: AccountAddressInput,
   sortOrder: List<ActiveDelegatorPerPoolOrder>?,
 ): Result<Long, AptosIndexerError> =
+  when (val result = getNumberOfDelegatorsData(aptosConfig, poolAddress, sortOrder)) {
+    is Result.Err -> result
+    is Result.Ok -> {
+      val count = result.value?.num_active_delegator_per_pool?.firstOrNull()?.num_active_delegator
+      Result.Ok(count?.toString()?.toLong() ?: 0L)
+    }
+  }
+
+internal suspend fun getNumberOfDelegatorsData(
+  aptosConfig: TransportConfig,
+  poolAddress: AccountAddressInput,
+  sortOrder: List<ActiveDelegatorPerPoolOrder>?,
+): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> =
   handleQuery {
       val filter = numActiveDelegatorPerPoolFilter {
-        this.poolAddress = stringFilter { eq = poolAddress.toString() }
+        this.poolAddress =
+          stringFilter { eq = AccountAddress.from(poolAddress).toStringLong() }
       }
 
       getGraphqlClient(aptosConfig)
@@ -48,14 +61,10 @@ internal suspend fun getNumberOfDelegators(
           )
         )
     }
-    .map { data ->
-      val count = data?.num_active_delegator_per_pool?.firstOrNull()?.num_active_delegator
-      count?.toString()?.toLong() ?: 0L
-    }
     .toResult()
 
 internal suspend fun getNumberOfDelegatorsForAllPools(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   sortOrder: List<ActiveDelegatorPerPoolOrder>?,
 ): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -65,7 +74,7 @@ internal suspend fun getNumberOfDelegatorsForAllPools(
     .toResult()
 
 internal suspend fun getDelegatedStakingActivities(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   poolAddress: AccountAddressInput,
   delegatorAddress: AccountAddressInput,
 ): Result<GetDelegatedStakingActivitiesQuery.Data?, AptosIndexerError> =

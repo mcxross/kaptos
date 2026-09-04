@@ -21,7 +21,8 @@ enum class Network {
   MAINNET,
   TESTNET,
   DEVNET,
+  SHELBYNET,
+  NETNA,
   LOCAL,
   CUSTOM,
-  RANDOMNET,
 }

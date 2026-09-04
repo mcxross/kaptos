@@ -1,4 +1,4 @@
-name: "run tests (jvm + e2e) with local testnet"
+name: "Kaptos release gates"
 on:
   pull_request:
     types: [labeled, opened, synchronize, reopened, auto_merge_enabled]
@@ -10,8 +10,70 @@ permissions:
   contents: read
 
 jobs:
-  run-tests:
+  jvm-localnet:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/run-tests
+
+  android-emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: ./.github/actions/cache-gradle
+      - name: Generate GraphQL client
+        run: ./gradlew generateApolloSources --console=plain
+      - name: Compile every Android artifact and instrumentation test
+        run: >-
+          ./gradlew
+          :kaptos:compileDebugKotlinAndroid
+          :kaptos-keyless:compileDebugKotlinAndroid
+          :kaptos-encrypted-transactions:compileDebugKotlinAndroid
+          :kaptos-confidential-assets:compileDebugKotlinAndroid
+          :kaptos:compileDebugAndroidTestKotlinAndroid
+          :kaptos-confidential-assets:compileDebugAndroidTestKotlinAndroid
+          --console=plain
+      - name: Run Android native crypto smoke tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          disable-animations: true
+          script: >-
+            ./gradlew
+            :kaptos:connectedDebugAndroidTest
+            :kaptos-confidential-assets:connectedDebugAndroidTest
+            --console=plain
+
+  apple:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: ./.github/actions/cache-gradle
+      - uses: ./.github/actions/cache-konan
+      - name: Generate GraphQL client
+        run: ./gradlew generateApolloSources --console=plain
+      - name: Run iOS simulator and macOS tests
+        run: >-
+          ./gradlew
+          :kaptos:iosSimulatorArm64Test
+          :kaptos-keyless:iosSimulatorArm64Test
+          :kaptos-encrypted-transactions:iosSimulatorArm64Test
+          :kaptos-confidential-assets:iosSimulatorArm64Test
+          :kaptos:macosArm64Test
+          :kaptos-keyless:macosArm64Test
+          :kaptos-encrypted-transactions:macosArm64Test
+          :kaptos-confidential-assets:macosArm64Test
+          :kaptos:linkDebugFrameworkIosSimulatorArm64
+          apiCheck
+          --console=plain

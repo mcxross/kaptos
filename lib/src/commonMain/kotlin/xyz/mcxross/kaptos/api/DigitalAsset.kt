@@ -32,9 +32,9 @@ import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
  * Digital asset API namespace. This class provides functionality to reading and writing digital
  * assets' related information.
  *
- * @property config AptosConfig object for configuration
+ * @property config TransportConfig object for configuration
  */
-class DigitalAsset(val config: AptosConfig) : DigitalAsset {
+internal class DigitalAsset(val config: TransportConfig) : DigitalAsset {
 
   override suspend fun getCollectionData(
     filter: CollectionOwnershipV2Filter
@@ -68,8 +68,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     description: String,
     uri: String,
     collectionOptions: CreateCollectionOptions,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     createCollectionTransaction(config, creator, name, description, uri, collectionOptions, options)
 
   override suspend fun mintDigitalAssetTransaction(
@@ -81,8 +81,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     propertyKeys: List<String>?,
     propertyTypes: List<String>?,
     propertyValues: List<String>?,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     mintDigitalAssetTransaction(
       config,
       creator,
@@ -101,8 +101,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     digitalAssetAddress: AccountAddressInput,
     recipient: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     transferDigitalAssetTransaction(
       config,
       sender,
@@ -122,8 +122,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     propertyKeys: List<String>,
     propertyTypes: List<String>,
     propertyValues: List<String>,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     mintSoulBoundTransaction(
       config,
       account,
@@ -142,16 +142,16 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     burnDigitalAssetTransaction(config, creator, digitalAssetAddress, digitalAssetType, options)
 
   override suspend fun freezeDigitalAssetTransferTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     freezeDigitalAssetTransferTransaction(
       config,
       creator,
@@ -164,8 +164,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     unfreezeDigitalAssetTransferTransaction(
       config,
       creator,
@@ -179,14 +179,14 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     digitalAssetAddress: AccountAddressInput,
     name: String,
     digitalAssetType: MoveStructId,
-  ): SimpleTransaction =
+  ): UnsignedTransaction.Simple =
     setDigitalAssetNameTransaction(
       config,
       creator,
       digitalAssetAddress,
       name,
       digitalAssetType,
-      InputGenerateTransactionOptions(),
+      TransactionOptions(),
     )
 
   override suspend fun setDigitalAssetDescriptionTransaction(
@@ -194,8 +194,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     digitalAssetAddress: AccountAddressInput,
     description: String,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     setDigitalAssetDescriptionTransaction(
       config,
       creator,
@@ -210,8 +210,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     digitalAssetAddress: AccountAddressInput,
     uri: String,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     setDigitalAssetURITransaction(
       config,
       creator,
@@ -228,8 +228,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     propertyValue: PropertyValue,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     addDigitalAssetPropertyTransaction(
       config,
       creator,
@@ -246,8 +246,8 @@ class DigitalAsset(val config: AptosConfig) : DigitalAsset {
     propertyKey: String,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     removeDigitalAssetPropertyTransaction(
       config,
       creator,

@@ -86,13 +86,15 @@ class Ed25519PublicKey(val data: ByteArray) : AccountPublicKey() {
 }
 
 /** Represents the private key of an Ed25519 key pair. */
-class Ed25519PrivateKey(data: HexInput) : PrivateKey {
+class Ed25519PrivateKey(data: ByteArray) : PrivateKey {
 
   /** The Ed25519 signing key */
   private val signingKeyPair: KeyPair
+  override var isCleared: Boolean = false
+    private set
 
   init {
-    val hex = Hex.fromHexInput(data)
+    val hex = Hex.fromHexInput(HexInput.fromByteArray(data.copyOf()))
     if (hex.toByteArray().size != LENGTH) {
       throw IllegalArgumentException(
         "Ed25519 private key must be 32 bytes, but instead got ${hex.toByteArray().size} bytes"
@@ -101,8 +103,6 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
     signingKeyPair = KeyPair.fromSecretSeed(hex.toByteArray())
   }
 
-  constructor(hex: String) : this(HexInput.fromString(hex))
-
   /**
    * Sign the given message with the private key.
    *
@@ -110,8 +110,8 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
    * @return [Signature]
    */
   override fun sign(message: HexInput): Ed25519Signature {
-    val messageBytes = Hex.fromHexInput(message).toByteArray()
-    return signingKeyPair.sign(messageBytes) as Ed25519Signature
+    checkNotCleared()
+    return signingKeyPair.sign(message.toByteArray()) as Ed25519Signature
   }
 
   /**
@@ -119,22 +119,44 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
    *
    * @return Ed25519PublicKey
    */
-  override fun publicKey(): Ed25519PublicKey =
-    Ed25519PublicKey(HexInput.fromByteArray(signingKeyPair.publicKey))
+  override fun publicKey(): Ed25519PublicKey {
+    checkNotCleared()
+    return Ed25519PublicKey(HexInput.fromByteArray(signingKeyPair.publicKey))
+  }
 
   /**
    * Get the private key in bytes (ByteArray).
    *
    * @return [ByteArray] representation of the private key
    */
-  override fun toByteArray(): ByteArray = signingKeyPair.privateKey
+  override fun toByteArray(): ByteArray {
+    checkNotCleared()
+    return signingKeyPair.privateKey.copyOf()
+  }
+
+  override fun toAip80(): Aip80PrivateKey {
+    checkNotCleared()
+    return Aip80PrivateKey.fromBytes(PrivateKeyType.Ed25519, toByteArray())
+  }
+
+  override fun clear() {
+    if (isCleared) return
+    signingKeyPair.privateKey.fill(0)
+    isCleared = true
+  }
+
+  private fun checkNotCleared() {
+    check(!isCleared) { "Ed25519 private key has been cleared" }
+  }
 
   /**
    * Get the private key as a hex string with the 0x prefix.
    *
    * @return string representation of the private key
    */
-  override fun toString(): String = Hex.fromHexInput(this.toByteArray()).toString()
+  override fun toString(): String =
+    if (isCleared) "<cleared Ed25519 private key>"
+    else Hex.fromHexInput(this.toByteArray()).toString()
 
   companion object {
     /** Length of an Ed25519 private key */
@@ -143,8 +165,18 @@ class Ed25519PrivateKey(data: HexInput) : PrivateKey {
     /** Generate a new Ed25519 key pair */
     fun generate(): Ed25519PrivateKey {
       val keyPair = generateKeypair(SigningSchemeInput.Ed25519)
-      return Ed25519PrivateKey(HexInput.fromByteArray(keyPair.privateKey))
+      return Ed25519PrivateKey(keyPair.privateKey)
     }
+
+    /** Import an Ed25519 private key from the safe, algorithm-prefixed AIP-80 format. */
+    fun fromAip80(value: String): Ed25519PrivateKey = fromAip80(Aip80PrivateKey.parse(value))
+
+    fun fromAip80(value: Aip80PrivateKey): Ed25519PrivateKey =
+      Ed25519PrivateKey(value.bytes(PrivateKeyType.Ed25519))
+
+    /** Explicit opt-in for applications migrating an unprefixed private-key hex value. */
+    fun fromLegacyHex(value: String): Ed25519PrivateKey =
+      Ed25519PrivateKey(decodeLegacyPrivateKeyHex(value))
   }
 }
 

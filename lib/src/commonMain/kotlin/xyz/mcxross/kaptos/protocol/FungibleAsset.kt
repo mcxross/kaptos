@@ -28,27 +28,12 @@ import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.Result
 
 /** An interface for querying fungible asset-related operations. */
-interface FungibleAsset {
+internal interface FungibleAsset {
   /**
    * Queries for fungible asset metadata.
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
-   * val filter = fungibleAssetMetadataFilter { assetType = stringFilter { eq = APTOS_COIN } }
-   * val resolution = aptos.getFungibleAssetMetadata(filter = filter)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved metadata: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving metadata: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param filter Filtering options for the query.
    * @param page Optional pagination arguments.
@@ -66,20 +51,6 @@ interface FungibleAsset {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
-   * val resolution = aptos.getFungibleAssetMetadataByAssetType(APTOS_COIN)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Asset type from response: ${data?.asset_type}")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving metadata by asset type: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param assetType The asset type to query for, e.g., "0x1::aptos_coin::AptosCoin".
    * @param page Optional pagination arguments.
@@ -98,21 +69,6 @@ interface FungibleAsset {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
-   * val creator = AccountAddress.fromString("0x00...001")
-   * val resolution = aptos.getFungibleAssetMetadataByCreatorAddress(creator)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved metadata: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving metadata by creator: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param creatorAddress The address of the asset's creator.
    * @param page Optional pagination arguments.
@@ -130,21 +86,6 @@ interface FungibleAsset {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.TESTNET)))
-   * val filter = fungibleAssetActivitiesFilter { assetType = stringFilter { eq = APTOS_COIN } }
-   * val resolution = aptos.getFungibleAssetActivities(filter = filter, page = PaginationArgs(limit = 2))
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved activities: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving activities: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param filter Filtering options for the query.
    * @param page Optional pagination arguments.
@@ -162,27 +103,6 @@ interface FungibleAsset {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val aptos = Aptos(AptosConfig(AptosSettings(network = Network.DEVNET)))
-   * val userAccount = Account.generate()
-   * aptos.fundAccount(userAccount.accountAddress, 1_000)
-   *
-   * val filter = currentFungibleAssetBalancesFilter {
-   * ownerAddress = stringFilter { eq = userAccount.accountAddress.toString() }
-   * assetType = stringFilter { eq = "0x1::aptos_coin::AptosCoin" }
-   * }
-   * val resolution = aptos.getCurrentFungibleAssetBalances(filter = filter)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved balances: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error retrieving balances: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param filter Filtering options for the query.
    * @param page Optional pagination arguments.

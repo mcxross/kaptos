@@ -69,14 +69,19 @@ class Hex() {
     }
 
     fun fromString(hex: String): Hex {
-      val hexString = hex.removePrefix("0x")
+      val hexString = hex.removePrefix("0x").removePrefix("0X")
+      if (hexString.isEmpty()) {
+        throw ParsingException(HexInvalidReason.TOO_SHORT.reason)
+      }
       if (hexString.length % 2 != 0) {
         throw ParsingException(HexInvalidReason.INVALID_LENGTH.reason)
+      }
+      if (!hexString.all { it.isDigit() || it in 'a'..'f' || it in 'A'..'F' }) {
+        throw ParsingException(HexInvalidReason.INVALID_HEX_CHARS.reason)
       }
       return Hex(hexString.chunked(2).map { it.toInt(16).toByte() }.toByteArray())
     }
 
-    // TODO: Implement fromHexInput
     fun fromHexInput(hexInput: HexInput): Hex {
       return fromString(hexInput.value)
     }

@@ -15,11 +15,11 @@
  */
 package xyz.mcxross.kaptos.model
 
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
-data class InputSubmitTransactionData(
-  val transaction: AnyRawTransaction,
+internal data class InputSubmitTransactionData(
+  val transaction: UnsignedTransaction,
   val senderAuthenticator: AccountAuthenticator,
   val feePayerAuthenticator: AccountAuthenticator? = null,
-  val additionalSignersAuthenticators: List<AccountAuthenticator>? = null,
+  val additionalSignersAuthenticators: List<AccountAuthenticator> = emptyList(),
 )

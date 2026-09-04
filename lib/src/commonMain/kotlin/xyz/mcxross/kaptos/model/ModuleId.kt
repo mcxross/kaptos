@@ -26,6 +26,8 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ModuleId(val address: AccountAddress, val name: Identifier) {
+  override fun toString(): String = "$address::$name"
+
   companion object {
     fun fromString(moduleId: MoveModuleId): ModuleId {
       val parts = moduleId.split("::")

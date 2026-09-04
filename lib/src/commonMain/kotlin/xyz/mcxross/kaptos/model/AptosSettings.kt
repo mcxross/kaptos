@@ -16,16 +16,22 @@
 
 package xyz.mcxross.kaptos.model
 
+import io.ktor.client.HttpClient
 import xyz.mcxross.kaptos.client.ClientConfig
 
-data class AptosSettings(
+internal data class AptosSettings(
   val network: Network? = null,
   val fullNode: String? = null,
   val faucet: String? = null,
   val indexer: String? = null,
-  val client: Client? = null,
+  /** Optional caller-owned client. Kaptos never closes an injected client. */
+  val client: HttpClient? = null,
   val clientConfig: ClientConfig = ClientConfig.default,
+  val commonHeaders: Map<String, String> = emptyMap(),
   val fullNodeConfig: FullNodeConfig? = null,
   val indexerConfig: IndexerConfig? = null,
   val faucetConfig: FaucetConfig? = null,
+  val archivalFallback: Boolean = true,
+  val requestTimeoutMillis: Long = 10_000,
+  val indexerWaitTimeoutMillis: Long = 10_000,
 )

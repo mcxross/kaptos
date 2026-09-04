@@ -10,7 +10,7 @@ import xyz.mcxross.kaptos.model.U8
 
 class MoveOptionSerializerTest {
   @Test
-  fun `can deserialize a Some option (vector of length 1)`() {
+  fun `can deserialize a Some option with vector length 1`() {
     val encoded = listOf(1.toByte(), 42.toByte()).toByteArray()
 
     val decoded: MoveOption<U8> = Bcs.decodeFromByteArray(encoded)
@@ -20,7 +20,7 @@ class MoveOptionSerializerTest {
   }
 
   @Test
-  fun `can deserialize a None option (vector of length 0)`() {
+  fun `can deserialize a None option with vector length 0`() {
     val encoded = listOf(0.toByte()).toByteArray()
 
     val decoded: MoveOption<U8> = Bcs.decodeFromByteArray(encoded)

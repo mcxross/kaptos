@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentCollectionOwnershipV2ViewFilterBuilder {
+internal class CurrentCollectionOwnershipV2ViewFilterBuilder {
   private val andConditions = mutableListOf<Current_collection_ownership_v2_view_bool_exp>()
   private val orConditions = mutableListOf<Current_collection_ownership_v2_view_bool_exp>()
   private var notCondition: Current_collection_ownership_v2_view_bool_exp? = null
@@ -52,7 +52,7 @@ class CurrentCollectionOwnershipV2ViewFilterBuilder {
     )
 }
 
-fun currentCollectionOwnershipV2ViewFilter(
+internal fun currentCollectionOwnershipV2ViewFilter(
   init: CurrentCollectionOwnershipV2ViewFilterBuilder.() -> Unit
 ): Current_collection_ownership_v2_view_bool_exp =
   CurrentCollectionOwnershipV2ViewFilterBuilder().apply(init).build()

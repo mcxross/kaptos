@@ -27,7 +27,7 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import xyz.mcxross.kaptos.util.DEFAULT_CLIENT_HEADERS
 
-actual fun httpClient(clientConfig: ClientConfig) =
+internal actual fun httpClient(clientConfig: ClientConfig) =
   HttpClient(Darwin) {
     followRedirects = clientConfig.followRedirects
 
@@ -71,7 +71,7 @@ actual fun httpClient(clientConfig: ClientConfig) =
     }
   }
 
-actual class ClientConfig(
+internal actual class ClientConfig(
 
   /** Specifies whether the client should follow redirects. Default is `true`. */
   var followRedirects: Boolean = true,

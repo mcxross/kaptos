@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class EventsFilterBuilder {
+internal class EventsFilterBuilder {
   private val andConditions = mutableListOf<Events_bool_exp>()
   private val orConditions = mutableListOf<Events_bool_exp>()
   private var notCondition: Events_bool_exp? = null
@@ -52,5 +52,5 @@ class EventsFilterBuilder {
     )
 }
 
-fun eventsFilter(init: EventsFilterBuilder.() -> Unit): Events_bool_exp =
+internal fun eventsFilter(init: EventsFilterBuilder.() -> Unit): Events_bool_exp =
   EventsFilterBuilder().apply(init).build()

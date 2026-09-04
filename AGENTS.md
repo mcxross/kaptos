@@ -5,12 +5,12 @@
 - Root Gradle build includes `:lib` and `:sample:jvmApp` (`settings.gradle.kts`).
 - `:lib` is renamed to `:kaptos` and is the main Kotlin Multiplatform SDK module.
 - `sample/jvmApp` depends on local module `project(":kaptos")`.
-- `sample/kmm` is a separate standalone KMP demo project with its own Gradle settings; it consumes published `xyz.mcxross.kaptos:kaptos`.
 
 ## SDK layering
 
-- `Aptos` is the facade entrypoint and delegates feature APIs (`Aptos.kt`).
-- `protocol/`: public API contracts (interfaces).
+- `Aptos` is the single public entry point, exposing namespaced services (`Aptos.kt`).
+- Public configuration is `AptosConfig`; internal transport configuration is `TransportConfig`.
+- `protocol/`: internal transport-facing contracts (interfaces).
 - `api/`: protocol implementations, mostly thin wrappers.
 - `internal/`: core business logic, REST/GraphQL execution, pagination, tx flows.
 - `client/`: transport layer (Ktor/Apollo); `expect/actual` HTTP client setup per platform.
@@ -18,7 +18,7 @@
 
 ## Network + platform
 
-- Endpoints are resolved through `AptosConfig` and maps in `util/ApiEndpoint.kt`.
+- Endpoints are resolved through internal `TransportConfig` and maps in `util/ApiEndpoint.kt`.
 - HTTP client is `expect`ed in `client/Core.kt` and implemented in:
   - `androidMain` (OkHttp)
   - `jvmMain` (CIO)

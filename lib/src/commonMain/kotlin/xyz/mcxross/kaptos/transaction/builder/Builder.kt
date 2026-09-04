@@ -16,97 +16,167 @@
 package xyz.mcxross.kaptos.transaction.builder
 
 import kotlin.time.Clock
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.account.Account
+import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
+import xyz.mcxross.kaptos.core.crypto.AnySignature
 import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.Ed25519Signature
+import xyz.mcxross.kaptos.core.crypto.MultiEd25519PublicKey
+import xyz.mcxross.kaptos.core.crypto.MultiEd25519Signature
+import xyz.mcxross.kaptos.core.crypto.PublicKey
+import xyz.mcxross.kaptos.core.crypto.Secp256k1PublicKey
+import xyz.mcxross.kaptos.core.crypto.Secp256r1PublicKey
+import xyz.mcxross.kaptos.core.crypto.SimulationSignatureProvider
+import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
+import xyz.mcxross.kaptos.core.crypto.multikey.MultiKeySignature
 import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo
 import xyz.mcxross.kaptos.internal.getLedgerInfo
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.EntryFunction
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticatorEd25519
-import xyz.mcxross.kaptos.transaction.authenticatior.TransactionAuthenticator
-import xyz.mcxross.kaptos.transaction.instances.AnyRawTransactionInstance
+import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.TransactionAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.ChainId
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 import xyz.mcxross.kaptos.transaction.instances.SignedTransaction
-import xyz.mcxross.kaptos.util.DEFAULT_MAX_GAS_AMOUNT
 import xyz.mcxross.kaptos.util.DEFAULT_TXN_EXP_SEC_FROM_NOW
 import xyz.mcxross.kaptos.util.NetworkToChainId
 
-suspend fun generateRawTransaction(
-  aptosConfig: AptosConfig,
+internal suspend fun generateRawTransaction(
+  aptosConfig: TransportConfig,
   sender: AccountAddressInput,
-  payload: AnyTransactionPayloadInstance,
-  options: InputGenerateTransactionOptions? = null,
-  feePayerAddress: AccountAddressInput?,
+  payload: TransactionPayload,
+  options: TransactionOptions? = null,
 ): RawTransaction {
-
-  val chainId: Long =
-    if (NetworkToChainId[aptosConfig.network.name] == null) {
-      getLedgerInfo(aptosConfig).expect("Could not fetch ledger info").chainId
-    } else {
-      NetworkToChainId[aptosConfig.network.name]?.toLong()
-        ?: throw IllegalArgumentException(
-          "Could not find chain ID for network ${aptosConfig.network.name}"
-        )
-    }
+  val networkName = aptosConfig.network.name.lowercase()
+  val chainId =
+    NetworkToChainId[networkName]?.toLong()
+      ?: getLedgerInfo(aptosConfig).expect("Could not fetch ledger info").chainId
 
   val gasUnitPrice =
     options?.gasUnitPrice
       ?: when (val response = getGasPriceEstimation(aptosConfig)) {
-        is Result.Ok -> response.value.gasEstimate
+        is Result.Ok -> response.value.gasEstimate.toULong()
         is Result.Err -> throw IllegalArgumentException("Could not fetch gas price")
       }
 
   val sequenceNumber =
-    options?.accountSequenceNumber
-      ?: when (val response = getInfo(aptosConfig, sender)) {
-        is Result.Ok -> response.value.sequenceNumber.toLong()
-        is Result.Err -> throw IllegalArgumentException("Could not fetch sequence number")
+    when (val replayProtection = options?.replayProtection) {
+      is ReplayProtection.Nonce -> ULong.MAX_VALUE
+      is ReplayProtection.SequenceNumber -> replayProtection.value
+      null ->
+        when (val response = getInfo(aptosConfig, sender)) {
+          is Result.Ok -> response.value.sequenceNumber
+          is Result.Err -> throw IllegalArgumentException("Could not fetch sequence number")
+        }
+    }
+
+  val wirePayload =
+    when (val replayProtection = options?.replayProtection) {
+      is ReplayProtection.Nonce -> payload.withNonce(replayProtection.value)
+      else -> payload
+    }
+
+  val expirationTimestamp =
+    options?.expirationTimestampSecs
+      ?: run {
+        val now = (Clock.System.now().toEpochMilliseconds() / 1000).toULong()
+        val delta = options?.expirationSecondsFromNow ?: DEFAULT_TXN_EXP_SEC_FROM_NOW.toULong()
+        require(delta <= ULong.MAX_VALUE - now) { "Transaction expiration overflows Aptos u64" }
+        now + delta
       }
 
   return RawTransaction(
     sender = AccountAddress.from(sender),
-    sequenceNumber = sequenceNumber.toLong(),
-    payload = payload,
-    maxGasAmount = options?.maxGasAmount ?: DEFAULT_MAX_GAS_AMOUNT,
+    sequenceNumber = sequenceNumber,
+    payload = wirePayload,
+    maxGasAmount = options?.maxGasAmount ?: 2_000_000uL,
     gasUnitPrice = gasUnitPrice,
-    expirationTimestampSecs =
-      options?.expireTimestamp
-        ?: (Clock.System.now().toEpochMilliseconds() / 1000 + DEFAULT_TXN_EXP_SEC_FROM_NOW),
+    expirationTimestampSecs = expirationTimestamp,
     chainId = ChainId(chainId.toUByte()),
   )
 }
 
-suspend fun buildTransaction(
-  aptosConfig: AptosConfig,
+private fun TransactionPayload.withNonce(nonce: ULong): TransactionPayload.InnerV1 =
+  when (this) {
+    is TransactionPayload.EntryFunction ->
+      TransactionPayload.InnerV1(
+        executable = TransactionExecutable.EntryFunction(call),
+        extraConfig = TransactionExtraConfig.V1(replayProtectionNonce = nonce),
+      )
+    is TransactionPayload.Script ->
+      TransactionPayload.InnerV1(
+        executable = TransactionExecutable.Script(script),
+        extraConfig = TransactionExtraConfig.V1(replayProtectionNonce = nonce),
+      )
+    is TransactionPayload.Multisig ->
+      TransactionPayload.InnerV1(
+        executable =
+          when (val inner = payload) {
+            is MultisigPayload.EntryFunction -> TransactionExecutable.EntryFunction(inner.call)
+            is MultisigPayload.Script -> TransactionExecutable.Script(inner.script)
+            null -> TransactionExecutable.Empty
+          },
+        extraConfig =
+          TransactionExtraConfig.V1(
+            multisigAddress = multisigAddress,
+            replayProtectionNonce = nonce,
+          ),
+      )
+    is TransactionPayload.InnerV1 ->
+      copy(
+        extraConfig =
+          when (val config = extraConfig) {
+            is TransactionExtraConfig.V1 -> config.copy(replayProtectionNonce = nonce)
+          }
+      )
+    is TransactionPayload.Encrypted ->
+      throw IllegalArgumentException(
+        "Encrypted payload replay protection must be configured before encryption"
+      )
+  }
+
+internal suspend fun buildTransaction(
+  aptosConfig: TransportConfig,
   inputGenerateTransactionData: InputGenerateTransactionData,
-  payload: AnyTransactionPayloadInstance,
+  payload: TransactionPayload,
   feePayerAddress: AccountAddressInput?,
-): AnyRawTransaction {
+): UnsignedTransaction {
   val rawTxn =
     generateRawTransaction(
       aptosConfig = aptosConfig,
       sender = inputGenerateTransactionData.sender,
       payload = payload,
       options = inputGenerateTransactionData.options,
-      feePayerAddress = feePayerAddress,
     )
 
-  return SimpleTransaction(
-    rawTxn,
-    if (feePayerAddress != null) AccountAddress.from(feePayerAddress) else null,
-  )
+  val secondarySignerAddresses =
+    (inputGenerateTransactionData as? InputGenerateMultiSignerRawTransactionData)
+      ?.secondarySignerAddresses
+      ?.map(AccountAddress::from)
+      .orEmpty()
+
+  return when {
+    inputGenerateTransactionData.withFeePayer ->
+      UnsignedTransaction.FeePayer(
+        rawTransaction = rawTxn,
+        secondarySignerAddresses = secondarySignerAddresses,
+        feePayerAddress =
+          feePayerAddress?.let(AccountAddress::from)
+            ?: UnsignedTransaction.EXTERNAL_FEE_PAYER_PLACEHOLDER,
+      )
+    secondarySignerAddresses.isNotEmpty() ->
+      UnsignedTransaction.MultiAgent(rawTxn, secondarySignerAddresses)
+    else -> UnsignedTransaction.Simple(rawTxn)
+  }
 }
 
-suspend fun generateTransactionPayload(
-  aptosConfig: AptosConfig,
+internal suspend fun generateTransactionPayload(
+  aptosConfig: TransportConfig,
   data: InputGenerateTransactionPayloadDataWithRemoteABI,
-): AnyTransactionPayloadInstance {
+): TransactionPayload {
   val functionParts =
     (data as InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI)
       .inputEntryFunctionData
@@ -144,9 +214,9 @@ suspend fun generateTransactionPayload(
   }
 }
 
-fun generateTransactionPayloadWithABI(
+internal fun generateTransactionPayloadWithABI(
   data: InputGenerateTransactionPayloadDataWithRemoteABI
-): AnyTransactionPayloadInstance {
+): TransactionPayload {
   val functionAbi =
     (data as InputEntryFunctionGenerateTransactionPayloadDataWithRemoteABIWithRemoteABI)
       .inputEntryFunctionData
@@ -157,7 +227,7 @@ fun generateTransactionPayloadWithABI(
   if (functionAbi != null) {
     if (data.inputEntryFunctionData.typeArguments.size != functionAbi.typeParameters.size) {
       throw IllegalArgumentException(
-        "Type argument count does not match the function ABI for '${functionAbi}. Expected ${functionAbi.typeParameters.size}, got '${data.inputEntryFunctionData.typeArguments?.size ?: 0}'"
+        "Type argument count does not match the function ABI for '${functionAbi}. Expected ${functionAbi.typeParameters.size}, got '${data.inputEntryFunctionData.typeArguments.size}'"
       )
     }
   }
@@ -165,7 +235,7 @@ fun generateTransactionPayloadWithABI(
   if (functionAbi != null) {
     if (data.inputEntryFunctionData.functionArguments.size != functionAbi.parameters.size) {
       throw IllegalArgumentException(
-        "Too few arguments for '${parts.first}::${parts.second}::${parts.third}', expected ${functionAbi.parameters.size} but got ${data.inputEntryFunctionData.functionArguments?.size ?: 0}"
+        "Too few arguments for '${parts.first}::${parts.second}::${parts.third}', expected ${functionAbi.parameters.size} but got ${data.inputEntryFunctionData.functionArguments.size}"
       )
     }
   }
@@ -178,11 +248,45 @@ fun generateTransactionPayloadWithABI(
       args = data.inputEntryFunctionData.functionArguments,
     )
 
-  return TransactionPayloadEntryFunction(entryFunctionPayload)
+  return TransactionPayload.EntryFunction(
+    EntryFunctionCall(
+      module = entryFunctionPayload.moduleName,
+      function = entryFunctionPayload.functionName,
+      typeArguments = entryFunctionPayload.typeArgs,
+      arguments = entryFunctionPayload.args.map { it.toMoveArgument() },
+    )
+  )
 }
 
-suspend fun generateViewFunctionPayload(
-  aptosConfig: AptosConfig,
+private fun EntryFunctionArgument.toMoveArgument(): MoveArgument =
+  when (this) {
+    is Bool -> MoveArgument.Bool(value)
+    is U8 -> MoveArgument.U8(value.toUByte())
+    is U16 -> MoveArgument.U16(value)
+    is U32 -> MoveArgument.U32(value)
+    is U64 -> MoveArgument.U64(value)
+    is U128 -> MoveArgument.U128(value)
+    is U256 -> MoveArgument.U256(value)
+    is AccountAddress -> MoveArgument.Address(this)
+    is MoveString -> MoveArgument.StringValue(value)
+    is MoveVector<*> -> MoveArgument.Vector(values.map { it.toMoveArgument() })
+    is MoveOption<*> -> MoveArgument.Option(value?.toMoveArgument())
+    is HexInput -> MoveArgument.PreSerialized(value.decodeHex())
+    else -> throw IllegalArgumentException("Unsupported Move argument ${this::class.simpleName}")
+  }
+
+private fun String.decodeHex(): ByteArray {
+  val normalized = removePrefix("0x").removePrefix("0X")
+  require(normalized.length % 2 == 0 && normalized.all { it.isDigit() || it in 'a'..'f' || it in 'A'..'F' }) {
+    "Invalid pre-serialized hex argument"
+  }
+  return ByteArray(normalized.length / 2) { index ->
+    normalized.substring(index * 2, index * 2 + 2).toInt(16).toByte()
+  }
+}
+
+internal suspend fun generateViewFunctionPayload(
+  aptosConfig: TransportConfig,
   inputViewFunctionData: InputViewFunctionData,
 ): EntryFunction {
 
@@ -211,8 +315,8 @@ suspend fun generateViewFunctionPayload(
   return generateViewFunctionPayloadWithABI(aptosConfig, inputViewFunctionData, functionAbi)
 }
 
-fun generateViewFunctionPayloadWithABI(
-  aptosConfig: AptosConfig,
+internal fun generateViewFunctionPayloadWithABI(
+  aptosConfig: TransportConfig,
   inputViewFunctionData: InputViewFunctionData,
   functionAbi: FunctionABI,
 ): EntryFunction {
@@ -221,13 +325,13 @@ fun generateViewFunctionPayloadWithABI(
   // Check the type argument count against the ABI
   if (inputViewFunctionData.typeArguments.size != functionAbi.typeParameters.size) {
     throw IllegalArgumentException(
-      "Type argument count does not match the function ABI for '${functionAbi}. Expected ${functionAbi.typeParameters.size}, got '${inputViewFunctionData.typeArguments?.size ?: 0}'"
+      "Type argument count does not match the function ABI for '${functionAbi}. Expected ${functionAbi.typeParameters.size}, got '${inputViewFunctionData.typeArguments.size}'"
     )
   }
 
   if (inputViewFunctionData.functionArguments.size != functionAbi.parameters.size) {
     throw IllegalArgumentException(
-      "Too few arguments for '${parts.first}::${parts.second}::${parts.third}', expected ${functionAbi.parameters.size} but got ${inputViewFunctionData.functionArguments?.size ?: 0}"
+      "Too few arguments for '${parts.first}::${parts.second}::${parts.third}', expected ${functionAbi.parameters.size} but got ${inputViewFunctionData.functionArguments.size}"
     )
   }
 
@@ -239,45 +343,127 @@ fun generateViewFunctionPayloadWithABI(
   )
 }
 
-fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator {
-  val message = generateSigningMessage(transaction)
+internal fun sign(signer: Account, transaction: UnsignedTransaction): AccountAuthenticator {
+  val message = transaction.signingMessage()
   return signer.signWithAuthenticator(HexInput.fromByteArray(message))
 }
 
-fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray =
-  xyz.mcxross.kaptos.core.crypto.generateSigningMessage(transaction)
-
-fun generateSignedTransaction(data: InputSubmitTransactionData): ByteArray {
-  val transactionToSubmit = deriveTransactionType(data.transaction)
-  val txnEd25519Authenticator = data.senderAuthenticator as AccountAuthenticatorEd25519
-
-  val txnAuthenticator =
-    TransactionAuthenticator(
-      AccountAuthenticatorVariant.Ed25519,
-      txnEd25519Authenticator.publicKey,
-      txnEd25519Authenticator.signature,
-    )
-
-  return Bcs.encodeToByteArray(transactionToSubmit as RawTransaction) + txnAuthenticator.toBcs()
+internal fun generateSignedTransaction(data: InputSubmitTransactionData): ByteArray {
+  val authenticator =
+    when (val transaction = data.transaction) {
+      is UnsignedTransaction.Simple ->
+        TransactionAuthenticator.singleSender(data.senderAuthenticator)
+      is UnsignedTransaction.MultiAgent -> {
+        TransactionAuthenticator.MultiAgent(
+          sender = data.senderAuthenticator,
+          secondarySignerAddresses = transaction.secondarySignerAddresses,
+          secondarySigners = data.additionalSignersAuthenticators,
+        )
+      }
+      is UnsignedTransaction.FeePayer ->
+        TransactionAuthenticator.FeePayer(
+          sender = data.senderAuthenticator,
+          secondarySignerAddresses = transaction.secondarySignerAddresses,
+          secondarySigners = data.additionalSignersAuthenticators,
+          feePayerAddress = transaction.feePayerAddress,
+          feePayer =
+            requireNotNull(data.feePayerAuthenticator) {
+              "A fee-payer transaction requires a fee-payer authenticator"
+            },
+        )
+    }
+  return SignedTransaction(data.transaction.rawTransaction, authenticator).toBcs()
 }
 
-fun deriveTransactionType(transaction: AnyRawTransaction): AnyRawTransactionInstance {
-  // TODO Handle FeePayerRawTransaction, MultiAgentRawTransaction
-  return when (transaction) {
-    is SimpleTransaction -> transaction.rawTransaction
-    else -> throw IllegalArgumentException("Unimplemented transaction type")
+internal fun generateSignedTransactionForSimulation(data: InputSimulateTransactionData): ByteArray {
+  val sender = simulationAuthenticator(data.signerPublicKey)
+  val secondarySigners =
+    if (data.secondarySignerPublicKeys.isEmpty()) {
+      val count =
+        when (val transaction = data.transaction) {
+          is UnsignedTransaction.Simple -> 0
+          is UnsignedTransaction.MultiAgent -> transaction.secondarySignerAddresses.size
+          is UnsignedTransaction.FeePayer -> transaction.secondarySignerAddresses.size
+        }
+      List(count) { AccountAuthenticator.NoAccount }
+    } else {
+      data.secondarySignerPublicKeys.map(::simulationAuthenticator)
+    }
+  val transactionAuthenticator =
+    when (val transaction = data.transaction) {
+      is UnsignedTransaction.Simple -> TransactionAuthenticator.singleSender(sender)
+      is UnsignedTransaction.MultiAgent ->
+        TransactionAuthenticator.MultiAgent(
+          sender = sender,
+          secondarySignerAddresses = transaction.secondarySignerAddresses,
+          secondarySigners = secondarySigners,
+        )
+      is UnsignedTransaction.FeePayer ->
+        TransactionAuthenticator.FeePayer(
+          sender = sender,
+          secondarySignerAddresses = transaction.secondarySignerAddresses,
+          secondarySigners = secondarySigners,
+          feePayerAddress = transaction.feePayerAddress,
+          feePayer = data.feePayerPublicKey?.let(::simulationAuthenticator)
+            ?: AccountAuthenticator.NoAccount,
+        )
+    }
+  return SignedTransaction(data.transaction.rawTransaction, transactionAuthenticator).toBcs()
+}
+
+private fun simulationAuthenticator(publicKey: PublicKey): AccountAuthenticator {
+  val invalidEd25519Signature = Ed25519Signature(ByteArray(Ed25519Signature.LENGTH))
+  return when (publicKey) {
+    is Ed25519PublicKey ->
+      AccountAuthenticator.Ed25519(publicKey, invalidEd25519Signature)
+    is Secp256k1PublicKey ->
+      AccountAuthenticator.SingleKey(
+        publicKey = AnyPublicKey(publicKey),
+        signature = AnySignature(invalidEd25519Signature),
+      )
+    is Secp256r1PublicKey ->
+      AccountAuthenticator.SingleKey(
+        publicKey = AnyPublicKey(publicKey),
+        signature = AnySignature(invalidEd25519Signature),
+      )
+    is SimulationSignatureProvider ->
+      AccountAuthenticator.SingleKey(
+        publicKey = AnyPublicKey(publicKey),
+        signature = AnySignature(publicKey.simulationSignature()),
+      )
+    is AnyPublicKey ->
+      AccountAuthenticator.SingleKey(
+        publicKey = publicKey,
+        signature =
+          AnySignature(
+            (publicKey.publicKey as? SimulationSignatureProvider)?.simulationSignature()
+              ?: invalidEd25519Signature
+          ),
+      )
+    is MultiKey -> {
+      val signatures = publicKey.publicKeys.map { AnySignature(invalidEd25519Signature) }
+      AccountAuthenticator.MultiKey(
+        publicKey = publicKey,
+        signature =
+          MultiKeySignature(
+            signatures = signatures,
+            bitmap = MultiKeySignature.createBitmap(publicKey.publicKeys.indices.toList()),
+          ),
+      )
+    }
+    is MultiEd25519PublicKey -> {
+      val signerIndices = (0..<publicKey.threshold.toInt()).toList()
+      AccountAuthenticator.MultiEd25519(
+        publicKey = publicKey,
+        signature =
+          MultiEd25519Signature(
+            signatures = List(signerIndices.size) { invalidEd25519Signature },
+            bitmap = MultiEd25519Signature.bitmapOf(signerIndices),
+          ),
+      )
+    }
+    else -> throw IllegalArgumentException(
+      "Unsupported public key used for simulation: ${publicKey::class.simpleName}"
+    )
   }
-}
-
-fun generateSignedTransactionForSimulation(data: InputSimulateTransactionData): ByteArray {
-
-  val txnAuthenticator =
-    TransactionAuthenticator(
-      accountAuthenticatorVariant = AccountAuthenticatorVariant.Ed25519,
-      publicKey = Ed25519PublicKey(data.signerPublicKey.toByteArray()),
-      signature = Ed25519Signature(ByteArray(64)),
-    )
-  return Bcs.encodeToByteArray(
-    SignedTransaction((data.transaction as SimpleTransaction).rawTransaction, txnAuthenticator)
-  )
 }

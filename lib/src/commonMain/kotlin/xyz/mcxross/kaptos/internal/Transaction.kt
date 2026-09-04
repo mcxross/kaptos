@@ -29,7 +29,7 @@ import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getTransactions(
-  config: AptosConfig,
+  config: TransportConfig,
   options: PaginationArgs?,
 ): Result<List<TransactionResponse>, AptosSdkError> {
   val params =
@@ -51,7 +51,7 @@ internal suspend fun getTransactions(
 }
 
 internal suspend fun getGasPriceEstimation(
-  config: AptosConfig
+  config: TransportConfig
 ): Result<GasEstimation, AptosSdkError> =
   getAptosFullNode<GasEstimation>(
       RequestOptions.GetAptosRequestOptions(
@@ -63,7 +63,7 @@ internal suspend fun getGasPriceEstimation(
     .toResult()
 
 internal suspend fun getTransactionByVersion(
-  config: AptosConfig,
+  config: TransportConfig,
   ledgerVersion: Long,
 ): Result<TransactionResponse, AptosSdkError> =
   getAptosFullNode<TransactionResponse>(
@@ -76,7 +76,7 @@ internal suspend fun getTransactionByVersion(
     .toResult()
 
 internal suspend fun getTransactionByHash(
-  config: AptosConfig,
+  config: TransportConfig,
   ledgerHash: String,
 ): Result<TransactionResponse, AptosSdkError> =
   getAptosFullNode<TransactionResponse>(
@@ -88,14 +88,14 @@ internal suspend fun getTransactionByHash(
     )
     .toResult()
 
-internal suspend fun isTransactionPending(config: AptosConfig, txnHash: HexInput): Boolean =
+internal suspend fun isTransactionPending(config: TransportConfig, txnHash: HexInput): Boolean =
   getTransactionByHash(config, txnHash.value)
     .toInternalResult()
     .expect { "Failed to fetch transaction $txnHash" }
     .type == TransactionResponseType.PENDING
 
 internal suspend fun longWaitForTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   txnHas: HexInput,
 ): Result<TransactionResponse, AptosSdkError> {
 
@@ -110,7 +110,7 @@ internal suspend fun longWaitForTransaction(
 }
 
 internal suspend fun waitForTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   txnHash: String,
   options: WaitForTransactionOptions,
 ): Result<TransactionResponse, AptosIndexerError> {
@@ -166,7 +166,7 @@ internal suspend fun waitForTransaction(
         }
       }
 
-      isPending = lastTxn?.type == TransactionResponseType.PENDING
+      isPending = lastTxn.type == TransactionResponseType.PENDING
 
       if (!isPending) {
         break
@@ -204,9 +204,9 @@ internal suspend fun waitForTransaction(
 }
 
 internal suspend fun signAndSubmitTransaction(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   signer: Account,
-  transaction: AnyRawTransaction,
+  transaction: UnsignedTransaction,
 ): Result<PendingTransactionResponse, Exception> {
   val senderAuthenticator = signTransaction(signer, transaction)
   val submit = Submit(aptosConfig)

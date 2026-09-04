@@ -2,41 +2,49 @@ package xyz.mcxross.kaptos.unit
 
 import kotlin.test.Test
 import kotlin.test.assertTrue
-import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.transaction.builder.generateSigningMessageForTransaction
-import xyz.mcxross.kaptos.util.runBlocking
+import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.transaction.instances.ChainId
+import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 
 const val TRANSFER_AMOUNT = 100UL
 
 class SigningMessageTest {
-
-  private val aptos = Aptos(AptosConfig(AptosSettings(network = Network.LOCAL)))
-
   private val alice =
     Account.fromPrivateKey(
-      Ed25519PrivateKey("0xc5338cd251c22daa8c9c9cc94f498cc8a5c7e1d2e75287a5dda91096fe64efa5")
+      Ed25519PrivateKey.fromLegacyHex(
+        "0xc5338cd251c22daa8c9c9cc94f498cc8a5c7e1d2e75287a5dda91096fe64efa5"
+      )
     )
 
   // Generates the proper message for transaction
   @Test
   fun testGenerateMessage() {
-    println(alice.accountAddress.value)
-    runBlocking {
-      val txn =
-        aptos.buildSimpleTransaction(
+    val txn =
+      UnsignedTransaction.Simple(
+        RawTransaction(
           sender = alice.accountAddress,
-          options =
-            InputGenerateTransactionOptions(accountSequenceNumber = 1, expireTimestamp = 100),
-        ) {
-          function = "0x1::coin::transfer"
-          typeArgs("0x1::aptos_coin::AptosCoin")
-          args(alice.accountAddress, TRANSFER_AMOUNT)
-        }
+          sequenceNumber = 1uL,
+          payload =
+            TransactionPayload.entryFunction(
+              function = "0x1::coin::transfer",
+              typeArguments = listOf(TypeTagStruct(aptosCoinStructTag())),
+              arguments =
+                listOf(
+                  MoveArgument.Address(alice.accountAddress),
+                  MoveArgument.U64(TRANSFER_AMOUNT),
+                ),
+            ),
+          maxGasAmount = 200_000uL,
+          gasUnitPrice = 100uL,
+          expirationTimestampSecs = 100uL,
+          chainId = ChainId(4u),
+        )
+      )
 
-      val message = generateSigningMessageForTransaction(txn)
+    val message = txn.signingMessage()
 
       val list =
         listOf(
@@ -285,8 +293,7 @@ class SigningMessageTest {
           4,
         )
 
-      val expected = list.map { it.toByte() }.toByteArray()
-      assertTrue { message.contentEquals(expected) }
-    }
+    val expected = list.map { it.toByte() }.toByteArray()
+    assertTrue { message.contentEquals(expected) }
   }
 }

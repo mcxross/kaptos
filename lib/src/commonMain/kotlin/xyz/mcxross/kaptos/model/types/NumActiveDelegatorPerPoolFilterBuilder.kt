@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class NumActiveDelegatorPerPoolFilterBuilder {
+internal class NumActiveDelegatorPerPoolFilterBuilder {
   private val andConditions = mutableListOf<Num_active_delegator_per_pool_bool_exp>()
   private val orConditions = mutableListOf<Num_active_delegator_per_pool_bool_exp>()
   private var notCondition: Num_active_delegator_per_pool_bool_exp? = null
@@ -33,7 +33,7 @@ class NumActiveDelegatorPerPoolFilterBuilder {
     )
 }
 
-fun numActiveDelegatorPerPoolFilter(
+internal fun numActiveDelegatorPerPoolFilter(
   init: NumActiveDelegatorPerPoolFilterBuilder.() -> Unit
 ): Num_active_delegator_per_pool_bool_exp =
   NumActiveDelegatorPerPoolFilterBuilder().apply(init).build()

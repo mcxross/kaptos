@@ -17,9 +17,9 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.extension.toStructTag
 import xyz.mcxross.kaptos.serialize.*
+import xyz.mcxross.kaptos.transaction.typetag.TypeTagParser
 
 @Serializable(with = TypeTagSerializer::class)
 sealed class TypeTag {
@@ -54,6 +54,14 @@ sealed class TypeTag {
     return this is TypeTagU256
   }
 
+  fun isSignedInteger(): Boolean =
+    this is TypeTagI8 ||
+      this is TypeTagI16 ||
+      this is TypeTagI32 ||
+      this is TypeTagI64 ||
+      this is TypeTagI128 ||
+      this is TypeTagI256
+
   fun isVector(): Boolean {
     return this is TypeTagVector
   }
@@ -79,7 +87,8 @@ sealed class TypeTag {
   }
 
   companion object {
-    fun fromString() {}
+    fun fromString(string: String, allowGenerics: Boolean = false): TypeTag =
+      TypeTagParser.parseTypeTag(string, allowGenerics)
 
     fun valueOf(string: String): TypeTag {
       return when (string) {
@@ -92,6 +101,12 @@ sealed class TypeTag {
         "u64" -> TypeTagU64
         "u128" -> TypeTagU128
         "u256" -> TypeTagU256
+        "i8" -> TypeTagI8
+        "i16" -> TypeTagI16
+        "i32" -> TypeTagI32
+        "i64" -> TypeTagI64
+        "i128" -> TypeTagI128
+        "i256" -> TypeTagI256
         else -> throw IllegalArgumentException("Invalid TypeTag string: $string")
       }
     }
@@ -184,6 +199,36 @@ data object TypeTagU256 : TypeTag() {
   override fun toString(): String = value
 }
 
+data object TypeTagI8 : TypeTag() {
+  override val value: String = "i8"
+  override fun toString(): String = value
+}
+
+data object TypeTagI16 : TypeTag() {
+  override val value: String = "i16"
+  override fun toString(): String = value
+}
+
+data object TypeTagI32 : TypeTag() {
+  override val value: String = "i32"
+  override fun toString(): String = value
+}
+
+data object TypeTagI64 : TypeTag() {
+  override val value: String = "i64"
+  override fun toString(): String = value
+}
+
+data object TypeTagI128 : TypeTag() {
+  override val value: String = "i128"
+  override fun toString(): String = value
+}
+
+data object TypeTagI256 : TypeTag() {
+  override val value: String = "i256"
+  override fun toString(): String = value
+}
+
 class TypeTagVector(val type: TypeTag) : TypeTag() {
 
   override val value: String
@@ -235,17 +280,22 @@ class StructTag(
   val name: String,
   val typeArgs: List<TypeTag>,
 ) {
+  override fun toString(): String = buildString {
+    append(address)
+    append("::")
+    append(moduleName)
+    append("::")
+    append(name)
+    if (typeArgs.isNotEmpty()) {
+      append(typeArgs.joinToString(prefix = "<", postfix = ">", separator = ","))
+    }
+  }
+
   companion object {
     fun fromString(string: String): StructTag {
-      val parts = string.parts()
-      if (parts.toList().size != 3) {
-        throw IllegalArgumentException("Invalid StructTag string: $string")
-      }
-      val address = AccountAddress.fromString(parts.first)
-      val moduleName = parts.second
-      val name = parts.third
-      // TODO: Parse type args
-      return StructTag(address, moduleName, name, emptyList())
+      val parsed = TypeTagParser.parseTypeTag(string)
+      return (parsed as? TypeTagStruct)?.type
+        ?: throw IllegalArgumentException("Expected a struct type tag: $string")
     }
   }
 }

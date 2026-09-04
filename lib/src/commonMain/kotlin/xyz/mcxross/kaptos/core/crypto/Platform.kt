@@ -15,7 +15,6 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
-import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.SigningSchemeInput
 
 expect fun generateKeypair(scheme: SigningSchemeInput): KeyPair
@@ -28,8 +27,36 @@ expect fun sign(message: ByteArray, privateKey: ByteArray): ByteArray
 
 expect fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray
 
-expect fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray
-
 expect fun generateSecp256k1PublicKey(privateKey: ByteArray): ByteArray
+
+internal expect fun secp256r1SignAptos(message: ByteArray, privateKey: ByteArray): ByteArray
+
+internal expect fun generateSecp256r1PublicKey(privateKey: ByteArray): ByteArray
+
+internal expect fun normalizeSecp256r1PublicKey(publicKey: ByteArray): ByteArray
+
+internal expect fun verifySecp256r1Signature(
+  publicKey: ByteArray,
+  message: ByteArray,
+  signature: ByteArray,
+): Boolean
+
+internal expect fun verifyWebAuthnSignature(
+  publicKey: ByteArray,
+  authenticatorData: ByteArray,
+  clientDataJson: ByteArray,
+  signature: ByteArray,
+): Boolean
+
+internal expect fun generateMnemonic(wordCount: UInt): String
+
+internal expect fun validateMnemonic(phrase: String): Boolean
+
+internal expect fun deriveMnemonicPrivateKey(
+  phrase: String,
+  passphrase: String,
+  type: PrivateKeyType,
+  path: String,
+): ByteArray
 
 expect fun verifySignature(publicKey: PublicKey, message: ByteArray, signature: ByteArray): Boolean

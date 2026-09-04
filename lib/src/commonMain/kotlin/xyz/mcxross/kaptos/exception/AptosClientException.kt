@@ -20,5 +20,5 @@ package xyz.mcxross.kaptos.exception
  *
  * Catching this exception allows you to handle any known error from the client in a single block.
  */
-open class AptosClientException(message: String, cause: Throwable? = null) :
+internal open class AptosClientException(message: String, cause: Throwable? = null) :
   Exception(message, cause)

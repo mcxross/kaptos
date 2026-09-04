@@ -58,7 +58,7 @@ import xyz.mcxross.kaptos.util.APTOS_FA
 import xyz.mcxross.kaptos.util.toOptional
 
 internal suspend fun getInfo(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddressInput: AccountAddressInput,
   params: Map<String, Any?>? = null,
 ): Result<AccountData, AptosSdkError> =
@@ -73,7 +73,7 @@ internal suspend fun getInfo(
     .toResult()
 
 internal suspend fun getModules(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddressInput: AccountAddressInput,
   params: Map<String, Any?>? = null,
 ): Result<List<MoveModuleBytecode>, AptosSdkError> =
@@ -89,7 +89,7 @@ internal suspend fun getModules(
     .toResult()
 
 internal suspend fun getModule(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddressInput: AccountAddressInput,
   moduleName: String,
   param: Map<String, Any?>? = null,
@@ -105,7 +105,7 @@ internal suspend fun getModule(
     .toResult()
 
 internal suspend fun getTransactions(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddressInput: AccountAddressInput,
   params: Map<String, Any?>? = null,
 ): Result<List<TransactionResponse>, AptosSdkError> =
@@ -121,7 +121,7 @@ internal suspend fun getTransactions(
     .toResult()
 
 internal suspend fun getResources(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddressInput: AccountAddressInput,
   params: Map<String, Any?>? = null,
 ): Result<List<MoveResource>, AptosSdkError> =
@@ -136,8 +136,8 @@ internal suspend fun getResources(
     )
     .toResult()
 
-suspend inline fun <reified T> getResource(
-  aptosConfig: AptosConfig,
+internal suspend inline fun <reified T> getResource(
+  aptosConfig: TransportConfig,
   accountAddress: AccountAddressInput,
   resourceType: String,
   params: Map<String, Any?>? = null,
@@ -153,7 +153,7 @@ suspend inline fun <reified T> getResource(
     .toResult()
 
 internal suspend fun lookupOriginalAccountAddress(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   authenticationKey: AccountAddressInput,
   options: LedgerVersionArg,
 ): Result<AccountAddressInput, AptosSdkError> {
@@ -195,7 +195,7 @@ internal suspend fun lookupOriginalAccountAddress(
 }
 
 internal suspend fun getAccountTransactionsCount(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddressInput: AccountAddressInput,
 ): Result<Long, AptosIndexerError> {
   val result = handleQuery {
@@ -216,7 +216,7 @@ internal suspend fun getAccountTransactionsCount(
 }
 
 internal suspend fun getAccountCoinsData(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   sortOrder: List<FungibleAssetSortOrder>?,
   page: PaginationArgs?,
@@ -241,7 +241,7 @@ internal suspend fun getAccountCoinsData(
     .toResult()
 
 internal suspend fun getAccountCoinsCount(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
 ): Result<Long, AptosIndexerError> {
   val result = handleQuery {
@@ -264,7 +264,7 @@ internal suspend fun getAccountCoinsCount(
 }
 
 internal suspend fun getAccountCoinAmount(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   coinType: MoveValue.MoveStructId,
   page: PaginationArgs?,
@@ -289,7 +289,7 @@ internal suspend fun getAccountCoinAmount(
 }
 
 internal suspend fun getAccountCoinAmountFromSmartContract(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   coinType: MoveValue.MoveStructId?,
   faMetadataAddress: AccountAddressInput?,
@@ -360,7 +360,7 @@ internal suspend fun getAccountCoinAmountFromSmartContract(
 }
 
 internal suspend fun getAccountAddressesForAuthKey(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: AuthKeyAddressFilter,
   sortOrder: List<AuthKeyAddressSortOrder>,
 ): Result<GetAccountAddressesForAuthKeyQuery.Data?, AptosIndexerError> =
@@ -371,7 +371,7 @@ internal suspend fun getAccountAddressesForAuthKey(
     .toResult()
 
 internal suspend fun getAccountCollectionsWithOwnedTokens(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   tokenStd: TokenStandard?,
   sortOrder: List<CollectionOwnershipV2ViewSortOrder>?,
@@ -402,7 +402,7 @@ internal suspend fun getAccountCollectionsWithOwnedTokens(
     .toResult()
 
 internal suspend fun getAccountOwnedTokensByTokenData(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>,
@@ -421,7 +421,7 @@ internal suspend fun getAccountOwnedTokensByTokenData(
     .toResult()
 
 internal suspend fun getAccountOwnedTokensFromCollection(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>?,
@@ -440,7 +440,7 @@ internal suspend fun getAccountOwnedTokensFromCollection(
     .toResult()
 
 internal suspend fun getAccountOwnedTokens(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>,
@@ -459,7 +459,7 @@ internal suspend fun getAccountOwnedTokens(
     .toResult()
 
 internal suspend fun getAccountTokensCount(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   page: PaginationArgs?,
 ): Result<Long, AptosIndexerError> {
@@ -486,7 +486,7 @@ internal suspend fun getAccountTokensCount(
 }
 
 internal suspend fun getAccountTransactionsCount(
-  config: AptosConfig,
+  config: TransportConfig,
   address: AccountAddress,
 ): Result<GetAccountTransactionsCountQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -495,7 +495,7 @@ internal suspend fun getAccountTransactionsCount(
     .toResult()
 
 internal suspend fun getAuthKeysForPublicKey(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: PublicKeyAuthKeyFilter?,
   sortOrder: List<PublicKeyAuthKeySortOrder>?,
 ): Result<GetAuthKeysForPublicKeyQuery.Data?, AptosIndexerError> =
@@ -511,7 +511,7 @@ internal suspend fun getAuthKeysForPublicKey(
     .toResult()
 
 internal suspend fun getAccountOwnedTokensFromCollectionAddress(
-  config: AptosConfig,
+  config: TransportConfig,
   accountAddress: AccountAddressInput,
   collectionAddress: AccountAddressInput,
   tokenStandard: TokenStandard?,
@@ -545,7 +545,7 @@ internal suspend fun getAccountOwnedTokensFromCollectionAddress(
     .toResult()
 
 internal suspend fun getAccountOwnedObjects(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddress: AccountAddressInput,
   sortOrder: List<ObjectSortOrder>? = null,
   page: PaginationArgs? = null,
@@ -566,21 +566,21 @@ internal suspend fun getAccountOwnedObjects(
     .toResult()
 
 /**
- * Waits for the indexer to sync up to the specified ledger version. The timeout is 3 seconds.
+ * Waits for the indexer to sync up to the specified ledger version.
  *
  * @param aptosConfig The configuration object for Aptos.
  * @param minimumLedgerVersion The minimum ledger version that the indexer should sync to.
  * @param processorType Optional: The type of processor to check the last success version from.
  * @throws kotlinx.coroutines.TimeoutCancellationException if the indexer does not reach the
- *   `minimumLedgerVersion` within the 3-second timeout.
+ *   `minimumLedgerVersion` within the configured timeout.
  */
 internal suspend fun waitForIndexer(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   minimumLedgerVersion: Long,
   processorType: ProcessorType?,
 ) = coroutineScope {
   var indexerVersion = -1L
-  withTimeout(3000) {
+  withTimeout(aptosConfig.indexerWaitTimeoutMillis) {
     while (indexerVersion < minimumLedgerVersion) {
       if (processorType == null) {
         indexerVersion = getIndexerLastSuccessVersion(aptosConfig).getOrNull() ?: -1L

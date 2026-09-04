@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentAptosNamesAggregateFilterBuilder {
+internal class CurrentAptosNamesAggregateFilterBuilder {
   private var count: Current_aptos_names_aggregate_bool_exp_count? = null
   private var boolAnd: Current_aptos_names_aggregate_bool_exp_bool_and? = null
   private var boolOr: Current_aptos_names_aggregate_bool_exp_bool_or? = null
@@ -42,7 +42,7 @@ class CurrentAptosNamesAggregateFilterBuilder {
     )
 }
 
-fun currentAptosNamesAggregateFilter(
+internal fun currentAptosNamesAggregateFilter(
   init: CurrentAptosNamesAggregateFilterBuilder.() -> Unit
 ): Current_aptos_names_aggregate_bool_exp =
   CurrentAptosNamesAggregateFilterBuilder().apply(init).build()

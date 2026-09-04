@@ -6,7 +6,7 @@ import xyz.mcxross.kaptos.generated.type.Current_token_ownerships_v2_select_colu
 import xyz.mcxross.kaptos.generated.type.Int_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(
+internal class CurrentTokenOwnershipsV2AggregateBoolExpCountBuilder(
   private val predicate: Int_comparison_exp
 ) {
   var arguments: List<Current_token_ownerships_v2_select_column>? = null

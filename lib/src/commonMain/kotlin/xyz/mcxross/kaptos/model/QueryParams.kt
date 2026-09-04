@@ -16,7 +16,7 @@
 
 package xyz.mcxross.kaptos.model
 
-interface QueryParams {
+internal interface QueryParams {
   fun toMap(): Map<String, Any?>
 }
 

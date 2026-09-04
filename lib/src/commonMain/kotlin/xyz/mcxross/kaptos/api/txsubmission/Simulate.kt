@@ -19,12 +19,13 @@ import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.internal.simulateTransaction
 import xyz.mcxross.kaptos.model.*
 
-class Simulate(val aptosConfig: AptosConfig) {
+internal class Simulate(val aptosConfig: TransportConfig) {
   suspend fun simple(
     signerPublicKey: PublicKey,
-    transaction: AnyRawTransaction,
+    transaction: UnsignedTransaction,
+    secondarySignerPublicKeys: List<PublicKey> = emptyList(),
     feePayerPublicKey: PublicKey? = null,
-    options: InputSimulateTransactionOptions = InputSimulateTransactionOptions(),
+    options: SimulationOptions = SimulationOptions(),
   ): Result<List<UserTransactionResponse>, Exception> =
     simulateTransaction(
       aptosConfig = aptosConfig,
@@ -32,6 +33,7 @@ class Simulate(val aptosConfig: AptosConfig) {
         InputSimulateTransactionData(
           signerPublicKey = signerPublicKey,
           transaction = transaction,
+          secondarySignerPublicKeys = secondarySignerPublicKeys,
           feePayerPublicKey = feePayerPublicKey,
           options = options,
         ),

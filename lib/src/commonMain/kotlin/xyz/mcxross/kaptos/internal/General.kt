@@ -34,7 +34,7 @@ import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.transaction.builder.generateViewFunctionPayload
 import xyz.mcxross.kaptos.util.toOptional
 
-internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Result<LedgerInfo, AptosSdkError> =
+internal suspend fun getLedgerInfo(aptosConfig: TransportConfig): Result<LedgerInfo, AptosSdkError> =
   getAptosFullNode<LedgerInfo>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
@@ -45,7 +45,7 @@ internal suspend fun getLedgerInfo(aptosConfig: AptosConfig): Result<LedgerInfo,
     .toResult()
 
 internal suspend fun getBlockByVersion(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   ledgerVersion: Long,
   withTransactions: Boolean?,
 ): Result<Block, AptosSdkError> =
@@ -60,7 +60,7 @@ internal suspend fun getBlockByVersion(
     .toResult()
 
 internal suspend fun getBlockByHeight(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   ledgerHeight: Long,
   withTransactions: Boolean?,
 ): Result<Block, AptosSdkError> {
@@ -77,7 +77,7 @@ internal suspend fun getBlockByHeight(
 }
 
 internal suspend fun getChainTopUserTransactions(
-  config: AptosConfig,
+  config: TransportConfig,
   limit: Int,
 ): Result<GetChainTopUserTransactionsQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -86,12 +86,12 @@ internal suspend fun getChainTopUserTransactions(
     .toResult()
 
 internal suspend fun getProcessorStatuses(
-  aptosConfig: AptosConfig
+  aptosConfig: TransportConfig
 ): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
   handleQuery { getGraphqlClient(aptosConfig).query(GetProcessorStatusQuery()) }.toResult()
 
 internal suspend fun getIndexerLastSuccessVersion(
-  aptosConfig: AptosConfig
+  aptosConfig: TransportConfig
 ): Result<Long, AptosIndexerError> {
   val statuses = getProcessorStatuses(aptosConfig).expect("Couldn't Retrieve Processor Statuses")
 
@@ -113,7 +113,7 @@ internal suspend fun getIndexerLastSuccessVersion(
 }
 
 internal suspend fun getProcessorStatus(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   processorType: ProcessorType,
 ): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -130,8 +130,8 @@ internal suspend fun getProcessorStatus(
     }
     .toResult()
 
-suspend inline fun <reified T : List<MoveValue>> view(
-  aptosConfig: AptosConfig,
+internal suspend inline fun <reified T : List<MoveValue>> view(
+  aptosConfig: TransportConfig,
   payload: InputViewFunctionData,
   bcs: Boolean = true,
   options: LedgerVersionArg? = null,

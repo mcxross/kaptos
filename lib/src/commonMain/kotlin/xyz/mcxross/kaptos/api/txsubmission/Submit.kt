@@ -17,9 +17,9 @@ package xyz.mcxross.kaptos.api.txsubmission
 
 import xyz.mcxross.kaptos.internal.submitTransaction
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
-class Submit(private val aptosConfig: AptosConfig) {
+internal class Submit(private val aptosConfig: TransportConfig) {
 
   /**
    * Submit a simple transaction
@@ -31,7 +31,7 @@ class Submit(private val aptosConfig: AptosConfig) {
    * @returns PendingTransactionResponse
    */
   suspend fun simple(
-    transaction: AnyRawTransaction,
+    transaction: UnsignedTransaction,
     senderAuthenticator: AccountAuthenticator,
     feePayerAuthenticator: AccountAuthenticator? = null,
   ): Result<PendingTransactionResponse, Exception> =

@@ -63,7 +63,7 @@ fun String.toMoveType256(): xyz.mcxross.kaptos.model.U256 {
 }
 
 fun String.asPrivateKey(): xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey {
-  return xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey(this)
+  return xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey.fromAip80(this)
 }
 
 fun String.asAccountAddress(): AccountAddress {

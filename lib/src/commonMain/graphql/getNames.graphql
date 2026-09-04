@@ -1,12 +1,27 @@
-#import "./AnsTokenFragment";
 query getNames(
+  $where_condition: current_aptos_names_bool_exp
   $offset: Int
   $limit: Int
-  $where_condition: current_aptos_names_bool_exp
   $order_by: [current_aptos_names_order_by!]
 ) {
-  current_aptos_names(limit: $limit, where: $where_condition, order_by: $order_by, offset: $offset) {
-    ...AnsTokenFragment
+  current_aptos_names(
+    where: $where_condition
+    offset: $offset
+    limit: $limit
+    order_by: $order_by
+  ) {
+    domain
+    domain_expiration_timestamp
+    expiration_timestamp
+    is_active
+    is_primary
+    last_transaction_version
+    owner_address
+    registered_address
+    subdomain
+    subdomain_expiration_policy
+    token_name
+    token_standard
   }
   current_aptos_names_aggregate(where: $where_condition) {
     aggregate {

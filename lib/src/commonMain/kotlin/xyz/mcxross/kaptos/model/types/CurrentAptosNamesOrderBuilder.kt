@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Current_aptos_names_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentAptosNamesOrderBuilder {
+internal class CurrentAptosNamesOrderBuilder {
   private var isDomainOwner: Current_aptos_names_order_by? = null
 
   var domain: OrderBy? = null
@@ -43,6 +43,6 @@ class CurrentAptosNamesOrderBuilder {
     )
 }
 
-fun currentAptosNamesOrder(
+internal fun currentAptosNamesOrder(
   init: CurrentAptosNamesOrderBuilder.() -> Unit
 ): Current_aptos_names_order_by = CurrentAptosNamesOrderBuilder().apply(init).build()

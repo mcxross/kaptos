@@ -24,7 +24,7 @@ import xyz.mcxross.kaptos.model.ActiveDelegatorPerPoolOrder
 import xyz.mcxross.kaptos.model.Result
 
 /** Interface for querying all `Staking` related information. */
-interface Staking {
+internal interface Staking {
 
   /**
    * Queries the current number of delegators in a specified pool.
@@ -34,20 +34,6 @@ interface Staking {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val poolAddress = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getNumberOfDelegators(poolAddress)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val count = resolution.value
-   * println("Number of delegators: $count")
-   * }
-   * is Result.Err -> {
-   * println("Error querying delegator count: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param poolAddress The address of the staking pool to query.
    * @param sortOrder An optional list of sorting options for the results.
@@ -70,19 +56,6 @@ interface Staking {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val resolution = aptos.getNumberOfDelegatorsForAllPools()
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved delegator data for all pools: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error querying delegators for all pools: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param sortOrder An optional list of sorting options for the results.
    * @param minimumLedgerVersion An optional ledger version. The function will wait for the indexer
@@ -103,21 +76,6 @@ interface Staking {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val poolAddr = AccountAddress.fromString("0x...")
-   * val delegatorAddr = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getDelegatedStakingActivities(poolAddr, delegatorAddr)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved staking activities: $data")
-   * }
-   * is Result.Err -> {
-   * println("Error querying staking activities: ${resolution.error.message}")
-   * }
-   * }
-   * ```
    *
    * @param poolAddress The address of the staking pool.
    * @param delegatorAddress The address of the delegator.

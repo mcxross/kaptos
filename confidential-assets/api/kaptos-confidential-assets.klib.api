@@ -1,0 +1,293 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, macosArm64, macosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <xyz.mcxross.kaptos:kaptos-confidential-assets>
+final enum class xyz.mcxross.kaptos.confidential/ConfidentialActivityType : kotlin/Enum<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> { // xyz.mcxross.kaptos.confidential/ConfidentialActivityType|null[0]
+    enum entry AllowListingChanged // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.AllowListingChanged|null[0]
+    enum entry AssetSpecificAuditorChanged // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.AssetSpecificAuditorChanged|null[0]
+    enum entry ConfidentialityForAssetTypeChanged // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.ConfidentialityForAssetTypeChanged|null[0]
+    enum entry Deposited // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Deposited|null[0]
+    enum entry GlobalAuditorChanged // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.GlobalAuditorChanged|null[0]
+    enum entry IncomingTransfersPauseChanged // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.IncomingTransfersPauseChanged|null[0]
+    enum entry KeyRotated // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.KeyRotated|null[0]
+    enum entry Normalized // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Normalized|null[0]
+    enum entry Registered // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Registered|null[0]
+    enum entry RolledOver // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.RolledOver|null[0]
+    enum entry Transferred // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Transferred|null[0]
+    enum entry Withdrawn // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Withdrawn|null[0]
+
+    final val entries // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val wireName // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.wireName|{}wireName[0]
+        final fun <get-wireName>(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.wireName.<get-wireName>|<get-wireName>(){}[0]
+
+    final fun valueOf(kotlin/String): xyz.mcxross.kaptos.confidential/ConfidentialActivityType // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.values|values#static(){}[0]
+
+    final object Companion // xyz.mcxross.kaptos.confidential/ConfidentialActivityType.Companion|null[0]
+}
+
+abstract interface xyz.mcxross.kaptos.confidential/ConfidentialAssetService { // xyz.mcxross.kaptos.confidential/ConfidentialAssetService|null[0]
+    abstract suspend fun buildDeposit(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildDeposit|buildDeposit(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildNormalizeBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildNormalizeBalance|buildNormalizeBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildRegisterBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildRegisterBalance|buildRegisterBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildRolloverPendingBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildRolloverPendingBalance|buildRolloverPendingBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildRotateEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildRotateEncryptionKey|buildRotateEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildSetIncomingTransfersPaused(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildSetIncomingTransfersPaused|buildSetIncomingTransfersPaused(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey> = ..., kotlin/ByteArray = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildTransfer|buildTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialEncryptionKey>;kotlin.ByteArray;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun buildWithdraw(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, xyz.mcxross.kaptos.model/AccountAddressInput = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.buildWithdraw|buildWithdraw(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun clearCache() // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.clearCache|clearCache(){}[0]
+    abstract suspend fun deposit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.deposit|deposit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun getActivities(xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity>> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getActivities|getActivities(xyz.mcxross.kaptos.confidential.ConfidentialActivityQuery){}[0]
+    abstract suspend fun getAssetAuditorEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey?> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getAssetAuditorEncryptionKey|getAssetAuditorEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean){}[0]
+    abstract suspend fun getBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.confidential/ConfidentialBalance> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getBalance|getBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean){}[0]
+    abstract suspend fun getEffectiveAuditorHint(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.confidential/EffectiveAuditorHint?> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getEffectiveAuditorHint|getEffectiveAuditorHint(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    abstract suspend fun getEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getEncryptionKey|getEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean){}[0]
+    abstract suspend fun getStatus(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.getStatus|getStatus(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    abstract suspend fun isEmergencyPaused(): xyz.mcxross.kaptos.model/AptosResult<kotlin/Boolean> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.isEmergencyPaused|isEmergencyPaused(){}[0]
+    abstract suspend fun normalizeBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.normalizeBalance|normalizeBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun registerBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.registerBalance|registerBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun rolloverPendingBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.rolloverPendingBalance|rolloverPendingBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun rotateEncryptionKey(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.rotateEncryptionKey|rotateEncryptionKey(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun setIncomingTransfersPaused(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.setIncomingTransfersPaused|setIncomingTransfersPaused(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun transfer(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey> = ..., kotlin/ByteArray = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.transfer|transfer(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialEncryptionKey>;kotlin.ByteArray;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    abstract suspend fun withdraw(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, xyz.mcxross.kaptos.model/AccountAddressInput = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.confidential/ConfidentialAssetService.withdraw|withdraw(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery { // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., kotlin.collections/Set<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> = ..., xyz.mcxross.kaptos.model/PageRequest = ...) // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.<init>|<init>(xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.AccountAddressInput?;kotlin.collections.Set<xyz.mcxross.kaptos.confidential.ConfidentialActivityType>;xyz.mcxross.kaptos.model.PageRequest){}[0]
+
+    final val asset // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.asset|{}asset[0]
+        final fun <get-asset>(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.asset.<get-asset>|<get-asset>(){}[0]
+    final val owner // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.owner|{}owner[0]
+        final fun <get-owner>(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.owner.<get-owner>|<get-owner>(){}[0]
+    final val page // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.page|{}page[0]
+        final fun <get-page>(): xyz.mcxross.kaptos.model/PageRequest // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.page.<get-page>|<get-page>(){}[0]
+    final val types // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.types|{}types[0]
+        final fun <get-types>(): kotlin.collections/Set<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.types.<get-types>|<get-types>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.component1|component1(){}[0]
+    final fun component2(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Set<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.component3|component3(){}[0]
+    final fun component4(): xyz.mcxross.kaptos.model/PageRequest // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.component4|component4(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., kotlin.collections/Set<xyz.mcxross.kaptos.confidential/ConfidentialActivityType> = ..., xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.copy|copy(xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.AccountAddressInput?;kotlin.collections.Set<xyz.mcxross.kaptos.confidential.ConfidentialActivityType>;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialAmount { // xyz.mcxross.kaptos.confidential/ConfidentialAmount|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/UInt>) // xyz.mcxross.kaptos.confidential/ConfidentialAmount.<init>|<init>(kotlin.collections.List<kotlin.UInt>){}[0]
+
+    final val chunks // xyz.mcxross.kaptos.confidential/ConfidentialAmount.chunks|{}chunks[0]
+        final fun <get-chunks>(): kotlin.collections/List<kotlin/UInt> // xyz.mcxross.kaptos.confidential/ConfidentialAmount.chunks.<get-chunks>|<get-chunks>(){}[0]
+    final val decimal // xyz.mcxross.kaptos.confidential/ConfidentialAmount.decimal|{}decimal[0]
+        final fun <get-decimal>(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAmount.decimal.<get-decimal>|<get-decimal>(){}[0]
+    final val normalizedChunks // xyz.mcxross.kaptos.confidential/ConfidentialAmount.normalizedChunks|{}normalizedChunks[0]
+        final fun <get-normalizedChunks>(): kotlin.collections/List<kotlin/UInt> // xyz.mcxross.kaptos.confidential/ConfidentialAmount.normalizedChunks.<get-normalizedChunks>|<get-normalizedChunks>(){}[0]
+
+    final fun component1(): kotlin.collections/List<kotlin/UInt> // xyz.mcxross.kaptos.confidential/ConfidentialAmount.component1|component1(){}[0]
+    final fun copy(kotlin.collections/List<kotlin/UInt> = ...): xyz.mcxross.kaptos.confidential/ConfidentialAmount // xyz.mcxross.kaptos.confidential/ConfidentialAmount.copy|copy(kotlin.collections.List<kotlin.UInt>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAmount.equals|equals(kotlin.Any?){}[0]
+    final fun fitsInULong(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAmount.fitsInULong|fitsInULong(){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialAmount.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAmount.toString|toString(){}[0]
+    final fun toULong(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAmount.toULong|toULong(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity { // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity|null[0]
+    constructor <init>(kotlin/ULong, kotlin/ULong, xyz.mcxross.kaptos.confidential/ConfidentialActivityType, xyz.mcxross.kaptos.model/AccountAddress, kotlin/String?, xyz.mcxross.kaptos.model/AccountAddress?, xyz.mcxross.kaptos.model/AccountAddress?, kotlin/String?, kotlin/ULong?, kotlinx.serialization.json/JsonObject, kotlin/String, kotlin/ULong, kotlin/Boolean, kotlin/String?, kotlin/String) // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.<init>|<init>(kotlin.ULong;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialActivityType;xyz.mcxross.kaptos.model.AccountAddress;kotlin.String?;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.model.AccountAddress?;kotlin.String?;kotlin.ULong?;kotlinx.serialization.json.JsonObject;kotlin.String;kotlin.ULong;kotlin.Boolean;kotlin.String?;kotlin.String){}[0]
+
+    final val amount // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.amount|{}amount[0]
+        final fun <get-amount>(): kotlin/ULong? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.amount.<get-amount>|<get-amount>(){}[0]
+    final val asset // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.asset|{}asset[0]
+        final fun <get-asset>(): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.asset.<get-asset>|<get-asset>(){}[0]
+    final val blockHeight // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.blockHeight|{}blockHeight[0]
+        final fun <get-blockHeight>(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.blockHeight.<get-blockHeight>|<get-blockHeight>(){}[0]
+    final val counterparty // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.counterparty|{}counterparty[0]
+        final fun <get-counterparty>(): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.counterparty.<get-counterparty>|<get-counterparty>(){}[0]
+    final val counterpartyPrimaryName // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.counterpartyPrimaryName|{}counterpartyPrimaryName[0]
+        final fun <get-counterpartyPrimaryName>(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.counterpartyPrimaryName.<get-counterpartyPrimaryName>|<get-counterpartyPrimaryName>(){}[0]
+    final val entryFunction // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.entryFunction|{}entryFunction[0]
+        final fun <get-entryFunction>(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.entryFunction.<get-entryFunction>|<get-entryFunction>(){}[0]
+    final val eventData // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventData|{}eventData[0]
+        final fun <get-eventData>(): kotlinx.serialization.json/JsonObject // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventData.<get-eventData>|<get-eventData>(){}[0]
+    final val eventDataVersion // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventDataVersion|{}eventDataVersion[0]
+        final fun <get-eventDataVersion>(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventDataVersion.<get-eventDataVersion>|<get-eventDataVersion>(){}[0]
+    final val eventIndex // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventIndex|{}eventIndex[0]
+        final fun <get-eventIndex>(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.eventIndex.<get-eventIndex>|<get-eventIndex>(){}[0]
+    final val owner // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.owner|{}owner[0]
+        final fun <get-owner>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.owner.<get-owner>|<get-owner>(){}[0]
+    final val ownerPrimaryName // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.ownerPrimaryName|{}ownerPrimaryName[0]
+        final fun <get-ownerPrimaryName>(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.ownerPrimaryName.<get-ownerPrimaryName>|<get-ownerPrimaryName>(){}[0]
+    final val timestamp // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+    final val transactionSucceeded // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.transactionSucceeded|{}transactionSucceeded[0]
+        final fun <get-transactionSucceeded>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.transactionSucceeded.<get-transactionSucceeded>|<get-transactionSucceeded>(){}[0]
+    final val transactionVersion // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.transactionVersion|{}transactionVersion[0]
+        final fun <get-transactionVersion>(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.transactionVersion.<get-transactionVersion>|<get-transactionVersion>(){}[0]
+    final val type // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.type|{}type[0]
+        final fun <get-type>(): xyz.mcxross.kaptos.confidential/ConfidentialActivityType // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.type.<get-type>|<get-type>(){}[0]
+
+    final fun component1(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component1|component1(){}[0]
+    final fun component10(): kotlinx.serialization.json/JsonObject // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component10|component10(){}[0]
+    final fun component11(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component11|component11(){}[0]
+    final fun component12(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component12|component12(){}[0]
+    final fun component13(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component13|component13(){}[0]
+    final fun component14(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component14|component14(){}[0]
+    final fun component15(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component15|component15(){}[0]
+    final fun component2(): kotlin/ULong // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component2|component2(){}[0]
+    final fun component3(): xyz.mcxross.kaptos.confidential/ConfidentialActivityType // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component3|component3(){}[0]
+    final fun component4(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component4|component4(){}[0]
+    final fun component5(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component5|component5(){}[0]
+    final fun component6(): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component6|component6(){}[0]
+    final fun component7(): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component7|component7(){}[0]
+    final fun component8(): kotlin/String? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component8|component8(){}[0]
+    final fun component9(): kotlin/ULong? // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.component9|component9(){}[0]
+    final fun copy(kotlin/ULong = ..., kotlin/ULong = ..., xyz.mcxross.kaptos.confidential/ConfidentialActivityType = ..., xyz.mcxross.kaptos.model/AccountAddress = ..., kotlin/String? = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., kotlin/String? = ..., kotlin/ULong? = ..., kotlinx.serialization.json/JsonObject = ..., kotlin/String = ..., kotlin/ULong = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String = ...): xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.copy|copy(kotlin.ULong;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialActivityType;xyz.mcxross.kaptos.model.AccountAddress;kotlin.String?;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.model.AccountAddress?;kotlin.String?;kotlin.ULong?;kotlinx.serialization.json.JsonObject;kotlin.String;kotlin.ULong;kotlin.Boolean;kotlin.String?;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig { // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/AccountAddress = ...) // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.<init>|<init>(xyz.mcxross.kaptos.model.AccountAddress){}[0]
+
+    final val moduleAddress // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.moduleAddress|{}moduleAddress[0]
+        final fun <get-moduleAddress>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.moduleAddress.<get-moduleAddress>|<get-moduleAddress>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.component1|component1(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/AccountAddress = ...): xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.copy|copy(xyz.mcxross.kaptos.model.AccountAddress){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus { // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/Boolean, kotlin/Boolean) // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.<init>|<init>(kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val incomingTransfersPaused // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.incomingTransfersPaused|{}incomingTransfersPaused[0]
+        final fun <get-incomingTransfersPaused>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.incomingTransfersPaused.<get-incomingTransfersPaused>|<get-incomingTransfersPaused>(){}[0]
+    final val normalized // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.normalized|{}normalized[0]
+        final fun <get-normalized>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.normalized.<get-normalized>|<get-normalized>(){}[0]
+    final val registered // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.registered|{}registered[0]
+        final fun <get-registered>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.registered.<get-registered>|<get-registered>(){}[0]
+
+    final fun component1(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.component3|component3(){}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ...): xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.copy|copy(kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialBalance { // xyz.mcxross.kaptos.confidential/ConfidentialBalance|null[0]
+    constructor <init>(kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext>, kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext>, xyz.mcxross.kaptos.confidential/ConfidentialAmount, xyz.mcxross.kaptos.confidential/ConfidentialAmount) // xyz.mcxross.kaptos.confidential/ConfidentialBalance.<init>|<init>(kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialCiphertext>;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialCiphertext>;xyz.mcxross.kaptos.confidential.ConfidentialAmount;xyz.mcxross.kaptos.confidential.ConfidentialAmount){}[0]
+
+    final val available // xyz.mcxross.kaptos.confidential/ConfidentialBalance.available|{}available[0]
+        final fun <get-available>(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> // xyz.mcxross.kaptos.confidential/ConfidentialBalance.available.<get-available>|<get-available>(){}[0]
+    final val availableAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.availableAmount|{}availableAmount[0]
+        final fun <get-availableAmount>(): xyz.mcxross.kaptos.confidential/ConfidentialAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.availableAmount.<get-availableAmount>|<get-availableAmount>(){}[0]
+    final val pending // xyz.mcxross.kaptos.confidential/ConfidentialBalance.pending|{}pending[0]
+        final fun <get-pending>(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> // xyz.mcxross.kaptos.confidential/ConfidentialBalance.pending.<get-pending>|<get-pending>(){}[0]
+    final val pendingAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.pendingAmount|{}pendingAmount[0]
+        final fun <get-pendingAmount>(): xyz.mcxross.kaptos.confidential/ConfidentialAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.pendingAmount.<get-pendingAmount>|<get-pendingAmount>(){}[0]
+
+    final fun component1(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> // xyz.mcxross.kaptos.confidential/ConfidentialBalance.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> // xyz.mcxross.kaptos.confidential/ConfidentialBalance.component2|component2(){}[0]
+    final fun component3(): xyz.mcxross.kaptos.confidential/ConfidentialAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.component3|component3(){}[0]
+    final fun component4(): xyz.mcxross.kaptos.confidential/ConfidentialAmount // xyz.mcxross.kaptos.confidential/ConfidentialBalance.component4|component4(){}[0]
+    final fun copy(kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> = ..., kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialCiphertext> = ..., xyz.mcxross.kaptos.confidential/ConfidentialAmount = ..., xyz.mcxross.kaptos.confidential/ConfidentialAmount = ...): xyz.mcxross.kaptos.confidential/ConfidentialBalance // xyz.mcxross.kaptos.confidential/ConfidentialBalance.copy|copy(kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialCiphertext>;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialCiphertext>;xyz.mcxross.kaptos.confidential.ConfidentialAmount;xyz.mcxross.kaptos.confidential.ConfidentialAmount){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialBalance.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialBalance.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialBalance.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialCiphertext { // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext|null[0]
+    constructor <init>(kotlin/ByteArray, kotlin/ByteArray) // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.<init>|<init>(kotlin.ByteArray;kotlin.ByteArray){}[0]
+
+    final val commitment // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.commitment|{}commitment[0]
+        final fun <get-commitment>(): kotlin/ByteArray // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.commitment.<get-commitment>|<get-commitment>(){}[0]
+    final val handle // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.handle|{}handle[0]
+        final fun <get-handle>(): kotlin/ByteArray // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.handle.<get-handle>|<get-handle>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialCiphertext.hashCode|hashCode(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey : kotlin/AutoCloseable { // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey|null[0]
+    final val encryptionKey // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.encryptionKey|{}encryptionKey[0]
+        final fun <get-encryptionKey>(): xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.encryptionKey.<get-encryptionKey>|<get-encryptionKey>(){}[0]
+
+    final var isCleared // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.isCleared|{}isCleared[0]
+        final fun <get-isCleared>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.isCleared.<get-isCleared>|<get-isCleared>(){}[0]
+
+    final fun clear() // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.clear|clear(){}[0]
+    final fun close() // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.close|close(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.toString|toString(){}[0]
+
+    final object Companion { // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.Companion|null[0]
+        final fun fromBytes(kotlin/ByteArray): xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.Companion.fromBytes|fromBytes(kotlin.ByteArray){}[0]
+        final fun fromSignature(kotlin/ByteArray): xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.Companion.fromSignature|fromSignature(kotlin.ByteArray){}[0]
+        final fun generate(): xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey // xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey.Companion.generate|generate(){}[0]
+    }
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey { // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey|null[0]
+    constructor <init>(kotlin/ByteArray) // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey.<init>|<init>(kotlin.ByteArray){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey.hashCode|hashCode(){}[0]
+    final fun toByteArray(): kotlin/ByteArray // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey.toByteArray|toByteArray(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions { // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/TransactionOptions = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ...) // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.<init>|<init>(xyz.mcxross.kaptos.model.TransactionOptions;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.model.AccountAddressInput?){}[0]
+
+    final val externalFeePayerAddress // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.externalFeePayerAddress|{}externalFeePayerAddress[0]
+        final fun <get-externalFeePayerAddress>(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.externalFeePayerAddress.<get-externalFeePayerAddress>|<get-externalFeePayerAddress>(){}[0]
+    final val feePayer // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.feePayer|{}feePayer[0]
+        final fun <get-feePayer>(): xyz.mcxross.kaptos.account/TransactionSigner? // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.feePayer.<get-feePayer>|<get-feePayer>(){}[0]
+    final val transaction // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.transaction|{}transaction[0]
+        final fun <get-transaction>(): xyz.mcxross.kaptos.model/TransactionOptions // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.transaction.<get-transaction>|<get-transaction>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.model/TransactionOptions // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.component1|component1(){}[0]
+    final fun component2(): xyz.mcxross.kaptos.account/TransactionSigner? // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.component2|component2(){}[0]
+    final fun component3(): xyz.mcxross.kaptos.model/AccountAddressInput? // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.component3|component3(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/TransactionOptions = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ...): xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.copy|copy(xyz.mcxross.kaptos.model.TransactionOptions;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.model.AccountAddressInput?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.confidential/EffectiveAuditorHint { // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/ULong) // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.<init>|<init>(kotlin.Boolean;kotlin.ULong){}[0]
+
+    final val epoch // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.epoch|{}epoch[0]
+        final fun <get-epoch>(): kotlin/ULong // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.epoch.<get-epoch>|<get-epoch>(){}[0]
+    final val isGlobal // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.isGlobal|{}isGlobal[0]
+        final fun <get-isGlobal>(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.isGlobal.<get-isGlobal>|<get-isGlobal>(){}[0]
+
+    final fun component1(): kotlin/Boolean // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.component1|component1(){}[0]
+    final fun component2(): kotlin/ULong // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.component2|component2(){}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/ULong = ...): xyz.mcxross.kaptos.confidential/EffectiveAuditorHint // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.copy|copy(kotlin.Boolean;kotlin.ULong){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.confidential/EffectiveAuditorHint.toString|toString(){}[0]
+}
+
+final const val xyz.mcxross.kaptos.confidential/AVAILABLE_BALANCE_CHUNK_COUNT // xyz.mcxross.kaptos.confidential/AVAILABLE_BALANCE_CHUNK_COUNT|{}AVAILABLE_BALANCE_CHUNK_COUNT[0]
+    final fun <get-AVAILABLE_BALANCE_CHUNK_COUNT>(): kotlin/Int // xyz.mcxross.kaptos.confidential/AVAILABLE_BALANCE_CHUNK_COUNT.<get-AVAILABLE_BALANCE_CHUNK_COUNT>|<get-AVAILABLE_BALANCE_CHUNK_COUNT>(){}[0]
+final const val xyz.mcxross.kaptos.confidential/CONFIDENTIAL_CHUNK_BITS // xyz.mcxross.kaptos.confidential/CONFIDENTIAL_CHUNK_BITS|{}CONFIDENTIAL_CHUNK_BITS[0]
+    final fun <get-CONFIDENTIAL_CHUNK_BITS>(): kotlin/Int // xyz.mcxross.kaptos.confidential/CONFIDENTIAL_CHUNK_BITS.<get-CONFIDENTIAL_CHUNK_BITS>|<get-CONFIDENTIAL_CHUNK_BITS>(){}[0]
+final const val xyz.mcxross.kaptos.confidential/TRANSFER_AMOUNT_CHUNK_COUNT // xyz.mcxross.kaptos.confidential/TRANSFER_AMOUNT_CHUNK_COUNT|{}TRANSFER_AMOUNT_CHUNK_COUNT[0]
+    final fun <get-TRANSFER_AMOUNT_CHUNK_COUNT>(): kotlin/Int // xyz.mcxross.kaptos.confidential/TRANSFER_AMOUNT_CHUNK_COUNT.<get-TRANSFER_AMOUNT_CHUNK_COUNT>|<get-TRANSFER_AMOUNT_CHUNK_COUNT>(){}[0]
+
+final fun (xyz.mcxross.kaptos/Aptos).xyz.mcxross.kaptos.confidential/confidentialAssets(xyz.mcxross.kaptos.confidential/ConfidentialAssetConfig = ...): xyz.mcxross.kaptos.confidential/ConfidentialAssetService // xyz.mcxross.kaptos.confidential/confidentialAssets|confidentialAssets@xyz.mcxross.kaptos.Aptos(xyz.mcxross.kaptos.confidential.ConfidentialAssetConfig){}[0]
+final fun (xyz.mcxross.kaptos/Aptos).xyz.mcxross.kaptos.confidential/confidentialDecryptionKey(): xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey // xyz.mcxross.kaptos.confidential/confidentialDecryptionKey|confidentialDecryptionKey@xyz.mcxross.kaptos.Aptos(){}[0]

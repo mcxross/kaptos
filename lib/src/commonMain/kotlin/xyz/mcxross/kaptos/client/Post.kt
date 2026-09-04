@@ -22,21 +22,27 @@ import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.map
 import io.ktor.client.call.*
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
 import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 
-suspend inline fun <reified V> post(
+internal suspend inline fun <reified V> post(
   options: RequestOptions.PostRequestOptions<V>
 ): Result<AptosResponse, AptosSdkError> {
   return try {
+    val requestHeaders = options.aptosConfig.requestHeadersFor(options.type)
     val aptosResponse =
-      getClient(options.aptosConfig.clientConfig).post(
+      options.aptosConfig.httpClient.post(
         options.aptosConfig.getRequestUrl(options.type)
       ) {
         url { appendPathSegments(options.path) }
+        options.params?.forEach { (key, value) -> parameter(key, value) }
+        timeout { requestTimeoutMillis = options.aptosConfig.requestTimeoutMillis }
+        applyAptosHeaders(requestHeaders)
         contentType(ContentType.parse(options.contentType.type))
+        accept(ContentType.parse(options.acceptType.type))
         setBody(options.body)
       }
 
@@ -46,7 +52,7 @@ suspend inline fun <reified V> post(
   }
 }
 
-suspend inline fun <reified T, reified V> postAptosFullNode(
+internal suspend inline fun <reified T, reified V> postAptosFullNode(
   options: RequestOptions.PostAptosRequestOptions<V>
 ): Result<Pair<AptosResponse, T>, AptosSdkError> {
   val postResult =
@@ -57,7 +63,10 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
         originMethod = options.originMethod,
         path = options.path,
         contentType = options.contentType,
+        acceptType = options.acceptType,
+        params = options.params,
         body = options.body,
+        overrides = options.overrides,
       )
     )
 
@@ -91,7 +100,7 @@ suspend inline fun <reified T, reified V> postAptosFullNode(
  * @return A `Result` which is either `Ok` containing only the deserialized data `T`, or `Err`
  *   containing an [AptosSdkError].
  */
-suspend inline fun <reified T, reified V> postAptosFullNodeAndGetData(
+internal suspend inline fun <reified T, reified V> postAptosFullNodeAndGetData(
   options: RequestOptions.PostAptosRequestOptions<V>
 ): Result<T, AptosSdkError> {
   return postAptosFullNode<T, V>(options).map { it.second }
@@ -120,7 +129,7 @@ suspend inline fun <reified T, reified V> postAptosFullNodeAndGetData(
  * @return A `Result` which is either `Ok` containing a list of submitted transaction hashes, or
  *   `Err` containing an [AptosSdkError].
  */
-suspend inline fun <reified T> postAptosFaucet(
+internal suspend inline fun <reified T> postAptosFaucet(
   options: RequestOptions.PostAptosRequestOptions<T>
 ): Result<FaucetResponse, AptosSdkError> {
   val postResult =
@@ -131,7 +140,10 @@ suspend inline fun <reified T> postAptosFaucet(
         originMethod = options.originMethod,
         path = options.path,
         contentType = options.contentType,
+        acceptType = options.acceptType,
+        params = options.params,
         body = options.body,
+        overrides = options.overrides,
       )
     )
 

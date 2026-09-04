@@ -17,7 +17,6 @@ package xyz.mcxross.kaptos.model
 
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
-import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 
 @Serializable
 enum class TransactionResponseType {
@@ -33,6 +32,7 @@ enum class TransactionResponseType {
 @Serializable
 sealed class TransactionResponse {
   abstract val type: TransactionResponseType
+  abstract val hash: String
 }
 
 @Serializable
@@ -40,7 +40,7 @@ sealed class TransactionResponse {
 data class UserTransactionResponse(
   override val type: TransactionResponseType = TransactionResponseType.USER,
   val version: String,
-  val hash: String,
+  override val hash: String,
   @SerialName("state_change_hash") val stateChangeHash: String,
   @SerialName("event_root_hash") val eventRootHash: String,
   @SerialName("state_checkpoint_hash") val statecCheckpointHash: String?,
@@ -64,7 +64,7 @@ data class UserTransactionResponse(
 @SerialName("pending_transaction")
 data class PendingTransactionResponse(
   override val type: TransactionResponseType = TransactionResponseType.PENDING,
-  val hash: String,
+  override val hash: String,
   val sender: String,
   @SerialName("sequence_number") val sequenceNumber: String,
   @SerialName("max_gas_amount") val maxGasAmount: String,
@@ -73,11 +73,28 @@ data class PendingTransactionResponse(
 ) : TransactionResponse()
 
 @Serializable
+@SerialName("genesis_transaction")
+data class GenesisTransactionResponse(
+  override val type: TransactionResponseType = TransactionResponseType.GENESIS,
+  val version: String,
+  override val hash: String,
+  @SerialName("state_change_hash") val stateChangeHash: String,
+  @SerialName("event_root_hash") val eventRootHash: String,
+  @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
+  @SerialName("gas_used") val gasUsed: String,
+  val success: Boolean,
+  @SerialName("vm_status") val vmStatus: String,
+  @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
+  val payload: JsonElement,
+  val events: List<Event>,
+) : TransactionResponse()
+
+@Serializable
 @SerialName("block_metadata_transaction")
 data class BlockMetadataTransactionResponse(
   override val type: TransactionResponseType,
   val version: String,
-  val hash: String,
+  override val hash: String,
   @SerialName("state_change_hash") val stateChangeHash: String,
   @SerialName("event_root_hash") val eventRootHash: String,
   @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
@@ -101,7 +118,7 @@ data class BlockMetadataTransactionResponse(
 data class StateCheckpointTransactionResponse(
   override val type: TransactionResponseType,
   val version: String,
-  val hash: String,
+  override val hash: String,
   @SerialName("state_change_hash") val stateChangeHash: String,
   @SerialName("event_root_hash") val eventRootHash: String,
   @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
@@ -118,7 +135,7 @@ data class StateCheckpointTransactionResponse(
 data class BlockEpilogueTransactionResponse(
   override val type: TransactionResponseType,
   val version: String,
-  val hash: String,
+  override val hash: String,
   @SerialName("state_change_hash") val stateChangeHash: String,
   @SerialName("event_root_hash") val eventRootHash: String,
   @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
@@ -127,6 +144,25 @@ data class BlockEpilogueTransactionResponse(
   @SerialName("vm_status") val vmStatus: String,
   @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
   val timestamp: String,
+) : TransactionResponse()
+
+@Serializable
+@SerialName("validator_transaction")
+data class ValidatorTransactionResponse(
+  override val type: TransactionResponseType = TransactionResponseType.VALIDATOR,
+  val version: String,
+  override val hash: String,
+  @SerialName("state_change_hash") val stateChangeHash: String,
+  @SerialName("event_root_hash") val eventRootHash: String,
+  @SerialName("state_checkpoint_hash") val stateCheckpointHash: String?,
+  @SerialName("gas_used") val gasUsed: String,
+  val success: Boolean,
+  @SerialName("vm_status") val vmStatus: String,
+  @SerialName("accumulator_root_hash") val accumulatorRootHash: String,
+  val events: List<Event>,
+  val timestamp: String,
+  @SerialName("validator_transaction_type") val validatorTransactionType: String,
+  @SerialName("dkg_transcript") val dkgTranscript: JsonElement? = null,
 ) : TransactionResponse()
 
 @Serializable sealed class TransactionPayloadResponse
@@ -172,15 +208,3 @@ data class WriteSetChangeDeleteModule(
   val state_key_hash: String,
   val module: String,
 ) : WriteSetChange()
-
-@Serializable abstract class AnyRawTransaction
-
-@Serializable
-data class MultiAgentTransaction(val rawTransaction: RawTransaction) : AnyRawTransaction()
-
-@Serializable
-data class SimpleTransaction(
-  val rawTransaction: RawTransaction,
-  var feePayerAddress: AccountAddress?,
-  val secondarySignerAddresses: Nothing? = null,
-) : AnyRawTransaction()

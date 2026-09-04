@@ -16,7 +16,7 @@
 package xyz.mcxross.kaptos.exception
 
 /** Represents an error that occurred during a GET request to the Aptos REST API. */
-sealed class AptosSdkError(message: String, cause: Throwable? = null) :
+internal sealed class AptosSdkError(message: String, cause: Throwable? = null) :
   AptosClientException(message, cause) {
 
   /**

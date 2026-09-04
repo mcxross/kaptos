@@ -23,7 +23,7 @@ import xyz.mcxross.kaptos.internal.getNumberOfDelegators
 import xyz.mcxross.kaptos.internal.getNumberOfDelegatorsForAllPools
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.ActiveDelegatorPerPoolOrder
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.ProcessorType
 import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.protocol.Staking
@@ -32,9 +32,9 @@ import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 /**
  * A class for querying all `Staking` related information.
  *
- * @property config AptosConfig object for configuration.
+ * @property config TransportConfig object for configuration.
  */
-class Staking(private val config: AptosConfig) : Staking {
+internal class Staking(private val config: TransportConfig) : Staking {
 
   /**
    * Queries the current number of delegators in a specified pool.

@@ -1,0 +1,42 @@
+public final class xyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions {
+	public fun <init> ()V
+	public fun <init> (Lxyz/mcxross/kaptos/model/FixedBytes32;Ljava/util/List;Lxyz/mcxross/kaptos/model/FixedBytes32;Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/FixedBytes32;Ljava/util/List;Lxyz/mcxross/kaptos/model/FixedBytes32;Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/FixedBytes32;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Lxyz/mcxross/kaptos/model/FixedBytes32;
+	public final fun component4 ()Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;
+	public final fun copy (Lxyz/mcxross/kaptos/model/FixedBytes32;Ljava/util/List;Lxyz/mcxross/kaptos/model/FixedBytes32;Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;)Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/FixedBytes32;Ljava/util/List;Lxyz/mcxross/kaptos/model/FixedBytes32;Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;ILjava/lang/Object;)Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getClaimedEntryFunction ()Lxyz/mcxross/kaptos/model/ClaimedEntryFunction;
+	public final fun getFeePayerAuthenticationKey ()Lxyz/mcxross/kaptos/model/FixedBytes32;
+	public final fun getSecondarySignerAuthenticationKeys ()Ljava/util/List;
+	public final fun getSenderAuthenticationKey ()Lxyz/mcxross/kaptos/model/FixedBytes32;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class xyz/mcxross/kaptos/encrypted/EncryptedTransactionService {
+	public abstract fun clearCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun encrypt (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun signAndSubmit (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun signAndSubmit (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun submitAndWait (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun submitAndWait$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/encrypted/EncryptedTransactionService$DefaultImpls {
+	public static synthetic fun encrypt$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun submitAndWait$default (Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/encrypted/EncryptedTransactionServiceKt {
+	public static final fun encryptedTransactions (Lxyz/mcxross/kaptos/Aptos;)Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionService;
+}
+

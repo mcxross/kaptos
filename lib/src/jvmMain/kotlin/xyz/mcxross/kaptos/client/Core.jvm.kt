@@ -29,7 +29,7 @@ import xyz.mcxross.kaptos.model.UserAgent
 import xyz.mcxross.kaptos.util.DEFAULT_CLIENT_HEADERS
 
 /** Create a new Ktor client with the given configuration. */
-actual fun httpClient(clientConfig: ClientConfig) =
+internal actual fun httpClient(clientConfig: ClientConfig) =
   HttpClient(CIO) {
 
     // Set the follow redirects and SSL redirects.
@@ -87,7 +87,7 @@ actual fun httpClient(clientConfig: ClientConfig) =
     }
   }
 
-actual class ClientConfig(
+internal actual class ClientConfig(
 
   /** Specifies whether the client should use pipelining. Default is `false`. */
   var pipelining: Boolean = false,

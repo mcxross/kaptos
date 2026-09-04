@@ -16,7 +16,7 @@
 package xyz.mcxross.kaptos.exception
 
 /** A typed representation of the specific error codes returned by the Aptos API. */
-enum class AptosErrorCode {
+internal enum class AptosErrorCode {
   ACCOUNT_NOT_FOUND,
   RESOURCE_NOT_FOUND,
   MODULE_NOT_FOUND,

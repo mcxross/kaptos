@@ -16,7 +16,7 @@
 
 package xyz.mcxross.kaptos.model
 
-sealed class Result<out V, out E> {
+internal sealed class Result<out V, out E> {
   data class Ok<out V>(val value: V) : Result<V, Nothing>()
 
   data class Err<out E>(val error: E) : Result<Nothing, E>()

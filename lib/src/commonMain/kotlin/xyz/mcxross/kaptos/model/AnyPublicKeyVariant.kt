@@ -15,7 +15,11 @@
  */
 package xyz.mcxross.kaptos.model
 
-enum class AnyPublicKeyVariant {
-  Ed25519,
-  Secp256k1,
+enum class AnyPublicKeyVariant(val value: Int) {
+  Ed25519(0),
+  Secp256k1(1),
+  Secp256r1(2),
+  Keyless(3),
+  FederatedKeyless(4),
+  SlhDsaSha2_128s(5),
 }

@@ -16,7 +16,6 @@
 
 package xyz.mcxross.kaptos.internal
 
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.exception.AptosIndexerError
@@ -29,17 +28,16 @@ import xyz.mcxross.kaptos.model.types.currentCollectionsV2Filter
 import xyz.mcxross.kaptos.model.types.currentTokenOwnershipsV2Filter
 import xyz.mcxross.kaptos.model.types.numericFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
-import xyz.mcxross.kaptos.transaction.typetag.TypeTagParser.parseTypeTag
 import xyz.mcxross.kaptos.util.toOptional
 
-suspend fun getCollectionData(
-  config: AptosConfig,
+internal suspend fun getCollectionData(
+  config: TransportConfig,
   filter: CollectionOwnershipV2Filter,
 ): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
   handleQuery { getGraphqlClient(config).query(GetCollectionDataQuery(filter)) }.toResult()
 
-suspend fun getCollectionDataByCollectionId(
-  config: AptosConfig,
+internal suspend fun getCollectionDataByCollectionId(
+  config: TransportConfig,
   collectionId: String,
 ): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -50,8 +48,8 @@ suspend fun getCollectionDataByCollectionId(
     }
     .toResult()
 
-suspend fun getTokenData(
-  config: AptosConfig,
+internal suspend fun getTokenData(
+  config: TransportConfig,
   page: PaginationArgs?,
 ): Result<GetTokenDataQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -87,14 +85,14 @@ private val collectionAbi =
   )
 
 internal suspend fun createCollectionTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   name: String,
   description: String,
   uri: String,
   collectionOptions: CreateCollectionOptions,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(description.length <= 2048) { "Description must be less than 2048 characters" }
 
   require(uri.length <= 512) { "URI must be less than 512 characters" }
@@ -130,11 +128,10 @@ internal suspend fun createCollectionTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 private val mintDigitalAssetAbi =
@@ -153,7 +150,7 @@ private val mintDigitalAssetAbi =
   )
 
 internal suspend fun mintDigitalAssetTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   collection: String,
   name: String,
@@ -162,8 +159,8 @@ internal suspend fun mintDigitalAssetTransaction(
   propertyKeys: List<String>?,
   propertyTypes: List<String>?,
   propertyValues: List<String>?,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(description.length <= 2048) { "Description must be less than 2048 characters" }
   require(uri.length <= 512) { "URI must be less than 512 characters" }
   val txn =
@@ -188,21 +185,20 @@ internal suspend fun mintDigitalAssetTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun transferDigitalAssetTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   sender: Account,
   digitalAssetAddress: AccountAddressInput,
   recipient: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
     generateTransaction(
@@ -221,15 +217,14 @@ internal suspend fun transferDigitalAssetTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun mintSoulBoundTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   account: Account,
   collection: String,
   name: String,
@@ -239,8 +234,8 @@ internal suspend fun mintSoulBoundTransaction(
   propertyKeys: List<String>,
   propertyTypes: List<String>,
   propertyValues: List<String>,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   if (propertyKeys.size != propertyValues.size) {
     throw IllegalArgumentException("Property keys and values must be the same size")
   }
@@ -271,20 +266,19 @@ internal suspend fun mintSoulBoundTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun burnDigitalAssetTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
     generateTransaction(
@@ -300,20 +294,19 @@ internal suspend fun burnDigitalAssetTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun freezeDigitalAssetTransferTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
     generateTransaction(
@@ -329,20 +322,19 @@ internal suspend fun freezeDigitalAssetTransferTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun unfreezeDigitalAssetTransferTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
     generateTransaction(
@@ -358,21 +350,20 @@ internal suspend fun unfreezeDigitalAssetTransferTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
-suspend fun setDigitalAssetDescriptionTransaction(
-  config: AptosConfig,
+internal suspend fun setDigitalAssetDescriptionTransaction(
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   description: String,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(description.length <= 2048) { "Description must be less than 2048 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
@@ -389,21 +380,20 @@ suspend fun setDigitalAssetDescriptionTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
-suspend fun setDigitalAssetNameTransaction(
-  config: AptosConfig,
+internal suspend fun setDigitalAssetNameTransaction(
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   name: String,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(name.length <= 512) { "Name must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
@@ -420,21 +410,20 @@ suspend fun setDigitalAssetNameTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
-suspend fun setDigitalAssetURITransaction(
-  config: AptosConfig,
+internal suspend fun setDigitalAssetURITransaction(
+  config: TransportConfig,
   creator: Account,
   digitalAssetAddress: AccountAddressInput,
   uri: String,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(uri.length <= 512) { "URI must be less than 512 characters" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
@@ -451,23 +440,22 @@ suspend fun setDigitalAssetURITransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun addDigitalAssetPropertyTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   propertyKey: String,
   propertyType: PropertyType,
   propertyValue: PropertyValue,
   digitalAssetAddress: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
 
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
@@ -485,26 +473,25 @@ internal suspend fun addDigitalAssetPropertyTransaction(
                 AccountAddress.fromString(digitalAssetAddress.value),
                 propertyKey,
                 propertyType.toString(),
-                MoveVector.u8(getSinglePropertyValueRaw(propertyValue, propertyType.toString())),
+                MoveVector.u8(getSinglePropertyValueRaw(propertyValue, propertyType)),
               )
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 internal suspend fun removeDigitalAssetPropertyTransaction(
-  config: AptosConfig,
+  config: TransportConfig,
   creator: Account,
   propertyKey: String,
   digitalAssetAddress: AccountAddressInput,
   digitalAssetType: MoveStructId,
-  options: InputGenerateTransactionOptions,
-): SimpleTransaction {
+  options: TransactionOptions,
+): UnsignedTransaction.Simple {
   require(propertyKey.isNotBlank()) { "Property key must not be blank" }
   require(digitalAssetType.isNotBlank()) { "Digital asset type must not be blank" }
   val txn =
@@ -521,30 +508,19 @@ internal suspend fun removeDigitalAssetPropertyTransaction(
             },
           options = options,
           withFeePayer = false,
-          secondarySignerAddresses = null,
         ),
     )
 
-  return txn as SimpleTransaction
+  return txn as UnsignedTransaction.Simple
 }
 
 private fun getSinglePropertyValueRaw(
   propertyValue: PropertyValue,
-  propertyType: String,
-): ByteArray {
-  val typeTag = parseTypeTag(propertyType)
-
-  if (typeTag.isStruct()) {
-    if ((typeTag as TypeTagStruct).isString()) {
-      return Bcs.encodeToByteArray(MoveString(propertyValue.toString()))
-    }
-  }
-
-  throw Exception("Property value type not supported: $propertyType")
-}
+  propertyType: PropertyType,
+): ByteArray = propertyValue.encodeAs(propertyType)
 
 internal suspend fun getCurrentDigitalAssetOwnership(
-  config: AptosConfig,
+  config: TransportConfig,
   digitalAssetAddress: AccountAddressInput,
 ): Result<GetCurrentTokenOwnershipQuery.Data?, AptosIndexerError> =
   handleQuery {
@@ -557,7 +533,7 @@ internal suspend fun getCurrentDigitalAssetOwnership(
     .toResult()
 
 internal suspend fun getEvents(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: EventFilter?,
   page: PaginationArgs?,
   sortOrder: List<EventSortOrder>?,

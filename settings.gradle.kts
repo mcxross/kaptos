@@ -1,10 +1,9 @@
 pluginManagement {
   repositories {
     google()
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
     gradlePluginPortal()
-    maven(url = "../repo")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }
 }
@@ -13,8 +12,8 @@ dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
     google()
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
     maven("https://central.sonatype.com/repository/maven-snapshots/")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
   }
@@ -22,10 +21,15 @@ dependencyResolutionManagement {
 
 plugins { id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0" }
 
-rootProject.name = "kaptos"
+// Keep the build identity distinct from the published `:lib` project name so
+// type-safe project accessors remain unambiguous when enabled.
+rootProject.name = "kaptos-build"
 
-include(":lib", ":sample:jvmApp")
+include(":lib", ":encrypted-transactions", ":keyless", ":confidential-assets", ":sample:jvmApp")
 
 project(":lib").name = "kaptos"
+project(":encrypted-transactions").name = "kaptos-encrypted-transactions"
+project(":keyless").name = "kaptos-keyless"
+project(":confidential-assets").name = "kaptos-confidential-assets"
 
 findProject(":sample:jvmApp")?.name = "jvmApp"

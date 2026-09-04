@@ -28,7 +28,7 @@ import xyz.mcxross.kaptos.model.AptosResponse
  * @property data the response data
  * @property request - the AptosRequest
  */
-class AptosApiErrorV1(val request: AptosRequest, val response: AptosResponse, message: String) :
+internal class AptosApiErrorV1(val request: AptosRequest, val response: AptosResponse, message: String) :
   Exception(message) {
 
   val name: String = "AptosApiError"

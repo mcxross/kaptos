@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class AuthKeyAccountAddressesFilterBuilder {
+internal class AuthKeyAccountAddressesFilterBuilder {
   private val andConditions = mutableListOf<Auth_key_account_addresses_bool_exp>()
   private val orConditions = mutableListOf<Auth_key_account_addresses_bool_exp>()
   private var notCondition: Auth_key_account_addresses_bool_exp? = null
@@ -37,6 +37,6 @@ class AuthKeyAccountAddressesFilterBuilder {
     )
 }
 
-fun authKeyAccountAddressesFilter(
+internal fun authKeyAccountAddressesFilter(
   init: AuthKeyAccountAddressesFilterBuilder.() -> Unit
 ): Auth_key_account_addresses_bool_exp = AuthKeyAccountAddressesFilterBuilder().apply(init).build()

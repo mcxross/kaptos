@@ -12,10 +12,10 @@ runs:
 
     - uses: pnpm/action-setup@v4
       with:
-        version: 8.9.0
+        version: 11.21.0
 
     - name: Install Aptos CLI and wait-on
-      run: pnpm install -g @aptos-labs/aptos-cli wait-on
+      run: pnpm install -g @aptos-labs/aptos-cli@3.0.0 wait-on@9.1.0
       shell: bash
 
     - name: Run a local testnet in the background
@@ -57,7 +57,15 @@ runs:
       with:
         max_attempts: 3
         timeout_minutes: 30
-        command: ./gradlew :kaptos:jvmTest
+        command: >-
+          ./gradlew
+          :kaptos:jvmTest
+          :kaptos-keyless:jvmTest
+          :kaptos-encrypted-transactions:jvmTest
+          :kaptos-confidential-assets:jvmTest
+          :sample:jvmApp:compileKotlin
+          apiCheck
+          --console=plain
 
     - name: Print local testnet logs on failure
       shell: bash

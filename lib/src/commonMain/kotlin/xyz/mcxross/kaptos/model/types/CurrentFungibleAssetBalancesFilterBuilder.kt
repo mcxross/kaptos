@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentFungibleAssetBalancesFilterBuilder {
+internal class CurrentFungibleAssetBalancesFilterBuilder {
   private val andConditions = mutableListOf<Current_fungible_asset_balances_bool_exp>()
   private val orConditions = mutableListOf<Current_fungible_asset_balances_bool_exp>()
   private var notCondition: Current_fungible_asset_balances_bool_exp? = null
@@ -70,7 +70,7 @@ class CurrentFungibleAssetBalancesFilterBuilder {
     )
 }
 
-fun currentFungibleAssetBalancesFilter(
+internal fun currentFungibleAssetBalancesFilter(
   init: CurrentFungibleAssetBalancesFilterBuilder.() -> Unit
 ): Current_fungible_asset_balances_bool_exp =
   CurrentFungibleAssetBalancesFilterBuilder().apply(init).build()

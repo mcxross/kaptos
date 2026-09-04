@@ -25,14 +25,14 @@ import xyz.mcxross.kaptos.internal.*
 import xyz.mcxross.kaptos.internal.signAndSubmitAsFeePayer
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Transaction
-import xyz.mcxross.kaptos.transaction.authenticatior.AccountAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
 /**
  * A class for reading and writing Aptos transactions.
  *
- * @property config AptosConfig object for configuration.
+ * @property config TransportConfig object for configuration.
  */
-class Transaction(val config: AptosConfig) : Transaction {
+internal class Transaction(val config: TransportConfig) : Transaction {
 
   override val buildTransaction: Build = Build(config)
   override val submitTransaction: Submit = Submit(config)
@@ -62,24 +62,24 @@ class Transaction(val config: AptosConfig) : Transaction {
   override suspend fun getGasPriceEstimation(): Result<GasEstimation, AptosSdkError> =
     getGasPriceEstimation(config)
 
-  override fun sign(signer: Account, transaction: AnyRawTransaction): AccountAuthenticator =
+  override fun sign(signer: Account, transaction: UnsignedTransaction): AccountAuthenticator =
     signTransaction(signer, transaction)
 
   override fun signAsFeePayer(
     signer: Account,
-    transaction: AnyRawTransaction,
-  ): AccountAuthenticator = xyz.mcxross.kaptos.internal.signAsFeePayer(signer, transaction)
+    transaction: UnsignedTransaction,
+  ): FeePayerSignature = xyz.mcxross.kaptos.internal.signAsFeePayer(signer, transaction)
 
   override suspend fun signAndSubmitTransaction(
     signer: Account,
-    transaction: AnyRawTransaction,
+    transaction: UnsignedTransaction,
   ): Result<PendingTransactionResponse, Exception> =
     signAndSubmitTransaction(config, signer, transaction)
 
   override suspend fun signAndSubmitAsFeePayer(
     feePayer: Account,
     senderAuthenticator: AccountAuthenticator,
-    transaction: AnyRawTransaction,
+    transaction: UnsignedTransaction,
   ): Result<PendingTransactionResponse, Exception> =
     signAndSubmitAsFeePayer(
       aptosConfig = config,
@@ -92,16 +92,16 @@ class Transaction(val config: AptosConfig) : Transaction {
     account: AccountAddressInput,
     metadataBytes: HexInput,
     moduleBytecode: List<HexInput>,
-    options: InputGenerateTransactionOptions,
-  ): SimpleTransaction =
+    options: TransactionOptions,
+  ): UnsignedTransaction.Simple =
     publicPackageTransaction(config, account, metadataBytes, moduleBytecode, options)
 
   override suspend fun buildSimpleTransaction(
     sender: AccountAddressInput,
-    options: InputGenerateTransactionOptions?,
+    options: TransactionOptions?,
     withFeePayer: Boolean,
     builder: InputEntryFunctionDataBuilder.() -> Unit,
-  ): SimpleTransaction =
+  ): UnsignedTransaction.Simple =
     buildTransaction.simple(
       sender = sender,
       data = entryFunctionData(builder),
@@ -111,7 +111,7 @@ class Transaction(val config: AptosConfig) : Transaction {
 
   override suspend fun execute(
     signer: Account,
-    options: InputGenerateTransactionOptions?,
+    options: TransactionOptions?,
     withFeePayer: Boolean,
     builder: InputEntryFunctionDataBuilder.() -> Unit,
   ): Result<PendingTransactionResponse, Exception> {

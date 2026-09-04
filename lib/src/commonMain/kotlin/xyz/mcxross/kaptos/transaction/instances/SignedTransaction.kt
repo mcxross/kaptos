@@ -15,11 +15,23 @@
  */
 package xyz.mcxross.kaptos.transaction.instances
 
-import kotlinx.serialization.Serializable
-import xyz.mcxross.kaptos.transaction.authenticatior.TransactionAuthenticator
+import xyz.mcxross.kaptos.transaction.authenticator.transactionAuthenticator
+import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
+import xyz.mcxross.kaptos.transaction.authenticator.TransactionAuthenticator
 
-@Serializable
 data class SignedTransaction(
   val rawTxn: RawTransaction,
   val authenticator: TransactionAuthenticator,
-)
+) {
+  fun toBcs(): ByteArray = rawTxn.toBcs() + authenticator.toBcs()
+
+  companion object {
+    fun fromBcs(bytes: ByteArray): SignedTransaction =
+      AptosBcsReader(bytes).let { reader ->
+        val rawTransaction = with(RawTransaction) { reader.rawTransaction() }
+        SignedTransaction(rawTransaction, reader.transactionAuthenticator()).also {
+          reader.ensureFinished()
+        }
+      }
+  }
+}

@@ -24,9 +24,9 @@ import xyz.mcxross.kaptos.protocol.Faucet
 /**
  * Faucet API namespace. This class provides functionality to create and fund accounts.
  *
- * @property config AptosConfig object for configuration
+ * @property config TransportConfig object for configuration
  */
-class Faucet(private val config: AptosConfig) : Faucet {
+internal class Faucet(private val config: TransportConfig) : Faucet {
 
   /**
    * Requests test coins from the network's Faucet for a given account.

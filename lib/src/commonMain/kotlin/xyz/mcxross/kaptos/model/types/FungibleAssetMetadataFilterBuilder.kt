@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class FungibleAssetMetadataFilterBuilder {
+internal class FungibleAssetMetadataFilterBuilder {
   private val andConditions = mutableListOf<Fungible_asset_metadata_bool_exp>()
   private val orConditions = mutableListOf<Fungible_asset_metadata_bool_exp>()
   private var notCondition: Fungible_asset_metadata_bool_exp? = null
@@ -57,6 +57,6 @@ class FungibleAssetMetadataFilterBuilder {
     )
 }
 
-fun fungibleAssetMetadataFilter(
+internal fun fungibleAssetMetadataFilter(
   init: FungibleAssetMetadataFilterBuilder.() -> Unit
 ): Fungible_asset_metadata_bool_exp = FungibleAssetMetadataFilterBuilder().apply(init).build()

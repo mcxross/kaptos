@@ -19,7 +19,7 @@ import xyz.mcxross.kaptos.internal.generateTransaction
 import xyz.mcxross.kaptos.model.*
 
 /** A class to handle all `Build` transaction operations */
-class Build(val config: AptosConfig) {
+internal class Build(val config: TransportConfig) {
 
   /**
    * Build a simple transaction
@@ -28,22 +28,21 @@ class Build(val config: AptosConfig) {
    * @param data The transaction data
    * @param options optional. Optional transaction configurations
    * @param withFeePayer optional. Whether there is a fee payer for the transaction
-   * @returns [SimpleTransaction]
+   * @returns [UnsignedTransaction.Simple]
    */
   suspend fun simple(
     sender: AccountAddressInput,
     data: InputGenerateTransactionPayloadData,
-    options: InputGenerateTransactionOptions? = null,
+    options: TransactionOptions? = null,
     withFeePayer: Boolean = false,
-  ): SimpleTransaction {
+  ): UnsignedTransaction.Simple {
     val singleSignerRawTransactionData =
       InputGenerateSingleSignerRawTransactionData(
         sender = sender,
         data = data,
         options = options,
         withFeePayer = withFeePayer,
-        secondarySignerAddresses = null,
       )
-    return generateTransaction(config, singleSignerRawTransactionData) as SimpleTransaction
+    return generateTransaction(config, singleSignerRawTransactionData) as UnsignedTransaction.Simple
   }
 }

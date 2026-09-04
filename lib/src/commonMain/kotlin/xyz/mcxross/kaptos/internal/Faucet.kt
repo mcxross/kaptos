@@ -25,7 +25,7 @@ import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun fundAccount(
-  aptosConfig: AptosConfig,
+  aptosConfig: TransportConfig,
   accountAddress: AccountAddressInput,
   amount: Long,
   options: WaitForTransactionOptions = WaitForTransactionOptions(),

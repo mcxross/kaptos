@@ -23,6 +23,9 @@ import xyz.mcxross.kaptos.model.HexInput
  */
 interface PrivateKey {
 
+  /** Whether the secret material has been explicitly cleared. */
+  val isCleared: Boolean
+
   /**
    * Sign the given message with the private key.
    *
@@ -35,4 +38,10 @@ interface PrivateKey {
 
   /** Get the private key in bytes. */
   fun toByteArray(): ByteArray
+
+  /** Export this private key using the algorithm-prefixed AIP-80 format. */
+  fun toAip80(): Aip80PrivateKey
+
+  /** Clear secret material. Subsequent private-key operations must fail. */
+  fun clear()
 }

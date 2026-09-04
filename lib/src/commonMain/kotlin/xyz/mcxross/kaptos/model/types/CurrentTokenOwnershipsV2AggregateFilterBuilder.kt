@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentTokenOwnershipsV2AggregateFilterBuilder {
+internal class CurrentTokenOwnershipsV2AggregateFilterBuilder {
   private var count: Current_token_ownerships_v2_aggregate_bool_exp_count? = null
   private var boolAnd: Current_token_ownerships_v2_aggregate_bool_exp_bool_and? = null
   private var boolOr: Current_token_ownerships_v2_aggregate_bool_exp_bool_or? = null
@@ -44,7 +44,7 @@ class CurrentTokenOwnershipsV2AggregateFilterBuilder {
     )
 }
 
-fun currentTokenOwnershipsV2AggregateFilter(
+internal fun currentTokenOwnershipsV2AggregateFilter(
   init: CurrentTokenOwnershipsV2AggregateFilterBuilder.() -> Unit
 ): Current_token_ownerships_v2_aggregate_bool_exp =
   CurrentTokenOwnershipsV2AggregateFilterBuilder().apply(init).build()

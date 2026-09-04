@@ -26,16 +26,22 @@ import com.github.michaelbull.result.getError
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.mapError
 import io.ktor.client.call.*
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.SerializationException
-import xyz.mcxross.kaptos.exception.AptosApiError
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.RequestOptions
+
+private val apiErrorJson = Json { ignoreUnknownKeys = true }
 
 /**
  * Executes a GET request to an Aptos API endpoint using a configurable Ktor client.
@@ -61,7 +67,7 @@ import xyz.mcxross.kaptos.model.RequestOptions
  * @return A `Result` which is either `Ok(AptosResponse)` on success or `Err(AptosNetworkException)`
  *   on failure.
  */
-suspend fun get(
+internal suspend fun get(
   options: RequestOptions.AptosRequestOptions,
   apiType: AptosApiType = AptosApiType.FULLNODE,
 ): Result<AptosResponse, AptosSdkError> {
@@ -72,18 +78,48 @@ suspend fun get(
   }
 
   return try {
-    val client = getClient(options.aptosConfig.clientConfig)
-    val aptosResponse =
-      client.get(options.aptosConfig.getRequestUrl(apiType)) {
+    val client = options.aptosConfig.httpClient
+    val originalBaseUrl = options.aptosConfig.getRequestUrl(apiType)
+    val requestHeaders = options.aptosConfig.requestHeadersFor(apiType)
+    var aptosResponse =
+      client.get(originalBaseUrl) {
         url { appendPathSegments(options.path) }
         options.params?.forEach { (key, value) -> parameter(key, value) }
+        timeout { requestTimeoutMillis = options.aptosConfig.requestTimeoutMillis }
+        applyAptosHeaders(requestHeaders)
+        accept(ContentType.parse(options.acceptType.type))
       }
+
+    if (
+      apiType == AptosApiType.FULLNODE &&
+        aptosResponse.status == HttpStatusCode.Gone &&
+        options.aptosConfig.archivalFallback
+    ) {
+      val errorBody = aptosResponse.bodyAsText()
+      val retryTarget = resolveArchivalRetryTarget(originalBaseUrl, errorBody)
+      if (retryTarget == null) return errorFromBody(errorBody)
+
+      aptosResponse =
+        try {
+          client.get(retryTarget.url) {
+            url { appendPathSegments(options.path) }
+            options.params?.forEach { (key, value) -> parameter(key, value) }
+            timeout { requestTimeoutMillis = options.aptosConfig.requestTimeoutMillis }
+            applyAptosHeaders(
+              requestHeaders,
+              includeCredentials = retryTarget.forwardCredentials,
+            )
+            accept(ContentType.parse(options.acceptType.type))
+          }
+        } catch (_: Exception) {
+          return errorFromBody(errorBody)
+        }
+    }
 
     if (aptosResponse.status.isSuccess()) {
       Ok(aptosResponse)
     } else {
-      val apiError = aptosResponse.body<AptosApiError>()
-      Err(AptosSdkError.ApiError(apiError))
+      errorFromBody(aptosResponse.bodyAsText())
     }
   } catch (e: Exception) {
     Err(AptosSdkError.NetworkError(e))
@@ -136,7 +172,7 @@ suspend fun get(
  *    Server Error).
  * 3. **Deserialization Error**: The response body could not be parsed into the target type `T`.
  */
-suspend inline fun <reified T> getAptosFullNode(
+internal suspend inline fun <reified T> getAptosFullNode(
   options: RequestOptions.GetAptosRequestOptions
 ): Result<T, AptosSdkError> {
   val responseResult =
@@ -202,7 +238,7 @@ suspend inline fun <reified T> getAptosFullNode(
  *   combined.
  * - `Err<AptosException>`: On failure, contains an error from the first failed step.
  */
-suspend inline fun <reified T> paginateWithCursor(
+internal suspend inline fun <reified T> paginateWithCursor(
   options: RequestOptions.AptosRequestOptions
 ): Result<List<T>, AptosSdkError> {
   val allItems = mutableListOf<T>()
@@ -241,10 +277,45 @@ suspend inline fun <reified T> paginateWithCursor(
   return Ok(allItems)
 }
 
-fun getGraphqlClient(config: AptosConfig) =
-  ApolloClient.Builder().serverUrl(config.getRequestUrl(AptosApiType.INDEXER)).build()
+internal fun getGraphqlClient(config: TransportConfig) =
+  config.graphqlClient()
 
-suspend fun getPageWithObfuscatedCursor(
+private data class ArchivalRetryTarget(val url: String, val forwardCredentials: Boolean)
+
+private fun resolveArchivalRetryTarget(
+  originalBaseUrl: String,
+  responseBody: String,
+): ArchivalRetryTarget? {
+  val advertised =
+    runCatching {
+        Json.parseToJsonElement(responseBody).jsonObject["archival_endpoint"]?.jsonPrimitive?.content
+      }
+      .getOrNull()
+      ?.takeIf { it.isNotBlank() }
+      ?: return null
+
+  val original = runCatching { Url(originalBaseUrl) }.getOrNull() ?: return null
+  val archival = runCatching { Url(advertised) }.getOrNull() ?: return null
+  if (archival.protocol != URLProtocol.HTTP && archival.protocol != URLProtocol.HTTPS) return null
+  if (original.protocol == URLProtocol.HTTPS && archival.protocol != URLProtocol.HTTPS) return null
+
+  return ArchivalRetryTarget(
+    url = advertised.trimEnd('/'),
+    forwardCredentials = siteOf(original.host) == siteOf(archival.host),
+  )
+}
+
+private fun siteOf(hostname: String): String =
+  hostname.lowercase().split('.').takeLast(2).joinToString(".")
+
+private fun errorFromBody(body: String): Result<AptosResponse, AptosSdkError> =
+  try {
+    Err(AptosSdkError.ApiError(apiErrorJson.decodeFromString(body)))
+  } catch (e: Exception) {
+    Err(AptosSdkError.DeserializationError(e))
+  }
+
+internal suspend fun getPageWithObfuscatedCursor(
   options: RequestOptions.GetAptosRequestOptions
 ): Result<Pair<AptosResponse, String?>, AptosSdkError> {
 

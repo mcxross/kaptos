@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Num_active_delegator_per_pool_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class NumActiveDelegatorPerPoolOrderBuilder {
+internal class NumActiveDelegatorPerPoolOrderBuilder {
   var numActiveDelegator: OrderBy? = null
   var poolAddress: OrderBy? = null
 
@@ -14,7 +14,7 @@ class NumActiveDelegatorPerPoolOrderBuilder {
     )
 }
 
-fun numActiveDelegatorPerPoolOrder(
+internal fun numActiveDelegatorPerPoolOrder(
   init: NumActiveDelegatorPerPoolOrderBuilder.() -> Unit
 ): Num_active_delegator_per_pool_order_by =
   NumActiveDelegatorPerPoolOrderBuilder().apply(init).build()

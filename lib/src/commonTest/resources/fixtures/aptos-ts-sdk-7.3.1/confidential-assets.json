@@ -1,0 +1,22 @@
+{
+  "baseline": {
+    "aptosTsSdkVersion": "7.3.1",
+    "aptosTsSdkCommit": "82b310449d7adf184540730ffdd754ada18d8ca6",
+    "confidentialAssetsSdkVersion": "2.0.0"
+  },
+  "registrationFiatShamir": {
+    "chainId": 2,
+    "protocolId": "AptosConfidentialAsset/RegistrationV1",
+    "typeName": "0x1::sigma_protocol_registration::Registration",
+    "sender": "0000000000000000000000000000000000000000000000000000000000000007",
+    "asset": "0000000000000000000000000000000000000000000000000000000000000009",
+    "sessionId": "00000000000000000000000000000000000000000000000000000000000000070000000000000000000000000000000000000000000000000000000000000009",
+    "statement": [
+      "8c9240b456a9e6dc65c377a1048d745f94a08cdb7f44cbcd7b46f34048871134",
+      "e2f2ae0a6abc4e71a884a961c500515f58e30b6aa582dd8db6a65945e08d2d76"
+    ],
+    "proofCommitment": "6a493210f7499cd17fecb510ae0cea23a110e8d5b901f8acadd3095c73a3b919",
+    "witnessCount": 1,
+    "challengeScalarLe": "419bf72873c4c590a2fbd00868c17aa4bceda111d0fffa3fac715943db963b0f"
+  }
+}

@@ -21,6 +21,8 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.headers
 import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosSdkError
@@ -32,21 +34,36 @@ import xyz.mcxross.kaptos.model.AptosResponse
  * Each client is platform-specific with a different engine. Each engine has its own configuration
  * options.
  */
-expect fun httpClient(clientConfig: ClientConfig): HttpClient
+internal expect fun httpClient(clientConfig: ClientConfig): HttpClient
 
-expect class ClientConfig {
+internal expect class ClientConfig {
   companion object {
     val default: ClientConfig
   }
 }
 
-fun getClient(clientConfig: ClientConfig) = httpClient(clientConfig)
+internal fun getClient(clientConfig: ClientConfig) = httpClient(clientConfig)
+
+internal fun HttpRequestBuilder.applyAptosHeaders(
+  requestHeaders: Map<String, String>,
+  includeCredentials: Boolean = true,
+) {
+  val credentialHeaders = setOf("authorization", "cookie", "x-api-key")
+  headers {
+    requestHeaders.forEach { (name, value) ->
+      if (includeCredentials || name.lowercase() !in credentialHeaders) {
+        remove(name)
+        append(name, value)
+      }
+    }
+  }
+}
 
 /**
  * Checks an HTTP response, returning a `Result` that is either the successful response or a
  * structured error.
  */
-suspend fun responseFitCheck(aptosResponse: AptosResponse): Result<AptosResponse, AptosSdkError> {
+internal suspend fun responseFitCheck(aptosResponse: AptosResponse): Result<AptosResponse, AptosSdkError> {
   if (aptosResponse.status.isSuccess()) {
     return Ok(aptosResponse)
   }

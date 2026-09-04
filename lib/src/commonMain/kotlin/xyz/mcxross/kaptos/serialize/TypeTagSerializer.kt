@@ -45,6 +45,12 @@ object TypeTagSerializer : KSerializer<TypeTag> {
       is TypeTagU64 -> encodeTypeTag(encoder, TypeTagVariants.U64, value)
       is TypeTagU128 -> encodeTypeTag(encoder, TypeTagVariants.U128, value)
       is TypeTagU256 -> encodeTypeTag(encoder, TypeTagVariants.U256, value)
+      is TypeTagI8 -> encodeTypeTag(encoder, TypeTagVariants.I8, value)
+      is TypeTagI16 -> encodeTypeTag(encoder, TypeTagVariants.I16, value)
+      is TypeTagI32 -> encodeTypeTag(encoder, TypeTagVariants.I32, value)
+      is TypeTagI64 -> encodeTypeTag(encoder, TypeTagVariants.I64, value)
+      is TypeTagI128 -> encodeTypeTag(encoder, TypeTagVariants.I128, value)
+      is TypeTagI256 -> encodeTypeTag(encoder, TypeTagVariants.I256, value)
       is TypeTagVector -> encodeTypeTag(encoder, TypeTagVariants.Vector, value)
     }
   }

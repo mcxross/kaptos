@@ -16,7 +16,7 @@
 
 package xyz.mcxross.kaptos.model
 
-enum class MimeType(val type: String) {
+internal enum class MimeType(val type: String) {
   /** JSON representation, used for transaction submission and accept type JSON output */
   JSON("application/json"),
   /** BCS representation, used for accept type BCS output */

@@ -30,11 +30,11 @@ import xyz.mcxross.kaptos.util.APTOS_COIN
  * Account API namespace. This interface provides functionality to reading and writing account
  * related information.
  *
- * @property config AptosConfig object for configuration
+ * @property config TransportConfig object for configuration
  */
-interface Account {
+internal interface Account {
 
-  val config: AptosConfig
+  val config: TransportConfig
 
   // ======================================= REST APIs ========================================
 
@@ -63,28 +63,6 @@ interface Account {
    * The function returns a `Result` object that must be handled. Using a `when` expression is the
    * safest way to process the outcome.
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val accountInfoResult = aptos.getAccountInfo(address)
-   *
-   * // Example 1: Robust handling with a 'when' expression
-   * when (accountInfoResult) {
-   * is Result.Ok -> {
-   * println("Success! Sequence Number: ${accountInfoResult.value.sequenceNumber}")
-   * }
-   * is Result.Err -> {
-   * println("Error fetching account: ${accountInfoResult.error}")
-   * }
-   * }
-   *
-   * // Example 2: Safely getting the value or null
-   * val accountData = accountInfoResult.getOrNull()
-   * if (accountData != null) {
-   * println("Account exists with sequence number: ${accountData.sequenceNumber}")
-   * } else {
-   * println("Could not retrieve account data.")
-   * }
-   * ```
    *
    * @param accountAddress The 32-byte address of the Aptos account to query. This can be provided
    *   in various formats via the `AccountAddressInput` type.
@@ -110,15 +88,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val modulesResult = aptos.getAccountModules(address)
-   *
-   * when (modulesResult) {
-   * is Result.Ok -> println("Successfully fetched ${modulesResult.value.size} modules.")
-   * is Result.Err -> println("Error fetching modules: ${modulesResult.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the Aptos account to query.
    * @param params A lambda to configure optional pagination parameters, such as `limit`.
@@ -138,16 +107,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val moduleName = "coin"
-   * val moduleResult = aptos.getAccountModule(address, moduleName)
-   *
-   * when (moduleResult) {
-   * is Result.Ok -> println("Successfully retrieved module ABI: ${moduleResult.value.abi}")
-   * is Result.Err -> println("Error retrieving module: ${moduleResult.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account that owns the module.
    * @param moduleName The name of the module to retrieve.
@@ -173,15 +132,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val resourcesResult = aptos.getAccountResources(address)
-   *
-   * when (resourcesResult) {
-   * is Result.Ok -> println("Account has ${resourcesResult.value.size} resources.")
-   * is Result.Err -> println("Error retrieving resources: ${resourcesResult.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the Aptos account to query.
    * @param params A lambda to configure optional query parameters, such as `limit` or
@@ -204,17 +154,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getAccountTransactions(address) {
-   * limit = 25
-   * }
-   *
-   * when (resolution) {
-   * is Result.Ok -> println("Successfully fetched ${resolution.value.size} transactions.")
-   * is Result.Err -> println("Error fetching transactions: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account to query.
    * @param params A lambda to configure optional pagination parameters, such as `limit` and
@@ -318,21 +257,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getAccountCollectionsWithOwnedTokens(
-   * accountAddress = address,
-   * tokenStandard = TokenStandard.V2
-   * )
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val collectionsData = resolution.value
-   * println("Successfully retrieved collections data: $collectionsData")
-   * }
-   * is Result.Err -> println("Error retrieving collections: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account to query.
    * @param tokenStandard An optional token standard to filter the results by (e.g., `NFT`).
@@ -359,22 +283,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val accountAddr = AccountAddress.fromString("0x...")
-   * val collectionAddr = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getAccountOwnedTokensFromCollectionAddress(
-   * accountAddress = accountAddr,
-   * collectionAddress = collectionAddr
-   * )
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved owned tokens data: $data")
-   * }
-   * is Result.Err -> println("Error retrieving owned tokens: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account that owns the tokens.
    * @param collectionAddress The address of the collection to query.
@@ -400,18 +308,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getAccountOwnedObjects(address)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val data = resolution.value
-   * println("Successfully retrieved owned objects data: $data")
-   * }
-   * is Result.Err -> println("Error retrieving owned objects: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account to query.
    * @param sortOrder An optional list of sorting options for the results.
@@ -436,18 +332,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * val address = AccountAddress.fromString("0x...")
-   * val resolution = aptos.getAccountTokensCount(address)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val count = resolution.value
-   * println("Account owns $count tokens.")
-   * }
-   * is Result.Err -> println("Error retrieving tokens count: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param accountAddress The address of the account to query.
    * @param page Optional pagination arguments (`limit` and `offset`).
@@ -469,19 +353,6 @@ interface Account {
    *
    * ## Usage
    *
-   * ```kotlin
-   * // Note: An authentication key can be created from an account address
-   * val authKey = AccountAddress.fromString("0x...")
-   * val resolution = aptos.lookupOriginalAccountAddress(authKey)
-   *
-   * when (resolution) {
-   * is Result.Ok -> {
-   * val address = resolution.value
-   * println("Original account address: $address")
-   * }
-   * is Result.Err -> println("Error looking up address: ${resolution.error.message}")
-   * }
-   * ```
    *
    * @param authenticationKey The authentication key to look up.
    * @param ledgerVersion An optional ledger version to query; if not provided, it will use the
@@ -503,7 +374,7 @@ interface Account {
  * @param param [LedgerVersionQueryParam] to optionally configure the ledger version.
  * @returns [MoveResource]
  */
-suspend inline fun <reified T> Account.getAccountResource(
+internal suspend inline fun <reified T> Account.getAccountResource(
   accountAddress: AccountAddressInput,
   resourceName: String,
   param: LedgerVersionQueryParam.() -> Unit = {},

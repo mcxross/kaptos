@@ -4,7 +4,7 @@ import xyz.mcxross.kaptos.generated.type.Jsonb_cast_exp
 import xyz.mcxross.kaptos.generated.type.Jsonb_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class JsonbFilterBuilder {
+internal class JsonbFilterBuilder {
   var cast: Jsonb_cast_exp? = null
   var containedIn: Any? = null
   var contains: Any? = null
@@ -41,5 +41,5 @@ class JsonbFilterBuilder {
     )
 }
 
-fun jsonbFilter(init: JsonbFilterBuilder.() -> Unit): Jsonb_comparison_exp =
+internal fun jsonbFilter(init: JsonbFilterBuilder.() -> Unit): Jsonb_comparison_exp =
   JsonbFilterBuilder().apply(init).build()

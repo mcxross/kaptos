@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class PublicKeyAuthKeysFilterBuilder {
+internal class PublicKeyAuthKeysFilterBuilder {
   private val andConditions = mutableListOf<Public_key_auth_keys_bool_exp>()
   private val orConditions = mutableListOf<Public_key_auth_keys_bool_exp>()
   private var notCondition: Public_key_auth_keys_bool_exp? = null
@@ -43,6 +43,6 @@ class PublicKeyAuthKeysFilterBuilder {
     )
 }
 
-fun publicKeyAuthKeysFilter(
+internal fun publicKeyAuthKeysFilter(
   init: PublicKeyAuthKeysFilterBuilder.() -> Unit
 ): Public_key_auth_keys_bool_exp = PublicKeyAuthKeysFilterBuilder().apply(init).build()

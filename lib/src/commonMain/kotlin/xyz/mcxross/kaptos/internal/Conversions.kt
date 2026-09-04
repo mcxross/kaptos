@@ -22,11 +22,11 @@ import com.github.michaelbull.result.Result as InternalResult
 import com.github.michaelbull.result.fold
 import xyz.mcxross.kaptos.model.Result
 
-fun <V, E> InternalResult<V, E>.toResult(): Result<V, E> {
+internal fun <V, E> InternalResult<V, E>.toResult(): Result<V, E> {
   return fold(success = { Result.Ok(it) }, failure = { Result.Err(it) })
 }
 
-fun <V, E> Result<V, E>.toInternalResult(): InternalResult<V, E> {
+internal fun <V, E> Result<V, E>.toInternalResult(): InternalResult<V, E> {
   return when (this) {
     is Result.Ok -> Ok(this.value)
     is Result.Err -> Err(this.error)

@@ -20,7 +20,7 @@ import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetObjectDataQuery
 import xyz.mcxross.kaptos.internal.getObjectDataByObjectAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.ObjectSortOrder
 import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.ProcessorType
@@ -31,9 +31,9 @@ import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 /**
  * A class for querying Aptos `Object` related data from the indexer.
  *
- * @property config The [AptosConfig] for connecting to the network.
+ * @property config The [TransportConfig] for connecting to the network.
  */
-class Object(override val config: AptosConfig) : Object {
+internal class Object(override val config: TransportConfig) : Object {
   /**
    * Queries for object data based on a specified object address.
    *

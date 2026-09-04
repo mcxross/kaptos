@@ -53,12 +53,14 @@ class Secp256k1PublicKey(val hexInput: HexInput) : PublicKey() {
 }
 
 /** A Secp256k1 ecdsa private key */
-class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
+class Secp256k1PrivateKey(key: ByteArray) : PrivateKey {
 
   private val hex: Hex
+  override var isCleared: Boolean = false
+    private set
 
   init {
-    val hex = Hex.fromHexInput(hexInput)
+    val hex = Hex.fromHexInput(HexInput.fromByteArray(key.copyOf()))
     if (hex.toByteArray().size != LENGTH) {
       throw IllegalArgumentException("Secp256k1 private key must be 32 bytes")
     }
@@ -66,20 +68,39 @@ class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
   }
 
   override fun sign(message: HexInput): Secp256k1Signature {
-    val messageBytes = Hex.fromHexInput(message).toByteArray()
-    val hash = sha3Hash(messageBytes)
+    checkNotCleared()
+    val hash = sha3Hash(message.toByteArray())
     return Secp256k1Signature(HexInput.fromByteArray(secp256k1Sign(hash, hex.toByteArray())))
   }
 
   override fun publicKey(): Secp256k1PublicKey {
+    checkNotCleared()
     val pk = generateSecp256k1PublicKey(hex.toByteArray())
     return Secp256k1PublicKey(HexInput.fromByteArray(pk))
   }
 
-  override fun toByteArray(): ByteArray = hex.toByteArray()
+  override fun toByteArray(): ByteArray {
+    checkNotCleared()
+    return hex.toByteArray().copyOf()
+  }
+
+  override fun toAip80(): Aip80PrivateKey {
+    checkNotCleared()
+    return Aip80PrivateKey.fromBytes(PrivateKeyType.Secp256k1, toByteArray())
+  }
+
+  override fun clear() {
+    if (isCleared) return
+    hex.toByteArray().fill(0)
+    isCleared = true
+  }
+
+  private fun checkNotCleared() {
+    check(!isCleared) { "Secp256k1 private key has been cleared" }
+  }
 
   override fun toString(): String {
-    return hex.toString()
+    return if (isCleared) "<cleared Secp256k1 private key>" else hex.toString()
   }
 
   companion object {
@@ -87,8 +108,18 @@ class Secp256k1PrivateKey(hexInput: HexInput) : PrivateKey {
 
     fun generate(): Secp256k1PrivateKey {
       val keyPair = generateKeypair(SigningSchemeInput.Secp256k1)
-      return Secp256k1PrivateKey(HexInput.fromByteArray(keyPair.privateKey))
+      return Secp256k1PrivateKey(keyPair.privateKey)
     }
+
+    /** Import a Secp256k1 private key from the safe, algorithm-prefixed AIP-80 format. */
+    fun fromAip80(value: String): Secp256k1PrivateKey = fromAip80(Aip80PrivateKey.parse(value))
+
+    fun fromAip80(value: Aip80PrivateKey): Secp256k1PrivateKey =
+      Secp256k1PrivateKey(value.bytes(PrivateKeyType.Secp256k1))
+
+    /** Explicit opt-in for applications migrating an unprefixed private-key hex value. */
+    fun fromLegacyHex(value: String): Secp256k1PrivateKey =
+      Secp256k1PrivateKey(decodeLegacyPrivateKeyHex(value))
   }
 }
 

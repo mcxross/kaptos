@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Public_key_auth_keys_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class PublicKeyAuthKeysOrderBuilder {
+internal class PublicKeyAuthKeysOrderBuilder {
   var accountPublicKey: OrderBy? = null
   var authKey: OrderBy? = null
   var isPublicKeyUsed: OrderBy? = null
@@ -24,6 +24,6 @@ class PublicKeyAuthKeysOrderBuilder {
     )
 }
 
-fun publicKeyAuthKeysOrder(
+internal fun publicKeyAuthKeysOrder(
   init: PublicKeyAuthKeysOrderBuilder.() -> Unit
 ): Public_key_auth_keys_order_by = PublicKeyAuthKeysOrderBuilder().apply(init).build()

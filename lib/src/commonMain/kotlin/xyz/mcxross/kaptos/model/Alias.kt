@@ -50,75 +50,73 @@ import xyz.mcxross.kaptos.generated.type.Table_metadatas_order_by
 import xyz.mcxross.kaptos.generated.type.Token_activities_v2_bool_exp
 import xyz.mcxross.kaptos.generated.type.Token_activities_v2_order_by
 
-typealias AptosResponse = HttpResponse
+internal typealias AptosResponse = HttpResponse
 
-typealias AptosRequest = HttpRequest
+internal typealias AptosRequest = HttpRequest
 
-typealias AnyTransactionPayloadInstance = TransactionPayload
+internal typealias FungibleAssetBalanceFilter = Current_fungible_asset_balances_bool_exp
 
-typealias FungibleAssetBalanceFilter = Current_fungible_asset_balances_bool_exp
+internal typealias FungibleAssetSortOrder = Current_fungible_asset_balances_order_by
 
-typealias FungibleAssetSortOrder = Current_fungible_asset_balances_order_by
+internal typealias AuthKeyAddressFilter = Auth_key_account_addresses_bool_exp
 
-typealias AuthKeyAddressFilter = Auth_key_account_addresses_bool_exp
+internal typealias AuthKeyAddressSortOrder = Auth_key_account_addresses_order_by
 
-typealias AuthKeyAddressSortOrder = Auth_key_account_addresses_order_by
+internal typealias CollectionOwnershipV2ViewFilter = Current_collection_ownership_v2_view_bool_exp
 
-typealias CollectionOwnershipV2ViewFilter = Current_collection_ownership_v2_view_bool_exp
+internal typealias CollectionOwnershipV2ViewSortOrder = Current_collection_ownership_v2_view_order_by
 
-typealias CollectionOwnershipV2ViewSortOrder = Current_collection_ownership_v2_view_order_by
+internal typealias CollectionOwnershipV2Filter = Current_collections_v2_bool_exp
 
-typealias CollectionOwnershipV2Filter = Current_collections_v2_bool_exp
+internal typealias CollectionOwnershipV2SortOrder = Current_collections_v2_order_by
 
-typealias CollectionOwnershipV2SortOrder = Current_collections_v2_order_by
+internal typealias TokenOwnershipV2Filter = Current_token_ownerships_v2_bool_exp
 
-typealias TokenOwnershipV2Filter = Current_token_ownerships_v2_bool_exp
+internal typealias TokenOwnershipV2SortOrder = Current_token_ownerships_v2_order_by
 
-typealias TokenOwnershipV2SortOrder = Current_token_ownerships_v2_order_by
+internal typealias PublicKeyAuthKeyFilter = Public_key_auth_keys_bool_exp
 
-typealias PublicKeyAuthKeyFilter = Public_key_auth_keys_bool_exp
+internal typealias PublicKeyAuthKeySortOrder = Public_key_auth_keys_order_by
 
-typealias PublicKeyAuthKeySortOrder = Public_key_auth_keys_order_by
+internal typealias EventFilter = Events_bool_exp
 
-typealias EventFilter = Events_bool_exp
+internal typealias EventSortOrder = Events_order_by
 
-typealias EventSortOrder = Events_order_by
+internal typealias FungibleAssetActivityFilter = Fungible_asset_activities_bool_exp
 
-typealias FungibleAssetActivityFilter = Fungible_asset_activities_bool_exp
+internal typealias FungibleAssetMetadataFilter = Fungible_asset_metadata_bool_exp
 
-typealias FungibleAssetMetadataFilter = Fungible_asset_metadata_bool_exp
+internal typealias AptosNameFilter = Current_aptos_names_bool_exp
 
-typealias AptosNameFilter = Current_aptos_names_bool_exp
+internal typealias AptosNameSortOrder = Current_aptos_names_order_by
 
-typealias AptosNameSortOrder = Current_aptos_names_order_by
+internal typealias ActiveDelegatorCountFilter = Num_active_delegator_per_pool_bool_exp
 
-typealias ActiveDelegatorCountFilter = Num_active_delegator_per_pool_bool_exp
+internal typealias ActiveDelegatorCountSortOrder = Num_active_delegator_per_pool_order_by
 
-typealias ActiveDelegatorCountSortOrder = Num_active_delegator_per_pool_order_by
+internal typealias ObjectFilter = Current_objects_bool_exp
 
-typealias ObjectFilter = Current_objects_bool_exp
+internal typealias ObjectSortOrder = Current_objects_order_by
 
-typealias ObjectSortOrder = Current_objects_order_by
+internal typealias ProcessorStatusFilter = Processor_status_bool_exp
 
-typealias ProcessorStatusFilter = Processor_status_bool_exp
+internal typealias TableItemFilter = Table_items_bool_exp
 
-typealias TableItemFilter = Table_items_bool_exp
+internal typealias TableItemSortOrder = Table_items_order_by
 
-typealias TableItemSortOrder = Table_items_order_by
+internal typealias TableMetadataFilter = Table_metadatas_bool_exp
 
-typealias TableMetadataFilter = Table_metadatas_bool_exp
+internal typealias TableMetadataSortOrder = Table_metadatas_order_by
 
-typealias TableMetadataSortOrder = Table_metadatas_order_by
+internal typealias TokenActivityV2Filter = Token_activities_v2_bool_exp
 
-typealias TokenActivityV2Filter = Token_activities_v2_bool_exp
+internal typealias TokenActivityV2SortOrder = Token_activities_v2_order_by
 
-typealias TokenActivityV2SortOrder = Token_activities_v2_order_by
+internal typealias TokenDataV2Filter = Current_token_datas_v2_bool_exp
 
-typealias TokenDataV2Filter = Current_token_datas_v2_bool_exp
+internal typealias TokenDataV2SortOrder = Current_token_datas_v2_order_by
 
-typealias TokenDataV2SortOrder = Current_token_datas_v2_order_by
-
-typealias ActiveDelegatorPerPoolOrder = Num_active_delegator_per_pool_order_by
+internal typealias ActiveDelegatorPerPoolOrder = Num_active_delegator_per_pool_order_by
 
 typealias MoveModuleId = String
 

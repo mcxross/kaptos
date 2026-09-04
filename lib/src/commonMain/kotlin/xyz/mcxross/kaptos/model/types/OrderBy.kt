@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-enum class OrderBy(internal val generated: Order_by) {
+internal enum class OrderBy(internal val generated: Order_by) {
   ASC(Order_by.asc),
   ASC_NULLS_FIRST(Order_by.asc_nulls_first),
   ASC_NULLS_LAST(Order_by.asc_nulls_last),

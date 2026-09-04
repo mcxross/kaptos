@@ -16,11 +16,11 @@
 
 package xyz.mcxross.kaptos.exception
 
-data class GraphQLError(
+internal data class GraphQLError(
   val message: String,
   val locations: List<ErrorLocation>? = null,
   val path: List<Any>? = null,
   val extensions: Map<String, Any?>? = null,
 )
 
-data class ErrorLocation(val line: Int, val column: Int)
+internal data class ErrorLocation(val line: Int, val column: Int)

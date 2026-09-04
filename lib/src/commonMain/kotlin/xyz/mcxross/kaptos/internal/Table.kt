@@ -6,7 +6,7 @@ import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.generated.GetTableItemsDataQuery
 import xyz.mcxross.kaptos.generated.GetTableItemsMetadataQuery
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.RequestOptions
 import xyz.mcxross.kaptos.model.Result
@@ -17,8 +17,8 @@ import xyz.mcxross.kaptos.model.TableMetadataFilter
 import xyz.mcxross.kaptos.model.TableMetadataSortOrder
 import xyz.mcxross.kaptos.util.toOptional
 
-suspend inline fun <reified T> getTableItem(
-  aptosConfig: AptosConfig,
+internal suspend inline fun <reified T> getTableItem(
+  aptosConfig: TransportConfig,
   handle: String,
   data: TableItemRequest,
   param: Map<String, Any?>? = null,
@@ -36,7 +36,7 @@ suspend inline fun <reified T> getTableItem(
 }
 
 internal suspend fun getTableItemsData(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: TableItemFilter,
   sortOrder: List<TableItemSortOrder>?,
   page: PaginationArgs?,
@@ -47,7 +47,7 @@ internal suspend fun getTableItemsData(
           GetTableItemsDataQuery(
             where_condition = filter,
             order_by = sortOrder.toOptional(),
-            offset = page?.limit.toOptional(),
+            offset = page?.offset.toOptional(),
             limit = page?.limit.toOptional(),
           )
         )
@@ -55,7 +55,7 @@ internal suspend fun getTableItemsData(
     .toResult()
 
 internal suspend fun getTableItemsMetadata(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: TableMetadataFilter,
   sortOrder: List<TableMetadataSortOrder>?,
   page: PaginationArgs?,

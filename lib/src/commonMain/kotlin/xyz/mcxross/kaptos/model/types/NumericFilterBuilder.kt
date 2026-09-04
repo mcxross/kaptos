@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Numeric_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class NumericFilterBuilder {
+internal class NumericFilterBuilder {
   var eq: Any? = null
   var gt: Any? = null
   var gte: Any? = null
@@ -28,5 +28,5 @@ class NumericFilterBuilder {
     )
 }
 
-fun numericFilter(init: NumericFilterBuilder.() -> Unit): Numeric_comparison_exp =
+internal fun numericFilter(init: NumericFilterBuilder.() -> Unit): Numeric_comparison_exp =
   NumericFilterBuilder().apply(init).build()

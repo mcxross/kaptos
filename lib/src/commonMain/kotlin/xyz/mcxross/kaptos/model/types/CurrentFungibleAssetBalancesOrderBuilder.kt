@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentFungibleAssetBalancesOrderBuilder {
+internal class CurrentFungibleAssetBalancesOrderBuilder {
   var amount: OrderBy? = null
   var amountV1: OrderBy? = null
   var amountV2: OrderBy? = null
@@ -56,7 +56,7 @@ class CurrentFungibleAssetBalancesOrderBuilder {
     )
 }
 
-fun currentFungibleAssetBalancesOrder(
+internal fun currentFungibleAssetBalancesOrder(
   init: CurrentFungibleAssetBalancesOrderBuilder.() -> Unit
 ): Current_fungible_asset_balances_order_by =
   CurrentFungibleAssetBalancesOrderBuilder().apply(init).build()

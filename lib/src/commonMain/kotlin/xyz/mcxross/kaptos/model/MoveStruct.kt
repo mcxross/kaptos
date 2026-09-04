@@ -33,8 +33,6 @@ import xyz.mcxross.kaptos.serialize.MoveVectorSerializer
  * The purpose of this class is to facilitate easy construction of BCS-serializable Move `vector<T>`
  * types.
  *
- * @sample
- *
  * ```kotlin
  * val shorts = MoveVector.u16(listOf(1u, 2u, 3u))
  *
@@ -70,56 +68,48 @@ data class MoveVector<T : EntryFunctionArgument>(var values: List<T>) : Transact
     /**
      * Factory method to generate a MoveVector of U16s from an array of numbers.
      *
-     * @sample
-     *
      * ```kotlin
      * val vector = MoveVector.u16(listOf(1u, 2u, 3u))
      * ```
      *
-     * @params values: an array of `numbers` to convert to U16s
-     * @returns a `MoveVector<U16>`
+     * @param value numbers to convert to U16 values
+     * @return a `MoveVector<U16>`
      */
     fun u16(value: List<UShort>): MoveVector<U16> = MoveVector(value.map { U16(it) })
 
     /**
      * Factory method to generate a MoveVector of U32s from an array of numbers.
      *
-     * @sample
-     *
      * ```kotlin
      * val vector = MoveVector.u32(listOf(1u, 2u, 3u))
      * ```
      *
-     * @params values: an array of `numbers` to convert to U32s
-     * @returns a `MoveVector<U32>`
+     * @param value numbers to convert to U32 values
+     * @return a `MoveVector<U32>`
      */
     fun u32(value: List<UInt>): MoveVector<U32> = MoveVector(value.map { U32(it) })
 
     /**
      * Factory method to generate a MoveVector of U64s from an array of numbers.
      *
-     * @sample
-     *
      * ```kotlin
      * val vector = MoveVector.u64(listOf(1u, 2u, 3u))
      * ```
      *
-     * @params values: an array of `numbers` to convert to U64s
-     * @returns a `MoveVector<U64>`
+     * @param value numbers to convert to U64 values
+     * @return a `MoveVector<U64>`
      */
     fun u64(value: List<ULong>): MoveVector<U64> = MoveVector(value.map { U64(it) })
 
     /**
      * Factory method to generate a MoveVector of boolean from an array of booleans.
      *
-     * @sample
-     *
      * ```kotlin
      * val vector = MoveVector.bool(listOf(true, false, true))
      * ```
      *
-     * @params values: an array of `booleans` to convert to Booleans
-     * @returns a `MoveVector<Bool>`
+     * @param value booleans to convert to Move `bool` values
+     * @return a `MoveVector<Bool>`
      */
     fun bool(value: List<Boolean>): MoveVector<Bool> = MoveVector(value.map { Bool(it) })
 

@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Boolean_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class BooleanFilterBuilder {
+internal class BooleanFilterBuilder {
   var eq: Boolean? = null
   var gt: Boolean? = null
   var gte: Boolean? = null
@@ -28,5 +28,5 @@ class BooleanFilterBuilder {
     )
 }
 
-fun booleanFilter(init: BooleanFilterBuilder.() -> Unit): Boolean_comparison_exp =
+internal fun booleanFilter(init: BooleanFilterBuilder.() -> Unit): Boolean_comparison_exp =
   BooleanFilterBuilder().apply(init).build()

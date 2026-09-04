@@ -18,5 +18,7 @@ package xyz.mcxross.kaptos.model
 enum class AnySignatureVariant(val value: Int) {
   Ed25519(0),
   Secp256k1(1),
+  WebAuthn(2),
   Keyless(3),
+  SlhDsaSha2_128s(4),
 }

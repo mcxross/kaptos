@@ -18,10 +18,10 @@ package xyz.mcxross.kaptos.model
 
 import xyz.mcxross.kaptos.client.ClientConfig
 
-abstract class RequestOptions {
+internal abstract class RequestOptions {
 
   /** The config for the API client */
-  abstract val aptosConfig: AptosConfig
+  abstract val aptosConfig: TransportConfig
 
   /** The name of the API method */
   abstract val originMethod: String
@@ -42,7 +42,7 @@ abstract class RequestOptions {
   abstract val overrides: ClientConfig?
 
   data class AptosRequestOptions(
-    override val aptosConfig: AptosConfig,
+    override val aptosConfig: TransportConfig,
 
     /** The type of API endpoint to call e.g. fullnode, indexer, etc */
     var type: AptosApiType,
@@ -69,7 +69,7 @@ abstract class RequestOptions {
   data class GetAptosRequestOptions(
 
     /** The config for the API client */
-    override val aptosConfig: AptosConfig,
+    override val aptosConfig: TransportConfig,
 
     /** The name of the API method */
     override val originMethod: String,
@@ -92,7 +92,7 @@ abstract class RequestOptions {
 
   data class PostRequestOptions<T>(
     /** The config for the API client */
-    override val aptosConfig: AptosConfig,
+    override val aptosConfig: TransportConfig,
     /** The type of API endpoint to call e.g. fullnode, indexer, etc */
     var type: AptosApiType,
     /** The name of the API method */
@@ -119,7 +119,7 @@ abstract class RequestOptions {
   data class PostAptosRequestOptions<T>(
 
     /** The config for the API client */
-    override val aptosConfig: AptosConfig,
+    override val aptosConfig: TransportConfig,
 
     /** The name of the API method */
     override val originMethod: String,

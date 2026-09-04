@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Fungible_asset_metadata_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class FungibleAssetMetadataOrderBuilder {
+internal class FungibleAssetMetadataOrderBuilder {
   var assetType: OrderBy? = null
   var creatorAddress: OrderBy? = null
   var decimals: OrderBy? = null
@@ -38,6 +38,6 @@ class FungibleAssetMetadataOrderBuilder {
     )
 }
 
-fun fungibleAssetMetadataOrder(
+internal fun fungibleAssetMetadataOrder(
   init: FungibleAssetMetadataOrderBuilder.() -> Unit
 ): Fungible_asset_metadata_order_by = FungibleAssetMetadataOrderBuilder().apply(init).build()

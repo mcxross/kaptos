@@ -81,7 +81,7 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
   )
 
   init {
-    if (data.size < LENGTH) {
+    if (data.size != LENGTH) {
       throw ParsingException(
         AddressInvalidReason.INCORRECT_NUMBER_OF_BYTES.reason +
           " Expected $LENGTH bytes, got ${data.size}."
@@ -200,9 +200,8 @@ data class AccountAddress(val data: ByteArray) : TransactionArgument(), AccountA
     }
 
     /**
-     * NOTE: This function has relaxed parsing behavior. For strict behavior, please use the
-     * `[fromStringStrict]` function. Where possible use `fromStringStrict` rather than this
-     * function, `[fromString]` is only provided for backwards compatibility.
+     * Parses relaxed address formats. Use [fromStringStrict] when input must satisfy canonical
+     * AIP-40 formatting.
      *
      * Creates an instance of [AccountAddress] from a hex string.
      *

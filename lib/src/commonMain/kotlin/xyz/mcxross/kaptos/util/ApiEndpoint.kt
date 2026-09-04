@@ -23,7 +23,8 @@ val NetworkToIndexerAPI =
     "mainnet" to "https://api.mainnet.aptoslabs.com/v1/graphql",
     "testnet" to "https://api.testnet.aptoslabs.com/v1/graphql",
     "devnet" to "https://api.devnet.aptoslabs.com/v1/graphql",
-    "randomnet" to "https://indexer-randomnet.hasura.app/v1/graphql",
+    "shelbynet" to "https://api.shelbynet.shelby.xyz/v1/graphql",
+    "netna" to "https://api.netna.staging.aptoslabs.com/v1/graphql",
     "local" to "http://127.0.0.1:8090/v1/graphql",
   )
 
@@ -32,25 +33,28 @@ val NetworkToNodeAPI =
     "mainnet" to "https://api.mainnet.aptoslabs.com/v1",
     "testnet" to "https://api.testnet.aptoslabs.com/v1",
     "devnet" to "https://api.devnet.aptoslabs.com/v1",
-    "randomnet" to "https://fullnode.random.aptoslabs.com/v1",
+    "shelbynet" to "https://api.shelbynet.shelby.xyz/v1",
+    "netna" to "https://api.netna.staging.aptoslabs.com/v1",
     "local" to "http://127.0.0.1:8080/v1",
   )
 
 val NetworkToFaucetAPI =
   mapOf(
-    "mainnet" to "https://faucet.mainnet.aptoslabs.com",
-    "testnet" to "https://faucet.testnet.aptoslabs.com",
     "devnet" to "https://faucet.devnet.aptoslabs.com",
-    "randomnet" to "https://faucet.random.aptoslabs.com",
+    "shelbynet" to "https://faucet.shelbynet.shelby.xyz",
+    "netna" to "https://faucet-dev-netna-us-central1-410192433417.us-central1.run.app",
     "local" to "http://127.0.0.1:8081",
   )
 
-val NetworkToChainId = mapOf("mainnet" to 1, "testnet" to 2, "randomnet" to 70)
+val NetworkToChainId = mapOf("mainnet" to 1, "testnet" to 2, "local" to 4)
 
 val NetworkToNetworkName =
   mapOf(
     "mainnet" to Network.MAINNET,
     "testnet" to Network.TESTNET,
     "devnet" to Network.DEVNET,
+    "shelbynet" to Network.SHELBYNET,
+    "netna" to Network.NETNA,
+    "local" to Network.LOCAL,
     "custom" to Network.CUSTOM,
   )

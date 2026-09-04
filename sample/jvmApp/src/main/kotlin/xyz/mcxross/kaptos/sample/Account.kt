@@ -1,15 +1,15 @@
 package xyz.mcxross.kaptos.sample
 
-import xyz.mcxross.kaptos.account.SingleKeyAccount
+import kotlinx.coroutines.runBlocking
+import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.model.SigningSchemeInput
 
-fun main() {
-  val singleKey = SingleKeyAccount.generate(SigningSchemeInput.Ed25519)
-  println(singleKey)
-
-  val account = SingleKeyAccount.generate(SigningSchemeInput.Secp256k1)
-
-  println(account.privateKey)
-  println(account.publicKey)
-  println(account.accountAddress)
+fun accountLifecycle() = runBlocking {
+  aptos {
+    val singleKey = singleKeyAccount()
+    val account = singleKeyAccount(SigningSchemeInput.Secp256k1)
+    println(singleKey)
+    println("Public key: ${account.publicKey}")
+    println("Address: ${account.accountAddress}")
+  }
 }

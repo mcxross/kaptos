@@ -15,22 +15,23 @@
  */
 package xyz.mcxross.kaptos.core.crypto
 
-import io.ktor.util.reflect.*
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
-import xyz.mcxross.bcs.Bcs
 import xyz.mcxross.fastkrypto.ed25519PublicKeyFromPrivate
 import xyz.mcxross.fastkrypto.ed25519Sign
 import xyz.mcxross.fastkrypto.ed25519Verify
 import xyz.mcxross.fastkrypto.secp256k1PublicKeyFromPrivate
 import xyz.mcxross.fastkrypto.secp256k1Sign
 import xyz.mcxross.fastkrypto.secp256k1Verify
+import xyz.mcxross.fastkrypto.secp256r1GenerateKeypair
+import xyz.mcxross.fastkrypto.secp256r1NormalizePublicKey
+import xyz.mcxross.fastkrypto.secp256r1PublicKeyFromPrivate
+import xyz.mcxross.fastkrypto.secp256r1SignSha3256
+import xyz.mcxross.fastkrypto.secp256r1Verify
+import xyz.mcxross.fastkrypto.secp256r1VerifySha3256
+import xyz.mcxross.fastkrypto.sha256
 import xyz.mcxross.fastkrypto.sha3256
-import xyz.mcxross.kaptos.model.AnyRawTransaction
 import xyz.mcxross.kaptos.model.SigningSchemeInput
-import xyz.mcxross.kaptos.transaction.builder.deriveTransactionType
-import xyz.mcxross.kaptos.transaction.instances.RawTransaction
-import xyz.mcxross.kaptos.util.RAW_TRANSACTION_SALT
 
 @Throws(NoSuchAlgorithmException::class)
 actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
@@ -47,7 +48,10 @@ actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
       val pk = secp256k1PublicKeyFromPrivate(seed)
       KeyPair(seed, pk)
     }
-    else -> throw NotImplementedError("Only Ed25519 and Secp256k1 are supported at the moment")
+    SigningSchemeInput.Secp256r1 -> {
+      val keyPair = secp256r1GenerateKeypair()
+      KeyPair(keyPair.privateKey, secp256r1NormalizePublicKey(keyPair.publicKey, false))
+    }
   }
 }
 
@@ -58,22 +62,6 @@ actual fun fromSeed(seed: ByteArray): KeyPair {
 
 actual fun sha3Hash(input: ByteArray): ByteArray {
   return sha3256(input)
-}
-
-actual fun generateSigningMessage(transaction: AnyRawTransaction): ByteArray {
-  val anyRawTxnInstance = deriveTransactionType(transaction)
-
-  // Concatenate prefix and body for hashing
-  val prefix =
-    if (anyRawTxnInstance.instanceOf(RawTransaction::class)) {
-      sha3256(RAW_TRANSACTION_SALT.encodeToByteArray())
-    } else {
-      ByteArray(0)
-    }
-
-  val body = Bcs.encodeToByteArray<RawTransaction>(anyRawTxnInstance as RawTransaction)
-
-  return prefix + body
 }
 
 actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
@@ -88,6 +76,56 @@ actual fun generateSecp256k1PublicKey(privateKey: ByteArray): ByteArray {
   return secp256k1PublicKeyFromPrivate(privateKey)
 }
 
+internal actual fun secp256r1SignAptos(
+  message: ByteArray,
+  privateKey: ByteArray,
+): ByteArray = secp256r1SignSha3256(privateKey, message)
+
+internal actual fun generateSecp256r1PublicKey(privateKey: ByteArray): ByteArray =
+  secp256r1NormalizePublicKey(secp256r1PublicKeyFromPrivate(privateKey), false)
+
+internal actual fun normalizeSecp256r1PublicKey(publicKey: ByteArray): ByteArray =
+  secp256r1NormalizePublicKey(publicKey, false)
+
+internal actual fun verifySecp256r1Signature(
+  publicKey: ByteArray,
+  message: ByteArray,
+  signature: ByteArray,
+): Boolean = secp256r1VerifySha3256(publicKey, message, signature)
+
+internal actual fun verifyWebAuthnSignature(
+  publicKey: ByteArray,
+  authenticatorData: ByteArray,
+  clientDataJson: ByteArray,
+  signature: ByteArray,
+): Boolean = secp256r1Verify(publicKey, authenticatorData + sha256(clientDataJson), signature)
+
+internal actual fun generateMnemonic(wordCount: UInt): String =
+  xyz.mcxross.fastkrypto.mnemonicGenerate(wordCount)
+
+internal actual fun validateMnemonic(phrase: String): Boolean =
+  xyz.mcxross.fastkrypto.mnemonicValidate(phrase)
+
+internal actual fun deriveMnemonicPrivateKey(
+  phrase: String,
+  passphrase: String,
+  type: PrivateKeyType,
+  path: String,
+): ByteArray =
+  xyz.mcxross.fastkrypto.mnemonicDerivePrivateKey(
+    phrase,
+    passphrase,
+    type.toFastKryptoScheme(),
+    path,
+  )
+
+private fun PrivateKeyType.toFastKryptoScheme(): xyz.mcxross.fastkrypto.SignatureScheme =
+  when (this) {
+    PrivateKeyType.Ed25519 -> xyz.mcxross.fastkrypto.SignatureScheme.ED25519
+    PrivateKeyType.Secp256k1 -> xyz.mcxross.fastkrypto.SignatureScheme.SECP256K1
+    PrivateKeyType.Secp256r1 -> xyz.mcxross.fastkrypto.SignatureScheme.SECP256R1
+  }
+
 actual fun verifySignature(
   publicKey: PublicKey,
   message: ByteArray,
@@ -100,6 +138,10 @@ actual fun verifySignature(
 
     is Secp256k1PublicKey -> {
       secp256k1Verify(publicKey.hexInput.toByteArray(), message, signature)
+    }
+
+    is Secp256r1PublicKey -> {
+      secp256r1VerifySha3256(publicKey.toByteArray(), message, signature)
     }
 
     else -> false

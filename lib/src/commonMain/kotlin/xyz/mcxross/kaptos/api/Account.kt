@@ -22,15 +22,16 @@ import xyz.mcxross.kaptos.generated.*
 import xyz.mcxross.kaptos.internal.*
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.protocol.Account
+import xyz.mcxross.kaptos.util.APTOS_COIN
 import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 
 /**
  * Account API namespace. This class provides functionality to reading and writing account related
  * information.
  *
- * @property config AptosConfig object for configuration
+ * @property config TransportConfig object for configuration
  */
-class Account(override val config: AptosConfig) : Account {
+internal class Account(override val config: TransportConfig) : Account {
 
   // ======================================= REST APIs ========================================
 
@@ -311,7 +312,31 @@ class Account(override val config: AptosConfig) : Account {
   override suspend fun getAccountAPTAmount(
     accountAddress: AccountAddressInput,
     minimumLedgerVersion: Long?,
-  ): Result<Long, AptosIndexerError> = Result.Ok(1)
+  ): Result<Long, AptosIndexerError> {
+    waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
+    return when (
+      val result =
+        getAccountCoinAmount(
+          config,
+          accountAddress,
+          MoveValue.MoveStructId(APTOS_COIN),
+          page = PaginationArgs(limit = 1),
+        )
+    ) {
+      is Result.Ok -> {
+        val amount =
+          result.value
+            ?.current_fungible_asset_balances
+            ?.firstOrNull()
+            ?.amount
+            ?.toString()
+            ?.toLongOrNull()
+            ?: 0L
+        Result.Ok(amount)
+      }
+      is Result.Err -> result
+    }
+  }
 
   /**
    * Queries the account's coin amount by the coin type

@@ -1,0 +1,39 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, macosArm64, macosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <xyz.mcxross.kaptos:kaptos-encrypted-transactions>
+abstract interface xyz.mcxross.kaptos.encrypted/EncryptedTransactionService { // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService|null[0]
+    abstract suspend fun clearCache() // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService.clearCache|clearCache(){}[0]
+    abstract suspend fun encrypt(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction> // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService.encrypt|encrypt(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    abstract suspend fun signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse> // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    abstract suspend fun signAndSubmit(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.account/TransactionSigner, kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse> // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.account.TransactionSigner;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    abstract suspend fun submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.encrypted/EncryptedTransactionService.submitAndWait|submitAndWait(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions { // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/FixedBytes32? = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/FixedBytes32?>? = ..., xyz.mcxross.kaptos.model/FixedBytes32? = ..., xyz.mcxross.kaptos.model/ClaimedEntryFunction? = ...) // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.<init>|<init>(xyz.mcxross.kaptos.model.FixedBytes32?;kotlin.collections.List<xyz.mcxross.kaptos.model.FixedBytes32?>?;xyz.mcxross.kaptos.model.FixedBytes32?;xyz.mcxross.kaptos.model.ClaimedEntryFunction?){}[0]
+
+    final val claimedEntryFunction // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.claimedEntryFunction|{}claimedEntryFunction[0]
+        final fun <get-claimedEntryFunction>(): xyz.mcxross.kaptos.model/ClaimedEntryFunction? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.claimedEntryFunction.<get-claimedEntryFunction>|<get-claimedEntryFunction>(){}[0]
+    final val feePayerAuthenticationKey // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.feePayerAuthenticationKey|{}feePayerAuthenticationKey[0]
+        final fun <get-feePayerAuthenticationKey>(): xyz.mcxross.kaptos.model/FixedBytes32? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.feePayerAuthenticationKey.<get-feePayerAuthenticationKey>|<get-feePayerAuthenticationKey>(){}[0]
+    final val secondarySignerAuthenticationKeys // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.secondarySignerAuthenticationKeys|{}secondarySignerAuthenticationKeys[0]
+        final fun <get-secondarySignerAuthenticationKeys>(): kotlin.collections/List<xyz.mcxross.kaptos.model/FixedBytes32?>? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.secondarySignerAuthenticationKeys.<get-secondarySignerAuthenticationKeys>|<get-secondarySignerAuthenticationKeys>(){}[0]
+    final val senderAuthenticationKey // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.senderAuthenticationKey|{}senderAuthenticationKey[0]
+        final fun <get-senderAuthenticationKey>(): xyz.mcxross.kaptos.model/FixedBytes32? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.senderAuthenticationKey.<get-senderAuthenticationKey>|<get-senderAuthenticationKey>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.model/FixedBytes32? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<xyz.mcxross.kaptos.model/FixedBytes32?>? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.component2|component2(){}[0]
+    final fun component3(): xyz.mcxross.kaptos.model/FixedBytes32? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.component3|component3(){}[0]
+    final fun component4(): xyz.mcxross.kaptos.model/ClaimedEntryFunction? // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.component4|component4(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/FixedBytes32? = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/FixedBytes32?>? = ..., xyz.mcxross.kaptos.model/FixedBytes32? = ..., xyz.mcxross.kaptos.model/ClaimedEntryFunction? = ...): xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.copy|copy(xyz.mcxross.kaptos.model.FixedBytes32?;kotlin.collections.List<xyz.mcxross.kaptos.model.FixedBytes32?>?;xyz.mcxross.kaptos.model.FixedBytes32?;xyz.mcxross.kaptos.model.ClaimedEntryFunction?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions.toString|toString(){}[0]
+}
+
+final fun (xyz.mcxross.kaptos/Aptos).xyz.mcxross.kaptos.encrypted/encryptedTransactions(): xyz.mcxross.kaptos.encrypted/EncryptedTransactionService // xyz.mcxross.kaptos.encrypted/encryptedTransactions|encryptedTransactions@xyz.mcxross.kaptos.Aptos(){}[0]

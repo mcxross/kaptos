@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.String_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class StringFilterBuilder {
+internal class StringFilterBuilder {
   var eq: String? = null
   var gt: String? = null
   var gte: String? = null
@@ -48,5 +48,5 @@ class StringFilterBuilder {
     )
 }
 
-fun stringFilter(init: StringFilterBuilder.() -> Unit): String_comparison_exp =
+internal fun stringFilter(init: StringFilterBuilder.() -> Unit): String_comparison_exp =
   StringFilterBuilder().apply(init).build()

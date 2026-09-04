@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Current_objects_order_by
 import xyz.mcxross.kaptos.util.toOptional
 
-class CurrentObjectsOrderBuilder {
+internal class CurrentObjectsOrderBuilder {
   var allowUngatedTransfer: OrderBy? = null
   var isDeleted: OrderBy? = null
   var lastGuidCreationNum: OrderBy? = null
@@ -24,5 +24,5 @@ class CurrentObjectsOrderBuilder {
     )
 }
 
-fun currentObjectsOrder(init: CurrentObjectsOrderBuilder.() -> Unit): Current_objects_order_by =
+internal fun currentObjectsOrder(init: CurrentObjectsOrderBuilder.() -> Unit): Current_objects_order_by =
   CurrentObjectsOrderBuilder().apply(init).build()

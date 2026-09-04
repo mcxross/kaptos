@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.*
 import xyz.mcxross.kaptos.util.toOptional
 
-class TableItemsFilterBuilder {
+internal class TableItemsFilterBuilder {
   private val andConditions = mutableListOf<Table_items_bool_exp>()
   private val orConditions = mutableListOf<Table_items_bool_exp>()
   private var notCondition: Table_items_bool_exp? = null
@@ -50,5 +50,5 @@ class TableItemsFilterBuilder {
     )
 }
 
-fun tableItemsFilter(init: TableItemsFilterBuilder.() -> Unit): Table_items_bool_exp =
+internal fun tableItemsFilter(init: TableItemsFilterBuilder.() -> Unit): Table_items_bool_exp =
   TableItemsFilterBuilder().apply(init).build()

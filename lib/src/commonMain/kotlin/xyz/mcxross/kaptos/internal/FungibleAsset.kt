@@ -21,7 +21,7 @@ import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetCurrentFungibleAssetBalancesQuery
 import xyz.mcxross.kaptos.generated.GetFungibleAssetActivitiesQuery
 import xyz.mcxross.kaptos.generated.GetFungibleAssetMetadataQuery
-import xyz.mcxross.kaptos.model.AptosConfig
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.FungibleAssetActivityFilter
 import xyz.mcxross.kaptos.model.FungibleAssetBalanceFilter
 import xyz.mcxross.kaptos.model.FungibleAssetMetadataFilter
@@ -30,7 +30,7 @@ import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.util.toOptional
 
 internal suspend fun getCurrentFungibleAssetBalances(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: FungibleAssetBalanceFilter?,
   page: PaginationArgs?,
 ): Result<GetCurrentFungibleAssetBalancesQuery.Data?, AptosIndexerError> =
@@ -47,7 +47,7 @@ internal suspend fun getCurrentFungibleAssetBalances(
     .toResult()
 
 internal suspend fun getFungibleAssetActivities(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: FungibleAssetActivityFilter,
   page: PaginationArgs?,
 ): Result<GetFungibleAssetActivitiesQuery.Data?, AptosIndexerError> =
@@ -64,7 +64,7 @@ internal suspend fun getFungibleAssetActivities(
     .toResult()
 
 internal suspend fun getFungibleAssetMetadata(
-  config: AptosConfig,
+  config: TransportConfig,
   filter: FungibleAssetMetadataFilter?,
   page: PaginationArgs?,
 ): Result<GetFungibleAssetMetadataQuery.Data?, AptosIndexerError> =

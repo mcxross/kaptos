@@ -3,7 +3,7 @@ package xyz.mcxross.kaptos.model.types
 import xyz.mcxross.kaptos.generated.type.Int_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-class IntFilterBuilder {
+internal class IntFilterBuilder {
   var eq: Int? = null
   var gt: Int? = null
   var gte: Int? = null
@@ -28,5 +28,5 @@ class IntFilterBuilder {
     )
 }
 
-fun intFilter(init: IntFilterBuilder.() -> Unit): Int_comparison_exp =
+internal fun intFilter(init: IntFilterBuilder.() -> Unit): Int_comparison_exp =
   IntFilterBuilder().apply(init).build()

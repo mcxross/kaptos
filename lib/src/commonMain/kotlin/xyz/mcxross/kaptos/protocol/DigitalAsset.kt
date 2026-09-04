@@ -30,7 +30,7 @@ import xyz.mcxross.kaptos.model.*
  * Digital asset API namespace. This interface provides functionality to reading and writing digital
  * assets' related information.
  */
-interface DigitalAsset {
+internal interface DigitalAsset {
 
   /**
    * Queries data of a specific collection by the collection creator address and the collection
@@ -72,16 +72,6 @@ interface DigitalAsset {
   /**
    * Creates a new collection within the specified account.
    *
-   * @sample
-   *
-   * ```kotlin
-   * val txn = aptos.createCollectionTransaction(
-   *       creator = alice,
-   *       name = "McXross",
-   *       description = "Lazy",
-   *       uri = "https://mcxross.xyz"
-   *     )
-   * ```
    *
    * @param creator The account under which the collection will be created. This is the account of
    *   the collection's creator.
@@ -93,7 +83,7 @@ interface DigitalAsset {
    *   characters.
    * @param collectionOptions Optional parameters for configuring the collection.
    * @param options Optional parameters for generating the transaction.
-   * @return A [SimpleTransaction] that, when submitted, will create the specified collection.
+   * @return A [UnsignedTransaction.Simple] that, when submitted, will create the specified collection.
    */
   suspend fun createCollectionTransaction(
     creator: Account,
@@ -101,23 +91,13 @@ interface DigitalAsset {
     description: String = "",
     uri: String = "",
     collectionOptions: CreateCollectionOptions = CreateCollectionOptions(),
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Create a transaction to mint a digital asset into the creators account within an existing
    * collection.
    *
-   * @sample
-   *
-   * ```kotlin
-   *     val txn = aptos.mintDigitalAssetTransaction(
-   *          creator = alice,
-   *          collection = "McXross", name = "Digi",
-   *          description = "Lazy",
-   *          uri = "https://mcxross.xyz"
-   *     )
-   * ```
    *
    * @param creator the creator of the collection
    * @param collection the name of the collection the digital asset belongs to
@@ -131,7 +111,7 @@ interface DigitalAsset {
    * @param propertyTypes the types of the properties
    * @param propertyValues the values of the properties
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun mintDigitalAssetTransaction(
     creator: Account,
@@ -142,8 +122,8 @@ interface DigitalAsset {
     propertyKeys: List<String>? = emptyList(),
     propertyTypes: List<String>? = emptyList(),
     propertyValues: List<String>? = emptyList(),
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Transfer a digital asset (non-fungible digital asset) ownership.
@@ -155,15 +135,15 @@ interface DigitalAsset {
    * @param digitalAssetAddress The digital asset address
    * @param recipient The recipient account address
    * @param digitalAssetType optional. The digital asset type, default to "0x4::token::Token"
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun transferDigitalAssetTransaction(
     sender: Account,
     digitalAssetAddress: AccountAddressInput,
     recipient: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Mint a soul bound digital asset.
@@ -178,7 +158,7 @@ interface DigitalAsset {
    * @param propertyTypes The types of the properties.
    * @param propertyValues The values of the properties.
    * @param options Optional parameters for generating the transaction.
-   * @return A [SimpleTransaction] that, when submitted, will mint the specified soul bound digital
+   * @return A [UnsignedTransaction.Simple] that, when submitted, will mint the specified soul bound digital
    *   asset.
    */
   suspend fun mintSoulBoundTransaction(
@@ -191,36 +171,36 @@ interface DigitalAsset {
     propertyKeys: List<String> = emptyList(),
     propertyTypes: List<String> = emptyList(),
     propertyValues: List<String> = emptyList(),
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Burn a digital asset by its creator
    *
    * @param creator The creator account
    * @param digitalAssetAddress The digital asset address
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun burnDigitalAssetTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Freeze digital asset transfer ability
    *
    * @param creator The creator account
    * @param digitalAssetAddress The digital asset address
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun freezeDigitalAssetTransferTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Unfreeze digital asset transfer ability
@@ -229,14 +209,14 @@ interface DigitalAsset {
    * @param digitalAssetAddress The digital asset address
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun unfreezeDigitalAssetTransferTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Set the digital asset name
@@ -245,14 +225,14 @@ interface DigitalAsset {
    * @param digitalAssetAddress The digital asset address
    * @param name The digital asset name
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun setDigitalAssetNameTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     name: String,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-  ): SimpleTransaction
+  ): UnsignedTransaction.Simple
 
   /**
    * Set the digital asset description
@@ -262,15 +242,15 @@ interface DigitalAsset {
    * @param description The digital asset description
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun setDigitalAssetDescriptionTransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     description: String,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Set the digital asset URI
@@ -280,15 +260,15 @@ interface DigitalAsset {
    * @param uri The digital asset URI
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun setDigitalAssetURITransaction(
     creator: Account,
     digitalAssetAddress: AccountAddressInput,
     uri: String,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Add a property to a digital asset
@@ -300,7 +280,7 @@ interface DigitalAsset {
    * @param digitalAssetAddress The digital asset address
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun addDigitalAssetPropertyTransaction(
     creator: Account,
@@ -309,8 +289,8 @@ interface DigitalAsset {
     propertyValue: PropertyValue,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 
   /**
    * Remove a property from a digital asset
@@ -320,13 +300,13 @@ interface DigitalAsset {
    * @param digitalAssetAddress The digital asset address
    * @param digitalAssetType The digital asset type. Default to "0x4::token::Token"
    * @param options Optional parameters for generating the transaction
-   * @returns A [SimpleTransaction] that can be simulated or submitted to chain
+   * @returns A [UnsignedTransaction.Simple] that can be simulated or submitted to chain
    */
   suspend fun removeDigitalAssetPropertyTransaction(
     creator: Account,
     propertyKey: String,
     digitalAssetAddress: AccountAddressInput,
     digitalAssetType: MoveStructId = "0x4::token::Token",
-    options: InputGenerateTransactionOptions = InputGenerateTransactionOptions(),
-  ): SimpleTransaction
+    options: TransactionOptions = TransactionOptions(),
+  ): UnsignedTransaction.Simple
 }
