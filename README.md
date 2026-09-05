@@ -17,6 +17,8 @@ multiple platforms.
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Encrypted transactions](#encrypted-transactions)
+- [Confidential assets](#confidential-assets)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
@@ -205,6 +207,105 @@ aptos(AptosConfig(network = Network.TESTNET)) {
     println("Committed ${committed.hash}")
 }
 ```
+
+### Encrypted transactions
+
+Add `kaptos-encrypted-transactions` alongside the core SDK, using the same version. Import
+`encryptedTransactions` to create a service on an existing `Aptos` instance. The service encrypts
+the executable payload, signs the encrypted transaction, and submits it through the shared transport.
+
+The configured fullnode must advertise an encryption key in its ledger response. Otherwise the
+service returns `AptosError.UnsupportedFeature`. Use a funded standard signer; the encrypted
+submission helpers reject Keyless signers, and encrypted transactions cannot be simulated.
+
+```kotlin
+import xyz.mcxross.kaptos.encrypted.encryptedTransactions
+import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.move.MoveArgument
+
+// config selects a network with encrypted-transaction support; recipient is an AccountAddress.
+aptos(config) {
+    val sender = ed25519Account("ed25519-priv-0x...")
+    val encrypted = encryptedTransactions()
+    val committed = encrypted.submitAndWait(
+        sender = sender,
+        payload = TransactionPayload.entryFunction(
+            function = "0x1::aptos_account::transfer",
+            arguments = listOf(
+                MoveArgument.Address(recipient),
+                MoveArgument.U64(1_000_000uL),
+            ),
+        ),
+    ).getOrElse { failure -> error(failure.message) }
+    println("Committed ${committed.hash}")
+}
+```
+
+For multi-agent, fee-payer, or orderless flows, build an `UnsignedTransaction` through
+`transactions`, then pass it to `encrypted.signAndSubmit(transaction, sender, ...)` with the
+matching signers. Use `encrypt(transaction)` when signing and submission happen separately;
+sign the returned encrypted transaction. `EncryptedTransactionOptions` accepts explicit signer
+authentication keys and a claimed entry function. Reuse the service within a workflow and call
+`encrypted.clearCache()` after a committed authentication-key rotation.
+
+The [encrypted transaction sample](sample/jvmApp/src/main/kotlin/xyz/mcxross/kaptos/sample/EncryptedTransaction.kt)
+runs with `--args=encrypted` and requires `APTOS_PRIVATE_KEY`, `APTOS_RECIPIENT`, and an
+`APTOS_NETWORK` that supports encrypted transactions.
+
+### Confidential assets
+
+Add `kaptos-confidential-assets` alongside the core SDK, using the same version. Its
+`confidentialAssets()` extension provides encrypted balance reads, proof-backed transfers and
+withdrawals, deposits, and encryption-key management. The default Move module is
+`0x1::confidential_asset`; use `ConfidentialAssetConfig(moduleAddress = ...)` for another deployment.
+The selected network and fungible asset must support these operations. `token` is the asset's
+metadata address, and the transaction signer needs funds for fees.
+
+Confidential decryption keys are separate from transaction-signing keys. The following example
+imports a canonical 32-byte key supplied by the application's key storage and registers a new
+confidential balance. For an existing balance, import its registered key and omit registration.
+
+```kotlin
+import xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey
+import xyz.mcxross.kaptos.confidential.confidentialAssets
+
+// config, token (AccountAddress), and storedDecryptionKeyBytes come from the application.
+aptos(config) {
+    val signer = ed25519Account("ed25519-priv-0x...")
+    val key = own(ConfidentialDecryptionKey.fromBytes(storedDecryptionKeyBytes))
+    val assets = confidentialAssets()
+
+    assets.registerBalance(signer = signer, token = token, key = key)
+        .getOrElse { failure -> error(failure.message) }
+
+    val balance = assets.getBalance(signer.accountAddress, token, key)
+        .getOrElse { failure -> error(failure.message) }
+    // balance.availableAmount and balance.pendingAmount contain the decrypted amounts.
+}
+```
+
+`own(...)` clears the imported key when the `aptos` scope closes; the application remains
+responsible for retaining its stored key and clearing the source byte array. For disposable
+registration examples, `confidentialDecryptionKey()` generates a key with the same managed
+lifecycle. Keep a recoverable key for any balance that will hold funds.
+
+Use `deposit(signer, token, amount)` to move public funds into the confidential balance and
+`rolloverPendingBalance(signer, token)` to move pending funds into the available balance.
+`transfer(signer, recipient, token, key, amount)` generates the transfer proofs; the recipient
+must have a registered encryption key. `withdraw(signer, token, key, amount)` moves funds back
+to a public balance. Amount arguments use `ULong` in the asset's smallest units.
+
+Mutation methods wait for commitment and invalidate affected caches. Their `build...` counterparts
+return unsigned transactions for separate signing or external fee-payer workflows.
+`ConfidentialTransactionOptions` accepts gas settings and either a local fee-payer signer or an
+external fee-payer address; submitting with an external payer requires separate signing.
+The service also exposes normalization, incoming-transfer pause controls, key rotation, auditor
+queries, and paginated activity. Balance reads are fresh by default; call `assets.clearCache()`
+to discard cached balances and keys after changes made outside the service.
+
+The [confidential asset sample](sample/jvmApp/src/main/kotlin/xyz/mcxross/kaptos/sample/ConfidentialAssetTransaction.kt)
+runs with `--args=confidential`. It registers a generated key and requires `APTOS_PRIVATE_KEY`,
+`APTOS_CONFIDENTIAL_ASSET` (the metadata address), and `APTOS_NETWORK` for the selected deployment.
 
 ### Typed view calls
 
