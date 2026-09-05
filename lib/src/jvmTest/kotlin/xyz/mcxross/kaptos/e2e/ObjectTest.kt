@@ -18,7 +18,7 @@ package xyz.mcxross.kaptos.e2e
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import xyz.mcxross.kaptos.api.Object as ObjectApi
+import xyz.mcxross.kaptos.internal.operations.ObjectOperations as ObjectApi
 import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.util.runBlocking

@@ -22,9 +22,9 @@ internal suspend fun transferCoinTransaction(
   from: AccountAddressInput,
   to: AccountAddressInput,
   amount: ULong,
-  coinType: String,
-  withFeePayer: Boolean,
-  options: TransactionOptions,
+  coinType: String = xyz.mcxross.kaptos.util.APTOS_COIN,
+  withFeePayer: Boolean = false,
+  options: TransactionOptions = TransactionOptions(),
 ): UnsignedTransaction.Simple {
   val data =
     InputGenerateSingleSignerRawTransactionData(

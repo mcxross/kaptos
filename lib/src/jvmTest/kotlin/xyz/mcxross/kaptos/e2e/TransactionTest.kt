@@ -21,10 +21,10 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Coin as CoinApi
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.General as GeneralApi
-import xyz.mcxross.kaptos.api.Transaction as TransactionApi
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.GeneralOperations as GeneralApi
+import xyz.mcxross.kaptos.internal.operations.TransactionOperations as TransactionApi
+import xyz.mcxross.kaptos.internal.transferCoinTransaction
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.unit.TRANSFER_AMOUNT
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
@@ -122,8 +122,7 @@ class TransactionTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
     val bob = Account.generate()
-    FaucetApi(transportConfig)
-      .fundAccount(alice.accountAddress, FUND_AMOUNT)
+    fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)
       .expect("Failed to fund Alice's account")
     return alice to bob
   }
@@ -134,8 +133,12 @@ class TransactionTest {
   ): UserTransactionResponse {
     val transportConfig = localTransportConfig()
     val txn =
-      CoinApi(transportConfig)
-        .transferCoinTransaction(alice.accountAddress, bob.accountAddress, TRANSFER_AMOUNT)
+      transferCoinTransaction(
+        transportConfig,
+        alice.accountAddress,
+        bob.accountAddress,
+        TRANSFER_AMOUNT,
+      )
     val sub =
       TransactionApi(transportConfig)
         .signAndSubmitTransaction(alice, txn)

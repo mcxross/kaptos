@@ -19,10 +19,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.General as GeneralApi
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.GeneralOperations as GeneralApi
+import xyz.mcxross.kaptos.internal.operations.view
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.protocol.view
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
 import xyz.mcxross.kaptos.util.runBlocking
 
@@ -34,8 +34,7 @@ class FaucetTest {
     val aliceAccount = Account.generate()
 
     when (
-      val fundResolution =
-        FaucetApi(transportConfig).fundAccount(aliceAccount.accountAddress, FUND_AMOUNT)
+      val fundResolution = fundAccount(transportConfig, aliceAccount.accountAddress, FUND_AMOUNT)
     ) {
       is Result.Ok -> {
         val payload =

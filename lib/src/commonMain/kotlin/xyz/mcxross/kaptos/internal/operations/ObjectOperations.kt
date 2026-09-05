@@ -13,43 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package xyz.mcxross.kaptos.protocol
+package xyz.mcxross.kaptos.internal.operations
 
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetObjectDataQuery
+import xyz.mcxross.kaptos.internal.getObjectDataByObjectAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.ObjectSortOrder
 import xyz.mcxross.kaptos.model.PaginationArgs
+import xyz.mcxross.kaptos.model.ProcessorType
 import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.TransportConfig
+import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 
-/** An interface for querying Aptos `Object` related data from the indexer. */
-internal interface Object {
+internal class ObjectOperations(val config: TransportConfig) {
 
-  val config: TransportConfig
-
-  /**
-   * Queries for object data based on a specified object address.
-   *
-   * This function can wait for the indexer to be synchronized to a specific ledger version before
-   * querying.
-   *
-   * ## Usage
-   *
-   *
-   * @param objectAddress The address of the object to retrieve data for.
-   * @param sortOrder An optional list of sorting options for the results.
-   * @param page Optional pagination arguments (`limit` and `offset`).
-   * @param minimumLedgerVersion An optional ledger version. The function will wait for the indexer
-   *   to be at or beyond this version before querying.
-   * @return A `Result` which is either `Result.Ok` containing the query data, or `Result.Err`
-   *   containing an [AptosIndexerError].
-   */
   suspend fun getObjectDataByObjectAddress(
     objectAddress: AccountAddressInput,
     sortOrder: List<ObjectSortOrder>? = null,
     page: PaginationArgs? = null,
     minimumLedgerVersion: Long? = null,
-  ): Result<GetObjectDataQuery.Current_object?, AptosIndexerError>
+  ): Result<GetObjectDataQuery.Current_object?, AptosIndexerError> {
+    waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.OBJECT_PROCESSOR)
+    return getObjectDataByObjectAddress(config, objectAddress, sortOrder, page)
+  }
 }

@@ -22,9 +22,9 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.FungibleAsset as FungibleAssetApi
 import xyz.mcxross.kaptos.extension.longOrNull
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.FungibleAssetOperations as FungibleAssetApi
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.BlockEpilogueTransactionResponse
 import xyz.mcxross.kaptos.model.BlockMetadataTransactionResponse
@@ -163,9 +163,7 @@ class FungibleAssetTest {
     val transportConfig = TransportConfig(AptosSettings(Network.LOCAL))
     val userAccount = Account.generate()
     val minimumLedgerVersion =
-      when (
-        val fundResponse = FaucetApi(transportConfig).fundAccount(userAccount.accountAddress, 1_000)
-      ) {
+      when (val fundResponse = fundAccount(transportConfig, userAccount.accountAddress, 1_000)) {
         is Result.Ok -> ledgerVersionOf(fundResponse.value)
         is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
       }

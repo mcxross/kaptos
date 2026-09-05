@@ -19,7 +19,9 @@ import xyz.mcxross.kaptos.AptosConfig
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.move.*
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
 import xyz.mcxross.kaptos.view.MoveViewResult
+import xyz.mcxross.kaptos.view.serialization.decodeValue
 
 class TypedViewTest :
   StringSpec({
@@ -52,7 +54,7 @@ class TypedViewTest :
         ) {
           install(ContentNegotiation) { json() }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         val value =
           aptos.views
@@ -86,7 +88,7 @@ class TypedViewTest :
         ) {
           install(ContentNegotiation) { json() }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         aptos.views
           .call("0x42::demo::read", arguments = listOf(MoveArgument.U64(1u)), ledgerVersion = 123u)
@@ -109,7 +111,7 @@ class TypedViewTest :
         ) {
           install(ContentNegotiation) { json() }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         aptos.transactions.preloadModuleAbis(viewModule())
         aptos.views
@@ -136,7 +138,7 @@ class TypedViewTest :
         ) {
           install(ContentNegotiation) { json() }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         aptos.views
           .call("0x42::demo::read", arguments = listOf(MoveArgument.U8(1u)))

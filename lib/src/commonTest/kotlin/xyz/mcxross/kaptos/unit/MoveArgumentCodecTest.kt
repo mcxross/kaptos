@@ -197,7 +197,15 @@ private val GEOMETRY_MODULE =
               isEnum = true,
               abilities = listOf(MoveAbility.COPY, MoveAbility.DROP),
               genericTypeParams = emptyList(),
-              fields = listOf(MoveStructField("None", "u8"), MoveStructField("Number", "u64")),
+              fields = emptyList(),
+              variants =
+                listOf(
+                  xyz.mcxross.kaptos.model.MoveStructVariant("None", emptyList()),
+                  xyz.mcxross.kaptos.model.MoveStructVariant(
+                    "Number",
+                    listOf(MoveStructField("0", "u64")),
+                  ),
+                ),
             ),
           ),
       ),

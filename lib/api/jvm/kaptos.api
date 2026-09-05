@@ -10,6 +10,7 @@ public final class xyz/mcxross/kaptos/Aptos : java/lang/AutoCloseable {
 	public static synthetic fun account$default (Lxyz/mcxross/kaptos/Aptos;Lxyz/mcxross/kaptos/model/SigningSchemeInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ILjava/lang/Object;)Lxyz/mcxross/kaptos/account/Account;
 	public final fun account-5xhebvg (Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddressInput;)Lxyz/mcxross/kaptos/account/Account;
 	public static synthetic fun account-5xhebvg$default (Lxyz/mcxross/kaptos/Aptos;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddressInput;ILjava/lang/Object;)Lxyz/mcxross/kaptos/account/Account;
+	public final fun clearAbiCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun close ()V
 	public final fun ed25519Account (Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddressInput;)Lxyz/mcxross/kaptos/account/Ed25519Account;
 	public final fun ed25519Account (Lxyz/mcxross/kaptos/core/crypto/Ed25519PrivateKey;Lxyz/mcxross/kaptos/model/AccountAddressInput;)Lxyz/mcxross/kaptos/account/Ed25519Account;
@@ -31,7 +32,7 @@ public final class xyz/mcxross/kaptos/Aptos : java/lang/AutoCloseable {
 	public final fun getStaking ()Lxyz/mcxross/kaptos/staking/StakingService;
 	public final fun getTables ()Lxyz/mcxross/kaptos/table/TableService;
 	public final fun getTransactions ()Lxyz/mcxross/kaptos/transaction/TransactionService;
-	public final fun getTransportClient ()Lio/ktor/client/HttpClient;
+	public final fun getTransport ()Lxyz/mcxross/kaptos/transport/AptosTransport;
 	public final fun getViews ()Lxyz/mcxross/kaptos/view/ViewService;
 	public final fun own (Ljava/lang/AutoCloseable;)Ljava/lang/AutoCloseable;
 	public final fun singleKeyAccount (Lxyz/mcxross/kaptos/core/crypto/PrivateKey;Lxyz/mcxross/kaptos/model/AccountAddressInput;)Lxyz/mcxross/kaptos/account/SingleKeyAccount;
@@ -42,12 +43,13 @@ public final class xyz/mcxross/kaptos/Aptos : java/lang/AutoCloseable {
 
 public final class xyz/mcxross/kaptos/AptosConfig {
 	public fun <init> ()V
-	public fun <init> (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lio/ktor/client/HttpClient;)V
-	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lio/ktor/client/HttpClient;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lxyz/mcxross/kaptos/transport/AptosTransport;Lxyz/mcxross/kaptos/move/AbiCachePolicy;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lxyz/mcxross/kaptos/transport/AptosTransport;Lxyz/mcxross/kaptos/move/AbiCachePolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lxyz/mcxross/kaptos/model/Network;
 	public final fun component10 ()Lxyz/mcxross/kaptos/model/AccountAddress;
 	public final fun component11 ()Lxyz/mcxross/kaptos/TransactionDefaults;
-	public final fun component12 ()Lio/ktor/client/HttpClient;
+	public final fun component12 ()Lxyz/mcxross/kaptos/transport/AptosTransport;
+	public final fun component13 ()Lxyz/mcxross/kaptos/move/AbiCachePolicy;
 	public final fun component2 ()Lxyz/mcxross/kaptos/AptosEndpoints;
 	public final fun component3 ()Ljava/util/Map;
 	public final fun component4 ()Lxyz/mcxross/kaptos/AptosEndpointConfig;
@@ -56,21 +58,22 @@ public final class xyz/mcxross/kaptos/AptosConfig {
 	public final fun component7 ()J
 	public final fun component8 ()J
 	public final fun component9 ()Z
-	public final fun copy (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lio/ktor/client/HttpClient;)Lxyz/mcxross/kaptos/AptosConfig;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/AptosConfig;Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lio/ktor/client/HttpClient;ILjava/lang/Object;)Lxyz/mcxross/kaptos/AptosConfig;
+	public final fun copy (Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lxyz/mcxross/kaptos/transport/AptosTransport;Lxyz/mcxross/kaptos/move/AbiCachePolicy;)Lxyz/mcxross/kaptos/AptosConfig;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/AptosConfig;Lxyz/mcxross/kaptos/model/Network;Lxyz/mcxross/kaptos/AptosEndpoints;Ljava/util/Map;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;Lxyz/mcxross/kaptos/AptosEndpointConfig;JJZLxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/TransactionDefaults;Lxyz/mcxross/kaptos/transport/AptosTransport;Lxyz/mcxross/kaptos/move/AbiCachePolicy;ILjava/lang/Object;)Lxyz/mcxross/kaptos/AptosConfig;
 	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAbiCachePolicy ()Lxyz/mcxross/kaptos/move/AbiCachePolicy;
 	public final fun getArchivalFallback ()Z
 	public final fun getCommonHeaders ()Ljava/util/Map;
 	public final fun getEndpoints ()Lxyz/mcxross/kaptos/AptosEndpoints;
 	public final fun getFaucet ()Lxyz/mcxross/kaptos/AptosEndpointConfig;
 	public final fun getFullNode ()Lxyz/mcxross/kaptos/AptosEndpointConfig;
-	public final fun getHttpClient ()Lio/ktor/client/HttpClient;
 	public final fun getIndexer ()Lxyz/mcxross/kaptos/AptosEndpointConfig;
 	public final fun getIndexerWaitTimeoutMillis ()J
 	public final fun getNamesContractAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
 	public final fun getNetwork ()Lxyz/mcxross/kaptos/model/Network;
 	public final fun getRequestTimeoutMillis ()J
 	public final fun getTransactionDefaults ()Lxyz/mcxross/kaptos/TransactionDefaults;
+	public final fun getTransport ()Lxyz/mcxross/kaptos/transport/AptosTransport;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -3056,8 +3059,8 @@ public final class xyz/mcxross/kaptos/model/MoveString$Companion {
 
 public final class xyz/mcxross/kaptos/model/MoveStruct {
 	public static final field Companion Lxyz/mcxross/kaptos/model/MoveStruct$Companion;
-	public fun <init> (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;)V
-	public synthetic fun <init> (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Z
 	public final fun component3 ()Z
@@ -3065,13 +3068,15 @@ public final class xyz/mcxross/kaptos/model/MoveStruct {
 	public final fun component5 ()Ljava/util/List;
 	public final fun component6 ()Ljava/util/List;
 	public final fun component7 ()Ljava/util/List;
-	public final fun copy (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;)Lxyz/mcxross/kaptos/model/MoveStruct;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/model/MoveStruct;Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/MoveStruct;
+	public final fun component8 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;)Lxyz/mcxross/kaptos/model/MoveStruct;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/model/MoveStruct;Ljava/lang/String;ZZZLjava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/MoveStruct;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAbilities ()Ljava/util/List;
 	public final fun getFields ()Ljava/util/List;
 	public final fun getGenericTypeParams ()Ljava/util/List;
 	public final fun getName ()Ljava/lang/String;
+	public final fun getVariants ()Ljava/util/List;
 	public fun hashCode ()I
 	public final fun isEnum ()Z
 	public final fun isEvent ()Z
@@ -3120,6 +3125,35 @@ public final synthetic class xyz/mcxross/kaptos/model/MoveStructField$$serialize
 }
 
 public final class xyz/mcxross/kaptos/model/MoveStructField$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class xyz/mcxross/kaptos/model/MoveStructVariant {
+	public static final field Companion Lxyz/mcxross/kaptos/model/MoveStructVariant$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/util/List;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;)Lxyz/mcxross/kaptos/model/MoveStructVariant;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/model/MoveStructVariant;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/MoveStructVariant;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFields ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class xyz/mcxross/kaptos/model/MoveStructVariant$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/model/MoveStructVariant$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lxyz/mcxross/kaptos/model/MoveStructVariant;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lxyz/mcxross/kaptos/model/MoveStructVariant;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class xyz/mcxross/kaptos/model/MoveStructVariant$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -4953,6 +4987,21 @@ public final class xyz/mcxross/kaptos/model/WriteSetChangeDeleteModule$Companion
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class xyz/mcxross/kaptos/move/AbiCachePolicy {
+	public fun <init> ()V
+	public fun <init> (JI)V
+	public synthetic fun <init> (JIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()J
+	public final fun component2 ()I
+	public final fun copy (JI)Lxyz/mcxross/kaptos/move/AbiCachePolicy;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/AbiCachePolicy;JIILjava/lang/Object;)Lxyz/mcxross/kaptos/move/AbiCachePolicy;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaxEntries ()I
+	public final fun getTtlMillis ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
 public abstract interface class xyz/mcxross/kaptos/move/MoveArgument {
 	public fun toBcs ()[B
 }
@@ -5212,11 +5261,14 @@ public final class xyz/mcxross/kaptos/move/MoveArgument$Vector : xyz/mcxross/kap
 
 public final class xyz/mcxross/kaptos/move/MoveArgumentCodec {
 	public static final field MAX_NESTING_DEPTH I
-	public fun <init> (Lxyz/mcxross/kaptos/move/MoveModuleLoader;)V
+	public fun <init> (Lxyz/mcxross/kaptos/move/MoveModuleLoader;Lxyz/mcxross/kaptos/move/AbiCachePolicy;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/move/MoveModuleLoader;Lxyz/mcxross/kaptos/move/AbiCachePolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clearCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun encode (Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/move/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun encode$default (Lxyz/mcxross/kaptos/move/MoveArgumentCodec;Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/move/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun entryFunctionPayload (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun entryFunctionPayload$default (Lxyz/mcxross/kaptos/move/MoveArgumentCodec;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun invalidateModule (Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun preload ([Lxyz/mcxross/kaptos/model/MoveModuleBytecode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
@@ -6216,6 +6268,14 @@ public final class xyz/mcxross/kaptos/transaction/typetag/TypeTagState {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class xyz/mcxross/kaptos/transport/AptosTransport {
+}
+
+public final class xyz/mcxross/kaptos/transport/ktor/KtorTransportKt {
+	public static final fun asAptosTransport (Lio/ktor/client/HttpClient;)Lxyz/mcxross/kaptos/transport/AptosTransport;
+	public static final fun ktorClient (Lxyz/mcxross/kaptos/transport/AptosTransport;)Lio/ktor/client/HttpClient;
+}
+
 public final class xyz/mcxross/kaptos/util/ApiEndpointKt {
 	public static final fun getNetworkToChainId ()Ljava/util/Map;
 	public static final fun getNetworkToFaucetAPI ()Ljava/util/Map;
@@ -6256,8 +6316,6 @@ public final class xyz/mcxross/kaptos/view/MoveViewResult {
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lxyz/mcxross/kaptos/view/MoveViewResult;
 	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/view/MoveViewResult;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/view/MoveViewResult;
-	public final fun decodeValue (ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;)Lxyz/mcxross/kaptos/model/AptosResult;
-	public static synthetic fun decodeValue$default (Lxyz/mcxross/kaptos/view/MoveViewResult;ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/AptosResult;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getValues ()Ljava/util/List;
 	public fun hashCode ()I
@@ -6274,5 +6332,10 @@ public abstract interface class xyz/mcxross/kaptos/view/ViewService {
 public final class xyz/mcxross/kaptos/view/ViewService$DefaultImpls {
 	public static synthetic fun call-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun callRaw-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/view/serialization/ViewDecodingKt {
+	public static final fun decodeValue (Lxyz/mcxross/kaptos/view/MoveViewResult;ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;)Lxyz/mcxross/kaptos/model/AptosResult;
+	public static synthetic fun decodeValue$default (Lxyz/mcxross/kaptos/view/MoveViewResult;ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/AptosResult;
 }
 

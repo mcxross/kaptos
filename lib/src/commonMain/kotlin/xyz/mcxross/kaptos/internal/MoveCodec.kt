@@ -4,7 +4,11 @@ import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.move.MoveArgumentCodec
 import xyz.mcxross.kaptos.move.MoveModuleLoader
 
-internal fun moveCodec(config: TransportConfig, ledgerVersion: ULong? = null): MoveArgumentCodec =
+internal fun moveCodec(
+  config: TransportConfig,
+  ledgerVersion: ULong? = null,
+  cachePolicy: xyz.mcxross.kaptos.move.AbiCachePolicy = xyz.mcxross.kaptos.move.AbiCachePolicy(),
+): MoveArgumentCodec =
   MoveArgumentCodec(
     MoveModuleLoader { address, name ->
       getModule(
@@ -14,5 +18,6 @@ internal fun moveCodec(config: TransportConfig, ledgerVersion: ULong? = null): M
           ledgerVersion?.let { mapOf("ledger_version" to it.toString()) },
         )
         .toAptosResult()
-    }
+    },
+    cachePolicy,
   )

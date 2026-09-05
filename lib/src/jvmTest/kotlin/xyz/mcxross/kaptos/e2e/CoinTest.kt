@@ -21,12 +21,12 @@ import kotlin.test.assertIs
 import kotlin.test.expect
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Account as AccountApi
-import xyz.mcxross.kaptos.api.Coin as CoinApi
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.Transaction as TransactionApi
 import xyz.mcxross.kaptos.extension.longOrNull
 import xyz.mcxross.kaptos.generated.GetAccountCoinsDataQuery
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.AccountOperations as AccountApi
+import xyz.mcxross.kaptos.internal.operations.TransactionOperations as TransactionApi
+import xyz.mcxross.kaptos.internal.transferCoinTransaction
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
 import xyz.mcxross.kaptos.util.APTOS_COIN
@@ -59,13 +59,16 @@ class CoinTest {
     val alice = Account.generate()
     val bob = Account.generate()
 
-    FaucetApi(transportConfig)
-      .fundAccount(alice.accountAddress, 100_000_00)
+    fundAccount(transportConfig, alice.accountAddress, 100_000_00)
       .expect("Failed to fund Alice's account")
 
     val txn =
-      CoinApi(transportConfig)
-        .transferCoinTransaction(from = alice.accountAddress, to = bob.accountAddress, amount = 10U)
+      transferCoinTransaction(
+        transportConfig,
+        from = alice.accountAddress,
+        to = bob.accountAddress,
+        amount = 10U,
+      )
 
     val rawTransaction: RawTransaction = txn.rawTransaction
 
@@ -84,18 +87,17 @@ class CoinTest {
     val alice = Account.generate()
     val bob = Account.generate()
 
-    FaucetApi(transportConfig)
-      .fundAccount(alice.accountAddress, 100_000_00)
+    fundAccount(transportConfig, alice.accountAddress, 100_000_00)
       .expect("Failed to fund Alice's account")
 
     val txn =
-      CoinApi(transportConfig)
-        .transferCoinTransaction(
-          from = alice.accountAddress,
-          to = bob.accountAddress,
-          amount = 10U,
-          coinType = "0x1::my_coin::type",
-        )
+      transferCoinTransaction(
+        transportConfig,
+        from = alice.accountAddress,
+        to = bob.accountAddress,
+        amount = 10U,
+        coinType = "0x1::my_coin::type",
+      )
 
     val rawTransaction: RawTransaction = txn.rawTransaction
 
@@ -115,8 +117,7 @@ class CoinTest {
     val bob = Account.generate()
 
     val fundingResponse =
-      FaucetApi(transportConfig)
-        .fundAccount(alice.accountAddress, FUND_AMOUNT)
+      fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)
         .expect("Failed to fund Alice's account")
     val fundingVersion = ledgerVersionOf(fundingResponse)
 
@@ -126,8 +127,12 @@ class CoinTest {
         .expect("Failed to get Alice's balance")
 
     val txn =
-      CoinApi(transportConfig)
-        .transferCoinTransaction(from = alice.accountAddress, to = bob.accountAddress, amount = 10U)
+      transferCoinTransaction(
+        transportConfig,
+        from = alice.accountAddress,
+        to = bob.accountAddress,
+        amount = 10U,
+      )
 
     val committedTransaction = TransactionApi(transportConfig).signAndSubmitTransaction(alice, txn)
 

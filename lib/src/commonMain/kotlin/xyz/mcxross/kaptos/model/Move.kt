@@ -50,6 +50,8 @@ data class MoveFunction(
 
 @Serializable data class MoveStructField(val name: String, val type: String)
 
+@Serializable data class MoveStructVariant(val name: String, val fields: List<MoveStructField>)
+
 @Serializable
 data class MoveStruct(
   val name: String,
@@ -59,6 +61,7 @@ data class MoveStruct(
   val abilities: List<MoveAbility>,
   @SerialName("generic_type_params") val genericTypeParams: List<MoveFunctionGenericTypeParam>,
   val fields: List<MoveStructField>,
+  val variants: List<MoveStructVariant> = emptyList(),
 )
 
 @Serializable

@@ -10,8 +10,10 @@
 
 - `Aptos` is the single public entry point, exposing namespaced services (`Aptos.kt`).
 - Public configuration is `AptosConfig`; internal transport configuration is `TransportConfig`.
-- `protocol/`: internal transport-facing contracts (interfaces).
-- `api/`: protocol implementations, mostly thin wrappers.
+- `internal/operations/`: concrete query and transaction operations, including indexer synchronization.
+  Internal signatures/defaults are declared once; there is no parallel protocol interface layer.
+- `move/`: shared argument encoding, complete enum ABI variants, and bounded ABI caching.
+- `transport/ktor/` and `view/serialization/`: explicit external-library integration adapters.
 - `internal/`: core business logic, REST/GraphQL execution, pagination, tx flows.
 - `internal/ServiceExecution.kt`: shared public-result conversion, execution, and response decoding.
   Service code converts transport results directly with `toAptosResult`; do not chain through
@@ -38,7 +40,7 @@
 
 ## Transactions and crypto flow
 
-- High-level flow: `api` -> `internal` -> `transaction/builder` -> signer/account -> BCS submit.
+- High-level flow: namespaced service -> `internal` -> `transaction/builder` -> signer/account -> BCS submit.
 - Transaction building/signing lives in `transaction/` and `internal/TransactionSubmission.kt`.
 - Account abstractions live in `account/`; key signing primitives are in `core/crypto` (`expect/actual`).
 

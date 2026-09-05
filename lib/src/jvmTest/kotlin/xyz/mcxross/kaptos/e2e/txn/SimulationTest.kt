@@ -19,8 +19,8 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.Transaction as TransactionApi
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.TransactionOperations as TransactionApi
 import xyz.mcxross.kaptos.model.*
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
 import xyz.mcxross.kaptos.util.runBlocking
@@ -34,8 +34,7 @@ class SimulationTest {
   @Test
   fun entryFunctionTest() {
     runBlocking {
-      FaucetApi(transportConfig)
-        .fundAccount(sender.accountAddress, FUND_AMOUNT)
+      fundAccount(transportConfig, sender.accountAddress, FUND_AMOUNT)
         .expect("Failed to fund sender")
 
       val rawTxn =

@@ -21,7 +21,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
-import xyz.mcxross.kaptos.api.Staking as StakingApi
+import xyz.mcxross.kaptos.internal.operations.StakingOperations as StakingApi
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.ActiveDelegatorCountSortOrder
 import xyz.mcxross.kaptos.model.AptosSettings

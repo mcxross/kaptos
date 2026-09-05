@@ -21,12 +21,12 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.Account as AccountApi
-import xyz.mcxross.kaptos.api.Faucet as FaucetApi
-import xyz.mcxross.kaptos.api.Transaction as TransactionApi
 import xyz.mcxross.kaptos.extension.longOrNull
+import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.operations.AccountOperations as AccountApi
+import xyz.mcxross.kaptos.internal.operations.TransactionOperations as TransactionApi
+import xyz.mcxross.kaptos.internal.operations.getAccountResource
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.protocol.getAccountResource
 import xyz.mcxross.kaptos.util.APTOS_COIN
 import xyz.mcxross.kaptos.util.FUND_AMOUNT
 import xyz.mcxross.kaptos.util.localTransportConfig
@@ -118,8 +118,7 @@ class AccountTest {
   fun `it fetches account transactions`() = runBlocking {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
-    FaucetApi(transportConfig)
-      .fundAccount(alice.accountAddress, FUND_AMOUNT)
+    fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)
       .expect("Failed to fund Alice's account")
     val bob = Account.generate()
     val rawTxn =
@@ -162,9 +161,7 @@ class AccountTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
     val minimumLedgerVersion =
-      when (
-        val fundResponse = FaucetApi(transportConfig).fundAccount(alice.accountAddress, FUND_AMOUNT)
-      ) {
+      when (val fundResponse = fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)) {
         is Result.Ok -> ledgerVersionOf(fundResponse.value)
         is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
       }
@@ -189,9 +186,7 @@ class AccountTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
     val minimumLedgerVersion =
-      when (
-        val fundResponse = FaucetApi(transportConfig).fundAccount(alice.accountAddress, FUND_AMOUNT)
-      ) {
+      when (val fundResponse = fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)) {
         is Result.Ok -> ledgerVersionOf(fundResponse.value)
         is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
       }
@@ -227,9 +222,7 @@ class AccountTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
     val minimumLedgerVersion =
-      when (
-        val fundResponse = FaucetApi(transportConfig).fundAccount(alice.accountAddress, FUND_AMOUNT)
-      ) {
+      when (val fundResponse = fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)) {
         is Result.Ok -> ledgerVersionOf(fundResponse.value)
         is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
       }
@@ -254,9 +247,7 @@ class AccountTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
     val minimumLedgerVersion =
-      when (
-        val fundResponse = FaucetApi(transportConfig).fundAccount(alice.accountAddress, FUND_AMOUNT)
-      ) {
+      when (val fundResponse = fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)) {
         is Result.Ok -> ledgerVersionOf(fundResponse.value)
         is Result.Err -> fail("Funding failed: ${fundResponse.error.message}")
       }
@@ -326,9 +317,7 @@ class AccountTest {
     val transportConfig = localTransportConfig()
     val alice = Account.generate()
 
-    when (
-      val fundResponse = FaucetApi(transportConfig).fundAccount(alice.accountAddress, FUND_AMOUNT)
-    ) {
+    when (val fundResponse = fundAccount(transportConfig, alice.accountAddress, FUND_AMOUNT)) {
       is Result.Ok -> {
         assertTrue(
           ledgerVersionOf(fundResponse.value) != null,

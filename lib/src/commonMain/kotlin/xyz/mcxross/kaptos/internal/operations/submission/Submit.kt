@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package xyz.mcxross.kaptos.api.txsubmission
+package xyz.mcxross.kaptos.internal.operations.submission
 
 import xyz.mcxross.kaptos.internal.submitTransaction
 import xyz.mcxross.kaptos.model.*

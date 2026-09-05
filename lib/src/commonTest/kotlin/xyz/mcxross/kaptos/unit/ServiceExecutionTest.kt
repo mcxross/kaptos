@@ -30,6 +30,7 @@ import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
 
 class ServiceExecutionTest :
   StringSpec({
@@ -67,7 +68,7 @@ class ServiceExecutionTest :
           HttpClient(MockEngine { throw CancellationException("request cancelled") }) {
             install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
           }
-        val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+        val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
         try {
           shouldThrow<CancellationException> { operation(aptos) }
         } finally {
@@ -90,7 +91,7 @@ class ServiceExecutionTest :
         ) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         val failure =
           aptos.views.callRaw("0x1::coin::balance").shouldBeInstanceOf<AptosResult.Failure>()
@@ -116,7 +117,7 @@ class ServiceExecutionTest :
         ) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
         }
-      val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
+      val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
       try {
         aptos.indexer
           .query("query { ledger_infos { chain_id } }")

@@ -6,11 +6,8 @@
  */
 package xyz.mcxross.kaptos.view
 
-import kotlinx.coroutines.CancellationException
-import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import xyz.mcxross.kaptos.client.postAptosFullNodeAndGetData
 import xyz.mcxross.kaptos.internal.executeAptos
@@ -27,28 +24,7 @@ import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.move.MoveArgumentCodec
 
 /** Raw, lossless result from a Move view function. */
-data class MoveViewResult(val values: List<JsonElement>) {
-  /** Decode one return value with an explicit serializer; no implicit Move-to-Kotlin coercion. */
-  fun <T> decodeValue(
-    index: Int,
-    deserializer: DeserializationStrategy<T>,
-    json: Json = Json,
-  ): AptosResult<T> {
-    if (index !in values.indices)
-      return AptosResult.Failure(
-        AptosError.Validation("View return index $index is outside ${values.size} returned values")
-      )
-    return try {
-      AptosResult.Success(json.decodeFromJsonElement(deserializer, values[index]))
-    } catch (error: CancellationException) {
-      throw error
-    } catch (error: Exception) {
-      AptosResult.Failure(
-        AptosError.Serialization("Unable to decode view return value $index", error)
-      )
-    }
-  }
-}
+data class MoveViewResult(val values: List<JsonElement>) {}
 
 /** Typed view calls and explicit raw JSON access. */
 interface ViewService {

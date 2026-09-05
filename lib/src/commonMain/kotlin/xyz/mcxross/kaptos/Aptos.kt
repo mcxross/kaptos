@@ -6,7 +6,6 @@
  */
 package xyz.mcxross.kaptos
 
-import io.ktor.client.HttpClient
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.account.AccountAbstractionService
 import xyz.mcxross.kaptos.account.AccountService
@@ -51,6 +50,7 @@ import xyz.mcxross.kaptos.table.DefaultTableService
 import xyz.mcxross.kaptos.table.TableService
 import xyz.mcxross.kaptos.transaction.DefaultTransactionService
 import xyz.mcxross.kaptos.transaction.TransactionService
+import xyz.mcxross.kaptos.transport.AptosTransport
 import xyz.mcxross.kaptos.view.DefaultViewService
 import xyz.mcxross.kaptos.view.ViewService
 
@@ -78,7 +78,7 @@ data class TransactionDefaults(
 /**
  * Immutable configuration for the namespaced [Aptos] API.
  *
- * An injected [httpClient] remains caller-owned. When it is omitted, [Aptos] creates and closes one
+ * An injected [transport] remains caller-owned. When it is omitted, [Aptos] creates and closes one
  * shared transport for all of its services.
  */
 data class AptosConfig(
@@ -93,7 +93,9 @@ data class AptosConfig(
   val archivalFallback: Boolean = true,
   val namesContractAddress: AccountAddress? = null,
   val transactionDefaults: TransactionDefaults = TransactionDefaults(),
-  val httpClient: HttpClient? = null,
+  val transport: AptosTransport? = null,
+  val abiCachePolicy: xyz.mcxross.kaptos.move.AbiCachePolicy =
+    xyz.mcxross.kaptos.move.AbiCachePolicy(),
 ) {
   init {
     require(requestTimeoutMillis > 0) { "requestTimeoutMillis must be positive" }
@@ -110,7 +112,7 @@ data class AptosConfig(
         fullNode = endpoints.fullNode,
         indexer = endpoints.indexer,
         faucet = endpoints.faucet,
-        client = httpClient,
+        client = transport?.client,
         commonHeaders = commonHeaders,
         fullNodeConfig = FullNodeConfig(fullNode.headers, fullNode.requestHeaders),
         indexerConfig = IndexerConfig(indexer.headers, indexer.requestHeaders),
@@ -130,16 +132,16 @@ data class AptosConfig(
  */
 class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
   internal val config: TransportConfig = settings.toTransportConfig()
-  private val argumentCodec = xyz.mcxross.kaptos.internal.moveCodec(config)
+  private val argumentCodec =
+    xyz.mcxross.kaptos.internal.moveCodec(config, cachePolicy = settings.abiCachePolicy)
   private val ownedResources = mutableListOf<AutoCloseable>()
   private var isClosed = false
 
   /**
-   * Shared Ktor transport used by this client and optional Kaptos modules. Its lifecycle remains
+   * Shared transport handle used by this client and optional Kaptos modules. Its lifecycle remains
    * owned by [Aptos], unless it was supplied in [AptosConfig].
    */
-  val transportClient: HttpClient
-    get() = config.httpClient
+  val transport: AptosTransport = AptosTransport(config.httpClient)
 
   /** Transaction building, signing, simulation, submission, and confirmation operations. */
   val transactions: TransactionService =
@@ -191,6 +193,11 @@ class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
 
   /** Aptos Names Service reads and transaction builders. */
   val names: NameService = DefaultNameService(config, transactions, settings.namesContractAddress)
+
+  /**
+   * Clear fetched and preloaded ABIs after a deployment or before a workflow requiring fresh ABIs.
+   */
+  suspend fun clearAbiCache() = argumentCodec.clearCache()
 
   /**
    * Transfers [resource] ownership to this client. Owned resources are closed in reverse order

@@ -17,9 +17,9 @@
 package xyz.mcxross.kaptos.e2e
 
 import kotlin.test.*
-import xyz.mcxross.kaptos.api.General as GeneralApi
+import xyz.mcxross.kaptos.internal.operations.GeneralOperations as GeneralApi
+import xyz.mcxross.kaptos.internal.operations.view
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.protocol.view
 import xyz.mcxross.kaptos.util.runBlocking
 
 class GeneralTest {

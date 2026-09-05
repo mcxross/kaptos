@@ -154,53 +154,7 @@ interface TransactionService {
     secondarySigners: List<TransactionSigner> = emptyList(),
     feePayer: TransactionSigner? = null,
   ): AptosResult<PendingTransactionResponse> {
-    val builtTransaction: AptosResult<UnsignedTransaction> =
-      when {
-        feePayer != null ->
-          buildFeePayer(
-            sender = signer.accountAddress,
-            secondarySigners = secondarySigners.map(TransactionSigner::accountAddress),
-            payload = payload,
-            feePayer = feePayer.accountAddress,
-            options = options,
-          )
-        secondarySigners.isNotEmpty() ->
-          buildMultiAgent(
-            sender = signer.accountAddress,
-            secondarySigners = secondarySigners.map(TransactionSigner::accountAddress),
-            payload = payload,
-            options = options,
-          )
-        else -> build(signer.accountAddress, payload, options)
-      }
-    val transaction =
-      when (builtTransaction) {
-        is AptosResult.Failure -> return builtTransaction
-        is AptosResult.Success -> builtTransaction.value
-      }
-
-    val secondaryAuthenticators = mutableListOf<AccountAuthenticator>()
-    for (secondarySigner in secondarySigners) {
-      when (val authenticator = sign(secondarySigner, transaction)) {
-        is AptosResult.Failure -> return authenticator
-        is AptosResult.Success -> secondaryAuthenticators += authenticator.value
-      }
-    }
-    val feePayerAuthenticator =
-      if (feePayer == null) {
-        null
-      } else {
-        when (val authenticator = sign(feePayer, transaction)) {
-          is AptosResult.Failure -> return authenticator
-          is AptosResult.Success -> authenticator.value
-        }
-      }
-    return signAndSubmit(
-      signer = signer,
-      transaction = transaction,
-      secondaryAuthenticators = secondaryAuthenticators,
-      feePayerAuthenticator = feePayerAuthenticator,
-    )
+    return submitPayload(signer, payload, options, secondarySigners, feePayer)
   }
 
   /** Signs, submits, and waits for an already-built transaction. */
@@ -303,6 +257,15 @@ internal class DefaultTransactionService(
     }
     val addresses = parseAddresses(secondarySigners)
     if (addresses is AptosResult.Failure) return addresses
+    val senderAddress =
+      try {
+        AccountAddress.from(sender)
+      } catch (error: IllegalArgumentException) {
+        return AptosResult.Failure(AptosError.Validation("Invalid sender", error))
+      }
+    validateSecondarySigners(senderAddress, (addresses as AptosResult.Success).value)?.let {
+      return it
+    }
     return buildRaw(sender, payload, options).map { raw ->
       UnsignedTransaction.MultiAgent(raw, (addresses as AptosResult.Success).value)
     }
@@ -324,6 +287,15 @@ internal class DefaultTransactionService(
         error.rethrowCancellation()
         return AptosResult.Failure(AptosError.Validation("Invalid fee-payer address", error))
       }
+    val senderAddress =
+      try {
+        AccountAddress.from(sender)
+      } catch (error: IllegalArgumentException) {
+        return AptosResult.Failure(AptosError.Validation("Invalid sender", error))
+      }
+    validateSecondarySigners(senderAddress, (addresses as AptosResult.Success).value)?.let {
+      return it
+    }
     return buildRaw(sender, payload, options).map { raw ->
       UnsignedTransaction.FeePayer(
         rawTransaction = raw,
@@ -350,21 +322,8 @@ internal class DefaultTransactionService(
         AptosError.UnsupportedFeature("Encrypted transactions cannot be simulated")
       )
     }
-    val secondarySignerCount =
-      when (transaction) {
-        is UnsignedTransaction.Simple -> 0
-        is UnsignedTransaction.MultiAgent -> transaction.secondarySignerAddresses.size
-        is UnsignedTransaction.FeePayer -> transaction.secondarySignerAddresses.size
-      }
-    if (
-      secondarySignerPublicKeys.isNotEmpty() &&
-        secondarySignerPublicKeys.size != secondarySignerCount
-    ) {
-      return AptosResult.Failure(
-        AptosError.Validation(
-          "Expected $secondarySignerCount secondary-signer public keys, got ${secondarySignerPublicKeys.size}"
-        )
-      )
+    validateSimulationSigners(transaction, secondarySignerPublicKeys, feePayerPublicKey)?.let {
+      return it
     }
     return executeAptos {
       simulateTransaction(
@@ -429,8 +388,15 @@ internal class DefaultTransactionService(
     transaction: UnsignedTransaction,
     secondaryAuthenticators: List<AccountAuthenticator>,
     feePayerAuthenticator: AccountAuthenticator?,
-  ): AptosResult<PendingTransactionResponse> =
-    when (val authenticator = sign(signer, transaction)) {
+  ): AptosResult<PendingTransactionResponse> {
+    if (signer.accountAddress != transaction.rawTransaction.sender)
+      return AptosResult.Failure(
+        AptosError.Validation("Signing account does not match transaction sender")
+      )
+    validateAuthenticators(transaction, secondaryAuthenticators, feePayerAuthenticator)?.let {
+      return it
+    }
+    return when (val authenticator = sign(signer, transaction)) {
       is AptosResult.Failure -> authenticator
       is AptosResult.Success ->
         submit(
@@ -440,6 +406,7 @@ internal class DefaultTransactionService(
           feePayerAuthenticator,
         )
     }
+  }
 
   override suspend fun waitForTransaction(
     hash: String,
@@ -481,32 +448,6 @@ internal class DefaultTransactionService(
       error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid secondary signer address", error))
     }
-
-  private fun validateAuthenticators(
-    transaction: UnsignedTransaction,
-    secondaryAuthenticators: List<AccountAuthenticator>,
-    feePayerAuthenticator: AccountAuthenticator?,
-  ): AptosResult.Failure? {
-    val signerCount =
-      when (transaction) {
-        is UnsignedTransaction.Simple -> 0
-        is UnsignedTransaction.MultiAgent -> transaction.secondarySignerAddresses.size
-        is UnsignedTransaction.FeePayer -> transaction.secondarySignerAddresses.size
-      }
-    if (secondaryAuthenticators.size != signerCount) {
-      return AptosResult.Failure(
-        AptosError.Validation(
-          "Expected $signerCount secondary authenticators, got ${secondaryAuthenticators.size}"
-        )
-      )
-    }
-    if (transaction is UnsignedTransaction.FeePayer && feePayerAuthenticator == null) {
-      return AptosResult.Failure(
-        AptosError.Validation("A fee-payer transaction requires a fee-payer authenticator")
-      )
-    }
-    return null
-  }
 }
 
 internal fun computeUserTransactionHash(
@@ -515,23 +456,8 @@ internal fun computeUserTransactionHash(
   secondaryAuthenticators: List<AccountAuthenticator>,
   feePayerAuthenticator: AccountAuthenticator?,
 ): AptosResult<String> {
-  val signerCount =
-    when (transaction) {
-      is UnsignedTransaction.Simple -> 0
-      is UnsignedTransaction.MultiAgent -> transaction.secondarySignerAddresses.size
-      is UnsignedTransaction.FeePayer -> transaction.secondarySignerAddresses.size
-    }
-  if (secondaryAuthenticators.size != signerCount) {
-    return AptosResult.Failure(
-      AptosError.Validation(
-        "Expected $signerCount secondary authenticators, got ${secondaryAuthenticators.size}"
-      )
-    )
-  }
-  if (transaction is UnsignedTransaction.FeePayer && feePayerAuthenticator == null) {
-    return AptosResult.Failure(
-      AptosError.Validation("A fee-payer transaction requires a fee-payer authenticator")
-    )
+  validateAuthenticators(transaction, secondaryAuthenticators, feePayerAuthenticator)?.let {
+    return it
   }
   return try {
     val signedTransaction =
@@ -560,6 +486,9 @@ internal fun createExternalFeePayerRequest(
   senderAuthenticator: AccountAuthenticator,
   secondaryAuthenticators: List<AccountAuthenticator>,
 ): AptosResult<ExternalFeePayerRequest> {
+  validateParticipants(transaction)?.let {
+    return it
+  }
   if (transaction.feePayerAddress != UnsignedTransaction.EXTERNAL_FEE_PAYER_PLACEHOLDER) {
     return AptosResult.Failure(
       AptosError.Validation(

@@ -19,8 +19,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
-import xyz.mcxross.kaptos.api.Ans as AnsApi
 import xyz.mcxross.kaptos.extension.isValidAptosAddress
+import xyz.mcxross.kaptos.internal.operations.AnsOperations as AnsApi
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.Network

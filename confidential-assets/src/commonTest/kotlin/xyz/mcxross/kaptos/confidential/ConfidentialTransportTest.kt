@@ -19,19 +19,20 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.TextContent
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.AptosConfig
 import xyz.mcxross.kaptos.AptosEndpoints
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.PageRequest
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
 
 class ConfidentialTransportTest {
   @Test
@@ -39,12 +40,16 @@ class ConfidentialTransportTest {
     val key = ConfidentialDecryptionKey.generate()
     val available =
       assertIs<AptosResult.Success<EncryptedChunks>>(
-        encryptChunks(key.encryptionKey, listOf(42u) + List(7) { 0u })
-      ).value.ciphertexts
+          encryptChunks(key.encryptionKey, listOf(42u) + List(7) { 0u })
+        )
+        .value
+        .ciphertexts
     val pending =
       assertIs<AptosResult.Success<EncryptedChunks>>(
-        encryptChunks(key.encryptionKey, listOf(7u) + List(7) { 0u })
-      ).value.ciphertexts
+          encryptChunks(key.encryptionKey, listOf(7u) + List(7) { 0u })
+        )
+        .value
+        .ciphertexts
     var balanceCalls = 0
     val client = client { request ->
       val body = (request.body as TextContent).text
@@ -73,8 +78,9 @@ class ConfidentialTransportTest {
 
     val balance =
       assertIs<AptosResult.Success<ConfidentialBalance>>(
-        service.getBalance(owner, token, key, useCache = true)
-      ).value
+          service.getBalance(owner, token, key, useCache = true)
+        )
+        .value
     assertEquals("42", balance.availableAmount.decimal)
     assertEquals("7", balance.pendingAmount.decimal)
     assertIs<AptosResult.Success<ConfidentialBalance>>(
@@ -89,8 +95,9 @@ class ConfidentialTransportTest {
     assertTrue(status.incomingTransfersPaused)
     assertNull(
       assertIs<AptosResult.Success<ConfidentialEncryptionKey?>>(
-        service.getAssetAuditorEncryptionKey(token)
-      ).value
+          service.getAssetAuditorEncryptionKey(token)
+        )
+        .value
     )
     client.close()
   }
@@ -125,16 +132,20 @@ class ConfidentialTransportTest {
             "confidential_asset_activities_aggregate":{"aggregate":{"count":3}}
           }
         }
-        """.trimIndent()
+        """
+          .trimIndent()
       )
     }
 
     val page =
       assertIs<AptosResult.Success<xyz.mcxross.kaptos.model.AptosPage<ConfidentialAssetActivity>>>(
-        client.confidentialAssets().getActivities(
-          ConfidentialActivityQuery(owner = owner, page = PageRequest(offset = 0, limit = 1))
+          client
+            .confidentialAssets()
+            .getActivities(
+              ConfidentialActivityQuery(owner = owner, page = PageRequest(offset = 0, limit = 1))
+            )
         )
-      ).value
+        .value
     assertEquals(3, page.totalCount)
     assertTrue(page.hasNextPage)
     assertEquals(ConfidentialActivityType.Deposited, page.items.single().type)
@@ -144,7 +155,7 @@ class ConfidentialTransportTest {
   }
 
   private fun client(
-    handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData,
+    handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData
   ): Aptos {
     val http =
       HttpClient(MockEngine(handler)) {
@@ -157,7 +168,7 @@ class ConfidentialTransportTest {
             fullNode = "https://fullnode.example/v1",
             indexer = "https://indexer.example/v1/graphql",
           ),
-        httpClient = http,
+        transport = http.asAptosTransport(),
       )
     )
   }

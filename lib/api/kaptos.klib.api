@@ -4222,7 +4222,7 @@ final class xyz.mcxross.kaptos.model/MoveString : xyz.mcxross.kaptos.model/Trans
 }
 
 final class xyz.mcxross.kaptos.model/MoveStruct { // xyz.mcxross.kaptos.model/MoveStruct|null[0]
-    constructor <init>(kotlin/String, kotlin/Boolean, kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility>, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveFunctionGenericTypeParam>, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField>) // xyz.mcxross.kaptos.model/MoveStruct.<init>|<init>(kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveAbility>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>){}[0]
+    constructor <init>(kotlin/String, kotlin/Boolean, kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility>, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveFunctionGenericTypeParam>, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField>, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructVariant> = ...) // xyz.mcxross.kaptos.model/MoveStruct.<init>|<init>(kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveAbility>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructVariant>){}[0]
 
     final val abilities // xyz.mcxross.kaptos.model/MoveStruct.abilities|{}abilities[0]
         final fun <get-abilities>(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility> // xyz.mcxross.kaptos.model/MoveStruct.abilities.<get-abilities>|<get-abilities>(){}[0]
@@ -4238,6 +4238,8 @@ final class xyz.mcxross.kaptos.model/MoveStruct { // xyz.mcxross.kaptos.model/Mo
         final fun <get-isNative>(): kotlin/Boolean // xyz.mcxross.kaptos.model/MoveStruct.isNative.<get-isNative>|<get-isNative>(){}[0]
     final val name // xyz.mcxross.kaptos.model/MoveStruct.name|{}name[0]
         final fun <get-name>(): kotlin/String // xyz.mcxross.kaptos.model/MoveStruct.name.<get-name>|<get-name>(){}[0]
+    final val variants // xyz.mcxross.kaptos.model/MoveStruct.variants|{}variants[0]
+        final fun <get-variants>(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructVariant> // xyz.mcxross.kaptos.model/MoveStruct.variants.<get-variants>|<get-variants>(){}[0]
 
     final fun component1(): kotlin/String // xyz.mcxross.kaptos.model/MoveStruct.component1|component1(){}[0]
     final fun component2(): kotlin/Boolean // xyz.mcxross.kaptos.model/MoveStruct.component2|component2(){}[0]
@@ -4246,7 +4248,8 @@ final class xyz.mcxross.kaptos.model/MoveStruct { // xyz.mcxross.kaptos.model/Mo
     final fun component5(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility> // xyz.mcxross.kaptos.model/MoveStruct.component5|component5(){}[0]
     final fun component6(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveFunctionGenericTypeParam> // xyz.mcxross.kaptos.model/MoveStruct.component6|component6(){}[0]
     final fun component7(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> // xyz.mcxross.kaptos.model/MoveStruct.component7|component7(){}[0]
-    final fun copy(kotlin/String = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility> = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveFunctionGenericTypeParam> = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> = ...): xyz.mcxross.kaptos.model/MoveStruct // xyz.mcxross.kaptos.model/MoveStruct.copy|copy(kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveAbility>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>){}[0]
+    final fun component8(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructVariant> // xyz.mcxross.kaptos.model/MoveStruct.component8|component8(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveAbility> = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveFunctionGenericTypeParam> = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructVariant> = ...): xyz.mcxross.kaptos.model/MoveStruct // xyz.mcxross.kaptos.model/MoveStruct.copy|copy(kotlin.String;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveAbility>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructVariant>){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/MoveStruct.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/MoveStruct.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/MoveStruct.toString|toString(){}[0]
@@ -4293,6 +4296,37 @@ final class xyz.mcxross.kaptos.model/MoveStructField { // xyz.mcxross.kaptos.mod
 
     final object Companion { // xyz.mcxross.kaptos.model/MoveStructField.Companion|null[0]
         final fun serializer(): kotlinx.serialization/KSerializer<xyz.mcxross.kaptos.model/MoveStructField> // xyz.mcxross.kaptos.model/MoveStructField.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class xyz.mcxross.kaptos.model/MoveStructVariant { // xyz.mcxross.kaptos.model/MoveStructVariant|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField>) // xyz.mcxross.kaptos.model/MoveStructVariant.<init>|<init>(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>){}[0]
+
+    final val fields // xyz.mcxross.kaptos.model/MoveStructVariant.fields|{}fields[0]
+        final fun <get-fields>(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> // xyz.mcxross.kaptos.model/MoveStructVariant.fields.<get-fields>|<get-fields>(){}[0]
+    final val name // xyz.mcxross.kaptos.model/MoveStructVariant.name|{}name[0]
+        final fun <get-name>(): kotlin/String // xyz.mcxross.kaptos.model/MoveStructVariant.name.<get-name>|<get-name>(){}[0]
+
+    final fun component1(): kotlin/String // xyz.mcxross.kaptos.model/MoveStructVariant.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> // xyz.mcxross.kaptos.model/MoveStructVariant.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/MoveStructField> = ...): xyz.mcxross.kaptos.model/MoveStructVariant // xyz.mcxross.kaptos.model/MoveStructVariant.copy|copy(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.MoveStructField>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/MoveStructVariant.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/MoveStructVariant.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/MoveStructVariant.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<xyz.mcxross.kaptos.model/MoveStructVariant> { // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer|null[0]
+        final val descriptor // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): xyz.mcxross.kaptos.model/MoveStructVariant // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, xyz.mcxross.kaptos.model/MoveStructVariant) // xyz.mcxross.kaptos.model/MoveStructVariant.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;xyz.mcxross.kaptos.model.MoveStructVariant){}[0]
+    }
+
+    final object Companion { // xyz.mcxross.kaptos.model/MoveStructVariant.Companion|null[0]
+        final val $childSerializers // xyz.mcxross.kaptos.model/MoveStructVariant.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<xyz.mcxross.kaptos.model/MoveStructVariant> // xyz.mcxross.kaptos.model/MoveStructVariant.Companion.serializer|serializer(){}[0]
     }
 }
 
@@ -5158,11 +5192,29 @@ final class xyz.mcxross.kaptos.model/WriteSetChangeDeleteModule : xyz.mcxross.ka
     }
 }
 
-final class xyz.mcxross.kaptos.move/MoveArgumentCodec { // xyz.mcxross.kaptos.move/MoveArgumentCodec|null[0]
-    constructor <init>(xyz.mcxross.kaptos.move/MoveModuleLoader) // xyz.mcxross.kaptos.move/MoveArgumentCodec.<init>|<init>(xyz.mcxross.kaptos.move.MoveModuleLoader){}[0]
+final class xyz.mcxross.kaptos.move/AbiCachePolicy { // xyz.mcxross.kaptos.move/AbiCachePolicy|null[0]
+    constructor <init>(kotlin/Long = ..., kotlin/Int = ...) // xyz.mcxross.kaptos.move/AbiCachePolicy.<init>|<init>(kotlin.Long;kotlin.Int){}[0]
 
+    final val maxEntries // xyz.mcxross.kaptos.move/AbiCachePolicy.maxEntries|{}maxEntries[0]
+        final fun <get-maxEntries>(): kotlin/Int // xyz.mcxross.kaptos.move/AbiCachePolicy.maxEntries.<get-maxEntries>|<get-maxEntries>(){}[0]
+    final val ttlMillis // xyz.mcxross.kaptos.move/AbiCachePolicy.ttlMillis|{}ttlMillis[0]
+        final fun <get-ttlMillis>(): kotlin/Long // xyz.mcxross.kaptos.move/AbiCachePolicy.ttlMillis.<get-ttlMillis>|<get-ttlMillis>(){}[0]
+
+    final fun component1(): kotlin/Long // xyz.mcxross.kaptos.move/AbiCachePolicy.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // xyz.mcxross.kaptos.move/AbiCachePolicy.component2|component2(){}[0]
+    final fun copy(kotlin/Long = ..., kotlin/Int = ...): xyz.mcxross.kaptos.move/AbiCachePolicy // xyz.mcxross.kaptos.move/AbiCachePolicy.copy|copy(kotlin.Long;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/AbiCachePolicy.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/AbiCachePolicy.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/AbiCachePolicy.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.move/MoveArgumentCodec { // xyz.mcxross.kaptos.move/MoveArgumentCodec|null[0]
+    constructor <init>(xyz.mcxross.kaptos.move/MoveModuleLoader, xyz.mcxross.kaptos.move/AbiCachePolicy = ...) // xyz.mcxross.kaptos.move/MoveArgumentCodec.<init>|<init>(xyz.mcxross.kaptos.move.MoveModuleLoader;xyz.mcxross.kaptos.move.AbiCachePolicy){}[0]
+
+    final suspend fun clearCache() // xyz.mcxross.kaptos.move/MoveArgumentCodec.clearCache|clearCache(){}[0]
     final suspend fun encode(xyz.mcxross.kaptos.model/TypeTag, xyz.mcxross.kaptos.move/MoveArgument, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.move/MoveArgument.PreSerialized> // xyz.mcxross.kaptos.move/MoveArgumentCodec.encode|encode(xyz.mcxross.kaptos.model.TypeTag;xyz.mcxross.kaptos.move.MoveArgument;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>){}[0]
     final suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction> // xyz.mcxross.kaptos.move/MoveArgumentCodec.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+    final suspend fun invalidateModule(xyz.mcxross.kaptos.model/AccountAddress, kotlin/String) // xyz.mcxross.kaptos.move/MoveArgumentCodec.invalidateModule|invalidateModule(xyz.mcxross.kaptos.model.AccountAddress;kotlin.String){}[0]
     final suspend fun preload(kotlin/Array<out xyz.mcxross.kaptos.model/MoveModuleBytecode>...) // xyz.mcxross.kaptos.move/MoveArgumentCodec.preload|preload(kotlin.Array<out|xyz.mcxross.kaptos.model.MoveModuleBytecode>...){}[0]
 }
 
@@ -5592,13 +5644,14 @@ final class xyz.mcxross.kaptos.transaction/TransactionWorker { // xyz.mcxross.ka
     }
 }
 
+final class xyz.mcxross.kaptos.transport/AptosTransport // xyz.mcxross.kaptos.transport/AptosTransport|null[0]
+
 final class xyz.mcxross.kaptos.view/MoveViewResult { // xyz.mcxross.kaptos.view/MoveViewResult|null[0]
     constructor <init>(kotlin.collections/List<kotlinx.serialization.json/JsonElement>) // xyz.mcxross.kaptos.view/MoveViewResult.<init>|<init>(kotlin.collections.List<kotlinx.serialization.json.JsonElement>){}[0]
 
     final val values // xyz.mcxross.kaptos.view/MoveViewResult.values|{}values[0]
         final fun <get-values>(): kotlin.collections/List<kotlinx.serialization.json/JsonElement> // xyz.mcxross.kaptos.view/MoveViewResult.values.<get-values>|<get-values>(){}[0]
 
-    final fun <#A1: kotlin/Any?> decodeValue(kotlin/Int, kotlinx.serialization/DeserializationStrategy<#A1>, kotlinx.serialization.json/Json = ...): xyz.mcxross.kaptos.model/AptosResult<#A1> // xyz.mcxross.kaptos.view/MoveViewResult.decodeValue|decodeValue(kotlin.Int;kotlinx.serialization.DeserializationStrategy<0:0>;kotlinx.serialization.json.Json){0§<kotlin.Any?>}[0]
     final fun component1(): kotlin.collections/List<kotlinx.serialization.json/JsonElement> // xyz.mcxross.kaptos.view/MoveViewResult.component1|component1(){}[0]
     final fun copy(kotlin.collections/List<kotlinx.serialization.json/JsonElement> = ...): xyz.mcxross.kaptos.view/MoveViewResult // xyz.mcxross.kaptos.view/MoveViewResult.copy|copy(kotlin.collections.List<kotlinx.serialization.json.JsonElement>){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.view/MoveViewResult.equals|equals(kotlin.Any?){}[0]
@@ -5637,8 +5690,8 @@ final class xyz.mcxross.kaptos/Aptos : kotlin/AutoCloseable { // xyz.mcxross.kap
         final fun <get-tables>(): xyz.mcxross.kaptos.table/TableService // xyz.mcxross.kaptos/Aptos.tables.<get-tables>|<get-tables>(){}[0]
     final val transactions // xyz.mcxross.kaptos/Aptos.transactions|{}transactions[0]
         final fun <get-transactions>(): xyz.mcxross.kaptos.transaction/TransactionService // xyz.mcxross.kaptos/Aptos.transactions.<get-transactions>|<get-transactions>(){}[0]
-    final val transportClient // xyz.mcxross.kaptos/Aptos.transportClient|{}transportClient[0]
-        final fun <get-transportClient>(): io.ktor.client/HttpClient // xyz.mcxross.kaptos/Aptos.transportClient.<get-transportClient>|<get-transportClient>(){}[0]
+    final val transport // xyz.mcxross.kaptos/Aptos.transport|{}transport[0]
+        final fun <get-transport>(): xyz.mcxross.kaptos.transport/AptosTransport // xyz.mcxross.kaptos/Aptos.transport.<get-transport>|<get-transport>(){}[0]
     final val views // xyz.mcxross.kaptos/Aptos.views|{}views[0]
         final fun <get-views>(): xyz.mcxross.kaptos.view/ViewService // xyz.mcxross.kaptos/Aptos.views.<get-views>|<get-views>(){}[0]
 
@@ -5653,11 +5706,14 @@ final class xyz.mcxross.kaptos/Aptos : kotlin/AutoCloseable { // xyz.mcxross.kap
     final fun ed25519Account(xyz.mcxross.kaptos.core.crypto/Ed25519PrivateKey, xyz.mcxross.kaptos.model/AccountAddressInput? = ...): xyz.mcxross.kaptos.account/Ed25519Account // xyz.mcxross.kaptos/Aptos.ed25519Account|ed25519Account(xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey;xyz.mcxross.kaptos.model.AccountAddressInput?){}[0]
     final fun singleKeyAccount(xyz.mcxross.kaptos.core.crypto/PrivateKey, xyz.mcxross.kaptos.model/AccountAddressInput? = ...): xyz.mcxross.kaptos.account/SingleKeyAccount // xyz.mcxross.kaptos/Aptos.singleKeyAccount|singleKeyAccount(xyz.mcxross.kaptos.core.crypto.PrivateKey;xyz.mcxross.kaptos.model.AccountAddressInput?){}[0]
     final fun singleKeyAccount(xyz.mcxross.kaptos.model/SigningSchemeInput = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ...): xyz.mcxross.kaptos.account/SingleKeyAccount // xyz.mcxross.kaptos/Aptos.singleKeyAccount|singleKeyAccount(xyz.mcxross.kaptos.model.SigningSchemeInput;xyz.mcxross.kaptos.model.AccountAddressInput?){}[0]
+    final suspend fun clearAbiCache() // xyz.mcxross.kaptos/Aptos.clearAbiCache|clearAbiCache(){}[0]
 }
 
 final class xyz.mcxross.kaptos/AptosConfig { // xyz.mcxross.kaptos/AptosConfig|null[0]
-    constructor <init>(xyz.mcxross.kaptos.model/Network = ..., xyz.mcxross.kaptos/AptosEndpoints = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., xyz.mcxross.kaptos/TransactionDefaults = ..., io.ktor.client/HttpClient? = ...) // xyz.mcxross.kaptos/AptosConfig.<init>|<init>(xyz.mcxross.kaptos.model.Network;xyz.mcxross.kaptos.AptosEndpoints;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;kotlin.Long;kotlin.Long;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.TransactionDefaults;io.ktor.client.HttpClient?){}[0]
+    constructor <init>(xyz.mcxross.kaptos.model/Network = ..., xyz.mcxross.kaptos/AptosEndpoints = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., xyz.mcxross.kaptos/TransactionDefaults = ..., xyz.mcxross.kaptos.transport/AptosTransport? = ..., xyz.mcxross.kaptos.move/AbiCachePolicy = ...) // xyz.mcxross.kaptos/AptosConfig.<init>|<init>(xyz.mcxross.kaptos.model.Network;xyz.mcxross.kaptos.AptosEndpoints;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;kotlin.Long;kotlin.Long;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.TransactionDefaults;xyz.mcxross.kaptos.transport.AptosTransport?;xyz.mcxross.kaptos.move.AbiCachePolicy){}[0]
 
+    final val abiCachePolicy // xyz.mcxross.kaptos/AptosConfig.abiCachePolicy|{}abiCachePolicy[0]
+        final fun <get-abiCachePolicy>(): xyz.mcxross.kaptos.move/AbiCachePolicy // xyz.mcxross.kaptos/AptosConfig.abiCachePolicy.<get-abiCachePolicy>|<get-abiCachePolicy>(){}[0]
     final val archivalFallback // xyz.mcxross.kaptos/AptosConfig.archivalFallback|{}archivalFallback[0]
         final fun <get-archivalFallback>(): kotlin/Boolean // xyz.mcxross.kaptos/AptosConfig.archivalFallback.<get-archivalFallback>|<get-archivalFallback>(){}[0]
     final val commonHeaders // xyz.mcxross.kaptos/AptosConfig.commonHeaders|{}commonHeaders[0]
@@ -5668,8 +5724,6 @@ final class xyz.mcxross.kaptos/AptosConfig { // xyz.mcxross.kaptos/AptosConfig|n
         final fun <get-faucet>(): xyz.mcxross.kaptos/AptosEndpointConfig // xyz.mcxross.kaptos/AptosConfig.faucet.<get-faucet>|<get-faucet>(){}[0]
     final val fullNode // xyz.mcxross.kaptos/AptosConfig.fullNode|{}fullNode[0]
         final fun <get-fullNode>(): xyz.mcxross.kaptos/AptosEndpointConfig // xyz.mcxross.kaptos/AptosConfig.fullNode.<get-fullNode>|<get-fullNode>(){}[0]
-    final val httpClient // xyz.mcxross.kaptos/AptosConfig.httpClient|{}httpClient[0]
-        final fun <get-httpClient>(): io.ktor.client/HttpClient? // xyz.mcxross.kaptos/AptosConfig.httpClient.<get-httpClient>|<get-httpClient>(){}[0]
     final val indexer // xyz.mcxross.kaptos/AptosConfig.indexer|{}indexer[0]
         final fun <get-indexer>(): xyz.mcxross.kaptos/AptosEndpointConfig // xyz.mcxross.kaptos/AptosConfig.indexer.<get-indexer>|<get-indexer>(){}[0]
     final val indexerWaitTimeoutMillis // xyz.mcxross.kaptos/AptosConfig.indexerWaitTimeoutMillis|{}indexerWaitTimeoutMillis[0]
@@ -5682,11 +5736,14 @@ final class xyz.mcxross.kaptos/AptosConfig { // xyz.mcxross.kaptos/AptosConfig|n
         final fun <get-requestTimeoutMillis>(): kotlin/Long // xyz.mcxross.kaptos/AptosConfig.requestTimeoutMillis.<get-requestTimeoutMillis>|<get-requestTimeoutMillis>(){}[0]
     final val transactionDefaults // xyz.mcxross.kaptos/AptosConfig.transactionDefaults|{}transactionDefaults[0]
         final fun <get-transactionDefaults>(): xyz.mcxross.kaptos/TransactionDefaults // xyz.mcxross.kaptos/AptosConfig.transactionDefaults.<get-transactionDefaults>|<get-transactionDefaults>(){}[0]
+    final val transport // xyz.mcxross.kaptos/AptosConfig.transport|{}transport[0]
+        final fun <get-transport>(): xyz.mcxross.kaptos.transport/AptosTransport? // xyz.mcxross.kaptos/AptosConfig.transport.<get-transport>|<get-transport>(){}[0]
 
     final fun component1(): xyz.mcxross.kaptos.model/Network // xyz.mcxross.kaptos/AptosConfig.component1|component1(){}[0]
     final fun component10(): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos/AptosConfig.component10|component10(){}[0]
     final fun component11(): xyz.mcxross.kaptos/TransactionDefaults // xyz.mcxross.kaptos/AptosConfig.component11|component11(){}[0]
-    final fun component12(): io.ktor.client/HttpClient? // xyz.mcxross.kaptos/AptosConfig.component12|component12(){}[0]
+    final fun component12(): xyz.mcxross.kaptos.transport/AptosTransport? // xyz.mcxross.kaptos/AptosConfig.component12|component12(){}[0]
+    final fun component13(): xyz.mcxross.kaptos.move/AbiCachePolicy // xyz.mcxross.kaptos/AptosConfig.component13|component13(){}[0]
     final fun component2(): xyz.mcxross.kaptos/AptosEndpoints // xyz.mcxross.kaptos/AptosConfig.component2|component2(){}[0]
     final fun component3(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos/AptosConfig.component3|component3(){}[0]
     final fun component4(): xyz.mcxross.kaptos/AptosEndpointConfig // xyz.mcxross.kaptos/AptosConfig.component4|component4(){}[0]
@@ -5695,7 +5752,7 @@ final class xyz.mcxross.kaptos/AptosConfig { // xyz.mcxross.kaptos/AptosConfig|n
     final fun component7(): kotlin/Long // xyz.mcxross.kaptos/AptosConfig.component7|component7(){}[0]
     final fun component8(): kotlin/Long // xyz.mcxross.kaptos/AptosConfig.component8|component8(){}[0]
     final fun component9(): kotlin/Boolean // xyz.mcxross.kaptos/AptosConfig.component9|component9(){}[0]
-    final fun copy(xyz.mcxross.kaptos.model/Network = ..., xyz.mcxross.kaptos/AptosEndpoints = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., xyz.mcxross.kaptos/TransactionDefaults = ..., io.ktor.client/HttpClient? = ...): xyz.mcxross.kaptos/AptosConfig // xyz.mcxross.kaptos/AptosConfig.copy|copy(xyz.mcxross.kaptos.model.Network;xyz.mcxross.kaptos.AptosEndpoints;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;kotlin.Long;kotlin.Long;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.TransactionDefaults;io.ktor.client.HttpClient?){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/Network = ..., xyz.mcxross.kaptos/AptosEndpoints = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., xyz.mcxross.kaptos/AptosEndpointConfig = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddress? = ..., xyz.mcxross.kaptos/TransactionDefaults = ..., xyz.mcxross.kaptos.transport/AptosTransport? = ..., xyz.mcxross.kaptos.move/AbiCachePolicy = ...): xyz.mcxross.kaptos/AptosConfig // xyz.mcxross.kaptos/AptosConfig.copy|copy(xyz.mcxross.kaptos.model.Network;xyz.mcxross.kaptos.AptosEndpoints;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;xyz.mcxross.kaptos.AptosEndpointConfig;kotlin.Long;kotlin.Long;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddress?;xyz.mcxross.kaptos.TransactionDefaults;xyz.mcxross.kaptos.transport.AptosTransport?;xyz.mcxross.kaptos.move.AbiCachePolicy){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos/AptosConfig.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos/AptosConfig.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos/AptosConfig.toString|toString(){}[0]
@@ -6721,6 +6778,7 @@ final val xyz.mcxross.kaptos.util/NetworkToNetworkName // xyz.mcxross.kaptos.uti
 final val xyz.mcxross.kaptos.util/NetworkToNodeAPI // xyz.mcxross.kaptos.util/NetworkToNodeAPI|{}NetworkToNodeAPI[0]
     final fun <get-NetworkToNodeAPI>(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.util/NetworkToNodeAPI.<get-NetworkToNodeAPI>|<get-NetworkToNodeAPI>(){}[0]
 
+final fun (io.ktor.client/HttpClient).xyz.mcxross.kaptos.transport.ktor/asAptosTransport(): xyz.mcxross.kaptos.transport/AptosTransport // xyz.mcxross.kaptos.transport.ktor/asAptosTransport|asAptosTransport@io.ktor.client.HttpClient(){}[0]
 final fun (kotlin/Any).xyz.mcxross.kaptos.extension/longOrNull(): kotlin/Long? // xyz.mcxross.kaptos.extension/longOrNull|longOrNull@kotlin.Any(){}[0]
 final fun (kotlin/Boolean).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/Bool // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Boolean(){}[0]
 final fun (kotlin/Byte).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U8 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Byte(){}[0]
@@ -6738,8 +6796,10 @@ final fun (kotlin/String).xyz.mcxross.kaptos.extension/toStructTag(): xyz.mcxros
 final fun (kotlin/String).xyz.mcxross.kaptos.util/toAccountAddress(): xyz.mcxross.kaptos.model/HexInput // xyz.mcxross.kaptos.util/toAccountAddress|toAccountAddress@kotlin.String(){}[0]
 final fun (kotlin/UInt).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U32 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.UInt(){}[0]
 final fun (kotlin/UShort).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U16 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.UShort(){}[0]
+final fun (xyz.mcxross.kaptos.transport/AptosTransport).xyz.mcxross.kaptos.transport.ktor/ktorClient(): io.ktor.client/HttpClient // xyz.mcxross.kaptos.transport.ktor/ktorClient|ktorClient@xyz.mcxross.kaptos.transport.AptosTransport(){}[0]
 final fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.model/AptosResult<#A>).xyz.mcxross.kaptos.model/errorOrNull(): xyz.mcxross.kaptos.model/AptosError? // xyz.mcxross.kaptos.model/errorOrNull|errorOrNull@xyz.mcxross.kaptos.model.AptosResult<0:0>(){0§<kotlin.Any?>}[0]
 final fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.model/AptosResult<#A>).xyz.mcxross.kaptos.model/getOrNull(): #A? // xyz.mcxross.kaptos.model/getOrNull|getOrNull@xyz.mcxross.kaptos.model.AptosResult<0:0>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.view/MoveViewResult).xyz.mcxross.kaptos.view.serialization/decodeValue(kotlin/Int, kotlinx.serialization/DeserializationStrategy<#A>, kotlinx.serialization.json/Json = ...): xyz.mcxross.kaptos.model/AptosResult<#A> // xyz.mcxross.kaptos.view.serialization/decodeValue|decodeValue@xyz.mcxross.kaptos.view.MoveViewResult(kotlin.Int;kotlinx.serialization.DeserializationStrategy<0:0>;kotlinx.serialization.json.Json){0§<kotlin.Any?>}[0]
 final fun <#A: kotlin/Any?> xyz.mcxross.kaptos.util/runBlocking(kotlin.coroutines/CoroutineContext = ..., kotlin.coroutines/SuspendFunction1<kotlinx.coroutines/CoroutineScope, #A>) // xyz.mcxross.kaptos.util/runBlocking|runBlocking(kotlin.coroutines.CoroutineContext;kotlin.coroutines.SuspendFunction1<kotlinx.coroutines.CoroutineScope,0:0>){0§<kotlin.Any?>}[0]
 final fun xyz.mcxross.kaptos.core.crypto.multikey/bitCount(kotlin/Int): kotlin/Int // xyz.mcxross.kaptos.core.crypto.multikey/bitCount|bitCount(kotlin.Int){}[0]
 final fun xyz.mcxross.kaptos.core.crypto/fromSeed(kotlin/ByteArray): xyz.mcxross.kaptos.core.crypto/KeyPair // xyz.mcxross.kaptos.core.crypto/fromSeed|fromSeed(kotlin.ByteArray){}[0]

@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package xyz.mcxross.kaptos.api
+package xyz.mcxross.kaptos.internal.operations
 
 import com.github.michaelbull.result.map
 import xyz.mcxross.kaptos.exception.AptosIndexerError
@@ -27,26 +26,31 @@ import xyz.mcxross.kaptos.internal.getFungibleAssetMetadata
 import xyz.mcxross.kaptos.internal.toInternalResult
 import xyz.mcxross.kaptos.internal.toResult
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.model.AccountAddressInput
+import xyz.mcxross.kaptos.model.FungibleAssetActivityFilter
+import xyz.mcxross.kaptos.model.FungibleAssetBalanceFilter
+import xyz.mcxross.kaptos.model.FungibleAssetMetadataFilter
+import xyz.mcxross.kaptos.model.PaginationArgs
+import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.types.fungibleAssetMetadataFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
-import xyz.mcxross.kaptos.protocol.FungibleAsset
 import xyz.mcxross.kaptos.util.waitForIndexerOnVersion
 
-internal class FungibleAsset(val config: TransportConfig) : FungibleAsset {
-  override suspend fun getFungibleAssetMetadata(
+internal class FungibleAssetOperations(val config: TransportConfig) {
+  suspend fun getFungibleAssetMetadata(
     filter: FungibleAssetMetadataFilter,
-    page: PaginationArgs?,
-    minimumLedgerVersion: Long?,
+    page: PaginationArgs? = null,
+    minimumLedgerVersion: Long? = null,
   ): Result<GetFungibleAssetMetadataQuery.Data?, AptosIndexerError> {
     waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
 
     return getFungibleAssetMetadata(config, filter, page)
   }
 
-  override suspend fun getFungibleAssetMetadataByAssetType(
+  suspend fun getFungibleAssetMetadataByAssetType(
     assetType: String,
-    page: PaginationArgs?,
-    minimumLedgerVersion: Long?,
+    page: PaginationArgs? = null,
+    minimumLedgerVersion: Long? = null,
   ): Result<GetFungibleAssetMetadataQuery.Fungible_asset_metadatum?, AptosIndexerError> {
     waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
     val filter = fungibleAssetMetadataFilter { this.assetType = stringFilter { eq = assetType } }
@@ -59,10 +63,10 @@ internal class FungibleAsset(val config: TransportConfig) : FungibleAsset {
       .toResult()
   }
 
-  override suspend fun getFungibleAssetMetadataByCreatorAddress(
+  suspend fun getFungibleAssetMetadataByCreatorAddress(
     creatorAddress: AccountAddressInput,
-    page: PaginationArgs?,
-    minimumLedgerVersion: Long?,
+    page: PaginationArgs? = null,
+    minimumLedgerVersion: Long? = null,
   ): Result<GetFungibleAssetMetadataQuery.Data?, AptosIndexerError> {
     waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
 
@@ -73,20 +77,20 @@ internal class FungibleAsset(val config: TransportConfig) : FungibleAsset {
     return getFungibleAssetMetadata(config, filter, page)
   }
 
-  override suspend fun getFungibleAssetActivities(
+  suspend fun getFungibleAssetActivities(
     filter: FungibleAssetActivityFilter,
-    page: PaginationArgs?,
-    minimumLedgerVersion: Long?,
+    page: PaginationArgs? = null,
+    minimumLedgerVersion: Long? = null,
   ): Result<GetFungibleAssetActivitiesQuery.Data?, AptosIndexerError> {
     waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
 
     return getFungibleAssetActivities(config, filter, page)
   }
 
-  override suspend fun getCurrentFungibleAssetBalances(
-    filter: FungibleAssetBalanceFilter?,
-    page: PaginationArgs?,
-    minimumLedgerVersion: Long?,
+  suspend fun getCurrentFungibleAssetBalances(
+    filter: FungibleAssetBalanceFilter? = null,
+    page: PaginationArgs? = null,
+    minimumLedgerVersion: Long? = null,
   ): Result<GetCurrentFungibleAssetBalancesQuery.Data?, AptosIndexerError> {
     waitForIndexerOnVersion(config, minimumLedgerVersion, ProcessorType.FUNGIBLE_ASSET_PROCESSOR)
     return getCurrentFungibleAssetBalances(config, filter, page)

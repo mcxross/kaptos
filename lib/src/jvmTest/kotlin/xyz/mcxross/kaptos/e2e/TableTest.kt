@@ -20,8 +20,10 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.test.fail
 import kotlinx.serialization.Serializable
-import xyz.mcxross.kaptos.api.Account as AccountApi
-import xyz.mcxross.kaptos.api.Table as TableApi
+import xyz.mcxross.kaptos.internal.operations.AccountOperations as AccountApi
+import xyz.mcxross.kaptos.internal.operations.TableOperations as TableApi
+import xyz.mcxross.kaptos.internal.operations.getAccountResource
+import xyz.mcxross.kaptos.internal.operations.getTableItem
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.Network
@@ -32,8 +34,6 @@ import xyz.mcxross.kaptos.model.types.bigintFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.model.types.tableItemsFilter
 import xyz.mcxross.kaptos.model.types.tableMetadatasFilter
-import xyz.mcxross.kaptos.protocol.getAccountResource
-import xyz.mcxross.kaptos.protocol.getTableItem
 import xyz.mcxross.kaptos.util.runBlocking
 
 class TableTest {

@@ -6,7 +6,6 @@
  */
 package xyz.mcxross.kaptos.keyless
 
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
@@ -39,6 +38,8 @@ import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.move.MoveArgument
+import xyz.mcxross.kaptos.transport.AptosTransport
+import xyz.mcxross.kaptos.transport.ktor.ktorClient
 import xyz.mcxross.kaptos.util.NetworkToNodeAPI
 
 /** Optional URL and headers for one Keyless backend. */
@@ -52,7 +53,7 @@ data class KeylessClientConfig(
   val pepperService: KeylessEndpointConfig = KeylessEndpointConfig(),
   val proverService: KeylessEndpointConfig = KeylessEndpointConfig(),
   val commonHeaders: Map<String, String> = emptyMap(),
-  val httpClient: HttpClient? = null,
+  val transport: AptosTransport? = null,
 )
 
 /** Controls whether account derivation waits for its Groth16 proof. */
@@ -149,7 +150,7 @@ internal class DefaultKeylessService(
   private val aptos: Aptos,
   private val serviceConfig: KeylessClientConfig,
 ) : KeylessService {
-  private val httpClient = serviceConfig.httpClient ?: aptos.transportClient
+  private val httpClient = (serviceConfig.transport ?: aptos.transport).ktorClient()
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
   private var cachedConfiguration: KeylessConfiguration? = null
   private val cachedJwks = mutableMapOf<String, Map<String, List<MoveJwk>>>()

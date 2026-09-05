@@ -212,6 +212,7 @@ Transactions and views share `MoveArgument` from `xyz.mcxross.kaptos.move` and `
 Typed views validate the function ABI and send BCS arguments; returned JSON values stay lossless.
 
 ```kotlin
+import xyz.mcxross.kaptos.view.serialization.decodeValue
 import kotlinx.serialization.builtins.serializer
 import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.model.TypeTag
@@ -228,8 +229,9 @@ aptos {
 
 Validation checks view status, argument and type-argument counts, concrete types, integer widths,
 struct field names, and supported value shapes. Typed views reject opaque `PreSerialized` values,
-including nested ones, and enum arguments because the current ABI model cannot describe their
-complete variant layouts. They do not infer JSON representations from BCS bytes. Move execution
+including nested ones. Enum arguments use the ABI's explicit `variants` list and named fields;
+missing layouts, unknown variants, and missing or extra fields are rejected. The codec never infers
+variant layouts from struct fields. It does not infer JSON representations from BCS bytes. Move execution
 and generic ability constraints are validated by the fullnode.
 
 `ledgerVersion` applies to both ABI lookup and execution. Historical calls use an isolated codec;
@@ -239,6 +241,28 @@ Use `views.callRaw(function, typeArguments, arguments, ledgerVersion)` for expli
 Its type arguments are strings and arguments are `JsonElement` values; the fullnode validates
 those raw values. `decodeValue(index, deserializer)` selects one return value using an explicit
 serializer and reports invalid indexes or incompatible return types as typed errors.
+
+### ABI freshness and transport integration
+
+Fetched ABIs expire after 60 seconds by default, with at most 128 fetched modules retained per
+codec. Configure `AptosConfig.abiCachePolicy` to change those limits; a zero TTL disables fetched
+caching. Failed refreshes return an error rather than using an expired ABI. Explicitly preloaded
+ABIs stay pinned for offline builds. Call `aptos.clearAbiCache()` after a deployment to clear both
+fetched and preloaded ABIs. Historical view calls keep their ABI lookup isolated at the requested
+ledger version.
+
+Ktor injection is available through an explicit adapter. The application retains ownership of an
+injected transport; the SDK manages its default transport.
+
+```kotlin
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
+
+val client = Aptos(AptosConfig(transport = httpClient.asAptosTransport()))
+```
+
+Serializer-based view decoding is an extension in `xyz.mcxross.kaptos.view.serialization`.
+The explicit raw JSON APIs continue to use kotlinx.serialization JSON values; these are intentional
+integration boundaries, while transaction and typed-view arguments use SDK-owned types.
 
 ### Solana derivable account abstraction
 

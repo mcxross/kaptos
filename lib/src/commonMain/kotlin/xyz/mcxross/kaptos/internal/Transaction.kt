@@ -19,13 +19,13 @@ package xyz.mcxross.kaptos.internal
 import com.github.michaelbull.result.expect
 import kotlinx.coroutines.delay
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.paginateWithCursor
 import xyz.mcxross.kaptos.exception.AptosApiErrorV1
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.exception.WaitForTransactionException
+import xyz.mcxross.kaptos.internal.operations.submission.Submit
 import xyz.mcxross.kaptos.model.*
 
 internal suspend fun getTransactions(

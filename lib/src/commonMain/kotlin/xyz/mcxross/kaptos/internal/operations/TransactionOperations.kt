@@ -13,70 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package xyz.mcxross.kaptos.api
+package xyz.mcxross.kaptos.internal.operations
 
 import xyz.mcxross.kaptos.account.Account
-import xyz.mcxross.kaptos.api.txsubmission.Build
-import xyz.mcxross.kaptos.api.txsubmission.Simulate
-import xyz.mcxross.kaptos.api.txsubmission.Submit
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.internal.*
+import xyz.mcxross.kaptos.internal.operations.submission.Build
+import xyz.mcxross.kaptos.internal.operations.submission.Simulate
+import xyz.mcxross.kaptos.internal.operations.submission.Submit
 import xyz.mcxross.kaptos.internal.signAndSubmitAsFeePayer
 import xyz.mcxross.kaptos.model.*
-import xyz.mcxross.kaptos.protocol.Transaction
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
-/**
- * A class for reading and writing Aptos transactions.
- *
- * @property config TransportConfig object for configuration.
- */
-internal class Transaction(val config: TransportConfig) : Transaction {
+internal class TransactionOperations(val config: TransportConfig) {
 
-  override val buildTransaction: Build = Build(config)
-  override val submitTransaction: Submit = Submit(config)
-  override val simulateTransaction: Simulate = Simulate(config)
+  val buildTransaction: Build = Build(config)
+  val submitTransaction: Submit = Submit(config)
+  val simulateTransaction: Simulate = Simulate(config)
 
-  override suspend fun getTransactions(
-    options: PaginationArgs?
+  suspend fun getTransactions(
+    options: PaginationArgs? = null
   ): Result<List<TransactionResponse>, AptosSdkError> = getTransactions(config, options)
 
-  override suspend fun getTransactionByVersion(
+  suspend fun getTransactionByVersion(
     ledgerVersion: Long
   ): Result<TransactionResponse, AptosSdkError> = getTransactionByVersion(config, ledgerVersion)
 
-  override suspend fun getTransactionByHash(
+  suspend fun getTransactionByHash(
     transactionHash: String
   ): Result<TransactionResponse, AptosSdkError> = getTransactionByHash(config, transactionHash)
 
-  override suspend fun isPendingTransaction(transactionHash: HexInput): Boolean =
+  suspend fun isPendingTransaction(transactionHash: HexInput): Boolean =
     isTransactionPending(config, transactionHash)
 
-  override suspend fun waitForTransaction(
+  suspend fun waitForTransaction(
     transactionHash: HexInput,
-    options: WaitForTransactionOptions,
+    options: WaitForTransactionOptions = WaitForTransactionOptions(),
   ): Result<TransactionResponse, Exception> =
     waitForTransaction(config, transactionHash.value, options)
 
-  override suspend fun getGasPriceEstimation(): Result<GasEstimation, AptosSdkError> =
+  suspend fun getGasPriceEstimation(): Result<GasEstimation, AptosSdkError> =
     getGasPriceEstimation(config)
 
-  override fun sign(signer: Account, transaction: UnsignedTransaction): AccountAuthenticator =
+  fun sign(signer: Account, transaction: UnsignedTransaction): AccountAuthenticator =
     signTransaction(signer, transaction)
 
-  override fun signAsFeePayer(
-    signer: Account,
-    transaction: UnsignedTransaction,
-  ): FeePayerSignature = xyz.mcxross.kaptos.internal.signAsFeePayer(signer, transaction)
+  fun signAsFeePayer(signer: Account, transaction: UnsignedTransaction): FeePayerSignature =
+    xyz.mcxross.kaptos.internal.signAsFeePayer(signer, transaction)
 
-  override suspend fun signAndSubmitTransaction(
+  suspend fun signAndSubmitTransaction(
     signer: Account,
     transaction: UnsignedTransaction,
   ): Result<PendingTransactionResponse, Exception> =
     signAndSubmitTransaction(config, signer, transaction)
 
-  override suspend fun signAndSubmitAsFeePayer(
+  suspend fun signAndSubmitAsFeePayer(
     feePayer: Account,
     senderAuthenticator: AccountAuthenticator,
     transaction: UnsignedTransaction,
@@ -88,18 +79,18 @@ internal class Transaction(val config: TransportConfig) : Transaction {
       transaction = transaction,
     )
 
-  override suspend fun publishPackageTransaction(
+  suspend fun publishPackageTransaction(
     account: AccountAddressInput,
     metadataBytes: HexInput,
     moduleBytecode: List<HexInput>,
-    options: TransactionOptions,
+    options: TransactionOptions = TransactionOptions(),
   ): UnsignedTransaction.Simple =
     publicPackageTransaction(config, account, metadataBytes, moduleBytecode, options)
 
-  override suspend fun buildSimpleTransaction(
+  suspend fun buildSimpleTransaction(
     sender: AccountAddressInput,
-    options: TransactionOptions?,
-    withFeePayer: Boolean,
+    options: TransactionOptions? = null,
+    withFeePayer: Boolean = false,
     builder: InputEntryFunctionDataBuilder.() -> Unit,
   ): UnsignedTransaction.Simple =
     buildTransaction.simple(
@@ -109,10 +100,10 @@ internal class Transaction(val config: TransportConfig) : Transaction {
       withFeePayer = withFeePayer,
     )
 
-  override suspend fun execute(
+  suspend fun execute(
     signer: Account,
-    options: TransactionOptions?,
-    withFeePayer: Boolean,
+    options: TransactionOptions? = null,
+    withFeePayer: Boolean = false,
     builder: InputEntryFunctionDataBuilder.() -> Unit,
   ): Result<PendingTransactionResponse, Exception> {
     val txn = buildSimpleTransaction(signer.accountAddress, options, withFeePayer, builder)

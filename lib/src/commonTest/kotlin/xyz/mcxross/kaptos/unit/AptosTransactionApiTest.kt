@@ -39,6 +39,7 @@ import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.ChainId
 import xyz.mcxross.kaptos.transaction.instances.RawTransaction
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
 
 class AptosTransactionApiTest :
   StringSpec({
@@ -126,29 +127,30 @@ class AptosTransactionApiTest :
         val request =
           client.transactions
             .externalFeePayerRequest(transaction, authenticator)
-            .shouldBeInstanceOf<AptosResult.Success<xyz.mcxross.kaptos.model.ExternalFeePayerRequest>>()
+            .shouldBeInstanceOf<
+              AptosResult.Success<xyz.mcxross.kaptos.model.ExternalFeePayerRequest>
+            >()
             .value
 
         request.transactionBytes.contentEquals(transaction.signingBcs()) shouldBe true
         request.senderAuthenticatorBytes.contentEquals(authenticator.toBcs()) shouldBe true
         request.additionalSignersAuthenticatorBytes shouldBe emptyList()
-        request.fingerprint shouldBe "0x76796c439e76eb30dad14cabe98d99239a314a91848eb507c6077031dcc0ee5e"
+        request.fingerprint shouldBe
+          "0x76796c439e76eb30dad14cabe98d99239a314a91848eb507c6077031dcc0ee5e"
       } finally {
         client.close()
       }
     }
 
     "submission preserves structured Aptos API errors" {
-      val engine =
-        MockEngine {
-          respond(
-            content =
-              """{"message":"Feature is gated","error_code":"feature_under_gating","vm_error_code":26}""",
-            status = HttpStatusCode.BadRequest,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine {
+        respond(
+          content =
+            """{"message":"Feature is gated","error_code":"feature_under_gating","vm_error_code":26}""",
+          status = HttpStatusCode.BadRequest,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val httpClient =
         HttpClient(engine) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
@@ -158,7 +160,7 @@ class AptosTransactionApiTest :
           AptosConfig(
             network = Network.CUSTOM,
             endpoints = AptosEndpoints(fullNode = "https://fullnode.example/v1"),
-            httpClient = httpClient,
+            transport = httpClient.asAptosTransport(),
           )
         )
       try {

@@ -161,22 +161,22 @@ final class xyz.mcxross.kaptos.keyless/KeylessAccount : xyz.mcxross.kaptos.keyle
 }
 
 final class xyz.mcxross.kaptos.keyless/KeylessClientConfig { // xyz.mcxross.kaptos.keyless/KeylessClientConfig|null[0]
-    constructor <init>(xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., io.ktor.client/HttpClient? = ...) // xyz.mcxross.kaptos.keyless/KeylessClientConfig.<init>|<init>(xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;kotlin.collections.Map<kotlin.String,kotlin.String>;io.ktor.client.HttpClient?){}[0]
+    constructor <init>(xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos.transport/AptosTransport? = ...) // xyz.mcxross.kaptos.keyless/KeylessClientConfig.<init>|<init>(xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.transport.AptosTransport?){}[0]
 
     final val commonHeaders // xyz.mcxross.kaptos.keyless/KeylessClientConfig.commonHeaders|{}commonHeaders[0]
         final fun <get-commonHeaders>(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.keyless/KeylessClientConfig.commonHeaders.<get-commonHeaders>|<get-commonHeaders>(){}[0]
-    final val httpClient // xyz.mcxross.kaptos.keyless/KeylessClientConfig.httpClient|{}httpClient[0]
-        final fun <get-httpClient>(): io.ktor.client/HttpClient? // xyz.mcxross.kaptos.keyless/KeylessClientConfig.httpClient.<get-httpClient>|<get-httpClient>(){}[0]
     final val pepperService // xyz.mcxross.kaptos.keyless/KeylessClientConfig.pepperService|{}pepperService[0]
         final fun <get-pepperService>(): xyz.mcxross.kaptos.keyless/KeylessEndpointConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.pepperService.<get-pepperService>|<get-pepperService>(){}[0]
     final val proverService // xyz.mcxross.kaptos.keyless/KeylessClientConfig.proverService|{}proverService[0]
         final fun <get-proverService>(): xyz.mcxross.kaptos.keyless/KeylessEndpointConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.proverService.<get-proverService>|<get-proverService>(){}[0]
+    final val transport // xyz.mcxross.kaptos.keyless/KeylessClientConfig.transport|{}transport[0]
+        final fun <get-transport>(): xyz.mcxross.kaptos.transport/AptosTransport? // xyz.mcxross.kaptos.keyless/KeylessClientConfig.transport.<get-transport>|<get-transport>(){}[0]
 
     final fun component1(): xyz.mcxross.kaptos.keyless/KeylessEndpointConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.component1|component1(){}[0]
     final fun component2(): xyz.mcxross.kaptos.keyless/KeylessEndpointConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.component2|component2(){}[0]
     final fun component3(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.keyless/KeylessClientConfig.component3|component3(){}[0]
-    final fun component4(): io.ktor.client/HttpClient? // xyz.mcxross.kaptos.keyless/KeylessClientConfig.component4|component4(){}[0]
-    final fun copy(xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., io.ktor.client/HttpClient? = ...): xyz.mcxross.kaptos.keyless/KeylessClientConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.copy|copy(xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;kotlin.collections.Map<kotlin.String,kotlin.String>;io.ktor.client.HttpClient?){}[0]
+    final fun component4(): xyz.mcxross.kaptos.transport/AptosTransport? // xyz.mcxross.kaptos.keyless/KeylessClientConfig.component4|component4(){}[0]
+    final fun copy(xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., xyz.mcxross.kaptos.keyless/KeylessEndpointConfig = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., xyz.mcxross.kaptos.transport/AptosTransport? = ...): xyz.mcxross.kaptos.keyless/KeylessClientConfig // xyz.mcxross.kaptos.keyless/KeylessClientConfig.copy|copy(xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;xyz.mcxross.kaptos.keyless.KeylessEndpointConfig;kotlin.collections.Map<kotlin.String,kotlin.String>;xyz.mcxross.kaptos.transport.AptosTransport?){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.keyless/KeylessClientConfig.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.keyless/KeylessClientConfig.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.keyless/KeylessClientConfig.toString|toString(){}[0]

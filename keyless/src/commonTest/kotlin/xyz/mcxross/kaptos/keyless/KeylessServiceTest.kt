@@ -14,19 +14,19 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
-import io.ktor.http.headersOf
 import io.ktor.http.content.TextContent
+import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import xyz.mcxross.kaptos.Aptos
 import xyz.mcxross.kaptos.AptosConfig
 import xyz.mcxross.kaptos.AptosEndpointConfig
@@ -35,25 +35,25 @@ import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Network
+import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
 
 class KeylessServiceTest {
   @Test
   fun pepperUsesCustomEndpointNumericExpiryAndEndpointHeaderPrecedence() = runTest {
     var requestBody: String? = null
-    val client =
-      jsonClient { request ->
-        if (request.url.encodedPath.endsWith("/fetch")) {
-          assertEquals("pepper.example", request.url.host)
-          assertEquals("/keyless/pepper/v0/fetch", request.url.encodedPath)
-          assertEquals("endpoint", request.headers["X-Order"])
-          assertEquals("common", request.headers["X-Common"])
-          assertNull(request.headers[HttpHeaders.Authorization])
-          requestBody = (request.body as TextContent).text
-          respondJson("""{"pepper":"${"ab".repeat(31)}"}""")
-        } else {
-          respondOk("{}")
-        }
+    val client = jsonClient { request ->
+      if (request.url.encodedPath.endsWith("/fetch")) {
+        assertEquals("pepper.example", request.url.host)
+        assertEquals("/keyless/pepper/v0/fetch", request.url.encodedPath)
+        assertEquals("endpoint", request.headers["X-Order"])
+        assertEquals("common", request.headers["X-Common"])
+        assertNull(request.headers[HttpHeaders.Authorization])
+        requestBody = (request.body as TextContent).text
+        respondJson("""{"pepper":"${"ab".repeat(31)}"}""")
+      } else {
+        respondOk("{}")
       }
+    }
     val aptos = clientWith(client)
     val keyless =
       aptos.keyless(
@@ -62,7 +62,7 @@ class KeylessServiceTest {
             KeylessEndpointConfig(
               url = "https://pepper.example/keyless/pepper/v0",
               headers = mapOf("X-Order" to "endpoint"),
-          ),
+            ),
           commonHeaders = mapOf("X-Order" to "common", "X-Common" to "common"),
         )
       )
@@ -85,35 +85,36 @@ class KeylessServiceTest {
   @Test
   fun proverUsesNumericU64FieldsAndParsesProof() = runTest {
     var proverBody: String? = null
-    val client =
-      jsonClient { request ->
-        when {
-          request.url.encodedPath.contains("keyless_account::Configuration") ->
-            respondJson(CONFIG_RESOURCE)
-          request.url.encodedPath.contains("Groth16VerificationKey") ->
-            respondJson(VK_RESOURCE)
-          request.url.encodedPath.endsWith("/prove") -> {
-            proverBody = (request.body as TextContent).text
-            respondJson(
-              """{
-                "proof": {
-                  "a": "${"01".repeat(32)}",
-                  "b": "${"02".repeat(64)}",
-                  "c": "${"03".repeat(32)}"
-                },
-                "training_wheels_signature": "0040${"04".repeat(64)}"
-              }""".trimIndent()
-            )
-          }
-          else -> respondOk("{}")
+    val client = jsonClient { request ->
+      when {
+        request.url.encodedPath.contains("keyless_account::Configuration") ->
+          respondJson(CONFIG_RESOURCE)
+        request.url.encodedPath.contains("Groth16VerificationKey") -> respondJson(VK_RESOURCE)
+        request.url.encodedPath.endsWith("/prove") -> {
+          proverBody = (request.body as TextContent).text
+          respondJson(
+            """
+            {
+                            "proof": {
+                              "a": "${"01".repeat(32)}",
+                              "b": "${"02".repeat(64)}",
+                              "c": "${"03".repeat(32)}"
+                            },
+                            "training_wheels_signature": "0040${"04".repeat(64)}"
+                          }
+            """
+              .trimIndent()
+          )
         }
+        else -> respondOk("{}")
       }
+    }
     val aptos = clientWith(client)
     val keyless =
       aptos.keyless(
         KeylessClientConfig(
           proverService = KeylessEndpointConfig("https://prover.example/keyless/prover/v0"),
-          httpClient = client,
+          transport = client.asAptosTransport(),
         )
       )
 
@@ -142,17 +143,18 @@ class KeylessServiceTest {
     val client = jsonClient { respondJson("""{"pepper":"00"}""") }
     val aptos = clientWith(client)
     val malformed =
-      aptos.keyless(
+      aptos
+        .keyless(
           KeylessClientConfig(
             pepperService = KeylessEndpointConfig("https://pepper.example"),
-            httpClient = client,
+            transport = client.asAptosTransport(),
           )
         )
         .use { it.getPepper("test.jwt", fixtureEphemeral()) }
     assertIs<AptosError.Crypto>(assertIs<AptosResult.Failure>(malformed).error)
 
     val missing =
-      aptos.keyless(KeylessClientConfig(httpClient = client)).use {
+      aptos.keyless(KeylessClientConfig(transport = client.asAptosTransport())).use {
         it.getPepper("test.jwt", fixtureEphemeral())
       }
     assertIs<AptosError.Validation>(assertIs<AptosResult.Failure>(missing).error)
@@ -175,16 +177,24 @@ class KeylessServiceTest {
         endpoints = AptosEndpoints(fullNode = "https://fullnode.example/v1"),
         commonHeaders = mapOf(HttpHeaders.Authorization to "Bearer fullnode-secret"),
         fullNode = AptosEndpointConfig(headers = mapOf("X-Fullnode" to "yes")),
-        httpClient = httpClient,
+        transport = httpClient.asAptosTransport(),
       )
     )
 
   private fun jsonClient(
-    handler: suspend io.ktor.client.engine.mock.MockRequestHandleScope.(io.ktor.client.request.HttpRequestData) -> io.ktor.client.request.HttpResponseData
+    handler:
+      suspend io.ktor.client.engine.mock.MockRequestHandleScope.(
+        io.ktor.client.request.HttpRequestData
+      ) -> io.ktor.client.request.HttpResponseData
   ): HttpClient =
     HttpClient(MockEngine(handler)) {
       install(ContentNegotiation) {
-        json(Json { ignoreUnknownKeys = true; explicitNulls = false })
+        json(
+          Json {
+            ignoreUnknownKeys = true
+            explicitNulls = false
+          }
+        )
       }
     }
 
@@ -198,25 +208,31 @@ class KeylessServiceTest {
     private const val SHORT_JWT =
       "eyJhbGciOiJSUzI1NiIsImtpZCI6InRlc3QifQ.eyJpc3MiOiJpc3N1ZXIiLCJhdWQiOiJhdWQiLCJzdWIiOiJ1c2VyIiwiaWF0Ijo5ODc2NTQwMDAwfQ.signature"
     private val CONFIG_RESOURCE =
-      """{
-        "data": {
-          "max_commited_epk_bytes": 93,
-          "max_exp_horizon_secs": "10000000",
-          "max_extra_field_bytes": 350,
-          "max_iss_val_bytes": 120,
-          "max_jwt_header_b64_bytes": 300,
-          "training_wheels_pubkey": {"vec": []}
-        }
-      }""".trimIndent()
+      """
+      {
+              "data": {
+                "max_commited_epk_bytes": 93,
+                "max_exp_horizon_secs": "10000000",
+                "max_extra_field_bytes": 350,
+                "max_iss_val_bytes": 120,
+                "max_jwt_header_b64_bytes": 300,
+                "training_wheels_pubkey": {"vec": []}
+              }
+            }
+      """
+        .trimIndent()
     private val VK_RESOURCE =
-      """{
-        "data": {
-          "alpha_g1": "${"00".repeat(32)}",
-          "beta_g2": "${"00".repeat(64)}",
-          "delta_g2": "${"00".repeat(64)}",
-          "gamma_abc_g1": ["${"00".repeat(32)}", "${"00".repeat(32)}"],
-          "gamma_g2": "${"00".repeat(64)}"
-        }
-      }""".trimIndent()
+      """
+      {
+              "data": {
+                "alpha_g1": "${"00".repeat(32)}",
+                "beta_g2": "${"00".repeat(64)}",
+                "delta_g2": "${"00".repeat(64)}",
+                "gamma_abc_g1": ["${"00".repeat(32)}", "${"00".repeat(32)}"],
+                "gamma_g2": "${"00".repeat(64)}"
+              }
+            }
+      """
+        .trimIndent()
   }
 }

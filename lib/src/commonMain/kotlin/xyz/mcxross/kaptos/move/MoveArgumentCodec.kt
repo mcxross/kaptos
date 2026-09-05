@@ -9,6 +9,7 @@
  */
 package xyz.mcxross.kaptos.move
 
+import kotlin.time.TimeSource
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -53,20 +54,36 @@ fun interface MoveModuleLoader {
 /**
  * ABI-aware codec for recursive Move struct and enum arguments.
  *
- * Module ABIs are cached per codec instance and can be preloaded for completely offline builds.
+ * Fetched ABIs expire according to [AbiCachePolicy]. Preloaded ABIs stay pinned until invalidated.
  */
-class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
-  private val modules = mutableMapOf<String, MoveModuleBytecode>()
+class MoveArgumentCodec(
+  private val moduleLoader: MoveModuleLoader,
+  private val cachePolicy: AbiCachePolicy = AbiCachePolicy(),
+) {
+  private data class CachedModule(val module: MoveModuleBytecode, val loadedAt: Long?)
+
+  private val epoch = TimeSource.Monotonic.markNow()
+  internal var nowMillis: () -> Long = { epoch.elapsedNow().inWholeMilliseconds }
+  private val modules = mutableMapOf<String, CachedModule>()
   private val moduleMutex = Mutex()
 
   /** Add trusted module ABIs to this codec's cache. */
   suspend fun preload(vararg values: MoveModuleBytecode) {
-    moduleMutex.withLock {
-      values.forEach { module ->
-        val abi = requireNotNull(module.abi) { "A preloaded module must contain an ABI" }
-        modules[moduleKey(AccountAddress.fromString(abi.address), abi.name)] = module
-      }
+    val validated = values.map { module ->
+      val abi = requireNotNull(module.abi) { "A preloaded module must contain an ABI" }
+      moduleKey(AccountAddress.fromString(abi.address), abi.name) to CachedModule(module, null)
     }
+    moduleMutex.withLock { modules.putAll(validated) }
+  }
+
+  /** Clear fetched and preloaded ABIs. In-flight loads finish before this invalidation returns. */
+  suspend fun clearCache() {
+    moduleMutex.withLock { modules.clear() }
+  }
+
+  /** Remove one fetched or preloaded module after a known deployment or upgrade. */
+  suspend fun invalidateModule(address: AccountAddress, name: String) {
+    moduleMutex.withLock { modules.remove(moduleKey(address, name)) }
   }
 
   /** Encode one value according to its instantiated Move type. */
@@ -221,10 +238,7 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
         throw IllegalArgumentException(
           "PreSerialized arguments cannot be validated; supply typed values or use callRaw with JSON"
         )
-      is MoveArgument.Enum ->
-        throw IllegalArgumentException(
-          "Enum view arguments require a complete variant field layout, which this ABI model does not provide"
-        )
+      is MoveArgument.Enum -> argument.fields.values.forEach { validateViewArgument(it, depth + 1) }
       is MoveArgument.Vector -> argument.values.forEach { validateViewArgument(it, depth + 1) }
       is MoveArgument.Struct ->
         argument.fields.values.forEach { validateViewArgument(it, depth + 1) }
@@ -324,7 +338,7 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
     val module = module(tag.address, tag.moduleName)
     val abi = requireNotNull(module.abi) { "Module ${tag.address}::${tag.moduleName} has no ABI" }
     val definition =
-      requireNotNull(abi.structs.firstOrNull { it.name == tag.name }) {
+      requireNotNull(abi.structs.singleOrNull { it.name == tag.name }) {
         "Type ${tag.name} was not found in ${tag.address}::${tag.moduleName}"
       }
     require(!definition.isNative) { "Native Move type ${tag.name} cannot be an argument" }
@@ -347,6 +361,10 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
     argument: MoveArgument.Struct,
     depth: Int,
   ) {
+    require(definition.variants.isEmpty()) { "Non-enum ${definition.name} cannot declare variants" }
+    require(definition.fields.map { it.name }.distinct().size == definition.fields.size) {
+      "Struct ${definition.name} contains duplicate field names"
+    }
     val expectedFields = definition.fields.map { it.name }.toSet()
     require(argument.fields.keys == expectedFields) {
       val missing = expectedFields - argument.fields.keys
@@ -365,40 +383,59 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
     argument: MoveArgument.Enum,
     depth: Int,
   ) {
-    val variantIndex = definition.fields.indexOfFirst { it.name == argument.variant }
-    require(variantIndex >= 0) {
-      "Unknown ${definition.name} variant '${argument.variant}'; expected ${definition.fields.map { it.name }}"
+    require(definition.fields.isEmpty() && definition.variants.isNotEmpty()) {
+      "Enum ${definition.name} requires explicit ABI variants and no struct fields"
+    }
+    require(definition.variants.map { it.name }.distinct().size == definition.variants.size) {
+      "Enum ${definition.name} contains duplicate variant names"
+    }
+    val variantIndex = definition.variants.indexOfFirst { it.name == argument.variant }
+    require(variantIndex >= 0) { "Unknown ${definition.name} variant '${argument.variant}'" }
+    val variant = definition.variants[variantIndex]
+    require(variant.fields.map { it.name }.distinct().size == variant.fields.size) {
+      "Enum ${definition.name} variant ${variant.name} contains duplicate fields"
+    }
+    require(argument.fields.keys == variant.fields.map { it.name }.toSet()) {
+      "Fields for ${definition.name}::${variant.name} do not match its ABI"
     }
     uleb128(variantIndex.toUInt())
-    if (argument.fields.isEmpty()) return
-    val orderedKeys = argument.fields.keys.sortedBy(String::toUInt)
-    require(orderedKeys == List(orderedKeys.size) { it.toString() }) {
-      "Enum fields must use sequential names 0, 1, ..."
-    }
-    val variantType =
-      substitute(TypeTag.fromString(definition.fields[variantIndex].type, true), tag.typeArgs)
-    orderedKeys.forEach { key ->
-      encodeValue(variantType, requireNotNull(argument.fields[key]), depth + 1)
+    variant.fields.forEach { field ->
+      val type = substitute(TypeTag.fromString(field.type, true), tag.typeArgs)
+      encodeValue(type, requireNotNull(argument.fields[field.name]), depth + 1)
     }
   }
 
   private suspend fun module(address: AccountAddress, name: String): MoveModuleBytecode {
     val key = moduleKey(address, name)
-    moduleMutex
-      .withLock { modules[key] }
-      ?.let {
-        return it
+    // Loading under the lock coalesces misses and orders loads against preload/invalidation.
+    return moduleMutex.withLock {
+      val cached = modules[key]
+      if (
+        cached != null &&
+          (cached.loadedAt == null || nowMillis() - cached.loadedAt < cachePolicy.ttlMillis)
+      ) {
+        modules.remove(key)
+        modules[key] = cached
+        return@withLock cached.module
       }
-    val loaded =
-      when (val result = moduleLoader.load(address, name)) {
-        is AptosResult.Success -> result.value
-        is AptosResult.Failure -> throw AbiLoadException(result.error)
+      modules.remove(key)
+      val loaded =
+        when (val result = moduleLoader.load(address, name)) {
+          is AptosResult.Success -> result.value
+          is AptosResult.Failure -> throw AbiLoadException(result.error)
+        }
+      val abi = requireNotNull(loaded.abi) { "Module $key has no ABI" }
+      require(AccountAddress.fromString(abi.address) == address && abi.name == name) {
+        "Loaded module ABI does not match $key"
       }
-    val abi = requireNotNull(loaded.abi) { "Module $key has no ABI" }
-    require(AccountAddress.fromString(abi.address) == address && abi.name == name) {
-      "Loaded module ABI does not match $key"
+      if (cachePolicy.ttlMillis > 0) {
+        while (modules.values.count { it.loadedAt != null } >= cachePolicy.maxEntries) {
+          modules.remove(modules.entries.first { it.value.loadedAt != null }.key)
+        }
+        modules[key] = CachedModule(loaded, nowMillis())
+      }
+      loaded
     }
-    return moduleMutex.withLock { modules.getOrPut(key) { loaded } }
   }
 
   private fun substitute(type: TypeTag, arguments: List<TypeTag>): TypeTag =
