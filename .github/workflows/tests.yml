@@ -32,7 +32,6 @@ jobs:
         run: >-
           ./gradlew
           :kaptos:compileDebugKotlinAndroid
-          :kaptos-keyless:compileDebugKotlinAndroid
           :kaptos-encrypted-transactions:compileDebugKotlinAndroid
           :kaptos-confidential-assets:compileDebugKotlinAndroid
           :kaptos:compileDebugAndroidTestKotlinAndroid
@@ -67,11 +66,9 @@ jobs:
         run: >-
           ./gradlew
           :kaptos:iosSimulatorArm64Test
-          :kaptos-keyless:iosSimulatorArm64Test
           :kaptos-encrypted-transactions:iosSimulatorArm64Test
           :kaptos-confidential-assets:iosSimulatorArm64Test
           :kaptos:macosArm64Test
-          :kaptos-keyless:macosArm64Test
           :kaptos-encrypted-transactions:macosArm64Test
           :kaptos-confidential-assets:macosArm64Test
           :kaptos:linkDebugFrameworkIosSimulatorArm64

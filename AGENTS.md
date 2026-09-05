@@ -2,7 +2,8 @@
 
 ## Repository structure and connections (kaptos)
 
-- Root Gradle build includes `:lib` and `:sample:jvmApp` (`settings.gradle.kts`).
+- Root Gradle build includes `:lib`, `:encrypted-transactions`, `:confidential-assets`, and
+  `:sample:jvmApp` (`settings.gradle.kts`).
 - `:lib` is renamed to `:kaptos` and is the main Kotlin Multiplatform SDK module.
 - `sample/jvmApp` depends on local module `project(":kaptos")`.
 

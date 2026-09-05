@@ -8,7 +8,6 @@ group = "xyz.mcxross.kaptos.sample"
 dependencies {
   implementation(libs.kotlinx.coroutines.core)
   implementation(project(":kaptos"))
-  implementation(project(":kaptos-keyless"))
   implementation(project(":kaptos-encrypted-transactions"))
   implementation(project(":kaptos-confidential-assets"))
   testImplementation(kotlin("test"))

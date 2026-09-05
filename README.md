@@ -30,7 +30,7 @@ multiple platforms.
 - **Modern transactions**: standard, sponsored, multi-agent, orderless, script, multisig-v2, and
   account-abstraction flows.
 - **Multiplatform**: Android, JVM, iOS, and macOS are compiled and tested release targets.
-- **Optional cryptography**: matching artifacts provide Keyless, batch-encrypted transactions, and
+- **Optional cryptography**: matching artifacts provide batch-encrypted transactions and
   Confidential Assets without increasing the core dependency surface.
 
 <details>
@@ -51,14 +51,6 @@ Encrypted transaction construction is deliberately optional:
 ```kotlin
 commonMain.dependencies {
     implementation("xyz.mcxross.kaptos:kaptos-encrypted-transactions:<version>")
-}
-```
-
-Keyless account support is also optional:
-
-```kotlin
-commonMain.dependencies {
-    implementation("xyz.mcxross.kaptos:kaptos-keyless:<version>")
 }
 ```
 
@@ -395,7 +387,7 @@ aptos(AptosConfig(network = Network.TESTNET)) {
 The derivable account must be funded before it can reserve transaction fees. Aptos removed
 permissioned signers; do not use `0x1::permissioned_delegation::authenticate` for new flows.
 
-Runnable standard, sponsored, orderless, abstraction, Keyless, encrypted-transaction, and
+Runnable standard, sponsored, orderless, abstraction, encrypted-transaction, and
 Confidential Asset examples are in [`sample/jvmApp`](sample/jvmApp).
 
 Run a JVM example directly with Gradle. `standard` is the default when `--args` is omitted:
@@ -407,7 +399,7 @@ APTOS_NETWORK='TESTNET' \
 ./gradlew :sample:jvmApp:run --args=standard
 ```
 
-Other accepted names are `sponsored`, `orderless`, `abstraction`, `keyless`, `encrypted`,
+Other accepted names are `sponsored`, `orderless`, `abstraction`, `encrypted`,
 `confidential`, `account`, and `multi-key`. Each sample reports any additional environment values
 it requires.
 

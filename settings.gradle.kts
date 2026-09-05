@@ -25,11 +25,10 @@ plugins { id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 // type-safe project accessors remain unambiguous when enabled.
 rootProject.name = "kaptos-build"
 
-include(":lib", ":encrypted-transactions", ":keyless", ":confidential-assets", ":sample:jvmApp")
+include(":lib", ":encrypted-transactions", ":confidential-assets", ":sample:jvmApp")
 
 project(":lib").name = "kaptos"
 project(":encrypted-transactions").name = "kaptos-encrypted-transactions"
-project(":keyless").name = "kaptos-keyless"
 project(":confidential-assets").name = "kaptos-confidential-assets"
 
 findProject(":sample:jvmApp")?.name = "jvmApp"

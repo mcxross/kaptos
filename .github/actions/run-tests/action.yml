@@ -60,7 +60,6 @@ runs:
         command: >-
           ./gradlew
           :kaptos:jvmTest
-          :kaptos-keyless:jvmTest
           :kaptos-encrypted-transactions:jvmTest
           :kaptos-confidential-assets:jvmTest
           :sample:jvmApp:compileKotlin

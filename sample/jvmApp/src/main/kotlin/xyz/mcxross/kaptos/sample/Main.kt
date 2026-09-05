@@ -16,7 +16,6 @@ fun main(arguments: Array<String>) {
     "sponsored" -> sponsoredTransaction()
     "orderless" -> orderlessTransaction()
     "abstraction" -> abstractionTransaction()
-    "keyless" -> keylessTransaction()
     "encrypted" -> encryptedTransaction()
     "confidential" -> confidentialAssetTransaction()
     "account" -> accountLifecycle()
