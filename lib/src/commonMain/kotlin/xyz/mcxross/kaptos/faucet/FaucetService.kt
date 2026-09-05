@@ -6,15 +6,15 @@
  */
 package xyz.mcxross.kaptos.faucet
 
-import xyz.mcxross.kaptos.account.toAptosError
+import xyz.mcxross.kaptos.internal.executeAptos
 import xyz.mcxross.kaptos.internal.fundAccount
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.WaitForTransactionOptions
 
 /** Test-network faucet operations exposed as `client.faucet`. */
@@ -35,18 +35,14 @@ internal fun interface FaucetDataSource {
   ): AptosResult<TransactionResponse>
 }
 
-internal class DefaultFaucetService(
-  private val dataSource: FaucetDataSource,
-) : FaucetService {
-  constructor(config: TransportConfig) :
-    this(
-      FaucetDataSource { address, amount, options ->
-        when (val result = fundAccount(config, address, amount, options)) {
-          is Result.Ok -> AptosResult.Success(result.value)
-          is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-        }
-      }
-    )
+internal class DefaultFaucetService(private val dataSource: FaucetDataSource) : FaucetService {
+  constructor(
+    config: TransportConfig
+  ) : this(
+    FaucetDataSource { address, amount, options ->
+      fundAccount(config, address, amount, options).toAptosResult()
+    }
+  )
 
   override suspend fun fund(
     address: AccountAddressInput,
@@ -59,10 +55,8 @@ internal class DefaultFaucetService(
       )
     }
 
-    return try {
+    return executeAptos {
       dataSource.fund(AccountAddress.from(address), amount.toLong(), options)
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Validation("Invalid faucet request", error))
     }
   }
 }

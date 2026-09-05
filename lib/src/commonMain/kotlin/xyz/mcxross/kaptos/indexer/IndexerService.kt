@@ -6,18 +6,21 @@
  */
 package xyz.mcxross.kaptos.indexer
 
-import com.github.michaelbull.result.fold
 import io.ktor.client.call.body
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import xyz.mcxross.kaptos.client.post
+import xyz.mcxross.kaptos.internal.executeAptos
+import xyz.mcxross.kaptos.internal.mapResponse
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.RequestOptions
+import xyz.mcxross.kaptos.model.TransportConfig
+import xyz.mcxross.kaptos.model.flatMap
 
 /** Lossless GraphQL access for optional SDK modules with independently versioned schemas. */
 interface IndexerService {
@@ -28,8 +31,7 @@ interface IndexerService {
   ): AptosResult<JsonObject>
 }
 
-@Serializable
-private data class GraphqlRequest(val query: String, val variables: JsonObject)
+@Serializable private data class GraphqlRequest(val query: String, val variables: JsonObject)
 
 @Serializable
 private data class GraphqlResponse(
@@ -45,7 +47,7 @@ internal class DefaultIndexerService(private val config: TransportConfig) : Inde
     if (document.isBlank()) {
       return AptosResult.Failure(AptosError.Validation("GraphQL document must not be blank"))
     }
-    return try {
+    return executeAptos {
       post(
           RequestOptions.PostRequestOptions(
             aptosConfig = config,
@@ -55,24 +57,18 @@ internal class DefaultIndexerService(private val config: TransportConfig) : Inde
             body = GraphqlRequest(document, variables),
           )
         )
-        .fold(
-          success = { response ->
-            val graphql = response.body<GraphqlResponse>()
-            if (!graphql.errors.isNullOrEmpty()) {
-              AptosResult.Failure(AptosError.Indexer(graphql.errors.toString()))
-            } else {
-              graphql.data?.let { AptosResult.Success(it) }
-                ?: AptosResult.Failure(AptosError.Indexer("Indexer returned no data"))
-            }
-          },
-          failure = { error ->
-            AptosResult.Failure(
-              AptosError.Indexer(error.message ?: "Indexer query failed", error)
-            )
-          },
-        )
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Indexer("Indexer query failed", error))
+        .toAptosResult()
+        .mapResponse("Invalid indexer response") {
+          it.body<GraphqlResponse>()
+        }
+        .flatMap { graphql ->
+          if (!graphql.errors.isNullOrEmpty()) {
+            AptosResult.Failure(AptosError.Indexer(graphql.errors.toString()))
+          } else {
+            graphql.data?.let { AptosResult.Success(it) }
+              ?: AptosResult.Failure(AptosError.Indexer("Indexer returned no data"))
+          }
+        }
     }
   }
 }

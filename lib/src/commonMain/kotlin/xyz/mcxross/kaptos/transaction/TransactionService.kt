@@ -7,18 +7,18 @@
 package xyz.mcxross.kaptos.transaction
 
 import xyz.mcxross.kaptos.account.TransactionSigner
-import xyz.mcxross.kaptos.account.toAptosError
+import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.sha3Hash
-import xyz.mcxross.kaptos.core.Hex
+import xyz.mcxross.kaptos.internal.executeAptos
+import xyz.mcxross.kaptos.internal.getModule
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.internal.simulateTransaction
 import xyz.mcxross.kaptos.internal.submitTransaction
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.internal.waitForTransaction
-import xyz.mcxross.kaptos.internal.getModule
-import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.ExternalFeePayerRequest
@@ -26,15 +26,16 @@ import xyz.mcxross.kaptos.model.InputSimulateTransactionData
 import xyz.mcxross.kaptos.model.InputSubmitTransactionData
 import xyz.mcxross.kaptos.model.MoveModuleBytecode
 import xyz.mcxross.kaptos.model.PendingTransactionResponse
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.SimulationOptions
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.TransactionResponse
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.TypeTag
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.WaitForTransactionOptions
+import xyz.mcxross.kaptos.model.map
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.builder.generateRawTransaction
@@ -265,17 +266,7 @@ internal class DefaultTransactionService(
   private val argumentCodec =
     MoveArgumentCodec(
       MoveModuleLoader { address, moduleName ->
-        when (val result = getModule(config, address, moduleName)) {
-          is Result.Ok -> AptosResult.Success(result.value)
-          is Result.Err ->
-            AptosResult.Failure(
-              AptosError.Api(
-                message = result.error.message ?: "Unable to fetch Move module ABI",
-                errorCode = result.error::class.simpleName ?: "module_abi_error",
-                cause = result.error,
-              )
-            )
-        }
+        getModule(config, address, moduleName).toAptosResult()
       }
     )
 
@@ -286,13 +277,12 @@ internal class DefaultTransactionService(
   ): AptosResult<TransactionPayload.EntryFunction> =
     argumentCodec.entryFunctionPayload(function, typeArguments, arguments)
 
-  override suspend fun preloadModuleAbis(
-    vararg modules: MoveModuleBytecode
-  ): AptosResult<Unit> =
+  override suspend fun preloadModuleAbis(vararg modules: MoveModuleBytecode): AptosResult<Unit> =
     try {
       argumentCodec.preload(*modules)
       AptosResult.Success(Unit)
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(
         AptosError.Serialization(error.message ?: "Invalid preloaded Move module ABI", error)
       )
@@ -303,7 +293,7 @@ internal class DefaultTransactionService(
     payload: TransactionPayload,
     options: TransactionOptions?,
   ): AptosResult<UnsignedTransaction.Simple> =
-    buildRaw(sender, payload, options).mapSuccess(UnsignedTransaction::Simple)
+    buildRaw(sender, payload, options).map(UnsignedTransaction::Simple)
 
   override suspend fun buildMultiAgent(
     sender: AccountAddressInput,
@@ -318,7 +308,7 @@ internal class DefaultTransactionService(
     }
     val addresses = parseAddresses(secondarySigners)
     if (addresses is AptosResult.Failure) return addresses
-    return buildRaw(sender, payload, options).mapSuccess { raw ->
+    return buildRaw(sender, payload, options).map { raw ->
       UnsignedTransaction.MultiAgent(raw, (addresses as AptosResult.Success).value)
     }
   }
@@ -334,12 +324,12 @@ internal class DefaultTransactionService(
     if (addresses is AptosResult.Failure) return addresses
     val feePayerAddress =
       try {
-        feePayer?.let(AccountAddress::from)
-          ?: UnsignedTransaction.EXTERNAL_FEE_PAYER_PLACEHOLDER
+        feePayer?.let(AccountAddress::from) ?: UnsignedTransaction.EXTERNAL_FEE_PAYER_PLACEHOLDER
       } catch (error: Throwable) {
+        error.rethrowCancellation()
         return AptosResult.Failure(AptosError.Validation("Invalid fee-payer address", error))
       }
-    return buildRaw(sender, payload, options).mapSuccess { raw ->
+    return buildRaw(sender, payload, options).map { raw ->
       UnsignedTransaction.FeePayer(
         rawTransaction = raw,
         secondarySignerAddresses = (addresses as AptosResult.Success).value,
@@ -381,17 +371,18 @@ internal class DefaultTransactionService(
         )
       )
     }
-    return callSdk {
+    return executeAptos {
       simulateTransaction(
-        config,
-        InputSimulateTransactionData(
-          signerPublicKey = senderPublicKey,
-          transaction = transaction,
-          secondarySignerPublicKeys = secondarySignerPublicKeys,
-          feePayerPublicKey = feePayerPublicKey,
-          options = options,
-        ),
-      )
+          config,
+          InputSimulateTransactionData(
+            signerPublicKey = senderPublicKey,
+            transaction = transaction,
+            secondarySignerPublicKeys = secondarySignerPublicKeys,
+            feePayerPublicKey = feePayerPublicKey,
+            options = options,
+          ),
+        )
+        .toAptosResult()
     }
   }
 
@@ -404,16 +395,17 @@ internal class DefaultTransactionService(
     validateAuthenticators(transaction, secondaryAuthenticators, feePayerAuthenticator)?.let {
       return it
     }
-    return callSdk {
+    return executeAptos {
       submitTransaction(
-        config,
-        InputSubmitTransactionData(
-          transaction = transaction,
-          senderAuthenticator = senderAuthenticator,
-          feePayerAuthenticator = feePayerAuthenticator,
-          additionalSignersAuthenticators = secondaryAuthenticators,
-        ),
-      )
+          config,
+          InputSubmitTransactionData(
+            transaction = transaction,
+            senderAuthenticator = senderAuthenticator,
+            feePayerAuthenticator = feePayerAuthenticator,
+            additionalSignersAuthenticators = secondaryAuthenticators,
+          ),
+        )
+        .toAptosResult()
     }
   }
 
@@ -457,20 +449,17 @@ internal class DefaultTransactionService(
   override suspend fun waitForTransaction(
     hash: String,
     options: WaitForTransactionOptions,
-  ): AptosResult<TransactionResponse> = call { waitForTransaction(config, hash, options) }
+  ): AptosResult<TransactionResponse> = executeAptos {
+    waitForTransaction(config, hash, options).toAptosResult()
+  }
 
   private suspend fun buildRaw(
     sender: AccountAddressInput,
     payload: TransactionPayload,
     options: TransactionOptions?,
-  ): AptosResult<xyz.mcxross.kaptos.transaction.instances.RawTransaction> =
-    try {
-      AptosResult.Success(generateRawTransaction(config, sender, payload, effectiveOptions(options)))
-    } catch (error: IllegalArgumentException) {
-      AptosResult.Failure(AptosError.Validation(error.message ?: "Invalid transaction", error))
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Transport("Unable to build transaction", error))
-    }
+  ): AptosResult<xyz.mcxross.kaptos.transaction.instances.RawTransaction> = executeAptos {
+    AptosResult.Success(generateRawTransaction(config, sender, payload, effectiveOptions(options)))
+  }
 
   private fun effectiveOptions(options: TransactionOptions?): TransactionOptions {
     if (options == null) return defaults
@@ -494,6 +483,7 @@ internal class DefaultTransactionService(
     try {
       AptosResult.Success(addresses.map(AccountAddress::from))
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid secondary signer address", error))
     }
 
@@ -522,41 +512,6 @@ internal class DefaultTransactionService(
     }
     return null
   }
-
-  private suspend fun <T> call(block: suspend () -> Result<T, Exception>): AptosResult<T> =
-    try {
-      when (val result = block()) {
-        is Result.Ok -> AptosResult.Success(result.value)
-        is Result.Err ->
-          AptosResult.Failure(
-            AptosError.Api(
-              message = result.error.message ?: "Aptos API request failed",
-              errorCode = result.error::class.simpleName ?: "api_error",
-              cause = result.error,
-            )
-          )
-      }
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Transport("Aptos request failed", error))
-    }
-
-  private suspend fun <T> callSdk(
-    block: suspend () -> Result<T, AptosSdkError>
-  ): AptosResult<T> =
-    try {
-      when (val result = block()) {
-        is Result.Ok -> AptosResult.Success(result.value)
-        is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      }
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Transport("Aptos request failed", error))
-    }
-
-  private inline fun <T, R> AptosResult<T>.mapSuccess(transform: (T) -> R): AptosResult<R> =
-    when (this) {
-      is AptosResult.Success -> AptosResult.Success(transform(value))
-      is AptosResult.Failure -> this
-    }
 }
 
 internal fun computeUserTransactionHash(
@@ -598,6 +553,7 @@ internal fun computeUserTransactionHash(
       Hex(sha3Hash(transactionPrefix + byteArrayOf(0) + signedTransaction)).toString()
     )
   } catch (error: Throwable) {
+    error.rethrowCancellation()
     AptosResult.Failure(
       AptosError.Serialization(error.message ?: "Unable to hash signed transaction", error)
     )
@@ -646,6 +602,7 @@ internal fun createExternalFeePayerRequest(
       )
     )
   } catch (error: Throwable) {
+    error.rethrowCancellation()
     AptosResult.Failure(
       AptosError.Serialization(error.message ?: "Unable to serialize Gas Station request", error)
     )

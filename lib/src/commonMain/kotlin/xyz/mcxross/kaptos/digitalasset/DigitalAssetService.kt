@@ -7,7 +7,6 @@
 package xyz.mcxross.kaptos.digitalasset
 
 import kotlin.time.Instant
-import xyz.mcxross.kaptos.account.toAptosError
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.generated.GetAccountOwnedTokensQuery
 import xyz.mcxross.kaptos.generated.GetCollectionDataQuery
@@ -17,18 +16,18 @@ import xyz.mcxross.kaptos.generated.fragment.TokenActivitiesFields
 import xyz.mcxross.kaptos.generated.type.Current_token_ownerships_v2_order_by
 import xyz.mcxross.kaptos.generated.type.Token_activities_v2_order_by
 import xyz.mcxross.kaptos.internal.handleQuery
-import xyz.mcxross.kaptos.internal.toResult
+import xyz.mcxross.kaptos.internal.rethrowCancellation
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.PageRequest
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.StructTag
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.TypeTagStruct
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.types.OrderBy
@@ -158,8 +157,7 @@ sealed interface DigitalAssetPropertyValue {
     val value: ByteArray
       get() = bytes.copyOf()
 
-    override fun equals(other: Any?): Boolean =
-      other is Bytes && bytes.contentEquals(other.bytes)
+    override fun equals(other: Any?): Boolean = other is Bytes && bytes.contentEquals(other.bytes)
 
     override fun hashCode(): Int = bytes.contentHashCode()
   }
@@ -335,8 +333,10 @@ internal class DefaultDigitalAssetService(
   private val dataSource: DigitalAssetDataSource,
   private val transactions: TransactionService,
 ) : DigitalAssetService {
-  constructor(config: TransportConfig, transactions: TransactionService) :
-    this(DefaultDigitalAssetDataSource(config), transactions)
+  constructor(
+    config: TransportConfig,
+    transactions: TransactionService,
+  ) : this(DefaultDigitalAssetDataSource(config), transactions)
 
   override suspend fun getCollection(
     collectionId: AccountAddressInput
@@ -655,8 +655,7 @@ internal class DefaultDigitalAssetService(
           TransactionPayload.entryFunction(
             function = function,
             typeArguments = listOf(TypeTagStruct(assetType)),
-            arguments =
-              listOf(MoveArgument.Address(AccountAddress.from(assetId))) + arguments,
+            arguments = listOf(MoveArgument.Address(AccountAddress.from(assetId))) + arguments,
           ),
         options = options,
       )
@@ -703,6 +702,7 @@ internal class DefaultDigitalAssetService(
     try {
       block()
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation(message, error))
     }
 
@@ -712,32 +712,29 @@ internal class DefaultDigitalAssetService(
   }
 }
 
-internal class DefaultDigitalAssetDataSource(
-  private val config: TransportConfig,
-) : DigitalAssetDataSource {
+internal class DefaultDigitalAssetDataSource(private val config: TransportConfig) :
+  DigitalAssetDataSource {
   override suspend fun getCollection(
     collectionId: AccountAddress?,
     creator: AccountAddress?,
     name: String?,
   ): AptosResult<CollectionRecord?> {
-    val filter =
-      currentCollectionsV2Filter {
-        collectionId?.let { this.collectionId = stringFilter { eq = it.toStringLong() } }
-        creator?.let { creatorAddress = stringFilter { eq = it.toStringLong() } }
-        name?.let { collectionName = stringFilter { eq = it } }
-      }
+    val filter = currentCollectionsV2Filter {
+      collectionId?.let { this.collectionId = stringFilter { eq = it.toStringLong() } }
+      creator?.let { creatorAddress = stringFilter { eq = it.toStringLong() } }
+      name?.let { collectionName = stringFilter { eq = it } }
+    }
     return when (
-      val result =
-        handleQuery {
-            getGraphqlClient(config)
-              .query(GetCollectionDataQuery(filter, limit = 1.toOptional()))
-          }
-          .toResult()
-    ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok -> mapData(result.value?.current_collections_v2?.firstOrNull()) {
-        it.toRecord()
+      val result = handleQuery {
+        getGraphqlClient(config).query(GetCollectionDataQuery(filter, limit = 1.toOptional()))
       }
+        .toAptosResult()
+    ) {
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
+        mapData(result.value?.current_collections_v2?.firstOrNull()) {
+          it.toRecord()
+        }
     }
   }
 
@@ -745,32 +742,28 @@ internal class DefaultDigitalAssetDataSource(
     owner: AccountAddress,
     page: PageRequest,
   ): AptosResult<AptosPage<DigitalAssetOwnership>> {
-    val filter =
-      currentTokenOwnershipsV2Filter {
-        ownerAddress = stringFilter { eq = owner.toStringLong() }
-        amount = numericFilter { gt = 0 }
-      }
+    val filter = currentTokenOwnershipsV2Filter {
+      ownerAddress = stringFilter { eq = owner.toStringLong() }
+      amount = numericFilter { gt = 0 }
+    }
     val order =
-      Current_token_ownerships_v2_order_by(
-        last_transaction_version = OrderBy.DESC.optional()
-      )
+      Current_token_ownerships_v2_order_by(last_transaction_version = OrderBy.DESC.optional())
     return when (
-      val result =
-        handleQuery {
-            getGraphqlClient(config)
-              .query(
-                GetAccountOwnedTokensQuery(
-                  where_condition = filter,
-                  offset = page.offset.toOptional(),
-                  limit = page.limit.toOptional(),
-                  order_by = listOf(order).toOptional(),
-                )
-              )
-          }
-          .toResult()
+      val result = handleQuery {
+        getGraphqlClient(config)
+          .query(
+            GetAccountOwnedTokensQuery(
+              where_condition = filter,
+              offset = page.offset.toOptional(),
+              limit = page.limit.toOptional(),
+              order_by = listOf(order).toOptional(),
+            )
+          )
+      }
+        .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           val data = requireNotNull(result.value) { "Indexer returned no owned-asset data" }
           AptosResult.Success(
@@ -779,12 +772,12 @@ internal class DefaultDigitalAssetDataSource(
                 data.current_token_ownerships_v2.map {
                   it.currentTokenOwnershipFields.toRecord()
                 },
-              totalCount =
-                data.current_token_ownerships_v2_aggregate.aggregate?.count ?: 0,
+              totalCount = data.current_token_ownerships_v2_aggregate.aggregate?.count ?: 0,
               request = page,
             )
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           serializationFailure("Invalid owned digital-asset row", error)
         }
     }
@@ -797,36 +790,34 @@ internal class DefaultDigitalAssetDataSource(
     val filter = tokenActivitiesV2Filter {
       tokenDataId = stringFilter { eq = assetId.toStringLong() }
     }
-    val order =
-      Token_activities_v2_order_by(transaction_version = OrderBy.DESC.optional())
+    val order = Token_activities_v2_order_by(transaction_version = OrderBy.DESC.optional())
     return when (
-      val result =
-        handleQuery {
-            getGraphqlClient(config)
-              .query(
-                GetTokenActivityQuery(
-                  where_condition = filter,
-                  offset = page.offset.toOptional(),
-                  limit = page.limit.toOptional(),
-                  order_by = listOf(order).toOptional(),
-                )
-              )
-          }
-          .toResult()
+      val result = handleQuery {
+        getGraphqlClient(config)
+          .query(
+            GetTokenActivityQuery(
+              where_condition = filter,
+              offset = page.offset.toOptional(),
+              limit = page.limit.toOptional(),
+              order_by = listOf(order).toOptional(),
+            )
+          )
+      }
+        .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           val data = requireNotNull(result.value) { "Indexer returned no activity data" }
           AptosResult.Success(
             AptosPage(
-              items =
-                data.token_activities_v2.map { it.tokenActivitiesFields.toRecord() },
+              items = data.token_activities_v2.map { it.tokenActivitiesFields.toRecord() },
               totalCount = data.token_activities_v2_aggregate.aggregate?.count ?: 0,
               request = page,
             )
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           serializationFailure("Invalid digital-asset activity row", error)
         }
     }
@@ -837,6 +828,7 @@ private inline fun <T, R> mapData(value: T?, transform: (T) -> R): AptosResult<R
   try {
     AptosResult.Success(value?.let(transform))
   } catch (error: Throwable) {
+    error.rethrowCancellation()
     serializationFailure("Invalid collection row", error)
   }
 
@@ -856,8 +848,7 @@ internal fun GetCollectionDataQuery.Current_collections_v2.toRecord(): Collectio
     totalMinted = total_minted_v2.optionalU64("total_minted_v2"),
     mutableDescription = mutable_description,
     mutableUri = mutable_uri,
-    lastTransactionVersion =
-      last_transaction_version.requiredU64("last_transaction_version"),
+    lastTransactionVersion = last_transaction_version.requiredU64("last_transaction_version"),
     lastTransactionTimestamp =
       last_transaction_timestamp.requiredInstant("last_transaction_timestamp"),
   )
@@ -882,8 +873,7 @@ internal fun CurrentTokenOwnershipFields.toRecord(): DigitalAssetOwnership =
     tokenStandard = token_standard,
     isSoulbound = is_soulbound_v2,
     isFungible = is_fungible_v2,
-    lastTransactionVersion =
-      last_transaction_version.requiredU64("last_transaction_version"),
+    lastTransactionVersion = last_transaction_version.requiredU64("last_transaction_version"),
     lastTransactionTimestamp =
       last_transaction_timestamp.requiredInstant("last_transaction_timestamp"),
   )
@@ -922,8 +912,7 @@ private fun DigitalAssetPropertyValue.toRawBytes(): ByteArray =
     is DigitalAssetPropertyValue.U8 -> byteArrayOf(value.toByte())
     is DigitalAssetPropertyValue.U16 -> AptosBcsWriter().also { it.u16(value) }.toByteArray()
     is DigitalAssetPropertyValue.U32 -> AptosBcsWriter().also { it.u32(value) }.toByteArray()
-    is DigitalAssetPropertyValue.U64 ->
-      AptosBcsWriter().also { it.u64(value) }.toByteArray()
+    is DigitalAssetPropertyValue.U64 -> AptosBcsWriter().also { it.u64(value) }.toByteArray()
     is DigitalAssetPropertyValue.U128 -> unsignedDecimalToLittleEndian(value, 16)
     is DigitalAssetPropertyValue.U256 -> unsignedDecimalToLittleEndian(value, 32)
     is DigitalAssetPropertyValue.Address -> value.data.copyOf()
@@ -931,8 +920,7 @@ private fun DigitalAssetPropertyValue.toRawBytes(): ByteArray =
     is DigitalAssetPropertyValue.Bytes -> AptosBcsWriter().also { it.bytes(value) }.toByteArray()
   }
 
-private fun Any?.optionalU64(field: String): ULong? =
-  this?.requiredU64(field)
+private fun Any?.optionalU64(field: String): ULong? = this?.requiredU64(field)
 
 private fun Any.requiredU64(field: String): ULong {
   val raw = toString().trim('"')
@@ -945,6 +933,7 @@ private fun Any.requiredInstant(field: String): Instant {
   return try {
     Instant.parse(if (hasOffset) raw else "${raw}Z")
   } catch (error: Throwable) {
+    error.rethrowCancellation()
     throw IllegalArgumentException("Invalid $field: $raw", error)
   }
 }

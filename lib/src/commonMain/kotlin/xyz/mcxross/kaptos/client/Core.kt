@@ -26,6 +26,7 @@ import io.ktor.client.request.headers
 import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosApiError
 import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.model.AptosResponse
 
 /**
@@ -63,7 +64,9 @@ internal fun HttpRequestBuilder.applyAptosHeaders(
  * Checks an HTTP response, returning a `Result` that is either the successful response or a
  * structured error.
  */
-internal suspend fun responseFitCheck(aptosResponse: AptosResponse): Result<AptosResponse, AptosSdkError> {
+internal suspend fun responseFitCheck(
+  aptosResponse: AptosResponse
+): Result<AptosResponse, AptosSdkError> {
   if (aptosResponse.status.isSuccess()) {
     return Ok(aptosResponse)
   }
@@ -71,6 +74,7 @@ internal suspend fun responseFitCheck(aptosResponse: AptosResponse): Result<Apto
     val apiError = aptosResponse.body<AptosApiError>()
     Err(AptosSdkError.ApiError(apiError))
   } catch (e: Exception) {
+    e.rethrowCancellation()
     Err(AptosSdkError.DeserializationError(e))
   }
 }

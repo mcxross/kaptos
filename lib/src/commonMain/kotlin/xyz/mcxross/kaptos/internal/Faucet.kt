@@ -64,6 +64,7 @@ internal suspend fun fundAccount(
     try {
       waitForTransaction(aptosConfig, hashToWaitFor, options)
     } catch (e: Exception) {
+      e.rethrowCancellation()
       return Result.Err(
         AptosSdkError.ApiError(
           AptosApiError(

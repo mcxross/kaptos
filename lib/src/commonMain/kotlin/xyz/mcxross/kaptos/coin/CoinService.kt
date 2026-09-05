@@ -6,6 +6,7 @@
  */
 package xyz.mcxross.kaptos.coin
 
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.AptosError
@@ -30,9 +31,7 @@ interface CoinService {
   ): AptosResult<UnsignedTransaction.Simple>
 }
 
-internal class DefaultCoinService(
-  private val transactions: TransactionService,
-) : CoinService {
+internal class DefaultCoinService(private val transactions: TransactionService) : CoinService {
   override suspend fun buildTransfer(
     sender: AccountAddressInput,
     recipient: AccountAddressInput,
@@ -56,6 +55,7 @@ internal class DefaultCoinService(
         options = options,
       )
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid coin transfer", error))
     }
 }

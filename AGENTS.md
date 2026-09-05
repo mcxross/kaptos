@@ -13,6 +13,9 @@
 - `protocol/`: internal transport-facing contracts (interfaces).
 - `api/`: protocol implementations, mostly thin wrappers.
 - `internal/`: core business logic, REST/GraphQL execution, pagination, tx flows.
+- `internal/ServiceExecution.kt`: shared public-result conversion, execution, and response decoding.
+  Service code converts transport results directly with `toAptosResult`; do not chain through
+  `toResult`. Request catches must propagate coroutine cancellation with `rethrowCancellation`.
 - `client/`: transport layer (Ktor/Apollo); `expect/actual` HTTP client setup per platform.
 - `model/`: shared domain/request/response/DSL types used across all layers.
 

@@ -26,6 +26,7 @@ import io.ktor.client.plugins.timeout
 import io.ktor.client.request.*
 import io.ktor.http.*
 import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.model.*
 
 internal suspend inline fun <reified V> post(
@@ -34,9 +35,7 @@ internal suspend inline fun <reified V> post(
   return try {
     val requestHeaders = options.aptosConfig.requestHeadersFor(options.type)
     val aptosResponse =
-      options.aptosConfig.httpClient.post(
-        options.aptosConfig.getRequestUrl(options.type)
-      ) {
+      options.aptosConfig.httpClient.post(options.aptosConfig.getRequestUrl(options.type)) {
         url { appendPathSegments(options.path) }
         options.params?.forEach { (key, value) -> parameter(key, value) }
         timeout { requestTimeoutMillis = options.aptosConfig.requestTimeoutMillis }
@@ -48,6 +47,7 @@ internal suspend inline fun <reified V> post(
 
     responseFitCheck(aptosResponse)
   } catch (e: Exception) {
+    e.rethrowCancellation()
     Err(AptosSdkError.NetworkError(e))
   }
 }
@@ -75,6 +75,7 @@ internal suspend inline fun <reified T, reified V> postAptosFullNode(
       val body = response.body<T>()
       Ok(Pair(response, body))
     } catch (e: Exception) {
+      e.rethrowCancellation()
       Err(AptosSdkError.DeserializationError(e))
     }
   }
@@ -151,6 +152,7 @@ internal suspend inline fun <reified T> postAptosFaucet(
     try {
       Ok(response.body<FaucetResponse>())
     } catch (e: Exception) {
+      e.rethrowCancellation()
       Err(AptosSdkError.DeserializationError(e))
     }
   }

@@ -15,35 +15,34 @@ import xyz.mcxross.kaptos.core.crypto.Ed25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.MultiEd25519PublicKey
 import xyz.mcxross.kaptos.core.crypto.multikey.AbstractMultiKey
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
-import xyz.mcxross.kaptos.exception.AptosIndexerError
-import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.internal.executeAptos
 import xyz.mcxross.kaptos.internal.getAccountAddressesForAuthKey
 import xyz.mcxross.kaptos.internal.getAuthKeysForPublicKey
 import xyz.mcxross.kaptos.internal.getInfo
-import xyz.mcxross.kaptos.internal.toResult
+import xyz.mcxross.kaptos.internal.rethrowCancellation
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.AccountData
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.HexInput
 import xyz.mcxross.kaptos.model.ReplayProtection
 import xyz.mcxross.kaptos.model.RequestOptions
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.SigningScheme
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
-import xyz.mcxross.kaptos.model.UserTransactionResponse
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
+import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.types.OrderBy
 import xyz.mcxross.kaptos.model.types.authKeyAccountAddressesFilter
 import xyz.mcxross.kaptos.model.types.authKeyAccountAddressesOrder
 import xyz.mcxross.kaptos.model.types.booleanFilter
 import xyz.mcxross.kaptos.model.types.publicKeyAuthKeysFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
-import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
 import xyz.mcxross.kaptos.transaction.instances.RotationProofChallenge
 
@@ -62,8 +61,7 @@ sealed interface AccountAsset {
   }
 
   companion object {
-    fun coin(type: String): AccountAsset =
-      Coin(xyz.mcxross.kaptos.model.StructTag.fromString(type))
+    fun coin(type: String): AccountAsset = Coin(xyz.mcxross.kaptos.model.StructTag.fromString(type))
 
     fun fungibleAsset(metadataAddress: AccountAddressInput): AccountAsset =
       FungibleAsset(AccountAddress.from(metadataAddress))
@@ -156,25 +154,21 @@ internal class DefaultAccountService(
   private val dataSource: AccountRestorationDataSource,
   private val transactions: TransactionService,
 ) : AccountService {
-  constructor(config: TransportConfig, transactions: TransactionService) :
-    this(DefaultAccountRestorationDataSource(config), transactions)
+  constructor(
+    config: TransportConfig,
+    transactions: TransactionService,
+  ) : this(DefaultAccountRestorationDataSource(config), transactions)
 
-  override suspend fun get(address: AccountAddressInput): AptosResult<AccountData> =
-    try {
-      dataSource.getAccount(AccountAddress.from(address))
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Validation("Invalid account address", error))
-    }
+  override suspend fun get(address: AccountAddressInput): AptosResult<AccountData> = executeAptos {
+    dataSource.getAccount(AccountAddress.from(address))
+  }
 
   override suspend fun getBalance(
     address: AccountAddressInput,
     asset: AccountAsset,
-  ): AptosResult<ULong> =
-    try {
-      dataSource.getBalance(AccountAddress.from(address), asset)
-    } catch (error: Throwable) {
-      AptosResult.Failure(AptosError.Validation("Invalid balance query", error))
-    }
+  ): AptosResult<ULong> = executeAptos {
+    dataSource.getBalance(AccountAddress.from(address), asset)
+  }
 
   override suspend fun findByPublicKey(
     publicKey: AccountPublicKey,
@@ -221,12 +215,13 @@ internal class DefaultAccountService(
       is AptosResult.Failure -> return restored
       is AptosResult.Success ->
         restored.value.forEach { entry ->
-          val key = keysByAuthenticationKey[entry.authenticationKey]
-            ?: return AptosResult.Failure(
-              AptosError.Serialization(
-                "Indexer returned an authentication key that was not requested"
+          val key =
+            keysByAuthenticationKey[entry.authenticationKey]
+              ?: return AptosResult.Failure(
+                AptosError.Serialization(
+                  "Indexer returned an authentication key that was not requested"
+                )
               )
-            )
           found += AccountInfo(entry.address, key, entry.lastTransactionVersion)
         }
     }
@@ -313,16 +308,18 @@ internal class DefaultAccountService(
               MoveArgument.Bytes(
                 currentAccount.sign(HexInput.fromByteArray(challengeBytes)).toByteArray()
               ),
-              MoveArgument.Bytes(newAccount.sign(HexInput.fromByteArray(challengeBytes)).toByteArray()),
+              MoveArgument.Bytes(
+                newAccount.sign(HexInput.fromByteArray(challengeBytes)).toByteArray()
+              ),
             ),
         )
       transactions.build(
         sender = currentAccount.accountAddress,
         payload = payload,
-        options =
-          options.copy(replayProtection = ReplayProtection.SequenceNumber(sequenceNumber)),
+        options = options.copy(replayProtection = ReplayProtection.SequenceNumber(sequenceNumber)),
       )
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Crypto("Unable to build verified key rotation", error))
     }
   }
@@ -332,12 +329,13 @@ internal class DefaultAccountService(
     newPublicKey: AccountPublicKey,
     options: TransactionOptions,
   ): AptosResult<UnsignedTransaction.Simple> {
-    val scheme = signingSchemeFor(newPublicKey)
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature(
-          "Unsupported authentication key type: ${newPublicKey::class.simpleName}"
+    val scheme =
+      signingSchemeFor(newPublicKey)
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature(
+            "Unsupported authentication key type: ${newPublicKey::class.simpleName}"
+          )
         )
-      )
     val payload =
       TransactionPayload.entryFunction(
         function = "0x1::account::rotate_authentication_key_from_public_key",
@@ -369,13 +367,14 @@ internal class DefaultAccountService(
       is MultiEd25519PublicKey -> {
         val privateKey = signer.ed25519PrivateKeyOrNull() ?: return null
         if (
-          key.threshold.toInt() != 1 ||
-            key.publicKeys.none { it.sameKey(privateKey.publicKey()) }
-        ) null
+          key.threshold.toInt() != 1 || key.publicKeys.none { it.sameKey(privateKey.publicKey()) }
+        )
+          null
         else MultiEd25519Account(key, listOf(privateKey), info.address)
       }
       is MultiKey -> {
-        if (key.signaturesRequired != 1 || !key.publicKeys.any { it.sameKey(signer.publicKey) }) null
+        if (key.signaturesRequired != 1 || !key.publicKeys.any { it.sameKey(signer.publicKey) })
+          null
         else MultiKeyAccount(key, listOf(signer), info.address)
       }
       else -> null
@@ -389,14 +388,10 @@ internal class DefaultAccountService(
     }
 }
 
-internal class DefaultAccountRestorationDataSource(
-  private val config: TransportConfig,
-) : AccountRestorationDataSource {
+internal class DefaultAccountRestorationDataSource(private val config: TransportConfig) :
+  AccountRestorationDataSource {
   override suspend fun getAccount(address: AccountAddress): AptosResult<AccountData> =
-    when (val result = getInfo(config, address)) {
-      is Result.Ok -> AptosResult.Success(result.value)
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-    }
+    getInfo(config, address).toAptosResult()
 
   override suspend fun getBalance(
     address: AccountAddress,
@@ -404,17 +399,18 @@ internal class DefaultAccountRestorationDataSource(
   ): AptosResult<ULong> =
     when (
       val result =
-        xyz.mcxross.kaptos.client.getAptosFullNode<String>(
+        xyz.mcxross.kaptos.client
+          .getAptosFullNode<String>(
             RequestOptions.GetAptosRequestOptions(
               aptosConfig = config,
               originMethod = "getBalance",
               path = "accounts/${address.value}/balance/${asset.value}",
             )
           )
-          .toResult()
+          .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok -> {
+      is AptosResult.Failure -> result
+      is AptosResult.Success -> {
         val raw = result.value.trim().removeSurrounding("\"")
         raw.toULongOrNull()?.let { AptosResult.Success(it) }
           ?: AptosResult.Failure(
@@ -423,22 +419,21 @@ internal class DefaultAccountRestorationDataSource(
       }
     }
 
-  override suspend fun getLatestTransactionVersion(
-    address: AccountAddress
-  ): AptosResult<ULong> =
+  override suspend fun getLatestTransactionVersion(address: AccountAddress): AptosResult<ULong> =
     when (
       val result =
         getAptosFullNode<List<UserTransactionResponse>>(
-          RequestOptions.GetAptosRequestOptions(
-            aptosConfig = config,
-            originMethod = "getLatestTransactionVersionForAddress",
-            path = "accounts/${address.value}/transactions",
-            params = mapOf("limit" to 1),
+            RequestOptions.GetAptosRequestOptions(
+              aptosConfig = config,
+              originMethod = "getLatestTransactionVersionForAddress",
+              path = "accounts/${address.value}/transactions",
+              params = mapOf("limit" to 1),
+            )
           )
-        ).toResult()
+          .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok -> {
+      is AptosResult.Failure -> result
+      is AptosResult.Success -> {
         val version = result.value.firstOrNull()?.version ?: "0"
         version.toULongOrNull()?.let { AptosResult.Success(it) }
           ?: AptosResult.Failure(
@@ -457,22 +452,19 @@ internal class DefaultAccountRestorationDataSource(
         is Ed25519PublicKey -> AnyPublicKey(publicKey)
         else ->
           return AptosResult.Failure(
-            AptosError.UnsupportedFeature(
-              "Related multi-key lookup requires a single public key"
-            )
+            AptosError.UnsupportedFeature("Related multi-key lookup requires a single public key")
           )
       }
-    val filter =
-      publicKeyAuthKeysFilter {
-        this.publicKey = stringFilter { eq = anyPublicKey.publicKey.toString() }
-        publicKeyType = stringFilter { eq = anyPublicKey.variant.indexerName }
-        accountPublicKey = stringFilter { isNull = false }
-        if (!includeUnverified) isPublicKeyUsed = booleanFilter { eq = true }
-      }
+    val filter = publicKeyAuthKeysFilter {
+      this.publicKey = stringFilter { eq = anyPublicKey.publicKey.toString() }
+      publicKeyType = stringFilter { eq = anyPublicKey.variant.indexerName }
+      accountPublicKey = stringFilter { isNull = false }
+      if (!includeUnverified) isPublicKeyUsed = booleanFilter { eq = true }
+    }
 
-    return when (val result = getAuthKeysForPublicKey(config, filter, null)) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+    return when (val result = getAuthKeysForPublicKey(config, filter, null).toAptosResult()) {
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           AptosResult.Success(
             result.value
@@ -484,6 +476,7 @@ internal class DefaultAccountRestorationDataSource(
               .distinctBy(AccountPublicKey::toString)
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(
             AptosError.Serialization("Invalid account public key returned by the indexer", error)
           )
@@ -496,33 +489,35 @@ internal class DefaultAccountRestorationDataSource(
     includeUnverified: Boolean,
   ): AptosResult<List<RestoredAccountAddress>> {
     if (authenticationKeys.isEmpty()) return AptosResult.Success(emptyList())
-    val filter =
-      authKeyAccountAddressesFilter {
-        authKey = stringFilter { inList = authenticationKeys }
-        if (!includeUnverified) isAuthKeyUsed = booleanFilter { eq = true }
-      }
+    val filter = authKeyAccountAddressesFilter {
+      authKey = stringFilter { inList = authenticationKeys }
+      if (!includeUnverified) isAuthKeyUsed = booleanFilter { eq = true }
+    }
     val order = authKeyAccountAddressesOrder { lastTransactionVersion = OrderBy.DESC }
-    return when (val result = getAccountAddressesForAuthKey(config, filter, listOf(order))) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+    return when (
+      val result = getAccountAddressesForAuthKey(config, filter, listOf(order)).toAptosResult()
+    ) {
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           AptosResult.Success(
-            result.value
-              ?.auth_key_account_addresses
-              .orEmpty()
-              .map { row ->
-                RestoredAccountAddress(
-                  authenticationKey = row.auth_key,
-                  address = AccountAddress.fromString(row.account_address),
-                  lastTransactionVersion =
-                    row.last_transaction_version.toString().toULongOrNull()
-                      ?: throw IllegalArgumentException("Invalid last transaction version"),
-                )
-              }
+            result.value?.auth_key_account_addresses.orEmpty().map { row ->
+              RestoredAccountAddress(
+                authenticationKey = row.auth_key,
+                address = AccountAddress.fromString(row.account_address),
+                lastTransactionVersion =
+                  row.last_transaction_version.toString().toULongOrNull()
+                    ?: throw IllegalArgumentException("Invalid last transaction version"),
+              )
+            }
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(
-            AptosError.Serialization("Invalid account restoration row returned by the indexer", error)
+            AptosError.Serialization(
+              "Invalid account restoration row returned by the indexer",
+              error,
+            )
           )
         }
     }
@@ -565,9 +560,10 @@ private fun decodeRestorationPublicKey(signatureType: String, value: String): Ac
         "Invalid MultiEd25519 public key length"
       }
       MultiEd25519PublicKey(
-        publicKeys = bytes.dropLast(1).chunked(Ed25519PublicKey.LENGTH).map {
-          Ed25519PublicKey(it.toByteArray())
-        },
+        publicKeys =
+          bytes.dropLast(1).chunked(Ed25519PublicKey.LENGTH).map {
+            Ed25519PublicKey(it.toByteArray())
+          },
         threshold = bytes.last().toUByte(),
       )
     }
@@ -585,30 +581,3 @@ private fun AnyPublicKey.sameKey(other: AccountPublicKey): Boolean =
     is AnyPublicKey -> toByteArray().contentEquals(other.toByteArray())
     else -> publicKey.toByteArray().contentEquals(other.toByteArray())
   }
-
-internal fun AptosSdkError.toAptosError(): AptosError =
-  when (this) {
-    is AptosSdkError.ApiError ->
-      if (apiError.errorCode.lowercase() in setOf("feature_under_gating", "unsupported_feature")) {
-        AptosError.UnsupportedFeature(
-          message = apiError.message,
-          cause = this,
-          errorCode = apiError.errorCode,
-          vmErrorCode = apiError.vmErrorCode,
-        )
-      } else {
-        AptosError.Api(
-          message = apiError.message,
-          errorCode = apiError.errorCode,
-          vmErrorCode = apiError.vmErrorCode,
-          cause = this,
-        )
-      }
-    is AptosSdkError.DeserializationError ->
-      AptosError.Serialization(message ?: "Unable to deserialize Aptos response", cause)
-    is AptosSdkError.NetworkError -> AptosError.Transport(message ?: "Network request failed", cause)
-    is AptosSdkError.UnknownError -> AptosError.Transport(message ?: "Aptos request failed", cause)
-  }
-
-internal fun AptosIndexerError.toAptosError(): AptosError =
-  AptosError.Indexer(message ?: "Indexer request failed", this)

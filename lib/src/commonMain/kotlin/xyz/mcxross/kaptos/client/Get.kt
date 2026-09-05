@@ -16,7 +16,6 @@
 
 package xyz.mcxross.kaptos.client
 
-import com.apollographql.apollo.ApolloClient
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
@@ -36,10 +35,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import xyz.mcxross.kaptos.exception.AptosSdkError
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosResponse
 import xyz.mcxross.kaptos.model.RequestOptions
+import xyz.mcxross.kaptos.model.TransportConfig
 
 private val apiErrorJson = Json { ignoreUnknownKeys = true }
 
@@ -111,7 +111,8 @@ internal suspend fun get(
             )
             accept(ContentType.parse(options.acceptType.type))
           }
-        } catch (_: Exception) {
+        } catch (error: Exception) {
+          error.rethrowCancellation()
           return errorFromBody(errorBody)
         }
     }
@@ -122,6 +123,7 @@ internal suspend fun get(
       errorFromBody(aptosResponse.bodyAsText())
     }
   } catch (e: Exception) {
+    e.rethrowCancellation()
     Err(AptosSdkError.NetworkError(e))
   }
 }
@@ -197,6 +199,7 @@ internal suspend inline fun <reified T> getAptosFullNode(
         }
       Ok(body)
     } catch (e: Exception) {
+      e.rethrowCancellation()
       Err(AptosSdkError.UnknownError(e))
     }
   }
@@ -266,6 +269,7 @@ internal suspend inline fun <reified T> paginateWithCursor(
       } catch (e: SerializationException) {
         return Err(AptosSdkError.UnknownError(e))
       } catch (e: Exception) {
+        e.rethrowCancellation()
         return Err(AptosSdkError.UnknownError(e))
       }
 
@@ -277,8 +281,7 @@ internal suspend inline fun <reified T> paginateWithCursor(
   return Ok(allItems)
 }
 
-internal fun getGraphqlClient(config: TransportConfig) =
-  config.graphqlClient()
+internal fun getGraphqlClient(config: TransportConfig) = config.graphqlClient()
 
 private data class ArchivalRetryTarget(val url: String, val forwardCredentials: Boolean)
 
@@ -288,11 +291,10 @@ private fun resolveArchivalRetryTarget(
 ): ArchivalRetryTarget? {
   val advertised =
     runCatching {
-        Json.parseToJsonElement(responseBody).jsonObject["archival_endpoint"]?.jsonPrimitive?.content
-      }
+      Json.parseToJsonElement(responseBody).jsonObject["archival_endpoint"]?.jsonPrimitive?.content
+    }
       .getOrNull()
-      ?.takeIf { it.isNotBlank() }
-      ?: return null
+      ?.takeIf { it.isNotBlank() } ?: return null
 
   val original = runCatching { Url(originalBaseUrl) }.getOrNull() ?: return null
   val archival = runCatching { Url(advertised) }.getOrNull() ?: return null
@@ -312,6 +314,7 @@ private fun errorFromBody(body: String): Result<AptosResponse, AptosSdkError> =
   try {
     Err(AptosSdkError.ApiError(apiErrorJson.decodeFromString(body)))
   } catch (e: Exception) {
+    e.rethrowCancellation()
     Err(AptosSdkError.DeserializationError(e))
   }
 

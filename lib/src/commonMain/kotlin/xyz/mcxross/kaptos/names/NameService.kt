@@ -12,32 +12,31 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
-import xyz.mcxross.kaptos.client.postAptosFullNodeAndGetData
 import xyz.mcxross.kaptos.client.getGraphqlClient
-import xyz.mcxross.kaptos.account.toAptosError
+import xyz.mcxross.kaptos.client.postAptosFullNodeAndGetData
 import xyz.mcxross.kaptos.generated.GetNamesQuery
 import xyz.mcxross.kaptos.internal.handleQuery
-import xyz.mcxross.kaptos.internal.toResult
+import xyz.mcxross.kaptos.internal.rethrowCancellation
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
-import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosPage
+import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.PageRequest
 import xyz.mcxross.kaptos.model.RequestOptions
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
-import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.model.types.OrderBy
 import xyz.mcxross.kaptos.model.types.booleanFilter
 import xyz.mcxross.kaptos.model.types.currentAptosNamesFilter
 import xyz.mcxross.kaptos.model.types.currentAptosNamesOrder
 import xyz.mcxross.kaptos.model.types.stringFilter
+import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.util.toOptional
 
 /** Validated Aptos Name Service name, without the optional `.apt` suffix. */
@@ -243,30 +242,31 @@ internal class DefaultNameService(
   override suspend fun expiration(name: String): AptosResult<ULong> =
     withName(name, dataSource::expiration)
 
-  override suspend fun primaryName(
-    accountAddress: AccountAddressInput
-  ): AptosResult<String?> =
+  override suspend fun primaryName(accountAddress: AccountAddressInput): AptosResult<String?> =
     try {
       dataSource.primaryName(AccountAddress.from(accountAddress))
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid account address", error))
     }
 
   override suspend fun getName(name: String): AptosResult<NameRecord?> =
     try {
-      when (val page = dataSource.query(NameQuery.Exact(AptosName.parse(name)), PageRequest(limit = 1))) {
+      when (
+        val page = dataSource.query(NameQuery.Exact(AptosName.parse(name)), PageRequest(limit = 1))
+      ) {
         is AptosResult.Failure -> page
         is AptosResult.Success -> AptosResult.Success(page.value.items.firstOrNull())
       }
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid Aptos name", error))
     }
 
   override suspend fun getAccountNames(
     accountAddress: AccountAddressInput,
     page: PageRequest,
-  ): AptosResult<AptosPage<NameRecord>> =
-    queryAccount(accountAddress, page, NameQuery::Account)
+  ): AptosResult<AptosPage<NameRecord>> = queryAccount(accountAddress, page, NameQuery::Account)
 
   override suspend fun getAccountDomains(
     accountAddress: AccountAddressInput,
@@ -294,6 +294,7 @@ internal class DefaultNameService(
         dataSource.query(NameQuery.DomainSubdomains(parsed.domain), page)
       }
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid Aptos domain", error))
     }
 
@@ -336,8 +337,10 @@ internal class DefaultNameService(
   ): AptosResult<UnsignedTransaction.Simple> =
     try {
       val parsed = AptosName.parse(name)
-      val targetArgument = MoveArgument.Option(target?.let { MoveArgument.Address(AccountAddress.from(it)) })
-      val ownerArgument = MoveArgument.Option(owner?.let { MoveArgument.Address(AccountAddress.from(it)) })
+      val targetArgument =
+        MoveArgument.Option(target?.let { MoveArgument.Address(AccountAddress.from(it)) })
+      val ownerArgument =
+        MoveArgument.Option(owner?.let { MoveArgument.Address(AccountAddress.from(it)) })
       when (expiration) {
         NameExpirationPolicy.Domain -> {
           if (parsed.subdomain != null) {
@@ -378,9 +381,7 @@ internal class DefaultNameService(
             }
           if (expirationTimestamp > parentExpiration) {
             return AptosResult.Failure(
-              AptosError.Validation(
-                "Subdomain expiration cannot be later than its parent domain"
-              )
+              AptosError.Validation("Subdomain expiration cannot be later than its parent domain")
             )
           }
           build(
@@ -401,6 +402,7 @@ internal class DefaultNameService(
         }
       }
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid ANS registration", error))
     }
 
@@ -426,6 +428,7 @@ internal class DefaultNameService(
         )
       }
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid ANS renewal", error))
     }
 
@@ -439,6 +442,7 @@ internal class DefaultNameService(
     try {
       build(sender, function, arguments(AptosName.parse(name)), options)
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid Aptos name", error))
     }
 
@@ -450,8 +454,7 @@ internal class DefaultNameService(
   ): AptosResult<UnsignedTransaction.Simple> =
     try {
       val configuredContract =
-        contractAddress
-          ?: return AptosResult.Failure(unsupportedNetworkError())
+        contractAddress ?: return AptosResult.Failure(unsupportedNetworkError())
       transactions.build(
         sender = sender,
         payload =
@@ -462,6 +465,7 @@ internal class DefaultNameService(
         options = options,
       )
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid ANS transaction", error))
     }
 
@@ -472,6 +476,7 @@ internal class DefaultNameService(
     try {
       block(AptosName.parse(name))
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid Aptos name", error))
     }
 
@@ -483,6 +488,7 @@ internal class DefaultNameService(
     try {
       dataSource.query(query(AccountAddress.from(accountAddress)), page)
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid account address", error))
     }
 
@@ -497,18 +503,14 @@ internal class DefaultNameService(
   }
 }
 
-private class UnsupportedNameDataSource(
-  private val network: Network,
-) : NameDataSource {
+private class UnsupportedNameDataSource(private val network: Network) : NameDataSource {
   override suspend fun owner(name: AptosName): AptosResult<AccountAddress?> = failure()
 
   override suspend fun target(name: AptosName): AptosResult<AccountAddress?> = failure()
 
   override suspend fun expiration(name: AptosName): AptosResult<ULong> = failure()
 
-  override suspend fun primaryName(
-    accountAddress: AccountAddress
-  ): AptosResult<String?> = failure()
+  override suspend fun primaryName(accountAddress: AccountAddress): AptosResult<String?> = failure()
 
   override suspend fun query(
     query: NameQuery,
@@ -533,14 +535,10 @@ internal class DefaultNameDataSource(
       is AptosResult.Failure -> result
       is AptosResult.Success ->
         result.value.singleOrNull()?.toULongOrNull()?.let { AptosResult.Success(it) }
-          ?: AptosResult.Failure(
-            AptosError.Serialization("Invalid ANS expiration view response")
-          )
+          ?: AptosResult.Failure(AptosError.Serialization("Invalid ANS expiration view response"))
     }
 
-  override suspend fun primaryName(
-    accountAddress: AccountAddress
-  ): AptosResult<String?> =
+  override suspend fun primaryName(accountAddress: AccountAddress): AptosResult<String?> =
     when (
       val result =
         view<List<MoveOptionWire<String>>>(
@@ -556,6 +554,7 @@ internal class DefaultNameDataSource(
           val domain = result.value[1].vec.singleOrNull()
           AptosResult.Success(domain?.let { listOfNotNull(subdomain, it).joinToString(".") })
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(
             AptosError.Serialization("Invalid ANS primary-name view response", error)
           )
@@ -566,49 +565,45 @@ internal class DefaultNameDataSource(
     query: NameQuery,
     page: PageRequest,
   ): AptosResult<AptosPage<NameRecord>> {
-    val filter =
-      currentAptosNamesFilter {
-        isActive = booleanFilter { eq = true }
-        when (query) {
-          is NameQuery.Exact -> {
-            domain = stringFilter { eq = query.name.domain }
-            subdomain = stringFilter { eq = query.name.subdomain.orEmpty() }
-          }
-          is NameQuery.Account ->
-            ownerAddress = stringFilter { eq = query.address.toString() }
-          is NameQuery.AccountDomains -> {
-            ownerAddress = stringFilter { eq = query.address.toString() }
-            subdomain = stringFilter { eq = "" }
-          }
-          is NameQuery.AccountSubdomains -> {
-            ownerAddress = stringFilter { eq = query.address.toString() }
-            subdomain = stringFilter { neq = "" }
-          }
-          is NameQuery.DomainSubdomains -> {
-            domain = stringFilter { eq = query.domain }
-            subdomain = stringFilter { neq = "" }
-          }
+    val filter = currentAptosNamesFilter {
+      isActive = booleanFilter { eq = true }
+      when (query) {
+        is NameQuery.Exact -> {
+          domain = stringFilter { eq = query.name.domain }
+          subdomain = stringFilter { eq = query.name.subdomain.orEmpty() }
+        }
+        is NameQuery.Account -> ownerAddress = stringFilter { eq = query.address.toString() }
+        is NameQuery.AccountDomains -> {
+          ownerAddress = stringFilter { eq = query.address.toString() }
+          subdomain = stringFilter { eq = "" }
+        }
+        is NameQuery.AccountSubdomains -> {
+          ownerAddress = stringFilter { eq = query.address.toString() }
+          subdomain = stringFilter { neq = "" }
+        }
+        is NameQuery.DomainSubdomains -> {
+          domain = stringFilter { eq = query.domain }
+          subdomain = stringFilter { neq = "" }
         }
       }
-    val order =
-      currentAptosNamesOrder { lastTransactionVersion = OrderBy.DESC }
+    }
+    val order = currentAptosNamesOrder { lastTransactionVersion = OrderBy.DESC }
     return when (
-      val result =
-        handleQuery {
-            getGraphqlClient(config)
-              .query(
-                GetNamesQuery(
-                  where_condition = filter.toOptional(),
-                  offset = page.offset.toOptional(),
-                  limit = page.limit.toOptional(),
-                  order_by = listOf(order).toOptional(),
-                )
-              )
-          }
-          .toResult()
+      val result = handleQuery {
+        getGraphqlClient(config)
+          .query(
+            GetNamesQuery(
+              where_condition = filter.toOptional(),
+              offset = page.offset.toOptional(),
+              limit = page.limit.toOptional(),
+              order_by = listOf(order).toOptional(),
+            )
+          )
+      }
+        .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           val data =
             result.value
@@ -623,6 +618,7 @@ internal class DefaultNameDataSource(
             )
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(AptosError.Serialization("Invalid ANS indexer row", error))
         }
     }
@@ -640,6 +636,7 @@ internal class DefaultNameDataSource(
           require(option.size <= 1) { "Invalid Move option" }
           AptosResult.Success(option.singleOrNull()?.let(AccountAddress::fromString))
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(AptosError.Serialization("Invalid ANS address response", error))
         }
     }
@@ -662,10 +659,10 @@ internal class DefaultNameDataSource(
                 ),
             )
           )
-          .toResult()
+          .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok -> AptosResult.Success(result.value)
+      is AptosResult.Failure -> result
+      is AptosResult.Success -> AptosResult.Success(result.value)
     }
 
   private fun AptosName.viewArguments(): List<JsonElement> =
@@ -679,8 +676,7 @@ private data class NameViewRequest(
   val arguments: List<JsonElement>,
 )
 
-@Serializable
-private data class MoveOptionWire<T>(val vec: List<T>)
+@Serializable private data class MoveOptionWire<T>(val vec: List<T>)
 
 internal fun GetNamesQuery.Current_aptos_name.toRecord(): NameRecord {
   val domainName = requireNotNull(domain) { "ANS row is missing its domain" }

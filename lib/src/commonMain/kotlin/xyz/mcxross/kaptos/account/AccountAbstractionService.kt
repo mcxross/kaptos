@@ -11,15 +11,16 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.decodeFromJsonElement
+import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Identifier
 import xyz.mcxross.kaptos.model.ModuleId
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.transaction.MoveArgument
 import xyz.mcxross.kaptos.transaction.TransactionService
@@ -27,9 +28,7 @@ import xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction
 import xyz.mcxross.kaptos.view.DefaultViewService
 
 /** Current on-chain account-abstraction configuration for an account. */
-data class AccountAbstractionStatus(
-  val authenticationFunctions: List<AuthenticationFunction>,
-) {
+data class AccountAbstractionStatus(val authenticationFunctions: List<AuthenticationFunction>) {
   val isEnabled: Boolean
     get() = authenticationFunctions.isNotEmpty()
 }
@@ -73,19 +72,24 @@ internal class DefaultAccountAbstractionService(
   private val dataSource: AccountAbstractionDataSource,
   private val transactions: TransactionService,
 ) : AccountAbstractionService {
-  constructor(config: TransportConfig, transactions: TransactionService) :
-    this(DefaultAccountAbstractionDataSource(config), transactions)
+  constructor(
+    config: TransportConfig,
+    transactions: TransactionService,
+  ) : this(DefaultAccountAbstractionDataSource(config), transactions)
 
   override suspend fun status(
     accountAddress: AccountAddressInput
   ): AptosResult<AccountAbstractionStatus> =
     try {
-      when (val functions = dataSource.getAuthenticationFunctions(AccountAddress.from(accountAddress))) {
+      when (
+        val functions = dataSource.getAuthenticationFunctions(AccountAddress.from(accountAddress))
+      ) {
         is AptosResult.Failure -> functions
         is AptosResult.Success ->
           AptosResult.Success(AccountAbstractionStatus(functions.value.distinct()))
       }
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid account address", error))
     }
 
@@ -156,9 +160,8 @@ internal class DefaultAccountAbstractionService(
     )
 }
 
-internal class DefaultAccountAbstractionDataSource(
-  config: TransportConfig,
-) : AccountAbstractionDataSource {
+internal class DefaultAccountAbstractionDataSource(config: TransportConfig) :
+  AccountAbstractionDataSource {
   private val views = DefaultViewService(config)
 
   override suspend fun getAuthenticationFunctions(
@@ -180,6 +183,7 @@ internal class DefaultAccountAbstractionDataSource(
             }
           )
         } catch (error: Throwable) {
+          error.rethrowCancellation()
           AptosResult.Failure(
             AptosError.Serialization("Invalid account-abstraction view response", error)
           )
@@ -190,7 +194,7 @@ internal class DefaultAccountAbstractionDataSource(
 
 @Serializable
 private data class DispatchableAuthenticatorOptionWire(
-  val vec: List<List<DispatchableFunctionWire>>,
+  val vec: List<List<DispatchableFunctionWire>>
 )
 
 @Serializable
@@ -220,6 +224,7 @@ private fun decodeAuthenticationFunctions(
       }
     )
   } catch (error: Throwable) {
+    error.rethrowCancellation()
     AptosResult.Failure(
       AptosError.Serialization("Invalid account-abstraction view response", error)
     )

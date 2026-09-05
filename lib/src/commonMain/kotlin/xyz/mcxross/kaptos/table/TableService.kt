@@ -8,20 +8,20 @@ package xyz.mcxross.kaptos.table
 
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
-import xyz.mcxross.kaptos.account.toAptosError
 import xyz.mcxross.kaptos.generated.GetTableItemsDataQuery
 import xyz.mcxross.kaptos.generated.GetTableItemsMetadataQuery
 import xyz.mcxross.kaptos.internal.getTableItem
 import xyz.mcxross.kaptos.internal.getTableItemsData
 import xyz.mcxross.kaptos.internal.getTableItemsMetadata
-import xyz.mcxross.kaptos.model.TransportConfig
+import xyz.mcxross.kaptos.internal.rethrowCancellation
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosSlice
 import xyz.mcxross.kaptos.model.PageRequest
 import xyz.mcxross.kaptos.model.PaginationArgs
-import xyz.mcxross.kaptos.model.Result
 import xyz.mcxross.kaptos.model.TableItemRequest
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.model.types.tableItemsFilter
 import xyz.mcxross.kaptos.model.types.tableMetadatasFilter
@@ -97,9 +97,7 @@ interface TableService {
   ): AptosResult<AptosSlice<TableMetadata>>
 }
 
-internal class DefaultTableService(
-  private val config: TransportConfig,
-) : TableService {
+internal class DefaultTableService(private val config: TransportConfig) : TableService {
   override suspend fun getItem(
     handle: String,
     keyType: String,
@@ -114,19 +112,15 @@ internal class DefaultTableService(
     }
     return try {
       val params = ledgerVersion?.let { mapOf("ledger_version" to it.toString()) }
-      when (
-        val result =
-          getTableItem<JsonElement>(
-            config,
-            handle,
-            TableItemRequest(key_type = keyType, value_type = valueType, key = key),
-            params,
-          )
-      ) {
-        is Result.Ok -> AptosResult.Success(result.value)
-        is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      }
+      getTableItem<JsonElement>(
+          config,
+          handle,
+          TableItemRequest(key_type = keyType, value_type = valueType, key = key),
+          params,
+        )
+        .toAptosResult()
     } catch (error: Throwable) {
+      error.rethrowCancellation()
       AptosResult.Failure(AptosError.Validation("Invalid table item request", error))
     }
   }
@@ -140,24 +134,31 @@ internal class DefaultTableService(
     return when (
       val result =
         getTableItemsData(
-          config,
-          filter,
-          sortOrder = null,
-          page = PaginationArgs(offset = page.offset, limit = page.limit),
-        )
+            config,
+            filter,
+            sortOrder = null,
+            page = PaginationArgs(offset = page.offset, limit = page.limit),
+          )
+          .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         try {
           AptosResult.Success(
             AptosSlice(
               items =
-                result.value?.table_items.orEmpty().map(GetTableItemsDataQuery.Table_item::toRecord),
+                result.value
+                  ?.table_items
+                  .orEmpty()
+                  .map(GetTableItemsDataQuery.Table_item::toRecord),
               request = page,
             )
           )
         } catch (error: Throwable) {
-          AptosResult.Failure(AptosError.Serialization("Invalid table item returned by indexer", error))
+          error.rethrowCancellation()
+          AptosResult.Failure(
+            AptosError.Serialization("Invalid table item returned by indexer", error)
+          )
         }
     }
   }
@@ -171,20 +172,22 @@ internal class DefaultTableService(
     return when (
       val result =
         getTableItemsMetadata(
-          config,
-          filter,
-          sortOrder = null,
-          page = PaginationArgs(offset = page.offset, limit = page.limit),
-        )
+            config,
+            filter,
+            sortOrder = null,
+            page = PaginationArgs(offset = page.offset, limit = page.limit),
+          )
+          .toAptosResult()
     ) {
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-      is Result.Ok ->
+      is AptosResult.Failure -> result
+      is AptosResult.Success ->
         AptosResult.Success(
           AptosSlice(
             items =
-              result.value?.table_metadatas.orEmpty().map(
-                GetTableItemsMetadataQuery.Table_metadata::toRecord
-              ),
+              result.value
+                ?.table_metadatas
+                .orEmpty()
+                .map(GetTableItemsMetadataQuery.Table_metadata::toRecord),
             request = page,
           )
         )
@@ -206,5 +209,4 @@ internal fun GetTableItemsMetadataQuery.Table_metadata.toRecord(): TableMetadata
   TableMetadata(handle = handle, keyType = key_type, valueType = value_type)
 
 private fun Any.requiredU64(field: String): ULong =
-  toString().trim('"').toULongOrNull()
-    ?: throw IllegalArgumentException("Invalid $field")
+  toString().trim('"').toULongOrNull() ?: throw IllegalArgumentException("Invalid $field")

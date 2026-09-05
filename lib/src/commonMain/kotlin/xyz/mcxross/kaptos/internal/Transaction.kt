@@ -148,6 +148,7 @@ internal suspend fun waitForTransaction(
     }
     isPending = lastTxn.type == TransactionResponseType.PENDING
   } catch (e: Exception) {
+    e.rethrowCancellation()
     handleAPIError(e)
   }
 

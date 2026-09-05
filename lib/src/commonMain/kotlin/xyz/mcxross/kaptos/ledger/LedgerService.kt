@@ -6,18 +6,16 @@
  */
 package xyz.mcxross.kaptos.ledger
 
-import xyz.mcxross.kaptos.account.toAptosError
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.core.Hex
-import xyz.mcxross.kaptos.internal.toResult
-import xyz.mcxross.kaptos.model.TransportConfig
-import xyz.mcxross.kaptos.model.AptosError
+import xyz.mcxross.kaptos.internal.mapResponse
+import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Block
 import xyz.mcxross.kaptos.model.ByteString
 import xyz.mcxross.kaptos.model.LedgerInfo
 import xyz.mcxross.kaptos.model.RequestOptions
-import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.transaction.instances.ChainId
 
 /** Current fullnode ledger state with every Aptos `u64` represented losslessly. */
@@ -64,9 +62,7 @@ internal interface LedgerDataSource {
   suspend fun blockAtHeight(height: ULong): AptosResult<LedgerBlock>
 }
 
-internal class DefaultLedgerService(
-  private val dataSource: LedgerDataSource,
-) : LedgerService {
+internal class DefaultLedgerService(private val dataSource: LedgerDataSource) : LedgerService {
   constructor(config: TransportConfig) : this(DefaultLedgerDataSource(config))
 
   override suspend fun info(): AptosResult<LedgerState> = dataSource.info()
@@ -78,55 +74,39 @@ internal class DefaultLedgerService(
     dataSource.blockAtHeight(height)
 }
 
-internal class DefaultLedgerDataSource(
-  private val config: TransportConfig,
-) : LedgerDataSource {
+internal class DefaultLedgerDataSource(private val config: TransportConfig) : LedgerDataSource {
   override suspend fun info(): AptosResult<LedgerState> =
-    request<LedgerInfo>("getLedgerInfo", "/").mapSafely("Invalid ledger information") {
+    request<LedgerInfo>("getLedgerInfo", "/").mapResponse("Invalid ledger information") {
       it.toState()
     }
 
   override suspend fun blockAtVersion(version: ULong): AptosResult<LedgerBlock> =
-    request<Block>("getBlockByVersion", "blocks/by_version/$version")
-      .mapSafely("Invalid ledger block") { it.toLedgerBlock() }
+    request<Block>("getBlockByVersion", "blocks/by_version/$version").mapResponse(
+      "Invalid ledger block"
+    ) {
+      it.toLedgerBlock()
+    }
 
   override suspend fun blockAtHeight(height: ULong): AptosResult<LedgerBlock> =
-    request<Block>("getBlockByHeight", "blocks/by_height/$height")
-      .mapSafely("Invalid ledger block") { it.toLedgerBlock() }
+    request<Block>("getBlockByHeight", "blocks/by_height/$height").mapResponse(
+      "Invalid ledger block"
+    ) {
+      it.toLedgerBlock()
+    }
 
   private suspend inline fun <reified T> request(
     origin: String,
     path: String,
   ): AptosResult<T> =
-    when (
-      val result =
-        getAptosFullNode<T>(
-            RequestOptions.GetAptosRequestOptions(
-              aptosConfig = config,
-              originMethod = origin,
-              path = path,
-            )
-          )
-          .toResult()
-    ) {
-      is Result.Ok -> AptosResult.Success(result.value)
-      is Result.Err -> AptosResult.Failure(result.error.toAptosError())
-    }
+    getAptosFullNode<T>(
+        RequestOptions.GetAptosRequestOptions(
+          aptosConfig = config,
+          originMethod = origin,
+          path = path,
+        )
+      )
+      .toAptosResult()
 }
-
-private inline fun <T, R> AptosResult<T>.mapSafely(
-  message: String,
-  transform: (T) -> R,
-): AptosResult<R> =
-  when (this) {
-    is AptosResult.Failure -> this
-    is AptosResult.Success ->
-      try {
-        AptosResult.Success(transform(value))
-      } catch (error: Throwable) {
-        AptosResult.Failure(AptosError.Serialization(message, error))
-      }
-  }
 
 private fun LedgerInfo.toState(): LedgerState =
   LedgerState(
