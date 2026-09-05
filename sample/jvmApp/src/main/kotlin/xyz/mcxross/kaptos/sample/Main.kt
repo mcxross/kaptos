@@ -11,7 +11,7 @@ import xyz.mcxross.kaptos.util.runBlocking
 
 /** Run one modern sample; transaction samples read credentials from the environment. */
 fun main(arguments: Array<String>) {
-  when (val sample = arguments.firstOrNull() ?: "stadard") {
+  when (arguments.firstOrNull() ?: "standard") {
     "standard" -> standardTransaction()
     "sponsored" -> sponsoredTransaction()
     "orderless" -> orderlessTransaction()
