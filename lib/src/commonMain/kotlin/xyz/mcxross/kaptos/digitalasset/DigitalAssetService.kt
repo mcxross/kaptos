@@ -36,7 +36,7 @@ import xyz.mcxross.kaptos.model.types.currentTokenOwnershipsV2Filter
 import xyz.mcxross.kaptos.model.types.numericFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.model.types.tokenActivitiesV2Filter
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.bcs.unsignedDecimalToLittleEndian

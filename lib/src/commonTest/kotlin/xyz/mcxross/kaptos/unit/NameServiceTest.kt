@@ -6,7 +6,6 @@
  */
 package xyz.mcxross.kaptos.unit
 
-import kotlin.time.Instant
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -20,17 +19,20 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
+import kotlin.time.Instant
 import kotlinx.serialization.json.Json
+import xyz.mcxross.kaptos.generated.GetNamesQuery
 import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
+import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosSettings
-import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.PageRequest
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.names.AptosName
 import xyz.mcxross.kaptos.names.DefaultNameDataSource
 import xyz.mcxross.kaptos.names.DefaultNameService
@@ -39,14 +41,11 @@ import xyz.mcxross.kaptos.names.NameExpirationPolicy
 import xyz.mcxross.kaptos.names.NameQuery
 import xyz.mcxross.kaptos.names.NameRecord
 import xyz.mcxross.kaptos.names.toRecord
-import xyz.mcxross.kaptos.generated.GetNamesQuery
-import xyz.mcxross.kaptos.transaction.MoveArgument
 
 class NameServiceTest :
   StringSpec({
     "names normalize the suffix and preserve subdomain order" {
-      AptosName.parse("sub.domain.apt") shouldBe
-        AptosName(domain = "domain", subdomain = "sub")
+      AptosName.parse("sub.domain.apt") shouldBe AptosName(domain = "domain", subdomain = "sub")
       AptosName.parse("domain").toString() shouldBe "domain"
       shouldThrow<IllegalArgumentException> { AptosName.parse("UPPER.apt") }
       shouldThrow<IllegalArgumentException> { AptosName.parse("a.b.c.apt") }
@@ -70,8 +69,7 @@ class NameServiceTest :
         .shouldBeInstanceOf<AptosResult.Success<UnsignedTransaction.Simple>>()
       val setTarget =
         transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
-      setTarget.call.module.toString() shouldBe
-        "${AccountAddress.fromString("0xabc")}::router"
+      setTarget.call.module.toString() shouldBe "${AccountAddress.fromString("0xabc")}::router"
       setTarget.call.function.toString() shouldBe "set_target_addr"
       setTarget.call.arguments shouldBe
         listOf(
@@ -163,26 +161,21 @@ class NameServiceTest :
           """["18446744073709551615"]""",
           """[{"vec":["sub"]},{"vec":["domain"]}]""",
         )
-      val engine =
-        MockEngine { httpRequest ->
-          httpRequest.url.encodedPath shouldBe "/v1/view"
-          respond(
-            content = responses[request++],
-            status = HttpStatusCode.OK,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine { httpRequest ->
+        httpRequest.url.encodedPath shouldBe "/v1/view"
+        respond(
+          content = responses[request++],
+          status = HttpStatusCode.OK,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client =
         HttpClient(engine) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
         }
       val config =
-        TransportConfig(
-          AptosSettings(fullNode = "https://api.example.com/v1", client = client)
-        )
-      val dataSource =
-        DefaultNameDataSource(config, AccountAddress.fromString("0xabc"))
+        TransportConfig(AptosSettings(fullNode = "https://api.example.com/v1", client = client))
+      val dataSource = DefaultNameDataSource(config, AccountAddress.fromString("0xabc"))
 
       dataSource
         .owner(AptosName.parse("domain"))
@@ -300,9 +293,8 @@ private class FakeNameDataSource(
   override suspend fun expiration(name: AptosName): AptosResult<ULong> =
     AptosResult.Success(expiration)
 
-  override suspend fun primaryName(
-    accountAddress: AccountAddress
-  ): AptosResult<String?> = AptosResult.Success(null)
+  override suspend fun primaryName(accountAddress: AccountAddress): AptosResult<String?> =
+    AptosResult.Success(null)
 
   override suspend fun query(
     query: NameQuery,

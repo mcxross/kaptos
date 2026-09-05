@@ -38,7 +38,7 @@ import xyz.mcxross.kaptos.model.TypeTag
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.WaitForTransactionOptions
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.ChainId
@@ -84,7 +84,10 @@ class AccountServiceTest :
           AccountLookupOptions(includeUnverified = true),
         )
 
-      val accounts = result.shouldBeInstanceOf<AptosResult.Success<List<xyz.mcxross.kaptos.account.AccountInfo>>>().value
+      val accounts =
+        result
+          .shouldBeInstanceOf<AptosResult.Success<List<xyz.mcxross.kaptos.account.AccountInfo>>>()
+          .value
       accounts shouldHaveSize 2
       accounts.map { it.address } shouldBe listOf(rotatedAddress, defaultAddress)
       accounts.first().publicKey shouldBe multiKey
@@ -141,8 +144,7 @@ class AccountServiceTest :
       payload.call.module.toString() shouldBe "0x1::account"
       payload.call.function.toString() shouldBe "rotate_authentication_key"
       payload.call.arguments shouldHaveSize 6
-      transactions.lastOptions?.replayProtection shouldBe
-        ReplayProtection.SequenceNumber(7uL)
+      transactions.lastOptions?.replayProtection shouldBe ReplayProtection.SequenceNumber(7uL)
     }
 
     "unverified rotation uses the destination authentication scheme explicitly" {
@@ -192,9 +194,8 @@ private class FakeRestorationDataSource(
     accounts[address.toStringLong()]?.let { AptosResult.Success(it) }
       ?: AptosResult.Failure(AptosError.Api("Account not found", "account_not_found"))
 
-  override suspend fun getLatestTransactionVersion(
-    address: AccountAddress
-  ): AptosResult<ULong> = AptosResult.Success(versions[address.toStringLong()] ?: 0uL)
+  override suspend fun getLatestTransactionVersion(address: AccountAddress): AptosResult<ULong> =
+    AptosResult.Success(versions[address.toStringLong()] ?: 0uL)
 
   override suspend fun getRelatedMultiKeys(
     publicKey: AccountPublicKey,
@@ -224,8 +225,7 @@ internal class RecordingTransactionService : TransactionService {
   ): AptosResult<UnsignedTransaction.Simple> {
     lastPayload = payload
     lastOptions = options
-    val sequence =
-      (options?.replayProtection as? ReplayProtection.SequenceNumber)?.value ?: 0uL
+    val sequence = (options?.replayProtection as? ReplayProtection.SequenceNumber)?.value ?: 0uL
     return AptosResult.Success(
       UnsignedTransaction.Simple(
         RawTransaction(

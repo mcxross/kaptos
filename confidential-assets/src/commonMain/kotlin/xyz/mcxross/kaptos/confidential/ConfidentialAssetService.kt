@@ -13,18 +13,18 @@ import xyz.mcxross.kaptos.account.TransactionSigner
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.AptosError
+import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.TransactionResponse
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.model.AptosPage
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
 /** Move package configuration for confidential-asset operations. */
 data class ConfidentialAssetConfig(
-  val moduleAddress: AccountAddress = AccountAddress.fromString("0x1"),
+  val moduleAddress: AccountAddress = AccountAddress.fromString("0x1")
 )
 
 /** Fee-payer and gas settings shared by confidential transaction builders. */
@@ -80,7 +80,7 @@ interface ConfidentialAssetService {
 
   /** Returns a typed page of indexed confidential-asset activity. */
   suspend fun getActivities(
-    query: ConfidentialActivityQuery = ConfidentialActivityQuery(),
+    query: ConfidentialActivityQuery = ConfidentialActivityQuery()
   ): AptosResult<AptosPage<ConfidentialAssetActivity>>
 
   /** Builds a confidential-balance registration transaction. */
@@ -235,7 +235,7 @@ interface ConfidentialAssetService {
 
 /** Bind confidential-asset operations to this client's transport and transaction services. */
 fun Aptos.confidentialAssets(
-  config: ConfidentialAssetConfig = ConfidentialAssetConfig(),
+  config: ConfidentialAssetConfig = ConfidentialAssetConfig()
 ): ConfidentialAssetService = DefaultConfidentialAssetService(this, config)
 
 internal class DefaultConfidentialAssetService(
@@ -258,9 +258,12 @@ internal class DefaultConfidentialAssetService(
     val address = account.addressOrFailure() ?: return invalidAddress("account")
     val asset = token.addressOrFailure() ?: return invalidAddress("token")
     val cacheKey = key(address, asset)
-    if (useCache) cacheMutex.withLock { balances[cacheKey] }?.let {
-      return AptosResult.Success(it)
-    }
+    if (useCache)
+      cacheMutex
+        .withLock { balances[cacheKey] }
+        ?.let {
+          return AptosResult.Success(it)
+        }
     val result = dataSource.balance(address, asset, key)
     if (result is AptosResult.Success) cacheMutex.withLock { balances[cacheKey] = result.value }
     return result
@@ -274,11 +277,15 @@ internal class DefaultConfidentialAssetService(
     val address = account.addressOrFailure() ?: return invalidAddress("account")
     val asset = token.addressOrFailure() ?: return invalidAddress("token")
     val cacheKey = key(address, asset)
-    if (useCache) cacheMutex.withLock { encryptionKeys[cacheKey] }?.let {
-      return AptosResult.Success(it)
-    }
+    if (useCache)
+      cacheMutex
+        .withLock { encryptionKeys[cacheKey] }
+        ?.let {
+          return AptosResult.Success(it)
+        }
     val result = dataSource.encryptionKey(address, asset)
-    if (result is AptosResult.Success) cacheMutex.withLock { encryptionKeys[cacheKey] = result.value }
+    if (result is AptosResult.Success)
+      cacheMutex.withLock { encryptionKeys[cacheKey] = result.value }
     return result
   }
 
@@ -288,9 +295,15 @@ internal class DefaultConfidentialAssetService(
   ): AptosResult<ConfidentialEncryptionKey?> {
     val asset = token.addressOrFailure() ?: return invalidAddress("token")
     val cacheKey = asset.toString()
-    if (useCache) cacheMutex.withLock {
-      if (auditorKeys.containsKey(cacheKey)) AptosResult.Success(auditorKeys[cacheKey]) else null
-    }?.let { return it }
+    if (useCache)
+      cacheMutex
+        .withLock {
+          if (auditorKeys.containsKey(cacheKey)) AptosResult.Success(auditorKeys[cacheKey])
+          else null
+        }
+        ?.let {
+          return it
+        }
     val result = dataSource.assetAuditorKey(asset)
     if (result is AptosResult.Success) cacheMutex.withLock { auditorKeys[cacheKey] = result.value }
     return result
@@ -317,7 +330,7 @@ internal class DefaultConfidentialAssetService(
   override suspend fun isEmergencyPaused(): AptosResult<Boolean> = dataSource.emergencyPaused()
 
   override suspend fun getActivities(
-    query: ConfidentialActivityQuery,
+    query: ConfidentialActivityQuery
   ): AptosResult<AptosPage<ConfidentialAssetActivity>> = client.confidentialActivities(query)
 
   override suspend fun buildRegisterBalance(
@@ -436,7 +449,9 @@ internal class DefaultConfidentialAssetService(
     val recipientAddress = recipient.addressOrFailure() ?: return invalidAddress("recipient")
     val tokenAddress = token.addressOrFailure() ?: return invalidAddress("token")
     if (senderAddress == recipientAddress) {
-      return AptosResult.Failure(AptosError.Validation("A confidential transfer cannot target its sender"))
+      return AptosResult.Failure(
+        AptosError.Validation("A confidential transfer cannot target its sender")
+      )
     }
     val memoLimit = dataSource.maxMemoBytes()
     if (memoLimit is AptosResult.Failure) return memoLimit
@@ -772,12 +787,13 @@ internal class DefaultConfidentialAssetService(
     if (senderAuthenticator is AptosResult.Failure) return senderAuthenticator
     val feePayerAuthenticator: AccountAuthenticator? =
       if (transaction is UnsignedTransaction.FeePayer) {
-        val feePayer = options.feePayer
-          ?: return AptosResult.Failure(
-            AptosError.Validation(
-              "Submission requires the local fee-payer signer used to build the transaction"
+        val feePayer =
+          options.feePayer
+            ?: return AptosResult.Failure(
+              AptosError.Validation(
+                "Submission requires the local fee-payer signer used to build the transaction"
+              )
             )
-          )
         when (val signed = feePayer.signTransaction(transaction)) {
           is AptosResult.Failure -> return signed
           is AptosResult.Success -> signed.value

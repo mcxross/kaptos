@@ -4953,6 +4953,277 @@ public final class xyz/mcxross/kaptos/model/WriteSetChangeDeleteModule$Companion
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public abstract interface class xyz/mcxross/kaptos/move/MoveArgument {
+	public fun toBcs ()[B
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Address : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public final fun copy (Lxyz/mcxross/kaptos/model/AccountAddress;)Lxyz/mcxross/kaptos/move/MoveArgument$Address;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Address;Lxyz/mcxross/kaptos/model/AccountAddress;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Address;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Bool : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Z)V
+	public final fun component1 ()Z
+	public final fun copy (Z)Lxyz/mcxross/kaptos/move/MoveArgument$Bool;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Bool;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Bool;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Z
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Bytes : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> ([B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()[B
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$DefaultImpls {
+	public static fun toBcs (Lxyz/mcxross/kaptos/move/MoveArgument;)[B
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Enum : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/Map;
+	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lxyz/mcxross/kaptos/move/MoveArgument$Enum;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Enum;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Enum;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFields ()Ljava/util/Map;
+	public final fun getVariant ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I128 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument$I128;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I128;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I128;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I16 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (S)V
+	public final fun component1 ()S
+	public final fun copy (S)Lxyz/mcxross/kaptos/move/MoveArgument$I16;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I16;SILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I16;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()S
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I256 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument$I256;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I256;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I256;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I32 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (I)V
+	public final fun component1 ()I
+	public final fun copy (I)Lxyz/mcxross/kaptos/move/MoveArgument$I32;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I32;IILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I32;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()I
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I64 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (J)V
+	public final fun component1 ()J
+	public final fun copy (J)Lxyz/mcxross/kaptos/move/MoveArgument$I64;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I64;JILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I64;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()J
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$I8 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (B)V
+	public final fun component1 ()B
+	public final fun copy (B)Lxyz/mcxross/kaptos/move/MoveArgument$I8;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$I8;BILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$I8;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()B
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Option : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Lxyz/mcxross/kaptos/move/MoveArgument;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun copy (Lxyz/mcxross/kaptos/move/MoveArgument;)Lxyz/mcxross/kaptos/move/MoveArgument$Option;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Option;Lxyz/mcxross/kaptos/move/MoveArgument;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Option;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Lxyz/mcxross/kaptos/move/MoveArgument;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$PreSerialized : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> ([B)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()[B
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$StringValue : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument$StringValue;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$StringValue;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$StringValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Struct : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/util/Map;)V
+	public final fun component1 ()Ljava/util/Map;
+	public final fun copy (Ljava/util/Map;)Lxyz/mcxross/kaptos/move/MoveArgument$Struct;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Struct;Ljava/util/Map;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Struct;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFields ()Ljava/util/Map;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U128 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument$U128;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$U128;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U128;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U16 : xyz/mcxross/kaptos/move/MoveArgument {
+	public synthetic fun <init> (SLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-Mh2AYeg ()S
+	public final fun copy-xj2QHRw (S)Lxyz/mcxross/kaptos/move/MoveArgument$U16;
+	public static synthetic fun copy-xj2QHRw$default (Lxyz/mcxross/kaptos/move/MoveArgument$U16;SILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U16;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue-Mh2AYeg ()S
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U256 : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument$U256;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$U256;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U256;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U32 : xyz/mcxross/kaptos/move/MoveArgument {
+	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-pVg5ArA ()I
+	public final fun copy-WZ4Q5Ns (I)Lxyz/mcxross/kaptos/move/MoveArgument$U32;
+	public static synthetic fun copy-WZ4Q5Ns$default (Lxyz/mcxross/kaptos/move/MoveArgument$U32;IILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U32;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue-pVg5ArA ()I
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U64 : xyz/mcxross/kaptos/move/MoveArgument {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-s-VKNKU ()J
+	public final fun copy-VKZWuLQ (J)Lxyz/mcxross/kaptos/move/MoveArgument$U64;
+	public static synthetic fun copy-VKZWuLQ$default (Lxyz/mcxross/kaptos/move/MoveArgument$U64;JILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U64;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue-s-VKNKU ()J
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$U8 : xyz/mcxross/kaptos/move/MoveArgument {
+	public synthetic fun <init> (BLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1-w2LRezQ ()B
+	public final fun copy-7apg3OU (B)Lxyz/mcxross/kaptos/move/MoveArgument$U8;
+	public static synthetic fun copy-7apg3OU$default (Lxyz/mcxross/kaptos/move/MoveArgument$U8;BILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$U8;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue-w2LRezQ ()B
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Vector : xyz/mcxross/kaptos/move/MoveArgument {
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lxyz/mcxross/kaptos/move/MoveArgument$Vector;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/move/MoveArgument$Vector;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument$Vector;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValues ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toBcs ()[B
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgumentCodec {
+	public static final field MAX_NESTING_DEPTH I
+	public fun <init> (Lxyz/mcxross/kaptos/move/MoveModuleLoader;)V
+	public final fun encode (Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/move/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encode$default (Lxyz/mcxross/kaptos/move/MoveArgumentCodec;Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/move/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun entryFunctionPayload (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun entryFunctionPayload$default (Lxyz/mcxross/kaptos/move/MoveArgumentCodec;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun preload ([Lxyz/mcxross/kaptos/model/MoveModuleBytecode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class xyz/mcxross/kaptos/move/MoveModuleLoader {
+	public abstract fun load (Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class xyz/mcxross/kaptos/names/AptosName {
 	public static final field Companion Lxyz/mcxross/kaptos/names/AptosName$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
@@ -5448,277 +5719,6 @@ public final synthetic class xyz/mcxross/kaptos/transaction/EntryFunction$$seria
 
 public final class xyz/mcxross/kaptos/transaction/EntryFunction$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract interface class xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun toBcs ()[B
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Address : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;)V
-	public final fun component1 ()Lxyz/mcxross/kaptos/model/AccountAddress;
-	public final fun copy (Lxyz/mcxross/kaptos/model/AccountAddress;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Address;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Address;Lxyz/mcxross/kaptos/model/AccountAddress;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Address;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Lxyz/mcxross/kaptos/model/AccountAddress;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Bool : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Z)V
-	public final fun component1 ()Z
-	public final fun copy (Z)Lxyz/mcxross/kaptos/transaction/MoveArgument$Bool;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Bool;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Bool;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Z
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Bytes : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> ([B)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()[B
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$DefaultImpls {
-	public static fun toBcs (Lxyz/mcxross/kaptos/transaction/MoveArgument;)[B
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Enum : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/util/Map;
-	public final fun copy (Ljava/lang/String;Ljava/util/Map;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Enum;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Enum;Ljava/lang/String;Ljava/util/Map;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Enum;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getFields ()Ljava/util/Map;
-	public final fun getVariant ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I128 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I128;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I128;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I128;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I16 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (S)V
-	public final fun component1 ()S
-	public final fun copy (S)Lxyz/mcxross/kaptos/transaction/MoveArgument$I16;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I16;SILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I16;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()S
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I256 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I256;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I256;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I256;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I32 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (I)V
-	public final fun component1 ()I
-	public final fun copy (I)Lxyz/mcxross/kaptos/transaction/MoveArgument$I32;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I32;IILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I32;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()I
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I64 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (J)V
-	public final fun component1 ()J
-	public final fun copy (J)Lxyz/mcxross/kaptos/transaction/MoveArgument$I64;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I64;JILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I64;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()J
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$I8 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (B)V
-	public final fun component1 ()B
-	public final fun copy (B)Lxyz/mcxross/kaptos/transaction/MoveArgument$I8;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$I8;BILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$I8;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()B
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Option : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Lxyz/mcxross/kaptos/transaction/MoveArgument;)V
-	public final fun component1 ()Lxyz/mcxross/kaptos/transaction/MoveArgument;
-	public final fun copy (Lxyz/mcxross/kaptos/transaction/MoveArgument;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Option;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Option;Lxyz/mcxross/kaptos/transaction/MoveArgument;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Option;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Lxyz/mcxross/kaptos/transaction/MoveArgument;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$PreSerialized : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> ([B)V
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()[B
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$StringValue : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/transaction/MoveArgument$StringValue;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$StringValue;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$StringValue;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Struct : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/util/Map;)V
-	public final fun component1 ()Ljava/util/Map;
-	public final fun copy (Ljava/util/Map;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Struct;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Struct;Ljava/util/Map;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Struct;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getFields ()Ljava/util/Map;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U128 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U128;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U128;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U128;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U16 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public synthetic fun <init> (SLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1-Mh2AYeg ()S
-	public final fun copy-xj2QHRw (S)Lxyz/mcxross/kaptos/transaction/MoveArgument$U16;
-	public static synthetic fun copy-xj2QHRw$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U16;SILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U16;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue-Mh2AYeg ()S
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U256 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/lang/String;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun copy (Ljava/lang/String;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U256;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U256;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U256;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U32 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1-pVg5ArA ()I
-	public final fun copy-WZ4Q5Ns (I)Lxyz/mcxross/kaptos/transaction/MoveArgument$U32;
-	public static synthetic fun copy-WZ4Q5Ns$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U32;IILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U32;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue-pVg5ArA ()I
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U64 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1-s-VKNKU ()J
-	public final fun copy-VKZWuLQ (J)Lxyz/mcxross/kaptos/transaction/MoveArgument$U64;
-	public static synthetic fun copy-VKZWuLQ$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U64;JILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U64;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue-s-VKNKU ()J
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$U8 : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public synthetic fun <init> (BLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1-w2LRezQ ()B
-	public final fun copy-7apg3OU (B)Lxyz/mcxross/kaptos/transaction/MoveArgument$U8;
-	public static synthetic fun copy-7apg3OU$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$U8;BILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$U8;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValue-w2LRezQ ()B
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgument$Vector : xyz/mcxross/kaptos/transaction/MoveArgument {
-	public fun <init> (Ljava/util/List;)V
-	public final fun component1 ()Ljava/util/List;
-	public final fun copy (Ljava/util/List;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Vector;
-	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/transaction/MoveArgument$Vector;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/transaction/MoveArgument$Vector;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getValues ()Ljava/util/List;
-	public fun hashCode ()I
-	public fun toBcs ()[B
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class xyz/mcxross/kaptos/transaction/MoveArgumentCodec {
-	public static final field MAX_NESTING_DEPTH I
-	public fun <init> (Lxyz/mcxross/kaptos/transaction/MoveModuleLoader;)V
-	public final fun encode (Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/transaction/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun encode$default (Lxyz/mcxross/kaptos/transaction/MoveArgumentCodec;Lxyz/mcxross/kaptos/model/TypeTag;Lxyz/mcxross/kaptos/transaction/MoveArgument;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public final fun entryFunctionPayload (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun entryFunctionPayload$default (Lxyz/mcxross/kaptos/transaction/MoveArgumentCodec;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public final fun preload ([Lxyz/mcxross/kaptos/model/MoveModuleBytecode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
-public abstract interface class xyz/mcxross/kaptos/transaction/MoveModuleLoader {
-	public abstract fun load (Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public abstract interface class xyz/mcxross/kaptos/transaction/TransactionService {
@@ -6256,6 +6256,8 @@ public final class xyz/mcxross/kaptos/view/MoveViewResult {
 	public final fun component1 ()Ljava/util/List;
 	public final fun copy (Ljava/util/List;)Lxyz/mcxross/kaptos/view/MoveViewResult;
 	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/view/MoveViewResult;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/view/MoveViewResult;
+	public final fun decodeValue (ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;)Lxyz/mcxross/kaptos/model/AptosResult;
+	public static synthetic fun decodeValue$default (Lxyz/mcxross/kaptos/view/MoveViewResult;ILkotlinx/serialization/DeserializationStrategy;Lkotlinx/serialization/json/Json;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/AptosResult;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getValues ()Ljava/util/List;
 	public fun hashCode ()I
@@ -6265,9 +6267,12 @@ public final class xyz/mcxross/kaptos/view/MoveViewResult {
 public abstract interface class xyz/mcxross/kaptos/view/ViewService {
 	public abstract fun call-o-gju8c (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun call-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun callRaw-o-gju8c (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun callRaw-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class xyz/mcxross/kaptos/view/ViewService$DefaultImpls {
 	public static synthetic fun call-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun callRaw-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 

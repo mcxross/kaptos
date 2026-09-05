@@ -206,6 +206,40 @@ aptos(AptosConfig(network = Network.TESTNET)) {
 }
 ```
 
+### Typed view calls
+
+Transactions and views share `MoveArgument` from `xyz.mcxross.kaptos.move` and `TypeTag`.
+Typed views validate the function ABI and send BCS arguments; returned JSON values stay lossless.
+
+```kotlin
+import kotlinx.serialization.builtins.serializer
+import xyz.mcxross.kaptos.move.MoveArgument
+import xyz.mcxross.kaptos.model.TypeTag
+import xyz.mcxross.kaptos.model.flatMap
+
+aptos {
+    val balance = views.call(
+        function = "0x1::coin::balance",
+        typeArguments = listOf(TypeTag.fromString("0x1::aptos_coin::AptosCoin")),
+        arguments = listOf(MoveArgument.Address(owner)),
+    ).flatMap { it.decodeValue(0, ULong.serializer()) }
+}
+```
+
+Validation checks view status, argument and type-argument counts, concrete types, integer widths,
+struct field names, and supported value shapes. Typed views reject opaque `PreSerialized` values,
+including nested ones, and enum arguments because the current ABI model cannot describe their
+complete variant layouts. They do not infer JSON representations from BCS bytes. Move execution
+and generic ability constraints are validated by the fullnode.
+
+`ledgerVersion` applies to both ABI lookup and execution. Historical calls use an isolated codec;
+current calls share the transaction codec and its preloaded module ABIs.
+
+Use `views.callRaw(function, typeArguments, arguments, ledgerVersion)` for explicit JSON access.
+Its type arguments are strings and arguments are `JsonElement` values; the fullnode validates
+those raw values. `decodeValue(index, deserializer)` selects one return value using an explicit
+serializer and reports invalid indexes or incompatible return types as typed errors.
+
 ### Solana derivable account abstraction
 
 The framework-native helper derives the Aptos account address and constructs the exact SIWS

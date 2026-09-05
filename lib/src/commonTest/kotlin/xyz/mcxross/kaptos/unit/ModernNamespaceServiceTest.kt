@@ -19,10 +19,10 @@ import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.UnsignedTransaction
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.objects.toRecord
 import xyz.mcxross.kaptos.staking.toRecord
 import xyz.mcxross.kaptos.table.toRecord
-import xyz.mcxross.kaptos.transaction.MoveArgument
 
 class ModernNamespaceServiceTest :
   StringSpec({
@@ -64,8 +64,7 @@ class ModernNamespaceServiceTest :
       item.writeSetChangeIndex shouldBe ULong.MAX_VALUE
       item.tableHandle shouldBe "0xcd"
 
-      GetTableItemsMetadataQuery.Table_metadata("0xcd", "address", "u64")
-        .toRecord() shouldBe
+      GetTableItemsMetadataQuery.Table_metadata("0xcd", "address", "u64").toRecord() shouldBe
         xyz.mcxross.kaptos.table.TableMetadata("0xcd", "address", "u64")
     }
 

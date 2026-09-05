@@ -142,7 +142,7 @@ internal class ConfidentialAssetDataSource(
     function: String,
     arguments: List<JsonElement>,
   ): AptosResult<List<JsonElement>> =
-    client.views.call(function = "$module::$function", arguments = arguments).map { it.values }
+    client.views.callRaw(function = "$module::$function", arguments = arguments).map { it.values }
 
   private fun parseCiphertexts(result: List<JsonElement>): AptosResult<List<ConfidentialCiphertext>> =
     parse("Invalid confidential balance response") {

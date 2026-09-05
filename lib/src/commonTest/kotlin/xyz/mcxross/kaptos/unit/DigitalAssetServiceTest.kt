@@ -23,14 +23,14 @@ import xyz.mcxross.kaptos.generated.GetCollectionDataQuery
 import xyz.mcxross.kaptos.generated.fragment.CurrentTokenOwnershipFields
 import xyz.mcxross.kaptos.generated.fragment.TokenActivitiesFields
 import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.AptosError
+import xyz.mcxross.kaptos.model.AptosPage
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.PageRequest
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.TypeTagStruct
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 
 class DigitalAssetServiceTest :
   StringSpec({
@@ -61,9 +61,8 @@ class DigitalAssetServiceTest :
           MoveArgument.StringValue("supply"),
           MoveArgument.StringValue("u64"),
         )
-      add.call.arguments[3]
-        .shouldBeInstanceOf<MoveArgument.Bytes>()
-        .value shouldBe ByteArray(8) { 0xff.toByte() }
+      add.call.arguments[3].shouldBeInstanceOf<MoveArgument.Bytes>().value shouldBe
+        ByteArray(8) { 0xff.toByte() }
 
       service
         .buildUpdateProperty(
@@ -76,13 +75,11 @@ class DigitalAssetServiceTest :
             ),
         )
         .shouldBeInstanceOf<AptosResult.Success<UnsignedTransaction.Simple>>()
-      val update =
-        transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
+      val update = transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
       update.call.function.toString() shouldBe "update_property"
       update.call.arguments[2] shouldBe MoveArgument.StringValue("0x1::string::String")
-      update.call.arguments[3]
-        .shouldBeInstanceOf<MoveArgument.Bytes>()
-        .value shouldBe byteArrayOf(3, 'a'.code.toByte(), 'p'.code.toByte(), 't'.code.toByte())
+      update.call.arguments[3].shouldBeInstanceOf<MoveArgument.Bytes>().value shouldBe
+        byteArrayOf(3, 'a'.code.toByte(), 'p'.code.toByte(), 't'.code.toByte())
     }
 
     "collection and mint builders use ordered official arguments with typed properties" {
@@ -97,8 +94,7 @@ class DigitalAssetServiceTest :
           uri = "https://example.com/collection.json",
         )
         .shouldBeInstanceOf<AptosResult.Success<UnsignedTransaction.Simple>>()
-      val create =
-        transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
+      val create = transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
       create.call.function.toString() shouldBe "create_collection"
       create.call.arguments[0] shouldBe MoveArgument.StringValue("Collection")
       create.call.arguments[1] shouldBe MoveArgument.U64(ULong.MAX_VALUE)
@@ -361,10 +357,8 @@ class DigitalAssetServiceTest :
 
 private class FakeDigitalAssetDataSource(
   private val collection: CollectionRecord? = collectionRecord(),
-  private val owned: AptosPage<DigitalAssetOwnership> =
-    AptosPage(emptyList(), 0, PageRequest()),
-  private val activity: AptosPage<DigitalAssetActivity> =
-    AptosPage(emptyList(), 0, PageRequest()),
+  private val owned: AptosPage<DigitalAssetOwnership> = AptosPage(emptyList(), 0, PageRequest()),
+  private val activity: AptosPage<DigitalAssetActivity> = AptosPage(emptyList(), 0, PageRequest()),
 ) : DigitalAssetDataSource {
   var collectionId: AccountAddress? = null
   var creator: AccountAddress? = null

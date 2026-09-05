@@ -28,19 +28,19 @@ import kotlinx.serialization.json.jsonPrimitive
 import xyz.mcxross.kaptos.account.AbstractedAccount
 import xyz.mcxross.kaptos.account.AbstractionSigner
 import xyz.mcxross.kaptos.account.AccountAbstractionDataSource
-import xyz.mcxross.kaptos.account.DefaultAccountAbstractionService
 import xyz.mcxross.kaptos.account.DefaultAccountAbstractionDataSource
+import xyz.mcxross.kaptos.account.DefaultAccountAbstractionService
 import xyz.mcxross.kaptos.account.DerivableAbstractedAccount
 import xyz.mcxross.kaptos.account.SolanaDerivableAccount
 import xyz.mcxross.kaptos.account.SolanaMessageSigner
 import xyz.mcxross.kaptos.core.crypto.AbstractPublicKey
 import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction
 import xyz.mcxross.kaptos.transaction.instances.ChainId
@@ -73,7 +73,9 @@ class AccountAbstractionTest :
       val status =
         service
           .status(AccountAddress.ONE)
-          .shouldBeInstanceOf<AptosResult.Success<xyz.mcxross.kaptos.account.AccountAbstractionStatus>>()
+          .shouldBeInstanceOf<
+            AptosResult.Success<xyz.mcxross.kaptos.account.AccountAbstractionStatus>
+          >()
           .value
       status.isEnabled shouldBe true
       status.authenticationFunctions shouldBe listOf(function)
@@ -93,8 +95,7 @@ class AccountAbstractionTest :
     "enable and disable builders encode the account-abstraction entry functions" {
       val function = AuthenticationFunction.parse(AUTHENTICATION_FUNCTION)
       val transactions = RecordingTransactionService()
-      val service =
-        DefaultAccountAbstractionService(FakeAbstractionDataSource(), transactions)
+      val service = DefaultAccountAbstractionService(FakeAbstractionDataSource(), transactions)
 
       service
         .buildEnable(AccountAddress.ONE, function)
@@ -126,29 +127,25 @@ class AccountAbstractionTest :
     }
 
     "fullnode view response is decoded without leaking wire models" {
-      val engine =
-        MockEngine { request ->
-          request.url.encodedPath shouldBe "/v1/view"
-          val requestJson =
-            Json.parseToJsonElement(request.body.toByteArray().decodeToString()).jsonObject
-          requestJson["arguments"]!!.jsonArray.single().jsonPrimitive.content shouldBe
-            AccountAddress.ONE.toStringLong()
-          respond(
-            content =
-              """[{"vec":[[{"module_address":"0x1","module_name":"permissioned_delegation","function_name":"authenticate"}]]}]""",
-            status = HttpStatusCode.OK,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine { request ->
+        request.url.encodedPath shouldBe "/v1/view"
+        val requestJson =
+          Json.parseToJsonElement(request.body.toByteArray().decodeToString()).jsonObject
+        requestJson["arguments"]!!.jsonArray.single().jsonPrimitive.content shouldBe
+          AccountAddress.ONE.toStringLong()
+        respond(
+          content =
+            """[{"vec":[[{"module_address":"0x1","module_name":"permissioned_delegation","function_name":"authenticate"}]]}]""",
+          status = HttpStatusCode.OK,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client =
         HttpClient(engine) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
         }
       val config =
-        TransportConfig(
-          AptosSettings(fullNode = "https://api.example.com/v1", client = client)
-        )
+        TransportConfig(AptosSettings(fullNode = "https://api.example.com/v1", client = client))
 
       val functions =
         DefaultAccountAbstractionDataSource(config)
@@ -208,15 +205,12 @@ class AccountAbstractionTest :
     }
 
     "Solana SIWS messages match the Aptos Framework fixture" {
-      SolanaDerivableAccount
-        .siwsMessage(
+      SolanaDerivableAccount.siwsMessage(
           domain = "localhost:3000",
           base58PublicKey = "G56zT1K6AQab7FzwHdQ8hiHXusR14Rmddw6Vz5MFbbmV",
           entryFunction = "0x1::coin::transfer",
           chainId = 2u,
-          digest =
-            "9509edc861070b2848d8161c9453159139f867745dc87d32864a71e796c7d279"
-              .hexBytes(),
+          digest = "9509edc861070b2848d8161c9453159139f867745dc87d32864a71e796c7d279".hexBytes(),
         )
         .decodeToString() shouldBe
         "localhost:3000 wants you to sign in with your Solana account:\n" +
@@ -256,15 +250,14 @@ class AccountAbstractionTest :
             digest = authenticator.signingMessageDigest.toByteArray(),
           )
           .decodeToString()
-      authenticator.signature.toByteArray().toHex() shouldBe
-        "0040${signature.toHex()}"
+      authenticator.signature.toByteArray().toHex() shouldBe "0040${signature.toHex()}"
       authenticator.accountIdentity?.toByteArray()?.toHex() shouldBe
         account.abstractPublicKey.toHex()
     }
   })
 
 private class FakeAbstractionDataSource(
-  private val functions: List<AuthenticationFunction> = emptyList(),
+  private val functions: List<AuthenticationFunction> = emptyList()
 ) : AccountAbstractionDataSource {
   override suspend fun getAuthenticationFunctions(
     accountAddress: AccountAddress
@@ -291,11 +284,9 @@ private fun officialSimpleTransaction(): UnsignedTransaction.Simple =
 private fun ByteArray.toHex(): String =
   joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
 
-private fun String.hexBytes(): ByteArray =
-  chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+private fun String.hexBytes(): ByteArray = chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
-private const val AUTHENTICATION_FUNCTION =
-  "0x1::permissioned_delegation::authenticate"
+private const val AUTHENTICATION_FUNCTION = "0x1::permissioned_delegation::authenticate"
 private const val ABSTRACTION_SIGNATURE = "aabbcc"
 private const val ABSTRACTION_SIGNING_MESSAGE_DIGEST =
   "4c0f1aab1515dceb891d7ca157f5a994b0881a1d4b4afded3cc531e0278c9043"

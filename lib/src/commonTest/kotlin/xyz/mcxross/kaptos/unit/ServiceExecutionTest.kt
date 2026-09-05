@@ -47,7 +47,7 @@ class ServiceExecutionTest :
           },
         "view POST" to
           {
-            it.views.call("0x1::coin::balance")
+            it.views.callRaw("0x1::coin::balance")
             Unit
           },
         "indexer POST" to
@@ -93,7 +93,7 @@ class ServiceExecutionTest :
       val aptos = Aptos(AptosConfig(network = Network.LOCAL, httpClient = http))
       try {
         val failure =
-          aptos.views.call("0x1::coin::balance").shouldBeInstanceOf<AptosResult.Failure>()
+          aptos.views.callRaw("0x1::coin::balance").shouldBeInstanceOf<AptosResult.Failure>()
         val error = failure.error.shouldBeInstanceOf<AptosError.Api>()
         error.errorCode shouldBe "vm_error"
         error.vmErrorCode shouldBe 42L

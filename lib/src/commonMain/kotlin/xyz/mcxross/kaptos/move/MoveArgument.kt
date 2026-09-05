@@ -4,14 +4,14 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  */
-package xyz.mcxross.kaptos.transaction
+package xyz.mcxross.kaptos.move
 
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.bcs.signedDecimalToLittleEndian
 import xyz.mcxross.kaptos.transaction.bcs.unsignedDecimalToLittleEndian
 
-/** Kotlin-native representation of values accepted by Move entry functions. */
+/** Kotlin-native representation of values accepted by Move transaction and view functions. */
 sealed interface MoveArgument {
   /** Serializes ABI-independent primitive/container arguments to canonical BCS. */
   fun toBcs(): ByteArray = AptosBcsWriter().also { encode(it) }.toByteArray()
@@ -30,14 +30,12 @@ sealed interface MoveArgument {
     init {
       unsignedDecimalToLittleEndian(value, 16)
     }
-
   }
 
   data class U256(val value: String) : MoveArgument {
     init {
       unsignedDecimalToLittleEndian(value, 32)
     }
-
   }
 
   data class I8(val value: Byte) : MoveArgument
@@ -52,14 +50,12 @@ sealed interface MoveArgument {
     init {
       signedDecimalToLittleEndian(value, 16)
     }
-
   }
 
   data class I256(val value: String) : MoveArgument {
     init {
       signedDecimalToLittleEndian(value, 32)
     }
-
   }
 
   data class Address(val value: AccountAddress) : MoveArgument

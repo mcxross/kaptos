@@ -6,27 +6,65 @@
  */
 package xyz.mcxross.kaptos.view
 
+import kotlinx.coroutines.CancellationException
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import xyz.mcxross.kaptos.client.postAptosFullNodeAndGetData
 import xyz.mcxross.kaptos.internal.executeAptos
 import xyz.mcxross.kaptos.internal.mapResponse
+import xyz.mcxross.kaptos.internal.moveCodec
 import xyz.mcxross.kaptos.internal.toAptosResult
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
+import xyz.mcxross.kaptos.model.MimeType
 import xyz.mcxross.kaptos.model.RequestOptions
 import xyz.mcxross.kaptos.model.TransportConfig
+import xyz.mcxross.kaptos.model.TypeTag
+import xyz.mcxross.kaptos.move.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgumentCodec
 
 /** Raw, lossless result from a Move view function. */
-data class MoveViewResult(val values: List<JsonElement>)
+data class MoveViewResult(val values: List<JsonElement>) {
+  /** Decode one return value with an explicit serializer; no implicit Move-to-Kotlin coercion. */
+  fun <T> decodeValue(
+    index: Int,
+    deserializer: DeserializationStrategy<T>,
+    json: Json = Json,
+  ): AptosResult<T> {
+    if (index !in values.indices)
+      return AptosResult.Failure(
+        AptosError.Validation("View return index $index is outside ${values.size} returned values")
+      )
+    return try {
+      AptosResult.Success(json.decodeFromJsonElement(deserializer, values[index]))
+    } catch (error: CancellationException) {
+      throw error
+    } catch (error: Exception) {
+      AptosResult.Failure(
+        AptosError.Serialization("Unable to decode view return value $index", error)
+      )
+    }
+  }
+}
 
-/** JSON-view operations for modules whose return structs are not known to core Kaptos. */
+/** Typed view calls and explicit raw JSON access. */
 interface ViewService {
+  /** ABI-validated arguments encoded as BCS. JSON response values remain lossless. */
+  suspend fun call(
+    function: String,
+    typeArguments: List<TypeTag> = emptyList(),
+    arguments: List<MoveArgument> = emptyList(),
+    ledgerVersion: ULong? = null,
+  ): AptosResult<MoveViewResult>
+
   /**
+   * Sends JSON as supplied, without ABI validation. The fullnode validates raw argument semantics.
    * Calls [function] at an optional historical [ledgerVersion] and preserves JSON return values.
    */
-  suspend fun call(
+  suspend fun callRaw(
     function: String,
     typeArguments: List<String> = emptyList(),
     arguments: List<JsonElement> = emptyList(),
@@ -41,8 +79,36 @@ private data class MoveViewRequest(
   val arguments: List<JsonElement>,
 )
 
-internal class DefaultViewService(private val config: TransportConfig) : ViewService {
+internal class DefaultViewService(
+  private val config: TransportConfig,
+  private val argumentCodec: MoveArgumentCodec = moveCodec(config),
+) : ViewService {
   override suspend fun call(
+    function: String,
+    typeArguments: List<TypeTag>,
+    arguments: List<MoveArgument>,
+    ledgerVersion: ULong?,
+  ): AptosResult<MoveViewResult> = executeAptos {
+    val codec = if (ledgerVersion == null) argumentCodec else moveCodec(config, ledgerVersion)
+    when (val request = codec.viewRequest(function, typeArguments, arguments)) {
+      is AptosResult.Failure -> request
+      is AptosResult.Success ->
+        postAptosFullNodeAndGetData<List<JsonElement>, ByteArray>(
+            RequestOptions.PostAptosRequestOptions(
+              aptosConfig = config,
+              originMethod = "view",
+              path = "view",
+              contentType = MimeType.BCS_VIEW_FUNCTION,
+              params = ledgerVersion?.let { mapOf("ledger_version" to it.toString()) },
+              body = request.value,
+            )
+          )
+          .toAptosResult()
+          .mapResponse("Invalid Move view response") { MoveViewResult(it) }
+    }
+  }
+
+  override suspend fun callRaw(
     function: String,
     typeArguments: List<String>,
     arguments: List<JsonElement>,

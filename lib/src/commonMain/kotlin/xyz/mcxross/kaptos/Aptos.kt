@@ -14,10 +14,6 @@ import xyz.mcxross.kaptos.account.DefaultAccountAbstractionService
 import xyz.mcxross.kaptos.account.DefaultAccountService
 import xyz.mcxross.kaptos.account.Ed25519Account
 import xyz.mcxross.kaptos.account.SingleKeyAccount
-import xyz.mcxross.kaptos.fungible.DefaultFungibleAssetService
-import xyz.mcxross.kaptos.fungible.FungibleAssetService
-import xyz.mcxross.kaptos.faucet.DefaultFaucetService
-import xyz.mcxross.kaptos.faucet.FaucetService
 import xyz.mcxross.kaptos.coin.CoinService
 import xyz.mcxross.kaptos.coin.DefaultCoinService
 import xyz.mcxross.kaptos.core.crypto.Aip80PrivateKey
@@ -27,32 +23,36 @@ import xyz.mcxross.kaptos.core.crypto.PrivateKeyType
 import xyz.mcxross.kaptos.core.crypto.Secp256k1PrivateKey
 import xyz.mcxross.kaptos.digitalasset.DefaultDigitalAssetService
 import xyz.mcxross.kaptos.digitalasset.DigitalAssetService
-import xyz.mcxross.kaptos.model.TransportConfig
+import xyz.mcxross.kaptos.faucet.DefaultFaucetService
+import xyz.mcxross.kaptos.faucet.FaucetService
+import xyz.mcxross.kaptos.fungible.DefaultFungibleAssetService
+import xyz.mcxross.kaptos.fungible.FungibleAssetService
+import xyz.mcxross.kaptos.indexer.DefaultIndexerService
+import xyz.mcxross.kaptos.indexer.IndexerService
+import xyz.mcxross.kaptos.ledger.DefaultLedgerService
+import xyz.mcxross.kaptos.ledger.LedgerService
+import xyz.mcxross.kaptos.model.AccountAddress
+import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.FaucetConfig
 import xyz.mcxross.kaptos.model.FullNodeConfig
 import xyz.mcxross.kaptos.model.IndexerConfig
 import xyz.mcxross.kaptos.model.Network
-import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.SigningSchemeInput
 import xyz.mcxross.kaptos.model.TransactionOptions
-import xyz.mcxross.kaptos.transaction.DefaultTransactionService
-import xyz.mcxross.kaptos.transaction.TransactionService
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.names.DefaultNameService
 import xyz.mcxross.kaptos.names.NameService
-import xyz.mcxross.kaptos.ledger.DefaultLedgerService
-import xyz.mcxross.kaptos.ledger.LedgerService
-import xyz.mcxross.kaptos.view.DefaultViewService
-import xyz.mcxross.kaptos.view.ViewService
-import xyz.mcxross.kaptos.indexer.DefaultIndexerService
-import xyz.mcxross.kaptos.indexer.IndexerService
 import xyz.mcxross.kaptos.objects.DefaultObjectService
 import xyz.mcxross.kaptos.objects.ObjectService
 import xyz.mcxross.kaptos.staking.DefaultStakingService
 import xyz.mcxross.kaptos.staking.StakingService
 import xyz.mcxross.kaptos.table.DefaultTableService
 import xyz.mcxross.kaptos.table.TableService
+import xyz.mcxross.kaptos.transaction.DefaultTransactionService
+import xyz.mcxross.kaptos.transaction.TransactionService
+import xyz.mcxross.kaptos.view.DefaultViewService
+import xyz.mcxross.kaptos.view.ViewService
 
 /** Optional endpoint overrides. Unspecified endpoints are derived from [AptosConfig.network]. */
 data class AptosEndpoints(
@@ -78,8 +78,8 @@ data class TransactionDefaults(
 /**
  * Immutable configuration for the namespaced [Aptos] API.
  *
- * An injected [httpClient] remains caller-owned. When it is omitted, [Aptos] creates and
- * closes one shared transport for all of its services.
+ * An injected [httpClient] remains caller-owned. When it is omitted, [Aptos] creates and closes one
+ * shared transport for all of its services.
  */
 data class AptosConfig(
   val network: Network = Network.DEVNET,
@@ -130,6 +130,7 @@ data class AptosConfig(
  */
 class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
   internal val config: TransportConfig = settings.toTransportConfig()
+  private val argumentCodec = xyz.mcxross.kaptos.internal.moveCodec(config)
   private val ownedResources = mutableListOf<AutoCloseable>()
   private var isClosed = false
 
@@ -144,6 +145,7 @@ class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
   val transactions: TransactionService =
     DefaultTransactionService(
       config = config,
+      argumentCodec = argumentCodec,
       defaults =
         TransactionOptions(
           maxGasAmount = settings.transactionDefaults.maxGasAmount,
@@ -164,7 +166,7 @@ class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
   val ledger: LedgerService = DefaultLedgerService(config)
 
   /** Read-only Move view-function calls. */
-  val views: ViewService = DefaultViewService(config)
+  val views: ViewService = DefaultViewService(config, argumentCodec)
 
   /** Low-level typed GraphQL execution for queries not covered by a domain service. */
   val indexer: IndexerService = DefaultIndexerService(config)
@@ -188,8 +190,7 @@ class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
   val fungibleAssets: FungibleAssetService = DefaultFungibleAssetService(transactions)
 
   /** Aptos Names Service reads and transaction builders. */
-  val names: NameService =
-    DefaultNameService(config, transactions, settings.namesContractAddress)
+  val names: NameService = DefaultNameService(config, transactions, settings.namesContractAddress)
 
   /**
    * Transfers [resource] ownership to this client. Owned resources are closed in reverse order
@@ -340,8 +341,8 @@ class Aptos(val settings: AptosConfig = AptosConfig()) : AutoCloseable {
 /**
  * Runs one Aptos workflow with managed lifecycle semantics.
  *
- * The client always closes after [block]. Accounts created through [Aptos.account] are also
- * cleared automatically. Long-lived applications can still construct [Aptos] directly.
+ * The client always closes after [block]. Accounts created through [Aptos.account] are also cleared
+ * automatically. Long-lived applications can still construct [Aptos] directly.
  */
 suspend fun <T> aptos(
   config: AptosConfig = AptosConfig(),

@@ -7,7 +7,7 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  */
-package xyz.mcxross.kaptos.transaction
+package xyz.mcxross.kaptos.move
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
@@ -99,28 +99,7 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
     arguments: List<MoveArgument> = emptyList(),
   ): AptosResult<TransactionPayload.EntryFunction> =
     try {
-      val parts = function.split("::")
-      require(parts.size == 3 && parts.none(String::isBlank)) {
-        "Move function must use address::module::function"
-      }
-      val address = AccountAddress.fromString(parts[0])
-      val module = module(address, parts[1])
-      val abi = requireNotNull(module.abi) { "Module ${parts[0]}::${parts[1]} has no ABI" }
-      val moveFunction =
-        requireNotNull(abi.exposedFunctions.firstOrNull { it.name == parts[2] }) {
-          "Entry function $function was not found"
-        }
-      require(moveFunction.isEntry) { "$function is not an entry function" }
-      require(typeArguments.size == moveFunction.genericTypeParams.size) {
-        "Expected ${moveFunction.genericTypeParams.size} type arguments, got ${typeArguments.size}"
-      }
-      val parameters =
-        moveFunction.params
-          .drop(findFirstNonSignerArg(moveFunction))
-          .map { TypeTag.fromString(it, allowGenerics = true) }
-      require(arguments.size == parameters.size) {
-        "Expected ${parameters.size} function arguments, got ${arguments.size}"
-      }
+      val parameters = functionParameters(function, typeArguments, arguments.size, view = false)
       val encoded =
         parameters.zip(arguments).map { (type, argument) ->
           when (val result = encode(type, argument, typeArguments)) {
@@ -141,6 +120,118 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
         )
       )
     }
+
+  /** Validate a view ABI and encode its request using Aptos' BCS view wire format. */
+  internal suspend fun viewRequest(
+    function: String,
+    typeArguments: List<TypeTag>,
+    arguments: List<MoveArgument>,
+  ): AptosResult<ByteArray> =
+    try {
+      val parameters = functionParameters(function, typeArguments, arguments.size, view = true)
+      val encoded =
+        parameters.zip(arguments).map { (type, value) ->
+          validateViewArgument(value, 0)
+          val concrete = substitute(type, typeArguments)
+          validateConcreteType(concrete, 0)
+          require(concrete !is TypeTagReference && concrete != TypeTagSigner) {
+            "View arguments cannot be signers or references"
+          }
+          val writer = AptosBcsWriter()
+          writer.encodeValue(concrete, value, 0)
+          writer.toByteArray()
+        }
+      val call = TransactionPayload.entryFunction(function, typeArguments).call
+      AptosResult.Success(
+        AptosBcsWriter()
+          .also { writer ->
+            writer.accountAddress(call.module.address)
+            writer.string(call.module.name.toString())
+            writer.string(call.function.toString())
+            writer.vector(typeArguments) { typeTag(it) }
+            writer.vector(encoded) { bytes(it) }
+          }
+          .toByteArray()
+      )
+    } catch (error: CancellationException) {
+      throw error
+    } catch (error: AbiLoadException) {
+      AptosResult.Failure(error.error)
+    } catch (error: Exception) {
+      AptosResult.Failure(
+        AptosError.Validation("Invalid view call $function: ${error.message}", error)
+      )
+    }
+
+  private suspend fun functionParameters(
+    function: String,
+    typeArguments: List<TypeTag>,
+    argumentCount: Int,
+    view: Boolean,
+  ): List<TypeTag> {
+    val parts = function.split("::")
+    require(parts.size == 3 && parts.none(String::isBlank)) {
+      "Move function must use address::module::function"
+    }
+    require(parts.drop(1).all { it.matches(Regex("[a-zA-Z_][a-zA-Z0-9_]*")) }) {
+      "Invalid Move module or function identifier"
+    }
+    val address = AccountAddress.fromString(parts[0])
+    val abi = requireNotNull(module(address, parts[1]).abi) { "Module has no ABI" }
+    val definition =
+      requireNotNull(abi.exposedFunctions.singleOrNull { it.name == parts[2] }) {
+        "Function $function was not found or is ambiguous"
+      }
+    require(if (view) definition.isView else definition.isEntry) {
+      "$function is not ${if (view) "a view" else "an entry"} function"
+    }
+    require(typeArguments.size == definition.genericTypeParams.size) {
+      "Expected ${definition.genericTypeParams.size} type arguments, got ${typeArguments.size}"
+    }
+    typeArguments.forEach { validateConcreteType(it, 0) }
+    val params =
+      if (view) definition.params else definition.params.drop(findFirstNonSignerArg(definition))
+    require(argumentCount == params.size) {
+      "Expected ${params.size} function arguments, got $argumentCount"
+    }
+    return params.map { TypeTag.fromString(it, allowGenerics = true) }
+  }
+
+  private fun validateConcreteType(type: TypeTag, depth: Int) {
+    require(depth <= MAX_NESTING_DEPTH) {
+      "Type argument nesting exceeds $MAX_NESTING_DEPTH levels"
+    }
+    when (type) {
+      is TypeTagGeneric,
+      is TypeTagReference,
+      TypeTagSigner ->
+        throw IllegalArgumentException("Type argument $type is not a concrete value type")
+      is TypeTagVector -> validateConcreteType(type.type, depth + 1)
+      is TypeTagStruct -> type.type.typeArgs.forEach { validateConcreteType(it, depth + 1) }
+      else -> Unit
+    }
+  }
+
+  private fun validateViewArgument(argument: MoveArgument, depth: Int) {
+    require(depth <= MAX_NESTING_DEPTH) {
+      "Move argument nesting exceeds $MAX_NESTING_DEPTH levels"
+    }
+    when (argument) {
+      is MoveArgument.PreSerialized ->
+        throw IllegalArgumentException(
+          "PreSerialized arguments cannot be validated; supply typed values or use callRaw with JSON"
+        )
+      is MoveArgument.Enum ->
+        throw IllegalArgumentException(
+          "Enum view arguments require a complete variant field layout, which this ABI model does not provide"
+        )
+      is MoveArgument.Vector -> argument.values.forEach { validateViewArgument(it, depth + 1) }
+      is MoveArgument.Struct ->
+        argument.fields.values.forEach { validateViewArgument(it, depth + 1) }
+      is MoveArgument.Option -> argument.value?.let { validateViewArgument(it, depth + 1) }
+      else -> Unit
+    }
+  }
 
   private suspend fun AptosBcsWriter.encodeValue(
     type: TypeTag,
@@ -203,10 +294,14 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
   ) {
     val tag = type.type
     when {
-      tag.isBuiltin("string", "String") ->
+      tag.isBuiltin("string", "String") -> {
+        require(tag.typeArgs.isEmpty()) { "Move String does not accept type arguments" }
         string(expect<MoveArgument.StringValue>(type, argument).value)
-      tag.isBuiltin("object", "Object") ->
+      }
+      tag.isBuiltin("object", "Object") -> {
+        require(tag.typeArgs.size == 1) { "Move Object requires one type argument" }
         accountAddress(expect<MoveArgument.Address>(type, argument).value)
+      }
       tag.isBuiltin("option", "Option") -> {
         require(tag.typeArgs.size == 1) { "Move Option must have one type argument" }
         val value = expect<MoveArgument.Option>(type, argument).value
@@ -233,8 +328,8 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
         "Type ${tag.name} was not found in ${tag.address}::${tag.moduleName}"
       }
     require(!definition.isNative) { "Native Move type ${tag.name} cannot be an argument" }
-    require(MoveAbility.COPY in definition.abilities) {
-      "Move type ${tag.name} does not have the copy ability"
+    require(MoveAbility.COPY in definition.abilities && MoveAbility.KEY !in definition.abilities) {
+      "Move type ${tag.name} must have copy and must not have key"
     }
     require(tag.typeArgs.size == definition.genericTypeParams.size) {
       "Expected ${definition.genericTypeParams.size} type arguments for ${tag.name}, got ${tag.typeArgs.size}"
@@ -289,12 +384,20 @@ class MoveArgumentCodec(private val moduleLoader: MoveModuleLoader) {
 
   private suspend fun module(address: AccountAddress, name: String): MoveModuleBytecode {
     val key = moduleKey(address, name)
-    moduleMutex.withLock { modules[key] }?.let { return it }
+    moduleMutex
+      .withLock { modules[key] }
+      ?.let {
+        return it
+      }
     val loaded =
       when (val result = moduleLoader.load(address, name)) {
         is AptosResult.Success -> result.value
         is AptosResult.Failure -> throw AbiLoadException(result.error)
       }
+    val abi = requireNotNull(loaded.abi) { "Module $key has no ABI" }
+    require(AccountAddress.fromString(abi.address) == address && abi.name == name) {
+      "Loaded module ABI does not match $key"
+    }
     return moduleMutex.withLock { modules.getOrPut(key) { loaded } }
   }
 

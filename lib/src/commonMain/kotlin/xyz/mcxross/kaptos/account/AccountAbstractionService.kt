@@ -22,7 +22,7 @@ import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction
 import xyz.mcxross.kaptos.view.DefaultViewService
@@ -169,7 +169,7 @@ internal class DefaultAccountAbstractionDataSource(config: TransportConfig) :
   ): AptosResult<List<AuthenticationFunction>> {
     return when (
       val result =
-        views.call(
+        views.callRaw(
           function = "0x1::account_abstraction::dispatchable_authenticator",
           arguments = listOf(JsonPrimitive(accountAddress.toStringLong())),
         )

@@ -15,7 +15,6 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.coroutines.CancellationException
-import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.MoveAbility
@@ -25,9 +24,9 @@ import xyz.mcxross.kaptos.model.MoveModuleBytecode
 import xyz.mcxross.kaptos.model.MoveStruct
 import xyz.mcxross.kaptos.model.MoveStructField
 import xyz.mcxross.kaptos.model.MoveVisibility
-import xyz.mcxross.kaptos.transaction.MoveArgument
-import xyz.mcxross.kaptos.transaction.MoveArgumentCodec
-import xyz.mcxross.kaptos.transaction.MoveModuleLoader
+import xyz.mcxross.kaptos.move.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgumentCodec
+import xyz.mcxross.kaptos.move.MoveModuleLoader
 
 class MoveArgumentCodecTest :
   StringSpec({
@@ -63,8 +62,7 @@ class MoveArgumentCodecTest :
           .success()
 
       payload.call.arguments.shouldHaveSize(4)
-      payload.call.arguments[0].bytes() shouldBe
-        u64(1uL) + u64(2uL) + u64(3uL) + u64(4uL)
+      payload.call.arguments[0].bytes() shouldBe u64(1uL) + u64(2uL) + u64(3uL) + u64(4uL)
       payload.call.arguments[1].bytes() shouldBe byteArrayOf(0x01, 0x02)
       payload.call.arguments[2].bytes() shouldBe byteArrayOf(0x01) + u64(42uL)
       payload.call.arguments[3].bytes() shouldBe ByteArray(16) { 0xff.toByte() }
@@ -105,9 +103,7 @@ class MoveArgumentCodecTest :
 
     "ABI loading preserves coroutine cancellation" {
       val codec =
-        MoveArgumentCodec(
-          MoveModuleLoader { _, _ -> throw CancellationException("cancelled") }
-        )
+        MoveArgumentCodec(MoveModuleLoader { _, _ -> throw CancellationException("cancelled") })
 
       shouldThrow<CancellationException> {
         codec.entryFunctionPayload("0x42::geometry::draw")
@@ -118,8 +114,7 @@ class MoveArgumentCodecTest :
 private fun point(x: ULong, y: ULong): MoveArgument.Struct =
   MoveArgument.Struct(mapOf("x" to MoveArgument.U64(x), "y" to MoveArgument.U64(y)))
 
-private fun MoveArgument.bytes(): ByteArray =
-  shouldBeInstanceOf<MoveArgument.PreSerialized>().value
+private fun MoveArgument.bytes(): ByteArray = shouldBeInstanceOf<MoveArgument.PreSerialized>().value
 
 private fun <T> AptosResult<T>.success(): T = shouldBeInstanceOf<AptosResult.Success<T>>().value
 
@@ -142,8 +137,7 @@ private val SHAPES_MODULE =
               isNative = false,
               abilities = listOf(MoveAbility.COPY, MoveAbility.DROP),
               genericTypeParams = emptyList(),
-              fields =
-                listOf(MoveStructField("x", "u64"), MoveStructField("y", "u64")),
+              fields = listOf(MoveStructField("x", "u64"), MoveStructField("y", "u64")),
             )
           ),
       ),
@@ -193,7 +187,8 @@ private val GEOMETRY_MODULE =
               name = "Box",
               isNative = false,
               abilities = listOf(MoveAbility.COPY, MoveAbility.DROP),
-              genericTypeParams = listOf(xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam(emptyList())),
+              genericTypeParams =
+                listOf(xyz.mcxross.kaptos.model.MoveFunctionGenericTypeParam(emptyList())),
               fields = listOf(MoveStructField("value", "T0")),
             ),
             MoveStruct(
@@ -202,8 +197,7 @@ private val GEOMETRY_MODULE =
               isEnum = true,
               abilities = listOf(MoveAbility.COPY, MoveAbility.DROP),
               genericTypeParams = emptyList(),
-              fields =
-                listOf(MoveStructField("None", "u8"), MoveStructField("Number", "u64")),
+              fields = listOf(MoveStructField("None", "u8"), MoveStructField("Number", "u64")),
             ),
           ),
       ),

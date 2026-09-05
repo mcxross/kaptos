@@ -387,8 +387,8 @@ abstract fun interface xyz.mcxross.kaptos.account/WebAuthnSigner { // xyz.mcxros
     abstract suspend fun sign(xyz.mcxross.kaptos.account/WebAuthnSigningRequest): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.core.crypto/WebAuthnSignature> // xyz.mcxross.kaptos.account/WebAuthnSigner.sign|sign(xyz.mcxross.kaptos.account.WebAuthnSigningRequest){}[0]
 }
 
-abstract fun interface xyz.mcxross.kaptos.transaction/MoveModuleLoader { // xyz.mcxross.kaptos.transaction/MoveModuleLoader|null[0]
-    abstract suspend fun load(xyz.mcxross.kaptos.model/AccountAddress, kotlin/String): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/MoveModuleBytecode> // xyz.mcxross.kaptos.transaction/MoveModuleLoader.load|load(xyz.mcxross.kaptos.model.AccountAddress;kotlin.String){}[0]
+abstract fun interface xyz.mcxross.kaptos.move/MoveModuleLoader { // xyz.mcxross.kaptos.move/MoveModuleLoader|null[0]
+    abstract suspend fun load(xyz.mcxross.kaptos.model/AccountAddress, kotlin/String): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/MoveModuleBytecode> // xyz.mcxross.kaptos.move/MoveModuleLoader.load|load(xyz.mcxross.kaptos.model.AccountAddress;kotlin.String){}[0]
 }
 
 abstract interface xyz.mcxross.kaptos.account/AccountAbstractionService { // xyz.mcxross.kaptos.account/AccountAbstractionService|null[0]
@@ -549,7 +549,7 @@ abstract interface xyz.mcxross.kaptos.transaction/TransactionService { // xyz.mc
     abstract suspend fun build(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.Simple> // xyz.mcxross.kaptos.transaction/TransactionService.build|build(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
     abstract suspend fun buildFeePayer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/TransactionPayload, kotlin.collections/List<xyz.mcxross.kaptos.model/AccountAddressInput> = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.FeePayer> // xyz.mcxross.kaptos.transaction/TransactionService.buildFeePayer|buildFeePayer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.TransactionPayload;kotlin.collections.List<xyz.mcxross.kaptos.model.AccountAddressInput>;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
     abstract suspend fun buildMultiAgent(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin.collections/List<xyz.mcxross.kaptos.model/AccountAddressInput>, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.MultiAgent> // xyz.mcxross.kaptos.transaction/TransactionService.buildMultiAgent|buildMultiAgent(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.collections.List<xyz.mcxross.kaptos.model.AccountAddressInput>;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
-    abstract suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction> // xyz.mcxross.kaptos.transaction/TransactionService.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
+    abstract suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction> // xyz.mcxross.kaptos.transaction/TransactionService.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
     abstract suspend fun preloadModuleAbis(kotlin/Array<out xyz.mcxross.kaptos.model/MoveModuleBytecode>...): xyz.mcxross.kaptos.model/AptosResult<kotlin/Unit> // xyz.mcxross.kaptos.transaction/TransactionService.preloadModuleAbis|preloadModuleAbis(kotlin.Array<out|xyz.mcxross.kaptos.model.MoveModuleBytecode>...){}[0]
     abstract suspend fun sign(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/UnsignedTransaction): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> // xyz.mcxross.kaptos.transaction/TransactionService.sign|sign(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.UnsignedTransaction){}[0]
     abstract suspend fun signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/UnsignedTransaction, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ..., xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse> // xyz.mcxross.kaptos.transaction/TransactionService.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.UnsignedTransaction;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator?){}[0]
@@ -565,7 +565,8 @@ abstract interface xyz.mcxross.kaptos.transaction/TransactionService { // xyz.mc
 }
 
 abstract interface xyz.mcxross.kaptos.view/ViewService { // xyz.mcxross.kaptos.view/ViewService|null[0]
-    abstract suspend fun call(kotlin/String, kotlin.collections/List<kotlin/String> = ..., kotlin.collections/List<kotlinx.serialization.json/JsonElement> = ..., kotlin/ULong? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/ViewService.call|call(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlinx.serialization.json.JsonElement>;kotlin.ULong?){}[0]
+    abstract suspend fun call(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ..., kotlin/ULong? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/ViewService.call|call(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>;kotlin.ULong?){}[0]
+    abstract suspend fun callRaw(kotlin/String, kotlin.collections/List<kotlin/String> = ..., kotlin.collections/List<kotlinx.serialization.json/JsonElement> = ..., kotlin/ULong? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/ViewService.callRaw|callRaw(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlinx.serialization.json.JsonElement>;kotlin.ULong?){}[0]
 }
 
 sealed interface <#A: out kotlin/Any?> xyz.mcxross.kaptos.model/AptosResult { // xyz.mcxross.kaptos.model/AptosResult|null[0]
@@ -1135,7 +1136,7 @@ sealed interface xyz.mcxross.kaptos.model/TransactionPayload { // xyz.mcxross.ka
     }
 
     final object Companion { // xyz.mcxross.kaptos.model/TransactionPayload.Companion|null[0]
-        final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
+        final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
         final fun fromBcs(kotlin/ByteArray): xyz.mcxross.kaptos.model/TransactionPayload // xyz.mcxross.kaptos.model/TransactionPayload.Companion.fromBcs|fromBcs(kotlin.ByteArray){}[0]
     }
 }
@@ -1198,6 +1199,282 @@ sealed interface xyz.mcxross.kaptos.model/UnsignedTransaction { // xyz.mcxross.k
     final object Companion { // xyz.mcxross.kaptos.model/UnsignedTransaction.Companion|null[0]
         final val EXTERNAL_FEE_PAYER_PLACEHOLDER // xyz.mcxross.kaptos.model/UnsignedTransaction.Companion.EXTERNAL_FEE_PAYER_PLACEHOLDER|{}EXTERNAL_FEE_PAYER_PLACEHOLDER[0]
             final fun <get-EXTERNAL_FEE_PAYER_PLACEHOLDER>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.model/UnsignedTransaction.Companion.EXTERNAL_FEE_PAYER_PLACEHOLDER.<get-EXTERNAL_FEE_PAYER_PLACEHOLDER>|<get-EXTERNAL_FEE_PAYER_PLACEHOLDER>(){}[0]
+    }
+}
+
+sealed interface xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument|null[0]
+    open fun toBcs(): kotlin/ByteArray // xyz.mcxross.kaptos.move/MoveArgument.toBcs|toBcs(){}[0]
+
+    final class Address : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Address|null[0]
+        constructor <init>(xyz.mcxross.kaptos.model/AccountAddress) // xyz.mcxross.kaptos.move/MoveArgument.Address.<init>|<init>(xyz.mcxross.kaptos.model.AccountAddress){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.Address.value|{}value[0]
+            final fun <get-value>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.move/MoveArgument.Address.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.move/MoveArgument.Address.component1|component1(){}[0]
+        final fun copy(xyz.mcxross.kaptos.model/AccountAddress = ...): xyz.mcxross.kaptos.move/MoveArgument.Address // xyz.mcxross.kaptos.move/MoveArgument.Address.copy|copy(xyz.mcxross.kaptos.model.AccountAddress){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Address.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Address.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Address.toString|toString(){}[0]
+    }
+
+    final class Bool : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Bool|null[0]
+        constructor <init>(kotlin/Boolean) // xyz.mcxross.kaptos.move/MoveArgument.Bool.<init>|<init>(kotlin.Boolean){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.Bool.value|{}value[0]
+            final fun <get-value>(): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Bool.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Bool.component1|component1(){}[0]
+        final fun copy(kotlin/Boolean = ...): xyz.mcxross.kaptos.move/MoveArgument.Bool // xyz.mcxross.kaptos.move/MoveArgument.Bool.copy|copy(kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Bool.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Bool.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Bool.toString|toString(){}[0]
+    }
+
+    final class Bytes : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Bytes|null[0]
+        constructor <init>(kotlin/ByteArray) // xyz.mcxross.kaptos.move/MoveArgument.Bytes.<init>|<init>(kotlin.ByteArray){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.Bytes.value|{}value[0]
+            final fun <get-value>(): kotlin/ByteArray // xyz.mcxross.kaptos.move/MoveArgument.Bytes.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Bytes.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Bytes.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Bytes.toString|toString(){}[0]
+    }
+
+    final class Enum : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Enum|null[0]
+        constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> = ...) // xyz.mcxross.kaptos.move/MoveArgument.Enum.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+
+        final val fields // xyz.mcxross.kaptos.move/MoveArgument.Enum.fields|{}fields[0]
+            final fun <get-fields>(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Enum.fields.<get-fields>|<get-fields>(){}[0]
+        final val variant // xyz.mcxross.kaptos.move/MoveArgument.Enum.variant|{}variant[0]
+            final fun <get-variant>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Enum.variant.<get-variant>|<get-variant>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Enum.component1|component1(){}[0]
+        final fun component2(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Enum.component2|component2(){}[0]
+        final fun copy(kotlin/String = ..., kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.move/MoveArgument.Enum // xyz.mcxross.kaptos.move/MoveArgument.Enum.copy|copy(kotlin.String;kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Enum.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Enum.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Enum.toString|toString(){}[0]
+    }
+
+    final class I128 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I128|null[0]
+        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.move/MoveArgument.I128.<init>|<init>(kotlin.String){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I128.value|{}value[0]
+            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I128.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I128.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.move/MoveArgument.I128 // xyz.mcxross.kaptos.move/MoveArgument.I128.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I128.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I128.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I128.toString|toString(){}[0]
+    }
+
+    final class I16 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I16|null[0]
+        constructor <init>(kotlin/Short) // xyz.mcxross.kaptos.move/MoveArgument.I16.<init>|<init>(kotlin.Short){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I16.value|{}value[0]
+            final fun <get-value>(): kotlin/Short // xyz.mcxross.kaptos.move/MoveArgument.I16.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/Short // xyz.mcxross.kaptos.move/MoveArgument.I16.component1|component1(){}[0]
+        final fun copy(kotlin/Short = ...): xyz.mcxross.kaptos.move/MoveArgument.I16 // xyz.mcxross.kaptos.move/MoveArgument.I16.copy|copy(kotlin.Short){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I16.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I16.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I16.toString|toString(){}[0]
+    }
+
+    final class I256 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I256|null[0]
+        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.move/MoveArgument.I256.<init>|<init>(kotlin.String){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I256.value|{}value[0]
+            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I256.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I256.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.move/MoveArgument.I256 // xyz.mcxross.kaptos.move/MoveArgument.I256.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I256.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I256.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I256.toString|toString(){}[0]
+    }
+
+    final class I32 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I32|null[0]
+        constructor <init>(kotlin/Int) // xyz.mcxross.kaptos.move/MoveArgument.I32.<init>|<init>(kotlin.Int){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I32.value|{}value[0]
+            final fun <get-value>(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I32.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I32.component1|component1(){}[0]
+        final fun copy(kotlin/Int = ...): xyz.mcxross.kaptos.move/MoveArgument.I32 // xyz.mcxross.kaptos.move/MoveArgument.I32.copy|copy(kotlin.Int){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I32.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I32.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I32.toString|toString(){}[0]
+    }
+
+    final class I64 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I64|null[0]
+        constructor <init>(kotlin/Long) // xyz.mcxross.kaptos.move/MoveArgument.I64.<init>|<init>(kotlin.Long){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I64.value|{}value[0]
+            final fun <get-value>(): kotlin/Long // xyz.mcxross.kaptos.move/MoveArgument.I64.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/Long // xyz.mcxross.kaptos.move/MoveArgument.I64.component1|component1(){}[0]
+        final fun copy(kotlin/Long = ...): xyz.mcxross.kaptos.move/MoveArgument.I64 // xyz.mcxross.kaptos.move/MoveArgument.I64.copy|copy(kotlin.Long){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I64.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I64.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I64.toString|toString(){}[0]
+    }
+
+    final class I8 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.I8|null[0]
+        constructor <init>(kotlin/Byte) // xyz.mcxross.kaptos.move/MoveArgument.I8.<init>|<init>(kotlin.Byte){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.I8.value|{}value[0]
+            final fun <get-value>(): kotlin/Byte // xyz.mcxross.kaptos.move/MoveArgument.I8.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/Byte // xyz.mcxross.kaptos.move/MoveArgument.I8.component1|component1(){}[0]
+        final fun copy(kotlin/Byte = ...): xyz.mcxross.kaptos.move/MoveArgument.I8 // xyz.mcxross.kaptos.move/MoveArgument.I8.copy|copy(kotlin.Byte){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.I8.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.I8.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.I8.toString|toString(){}[0]
+    }
+
+    final class Option : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Option|null[0]
+        constructor <init>(xyz.mcxross.kaptos.move/MoveArgument?) // xyz.mcxross.kaptos.move/MoveArgument.Option.<init>|<init>(xyz.mcxross.kaptos.move.MoveArgument?){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.Option.value|{}value[0]
+            final fun <get-value>(): xyz.mcxross.kaptos.move/MoveArgument? // xyz.mcxross.kaptos.move/MoveArgument.Option.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): xyz.mcxross.kaptos.move/MoveArgument? // xyz.mcxross.kaptos.move/MoveArgument.Option.component1|component1(){}[0]
+        final fun copy(xyz.mcxross.kaptos.move/MoveArgument? = ...): xyz.mcxross.kaptos.move/MoveArgument.Option // xyz.mcxross.kaptos.move/MoveArgument.Option.copy|copy(xyz.mcxross.kaptos.move.MoveArgument?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Option.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Option.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Option.toString|toString(){}[0]
+    }
+
+    final class PreSerialized : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized|null[0]
+        constructor <init>(kotlin/ByteArray) // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.<init>|<init>(kotlin.ByteArray){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.value|{}value[0]
+            final fun <get-value>(): kotlin/ByteArray // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.PreSerialized.toString|toString(){}[0]
+    }
+
+    final class StringValue : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.StringValue|null[0]
+        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.move/MoveArgument.StringValue.<init>|<init>(kotlin.String){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.StringValue.value|{}value[0]
+            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.StringValue.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.StringValue.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.move/MoveArgument.StringValue // xyz.mcxross.kaptos.move/MoveArgument.StringValue.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.StringValue.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.StringValue.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.StringValue.toString|toString(){}[0]
+    }
+
+    final class Struct : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Struct|null[0]
+        constructor <init>(kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument>) // xyz.mcxross.kaptos.move/MoveArgument.Struct.<init>|<init>(kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+
+        final val fields // xyz.mcxross.kaptos.move/MoveArgument.Struct.fields|{}fields[0]
+            final fun <get-fields>(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Struct.fields.<get-fields>|<get-fields>(){}[0]
+
+        final fun component1(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Struct.component1|component1(){}[0]
+        final fun copy(kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.move/MoveArgument.Struct // xyz.mcxross.kaptos.move/MoveArgument.Struct.copy|copy(kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Struct.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Struct.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Struct.toString|toString(){}[0]
+    }
+
+    final class U128 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U128|null[0]
+        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.move/MoveArgument.U128.<init>|<init>(kotlin.String){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U128.value|{}value[0]
+            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U128.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U128.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.move/MoveArgument.U128 // xyz.mcxross.kaptos.move/MoveArgument.U128.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U128.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U128.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U128.toString|toString(){}[0]
+    }
+
+    final class U16 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U16|null[0]
+        constructor <init>(kotlin/UShort) // xyz.mcxross.kaptos.move/MoveArgument.U16.<init>|<init>(kotlin.UShort){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U16.value|{}value[0]
+            final fun <get-value>(): kotlin/UShort // xyz.mcxross.kaptos.move/MoveArgument.U16.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/UShort // xyz.mcxross.kaptos.move/MoveArgument.U16.component1|component1(){}[0]
+        final fun copy(kotlin/UShort = ...): xyz.mcxross.kaptos.move/MoveArgument.U16 // xyz.mcxross.kaptos.move/MoveArgument.U16.copy|copy(kotlin.UShort){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U16.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U16.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U16.toString|toString(){}[0]
+    }
+
+    final class U256 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U256|null[0]
+        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.move/MoveArgument.U256.<init>|<init>(kotlin.String){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U256.value|{}value[0]
+            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U256.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U256.component1|component1(){}[0]
+        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.move/MoveArgument.U256 // xyz.mcxross.kaptos.move/MoveArgument.U256.copy|copy(kotlin.String){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U256.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U256.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U256.toString|toString(){}[0]
+    }
+
+    final class U32 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U32|null[0]
+        constructor <init>(kotlin/UInt) // xyz.mcxross.kaptos.move/MoveArgument.U32.<init>|<init>(kotlin.UInt){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U32.value|{}value[0]
+            final fun <get-value>(): kotlin/UInt // xyz.mcxross.kaptos.move/MoveArgument.U32.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/UInt // xyz.mcxross.kaptos.move/MoveArgument.U32.component1|component1(){}[0]
+        final fun copy(kotlin/UInt = ...): xyz.mcxross.kaptos.move/MoveArgument.U32 // xyz.mcxross.kaptos.move/MoveArgument.U32.copy|copy(kotlin.UInt){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U32.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U32.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U32.toString|toString(){}[0]
+    }
+
+    final class U64 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U64|null[0]
+        constructor <init>(kotlin/ULong) // xyz.mcxross.kaptos.move/MoveArgument.U64.<init>|<init>(kotlin.ULong){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U64.value|{}value[0]
+            final fun <get-value>(): kotlin/ULong // xyz.mcxross.kaptos.move/MoveArgument.U64.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/ULong // xyz.mcxross.kaptos.move/MoveArgument.U64.component1|component1(){}[0]
+        final fun copy(kotlin/ULong = ...): xyz.mcxross.kaptos.move/MoveArgument.U64 // xyz.mcxross.kaptos.move/MoveArgument.U64.copy|copy(kotlin.ULong){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U64.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U64.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U64.toString|toString(){}[0]
+    }
+
+    final class U8 : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.U8|null[0]
+        constructor <init>(kotlin/UByte) // xyz.mcxross.kaptos.move/MoveArgument.U8.<init>|<init>(kotlin.UByte){}[0]
+
+        final val value // xyz.mcxross.kaptos.move/MoveArgument.U8.value|{}value[0]
+            final fun <get-value>(): kotlin/UByte // xyz.mcxross.kaptos.move/MoveArgument.U8.value.<get-value>|<get-value>(){}[0]
+
+        final fun component1(): kotlin/UByte // xyz.mcxross.kaptos.move/MoveArgument.U8.component1|component1(){}[0]
+        final fun copy(kotlin/UByte = ...): xyz.mcxross.kaptos.move/MoveArgument.U8 // xyz.mcxross.kaptos.move/MoveArgument.U8.copy|copy(kotlin.UByte){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.U8.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.U8.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.U8.toString|toString(){}[0]
+    }
+
+    final class Vector : xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.move/MoveArgument.Vector|null[0]
+        constructor <init>(kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument>) // xyz.mcxross.kaptos.move/MoveArgument.Vector.<init>|<init>(kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+
+        final val values // xyz.mcxross.kaptos.move/MoveArgument.Vector.values|{}values[0]
+            final fun <get-values>(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Vector.values.<get-values>|<get-values>(){}[0]
+
+        final fun component1(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Vector.component1|component1(){}[0]
+        final fun copy(kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.move/MoveArgument.Vector // xyz.mcxross.kaptos.move/MoveArgument.Vector.copy|copy(kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Vector.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Vector.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Vector.toString|toString(){}[0]
     }
 }
 
@@ -1423,282 +1700,6 @@ sealed interface xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthent
     final object Companion { // xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthenticator.Companion|null[0]
         final fun fromBcs(kotlin/ByteArray): xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthenticator // xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthenticator.Companion.fromBcs|fromBcs(kotlin.ByteArray){}[0]
         final fun singleSender(xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator): xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthenticator // xyz.mcxross.kaptos.transaction.authenticator/TransactionAuthenticator.Companion.singleSender|singleSender(xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator){}[0]
-    }
-}
-
-sealed interface xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument|null[0]
-    open fun toBcs(): kotlin/ByteArray // xyz.mcxross.kaptos.transaction/MoveArgument.toBcs|toBcs(){}[0]
-
-    final class Address : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Address|null[0]
-        constructor <init>(xyz.mcxross.kaptos.model/AccountAddress) // xyz.mcxross.kaptos.transaction/MoveArgument.Address.<init>|<init>(xyz.mcxross.kaptos.model.AccountAddress){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.Address.value|{}value[0]
-            final fun <get-value>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.transaction/MoveArgument.Address.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.transaction/MoveArgument.Address.component1|component1(){}[0]
-        final fun copy(xyz.mcxross.kaptos.model/AccountAddress = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Address // xyz.mcxross.kaptos.transaction/MoveArgument.Address.copy|copy(xyz.mcxross.kaptos.model.AccountAddress){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Address.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Address.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Address.toString|toString(){}[0]
-    }
-
-    final class Bool : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Bool|null[0]
-        constructor <init>(kotlin/Boolean) // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.<init>|<init>(kotlin.Boolean){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.value|{}value[0]
-            final fun <get-value>(): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.component1|component1(){}[0]
-        final fun copy(kotlin/Boolean = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Bool // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.copy|copy(kotlin.Boolean){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Bool.toString|toString(){}[0]
-    }
-
-    final class Bytes : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes|null[0]
-        constructor <init>(kotlin/ByteArray) // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.<init>|<init>(kotlin.ByteArray){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.value|{}value[0]
-            final fun <get-value>(): kotlin/ByteArray // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.value.<get-value>|<get-value>(){}[0]
-
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Bytes.toString|toString(){}[0]
-    }
-
-    final class Enum : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Enum|null[0]
-        constructor <init>(kotlin/String, kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> = ...) // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.<init>|<init>(kotlin.String;kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-
-        final val fields // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.fields|{}fields[0]
-            final fun <get-fields>(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.fields.<get-fields>|<get-fields>(){}[0]
-        final val variant // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.variant|{}variant[0]
-            final fun <get-variant>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.variant.<get-variant>|<get-variant>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.component1|component1(){}[0]
-        final fun component2(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.component2|component2(){}[0]
-        final fun copy(kotlin/String = ..., kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Enum // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.copy|copy(kotlin.String;kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Enum.toString|toString(){}[0]
-    }
-
-    final class I128 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I128|null[0]
-        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.transaction/MoveArgument.I128.<init>|<init>(kotlin.String){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I128.value|{}value[0]
-            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I128.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I128.component1|component1(){}[0]
-        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I128 // xyz.mcxross.kaptos.transaction/MoveArgument.I128.copy|copy(kotlin.String){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I128.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I128.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I128.toString|toString(){}[0]
-    }
-
-    final class I16 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I16|null[0]
-        constructor <init>(kotlin/Short) // xyz.mcxross.kaptos.transaction/MoveArgument.I16.<init>|<init>(kotlin.Short){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I16.value|{}value[0]
-            final fun <get-value>(): kotlin/Short // xyz.mcxross.kaptos.transaction/MoveArgument.I16.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/Short // xyz.mcxross.kaptos.transaction/MoveArgument.I16.component1|component1(){}[0]
-        final fun copy(kotlin/Short = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I16 // xyz.mcxross.kaptos.transaction/MoveArgument.I16.copy|copy(kotlin.Short){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I16.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I16.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I16.toString|toString(){}[0]
-    }
-
-    final class I256 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I256|null[0]
-        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.transaction/MoveArgument.I256.<init>|<init>(kotlin.String){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I256.value|{}value[0]
-            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I256.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I256.component1|component1(){}[0]
-        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I256 // xyz.mcxross.kaptos.transaction/MoveArgument.I256.copy|copy(kotlin.String){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I256.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I256.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I256.toString|toString(){}[0]
-    }
-
-    final class I32 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I32|null[0]
-        constructor <init>(kotlin/Int) // xyz.mcxross.kaptos.transaction/MoveArgument.I32.<init>|<init>(kotlin.Int){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I32.value|{}value[0]
-            final fun <get-value>(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I32.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I32.component1|component1(){}[0]
-        final fun copy(kotlin/Int = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I32 // xyz.mcxross.kaptos.transaction/MoveArgument.I32.copy|copy(kotlin.Int){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I32.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I32.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I32.toString|toString(){}[0]
-    }
-
-    final class I64 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I64|null[0]
-        constructor <init>(kotlin/Long) // xyz.mcxross.kaptos.transaction/MoveArgument.I64.<init>|<init>(kotlin.Long){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I64.value|{}value[0]
-            final fun <get-value>(): kotlin/Long // xyz.mcxross.kaptos.transaction/MoveArgument.I64.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/Long // xyz.mcxross.kaptos.transaction/MoveArgument.I64.component1|component1(){}[0]
-        final fun copy(kotlin/Long = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I64 // xyz.mcxross.kaptos.transaction/MoveArgument.I64.copy|copy(kotlin.Long){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I64.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I64.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I64.toString|toString(){}[0]
-    }
-
-    final class I8 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.I8|null[0]
-        constructor <init>(kotlin/Byte) // xyz.mcxross.kaptos.transaction/MoveArgument.I8.<init>|<init>(kotlin.Byte){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.I8.value|{}value[0]
-            final fun <get-value>(): kotlin/Byte // xyz.mcxross.kaptos.transaction/MoveArgument.I8.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/Byte // xyz.mcxross.kaptos.transaction/MoveArgument.I8.component1|component1(){}[0]
-        final fun copy(kotlin/Byte = ...): xyz.mcxross.kaptos.transaction/MoveArgument.I8 // xyz.mcxross.kaptos.transaction/MoveArgument.I8.copy|copy(kotlin.Byte){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.I8.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.I8.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.I8.toString|toString(){}[0]
-    }
-
-    final class Option : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Option|null[0]
-        constructor <init>(xyz.mcxross.kaptos.transaction/MoveArgument?) // xyz.mcxross.kaptos.transaction/MoveArgument.Option.<init>|<init>(xyz.mcxross.kaptos.transaction.MoveArgument?){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.Option.value|{}value[0]
-            final fun <get-value>(): xyz.mcxross.kaptos.transaction/MoveArgument? // xyz.mcxross.kaptos.transaction/MoveArgument.Option.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): xyz.mcxross.kaptos.transaction/MoveArgument? // xyz.mcxross.kaptos.transaction/MoveArgument.Option.component1|component1(){}[0]
-        final fun copy(xyz.mcxross.kaptos.transaction/MoveArgument? = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Option // xyz.mcxross.kaptos.transaction/MoveArgument.Option.copy|copy(xyz.mcxross.kaptos.transaction.MoveArgument?){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Option.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Option.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Option.toString|toString(){}[0]
-    }
-
-    final class PreSerialized : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized|null[0]
-        constructor <init>(kotlin/ByteArray) // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.<init>|<init>(kotlin.ByteArray){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.value|{}value[0]
-            final fun <get-value>(): kotlin/ByteArray // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.value.<get-value>|<get-value>(){}[0]
-
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized.toString|toString(){}[0]
-    }
-
-    final class StringValue : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue|null[0]
-        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.<init>|<init>(kotlin.String){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.value|{}value[0]
-            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.component1|component1(){}[0]
-        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.transaction/MoveArgument.StringValue // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.copy|copy(kotlin.String){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.StringValue.toString|toString(){}[0]
-    }
-
-    final class Struct : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Struct|null[0]
-        constructor <init>(kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument>) // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.<init>|<init>(kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-
-        final val fields // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.fields|{}fields[0]
-            final fun <get-fields>(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.fields.<get-fields>|<get-fields>(){}[0]
-
-        final fun component1(): kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.component1|component1(){}[0]
-        final fun copy(kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Struct // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.copy|copy(kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Struct.toString|toString(){}[0]
-    }
-
-    final class U128 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U128|null[0]
-        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.transaction/MoveArgument.U128.<init>|<init>(kotlin.String){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U128.value|{}value[0]
-            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U128.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U128.component1|component1(){}[0]
-        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U128 // xyz.mcxross.kaptos.transaction/MoveArgument.U128.copy|copy(kotlin.String){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U128.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U128.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U128.toString|toString(){}[0]
-    }
-
-    final class U16 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U16|null[0]
-        constructor <init>(kotlin/UShort) // xyz.mcxross.kaptos.transaction/MoveArgument.U16.<init>|<init>(kotlin.UShort){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U16.value|{}value[0]
-            final fun <get-value>(): kotlin/UShort // xyz.mcxross.kaptos.transaction/MoveArgument.U16.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/UShort // xyz.mcxross.kaptos.transaction/MoveArgument.U16.component1|component1(){}[0]
-        final fun copy(kotlin/UShort = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U16 // xyz.mcxross.kaptos.transaction/MoveArgument.U16.copy|copy(kotlin.UShort){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U16.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U16.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U16.toString|toString(){}[0]
-    }
-
-    final class U256 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U256|null[0]
-        constructor <init>(kotlin/String) // xyz.mcxross.kaptos.transaction/MoveArgument.U256.<init>|<init>(kotlin.String){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U256.value|{}value[0]
-            final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U256.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U256.component1|component1(){}[0]
-        final fun copy(kotlin/String = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U256 // xyz.mcxross.kaptos.transaction/MoveArgument.U256.copy|copy(kotlin.String){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U256.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U256.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U256.toString|toString(){}[0]
-    }
-
-    final class U32 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U32|null[0]
-        constructor <init>(kotlin/UInt) // xyz.mcxross.kaptos.transaction/MoveArgument.U32.<init>|<init>(kotlin.UInt){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U32.value|{}value[0]
-            final fun <get-value>(): kotlin/UInt // xyz.mcxross.kaptos.transaction/MoveArgument.U32.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/UInt // xyz.mcxross.kaptos.transaction/MoveArgument.U32.component1|component1(){}[0]
-        final fun copy(kotlin/UInt = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U32 // xyz.mcxross.kaptos.transaction/MoveArgument.U32.copy|copy(kotlin.UInt){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U32.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U32.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U32.toString|toString(){}[0]
-    }
-
-    final class U64 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U64|null[0]
-        constructor <init>(kotlin/ULong) // xyz.mcxross.kaptos.transaction/MoveArgument.U64.<init>|<init>(kotlin.ULong){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U64.value|{}value[0]
-            final fun <get-value>(): kotlin/ULong // xyz.mcxross.kaptos.transaction/MoveArgument.U64.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/ULong // xyz.mcxross.kaptos.transaction/MoveArgument.U64.component1|component1(){}[0]
-        final fun copy(kotlin/ULong = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U64 // xyz.mcxross.kaptos.transaction/MoveArgument.U64.copy|copy(kotlin.ULong){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U64.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U64.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U64.toString|toString(){}[0]
-    }
-
-    final class U8 : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.U8|null[0]
-        constructor <init>(kotlin/UByte) // xyz.mcxross.kaptos.transaction/MoveArgument.U8.<init>|<init>(kotlin.UByte){}[0]
-
-        final val value // xyz.mcxross.kaptos.transaction/MoveArgument.U8.value|{}value[0]
-            final fun <get-value>(): kotlin/UByte // xyz.mcxross.kaptos.transaction/MoveArgument.U8.value.<get-value>|<get-value>(){}[0]
-
-        final fun component1(): kotlin/UByte // xyz.mcxross.kaptos.transaction/MoveArgument.U8.component1|component1(){}[0]
-        final fun copy(kotlin/UByte = ...): xyz.mcxross.kaptos.transaction/MoveArgument.U8 // xyz.mcxross.kaptos.transaction/MoveArgument.U8.copy|copy(kotlin.UByte){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.U8.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.U8.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.U8.toString|toString(){}[0]
-    }
-
-    final class Vector : xyz.mcxross.kaptos.transaction/MoveArgument { // xyz.mcxross.kaptos.transaction/MoveArgument.Vector|null[0]
-        constructor <init>(kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument>) // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.<init>|<init>(kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-
-        final val values // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.values|{}values[0]
-            final fun <get-values>(): kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.values.<get-values>|<get-values>(){}[0]
-
-        final fun component1(): kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.component1|component1(){}[0]
-        final fun copy(kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.transaction/MoveArgument.Vector // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.copy|copy(kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-        final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.equals|equals(kotlin.Any?){}[0]
-        final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.hashCode|hashCode(){}[0]
-        final fun toString(): kotlin/String // xyz.mcxross.kaptos.transaction/MoveArgument.Vector.toString|toString(){}[0]
     }
 }
 
@@ -3425,10 +3426,10 @@ final class xyz.mcxross.kaptos.model/EntryFunctionABI : xyz.mcxross.kaptos.model
 }
 
 final class xyz.mcxross.kaptos.model/EntryFunctionCall { // xyz.mcxross.kaptos.model/EntryFunctionCall|null[0]
-    constructor <init>(xyz.mcxross.kaptos.model/ModuleId, xyz.mcxross.kaptos.model/Identifier, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...) // xyz.mcxross.kaptos.model/EntryFunctionCall.<init>|<init>(xyz.mcxross.kaptos.model.ModuleId;xyz.mcxross.kaptos.model.Identifier;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
+    constructor <init>(xyz.mcxross.kaptos.model/ModuleId, xyz.mcxross.kaptos.model/Identifier, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...) // xyz.mcxross.kaptos.model/EntryFunctionCall.<init>|<init>(xyz.mcxross.kaptos.model.ModuleId;xyz.mcxross.kaptos.model.Identifier;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
 
     final val arguments // xyz.mcxross.kaptos.model/EntryFunctionCall.arguments|{}arguments[0]
-        final fun <get-arguments>(): kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.model/EntryFunctionCall.arguments.<get-arguments>|<get-arguments>(){}[0]
+        final fun <get-arguments>(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.model/EntryFunctionCall.arguments.<get-arguments>|<get-arguments>(){}[0]
     final val function // xyz.mcxross.kaptos.model/EntryFunctionCall.function|{}function[0]
         final fun <get-function>(): xyz.mcxross.kaptos.model/Identifier // xyz.mcxross.kaptos.model/EntryFunctionCall.function.<get-function>|<get-function>(){}[0]
     final val module // xyz.mcxross.kaptos.model/EntryFunctionCall.module|{}module[0]
@@ -3439,8 +3440,8 @@ final class xyz.mcxross.kaptos.model/EntryFunctionCall { // xyz.mcxross.kaptos.m
     final fun component1(): xyz.mcxross.kaptos.model/ModuleId // xyz.mcxross.kaptos.model/EntryFunctionCall.component1|component1(){}[0]
     final fun component2(): xyz.mcxross.kaptos.model/Identifier // xyz.mcxross.kaptos.model/EntryFunctionCall.component2|component2(){}[0]
     final fun component3(): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/EntryFunctionCall.component3|component3(){}[0]
-    final fun component4(): kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.model/EntryFunctionCall.component4|component4(){}[0]
-    final fun copy(xyz.mcxross.kaptos.model/ModuleId = ..., xyz.mcxross.kaptos.model/Identifier = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.model/EntryFunctionCall // xyz.mcxross.kaptos.model/EntryFunctionCall.copy|copy(xyz.mcxross.kaptos.model.ModuleId;xyz.mcxross.kaptos.model.Identifier;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
+    final fun component4(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.model/EntryFunctionCall.component4|component4(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/ModuleId = ..., xyz.mcxross.kaptos.model/Identifier = ..., kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/EntryFunctionCall // xyz.mcxross.kaptos.model/EntryFunctionCall.copy|copy(xyz.mcxross.kaptos.model.ModuleId;xyz.mcxross.kaptos.model.Identifier;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/EntryFunctionCall.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/EntryFunctionCall.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/EntryFunctionCall.toString|toString(){}[0]
@@ -4442,10 +4443,10 @@ final class xyz.mcxross.kaptos.model/PendingTransactionResponse : xyz.mcxross.ka
 }
 
 final class xyz.mcxross.kaptos.model/ScriptPayload { // xyz.mcxross.kaptos.model/ScriptPayload|null[0]
-    constructor <init>(kotlin/ByteArray, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...) // xyz.mcxross.kaptos.model/ScriptPayload.<init>|<init>(kotlin.ByteArray;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
+    constructor <init>(kotlin/ByteArray, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...) // xyz.mcxross.kaptos.model/ScriptPayload.<init>|<init>(kotlin.ByteArray;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
 
     final val arguments // xyz.mcxross.kaptos.model/ScriptPayload.arguments|{}arguments[0]
-        final fun <get-arguments>(): kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> // xyz.mcxross.kaptos.model/ScriptPayload.arguments.<get-arguments>|<get-arguments>(){}[0]
+        final fun <get-arguments>(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.model/ScriptPayload.arguments.<get-arguments>|<get-arguments>(){}[0]
     final val bytecode // xyz.mcxross.kaptos.model/ScriptPayload.bytecode|{}bytecode[0]
         final fun <get-bytecode>(): kotlin/ByteArray // xyz.mcxross.kaptos.model/ScriptPayload.bytecode.<get-bytecode>|<get-bytecode>(){}[0]
     final val typeArguments // xyz.mcxross.kaptos.model/ScriptPayload.typeArguments|{}typeArguments[0]
@@ -5157,6 +5158,14 @@ final class xyz.mcxross.kaptos.model/WriteSetChangeDeleteModule : xyz.mcxross.ka
     }
 }
 
+final class xyz.mcxross.kaptos.move/MoveArgumentCodec { // xyz.mcxross.kaptos.move/MoveArgumentCodec|null[0]
+    constructor <init>(xyz.mcxross.kaptos.move/MoveModuleLoader) // xyz.mcxross.kaptos.move/MoveArgumentCodec.<init>|<init>(xyz.mcxross.kaptos.move.MoveModuleLoader){}[0]
+
+    final suspend fun encode(xyz.mcxross.kaptos.model/TypeTag, xyz.mcxross.kaptos.move/MoveArgument, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.move/MoveArgument.PreSerialized> // xyz.mcxross.kaptos.move/MoveArgumentCodec.encode|encode(xyz.mcxross.kaptos.model.TypeTag;xyz.mcxross.kaptos.move.MoveArgument;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>){}[0]
+    final suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction> // xyz.mcxross.kaptos.move/MoveArgumentCodec.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+    final suspend fun preload(kotlin/Array<out xyz.mcxross.kaptos.model/MoveModuleBytecode>...) // xyz.mcxross.kaptos.move/MoveArgumentCodec.preload|preload(kotlin.Array<out|xyz.mcxross.kaptos.model.MoveModuleBytecode>...){}[0]
+}
+
 final class xyz.mcxross.kaptos.names/AptosName { // xyz.mcxross.kaptos.names/AptosName|null[0]
     constructor <init>(kotlin/String, kotlin/String? = ...) // xyz.mcxross.kaptos.names/AptosName.<init>|<init>(kotlin.String;kotlin.String?){}[0]
 
@@ -5568,14 +5577,6 @@ final class xyz.mcxross.kaptos.transaction/EntryFunction { // xyz.mcxross.kaptos
     }
 }
 
-final class xyz.mcxross.kaptos.transaction/MoveArgumentCodec { // xyz.mcxross.kaptos.transaction/MoveArgumentCodec|null[0]
-    constructor <init>(xyz.mcxross.kaptos.transaction/MoveModuleLoader) // xyz.mcxross.kaptos.transaction/MoveArgumentCodec.<init>|<init>(xyz.mcxross.kaptos.transaction.MoveModuleLoader){}[0]
-
-    final suspend fun encode(xyz.mcxross.kaptos.model/TypeTag, xyz.mcxross.kaptos.transaction/MoveArgument, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.transaction/MoveArgument.PreSerialized> // xyz.mcxross.kaptos.transaction/MoveArgumentCodec.encode|encode(xyz.mcxross.kaptos.model.TypeTag;xyz.mcxross.kaptos.transaction.MoveArgument;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>){}[0]
-    final suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.transaction/MoveArgument> = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction> // xyz.mcxross.kaptos.transaction/MoveArgumentCodec.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.transaction.MoveArgument>){}[0]
-    final suspend fun preload(kotlin/Array<out xyz.mcxross.kaptos.model/MoveModuleBytecode>...) // xyz.mcxross.kaptos.transaction/MoveArgumentCodec.preload|preload(kotlin.Array<out|xyz.mcxross.kaptos.model.MoveModuleBytecode>...){}[0]
-}
-
 final class xyz.mcxross.kaptos.transaction/TransactionWorker { // xyz.mcxross.kaptos.transaction/TransactionWorker|null[0]
     constructor <init>(kotlinx.coroutines/CoroutineScope, xyz.mcxross.kaptos.transaction/AccountSequenceManager, kotlin/Int = ..., kotlin.coroutines/SuspendFunction1<xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse>>, kotlin/Function1<xyz.mcxross.kaptos.model/AptosError, kotlin/Boolean> = ...) // xyz.mcxross.kaptos.transaction/TransactionWorker.<init>|<init>(kotlinx.coroutines.CoroutineScope;xyz.mcxross.kaptos.transaction.AccountSequenceManager;kotlin.Int;kotlin.coroutines.SuspendFunction1<xyz.mcxross.kaptos.model.UnsignedTransaction,xyz.mcxross.kaptos.model.AptosResult<xyz.mcxross.kaptos.model.PendingTransactionResponse>>;kotlin.Function1<xyz.mcxross.kaptos.model.AptosError,kotlin.Boolean>){}[0]
 
@@ -5597,6 +5598,7 @@ final class xyz.mcxross.kaptos.view/MoveViewResult { // xyz.mcxross.kaptos.view/
     final val values // xyz.mcxross.kaptos.view/MoveViewResult.values|{}values[0]
         final fun <get-values>(): kotlin.collections/List<kotlinx.serialization.json/JsonElement> // xyz.mcxross.kaptos.view/MoveViewResult.values.<get-values>|<get-values>(){}[0]
 
+    final fun <#A1: kotlin/Any?> decodeValue(kotlin/Int, kotlinx.serialization/DeserializationStrategy<#A1>, kotlinx.serialization.json/Json = ...): xyz.mcxross.kaptos.model/AptosResult<#A1> // xyz.mcxross.kaptos.view/MoveViewResult.decodeValue|decodeValue(kotlin.Int;kotlinx.serialization.DeserializationStrategy<0:0>;kotlinx.serialization.json.Json){0§<kotlin.Any?>}[0]
     final fun component1(): kotlin.collections/List<kotlinx.serialization.json/JsonElement> // xyz.mcxross.kaptos.view/MoveViewResult.component1|component1(){}[0]
     final fun copy(kotlin.collections/List<kotlinx.serialization.json/JsonElement> = ...): xyz.mcxross.kaptos.view/MoveViewResult // xyz.mcxross.kaptos.view/MoveViewResult.copy|copy(kotlin.collections.List<kotlinx.serialization.json.JsonElement>){}[0]
     final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.view/MoveViewResult.equals|equals(kotlin.Any?){}[0]

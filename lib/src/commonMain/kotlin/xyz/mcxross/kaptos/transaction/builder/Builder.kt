@@ -34,8 +34,8 @@ import xyz.mcxross.kaptos.internal.getGasPriceEstimation
 import xyz.mcxross.kaptos.internal.getInfo
 import xyz.mcxross.kaptos.internal.getLedgerInfo
 import xyz.mcxross.kaptos.model.*
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.EntryFunction
-import xyz.mcxross.kaptos.transaction.MoveArgument
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticator.TransactionAuthenticator
 import xyz.mcxross.kaptos.transaction.instances.ChainId
@@ -277,7 +277,10 @@ private fun EntryFunctionArgument.toMoveArgument(): MoveArgument =
 
 private fun String.decodeHex(): ByteArray {
   val normalized = removePrefix("0x").removePrefix("0X")
-  require(normalized.length % 2 == 0 && normalized.all { it.isDigit() || it in 'a'..'f' || it in 'A'..'F' }) {
+  require(
+    normalized.length % 2 == 0 &&
+      normalized.all { it.isDigit() || it in 'a'..'f' || it in 'A'..'F' }
+  ) {
     "Invalid pre-serialized hex argument"
   }
   return ByteArray(normalized.length / 2) { index ->
@@ -404,8 +407,9 @@ internal fun generateSignedTransactionForSimulation(data: InputSimulateTransacti
           secondarySignerAddresses = transaction.secondarySignerAddresses,
           secondarySigners = secondarySigners,
           feePayerAddress = transaction.feePayerAddress,
-          feePayer = data.feePayerPublicKey?.let(::simulationAuthenticator)
-            ?: AccountAuthenticator.NoAccount,
+          feePayer =
+            data.feePayerPublicKey?.let(::simulationAuthenticator)
+              ?: AccountAuthenticator.NoAccount,
         )
     }
   return SignedTransaction(data.transaction.rawTransaction, transactionAuthenticator).toBcs()
@@ -414,8 +418,7 @@ internal fun generateSignedTransactionForSimulation(data: InputSimulateTransacti
 private fun simulationAuthenticator(publicKey: PublicKey): AccountAuthenticator {
   val invalidEd25519Signature = Ed25519Signature(ByteArray(Ed25519Signature.LENGTH))
   return when (publicKey) {
-    is Ed25519PublicKey ->
-      AccountAuthenticator.Ed25519(publicKey, invalidEd25519Signature)
+    is Ed25519PublicKey -> AccountAuthenticator.Ed25519(publicKey, invalidEd25519Signature)
     is Secp256k1PublicKey ->
       AccountAuthenticator.SingleKey(
         publicKey = AnyPublicKey(publicKey),
@@ -462,8 +465,9 @@ private fun simulationAuthenticator(publicKey: PublicKey): AccountAuthenticator 
           ),
       )
     }
-    else -> throw IllegalArgumentException(
-      "Unsupported public key used for simulation: ${publicKey::class.simpleName}"
-    )
+    else ->
+      throw IllegalArgumentException(
+        "Unsupported public key used for simulation: ${publicKey::class.simpleName}"
+      )
   }
 }

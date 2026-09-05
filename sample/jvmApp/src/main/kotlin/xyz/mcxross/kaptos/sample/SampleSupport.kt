@@ -13,15 +13,11 @@ import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.TransactionPayload
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 
 internal fun sampleConfig(): AptosConfig =
   AptosConfig(
-    network =
-      System.getenv("APTOS_NETWORK")
-        ?.uppercase()
-        ?.let(Network::valueOf)
-        ?: Network.TESTNET,
+    network = System.getenv("APTOS_NETWORK")?.uppercase()?.let(Network::valueOf) ?: Network.TESTNET
   )
 
 internal fun Aptos.sampleSigner(variable: String = "APTOS_PRIVATE_KEY"): Ed25519Account =
@@ -40,8 +36,7 @@ internal fun aptTransfer(
   )
 
 internal fun requiredEnvironment(name: String): String =
-  System.getenv(name)?.takeIf(String::isNotBlank)
-    ?: error("Set $name before running this sample")
+  System.getenv(name)?.takeIf(String::isNotBlank) ?: error("Set $name before running this sample")
 
 internal fun <T> AptosResult<T>.orThrow(): T =
   when (this) {

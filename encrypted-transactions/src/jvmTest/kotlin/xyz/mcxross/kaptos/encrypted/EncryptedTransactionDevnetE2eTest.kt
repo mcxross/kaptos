@@ -6,11 +6,11 @@
  */
 package xyz.mcxross.kaptos.encrypted
 
-import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.test.fail
+import kotlinx.coroutines.runBlocking
 import xyz.mcxross.kaptos.AptosConfig
 import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.model.AptosResult
@@ -18,7 +18,7 @@ import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.UserTransactionResponse
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 
 /** Opt-in live test for the same single-sender flow used by the JVM encrypted sample. */
 class EncryptedTransactionDevnetE2eTest {

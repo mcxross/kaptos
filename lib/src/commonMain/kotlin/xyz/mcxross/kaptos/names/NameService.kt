@@ -35,7 +35,7 @@ import xyz.mcxross.kaptos.model.types.booleanFilter
 import xyz.mcxross.kaptos.model.types.currentAptosNamesFilter
 import xyz.mcxross.kaptos.model.types.currentAptosNamesOrder
 import xyz.mcxross.kaptos.model.types.stringFilter
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.TransactionService
 import xyz.mcxross.kaptos.util.toOptional
 

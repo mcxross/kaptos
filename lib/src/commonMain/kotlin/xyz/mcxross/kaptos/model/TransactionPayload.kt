@@ -7,7 +7,7 @@
 package xyz.mcxross.kaptos.model
 
 import xyz.mcxross.kaptos.extension.parts
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.bcs.littleEndianSignedToDecimal
@@ -53,7 +53,9 @@ sealed interface TransactionPayload {
     }
 
     fun fromBcs(bytes: ByteArray): TransactionPayload =
-      AptosBcsReader(bytes).let { reader -> reader.transactionPayload().also { reader.ensureFinished() } }
+      AptosBcsReader(bytes).let { reader ->
+        reader.transactionPayload().also { reader.ensureFinished() }
+      }
   }
 }
 
@@ -125,7 +127,9 @@ sealed interface TransactionExtraConfig {
   }
 }
 
-/** Batch-encryption wire record. Cryptographic construction lives in kaptos-encrypted-transactions. */
+/**
+ * Batch-encryption wire record. Cryptographic construction lives in kaptos-encrypted-transactions.
+ */
 data class EncryptedTransactionPayload(
   val ciphertext: EncryptedCiphertext,
   val extraConfig: TransactionExtraConfig,
@@ -163,7 +167,9 @@ data class BibeCiphertext(
   val body: ByteString,
 ) {
   init {
-    require(threeG2Points.size == 288) { "Batch-encryption ciphertext must contain three 96-byte G2 points" }
+    require(threeG2Points.size == 288) {
+      "Batch-encryption ciphertext must contain three 96-byte G2 points"
+    }
   }
 }
 
@@ -175,7 +181,8 @@ open class ByteString(value: ByteArray) {
 
   fun toByteArray(): ByteArray = bytes.copyOf()
 
-  override fun equals(other: Any?): Boolean = other is ByteString && bytes.contentEquals(other.bytes)
+  override fun equals(other: Any?): Boolean =
+    other is ByteString && bytes.contentEquals(other.bytes)
 
   override fun hashCode(): Int = bytes.contentHashCode()
 
@@ -329,7 +336,9 @@ private fun AptosBcsWriter.scriptArgument(value: MoveArgument) {
     is MoveArgument.Option,
     is MoveArgument.Struct,
     is MoveArgument.Enum ->
-      throw IllegalArgumentException("${value::class.simpleName} is not supported by script arguments")
+      throw IllegalArgumentException(
+        "${value::class.simpleName} is not supported by script arguments"
+      )
   }
 }
 
@@ -480,13 +489,12 @@ private fun AptosBcsReader.encryptedPayload(): EncryptedTransactionPayload {
   val extraConfig = extraConfig()
   val payloadHash = FixedBytes32(fixed(32))
   val epoch = u64()
-  val claimed =
-    option {
-      ClaimedEntryFunction(
-        module = ModuleId(accountAddress(), Identifier(string())),
-        function = option { Identifier(string()) },
-      )
-    }
+  val claimed = option {
+    ClaimedEntryFunction(
+      module = ModuleId(accountAddress(), Identifier(string())),
+      function = option { Identifier(string()) },
+    )
+  }
   return EncryptedTransactionPayload(ciphertext, extraConfig, payloadHash, epoch, claimed)
 }
 

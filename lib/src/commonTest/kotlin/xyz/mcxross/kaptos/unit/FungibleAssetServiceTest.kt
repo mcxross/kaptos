@@ -21,13 +21,13 @@ import xyz.mcxross.kaptos.account.AccountAsset
 import xyz.mcxross.kaptos.account.DefaultAccountRestorationDataSource
 import xyz.mcxross.kaptos.fungible.DefaultFungibleAssetService
 import xyz.mcxross.kaptos.model.AccountAddress
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.TransactionPayload
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.TypeTagStruct
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 
 class FungibleAssetServiceTest :
   StringSpec({
@@ -73,8 +73,7 @@ class FungibleAssetServiceTest :
       val payload = transactions.lastPayload.shouldBeInstanceOf<TransactionPayload.EntryFunction>()
       payload.call.module.toString() shouldBe "0x1::dispatchable_fungible_asset"
       payload.call.typeArguments shouldHaveSize 1
-      payload.call.typeArguments.single().toString() shouldBe
-        "0x1::fungible_asset::FungibleStore"
+      payload.call.typeArguments.single().toString() shouldBe "0x1::fungible_asset::FungibleStore"
       payload.call.arguments shouldBe
         listOf(
           MoveArgument.Address(AccountAddress.fromString("0xc")),
@@ -85,22 +84,17 @@ class FungibleAssetServiceTest :
 
     "unified balance lookup supports coin types and the full unsigned range" {
       val expected = ULong.MAX_VALUE
-      val engine =
-        MockEngine { request ->
-          request.url.encodedPath shouldBe
-            "/v1/accounts/0x1/balance/0x1::aptos_coin::AptosCoin"
-          respond(
-            content = "\"$expected\"",
-            status = HttpStatusCode.OK,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine { request ->
+        request.url.encodedPath shouldBe "/v1/accounts/0x1/balance/0x1::aptos_coin::AptosCoin"
+        respond(
+          content = "\"$expected\"",
+          status = HttpStatusCode.OK,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client = HttpClient(engine)
       val config =
-        TransportConfig(
-          AptosSettings(fullNode = "https://api.example.com/v1", client = client)
-        )
+        TransportConfig(AptosSettings(fullNode = "https://api.example.com/v1", client = client))
 
       val balance =
         DefaultAccountRestorationDataSource(config)

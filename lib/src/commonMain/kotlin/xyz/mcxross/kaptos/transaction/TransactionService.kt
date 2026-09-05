@@ -11,7 +11,6 @@ import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.PublicKey
 import xyz.mcxross.kaptos.core.crypto.sha3Hash
 import xyz.mcxross.kaptos.internal.executeAptos
-import xyz.mcxross.kaptos.internal.getModule
 import xyz.mcxross.kaptos.internal.rethrowCancellation
 import xyz.mcxross.kaptos.internal.simulateTransaction
 import xyz.mcxross.kaptos.internal.submitTransaction
@@ -36,6 +35,8 @@ import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.WaitForTransactionOptions
 import xyz.mcxross.kaptos.model.map
+import xyz.mcxross.kaptos.move.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgumentCodec
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.builder.generateRawTransaction
@@ -262,14 +263,8 @@ interface TransactionService {
 internal class DefaultTransactionService(
   private val config: TransportConfig,
   private val defaults: TransactionOptions,
+  private val argumentCodec: MoveArgumentCodec = xyz.mcxross.kaptos.internal.moveCodec(config),
 ) : TransactionService {
-  private val argumentCodec =
-    MoveArgumentCodec(
-      MoveModuleLoader { address, moduleName ->
-        getModule(config, address, moduleName).toAptosResult()
-      }
-    )
-
   override suspend fun entryFunctionPayload(
     function: String,
     typeArguments: List<TypeTag>,

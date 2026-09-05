@@ -17,13 +17,13 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.Url
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
+import kotlin.time.Clock
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import kotlin.time.Clock
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonPrimitive
@@ -38,7 +38,7 @@ import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.TransactionOptions
 import xyz.mcxross.kaptos.model.TransactionPayload
 import xyz.mcxross.kaptos.model.UnsignedTransaction
-import xyz.mcxross.kaptos.transaction.MoveArgument
+import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.util.NetworkToNodeAPI
 
 /** Optional URL and headers for one Keyless backend. */
@@ -149,8 +149,7 @@ internal class DefaultKeylessService(
   private val aptos: Aptos,
   private val serviceConfig: KeylessClientConfig,
 ) : KeylessService {
-  private val httpClient =
-    serviceConfig.httpClient ?: aptos.transportClient
+  private val httpClient = serviceConfig.httpClient ?: aptos.transportClient
   private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
   private var cachedConfiguration: KeylessConfiguration? = null
   private val cachedJwks = mutableMapOf<String, Map<String, List<MoveJwk>>>()
@@ -162,19 +161,20 @@ internal class DefaultKeylessService(
     derivationPath: String?,
   ): AptosResult<ByteArray> =
     postSensitive<PepperRequest, PepperResponse>(
-      endpoint = ::pepperUrl,
-      path = "fetch",
-      endpointHeaders = serviceConfig.pepperService.headers,
-      body = pepperRequest(jwt, ephemeralKeyPair, uidKey, derivationPath),
-    ).flatMap { response ->
-      cryptoResult("Pepper service returned invalid pepper") {
-        decodeHex(response.pepper).also {
-          require(it.size == KEYLESS_PEPPER_LENGTH) {
-            "Pepper must be $KEYLESS_PEPPER_LENGTH bytes"
+        endpoint = ::pepperUrl,
+        path = "fetch",
+        endpointHeaders = serviceConfig.pepperService.headers,
+        body = pepperRequest(jwt, ephemeralKeyPair, uidKey, derivationPath),
+      )
+      .flatMap { response ->
+        cryptoResult("Pepper service returned invalid pepper") {
+          decodeHex(response.pepper).also {
+            require(it.size == KEYLESS_PEPPER_LENGTH) {
+              "Pepper must be $KEYLESS_PEPPER_LENGTH bytes"
+            }
           }
         }
       }
-    }
 
   override suspend fun getPepperBase(
     jwt: String,
@@ -183,15 +183,18 @@ internal class DefaultKeylessService(
     derivationPath: String?,
   ): AptosResult<ByteArray> =
     postSensitive<PepperRequest, PepperBaseResponse>(
-      endpoint = ::pepperUrl,
-      path = "signature",
-      endpointHeaders = serviceConfig.pepperService.headers,
-      body = pepperRequest(jwt, ephemeralKeyPair, uidKey, derivationPath),
-    ).flatMap { response ->
-      cryptoResult("Pepper service returned invalid pepper_base") {
-        decodeHex(response.signature).also { require(it.size == 48) { "pepper_base must be 48 bytes" } }
+        endpoint = ::pepperUrl,
+        path = "signature",
+        endpointHeaders = serviceConfig.pepperService.headers,
+        body = pepperRequest(jwt, ephemeralKeyPair, uidKey, derivationPath),
+      )
+      .flatMap { response ->
+        cryptoResult("Pepper service returned invalid pepper_base") {
+          decodeHex(response.signature).also {
+            require(it.size == 48) { "pepper_base must be 48 bytes" }
+          }
+        }
       }
-    }
 
   override suspend fun getProof(
     jwt: String,
@@ -200,8 +203,7 @@ internal class DefaultKeylessService(
     uidKey: String,
   ): AptosResult<ZeroKnowledgeSignature> {
     val actualPepper =
-      pepper?.let { AptosResult.Success(it.copyOf()) }
-        ?: getPepper(jwt, ephemeralKeyPair, uidKey)
+      pepper?.let { AptosResult.Success(it.copyOf()) } ?: getPepper(jwt, ephemeralKeyPair, uidKey)
     if (actualPepper is AptosResult.Failure) return actualPepper
     val pepperBytes = (actualPepper as AptosResult.Success).value
     if (pepperBytes.size != KEYLESS_PEPPER_LENGTH) {
@@ -232,38 +234,41 @@ internal class DefaultKeylessService(
     }
 
     return postSensitive<ProverRequest, ProverResponse>(
-      endpoint = ::proverUrl,
-      path = "prove",
-      endpointHeaders = serviceConfig.proverService.headers,
-      body =
-        ProverRequest(
-          jwt = jwt,
-          ephemeralPublicKey = ephemeralKeyPair.ephemeralPublicKeyBcs().hex(),
-          expiryDateSecs = ephemeralKeyPair.expiryDateSecs,
-          expirationHorizonSecs = keylessConfig.maxExpirationHorizonSecs,
-          blinder = ephemeralKeyPair.blinder.hex(),
-          uidKey = uidKey,
-          pepper = pepperBytes.hex(),
-        ),
-    ).flatMap { response ->
-      cryptoResult("Prover returned an invalid Keyless proof") {
-        val trainingBytes = decodeHex(response.trainingWheelsSignature)
-        val trainingReader = KeylessBcsReader(trainingBytes)
-        require(trainingReader.uleb128() == 0u) { "Only Ed25519 training signatures are supported" }
-        val trainingSignature = Ed25519Signature(trainingReader.bytes())
-        trainingReader.ensureFinished()
-        ZeroKnowledgeSignature(
-          proof =
-            Groth16Proof(
-              decodeHex(response.proof.a),
-              decodeHex(response.proof.b),
-              decodeHex(response.proof.c),
-            ),
-          expirationHorizonSecs = keylessConfig.maxExpirationHorizonSecs,
-          trainingWheelsSignature = trainingSignature,
-        )
+        endpoint = ::proverUrl,
+        path = "prove",
+        endpointHeaders = serviceConfig.proverService.headers,
+        body =
+          ProverRequest(
+            jwt = jwt,
+            ephemeralPublicKey = ephemeralKeyPair.ephemeralPublicKeyBcs().hex(),
+            expiryDateSecs = ephemeralKeyPair.expiryDateSecs,
+            expirationHorizonSecs = keylessConfig.maxExpirationHorizonSecs,
+            blinder = ephemeralKeyPair.blinder.hex(),
+            uidKey = uidKey,
+            pepper = pepperBytes.hex(),
+          ),
+      )
+      .flatMap { response ->
+        cryptoResult("Prover returned an invalid Keyless proof") {
+          val trainingBytes = decodeHex(response.trainingWheelsSignature)
+          val trainingReader = KeylessBcsReader(trainingBytes)
+          require(trainingReader.uleb128() == 0u) {
+            "Only Ed25519 training signatures are supported"
+          }
+          val trainingSignature = Ed25519Signature(trainingReader.bytes())
+          trainingReader.ensureFinished()
+          ZeroKnowledgeSignature(
+            proof =
+              Groth16Proof(
+                decodeHex(response.proof.a),
+                decodeHex(response.proof.b),
+                decodeHex(response.proof.c),
+              ),
+            expirationHorizonSecs = keylessConfig.maxExpirationHorizonSecs,
+            trainingWheelsSignature = trainingSignature,
+          )
+        }
       }
-    }
   }
 
   override suspend fun deriveStandardAccount(
@@ -325,36 +330,44 @@ internal class DefaultKeylessService(
   }
 
   override suspend fun configuration(refresh: Boolean): AptosResult<KeylessConfiguration> {
-    if (!refresh) cachedConfiguration?.let { return AptosResult.Success(it) }
-    val config = fullnodeGet<MoveResource<KeylessConfigurationResponse>>(
-      "accounts/0x1/resource/0x1::keyless_account::Configuration"
-    )
+    if (!refresh)
+      cachedConfiguration?.let {
+        return AptosResult.Success(it)
+      }
+    val config =
+      fullnodeGet<MoveResource<KeylessConfigurationResponse>>(
+        "accounts/0x1/resource/0x1::keyless_account::Configuration"
+      )
     if (config is AptosResult.Failure) return config
-    val vk = fullnodeGet<MoveResource<Groth16VerificationKeyResponse>>(
-      "accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey"
-    )
+    val vk =
+      fullnodeGet<MoveResource<Groth16VerificationKeyResponse>>(
+        "accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey"
+      )
     if (vk is AptosResult.Failure) return vk
     return cryptoResult("Invalid on-chain Keyless configuration") {
       val configData = (config as AptosResult.Success).value.data
       val vkData = (vk as AptosResult.Success).value.data
       KeylessConfiguration(
-        verificationKey =
-          Groth16VerificationKey(
-            alphaG1 = decodeHex(vkData.alphaG1),
-            betaG2 = decodeHex(vkData.betaG2),
-            deltaG2 = decodeHex(vkData.deltaG2),
-            gammaAbcG1 = vkData.gammaAbcG1.map(::decodeHex),
-            gammaG2 = decodeHex(vkData.gammaG2),
-          ),
-        maxExpirationHorizonSecs = vkU64(configData.maxExpirationHorizonSecs),
-        trainingWheelsPublicKey =
-          configData.trainingWheelsPublicKey.values.firstOrNull()?.let(::decodeHex)
-            ?.let(::Ed25519PublicKey),
-        maxExtraFieldBytes = configData.maxExtraFieldBytes,
-        maxJwtHeaderBase64Bytes = configData.maxJwtHeaderBase64Bytes,
-        maxIssuerBytes = configData.maxIssuerBytes,
-        maxCommittedEphemeralPublicKeyBytes = configData.maxCommittedEphemeralPublicKeyBytes,
-      ).also { cachedConfiguration = it }
+          verificationKey =
+            Groth16VerificationKey(
+              alphaG1 = decodeHex(vkData.alphaG1),
+              betaG2 = decodeHex(vkData.betaG2),
+              deltaG2 = decodeHex(vkData.deltaG2),
+              gammaAbcG1 = vkData.gammaAbcG1.map(::decodeHex),
+              gammaG2 = decodeHex(vkData.gammaG2),
+            ),
+          maxExpirationHorizonSecs = vkU64(configData.maxExpirationHorizonSecs),
+          trainingWheelsPublicKey =
+            configData.trainingWheelsPublicKey.values
+              .firstOrNull()
+              ?.let(::decodeHex)
+              ?.let(::Ed25519PublicKey),
+          maxExtraFieldBytes = configData.maxExtraFieldBytes,
+          maxJwtHeaderBase64Bytes = configData.maxJwtHeaderBase64Bytes,
+          maxIssuerBytes = configData.maxIssuerBytes,
+          maxCommittedEphemeralPublicKeyBytes = configData.maxCommittedEphemeralPublicKeyBytes,
+        )
+        .also { cachedConfiguration = it }
     }
   }
 
@@ -369,7 +382,10 @@ internal class DefaultKeylessService(
         return AptosResult.Failure(AptosError.Validation("Invalid federated JWK address", error))
       }
     val cacheKey = address?.toString() ?: "0x1"
-    if (!refresh) cachedJwks[cacheKey]?.let { return AptosResult.Success(it) }
+    if (!refresh)
+      cachedJwks[cacheKey]?.let {
+        return AptosResult.Success(it)
+      }
     val resourceName = if (address == null) "PatchedJWKs" else "FederatedJWKs"
     val resource =
       fullnodeGet<MoveResource<JwksResource>>(
@@ -377,10 +393,12 @@ internal class DefaultKeylessService(
       )
     return resource.flatMap { response ->
       cryptoResult("Invalid on-chain JWK resource") {
-        response.data.jwks.entries.associate { entry ->
-          val issuer = decodeHex(entry.issuer).decodeToString(throwOnInvalidSequence = true)
-          issuer to entry.jwks.map { MoveJwk.fromBcs(decodeHex(it.variant.data)) }
-        }.also { cachedJwks[cacheKey] = it }
+        response.data.jwks.entries
+          .associate { entry ->
+            val issuer = decodeHex(entry.issuer).decodeToString(throwOnInvalidSequence = true)
+            issuer to entry.jwks.map { MoveJwk.fromBcs(decodeHex(it.variant.data)) }
+          }
+          .also { cachedJwks[cacheKey] = it }
       }
     }
   }
@@ -392,11 +410,9 @@ internal class DefaultKeylessService(
     jwk: MoveJwk?,
     configuration: KeylessConfiguration?,
   ): AptosResult<Boolean> {
-    val actualConfiguration =
-      configuration?.let { AptosResult.Success(it) } ?: configuration()
+    val actualConfiguration = configuration?.let { AptosResult.Success(it) } ?: configuration()
     if (actualConfiguration is AptosResult.Failure) return actualConfiguration
-    val actualJwk =
-      jwk?.let { AptosResult.Success(it) } ?: findJwk(publicKey, signature.keyId)
+    val actualJwk = jwk?.let { AptosResult.Success(it) } ?: findJwk(publicKey, signature.keyId)
     if (actualJwk is AptosResult.Failure) return actualJwk
     val now = Clock.System.now().epochSeconds
     return AptosResult.Success(
@@ -464,9 +480,7 @@ internal class DefaultKeylessService(
         return AptosResult.Failure(AptosError.Transport("Unable to fetch federated JWKS", error))
       }
     if (keys.isEmpty() || keys.size > 32 || keys.any { !it.isValid() }) {
-      return AptosResult.Failure(
-        AptosError.Validation("JWKS must contain 1..32 complete RSA keys")
-      )
+      return AptosResult.Failure(AptosError.Validation("JWKS must contain 1..32 complete RSA keys"))
     }
     val payload =
       TransactionPayload.entryFunction(
@@ -497,8 +511,7 @@ internal class DefaultKeylessService(
     jwkAddress: AccountAddress?,
   ): AptosResult<AbstractKeylessAccount> {
     val actualPepper =
-      pepper?.let { AptosResult.Success(it.copyOf()) }
-        ?: getPepper(jwt, ephemeralKeyPair, uidKey)
+      pepper?.let { AptosResult.Success(it.copyOf()) } ?: getPepper(jwt, ephemeralKeyPair, uidKey)
     if (actualPepper is AptosResult.Failure) return actualPepper
     val pepperBytes = (actualPepper as AptosResult.Success).value
     val claims =
@@ -586,7 +599,9 @@ internal class DefaultKeylessService(
     }
   }
 
-  private suspend fun lookupOriginalAddress(authenticationKey: AccountAddress): AptosResult<AccountAddress> {
+  private suspend fun lookupOriginalAddress(
+    authenticationKey: AccountAddress
+  ): AptosResult<AccountAddress> {
     val originating =
       fullnodeGet<MoveResource<OriginatingAddress>>(
         "accounts/0x1/resource/0x1::account::OriginatingAddress"
@@ -608,7 +623,9 @@ internal class DefaultKeylessService(
         }
       if (response.status == HttpStatusCode.NotFound) AptosResult.Success(authenticationKey)
       else if (!response.status.isSuccess()) {
-        AptosResult.Failure(AptosError.Api("Originating-address lookup failed", response.status.value.toString()))
+        AptosResult.Failure(
+          AptosError.Api("Originating-address lookup failed", response.status.value.toString())
+        )
       } else {
         AptosResult.Success(AccountAddress.fromString(response.body<JsonPrimitive>().content))
       }
@@ -619,11 +636,14 @@ internal class DefaultKeylessService(
 
   private suspend inline fun <reified T> fullnodeGet(path: String): AptosResult<T> =
     try {
-      val response = httpClient.get("${fullnodeUrl()}/$path") {
-        fullnodeHeaders().forEach { (name, value) -> headers.append(name, value) }
-      }
+      val response =
+        httpClient.get("${fullnodeUrl()}/$path") {
+          fullnodeHeaders().forEach { (name, value) -> headers.append(name, value) }
+        }
       if (!response.status.isSuccess()) {
-        AptosResult.Failure(AptosError.Api("Fullnode request failed", response.status.value.toString()))
+        AptosResult.Failure(
+          AptosError.Api("Fullnode request failed", response.status.value.toString())
+        )
       } else AptosResult.Success(response.body())
     } catch (error: Throwable) {
       AptosResult.Failure(AptosError.Transport("Fullnode request failed", error))
@@ -636,17 +656,20 @@ internal class DefaultKeylessService(
     body: Request,
   ): AptosResult<Response> =
     try {
-      val response = httpClient.post("${endpoint().trimEnd('/')}/$path") {
-        contentType(ContentType.Application.Json)
-        serviceConfig.commonHeaders.forEach { (name, value) -> headers.append(name, value) }
-        endpointHeaders.forEach { (name, value) ->
-          headers.remove(name)
-          headers.append(name, value)
+      val response =
+        httpClient.post("${endpoint().trimEnd('/')}/$path") {
+          contentType(ContentType.Application.Json)
+          serviceConfig.commonHeaders.forEach { (name, value) -> headers.append(name, value) }
+          endpointHeaders.forEach { (name, value) ->
+            headers.remove(name)
+            headers.append(name, value)
+          }
+          setBody(body)
         }
-        setBody(body)
-      }
       if (!response.status.isSuccess()) {
-        AptosResult.Failure(AptosError.Api("Keyless service request failed", response.status.value.toString()))
+        AptosResult.Failure(
+          AptosError.Api("Keyless service request failed", response.status.value.toString())
+        )
       } else AptosResult.Success(response.body())
     } catch (error: Throwable) {
       AptosResult.Failure(
@@ -673,11 +696,9 @@ internal class DefaultKeylessService(
       derivationPath = derivationPath,
     )
 
-  private fun pepperUrl(): String =
-    serviceConfig.pepperService.url ?: defaultServiceUrl("pepper")
+  private fun pepperUrl(): String = serviceConfig.pepperService.url ?: defaultServiceUrl("pepper")
 
-  private fun proverUrl(): String =
-    serviceConfig.proverService.url ?: defaultServiceUrl("prover")
+  private fun proverUrl(): String = serviceConfig.proverService.url ?: defaultServiceUrl("prover")
 
   private fun defaultServiceUrl(service: String): String {
     val network =
@@ -772,7 +793,8 @@ private data class Groth16VerificationKeyResponse(
 
 @Serializable private data class MoveAnyVariant(val data: String)
 
-@Serializable private data class OriginatingAddress(@SerialName("address_map") val addressMap: TableHandle)
+@Serializable
+private data class OriginatingAddress(@SerialName("address_map") val addressMap: TableHandle)
 
 @Serializable private data class TableHandle(val handle: String)
 
