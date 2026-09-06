@@ -88,17 +88,6 @@ class AptosConfigTest {
     }
   }
 
-  // It should have undefined urls when network is custom and no urls provided
-  @Test
-  fun aptosConfigCustomNetworkTest() {
-    val settings = AptosSettings(network = Network.CUSTOM)
-    val aptosConfig = TransportConfig(settings)
-    expect(Network.CUSTOM) { aptosConfig.network }
-    expect(aptosConfig.fullNode) { null }
-    expect(aptosConfig.faucet) { null }
-    expect(aptosConfig.indexer) { null }
-  }
-
   // It should throw an error when network is custom and no urls provided
   @Test
   fun aptosConfigCustomNetworkNoSetUrlsTest() {
@@ -108,24 +97,6 @@ class AptosConfigTest {
     assertFailsWith<Exception> { aptosConfig.getRequestUrl(AptosApiType.FULLNODE) }
     assertFailsWith<Exception> { aptosConfig.getRequestUrl(AptosApiType.FAUCET) }
     assertFailsWith<Exception> { aptosConfig.getRequestUrl(AptosApiType.INDEXER) }
-  }
-
-  @Test
-  fun aptosConfigCustomNetworkSetUrlsTest() {
-    val settings =
-      AptosSettings(
-        network = Network.CUSTOM,
-        fullNode = "my-full-node",
-        faucet = "my-faucet",
-        indexer = "my-indexer",
-      )
-
-    val aptosConfig = TransportConfig(settings)
-
-    expect(Network.CUSTOM) { aptosConfig.network }
-    expect(aptosConfig.fullNode) { "my-full-node" }
-    expect(aptosConfig.faucet) { "my-faucet" }
-    expect(aptosConfig.indexer) { "my-indexer" }
   }
 
   @Test

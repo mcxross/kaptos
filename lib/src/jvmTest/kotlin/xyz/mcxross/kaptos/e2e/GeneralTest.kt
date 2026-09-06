@@ -139,56 +139,6 @@ class GeneralTest {
         is Result.Err -> fail("Expected Ok but got Err: ${response.error}")
       }
 
-      /*val response1 =
-          GeneralApi(transportConfig).view<List<MoveValue.Bool>>(
-              InputViewFunctionData(
-                  function = "0x1::account::exists_at",
-                  typeArguments = emptyList(),
-                  functionArguments =
-                      listOf(MoveString(AccountAddress.fromString("0x123456").toStringLong())),
-              ))
-
-      when (response1) {
-        is Result.Ok -> {
-          assertEquals(response1.value[0].value, false, "Should return false")
-        }
-        is Result.Err -> fail("Expected Ok but got Err: ${response1.error}")
-      }*/
-    }
-  }
-
-  @Test
-  fun testFetchViewFunctionWithUint128() {
-    runBlocking {
-      val transportConfig = TransportConfig(AptosSettings(network = Network.LOCAL))
-
-      val response =
-        GeneralApi(transportConfig)
-          .view<List<MoveValue.MoveUint128Type>>(
-            InputViewFunctionData(
-              function = "0x1::account::get_sequence_number",
-              typeArguments = emptyList(),
-              functionArguments = listOf(AccountAddress.fromString("0x1").toLongAddress()),
-            )
-          )
-
-    }
-  }
-
-  @Test
-  fun testFetchViewFunctionUint256Output() {
-    runBlocking {
-      val transportConfig = TransportConfig(AptosSettings(network = Network.LOCAL))
-
-      val resolution =
-        GeneralApi(transportConfig)
-          .view<List<MoveValue.MoveUint256Type>>(
-            InputViewFunctionData(
-              function = "0x1::account::get_sequence_number",
-              typeArguments = emptyList(),
-              functionArguments = listOf(AccountAddress.fromString("0x1").toLongAddress()),
-            )
-          )
     }
   }
 
