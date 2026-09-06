@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""Format changed Kotlin files, or check the exact files being saved to Git."""
+import argparse
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+
+
+def git(*args):
+    return subprocess.check_output(['git', *args])
+
+
+def names(*args):
+    return [p.decode() for p in git(*args).split(b'\0') if p]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true')
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--staged', action='store_true')
+    scope.add_argument('--all', action='store_true')
+    scope.add_argument('--base', help='Check changed files relative to this Git revision (CI)')
+    args = parser.parse_args()
+    if args.staged and not args.check:
+        parser.error('--staged requires --check; formatting must not rewrite the index')
+    root = Path(git('rev-parse', '--show-toplevel').decode().strip())
+    import os
+    os.chdir(root)
+    patterns = ['--', '*.kt', '*.kts']
+    diff = ['diff', '--name-only', '--diff-filter=ACMR', '-z']
+    if args.staged:
+        paths = names(*diff, '--cached', *patterns)
+    elif args.all:
+        paths = names('ls-files', '-z', *patterns)
+    elif args.base:
+        paths = names(*diff, args.base, 'HEAD', *patterns)
+    else:
+        paths = (names(*diff, *patterns) + names(*diff, '--cached', *patterns)
+                 + names('ls-files', '--others', '--exclude-standard', '-z', *patterns))
+    paths = sorted(set(paths))
+    if not args.staged:
+        paths = [p for p in paths if (root / p).exists()]
+    if not paths:
+        return 0
+    if not shutil.which('ktfmt'):
+        sys.exit('ktfmt is required. Install ktfmt 0.64 and rerun this command.')
+    flags = ['--google-style']
+    if args.check:
+        flags += ['--dry-run', '--set-exit-if-changed']
+    with tempfile.TemporaryDirectory(prefix='kaptos-ktfmt-') as temp:
+        targets = []
+        for path in paths:
+            if args.staged:
+                entry = git('ls-files', '--stage', '--', path).decode()
+                if not entry.startswith('100'):
+                    sys.exit(f'Cannot format a non-regular staged Kotlin file: {path}')
+                target = Path(temp) / path
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(git('show', ':' + path))
+            else:
+                target = root / path
+                if target.is_symlink():
+                    sys.exit(f'Cannot format a Kotlin symlink: {path}')
+            targets.append(str(target))
+        result = subprocess.run(['ktfmt', *flags, *targets]).returncode
+    if result:
+        print('Kotlin formatting failed. Run scripts/format-kotlin, review, and restage the changes.',
+              file=sys.stderr)
+    return result
+
+
+if __name__ == '__main__':
+    sys.exit(main())

@@ -45,6 +45,14 @@
 - Transaction building/signing lives in `transaction/` and `internal/TransactionSubmission.kt`.
 - Account abstractions live in `account/`; key signing primitives are in `core/crypto` (`expect/actual`).
 
+## Required Kotlin formatting
+
+- Run `./scripts/format-kotlin` (`ktfmt --google-style`) on every added or modified `.kt` and
+  `.kts` file before committing or stashing. Review the result and restage intended changes.
+- Install the shared pre-commit hook with `./scripts/install-git-hooks`; use `git stash-formatted`
+  for stashes. Do not bypass formatting checks. See `CONTRIBUTING.md` for the shared workflow.
+
+
 ## Tests, CI, release
 
 - Tests live in `lib/src/commonTest` (unit + e2e).

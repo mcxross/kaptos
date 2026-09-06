@@ -1,0 +1,7 @@
+#!/bin/sh
+# Arguments are options/pathspecs for `git stash push`.
+set -eu
+root=$(git rev-parse --show-toplevel)
+"$root/scripts/format-kotlin" --check --staged
+"$root/scripts/format-kotlin" --check
+exec git stash push "$@"

@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+existing=$(git config --get core.hooksPath || true)
+if [ -n "$existing" ] && [ "$existing" != '.githooks' ]; then
+  echo "Existing core.hooksPath is $existing; integrate .githooks/pre-commit there before changing it." >&2
+  exit 1
+fi
+git config --local core.hooksPath .githooks
+git config --local alias.stash-formatted '!sh ./scripts/stash-formatted'
+echo 'Installed Google-style pre-commit check and git stash-formatted.'

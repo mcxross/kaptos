@@ -1,0 +1,42 @@
+name: Kotlin formatting
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  formatting:
+    name: Kotlin formatting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install ktfmt 0.64
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/ktfmt-bin"
+          curl --fail --location --retry 3 --max-time 180 \
+            https://repo.maven.apache.org/maven2/com/facebook/ktfmt/0.64/ktfmt-0.64-with-dependencies.jar \
+            -o "$RUNNER_TEMP/ktfmt.jar"
+          echo "5b3d5286fd2defcc7dc8e28c21ddf156cc6b2d8682bdcd929ce4333e7a6201f2  $RUNNER_TEMP/ktfmt.jar" | sha256sum --check
+          cat > "$RUNNER_TEMP/ktfmt-bin/ktfmt" <<'SH'
+          #!/bin/sh
+          exec java -jar "$RUNNER_TEMP/ktfmt.jar" "$@"
+          SH
+          chmod +x "$RUNNER_TEMP/ktfmt-bin/ktfmt"
+          echo "$RUNNER_TEMP/ktfmt-bin" >> "$GITHUB_PATH"
+      - name: Check changed Kotlin files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = '0000000000000000000000000000000000000000' ]; then
+            ./scripts/format-kotlin --check --all
+          else
+            ./scripts/format-kotlin --check --base "$BASE_SHA"
+          fi

@@ -423,7 +423,11 @@ To run the SDK tests, simply run from the root of this repository:
 
 ## Contribution
 
-All contributions to Kaptos are welcome. Before opening a PR, please submit an issue detailing the bug or feature. When opening a PR, please ensure that your contribution builds on the KMM toolchain, has been linted with `ktfmt <GOOGLE (INTERNAL)>`, and contains tests when applicable. For more information, please see the [contribution guidelines](CONTRIBUTING.md).
+Run `./scripts/install-git-hooks` once per clone. Kotlin changes must pass `ktfmt --google-style`
+before commits or stashes; use `git stash-formatted` for checked stashes. CI checks changed Kotlin
+files as well. See [the required formatting workflow](CONTRIBUTING.md).
+
+All contributions to Kaptos are welcome. Before opening a PR, please submit an issue detailing the bug or feature. When opening a PR, please ensure that your contribution builds on the KMM toolchain, has been formatted with `ktfmt --google-style`, and contains tests when applicable. For more information, please see the [contribution guidelines](CONTRIBUTING.md).
 
 ## License
 
