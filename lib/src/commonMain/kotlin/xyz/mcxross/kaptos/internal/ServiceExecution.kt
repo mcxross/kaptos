@@ -70,6 +70,7 @@ internal inline fun <T, R> AptosResult<T>.mapResponse(
 internal fun AptosSdkError.toAptosError(): AptosError {
   cause?.rethrowCancellation()
   return when (this) {
+    is AptosSdkError.Timeout -> AptosError.Timeout(message, this)
     is AptosSdkError.ApiError ->
       if (apiError.errorCode.lowercase() in setOf("feature_under_gating", "unsupported_feature")) {
         AptosError.UnsupportedFeature(

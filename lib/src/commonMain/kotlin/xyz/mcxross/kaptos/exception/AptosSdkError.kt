@@ -19,6 +19,8 @@ package xyz.mcxross.kaptos.exception
 internal sealed class AptosSdkError(message: String, cause: Throwable? = null) :
   AptosClientException(message, cause) {
 
+  data class Timeout(override val message: String) : AptosSdkError(message)
+
   /**
    * A network, serialization, or other I/O-related issue.
    *

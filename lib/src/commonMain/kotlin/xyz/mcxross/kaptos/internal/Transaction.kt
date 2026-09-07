@@ -21,10 +21,7 @@ import kotlinx.coroutines.delay
 import xyz.mcxross.kaptos.account.Account
 import xyz.mcxross.kaptos.client.getAptosFullNode
 import xyz.mcxross.kaptos.client.paginateWithCursor
-import xyz.mcxross.kaptos.exception.AptosApiErrorV1
-import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.AptosSdkError
-import xyz.mcxross.kaptos.exception.WaitForTransactionException
 import xyz.mcxross.kaptos.internal.operations.submission.Submit
 import xyz.mcxross.kaptos.model.*
 
@@ -113,95 +110,50 @@ internal suspend fun waitForTransaction(
   config: TransportConfig,
   txnHash: String,
   options: WaitForTransactionOptions,
-): Result<TransactionResponse, AptosIndexerError> {
-  var isPending = true
-  var timeElapsed = 0
-  var lastTxn: TransactionResponse? = null
-  var lastError: AptosApiErrorV1? = null
-  var backoffIntervalMs = 200
-  val backoffMultiplier = 1.5
-
-  fun handleAPIError(e: Exception) {
-    val isAptosApiErrorV1 = e is AptosApiErrorV1
-    if (!isAptosApiErrorV1) {
-      throw e // This would be unexpected
-    }
-
-    lastError = e
-
-    val isRequestError = e.status != 404 && e.status >= 400 && e.status < 500
-
-    if (isRequestError) {
-      throw e
-    }
-  }
-
-  // check to see if the txn is already on the blockchain
-  try {
-    when (val txnResponse = getTransactionByHash(config, txnHash)) {
-      is Result.Ok -> {
-        lastTxn = txnResponse.value
-      }
-      is Result.Err -> {
-        return Result.Err(AptosIndexerError.GraphQL(listOf()))
-      }
-    }
-    isPending = lastTxn.type == TransactionResponseType.PENDING
-  } catch (e: Exception) {
-    e.rethrowCancellation()
-    handleAPIError(e)
-  }
-
-  while (isPending) {
-    if (timeElapsed >= options.timeoutSecs) {
-      break
-    }
-
-    try {
-      when (val txnResponse = getTransactionByHash(config, txnHash)) {
+): Result<TransactionResponse, AptosSdkError> {
+  suspend fun poll(): Result<TransactionResponse, AptosSdkError> {
+    var backoffMs = 200L
+    while (true) {
+      when (val response = getTransactionByHash(config, txnHash)) {
         is Result.Ok -> {
-          lastTxn = txnResponse.value
+          val transaction = response.value
+          if (transaction.type != TransactionResponseType.PENDING) {
+            if (
+              options.checkSuccess && transaction is UserTransactionResponse && !transaction.success
+            ) {
+              return Result.Err(
+                AptosSdkError.ApiError(
+                  xyz.mcxross.kaptos.exception.AptosApiError(
+                    transaction.vmStatus,
+                    "transaction_execution_failed",
+                  )
+                )
+              )
+            }
+            return response
+          }
         }
         is Result.Err -> {
-          return Result.Err(AptosIndexerError.GraphQL(listOf()))
+          val error = response.error
+          // A sponsor can submit to a different node before our read node has observed the hash.
+          if (
+            error !is AptosSdkError.ApiError || error.apiError.errorCode != "transaction_not_found"
+          ) {
+            return response
+          }
         }
       }
-
-      isPending = lastTxn.type == TransactionResponseType.PENDING
-
-      if (!isPending) {
-        break
-      }
-    } catch (e: AptosApiErrorV1) {
-      lastError = e
+      delay(backoffMs)
+      backoffMs = (backoffMs * 3 / 2).coerceAtMost(2_000L)
     }
-
-    delay(backoffIntervalMs.toLong())
-    timeElapsed += backoffIntervalMs / 1000
-    backoffIntervalMs = (backoffIntervalMs * backoffMultiplier).toInt()
   }
-
-  if (lastTxn == null) {
-    if (lastError != null) {
-      throw lastError
-    } else {
-      throw WaitForTransactionException(
-        "Fetching transaction $txnHash failed and timed out after ${options.timeoutSecs} seconds"
+  // Bound the entire operation, including slow requests. Parent cancellation still propagates.
+  return kotlinx.coroutines.withTimeoutOrNull(options.timeoutSecs.toLong() * 1_000L) { poll() }
+    ?: Result.Err(
+      AptosSdkError.Timeout(
+        "Transaction $txnHash was not confirmed within ${options.timeoutSecs} seconds"
       )
-    }
-  }
-
-  if (lastTxn.type == TransactionResponseType.PENDING) {
-    throw WaitForTransactionException(
-      "Transaction $txnHash timed out in pending state after ${options.timeoutSecs} seconds"
     )
-  }
-
-  if (!options.checkSuccess) {
-    return Result.Ok(lastTxn)
-  }
-
-  return Result.Ok(lastTxn)
 }
 
 internal suspend fun signAndSubmitTransaction(

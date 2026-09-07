@@ -20,7 +20,6 @@ import com.github.michaelbull.result.get
 import com.github.michaelbull.result.getError
 import xyz.mcxross.kaptos.client.postAptosFaucet
 import xyz.mcxross.kaptos.exception.AptosApiError
-import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.*
 
@@ -60,7 +59,7 @@ internal suspend fun fundAccount(
         )
       )
 
-  val waitResult: Result<TransactionResponse, AptosIndexerError> =
+  val waitResult: Result<TransactionResponse, AptosSdkError> =
     try {
       waitForTransaction(aptosConfig, hashToWaitFor, options)
     } catch (e: Exception) {
