@@ -38,13 +38,13 @@ class MultiEd25519Account(
     require(privateKeys.size >= publicKey.threshold.toInt()) {
       "At least ${publicKey.threshold} private keys are required"
     }
-    val indexed =
-      signerPrivateKeys.map { privateKey ->
-        val signerPublicKey = privateKey.publicKey().toByteArray()
-        val index = publicKey.publicKeys.indexOfFirst { it.toByteArray().contentEquals(signerPublicKey) }
-        require(index >= 0) { "A private key does not belong to this MultiEd25519 public key" }
-        IndexedSigner(index, privateKey)
-      }
+    val indexed = signerPrivateKeys.map { privateKey ->
+      val signerPublicKey = privateKey.publicKey().toByteArray()
+      val index =
+        publicKey.publicKeys.indexOfFirst { it.toByteArray().contentEquals(signerPublicKey) }
+      require(index >= 0) { "A private key does not belong to this MultiEd25519 public key" }
+      IndexedSigner(index, privateKey)
+    }
     require(indexed.map(IndexedSigner::index).distinct().size == indexed.size) {
       "Duplicate MultiEd25519 private key"
     }

@@ -23,9 +23,10 @@ kotlin {
     }
     minSdk = 24
     compilerOptions.jvmTarget = JvmTarget.JVM_17
-    withDeviceTestBuilder { sourceSetTreeName = "test" }.configure {
-      instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+    withDeviceTestBuilder { sourceSetTreeName = "test" }
+      .configure {
+        instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      }
   }
   iosX64()
   iosArm64()

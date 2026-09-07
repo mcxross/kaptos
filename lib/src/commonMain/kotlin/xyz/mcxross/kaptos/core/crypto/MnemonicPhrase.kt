@@ -28,10 +28,7 @@ sealed class AptosDerivationPath(val value: String) {
     val accountIndex: UInt = 0u,
     val changeIndex: UInt = 0u,
     val addressIndex: UInt = 0u,
-  ) :
-    AptosDerivationPath(
-      "m/44'/637'/$accountIndex'/$changeIndex'/$addressIndex'"
-    )
+  ) : AptosDerivationPath("m/44'/637'/$accountIndex'/$changeIndex'/$addressIndex'")
 
   data class Ecdsa(
     val accountIndex: UInt = 0u,

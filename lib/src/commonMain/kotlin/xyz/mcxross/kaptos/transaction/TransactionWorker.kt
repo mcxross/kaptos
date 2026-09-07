@@ -6,8 +6,8 @@
  */
 package xyz.mcxross.kaptos.transaction
 
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
@@ -85,7 +85,8 @@ class TransactionWorker(
 
   private val idMutex = Mutex()
   private var nextRequestId = 0uL
-  private val mutableEvents = MutableSharedFlow<TransactionWorkerEvent>(extraBufferCapacity = capacity)
+  private val mutableEvents =
+    MutableSharedFlow<TransactionWorkerEvent>(extraBufferCapacity = capacity)
   private val channel =
     Channel<Work>(
       capacity = capacity,
@@ -104,11 +105,10 @@ class TransactionWorker(
   suspend fun submit(
     build: suspend (sequenceNumber: ULong) -> AptosResult<UnsignedTransaction>
   ): Deferred<AptosResult<PendingTransactionResponse>> {
-    val requestId =
-      idMutex.withLock {
-        check(nextRequestId != ULong.MAX_VALUE) { "Transaction worker request ID overflow" }
-        nextRequestId++
-      }
+    val requestId = idMutex.withLock {
+      check(nextRequestId != ULong.MAX_VALUE) { "Transaction worker request ID overflow" }
+      nextRequestId++
+    }
     val result = CompletableDeferred<AptosResult<PendingTransactionResponse>>()
     val work = Work(requestId, build, result)
     try {

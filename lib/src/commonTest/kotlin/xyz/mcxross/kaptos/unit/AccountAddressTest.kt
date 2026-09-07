@@ -250,7 +250,8 @@ class AccountAddressTest {
     )
     assertEquals(
       ADDRESS_F["shortWith0x"].toString(),
-      AccountAddress.fromString(ADDRESS_F_PADDED_SHORT_FORM["shortWithout0x"].toString()).toString(),
+      AccountAddress.fromString(ADDRESS_F_PADDED_SHORT_FORM["shortWithout0x"].toString())
+        .toString(),
     )
 
     assertEquals(

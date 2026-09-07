@@ -48,12 +48,16 @@ class ConfidentialCryptoTest {
     val voluntaryAuditor = ConfidentialDecryptionKey.generate().encryptionKey
     val effectiveAuditor = ConfidentialDecryptionKey.generate().encryptionKey
     val oldChunks = listOf(100u, 1u, 0u, 0u, 0u, 0u, 0u, 0u)
-    val old = assertIs<AptosResult.Success<EncryptedChunks>>(
-      encryptChunks(senderKey.encryptionKey, oldChunks)
-    ).value
-    val pending = assertIs<AptosResult.Success<EncryptedChunks>>(
-      encryptChunks(senderKey.encryptionKey, List(8) { 0u })
-    ).value
+    val old =
+      assertIs<AptosResult.Success<EncryptedChunks>>(
+          encryptChunks(senderKey.encryptionKey, oldChunks)
+        )
+        .value
+    val pending =
+      assertIs<AptosResult.Success<EncryptedChunks>>(
+          encryptChunks(senderKey.encryptionKey, List(8) { 0u })
+        )
+        .value
     val balance =
       ConfidentialBalance(
         available = old.ciphertexts,
@@ -64,41 +68,44 @@ class ConfidentialCryptoTest {
 
     val registration =
       assertIs<AptosResult.Success<RegistrationAuthorization>>(
-        ConfidentialProofFactory.registration(senderKey, sender, token, 2u)
-      ).value
+          ConfidentialProofFactory.registration(senderKey, sender, token, 2u)
+        )
+        .value
     assertEquals(1, registration.sigma.response.size)
 
     val withdrawal =
       assertIs<AptosResult.Success<BalanceAuthorization>>(
-        ConfidentialProofFactory.withdraw(
-          key = senderKey,
-          sender = sender,
-          token = token,
-          chainId = 2u,
-          amount = 1u,
-          balance = balance,
-          auditor = effectiveAuditor,
+          ConfidentialProofFactory.withdraw(
+            key = senderKey,
+            sender = sender,
+            token = token,
+            chainId = 2u,
+            amount = 1u,
+            balance = balance,
+            auditor = effectiveAuditor,
+          )
         )
-      ).value
+        .value
     assertEquals(AVAILABLE_BALANCE_CHUNK_COUNT, withdrawal.newBalance.size)
     assertEquals(AVAILABLE_BALANCE_CHUNK_COUNT, withdrawal.newAuditorHandles.size)
     assertTrue(withdrawal.rangeProof.isNotEmpty())
 
     val transfer =
       assertIs<AptosResult.Success<TransferAuthorization>>(
-        ConfidentialProofFactory.transfer(
-          key = senderKey,
-          sender = sender,
-          recipient = recipient,
-          token = token,
-          chainId = 2u,
-          amount = 10u,
-          balance = balance,
-          recipientKey = recipientKey.encryptionKey,
-          voluntaryAuditors = listOf(voluntaryAuditor),
-          effectiveAuditor = effectiveAuditor,
+          ConfidentialProofFactory.transfer(
+            key = senderKey,
+            sender = sender,
+            recipient = recipient,
+            token = token,
+            chainId = 2u,
+            amount = 10u,
+            balance = balance,
+            recipientKey = recipientKey.encryptionKey,
+            voluntaryAuditors = listOf(voluntaryAuditor),
+            effectiveAuditor = effectiveAuditor,
+          )
         )
-      ).value
+        .value
     assertEquals(AVAILABLE_BALANCE_CHUNK_COUNT, transfer.newBalance.size)
     assertEquals(TRANSFER_AMOUNT_CHUNK_COUNT, transfer.transferBySender.size)
     assertEquals(1, transfer.voluntaryAuditorTransferHandles.size)
@@ -107,9 +114,12 @@ class ConfidentialCryptoTest {
     val nextKey = ConfidentialDecryptionKey.generate()
     val rotation =
       assertIs<AptosResult.Success<KeyRotationAuthorization>>(
-        ConfidentialProofFactory.rotate(senderKey, nextKey, sender, token, 2u, balance)
-      ).value
-    assertTrue(rotation.newPublicKey.toByteArray().contentEquals(nextKey.encryptionKey.toByteArray()))
+          ConfidentialProofFactory.rotate(senderKey, nextKey, sender, token, 2u, balance)
+        )
+        .value
+    assertTrue(
+      rotation.newPublicKey.toByteArray().contentEquals(nextKey.encryptionKey.toByteArray())
+    )
     assertEquals(AVAILABLE_BALANCE_CHUNK_COUNT, rotation.newHandles.size)
   }
 

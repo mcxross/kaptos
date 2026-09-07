@@ -33,32 +33,30 @@ import xyz.mcxross.kaptos.util.toOptional
 internal suspend fun getCollectionData(
   config: TransportConfig,
   filter: CollectionOwnershipV2Filter,
-): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
-  handleQuery { getGraphqlClient(config).query(GetCollectionDataQuery(filter)) }.toResult()
+): Result<GetCollectionDataQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config).query(GetCollectionDataQuery(filter))
+}
+  .toResult()
 
 internal suspend fun getCollectionDataByCollectionId(
   config: TransportConfig,
   collectionId: String,
-): Result<GetCollectionDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val filter = currentCollectionsV2Filter {
-        this.collectionId = stringFilter { eq = collectionId }
-      }
-      getGraphqlClient(config).query(GetCollectionDataQuery(where_condition = filter))
-    }
-    .toResult()
+): Result<GetCollectionDataQuery.Data?, AptosIndexerError> = handleQuery {
+  val filter = currentCollectionsV2Filter {
+    this.collectionId = stringFilter { eq = collectionId }
+  }
+  getGraphqlClient(config).query(GetCollectionDataQuery(where_condition = filter))
+}
+  .toResult()
 
 internal suspend fun getTokenData(
   config: TransportConfig,
   page: PaginationArgs?,
-): Result<GetTokenDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetTokenDataQuery(limit = page?.limit.toOptional(), offset = page?.offset.toOptional())
-        )
-    }
-    .toResult()
+): Result<GetTokenDataQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(GetTokenDataQuery(limit = page?.limit.toOptional(), offset = page?.offset.toOptional()))
+}
+  .toResult()
 
 private val structTag = StructTag(AccountAddress.ONE, "string", "string", emptyList())
 
@@ -522,31 +520,29 @@ private fun getSinglePropertyValueRaw(
 internal suspend fun getCurrentDigitalAssetOwnership(
   config: TransportConfig,
   digitalAssetAddress: AccountAddressInput,
-): Result<GetCurrentTokenOwnershipQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val filter = currentTokenOwnershipsV2Filter {
-        tokenDataId = stringFilter { eq = digitalAssetAddress.value }
-        amount = numericFilter { gt = 0 }
-      }
-      getGraphqlClient(config).query(GetCurrentTokenOwnershipQuery(where_condition = filter))
-    }
-    .toResult()
+): Result<GetCurrentTokenOwnershipQuery.Data?, AptosIndexerError> = handleQuery {
+  val filter = currentTokenOwnershipsV2Filter {
+    tokenDataId = stringFilter { eq = digitalAssetAddress.value }
+    amount = numericFilter { gt = 0 }
+  }
+  getGraphqlClient(config).query(GetCurrentTokenOwnershipQuery(where_condition = filter))
+}
+  .toResult()
 
 internal suspend fun getEvents(
   config: TransportConfig,
   filter: EventFilter?,
   page: PaginationArgs?,
   sortOrder: List<EventSortOrder>?,
-): Result<GetEventsQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetEventsQuery(
-            where_condition = filter.toOptional(),
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetEventsQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(
+      GetEventsQuery(
+        where_condition = filter.toOptional(),
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()

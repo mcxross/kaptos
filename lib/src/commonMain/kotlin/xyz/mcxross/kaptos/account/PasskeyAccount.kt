@@ -69,10 +69,11 @@ class PasskeyAccount(
     when (val signature = signBytes(transaction.signingMessage())) {
       is AptosResult.Failure -> signature
       is AptosResult.Success -> {
-        val anySignature = signature.value as? AnySignature
-          ?: return AptosResult.Failure(
-            AptosError.Crypto("Passkey signer returned an incompatible signature")
-          )
+        val anySignature =
+          signature.value as? AnySignature
+            ?: return AptosResult.Failure(
+              AptosError.Crypto("Passkey signer returned an incompatible signature")
+            )
         AptosResult.Success(AccountAuthenticator.SingleKey(publicKey, anySignature))
       }
     }

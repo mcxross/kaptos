@@ -2,8 +2,8 @@ import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SourcesJar
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
   alias(libs.plugins.android.kotlin.multiplatform.library)
@@ -26,9 +26,10 @@ kotlin {
     }
     minSdk = 24
     compilerOptions.jvmTarget = JvmTarget.JVM_17
-    withDeviceTestBuilder { sourceSetTreeName = "test" }.configure {
-      instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+    withDeviceTestBuilder { sourceSetTreeName = "test" }
+      .configure {
+        instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      }
   }
 
   val xcframeworkName = "AptosKit"

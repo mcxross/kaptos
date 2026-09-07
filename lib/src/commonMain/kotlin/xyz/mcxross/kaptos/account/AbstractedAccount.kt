@@ -59,8 +59,7 @@ open class AbstractedAccount(
       is AptosResult.Failure -> signature
       is AptosResult.Success -> {
         val authenticationData =
-          if (identityBytes == null) AbstractSignature(signature.value).toBcs()
-          else signature.value
+          if (identityBytes == null) AbstractSignature(signature.value).toBcs() else signature.value
         AptosResult.Success(
           AccountAuthenticator.Abstraction(
             function = authenticationFunction,
@@ -98,12 +97,15 @@ open class AbstractedAccount(
   }
 }
 
-/** An abstracted account whose address is deterministically derived from an identity byte string. */
+/**
+ * An abstracted account whose address is deterministically derived from an identity byte string.
+ */
 open class DerivableAbstractedAccount(
   authenticationFunction: AuthenticationFunction,
   abstractPublicKey: ByteArray,
   signer: AbstractionSigner,
-) : AbstractedAccount(
+) :
+  AbstractedAccount(
     accountAddress = computeAccountAddress(authenticationFunction, abstractPublicKey),
     authenticationFunction = authenticationFunction,
     signer = signer,
@@ -129,8 +131,7 @@ open class DerivableAbstractedAccount(
             writer.string(authenticationFunction.function.toString())
           }
           .toByteArray()
-      val identityBytes =
-        AptosBcsWriter().also { it.bytes(accountIdentity) }.toByteArray()
+      val identityBytes = AptosBcsWriter().also { it.bytes(accountIdentity) }.toByteArray()
       return AccountAddress(
         sha3Hash(functionBytes + identityBytes + byteArrayOf(ADDRESS_DOMAIN_SEPARATOR.toByte()))
       )

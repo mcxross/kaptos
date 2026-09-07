@@ -87,11 +87,18 @@ internal actual fun generateSecp256r1PublicKey(privateKey: ByteArray): ByteArray
 internal actual fun normalizeSecp256r1PublicKey(publicKey: ByteArray): ByteArray =
   secp256r1NormalizePublicKey(publicKey, false)
 
-internal actual fun verifySecp256r1Signature(publicKey: ByteArray, message: ByteArray, signature: ByteArray): Boolean =
-  secp256r1VerifySha3256(publicKey, message, signature)
+internal actual fun verifySecp256r1Signature(
+  publicKey: ByteArray,
+  message: ByteArray,
+  signature: ByteArray,
+): Boolean = secp256r1VerifySha3256(publicKey, message, signature)
 
-internal actual fun verifyWebAuthnSignature(publicKey: ByteArray, authenticatorData: ByteArray, clientDataJson: ByteArray, signature: ByteArray): Boolean =
-  secp256r1Verify(publicKey, authenticatorData + sha256(clientDataJson), signature)
+internal actual fun verifyWebAuthnSignature(
+  publicKey: ByteArray,
+  authenticatorData: ByteArray,
+  clientDataJson: ByteArray,
+  signature: ByteArray,
+): Boolean = secp256r1Verify(publicKey, authenticatorData + sha256(clientDataJson), signature)
 
 internal actual fun generateMnemonic(wordCount: UInt): String =
   xyz.mcxross.fastkrypto.mnemonicGenerate(wordCount)

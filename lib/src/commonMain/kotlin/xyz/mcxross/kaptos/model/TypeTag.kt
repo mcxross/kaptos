@@ -201,31 +201,37 @@ data object TypeTagU256 : TypeTag() {
 
 data object TypeTagI8 : TypeTag() {
   override val value: String = "i8"
+
   override fun toString(): String = value
 }
 
 data object TypeTagI16 : TypeTag() {
   override val value: String = "i16"
+
   override fun toString(): String = value
 }
 
 data object TypeTagI32 : TypeTag() {
   override val value: String = "i32"
+
   override fun toString(): String = value
 }
 
 data object TypeTagI64 : TypeTag() {
   override val value: String = "i64"
+
   override fun toString(): String = value
 }
 
 data object TypeTagI128 : TypeTag() {
   override val value: String = "i128"
+
   override fun toString(): String = value
 }
 
 data object TypeTagI256 : TypeTag() {
   override val value: String = "i256"
+
   override fun toString(): String = value
 }
 

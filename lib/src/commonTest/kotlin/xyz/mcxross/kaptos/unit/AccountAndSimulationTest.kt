@@ -15,9 +15,9 @@ import xyz.mcxross.kaptos.account.Ed25519Account
 import xyz.mcxross.kaptos.account.MultiEd25519Account
 import xyz.mcxross.kaptos.account.PasskeyAccount
 import xyz.mcxross.kaptos.account.WebAuthnSigner
+import xyz.mcxross.kaptos.core.crypto.Aip80PrivateKey
 import xyz.mcxross.kaptos.core.crypto.AnyPublicKey
 import xyz.mcxross.kaptos.core.crypto.AnySignature
-import xyz.mcxross.kaptos.core.crypto.Aip80PrivateKey
 import xyz.mcxross.kaptos.core.crypto.AptosDerivationPath
 import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.MnemonicPhrase
@@ -68,8 +68,7 @@ class AccountAndSimulationTest :
         "ed25519-priv-0x5d996aa76b3212142792d9130796cd2e11e3c445a93118c08414df4f66bc60ec"
       mnemonic.deriveSecp256k1PrivateKey(AptosDerivationPath.Ecdsa()).toAip80().value shouldBe
         "secp256k1-priv-0x1eec55afc2f72c4ab7b46c84d761739035ac420a2b6b22cef3411adaf91ce1f7"
-      AptosDerivationPath.Ed25519(addressIndex = 44u).value shouldBe
-        "m/44'/637'/0'/0'/44'"
+      AptosDerivationPath.Ed25519(addressIndex = 44u).value shouldBe "m/44'/637'/0'/0'/44'"
       AptosDerivationPath.Ecdsa(addressIndex = 44u).value shouldBe "m/44'/637'/0'/0/44"
     }
 
@@ -95,7 +94,8 @@ class AccountAndSimulationTest :
         )
       val message = HexInput.fromByteArray("multi-ed25519".encodeToByteArray())
       val authenticator =
-        account.signWithAuthenticator(message)
+        account
+          .signWithAuthenticator(message)
           .shouldBeInstanceOf<AccountAuthenticator.MultiEd25519>()
 
       account.verifySignature(message, authenticator.signature).shouldBeTrue()
@@ -126,10 +126,11 @@ class AccountAndSimulationTest :
         )
       val authenticator =
         signed.authenticator.shouldBeInstanceOf<TransactionAuthenticator.MultiAgent>()
-      authenticator.sender.shouldBeInstanceOf<AccountAuthenticator.SingleKey>()
-        .publicKey.shouldBeInstanceOf<AnyPublicKey>()
-      authenticator.secondarySigners.single()
-        .shouldBeInstanceOf<AccountAuthenticator.Ed25519>()
+      authenticator.sender
+        .shouldBeInstanceOf<AccountAuthenticator.SingleKey>()
+        .publicKey
+        .shouldBeInstanceOf<AnyPublicKey>()
+      authenticator.secondarySigners.single().shouldBeInstanceOf<AccountAuthenticator.Ed25519>()
     }
 
     "Secp256r1 matches the pinned TypeScript SDK vector and clears private material" {
@@ -155,11 +156,13 @@ class AccountAndSimulationTest :
           authenticatorData = WEBAUTHN_AUTHENTICATOR_DATA.hexBytes(),
           clientDataJson = WEBAUTHN_CLIENT_DATA.hexBytes(),
         )
-      signature.verify(
-        publicKey,
-        WEBAUTHN_MESSAGE.hexBytes(),
-        WebAuthnVerificationOptions(expectedOrigin = "https://example.com"),
-      ).shouldBeTrue()
+      signature
+        .verify(
+          publicKey,
+          WEBAUTHN_MESSAGE.hexBytes(),
+          WebAuthnVerificationOptions(expectedOrigin = "https://example.com"),
+        )
+        .shouldBeTrue()
       signature.verify(publicKey, "wrong-message".encodeToByteArray()) shouldBe false
 
       val authenticator =
@@ -214,11 +217,9 @@ private fun rawTransaction(): RawTransaction =
 private fun ByteArray.toHex(): String =
   joinToString("") { (it.toInt() and 0xff).toString(16).padStart(2, '0') }
 
-private fun String.hexBytes(): ByteArray =
-  chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+private fun String.hexBytes(): ByteArray = chunked(2).map { it.toInt(16).toByte() }.toByteArray()
 
-private const val P256_PRIVATE =
-  "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"
+private const val P256_PRIVATE = "0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f20"
 private const val P256_PUBLIC =
   "04515c3d6eb9e396b904d3feca7f54fdcd0cc1e997bf375dca515ad0a6c3b4035f4536be3a50f318fbf9a5475902a221502bef0d57e08c53b2cc0a56f17d9f9354"
 private const val P256_MESSAGE = "6170746f732d736563703235367231"

@@ -6,7 +6,9 @@ import xyz.mcxross.kaptos.generated.type.Current_aptos_names_select_column
 import xyz.mcxross.kaptos.generated.type.Int_comparison_exp
 import xyz.mcxross.kaptos.util.toOptional
 
-internal class CurrentAptosNamesAggregateBoolExpCountBuilder(private val predicate: Int_comparison_exp) {
+internal class CurrentAptosNamesAggregateBoolExpCountBuilder(
+  private val predicate: Int_comparison_exp
+) {
   var arguments: List<Current_aptos_names_select_column>? = null
   var distinct: Boolean? = null
   private var filter: Current_aptos_names_bool_exp? = null

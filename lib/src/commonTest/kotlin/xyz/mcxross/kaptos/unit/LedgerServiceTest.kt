@@ -20,54 +20,51 @@ import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import xyz.mcxross.kaptos.ledger.DefaultLedgerService
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.ByteString
+import xyz.mcxross.kaptos.model.TransportConfig
 
 class LedgerServiceTest :
   StringSpec({
     "ledger info and blocks decode all u64 fields without signed truncation" {
       var requestIndex = 0
-      val engine =
-        MockEngine { request ->
-          val content =
-            when (requestIndex++) {
-              0 -> {
-                request.url.encodedPath shouldBe "/v1/"
-                """
-                {
-                  "chain_id": 4,
-                  "epoch": "18446744073709551615",
-                  "ledger_version": "18446744073709551615",
-                  "oldest_ledger_version": "0",
-                  "ledger_timestamp": "18446744073709551615",
-                  "node_role": "full_node",
-                  "oldest_block_height": "0",
-                  "block_height": "18446744073709551615",
-                  "encryption_key": "0x0001"
-                }
-                """.trimIndent()
+      val engine = MockEngine { request ->
+        val content =
+          when (requestIndex++) {
+            0 -> {
+              request.url.encodedPath shouldBe "/v1/"
+              """
+              {
+                "chain_id": 4,
+                "epoch": "18446744073709551615",
+                "ledger_version": "18446744073709551615",
+                "oldest_ledger_version": "0",
+                "ledger_timestamp": "18446744073709551615",
+                "node_role": "full_node",
+                "oldest_block_height": "0",
+                "block_height": "18446744073709551615",
+                "encryption_key": "0x0001"
               }
-              1 -> {
-                request.url.encodedPath shouldBe
-                  "/v1/blocks/by_version/18446744073709551615"
-                blockJson()
-              }
-              else -> {
-                request.url.encodedPath shouldBe
-                  "/v1/blocks/by_height/18446744073709551615"
-                blockJson()
-              }
+              """
+                .trimIndent()
             }
-          respond(
-            content = content,
-            status = HttpStatusCode.OK,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+            1 -> {
+              request.url.encodedPath shouldBe "/v1/blocks/by_version/18446744073709551615"
+              blockJson()
+            }
+            else -> {
+              request.url.encodedPath shouldBe "/v1/blocks/by_height/18446744073709551615"
+              blockJson()
+            }
+          }
+        respond(
+          content = content,
+          status = HttpStatusCode.OK,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client =
         HttpClient(engine) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
@@ -77,7 +74,9 @@ class LedgerServiceTest :
       val service = DefaultLedgerService(config)
 
       val info =
-        service.info().shouldBeInstanceOf<AptosResult.Success<xyz.mcxross.kaptos.ledger.LedgerState>>()
+        service
+          .info()
+          .shouldBeInstanceOf<AptosResult.Success<xyz.mcxross.kaptos.ledger.LedgerState>>()
           .value
       info.chainId.chainId shouldBe 4u
       info.epoch shouldBe ULong.MAX_VALUE
@@ -103,27 +102,26 @@ class LedgerServiceTest :
     }
 
     "malformed ledger wire values become typed serialization errors" {
-      val engine =
-        MockEngine {
-          respond(
-            content =
-              """
-              {
-                "chain_id": 4,
-                "epoch": "not-a-u64",
-                "ledger_version": "1",
-                "oldest_ledger_version": "0",
-                "ledger_timestamp": "1",
-                "node_role": "full_node",
-                "oldest_block_height": "0",
-                "block_height": "1"
-              }
-              """.trimIndent(),
-            status = HttpStatusCode.OK,
-            headers =
-              headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine {
+        respond(
+          content =
+            """
+            {
+              "chain_id": 4,
+              "epoch": "not-a-u64",
+              "ledger_version": "1",
+              "oldest_ledger_version": "0",
+              "ledger_timestamp": "1",
+              "node_role": "full_node",
+              "oldest_block_height": "0",
+              "block_height": "1"
+            }
+            """
+              .trimIndent(),
+          status = HttpStatusCode.OK,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client =
         HttpClient(engine) {
           install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
@@ -151,4 +149,5 @@ private fun blockJson(): String =
     "first_version": "0",
     "last_version": "18446744073709551615"
   }
-  """.trimIndent()
+  """
+    .trimIndent()

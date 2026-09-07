@@ -35,7 +35,9 @@ data class RawTransaction(
 
   companion object {
     fun fromBcs(bytes: ByteArray): RawTransaction =
-      AptosBcsReader(bytes).let { reader -> reader.rawTransaction().also { reader.ensureFinished() } }
+      AptosBcsReader(bytes).let { reader ->
+        reader.rawTransaction().also { reader.ensureFinished() }
+      }
 
     internal fun AptosBcsReader.rawTransaction(): RawTransaction =
       RawTransaction(

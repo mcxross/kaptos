@@ -57,9 +57,11 @@ inline fun <T> AptosResult<T>.getOrElse(defaultValue: (AptosError) -> T): T =
   }
 
 /** Performs [action] for success and returns this result unchanged. */
-inline fun <T> AptosResult<T>.onSuccess(action: (T) -> Unit): AptosResult<T> =
-  apply { if (this is AptosResult.Success) action(value) }
+inline fun <T> AptosResult<T>.onSuccess(action: (T) -> Unit): AptosResult<T> = apply {
+  if (this is AptosResult.Success) action(value)
+}
 
 /** Performs [action] for failure and returns this result unchanged. */
-inline fun <T> AptosResult<T>.onFailure(action: (AptosError) -> Unit): AptosResult<T> =
-  apply { if (this is AptosResult.Failure) action(error) }
+inline fun <T> AptosResult<T>.onFailure(action: (AptosError) -> Unit): AptosResult<T> = apply {
+  if (this is AptosResult.Failure) action(error)
+}

@@ -16,5 +16,6 @@ internal class TableMetadatasOrderBuilder {
     )
 }
 
-internal fun tableMetadatasOrder(init: TableMetadatasOrderBuilder.() -> Unit): Table_metadatas_order_by =
-  TableMetadatasOrderBuilder().apply(init).build()
+internal fun tableMetadatasOrder(
+  init: TableMetadatasOrderBuilder.() -> Unit
+): Table_metadatas_order_by = TableMetadatasOrderBuilder().apply(init).build()

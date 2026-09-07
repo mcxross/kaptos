@@ -51,11 +51,14 @@ class MultiEd25519PublicKey(
   override fun equals(other: Any?): Boolean =
     other is MultiEd25519PublicKey &&
       threshold == other.threshold &&
-      publicKeys.map { it.toByteArray().toList() } == other.publicKeys.map { it.toByteArray().toList() }
+      publicKeys.map { it.toByteArray().toList() } ==
+        other.publicKeys.map { it.toByteArray().toList() }
 
-  override fun hashCode(): Int = 31 * publicKeys.fold(1) { value, key ->
-    31 * value + key.toByteArray().contentHashCode()
-  } + threshold.hashCode()
+  override fun hashCode(): Int =
+    31 *
+      publicKeys.fold(1) { value, key ->
+        31 * value + key.toByteArray().contentHashCode()
+      } + threshold.hashCode()
 
   companion object {
     const val MIN_KEYS = 2
@@ -91,7 +94,8 @@ class MultiEd25519Signature(
   }
 
   override fun toByteArray(): ByteArray =
-    signatures.fold(ByteArray(0)) { bytes, signature -> bytes + signature.toByteArray() } + bitmapBytes
+    signatures.fold(ByteArray(0)) { bytes, signature -> bytes + signature.toByteArray() } +
+      bitmapBytes
 
   override fun toBcs(): ByteArray = encodeBcsBytes(toByteArray())
 

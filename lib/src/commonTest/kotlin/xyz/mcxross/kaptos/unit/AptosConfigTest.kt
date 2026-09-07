@@ -5,11 +5,11 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertIs
 import kotlin.test.expect
 import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosConfigurationException
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.Network
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.util.NetworkToFaucetAPI
 import xyz.mcxross.kaptos.util.NetworkToIndexerAPI
 import xyz.mcxross.kaptos.util.NetworkToNodeAPI

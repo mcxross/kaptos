@@ -23,8 +23,7 @@ fun orderlessTransaction() = runBlocking {
         .submitAndWait(
           signer = signer,
           payload = aptTransfer(sampleAddress("APTOS_RECIPIENT"), 1_000_000uL),
-          transactionOptions =
-            TransactionOptions(replayProtection = ReplayProtection.Nonce(nonce)),
+          transactionOptions = TransactionOptions(replayProtection = ReplayProtection.Nonce(nonce)),
         )
         .orThrow()
     println("Committed ${committed.hash}")

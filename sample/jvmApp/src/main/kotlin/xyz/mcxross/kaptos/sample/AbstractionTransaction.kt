@@ -7,8 +7,8 @@
 package xyz.mcxross.kaptos.sample
 
 import kotlinx.coroutines.runBlocking
-import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.account.SolanaDerivableAccount
+import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.model.TransactionOptions
 
 /** Funds a framework-native derivable account, then submits a SIWS-authenticated transfer. */

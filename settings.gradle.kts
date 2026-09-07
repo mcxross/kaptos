@@ -28,7 +28,9 @@ rootProject.name = "kaptos-build"
 include(":lib", ":encrypted-transactions", ":confidential-assets", ":sample:jvmApp")
 
 project(":lib").name = "kaptos"
+
 project(":encrypted-transactions").name = "kaptos-encrypted-transactions"
+
 project(":confidential-assets").name = "kaptos-confidential-assets"
 
 findProject(":sample:jvmApp")?.name = "jvmApp"

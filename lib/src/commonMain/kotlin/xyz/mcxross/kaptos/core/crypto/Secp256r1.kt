@@ -146,8 +146,8 @@ data class WebAuthnVerificationOptions(
 /**
  * A WebAuthn assertion in the exact Aptos BCS layout.
  *
- * Credential acquisition stays application-owned; this type validates the assertion and packages
- * it for a SingleKey authenticator.
+ * Credential acquisition stays application-owned; this type validates the assertion and packages it
+ * for a SingleKey authenticator.
  */
 class WebAuthnSignature(
   signature: ByteArray,
@@ -188,8 +188,10 @@ class WebAuthnSignature(
     val clientData =
       runCatching { Json.parseToJsonElement(clientDataBytes.decodeToString()).jsonObject }
         .getOrNull() ?: return false
-    fun stringField(name: String): String? =
-      runCatching { clientData[name]?.jsonPrimitive?.content }.getOrNull()
+    fun stringField(name: String): String? = runCatching {
+      clientData[name]?.jsonPrimitive?.content
+    }
+      .getOrNull()
 
     if (stringField("type") != "webauthn.get") return false
     if (stringField("challenge") != base64Url(sha3Hash(signingMessage))) {

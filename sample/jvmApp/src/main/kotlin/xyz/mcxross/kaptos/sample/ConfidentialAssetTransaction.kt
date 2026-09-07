@@ -8,8 +8,8 @@ package xyz.mcxross.kaptos.sample
 
 import kotlinx.coroutines.runBlocking
 import xyz.mcxross.kaptos.aptos
-import xyz.mcxross.kaptos.confidential.confidentialDecryptionKey
 import xyz.mcxross.kaptos.confidential.confidentialAssets
+import xyz.mcxross.kaptos.confidential.confidentialDecryptionKey
 
 /** Registers a local confidential encryption key for the selected fungible asset. */
 fun confidentialAssetTransaction() = runBlocking {

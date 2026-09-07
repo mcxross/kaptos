@@ -138,7 +138,6 @@ class GeneralTest {
         }
         is Result.Err -> fail("Expected Ok but got Err: ${response.error}")
       }
-
     }
   }
 

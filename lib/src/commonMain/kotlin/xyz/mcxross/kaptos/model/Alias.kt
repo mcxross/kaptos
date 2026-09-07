@@ -64,7 +64,8 @@ internal typealias AuthKeyAddressSortOrder = Auth_key_account_addresses_order_by
 
 internal typealias CollectionOwnershipV2ViewFilter = Current_collection_ownership_v2_view_bool_exp
 
-internal typealias CollectionOwnershipV2ViewSortOrder = Current_collection_ownership_v2_view_order_by
+internal typealias CollectionOwnershipV2ViewSortOrder =
+  Current_collection_ownership_v2_view_order_by
 
 internal typealias CollectionOwnershipV2Filter = Current_collections_v2_bool_exp
 

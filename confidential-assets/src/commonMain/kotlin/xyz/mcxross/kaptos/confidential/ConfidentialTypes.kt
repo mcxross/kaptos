@@ -52,8 +52,7 @@ class ConfidentialDecryptionKey private constructor(bytes: ByteArray) : AutoClos
   }
 
   val encryptionKey: ConfidentialEncryptionKey
-    get() =
-      withSecret { ConfidentialEncryptionKey(twistedEd25519PublicKeyFromPrivate(it)) }
+    get() = withSecret { ConfidentialEncryptionKey(twistedEd25519PublicKeyFromPrivate(it)) }
 
   fun clear() {
     secret.fill(0)
@@ -131,21 +130,18 @@ class ConfidentialCiphertext(commitment: ByteArray, handle: ByteArray) {
 
   internal fun decrypt(key: ConfidentialDecryptionKey): AptosResult<UInt> =
     try {
-      val value =
-        key.withSecret {
-          twistedElgamalDecrypt(
-            privateKey = it,
-            commitment = commitmentBytes,
-            handle = handleBytes,
-            // Homomorphic deposits can temporarily push an individual chunk above 16 bits.
-            bitWidth = 32u,
-          )
-        }
+      val value = key.withSecret {
+        twistedElgamalDecrypt(
+          privateKey = it,
+          commitment = commitmentBytes,
+          handle = handleBytes,
+          // Homomorphic deposits can temporarily push an individual chunk above 16 bits.
+          bitWidth = 32u,
+        )
+      }
       AptosResult.Success(value.toUInt())
     } catch (error: Throwable) {
-      AptosResult.Failure(
-        AptosError.Crypto("Unable to decrypt confidential balance chunk", error)
-      )
+      AptosResult.Failure(AptosError.Crypto("Unable to decrypt confidential balance chunk", error))
     }
 
   override fun equals(other: Any?): Boolean =
@@ -153,7 +149,8 @@ class ConfidentialCiphertext(commitment: ByteArray, handle: ByteArray) {
       commitmentBytes.contentEquals(other.commitmentBytes) &&
       handleBytes.contentEquals(other.handleBytes)
 
-  override fun hashCode(): Int = 31 * commitmentBytes.contentHashCode() + handleBytes.contentHashCode()
+  override fun hashCode(): Int =
+    31 * commitmentBytes.contentHashCode() + handleBytes.contentHashCode()
 }
 
 /** A fixed-width confidential amount, least-significant base-2^16 limb first. */
@@ -164,7 +161,10 @@ data class ConfidentialAmount(val chunks: List<UInt>) {
 
   /** Lossless base-10 representation, including values wider than Kotlin's [ULong]. */
   val decimal: String
-    get() = chunks.asReversed().fold("0") { value, chunk -> decimalAdd(decimalMultiply(value, 65_536), chunk) }
+    get() =
+      chunks.asReversed().fold("0") { value, chunk ->
+        decimalAdd(decimalMultiply(value, 65_536), chunk)
+      }
 
   val normalizedChunks: List<UInt>
     get() = normalizeChunks(chunks)
@@ -212,14 +212,13 @@ internal fun encryptChunks(
       "Randomness count must match the chunk count"
     }
     require(chunks.all { it <= 65_535u }) { "Normalized confidential chunks must fit in 16 bits" }
-    val encrypted =
-      chunks.mapIndexed { index, chunk ->
-        xyz.mcxross.fastkrypto.twistedElgamalEncrypt(
-          publicKey = key.toByteArray(),
-          amount = chunk.toULong(),
-          randomness = randomness?.get(index)?.copyOf(),
-        )
-      }
+    val encrypted = chunks.mapIndexed { index, chunk ->
+      xyz.mcxross.fastkrypto.twistedElgamalEncrypt(
+        publicKey = key.toByteArray(),
+        amount = chunk.toULong(),
+        randomness = randomness?.get(index)?.copyOf(),
+      )
+    }
     AptosResult.Success(
       EncryptedChunks(
         ciphertexts = encrypted.map { ConfidentialCiphertext(it.commitment, it.handle) },
@@ -251,7 +250,8 @@ internal fun subtractChunks(value: List<UInt>, amount: ULong): AptosResult<List<
     }
   }
   return if (borrow == 0) AptosResult.Success(result)
-  else AptosResult.Failure(AptosError.Validation("Amount exceeds the available confidential balance"))
+  else
+    AptosResult.Failure(AptosError.Validation("Amount exceeds the available confidential balance"))
 }
 
 internal fun normalizeChunks(value: List<UInt>): List<UInt> {
@@ -262,7 +262,9 @@ internal fun normalizeChunks(value: List<UInt>): List<UInt> {
     result[index] = (total and 0xffffu).toUInt()
     carry = total shr CONFIDENTIAL_CHUNK_BITS
   }
-  require(carry == 0uL) { "Confidential amount exceeds its ${value.size * CONFIDENTIAL_CHUNK_BITS}-bit width" }
+  require(carry == 0uL) {
+    "Confidential amount exceeds its ${value.size * CONFIDENTIAL_CHUNK_BITS}-bit width"
+  }
   return result
 }
 

@@ -35,5 +35,6 @@ internal class TableMetadatasFilterBuilder {
     )
 }
 
-internal fun tableMetadatasFilter(init: TableMetadatasFilterBuilder.() -> Unit): Table_metadatas_bool_exp =
-  TableMetadatasFilterBuilder().apply(init).build()
+internal fun tableMetadatasFilter(
+  init: TableMetadatasFilterBuilder.() -> Unit
+): Table_metadatas_bool_exp = TableMetadatasFilterBuilder().apply(init).build()

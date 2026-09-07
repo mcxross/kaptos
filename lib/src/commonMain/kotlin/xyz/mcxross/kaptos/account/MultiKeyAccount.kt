@@ -57,13 +57,12 @@ class MultiKeyAccount(
     }
 
     // For each signer, find its corresponding position in the MultiKey's public keys array
-    val bitPositions =
-      signers.map { signer ->
-        val anyPubKey =
-          if (signer.publicKey is AnyPublicKey) signer.publicKey as AnyPublicKey
-          else AnyPublicKey(signer.publicKey)
-        multiKey.index(anyPubKey)
-      }
+    val bitPositions = signers.map { signer ->
+      val anyPubKey =
+        if (signer.publicKey is AnyPublicKey) signer.publicKey as AnyPublicKey
+        else AnyPublicKey(signer.publicKey)
+      multiKey.index(anyPubKey)
+    }
 
     // Create pairs of [signer, position] and sort them by position
     val signersAndBitPosition = signers.zip(bitPositions).sortedBy { it.second }
@@ -80,20 +79,18 @@ class MultiKeyAccount(
   }
 
   override fun sign(message: HexInput): MultiKeySignature {
-    val signatures =
-      sortedSigners.map { signer ->
-        val sig = signer.sign(message)
-        if (sig is AnySignature) sig else AnySignature(sig)
-      }
+    val signatures = sortedSigners.map { signer ->
+      val sig = signer.sign(message)
+      if (sig is AnySignature) sig else AnySignature(sig)
+    }
     return MultiKeySignature(signatures, signaturesBitmap)
   }
 
   override fun signTransactionSignature(tx: UnsignedTransaction): MultiKeySignature {
-    val signatures =
-      sortedSigners.map { signer ->
-        val sig = signer.signTransactionSignature(tx)
-        if (sig is AnySignature) sig else AnySignature(sig)
-      }
+    val signatures = sortedSigners.map { signer ->
+      val sig = signer.signTransactionSignature(tx)
+      if (sig is AnySignature) sig else AnySignature(sig)
+    }
     return MultiKeySignature(signatures, signaturesBitmap)
   }
 

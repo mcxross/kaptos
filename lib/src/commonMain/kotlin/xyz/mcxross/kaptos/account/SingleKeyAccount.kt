@@ -83,9 +83,7 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
             Secp256k1PrivateKey.generate()
           }
           SigningSchemeInput.Secp256r1 -> {
-            throw IllegalArgumentException(
-              "Use PasskeyAccount for Secp256r1 transaction signing"
-            )
+            throw IllegalArgumentException("Use PasskeyAccount for Secp256r1 transaction signing")
           }
         }
       return SingleKeyAccount(privateKey)
@@ -103,7 +101,6 @@ class SingleKeyAccount(val privateKey: PrivateKey, val address: AccountAddressIn
       mnemonic: MnemonicPhrase,
       path: AptosDerivationPath.Ecdsa = AptosDerivationPath.Ecdsa(),
       passphrase: String = "",
-    ): SingleKeyAccount =
-      SingleKeyAccount(mnemonic.deriveSecp256k1PrivateKey(path, passphrase))
+    ): SingleKeyAccount = SingleKeyAccount(mnemonic.deriveSecp256k1PrivateKey(path, passphrase))
   }
 }

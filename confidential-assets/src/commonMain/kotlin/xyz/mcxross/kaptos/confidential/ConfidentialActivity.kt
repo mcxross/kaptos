@@ -73,7 +73,7 @@ data class ConfidentialActivityQuery(
 )
 
 internal suspend fun Aptos.confidentialActivities(
-  query: ConfidentialActivityQuery,
+  query: ConfidentialActivityQuery
 ): AptosResult<AptosPage<ConfidentialAssetActivity>> {
   val variables =
     try {
@@ -108,11 +108,15 @@ internal suspend fun Aptos.confidentialActivities(
         put("limit", JsonPrimitive(query.page.limit))
         put(
           "order_by",
-          buildJsonArray { add(buildJsonObject { put("transaction_version", JsonPrimitive("desc")) }) },
+          buildJsonArray {
+            add(buildJsonObject { put("transaction_version", JsonPrimitive("desc")) })
+          },
         )
       }
     } catch (error: Throwable) {
-      return AptosResult.Failure(AptosError.Validation("Invalid confidential activity query", error))
+      return AptosResult.Failure(
+        AptosError.Validation("Invalid confidential activity query", error)
+      )
     }
   return when (val response = indexer.query(ACTIVITIES_QUERY, variables)) {
     is AptosResult.Failure -> response
@@ -121,9 +125,14 @@ internal suspend fun Aptos.confidentialActivities(
         val rows = response.value.getValue("confidential_asset_activities").jsonArray
         val count =
           response.value
-            .getValue("confidential_asset_activities_aggregate").jsonObject
-            .getValue("aggregate").jsonObject
-            .getValue("count").jsonPrimitive.content.toInt()
+            .getValue("confidential_asset_activities_aggregate")
+            .jsonObject
+            .getValue("aggregate")
+            .jsonObject
+            .getValue("count")
+            .jsonPrimitive
+            .content
+            .toInt()
         AptosResult.Success(
           AptosPage(
             items = rows.map { it.jsonObject.toActivity() },
@@ -139,8 +148,9 @@ internal suspend fun Aptos.confidentialActivities(
   }
 }
 
-private fun equality(value: String): JsonObject =
-  buildJsonObject { put("_eq", JsonPrimitive(value)) }
+private fun equality(value: String): JsonObject = buildJsonObject {
+  put("_eq", JsonPrimitive(value))
+}
 
 private fun JsonObject.toActivity(): ConfidentialAssetActivity =
   ConfidentialAssetActivity(
@@ -156,7 +166,8 @@ private fun JsonObject.toActivity(): ConfidentialAssetActivity =
     eventData = getValue("event_data").jsonObject,
     eventDataVersion = getValue("event_data_version").jsonPrimitive.content,
     blockHeight = requiredU64("block_height"),
-    transactionSucceeded = getValue("is_transaction_success").jsonPrimitive.content.toBooleanStrict(),
+    transactionSucceeded =
+      getValue("is_transaction_success").jsonPrimitive.content.toBooleanStrict(),
     entryFunction = optionalContent("entry_function_id_str"),
     timestamp = getValue("transaction_timestamp").jsonPrimitive.content,
   )

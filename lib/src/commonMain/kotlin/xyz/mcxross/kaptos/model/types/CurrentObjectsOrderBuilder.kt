@@ -24,5 +24,6 @@ internal class CurrentObjectsOrderBuilder {
     )
 }
 
-internal fun currentObjectsOrder(init: CurrentObjectsOrderBuilder.() -> Unit): Current_objects_order_by =
-  CurrentObjectsOrderBuilder().apply(init).build()
+internal fun currentObjectsOrder(
+  init: CurrentObjectsOrderBuilder.() -> Unit
+): Current_objects_order_by = CurrentObjectsOrderBuilder().apply(init).build()

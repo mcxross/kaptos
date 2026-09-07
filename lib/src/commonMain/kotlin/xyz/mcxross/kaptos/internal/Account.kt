@@ -220,25 +220,24 @@ internal suspend fun getAccountCoinsData(
   accountAddress: AccountAddressInput,
   sortOrder: List<FungibleAssetSortOrder>?,
   page: PaginationArgs?,
-): Result<GetAccountCoinsDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val address = AccountAddress.from(accountAddress)
+): Result<GetAccountCoinsDataQuery.Data?, AptosIndexerError> = handleQuery {
+  val address = AccountAddress.from(accountAddress)
 
-      val filter = currentFungibleAssetBalancesFilter {
-        ownerAddress = stringFilter { eq = address.toString() }
-      }
+  val filter = currentFungibleAssetBalancesFilter {
+    ownerAddress = stringFilter { eq = address.toString() }
+  }
 
-      getGraphqlClient(config)
-        .query(
-          GetAccountCoinsDataQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            page?.limit.toOptional(),
-            sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+  getGraphqlClient(config)
+    .query(
+      GetAccountCoinsDataQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        page?.limit.toOptional(),
+        sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountCoinsCount(
   config: TransportConfig,
@@ -276,15 +275,15 @@ internal suspend fun getAccountCoinAmount(
   }
 
   return handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetAccountCoinsDataQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-          )
+    getGraphqlClient(config)
+      .query(
+        GetAccountCoinsDataQuery(
+          where_condition = filter,
+          offset = page?.offset.toOptional(),
+          limit = page?.limit.toOptional(),
         )
-    }
+      )
+  }
     .toResult()
 }
 
@@ -363,12 +362,11 @@ internal suspend fun getAccountAddressesForAuthKey(
   config: TransportConfig,
   filter: AuthKeyAddressFilter,
   sortOrder: List<AuthKeyAddressSortOrder>,
-): Result<GetAccountAddressesForAuthKeyQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(GetAccountAddressesForAuthKeyQuery(filter.toOptional(), sortOrder.toOptional()))
-    }
-    .toResult()
+): Result<GetAccountAddressesForAuthKeyQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(GetAccountAddressesForAuthKeyQuery(filter.toOptional(), sortOrder.toOptional()))
+}
+  .toResult()
 
 internal suspend fun getAccountCollectionsWithOwnedTokens(
   config: TransportConfig,
@@ -376,87 +374,83 @@ internal suspend fun getAccountCollectionsWithOwnedTokens(
   tokenStd: TokenStandard?,
   sortOrder: List<CollectionOwnershipV2ViewSortOrder>?,
   page: PaginationArgs?,
-): Result<GetAccountCollectionsWithOwnedTokensQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val filter = currentCollectionOwnershipV2ViewFilter {
-        ownerAddress = stringFilter { eq = accountAddress.value }
-        currentCollection = currentCollectionsV2Filter {
-          this.tokenStandard = stringFilter {
-            if (tokenStd != null) {
-              eq = tokenStd.name
-            }
-          }
+): Result<GetAccountCollectionsWithOwnedTokensQuery.Data?, AptosIndexerError> = handleQuery {
+  val filter = currentCollectionOwnershipV2ViewFilter {
+    ownerAddress = stringFilter { eq = accountAddress.value }
+    currentCollection = currentCollectionsV2Filter {
+      this.tokenStandard = stringFilter {
+        if (tokenStd != null) {
+          eq = tokenStd.name
         }
       }
-
-      getGraphqlClient(config)
-        .query(
-          GetAccountCollectionsWithOwnedTokensQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
     }
-    .toResult()
+  }
+
+  getGraphqlClient(config)
+    .query(
+      GetAccountCollectionsWithOwnedTokensQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountOwnedTokensByTokenData(
   config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>,
-): Result<GetAccountOwnedTokensByTokenDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetAccountOwnedTokensByTokenDataQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetAccountOwnedTokensByTokenDataQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(
+      GetAccountOwnedTokensByTokenDataQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountOwnedTokensFromCollection(
   config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>?,
-): Result<GetAccountOwnedTokensFromCollectionQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetAccountOwnedTokensFromCollectionQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetAccountOwnedTokensFromCollectionQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(
+      GetAccountOwnedTokensFromCollectionQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountOwnedTokens(
   config: TransportConfig,
   filter: TokenOwnershipV2Filter,
   page: PaginationArgs?,
   sortOrder: List<TokenOwnershipV2SortOrder>,
-): Result<GetAccountOwnedTokensQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetAccountOwnedTokensQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetAccountOwnedTokensQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(
+      GetAccountOwnedTokensQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountTokensCount(
   config: TransportConfig,
@@ -464,21 +458,21 @@ internal suspend fun getAccountTokensCount(
   page: PaginationArgs?,
 ): Result<Long, AptosIndexerError> {
   return handleQuery {
-      val address = AccountAddress.from(accountAddress).toStringLong()
-      val filter = currentTokenOwnershipsV2Filter {
-        ownerAddress = stringFilter { eq = address }
-        amount = numericFilter { gt = 0 }
-      }
-
-      getGraphqlClient(config)
-        .query(
-          GetAccountTokensCountQuery(
-            where_condition = filter.toOptional(),
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-          )
-        )
+    val address = AccountAddress.from(accountAddress).toStringLong()
+    val filter = currentTokenOwnershipsV2Filter {
+      ownerAddress = stringFilter { eq = address }
+      amount = numericFilter { gt = 0 }
     }
+
+    getGraphqlClient(config)
+      .query(
+        GetAccountTokensCountQuery(
+          where_condition = filter.toOptional(),
+          offset = page?.offset.toOptional(),
+          limit = page?.limit.toOptional(),
+        )
+      )
+  }
     .map { response ->
       response?.current_token_ownerships_v2_aggregate?.aggregate?.count?.toLong() ?: 0L
     }
@@ -488,27 +482,25 @@ internal suspend fun getAccountTokensCount(
 internal suspend fun getAccountTransactionsCount(
   config: TransportConfig,
   address: AccountAddress,
-): Result<GetAccountTransactionsCountQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config).query(GetAccountTransactionsCountQuery(address.value.toOptional()))
-    }
-    .toResult()
+): Result<GetAccountTransactionsCountQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config).query(GetAccountTransactionsCountQuery(address.value.toOptional()))
+}
+  .toResult()
 
 internal suspend fun getAuthKeysForPublicKey(
   config: TransportConfig,
   filter: PublicKeyAuthKeyFilter?,
   sortOrder: List<PublicKeyAuthKeySortOrder>?,
-): Result<GetAuthKeysForPublicKeyQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config)
-        .query(
-          GetAuthKeysForPublicKeyQuery(
-            where_condition = filter.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetAuthKeysForPublicKeyQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config)
+    .query(
+      GetAuthKeysForPublicKeyQuery(
+        where_condition = filter.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountOwnedTokensFromCollectionAddress(
   config: TransportConfig,
@@ -517,53 +509,51 @@ internal suspend fun getAccountOwnedTokensFromCollectionAddress(
   tokenStandard: TokenStandard?,
   sortOrder: List<TokenOwnershipV2SortOrder>?,
   page: PaginationArgs?,
-): Result<GetAccountOwnedTokensFromCollectionQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val accAddress = AccountAddress.from(accountAddress).toLongAddress()
-      val collAddress = AccountAddress.from(collectionAddress).toLongAddress()
+): Result<GetAccountOwnedTokensFromCollectionQuery.Data?, AptosIndexerError> = handleQuery {
+  val accAddress = AccountAddress.from(accountAddress).toLongAddress()
+  val collAddress = AccountAddress.from(collectionAddress).toLongAddress()
 
-      val filter =
-        Current_token_ownerships_v2_bool_exp(
-          owner_address = stringFilter { eq = accAddress.value }.toOptional(),
-          current_token_data =
-            currentTokenDatasV2Filter { collectionId = stringFilter { eq = collAddress.value } }
-              .toOptional(),
-          amount = numericFilter { gt = 0 }.toOptional(),
-          token_standard = stringFilter { eq = tokenStandard?.name?.lowercase() }.toOptional(),
-        )
+  val filter =
+    Current_token_ownerships_v2_bool_exp(
+      owner_address = stringFilter { eq = accAddress.value }.toOptional(),
+      current_token_data =
+        currentTokenDatasV2Filter { collectionId = stringFilter { eq = collAddress.value } }
+          .toOptional(),
+      amount = numericFilter { gt = 0 }.toOptional(),
+      token_standard = stringFilter { eq = tokenStandard?.name?.lowercase() }.toOptional(),
+    )
 
-      getGraphqlClient(config)
-        .query(
-          GetAccountOwnedTokensFromCollectionQuery(
-            where_condition = filter,
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+  getGraphqlClient(config)
+    .query(
+      GetAccountOwnedTokensFromCollectionQuery(
+        where_condition = filter,
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getAccountOwnedObjects(
   aptosConfig: TransportConfig,
   accountAddress: AccountAddressInput,
   sortOrder: List<ObjectSortOrder>? = null,
   page: PaginationArgs? = null,
-): Result<GetObjectDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val addr = AccountAddress.from(accountAddress).toLongAddress()
-      val filter = currentObjectsFilter { ownerAddress = stringFilter { eq = addr.toStringLong() } }
-      getGraphqlClient(aptosConfig)
-        .query(
-          GetObjectDataQuery(
-            where_condition = filter.toOptional(),
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetObjectDataQuery.Data?, AptosIndexerError> = handleQuery {
+  val addr = AccountAddress.from(accountAddress).toLongAddress()
+  val filter = currentObjectsFilter { ownerAddress = stringFilter { eq = addr.toStringLong() } }
+  getGraphqlClient(aptosConfig)
+    .query(
+      GetObjectDataQuery(
+        where_condition = filter.toOptional(),
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 /**
  * Waits for the indexer to sync up to the specified ledger version.

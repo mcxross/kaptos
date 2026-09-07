@@ -36,10 +36,11 @@ data class AuthenticationFunction(
         "Authentication function must be address::module::function"
       }
       return AuthenticationFunction(
-        module = ModuleId(
-          xyz.mcxross.kaptos.model.AccountAddress.fromString(parts[0]),
-          Identifier(parts[1]),
-        ),
+        module =
+          ModuleId(
+            xyz.mcxross.kaptos.model.AccountAddress.fromString(parts[0]),
+            Identifier(parts[1]),
+          ),
         function = Identifier(parts[2]),
       )
     }
@@ -92,7 +93,7 @@ sealed interface AccountAuthenticator {
 }
 
 internal fun AptosBcsReader.accountAuthenticator(
-  allowTrailingAbstractionSignature: Boolean = false,
+  allowTrailingAbstractionSignature: Boolean = false
 ): AccountAuthenticator =
   when (val variant = uleb128()) {
     0u ->
@@ -150,15 +151,13 @@ internal fun AptosBcsReader.accountAuthenticator(
     else -> throw IllegalArgumentException("Unsupported AccountAuthenticator variant: $variant")
   }
 
-internal fun AptosBcsReader.multiEd25519AccountAuthenticator():
-  AccountAuthenticator.MultiEd25519 {
+internal fun AptosBcsReader.multiEd25519AccountAuthenticator(): AccountAuthenticator.MultiEd25519 {
   val publicKeyBytes = bytes()
   require(publicKeyBytes.size >= 65 && (publicKeyBytes.size - 1) % 32 == 0) {
     "Invalid MultiEd25519 public key length"
   }
   val threshold = publicKeyBytes.last().toUByte()
-  val publicKeys =
-    publicKeyBytes.dropLast(1).chunked(32).map { Ed25519PublicKey(it.toByteArray()) }
+  val publicKeys = publicKeyBytes.dropLast(1).chunked(32).map { Ed25519PublicKey(it.toByteArray()) }
   val signatureBytes = bytes()
   require(signatureBytes.size >= 4 && (signatureBytes.size - 4) % 64 == 0) {
     "Invalid MultiEd25519 signature length"

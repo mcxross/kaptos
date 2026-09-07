@@ -20,9 +20,10 @@ fun main(arguments: Array<String>) {
     "confidential" -> confidentialAssetTransaction()
     "account" -> accountLifecycle()
     "multi-key" -> multiKeyAccount()
-    else -> runBlocking{
-      val aptos = Aptos()
-      println(aptos.ledger.blockAtVersion(59uL))
-    }
+    else ->
+      runBlocking {
+        val aptos = Aptos()
+        println(aptos.ledger.blockAtVersion(59uL))
+      }
   }
 }

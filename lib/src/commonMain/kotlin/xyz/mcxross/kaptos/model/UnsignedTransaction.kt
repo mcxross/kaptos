@@ -59,7 +59,9 @@ sealed interface UnsignedTransaction {
   }
 
   companion object {
-    /** Used while an external sponsor is expected to provide its address and authenticator later. */
+    /**
+     * Used while an external sponsor is expected to provide its address and authenticator later.
+     */
     val EXTERNAL_FEE_PAYER_PLACEHOLDER: AccountAddress = AccountAddress.ZERO
   }
 }

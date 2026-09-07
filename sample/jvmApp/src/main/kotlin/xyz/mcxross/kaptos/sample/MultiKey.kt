@@ -1,8 +1,8 @@
 package xyz.mcxross.kaptos.sample
 
 import kotlinx.coroutines.runBlocking
-import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.account.MultiKeyAccount
+import xyz.mcxross.kaptos.aptos
 import xyz.mcxross.kaptos.core.crypto.multikey.MultiKey
 import xyz.mcxross.kaptos.model.HexInput
 

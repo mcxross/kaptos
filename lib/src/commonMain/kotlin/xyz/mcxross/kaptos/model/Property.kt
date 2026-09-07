@@ -125,8 +125,7 @@ sealed class PropertyValue {
 internal fun PropertyValue.encodeAs(type: PropertyType): ByteArray =
   when (type) {
     PropertyType.BOOLEAN ->
-      (this as? PropertyValue.BooleanValue)?.toByteArray()
-        ?: propertyTypeMismatch(type)
+      (this as? PropertyValue.BooleanValue)?.toByteArray() ?: propertyTypeMismatch(type)
     PropertyType.U8 -> encodeNumber(this, 1, type)
     PropertyType.U16 -> encodeNumber(this, 2, type)
     PropertyType.U32 -> encodeNumber(this, 4, type)
@@ -134,14 +133,11 @@ internal fun PropertyValue.encodeAs(type: PropertyType): ByteArray =
     PropertyType.U128 -> encodeNumber(this, 16, type)
     PropertyType.U256 -> encodeNumber(this, 32, type)
     PropertyType.ADDRESS ->
-      (this as? PropertyValue.AccountAddressValue)?.toByteArray()
-        ?: propertyTypeMismatch(type)
+      (this as? PropertyValue.AccountAddressValue)?.toByteArray() ?: propertyTypeMismatch(type)
     PropertyType.STRING ->
-      (this as? PropertyValue.StringValue)?.toByteArray()
-        ?: propertyTypeMismatch(type)
+      (this as? PropertyValue.StringValue)?.toByteArray() ?: propertyTypeMismatch(type)
     PropertyType.ARRAY ->
-      (this as? PropertyValue.Uint8ArrayValue)?.toByteArray()
-        ?: propertyTypeMismatch(type)
+      (this as? PropertyValue.Uint8ArrayValue)?.toByteArray() ?: propertyTypeMismatch(type)
   }
 
 private fun encodeNumber(value: PropertyValue, width: Int, type: PropertyType): ByteArray {

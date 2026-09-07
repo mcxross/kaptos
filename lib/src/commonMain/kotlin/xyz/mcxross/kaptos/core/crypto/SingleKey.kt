@@ -39,8 +39,8 @@ interface AnySignatureCompatible {
 }
 
 /**
- * Implemented by optional public-key families that need a scheme-specific placeholder signature
- * for fullnode simulation.
+ * Implemented by optional public-key families that need a scheme-specific placeholder signature for
+ * fullnode simulation.
  */
 interface SimulationSignatureProvider {
   fun simulationSignature(): Signature
@@ -82,8 +82,7 @@ class AnyPublicKey(val publicKey: PublicKey) : AccountPublicKey() {
 
   override fun toBcs(): ByteArray {
     val payload =
-      if (publicKey is AnyPublicKeyCompatible) publicKey.toAnyPublicKeyBcs()
-      else publicKey.toBcs()
+      if (publicKey is AnyPublicKeyCompatible) publicKey.toAnyPublicKeyBcs() else publicKey.toBcs()
     return encodeUleb128(variant.value) + payload
   }
 }
@@ -107,8 +106,7 @@ class AnySignature(val signature: Signature) : Signature() {
 
   override fun toBcs(): ByteArray {
     val payload =
-      if (signature is AnySignatureCompatible) signature.toAnySignatureBcs()
-      else signature.toBcs()
+      if (signature is AnySignatureCompatible) signature.toAnySignatureBcs() else signature.toBcs()
     return encodeUleb128(variant.value) + payload
   }
 }

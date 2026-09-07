@@ -18,8 +18,7 @@ internal object AptosDecimalStringULongSerializer : KSerializer<ULong> {
   override val descriptor: SerialDescriptor =
     PrimitiveSerialDescriptor("aptos.u64.decimal-string", PrimitiveKind.STRING)
 
-  override fun serialize(encoder: Encoder, value: ULong) =
-    encoder.encodeString(value.toString())
+  override fun serialize(encoder: Encoder, value: ULong) = encoder.encodeString(value.toString())
 
   override fun deserialize(decoder: Decoder): ULong {
     val raw = decoder.decodeString()

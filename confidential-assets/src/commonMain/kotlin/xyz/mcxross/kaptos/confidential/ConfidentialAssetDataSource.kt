@@ -20,7 +20,6 @@ import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
-import xyz.mcxross.kaptos.view.MoveViewResult
 
 internal class ConfidentialAssetDataSource(
   private val client: Aptos,
@@ -32,30 +31,29 @@ internal class ConfidentialAssetDataSource(
     account: AccountAddress,
     token: AccountAddress,
     key: ConfidentialDecryptionKey,
-  ): AptosResult<ConfidentialBalance> =
-    coroutineScope {
-      val arguments = listOf(JsonPrimitive(account.toString()), JsonPrimitive(token.toString()))
-      val available = async { view("get_available_balance", arguments) }
-      val pending = async { view("get_pending_balance", arguments) }
-      val availableCiphertexts = available.await().flatMap(::parseCiphertexts)
-      if (availableCiphertexts is AptosResult.Failure) return@coroutineScope availableCiphertexts
-      val pendingCiphertexts = pending.await().flatMap(::parseCiphertexts)
-      if (pendingCiphertexts is AptosResult.Failure) return@coroutineScope pendingCiphertexts
-      availableCiphertexts as AptosResult.Success
-      pendingCiphertexts as AptosResult.Success
-      val availableChunks = decrypt(availableCiphertexts.value, key)
-      if (availableChunks is AptosResult.Failure) return@coroutineScope availableChunks
-      val pendingChunks = decrypt(pendingCiphertexts.value, key)
-      if (pendingChunks is AptosResult.Failure) return@coroutineScope pendingChunks
-      AptosResult.Success(
-        ConfidentialBalance(
-          available = availableCiphertexts.value,
-          pending = pendingCiphertexts.value,
-          availableAmount = ConfidentialAmount((availableChunks as AptosResult.Success).value),
-          pendingAmount = ConfidentialAmount((pendingChunks as AptosResult.Success).value),
-        )
+  ): AptosResult<ConfidentialBalance> = coroutineScope {
+    val arguments = listOf(JsonPrimitive(account.toString()), JsonPrimitive(token.toString()))
+    val available = async { view("get_available_balance", arguments) }
+    val pending = async { view("get_pending_balance", arguments) }
+    val availableCiphertexts = available.await().flatMap(::parseCiphertexts)
+    if (availableCiphertexts is AptosResult.Failure) return@coroutineScope availableCiphertexts
+    val pendingCiphertexts = pending.await().flatMap(::parseCiphertexts)
+    if (pendingCiphertexts is AptosResult.Failure) return@coroutineScope pendingCiphertexts
+    availableCiphertexts as AptosResult.Success
+    pendingCiphertexts as AptosResult.Success
+    val availableChunks = decrypt(availableCiphertexts.value, key)
+    if (availableChunks is AptosResult.Failure) return@coroutineScope availableChunks
+    val pendingChunks = decrypt(pendingCiphertexts.value, key)
+    if (pendingChunks is AptosResult.Failure) return@coroutineScope pendingChunks
+    AptosResult.Success(
+      ConfidentialBalance(
+        available = availableCiphertexts.value,
+        pending = pendingCiphertexts.value,
+        availableAmount = ConfidentialAmount((availableChunks as AptosResult.Success).value),
+        pendingAmount = ConfidentialAmount((pendingChunks as AptosResult.Success).value),
       )
-    }
+    )
+  }
 
   suspend fun encryptionKey(
     account: AccountAddress,
@@ -72,13 +70,19 @@ internal class ConfidentialAssetDataSource(
       }
 
   suspend fun assetAuditorKey(token: AccountAddress): AptosResult<ConfidentialEncryptionKey?> =
-    view("get_effective_auditor_config", listOf(JsonPrimitive(token.toString()))).flatMap { result ->
+    view("get_effective_auditor_config", listOf(JsonPrimitive(token.toString()))).flatMap { result
+      ->
       parse("Invalid effective auditor response") {
         val option =
-          result.single().jsonObject
-            .getValue("config").jsonObject
-            .getValue("ek").jsonObject
-            .getValue("vec").jsonArray
+          result
+            .single()
+            .jsonObject
+            .getValue("config")
+            .jsonObject
+            .getValue("ek")
+            .jsonObject
+            .getValue("vec")
+            .jsonArray
         option.firstOrNull()?.jsonObject?.requiredHex("data")?.let(::ConfidentialEncryptionKey)
       }
     }
@@ -106,24 +110,24 @@ internal class ConfidentialAssetDataSource(
   suspend fun status(
     account: AccountAddress,
     token: AccountAddress,
-  ): AptosResult<ConfidentialAssetStatus> =
-    coroutineScope {
-      val arguments = listOf(JsonPrimitive(account.toString()), JsonPrimitive(token.toString()))
-      val registered = async { booleanView("has_confidential_store", arguments) }
-      val normalized = async { booleanView("is_normalized", arguments) }
-      val paused = async { booleanView("incoming_transfers_paused", arguments) }
-      val values = listOf(registered.await(), normalized.await(), paused.await())
-      values.filterIsInstance<AptosResult.Failure>().firstOrNull()
-        ?: AptosResult.Success(
-          ConfidentialAssetStatus(
-            registered = (values[0] as AptosResult.Success).value,
-            normalized = (values[1] as AptosResult.Success).value,
-            incomingTransfersPaused = (values[2] as AptosResult.Success).value,
-          )
+  ): AptosResult<ConfidentialAssetStatus> = coroutineScope {
+    val arguments = listOf(JsonPrimitive(account.toString()), JsonPrimitive(token.toString()))
+    val registered = async { booleanView("has_confidential_store", arguments) }
+    val normalized = async { booleanView("is_normalized", arguments) }
+    val paused = async { booleanView("incoming_transfers_paused", arguments) }
+    val values = listOf(registered.await(), normalized.await(), paused.await())
+    values.filterIsInstance<AptosResult.Failure>().firstOrNull()
+      ?: AptosResult.Success(
+        ConfidentialAssetStatus(
+          registered = (values[0] as AptosResult.Success).value,
+          normalized = (values[1] as AptosResult.Success).value,
+          incomingTransfersPaused = (values[2] as AptosResult.Success).value,
         )
-    }
+      )
+  }
 
-  suspend fun emergencyPaused(): AptosResult<Boolean> = booleanView("is_emergency_paused", emptyList())
+  suspend fun emergencyPaused(): AptosResult<Boolean> =
+    booleanView("is_emergency_paused", emptyList())
 
   suspend fun maxMemoBytes(): AptosResult<Int> =
     view("get_max_memo_bytes", emptyList()).flatMap { result ->
@@ -144,7 +148,9 @@ internal class ConfidentialAssetDataSource(
   ): AptosResult<List<JsonElement>> =
     client.views.callRaw(function = "$module::$function", arguments = arguments).map { it.values }
 
-  private fun parseCiphertexts(result: List<JsonElement>): AptosResult<List<ConfidentialCiphertext>> =
+  private fun parseCiphertexts(
+    result: List<JsonElement>
+  ): AptosResult<List<ConfidentialCiphertext>> =
     parse("Invalid confidential balance response") {
       val value = result.single().jsonObject
       val commitments = value.getValue("P").jsonArray.map { it.jsonObject.requiredHex("data") }

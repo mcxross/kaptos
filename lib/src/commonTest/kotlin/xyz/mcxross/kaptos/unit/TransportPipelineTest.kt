@@ -23,25 +23,24 @@ import xyz.mcxross.kaptos.client.get
 import xyz.mcxross.kaptos.client.post
 import xyz.mcxross.kaptos.exception.AptosSdkError
 import xyz.mcxross.kaptos.model.AptosApiType
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.AptosSettings
 import xyz.mcxross.kaptos.model.FullNodeConfig
 import xyz.mcxross.kaptos.model.RequestOptions
+import xyz.mcxross.kaptos.model.TransportConfig
 
 class TransportPipelineTest :
   StringSpec({
     "POST preserves query parameters and endpoint headers override common headers" {
       var calls = 0
-      val engine =
-        MockEngine { request ->
-          calls += 1
-          request.url.encodedPath shouldBe "/v1/transactions/simulate"
-          request.url.parameters["estimate_gas_unit_price"] shouldBe "true"
-          request.url.parameters["estimate_max_gas_amount"] shouldBe "true"
-          request.headers["X-Order"] shouldBe "endpoint"
-          request.headers["X-Common"] shouldBe "present"
-          respondOk("{}")
-        }
+      val engine = MockEngine { request ->
+        calls += 1
+        request.url.encodedPath shouldBe "/v1/transactions/simulate"
+        request.url.parameters["estimate_gas_unit_price"] shouldBe "true"
+        request.url.parameters["estimate_max_gas_amount"] shouldBe "true"
+        request.headers["X-Order"] shouldBe "endpoint"
+        request.headers["X-Common"] shouldBe "present"
+        respondOk("{}")
+      }
       val client = HttpClient(engine)
       val config =
         TransportConfig(
@@ -53,7 +52,8 @@ class TransportPipelineTest :
           )
         )
 
-      val result = post(
+      val result =
+        post(
           RequestOptions.PostRequestOptions(
             aptosConfig = config,
             type = AptosApiType.FULLNODE,
@@ -115,25 +115,24 @@ class TransportPipelineTest :
 
     "410 retries once and strips credentials for a cross-site archival endpoint" {
       var calls = 0
-      val engine =
-        MockEngine { request ->
-          calls += 1
-          if (calls == 1) {
-            request.headers[HttpHeaders.Authorization] shouldBe "Bearer secret"
-            respond(
-              content =
-                """{"message":"pruned","error_code":"version_pruned","archival_endpoint":"https://archive.other.net/v1"}""",
-              status = HttpStatusCode.Gone,
-              headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-            )
-          } else {
-            request.url.host shouldBe "archive.other.net"
-            request.url.encodedPath shouldBe "/v1/accounts/0x1"
-            request.headers[HttpHeaders.Authorization] shouldBe null
-            request.headers["X-Trace"] shouldBe "keep"
-            respondOk("{}")
-          }
+      val engine = MockEngine { request ->
+        calls += 1
+        if (calls == 1) {
+          request.headers[HttpHeaders.Authorization] shouldBe "Bearer secret"
+          respond(
+            content =
+              """{"message":"pruned","error_code":"version_pruned","archival_endpoint":"https://archive.other.net/v1"}""",
+            status = HttpStatusCode.Gone,
+            headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+          )
+        } else {
+          request.url.host shouldBe "archive.other.net"
+          request.url.encodedPath shouldBe "/v1/accounts/0x1"
+          request.headers[HttpHeaders.Authorization] shouldBe null
+          request.headers["X-Trace"] shouldBe "keep"
+          respondOk("{}")
         }
+      }
       val client = HttpClient(engine)
       val config =
         TransportConfig(
@@ -145,7 +144,8 @@ class TransportPipelineTest :
           )
         )
 
-      val result = get(
+      val result =
+        get(
           RequestOptions.AptosRequestOptions(
             aptosConfig = config,
             type = AptosApiType.FULLNODE,
@@ -161,16 +161,15 @@ class TransportPipelineTest :
 
     "archival fallback can be disabled" {
       var calls = 0
-      val engine =
-        MockEngine {
-          calls += 1
-          respond(
-            content =
-              """{"message":"pruned","error_code":"version_pruned","archival_endpoint":"https://archive.example.com/v1"}""",
-            status = HttpStatusCode.Gone,
-            headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
-          )
-        }
+      val engine = MockEngine {
+        calls += 1
+        respond(
+          content =
+            """{"message":"pruned","error_code":"version_pruned","archival_endpoint":"https://archive.example.com/v1"}""",
+          status = HttpStatusCode.Gone,
+          headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+        )
+      }
       val client = HttpClient(engine)
       val config =
         TransportConfig(
@@ -199,7 +198,8 @@ class TransportPipelineTest :
 
     "closing config does not close an injected client" {
       val client = HttpClient(MockEngine { respondOk("{}") })
-      val config = TransportConfig(AptosSettings(fullNode = "https://api.example.com/v1", client = client))
+      val config =
+        TransportConfig(AptosSettings(fullNode = "https://api.example.com/v1", client = client))
       config.close()
       client.get("https://api.example.com/v1").status shouldBe HttpStatusCode.OK
       client.close()

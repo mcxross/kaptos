@@ -85,7 +85,9 @@ interface EncryptedTransactionService {
   suspend fun clearCache()
 }
 
-/** Create an encrypted-transaction service bound to this client's transport and account services. */
+/**
+ * Create an encrypted-transaction service bound to this client's transport and account services.
+ */
 fun Aptos.encryptedTransactions(): EncryptedTransactionService =
   DefaultEncryptedTransactionService(
     context = ClientEncryptionContext(this),
@@ -164,12 +166,13 @@ internal class DefaultEncryptedTransactionService(
     val ledger = context.ledger()
     if (ledger is AptosResult.Failure) return ledger
     ledger as AptosResult.Success
-    val currentEncryptionKey = resolveEncryptionKey(ledger.value)
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature(
-          "The configured fullnode does not advertise encrypted transaction support"
+    val currentEncryptionKey =
+      resolveEncryptionKey(ledger.value)
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature(
+            "The configured fullnode does not advertise encrypted transaction support"
+          )
         )
-      )
 
     return try {
       val nonce = crypto.randomBytes(DECRYPTION_NONCE_LENGTH)
@@ -254,10 +257,11 @@ internal class DefaultEncryptedTransactionService(
           is AptosResult.Success -> authenticator.value
         }
       }
-    val transactionService = transactions
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature("Transaction submission is not configured")
-      )
+    val transactionService =
+      transactions
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature("Transaction submission is not configured")
+        )
     return transactionService.submit(
       transaction = encrypted.value,
       senderAuthenticator = (senderAuthenticator as AptosResult.Success).value,
@@ -272,13 +276,13 @@ internal class DefaultEncryptedTransactionService(
     transactionOptions: TransactionOptions?,
     options: EncryptedTransactionOptions,
   ): AptosResult<PendingTransactionResponse> {
-    val transactionService = transactions
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature("Transaction submission is not configured")
-      )
+    val transactionService =
+      transactions
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature("Transaction submission is not configured")
+        )
     return when (
-      val transaction =
-        transactionService.build(sender.accountAddress, payload, transactionOptions)
+      val transaction = transactionService.build(sender.accountAddress, payload, transactionOptions)
     ) {
       is AptosResult.Failure -> transaction
       is AptosResult.Success -> signAndSubmit(transaction.value, sender, options = options)
@@ -292,16 +296,14 @@ internal class DefaultEncryptedTransactionService(
     options: EncryptedTransactionOptions,
     waitOptions: WaitForTransactionOptions,
   ): AptosResult<TransactionResponse> {
-    val transactionService = transactions
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature("Transaction submission is not configured")
-      )
-    return when (
-      val pending = signAndSubmit(sender, payload, transactionOptions, options)
-    ) {
+    val transactionService =
+      transactions
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature("Transaction submission is not configured")
+        )
+    return when (val pending = signAndSubmit(sender, payload, transactionOptions, options)) {
       is AptosResult.Failure -> pending
-      is AptosResult.Success ->
-        transactionService.waitForTransaction(pending.value, waitOptions)
+      is AptosResult.Success -> transactionService.waitForTransaction(pending.value, waitOptions)
     }
   }
 
@@ -346,9 +348,7 @@ internal class DefaultEncryptedTransactionService(
     val hasOnChainFeePayer = feePayerAddress != null && !feePayerAddress.isZero()
     if (options.feePayerAuthenticationKey != null && !hasOnChainFeePayer) {
       return AptosResult.Failure(
-        AptosError.Validation(
-          "feePayerAuthenticationKey requires a non-zero fee-payer address"
-        )
+        AptosError.Validation("feePayerAuthenticationKey requires a non-zero fee-payer address")
       )
     }
 
@@ -369,7 +369,9 @@ internal class DefaultEncryptedTransactionService(
       }
     }
     if (hasOnChainFeePayer) {
-      when (val key = resolveAuthenticationKey(feePayerAddress, options.feePayerAuthenticationKey)) {
+      when (
+        val key = resolveAuthenticationKey(feePayerAddress, options.feePayerAuthenticationKey)
+      ) {
         is AptosResult.Failure -> return key
         is AptosResult.Success -> result += SignerAuthenticationKey(feePayerAddress, key.value)
       }
@@ -383,9 +385,11 @@ internal class DefaultEncryptedTransactionService(
   ): AptosResult<FixedBytes32> {
     if (override != null) return AptosResult.Success(override)
     val cacheKey = address.toStringLong()
-    cacheMutex.withLock { authenticationKeys[cacheKey] }?.let {
-      return AptosResult.Success(it)
-    }
+    cacheMutex
+      .withLock { authenticationKeys[cacheKey] }
+      ?.let {
+        return AptosResult.Success(it)
+      }
     return when (val fetched = context.authenticationKey(address)) {
       is AptosResult.Failure -> fetched
       is AptosResult.Success ->
@@ -444,7 +448,9 @@ private fun preparePayload(payload: TransactionPayload): AptosResult<PreparedPay
     }
   if (prepared.executable == TransactionExecutable.Encrypted) {
     return AptosResult.Failure(
-      AptosError.UnsupportedFeature("The encrypted executable sentinel cannot be encrypted client-side")
+      AptosError.UnsupportedFeature(
+        "The encrypted executable sentinel cannot be encrypted client-side"
+      )
     )
   }
   return AptosResult.Success(prepared)
@@ -456,8 +462,7 @@ private fun resolveClaim(
   requested: ClaimedEntryFunction?,
 ): AptosResult<ClaimedEntryFunction?> {
   val hasFeePayer = transaction is UnsignedTransaction.FeePayer
-  val hasMultisig =
-    (payload.extraConfig as? TransactionExtraConfig.V1)?.multisigAddress != null
+  val hasMultisig = (payload.extraConfig as? TransactionExtraConfig.V1)?.multisigAddress != null
   if (!hasFeePayer && !hasMultisig) return AptosResult.Success(null)
 
   val entry = payload.executable as? TransactionExecutable.EntryFunction
@@ -469,8 +474,9 @@ private fun resolveClaim(
         )
       )
     }
-    if (!entry.call.module.address.sameAddress(requested.module.address) ||
-      entry.call.module.name != requested.module.name
+    if (
+      !entry.call.module.address.sameAddress(requested.module.address) ||
+        entry.call.module.name != requested.module.name
     ) {
       return AptosResult.Failure(
         AptosError.Validation("claimedEntryFunction.module must match the plaintext entry function")
@@ -478,14 +484,14 @@ private fun resolveClaim(
     }
     if (requested.function != null && requested.function != entry.call.function) {
       return AptosResult.Failure(
-        AptosError.Validation("claimedEntryFunction.function must match the plaintext entry function")
+        AptosError.Validation(
+          "claimedEntryFunction.function must match the plaintext entry function"
+        )
       )
     }
     return AptosResult.Success(requested)
   }
-  return AptosResult.Success(
-    entry?.let { ClaimedEntryFunction(it.call.module, it.call.function) }
-  )
+  return AptosResult.Success(entry?.let { ClaimedEntryFunction(it.call.module, it.call.function) })
 }
 
 private fun UnsignedTransaction.withEncryptedPayload(
@@ -527,7 +533,8 @@ private fun validateSigners(
       "Expected ${expectedSecondary.size} secondary signers, got ${secondarySigners.size}"
     )
   }
-  if (secondarySigners.indices.any {
+  if (
+    secondarySigners.indices.any {
       !secondarySigners[it].accountAddress.sameAddress(expectedSecondary[it])
     }
   ) {
@@ -536,7 +543,8 @@ private fun validateSigners(
   return when (transaction) {
     is UnsignedTransaction.FeePayer -> {
       when {
-        feePayer == null -> AptosError.Validation("A fee-payer transaction requires a fee-payer signer")
+        feePayer == null ->
+          AptosError.Validation("A fee-payer transaction requires a fee-payer signer")
         transaction.feePayerAddress.isZero() ->
           AptosError.Validation("Resolve the external fee-payer address before signing")
         !feePayer.accountAddress.sameAddress(transaction.feePayerAddress) ->
@@ -557,15 +565,17 @@ private fun encodeAssociatedData(
   sender: AccountAddress,
   signerKeys: List<SignerAuthenticationKey>,
 ): ByteArray =
-  BcsOutput().apply {
-    uleb128(0u)
-    fixed(sender.data)
-    uleb128(signerKeys.size.toUInt())
-    signerKeys.forEach {
-      fixed(it.address.data)
-      bytes(it.authenticationKey.toByteArray())
+  BcsOutput()
+    .apply {
+      uleb128(0u)
+      fixed(sender.data)
+      uleb128(signerKeys.size.toUInt())
+      signerKeys.forEach {
+        fixed(it.address.data)
+        bytes(it.authenticationKey.toByteArray())
+      }
     }
-  }.toByteArray()
+    .toByteArray()
 
 private class BcsOutput {
   private val output = mutableListOf<Byte>()

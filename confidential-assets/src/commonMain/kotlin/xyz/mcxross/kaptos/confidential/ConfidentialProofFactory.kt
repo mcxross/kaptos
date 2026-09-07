@@ -60,15 +60,14 @@ internal object ConfidentialProofFactory {
     chainId: UByte,
   ): AptosResult<RegistrationAuthorization> =
     cryptoResult("Unable to authorize confidential balance registration") {
-      val proof =
-        key.withSecret {
-          aptosConfidentialRegistrationProve(
-            privateKey = it,
-            senderAddress = sender.data.copyOf(),
-            tokenAddress = token.data.copyOf(),
-            chainId = chainId,
-          )
-        }
+      val proof = key.withSecret {
+        aptosConfidentialRegistrationProve(
+          privateKey = it,
+          senderAddress = sender.data.copyOf(),
+          tokenAddress = token.data.copyOf(),
+          chainId = chainId,
+        )
+      }
       RegistrationAuthorization(key.encryptionKey, SigmaProof(proof.commitment, proof.response))
     }
 
@@ -126,8 +125,9 @@ internal object ConfidentialProofFactory {
   ): AptosResult<BalanceAuthorization> =
     cryptoResult("Unable to authorize confidential balance update") {
       val encrypted = encryptChunks(key.encryptionKey, newChunks).required()
-      val auditorEncrypted =
-        auditor?.let { encryptChunks(it, newChunks, encrypted.randomness).required() }
+      val auditorEncrypted = auditor?.let {
+        encryptChunks(it, newChunks, encrypted.randomness).required()
+      }
       val range =
         aptosConfidentialRangeProve(
           values = newChunks.map(UInt::toULong),
@@ -137,30 +137,33 @@ internal object ConfidentialProofFactory {
         range.commitments.zip(encrypted.ciphertexts).all { (expected, actual) ->
           expected.contentEquals(actual.commitment)
         }
-      ) { "Range-proof commitments do not match the new encrypted balance" }
-      val sigma =
-        key.withSecret { secret ->
-          aptosConfidentialWithdrawProve(
-            AptosConfidentialWithdrawProofInputBytes(
-              privateKey = secret,
-              senderAddress = sender.data.copyOf(),
-              tokenAddress = token.data.copyOf(),
-              chainId = chainId,
-              amount = amount,
-              oldCommitments = oldBalance.map(ConfidentialCiphertext::commitment),
-              oldHandles = oldBalance.map(ConfidentialCiphertext::handle),
-              newCommitments = encrypted.ciphertexts.map(ConfidentialCiphertext::commitment),
-              newHandles = encrypted.ciphertexts.map(ConfidentialCiphertext::handle),
-              newAmountChunks = newChunks.map(UInt::toULong),
-              newRandomness = encrypted.randomness.map(ByteArray::copyOf),
-              auditorPublicKey = auditor?.toByteArray(),
-              newAuditorHandles = auditorEncrypted?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
-            )
+      ) {
+        "Range-proof commitments do not match the new encrypted balance"
+      }
+      val sigma = key.withSecret { secret ->
+        aptosConfidentialWithdrawProve(
+          AptosConfidentialWithdrawProofInputBytes(
+            privateKey = secret,
+            senderAddress = sender.data.copyOf(),
+            tokenAddress = token.data.copyOf(),
+            chainId = chainId,
+            amount = amount,
+            oldCommitments = oldBalance.map(ConfidentialCiphertext::commitment),
+            oldHandles = oldBalance.map(ConfidentialCiphertext::handle),
+            newCommitments = encrypted.ciphertexts.map(ConfidentialCiphertext::commitment),
+            newHandles = encrypted.ciphertexts.map(ConfidentialCiphertext::handle),
+            newAmountChunks = newChunks.map(UInt::toULong),
+            newRandomness = encrypted.randomness.map(ByteArray::copyOf),
+            auditorPublicKey = auditor?.toByteArray(),
+            newAuditorHandles =
+              auditorEncrypted?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
           )
-        }
+        )
+      }
       BalanceAuthorization(
         newBalance = encrypted.ciphertexts,
-        newAuditorHandles = auditorEncrypted?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
+        newAuditorHandles =
+          auditorEncrypted?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
         rangeProof = range.proof,
         sigma = SigmaProof(sigma.commitment, sigma.response),
       )
@@ -188,14 +191,12 @@ internal object ConfidentialProofFactory {
       val transferByRecipient =
         encryptChunks(recipientKey, transferChunks, transferBySender.randomness).required()
       val allAuditors = voluntaryAuditors + listOfNotNull(effectiveAuditor)
-      val auditorTransfers =
-        allAuditors.map { auditor ->
-          encryptChunks(auditor, transferChunks, transferBySender.randomness).required()
-        }
-      val effectiveNewBalance =
-        effectiveAuditor?.let {
-          encryptChunks(it, newChunks, newBalance.randomness).required()
-        }
+      val auditorTransfers = allAuditors.map { auditor ->
+        encryptChunks(auditor, transferChunks, transferBySender.randomness).required()
+      }
+      val effectiveNewBalance = effectiveAuditor?.let {
+        encryptChunks(it, newChunks, newBalance.randomness).required()
+      }
       val newRange =
         aptosConfidentialRangeProve(
           values = newChunks.map(UInt::toULong),
@@ -206,36 +207,38 @@ internal object ConfidentialProofFactory {
           values = transferChunks.map(UInt::toULong),
           blindings = transferBySender.randomness.map(ByteArray::copyOf),
         )
-      val sigma =
-        key.withSecret { secret ->
-          aptosConfidentialTransferProve(
-            AptosConfidentialTransferProofInputBytes(
-              privateKey = secret,
-              senderAddress = sender.data.copyOf(),
-              recipientAddress = recipient.data.copyOf(),
-              tokenAddress = token.data.copyOf(),
-              chainId = chainId,
-              recipientPublicKey = recipientKey.toByteArray(),
-              oldCommitments = balance.available.map(ConfidentialCiphertext::commitment),
-              oldHandles = balance.available.map(ConfidentialCiphertext::handle),
-              newCommitments = newBalance.ciphertexts.map(ConfidentialCiphertext::commitment),
-              newHandles = newBalance.ciphertexts.map(ConfidentialCiphertext::handle),
-              newAmountChunks = newChunks.map(UInt::toULong),
-              newRandomness = newBalance.randomness.map(ByteArray::copyOf),
-              transferCommitments = transferBySender.ciphertexts.map(ConfidentialCiphertext::commitment),
-              transferSenderHandles = transferBySender.ciphertexts.map(ConfidentialCiphertext::handle),
-              transferRecipientHandles = transferByRecipient.ciphertexts.map(ConfidentialCiphertext::handle),
-              transferAmountChunks = transferChunks.map(UInt::toULong),
-              transferRandomness = transferBySender.randomness.map(ByteArray::copyOf),
-              hasEffectiveAuditor = effectiveAuditor != null,
-              auditorPublicKeys = allAuditors.map(ConfidentialEncryptionKey::toByteArray),
-              effectiveNewBalanceHandles =
-                effectiveNewBalance?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
-              auditorTransferHandles =
-                auditorTransfers.flatMap { it.ciphertexts.map(ConfidentialCiphertext::handle) },
-            )
+      val sigma = key.withSecret { secret ->
+        aptosConfidentialTransferProve(
+          AptosConfidentialTransferProofInputBytes(
+            privateKey = secret,
+            senderAddress = sender.data.copyOf(),
+            recipientAddress = recipient.data.copyOf(),
+            tokenAddress = token.data.copyOf(),
+            chainId = chainId,
+            recipientPublicKey = recipientKey.toByteArray(),
+            oldCommitments = balance.available.map(ConfidentialCiphertext::commitment),
+            oldHandles = balance.available.map(ConfidentialCiphertext::handle),
+            newCommitments = newBalance.ciphertexts.map(ConfidentialCiphertext::commitment),
+            newHandles = newBalance.ciphertexts.map(ConfidentialCiphertext::handle),
+            newAmountChunks = newChunks.map(UInt::toULong),
+            newRandomness = newBalance.randomness.map(ByteArray::copyOf),
+            transferCommitments =
+              transferBySender.ciphertexts.map(ConfidentialCiphertext::commitment),
+            transferSenderHandles =
+              transferBySender.ciphertexts.map(ConfidentialCiphertext::handle),
+            transferRecipientHandles =
+              transferByRecipient.ciphertexts.map(ConfidentialCiphertext::handle),
+            transferAmountChunks = transferChunks.map(UInt::toULong),
+            transferRandomness = transferBySender.randomness.map(ByteArray::copyOf),
+            hasEffectiveAuditor = effectiveAuditor != null,
+            auditorPublicKeys = allAuditors.map(ConfidentialEncryptionKey::toByteArray),
+            effectiveNewBalanceHandles =
+              effectiveNewBalance?.ciphertexts?.map(ConfidentialCiphertext::handle).orEmpty(),
+            auditorTransferHandles =
+              auditorTransfers.flatMap { it.ciphertexts.map(ConfidentialCiphertext::handle) },
           )
-        }
+        )
+      }
       val voluntaryTransfers =
         auditorTransfers.take(voluntaryAuditors.size).map { encrypted ->
           encrypted.ciphertexts.map(ConfidentialCiphertext::handle)
@@ -266,19 +269,18 @@ internal object ConfidentialProofFactory {
     balance: ConfidentialBalance,
   ): AptosResult<KeyRotationAuthorization> =
     cryptoResult("Unable to authorize confidential encryption-key rotation") {
-      val rotation =
-        currentKey.withSecret { currentSecret ->
-          newKey.withSecret { newSecret ->
-            aptosConfidentialKeyRotationProve(
-              currentPrivateKey = currentSecret,
-              newPrivateKey = newSecret,
-              oldHandles = balance.available.map(ConfidentialCiphertext::handle),
-              senderAddress = sender.data.copyOf(),
-              tokenAddress = token.data.copyOf(),
-              chainId = chainId,
-            )
-          }
+      val rotation = currentKey.withSecret { currentSecret ->
+        newKey.withSecret { newSecret ->
+          aptosConfidentialKeyRotationProve(
+            currentPrivateKey = currentSecret,
+            newPrivateKey = newSecret,
+            oldHandles = balance.available.map(ConfidentialCiphertext::handle),
+            senderAddress = sender.data.copyOf(),
+            tokenAddress = token.data.copyOf(),
+            chainId = chainId,
+          )
         }
+      }
       KeyRotationAuthorization(
         newPublicKey = ConfidentialEncryptionKey(rotation.newPublicKey),
         newHandles = rotation.newHandles,

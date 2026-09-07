@@ -15,8 +15,8 @@
  */
 package xyz.mcxross.kaptos.account
 
-import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.AccountPublicKey
+import xyz.mcxross.kaptos.core.crypto.Ed25519PrivateKey
 import xyz.mcxross.kaptos.core.crypto.PrivateKey
 import xyz.mcxross.kaptos.core.crypto.Signature
 import xyz.mcxross.kaptos.model.*
@@ -74,7 +74,7 @@ abstract class Account : TransactionSigner, AutoCloseable {
     signBytes(message.encodeToByteArray())
 
   override suspend fun signTransaction(
-    transaction: UnsignedTransaction,
+    transaction: UnsignedTransaction
   ): AptosResult<AccountAuthenticator> =
     try {
       AptosResult.Success(

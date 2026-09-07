@@ -74,7 +74,8 @@ internal fun isValidANSName(name: String): Pair<String, String?> {
   return Pair(second ?: first, if (second != null) first else null)
 }
 
-internal val LOCAL_ANS_ACCOUNT_PK = "0x37368b46ce665362562c6d1d4ec01a08c8644c488690df5a17e13ba163e20221"
+internal val LOCAL_ANS_ACCOUNT_PK =
+  "0x37368b46ce665362562c6d1d4ec01a08c8644c488690df5a17e13ba163e20221"
 internal const val LOCAL_ANS_ACCOUNT_ADDRESS =
   "0x585fc9f0f0c54183b039ffc770ca282ebd87307916c215a3e692f2f8e4305e82"
 
@@ -120,25 +121,27 @@ internal suspend fun getOwnerAddress(
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
       .toInternalResult()
 
-  val finalResult =
-    viewResult.andThen { moveValueList ->
-      val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
+  val finalResult = viewResult.andThen { moveValueList ->
+    val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
 
-      if (addressString != null) {
-        Ok(AccountAddress.fromString(addressString))
-      } else {
-        Err(
-          AptosSdkError.ApiError(
-            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
-          )
+    if (addressString != null) {
+      Ok(AccountAddress.fromString(addressString))
+    } else {
+      Err(
+        AptosSdkError.ApiError(
+          AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
         )
-      }
+      )
     }
+  }
 
   return finalResult.toResult()
 }
 
-internal suspend fun getExpiration(aptosConfig: TransportConfig, name: String): Result<Long, AptosSdkError> {
+internal suspend fun getExpiration(
+  aptosConfig: TransportConfig,
+  name: String,
+): Result<Long, AptosSdkError> {
   val ansName =
     try {
       isValidANSName(name)
@@ -161,20 +164,19 @@ internal suspend fun getExpiration(aptosConfig: TransportConfig, name: String): 
   val viewResult =
     view<List<MoveValue.String>>(aptosConfig, payload = viewFunctionData).toInternalResult()
 
-  val finalResult =
-    viewResult.andThen { moveValueList ->
-      val expirationString = (moveValueList.firstOrNull())?.value
+  val finalResult = viewResult.andThen { moveValueList ->
+    val expirationString = (moveValueList.firstOrNull())?.value
 
-      if (expirationString != null) {
-        Ok(expirationString.toLong())
-      } else {
-        Err(
-          AptosSdkError.ApiError(
-            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
-          )
+    if (expirationString != null) {
+      Ok(expirationString.toLong())
+    } else {
+      Err(
+        AptosSdkError.ApiError(
+          AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
         )
-      }
+      )
     }
+  }
 
   return finalResult.toResult()
 }
@@ -206,20 +208,19 @@ internal suspend fun getTargetAddress(
     view<List<MoveValue.MoveListType<MoveValue.String>>>(aptosConfig, payload = viewFunctionData)
       .toInternalResult()
 
-  val finalResult =
-    viewResult.andThen { moveValueList ->
-      val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
+  val finalResult = viewResult.andThen { moveValueList ->
+    val addressString = (moveValueList.firstOrNull())?.value?.firstOrNull()?.value
 
-      if (addressString != null) {
-        Ok(AccountAddress.fromString(addressString))
-      } else {
-        Err(
-          AptosSdkError.ApiError(
-            AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
-          )
+    if (addressString != null) {
+      Ok(AccountAddress.fromString(addressString))
+    } else {
+      Err(
+        AptosSdkError.ApiError(
+          AptosApiError(message = "ANS name '$name' not found.", errorCode = "RESOURCE_NOT_FOUND")
         )
-      }
+      )
     }
+  }
 
   return finalResult.toResult()
 }

@@ -43,5 +43,6 @@ internal class CurrentObjectsFilterBuilder {
     )
 }
 
-internal fun currentObjectsFilter(init: CurrentObjectsFilterBuilder.() -> Unit): Current_objects_bool_exp =
-  CurrentObjectsFilterBuilder().apply(init).build()
+internal fun currentObjectsFilter(
+  init: CurrentObjectsFilterBuilder.() -> Unit
+): Current_objects_bool_exp = CurrentObjectsFilterBuilder().apply(init).build()

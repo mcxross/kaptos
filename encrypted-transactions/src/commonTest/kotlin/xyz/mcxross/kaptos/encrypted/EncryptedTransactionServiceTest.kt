@@ -1,12 +1,12 @@
 package xyz.mcxross.kaptos.encrypted
 
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlinx.coroutines.test.runTest
 import xyz.mcxross.kaptos.ledger.LedgerState
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosError
@@ -54,8 +54,9 @@ class EncryptedTransactionServiceTest {
     val feePayer = address(3)
     val replayNonce = ULong.MAX_VALUE - 1uL
     val executable =
-      TransactionPayload.entryFunction("0x1::coin::transfer")
-        .let { TransactionExecutable.EntryFunction(it.call) }
+      TransactionPayload.entryFunction("0x1::coin::transfer").let {
+        TransactionExecutable.EntryFunction(it.call)
+      }
     val transaction =
       UnsignedTransaction.FeePayer(
         rawTransaction =
@@ -79,8 +80,7 @@ class EncryptedTransactionServiceTest {
     val result = assertIs<AptosResult.Success<UnsignedTransaction>>(service.encrypt(transaction))
     val encrypted = assertIs<UnsignedTransaction.FeePayer>(result.value)
     assertEquals(200uL, encrypted.rawTransaction.gasUnitPrice)
-    val payload =
-      assertIs<TransactionPayload.Encrypted>(encrypted.rawTransaction.payload).payload
+    val payload = assertIs<TransactionPayload.Encrypted>(encrypted.rawTransaction.payload).payload
     assertEquals(9uL, payload.encryptionEpoch)
     assertEquals(
       replayNonce,
@@ -121,9 +121,7 @@ class EncryptedTransactionServiceTest {
       assertIs<AptosResult.Success<UnsignedTransaction>>(
         service.encrypt(
           transaction,
-          EncryptedTransactionOptions(
-            senderAuthenticationKey = FixedBytes32(ByteArray(32) { 42 }),
-          ),
+          EncryptedTransactionOptions(senderAuthenticationKey = FixedBytes32(ByteArray(32) { 42 })),
         )
       )
     val payload =
@@ -150,7 +148,7 @@ class EncryptedTransactionServiceTest {
           .encrypt(
             transaction,
             EncryptedTransactionOptions(
-              secondarySignerAuthenticationKeys = listOf(FixedBytes32(ByteArray(32))),
+              secondarySignerAuthenticationKeys = listOf(FixedBytes32(ByteArray(32)))
             ),
           )
       )
@@ -158,7 +156,7 @@ class EncryptedTransactionServiceTest {
   }
 
   private class FakeContext(
-    private val encryptionKey: ByteString? = ByteString(byteArrayOf(9, 8, 7)),
+    private val encryptionKey: ByteString? = ByteString(byteArrayOf(9, 8, 7))
   ) : EncryptionContext {
     val authenticationKeyRequests = mutableMapOf<String, Int>()
 

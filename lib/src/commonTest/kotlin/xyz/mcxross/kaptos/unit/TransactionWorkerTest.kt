@@ -9,9 +9,9 @@ package xyz.mcxross.kaptos.unit
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.CompletableDeferred
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosError
 import xyz.mcxross.kaptos.model.AptosResult
@@ -28,11 +28,11 @@ import xyz.mcxross.kaptos.util.runBlocking
 class TransactionWorkerTest {
   @Test
   fun sequenceManagerReservesUniqueContiguousNumbers() = runBlocking {
-    val manager =
-      AccountSequenceManager(AccountAddress.ONE) { AptosResult.Success(40uL) }
+    val manager = AccountSequenceManager(AccountAddress.ONE) { AptosResult.Success(40uL) }
 
     val reserved =
-      (0..<20).map { async { assertIs<AptosResult.Success<ULong>>(manager.reserve()).value } }
+      (0..<20)
+        .map { async { assertIs<AptosResult.Success<ULong>>(manager.reserve()).value } }
         .awaitAll()
         .sorted()
 
@@ -68,10 +68,12 @@ class TransactionWorkerTest {
       )
 
     val result =
-      worker.submit { sequenceNumber ->
-        builtWith += sequenceNumber
-        AptosResult.Success(UnsignedTransaction.Simple(raw(sequenceNumber)))
-      }.await()
+      worker
+        .submit { sequenceNumber ->
+          builtWith += sequenceNumber
+          AptosResult.Success(UnsignedTransaction.Simple(raw(sequenceNumber)))
+        }
+        .await()
 
     val submitted = assertIs<AptosResult.Success<PendingTransactionResponse>>(result).value
     assertEquals("20", submitted.sequenceNumber)
@@ -82,8 +84,7 @@ class TransactionWorkerTest {
 
   @Test
   fun cancellationCompletesActiveAndQueuedSubmissions() = runBlocking {
-    val manager =
-      AccountSequenceManager(AccountAddress.ONE) { AptosResult.Success(0uL) }
+    val manager = AccountSequenceManager(AccountAddress.ONE) { AptosResult.Success(0uL) }
     val buildStarted = CompletableDeferred<Unit>()
     val continueBuild = CompletableDeferred<Unit>()
     val worker =
@@ -94,12 +95,11 @@ class TransactionWorkerTest {
         submitTransaction = { AptosResult.Success(pending(it.rawTransaction.sequenceNumber)) },
       )
 
-    val active =
-      worker.submit { sequenceNumber ->
-        buildStarted.complete(Unit)
-        continueBuild.await()
-        AptosResult.Success(UnsignedTransaction.Simple(raw(sequenceNumber)))
-      }
+    val active = worker.submit { sequenceNumber ->
+      buildStarted.complete(Unit)
+      continueBuild.await()
+      AptosResult.Success(UnsignedTransaction.Simple(raw(sequenceNumber)))
+    }
     buildStarted.await()
     val queued = worker.submit { sequenceNumber ->
       AptosResult.Success(UnsignedTransaction.Simple(raw(sequenceNumber)))

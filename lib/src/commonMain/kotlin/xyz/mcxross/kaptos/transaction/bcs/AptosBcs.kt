@@ -204,7 +204,8 @@ internal class AptosBcsReader(private val input: ByteArray) {
   fun anyPublicKey(): AnyPublicKey =
     when (val variant = uleb128()) {
       0u -> AnyPublicKey(Ed25519PublicKey(bytes()))
-      1u -> AnyPublicKey(Secp256k1PublicKey(xyz.mcxross.kaptos.model.HexInput.fromByteArray(bytes())))
+      1u ->
+        AnyPublicKey(Secp256k1PublicKey(xyz.mcxross.kaptos.model.HexInput.fromByteArray(bytes())))
       2u -> AnyPublicKey(Secp256r1PublicKey(bytes()))
       else -> throw IllegalArgumentException("Unsupported AnyPublicKey variant: $variant")
     }

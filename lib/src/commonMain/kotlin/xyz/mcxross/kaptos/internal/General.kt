@@ -34,7 +34,9 @@ import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.transaction.builder.generateViewFunctionPayload
 import xyz.mcxross.kaptos.util.toOptional
 
-internal suspend fun getLedgerInfo(aptosConfig: TransportConfig): Result<LedgerInfo, AptosSdkError> =
+internal suspend fun getLedgerInfo(
+  aptosConfig: TransportConfig
+): Result<LedgerInfo, AptosSdkError> =
   getAptosFullNode<LedgerInfo>(
       RequestOptions.GetAptosRequestOptions(
         aptosConfig = aptosConfig,
@@ -79,16 +81,17 @@ internal suspend fun getBlockByHeight(
 internal suspend fun getChainTopUserTransactions(
   config: TransportConfig,
   limit: Int,
-): Result<GetChainTopUserTransactionsQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(config).query(GetChainTopUserTransactionsQuery(limit.toOptional()))
-    }
-    .toResult()
+): Result<GetChainTopUserTransactionsQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(config).query(GetChainTopUserTransactionsQuery(limit.toOptional()))
+}
+  .toResult()
 
 internal suspend fun getProcessorStatuses(
   aptosConfig: TransportConfig
-): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
-  handleQuery { getGraphqlClient(aptosConfig).query(GetProcessorStatusQuery()) }.toResult()
+): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(aptosConfig).query(GetProcessorStatusQuery())
+}
+  .toResult()
 
 internal suspend fun getIndexerLastSuccessVersion(
   aptosConfig: TransportConfig
@@ -115,20 +118,19 @@ internal suspend fun getIndexerLastSuccessVersion(
 internal suspend fun getProcessorStatus(
   aptosConfig: TransportConfig,
   processorType: ProcessorType,
-): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(aptosConfig)
-        .query(
-          GetProcessorStatusQuery(
-            Optional.present(
-              processorStatusFilter {
-                processor = stringFilter { eq = processorType.value.lowercase() }
-              }
-            )
-          )
+): Result<GetProcessorStatusQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(aptosConfig)
+    .query(
+      GetProcessorStatusQuery(
+        Optional.present(
+          processorStatusFilter {
+            processor = stringFilter { eq = processorType.value.lowercase() }
+          }
         )
-    }
-    .toResult()
+      )
+    )
+}
+  .toResult()
 
 internal suspend inline fun <reified T : List<MoveValue>> view(
   aptosConfig: TransportConfig,

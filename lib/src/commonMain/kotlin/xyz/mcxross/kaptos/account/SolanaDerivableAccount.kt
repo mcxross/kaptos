@@ -31,14 +31,16 @@ fun interface SolanaMessageSigner {
  * Only entry-function transactions are supported because the on-chain authenticator requires an
  * entry-function name.
  */
-class SolanaDerivableAccount private constructor(
+class SolanaDerivableAccount
+private constructor(
   private val identity: SolanaIdentity,
   private val messageSigner: SolanaMessageSigner,
-) : DerivableAbstractedAccount(
-  authenticationFunction = AUTHENTICATION_FUNCTION,
-  abstractPublicKey = identity.bcs,
-  signer = AbstractionSigner(messageSigner::sign),
-) {
+) :
+  DerivableAbstractedAccount(
+    authenticationFunction = AUTHENTICATION_FUNCTION,
+    abstractPublicKey = identity.bcs,
+    signer = AbstractionSigner(messageSigner::sign),
+  ) {
   constructor(
     publicKey: ByteArray,
     domain: String,
@@ -60,14 +62,16 @@ class SolanaDerivableAccount private constructor(
   override suspend fun signTransaction(
     transaction: UnsignedTransaction
   ): AptosResult<AccountAuthenticator> {
-    val entryFunction = transaction.entryFunctionName()
-      ?: return AptosResult.Failure(
-        AptosError.UnsupportedFeature(
-          "Solana derivable accounts support entry-function transactions only"
+    val entryFunction =
+      transaction.entryFunctionName()
+        ?: return AptosResult.Failure(
+          AptosError.UnsupportedFeature(
+            "Solana derivable accounts support entry-function transactions only"
+          )
         )
-      )
     val function = authenticationFunction
-    val abstractionMessage = AbstractedAccount.signingMessage(transaction.signingMessage(), function)
+    val abstractionMessage =
+      AbstractedAccount.signingMessage(transaction.signingMessage(), function)
     val digest = sha3Hash(abstractionMessage)
     val message =
       siwsMessage(
@@ -110,8 +114,7 @@ class SolanaDerivableAccount private constructor(
   companion object {
     private const val SIGNATURE_LENGTH = 64
     private const val SIWS_MESSAGE_V1 = 0u
-    private const val BASE58_ALPHABET =
-      "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+    private const val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
     private val AUTHENTICATION_FUNCTION =
       AuthenticationFunction.parse("0x1::solana_derivable_account::authenticate")
 
@@ -159,18 +162,18 @@ class SolanaDerivableAccount private constructor(
           else -> "custom network: ${chainId.toInt()}"
         }
       return buildString {
-          append(domain)
-          append(" wants you to sign in with your Solana account:\n")
-          append(base58PublicKey)
-          append("\n\nPlease confirm you explicitly initiated this request from ")
-          append(domain)
-          append(". You are approving to execute transaction ")
-          append(entryFunction)
-          append(" on Aptos blockchain (")
-          append(networkName)
-          append(").\n\nNonce: 0x")
-          digest.forEach { append((it.toInt() and 0xff).toString(16).padStart(2, '0')) }
-        }
+        append(domain)
+        append(" wants you to sign in with your Solana account:\n")
+        append(base58PublicKey)
+        append("\n\nPlease confirm you explicitly initiated this request from ")
+        append(domain)
+        append(". You are approving to execute transaction ")
+        append(entryFunction)
+        append(" on Aptos blockchain (")
+        append(networkName)
+        append(").\n\nNonce: 0x")
+        digest.forEach { append((it.toInt() and 0xff).toString(16).padStart(2, '0')) }
+      }
         .encodeToByteArray()
     }
 

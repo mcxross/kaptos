@@ -15,9 +15,9 @@
  */
 package xyz.mcxross.kaptos.transaction.instances
 
+import xyz.mcxross.kaptos.transaction.authenticator.TransactionAuthenticator
 import xyz.mcxross.kaptos.transaction.authenticator.transactionAuthenticator
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
-import xyz.mcxross.kaptos.transaction.authenticator.TransactionAuthenticator
 
 data class SignedTransaction(
   val rawTxn: RawTransaction,

@@ -18,14 +18,14 @@ import xyz.mcxross.kaptos.model.AptosResult
 class FaucetServiceTest :
   StringSpec({
     "passes a validated unsigned amount to the transport" {
-    var requestedAmount: Long? = null
-    val service =
-      DefaultFaucetService(
-        FaucetDataSource { _, amount, _ ->
-          requestedAmount = amount
-          AptosResult.Failure(AptosError.Transport("fixture"))
-        }
-      )
+      var requestedAmount: Long? = null
+      val service =
+        DefaultFaucetService(
+          FaucetDataSource { _, amount, _ ->
+            requestedAmount = amount
+            AptosResult.Failure(AptosError.Transport("fixture"))
+          }
+        )
 
       service.fund(AccountAddress.fromString("0x1"), 100_000_000uL)
 
@@ -45,7 +45,9 @@ class FaucetServiceTest :
       val result = service.fund(AccountAddress.fromString("0x1"), ULong.MAX_VALUE)
 
       called shouldBe false
-      result.shouldBeInstanceOf<AptosResult.Failure>().error
+      result
+        .shouldBeInstanceOf<AptosResult.Failure>()
+        .error
         .shouldBeInstanceOf<AptosError.Validation>()
     }
   })

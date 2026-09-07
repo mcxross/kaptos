@@ -13,7 +13,9 @@ import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 
-/** Suspend-capable signer contract for local keys, wallets, passkeys, and remote custody systems. */
+/**
+ * Suspend-capable signer contract for local keys, wallets, passkeys, and remote custody systems.
+ */
 interface TransactionSigner {
   val accountAddress: AccountAddress
   val publicKey: PublicKey
@@ -28,9 +30,7 @@ interface TransactionSigner {
   suspend fun signText(message: String): AptosResult<Signature>
 
   /** Signs the correct domain-separated message for [transaction]. */
-  suspend fun signTransaction(
-    transaction: UnsignedTransaction,
-  ): AptosResult<AccountAuthenticator>
+  suspend fun signTransaction(transaction: UnsignedTransaction): AptosResult<AccountAuthenticator>
 
   /** Verifies [signature] against arbitrary bytes using this signer's public key. */
   fun verifySignature(message: ByteArray, signature: Signature): Boolean

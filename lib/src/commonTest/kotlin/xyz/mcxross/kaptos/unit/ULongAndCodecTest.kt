@@ -6,8 +6,8 @@
  */
 package xyz.mcxross.kaptos.unit
 
-import io.kotest.core.spec.style.StringSpec
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -26,7 +26,8 @@ class ULongAndCodecTest :
       val value = ULong.MAX_VALUE
       Json.encodeToString(AptosDecimalStringULongSerializer, value) shouldBe
         "\"18446744073709551615\""
-      Json.decodeFromString(AptosDecimalStringULongSerializer, "\"18446744073709551615\"") shouldBe value
+      Json.decodeFromString(AptosDecimalStringULongSerializer, "\"18446744073709551615\"") shouldBe
+        value
     }
 
     "ULong rejects negative and overflowing input" {
@@ -49,8 +50,9 @@ class ULongAndCodecTest :
     "property strings and byte vectors include their BCS length" {
       PropertyValue.StringValue("apt").encodeAs(PropertyType.STRING).toList() shouldBe
         listOf(3, 'a'.code, 'p'.code, 't'.code).map(Int::toByte)
-      PropertyValue.Uint8ArrayValue(byteArrayOf(1, 2)).encodeAs(PropertyType.ARRAY).toList() shouldBe
-        listOf(2, 1, 2).map(Int::toByte)
+      PropertyValue.Uint8ArrayValue(byteArrayOf(1, 2))
+        .encodeAs(PropertyType.ARRAY)
+        .toList() shouldBe listOf(2, 1, 2).map(Int::toByte)
     }
 
     "hex parsing validates empty odd and non-hex input" {

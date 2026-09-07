@@ -7,7 +7,6 @@ import xyz.mcxross.kaptos.model.*
 
 class BcsHelperTest :
   StringSpec({
-
     "serializes U8 correctly" { Bcs.encodeToByteArray(U8(1)).toList() shouldBe listOf<Byte>(1) }
 
     "serializes U8 zero" { Bcs.encodeToByteArray(U8(0)).toList() shouldBe listOf<Byte>(0) }

@@ -21,11 +21,11 @@ import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.exception.AptosIndexerError
 import xyz.mcxross.kaptos.generated.GetObjectDataQuery
 import xyz.mcxross.kaptos.model.AccountAddressInput
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.ObjectFilter
 import xyz.mcxross.kaptos.model.ObjectSortOrder
 import xyz.mcxross.kaptos.model.PaginationArgs
 import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.types.currentObjectsFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.util.toOptional
@@ -35,19 +35,18 @@ internal suspend fun getObjectData(
   filter: ObjectFilter,
   sortOrder: List<ObjectSortOrder>?,
   page: PaginationArgs?,
-): Result<GetObjectDataQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(aptosConfig)
-        .query(
-          GetObjectDataQuery(
-            where_condition = filter.toOptional(),
-            order_by = sortOrder.toOptional(),
-            offset = page?.offset.toOptional(),
-            limit = page?.limit.toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetObjectDataQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(aptosConfig)
+    .query(
+      GetObjectDataQuery(
+        where_condition = filter.toOptional(),
+        order_by = sortOrder.toOptional(),
+        offset = page?.offset.toOptional(),
+        limit = page?.limit.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getObjectDataByObjectAddress(
   aptosConfig: TransportConfig,
@@ -56,8 +55,9 @@ internal suspend fun getObjectDataByObjectAddress(
   page: PaginationArgs?,
 ): Result<GetObjectDataQuery.Current_object?, AptosIndexerError> {
   val filter = currentObjectsFilter {
-    this.objectAddress =
-      stringFilter { eq = xyz.mcxross.kaptos.model.AccountAddress.from(objectAddress).toStringLong() }
+    this.objectAddress = stringFilter {
+      eq = xyz.mcxross.kaptos.model.AccountAddress.from(objectAddress).toStringLong()
+    }
   }
 
   val resolution = getObjectData(aptosConfig, filter, sortOrder, page)

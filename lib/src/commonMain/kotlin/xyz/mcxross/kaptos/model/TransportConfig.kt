@@ -68,36 +68,36 @@ internal class TransportConfig(settings: AptosSettings = AptosSettings()) {
     require(indexerWaitTimeoutMillis > 0) { "indexerWaitTimeoutMillis must be positive" }
   }
 
-  internal fun headersFor(apiType: AptosApiType): Map<String, String> =
-    buildMap {
-      putAll(commonHeaders)
-      when (apiType) {
-        AptosApiType.FULLNODE -> putAll(fullNodeConfig.headers)
-        AptosApiType.INDEXER -> putAll(indexerConfig.headers)
-        AptosApiType.FAUCET -> {
-          putAll(faucetConfig.headers)
-          faucetConfig.authToken?.let { put("Authorization", "Bearer $it") }
-        }
+  internal fun headersFor(apiType: AptosApiType): Map<String, String> = buildMap {
+    putAll(commonHeaders)
+    when (apiType) {
+      AptosApiType.FULLNODE -> putAll(fullNodeConfig.headers)
+      AptosApiType.INDEXER -> putAll(indexerConfig.headers)
+      AptosApiType.FAUCET -> {
+        putAll(faucetConfig.headers)
+        faucetConfig.authToken?.let { put("Authorization", "Bearer $it") }
       }
     }
+  }
 
-  internal suspend fun requestHeadersFor(apiType: AptosApiType): Map<String, String> =
-    buildMap {
-      putAll(headersFor(apiType))
-      val dynamic =
-        when (apiType) {
-          AptosApiType.FULLNODE -> fullNodeConfig.requestHeaders()
-          AptosApiType.INDEXER -> indexerConfig.requestHeaders()
-          AptosApiType.FAUCET -> faucetConfig.requestHeaders()
-        }
-      putAll(dynamic)
-    }
+  internal suspend fun requestHeadersFor(apiType: AptosApiType): Map<String, String> = buildMap {
+    putAll(headersFor(apiType))
+    val dynamic =
+      when (apiType) {
+        AptosApiType.FULLNODE -> fullNodeConfig.requestHeaders()
+        AptosApiType.INDEXER -> indexerConfig.requestHeaders()
+        AptosApiType.FAUCET -> faucetConfig.requestHeaders()
+      }
+    putAll(dynamic)
+  }
 
   internal fun graphqlClient(): ApolloClient =
     apolloClient
       ?: ApolloClient.Builder()
         .serverUrl(getRequestUrl(AptosApiType.INDEXER))
-        .apply { headersFor(AptosApiType.INDEXER).forEach { (name, value) -> addHttpHeader(name, value) } }
+        .apply {
+          headersFor(AptosApiType.INDEXER).forEach { (name, value) -> addHttpHeader(name, value) }
+        }
         .build()
         .also { apolloClient = it }
 
@@ -115,8 +115,7 @@ internal class TransportConfig(settings: AptosSettings = AptosSettings()) {
             throw AptosConfigurationException(
               AptosError.Validation("Please provide a custom full node URL")
             )
-          }
-          else
+          } else
             NetworkToNodeAPI.getOrElse(network.name.lowercase()) {
               throw AptosConfigurationException(
                 AptosError.UnsupportedFeature("Fullnode is not available for $network")
@@ -146,7 +145,7 @@ internal class TransportConfig(settings: AptosSettings = AptosSettings()) {
                   AptosError.UnsupportedFeature("Faucet is not available for $network")
                 )
               }
-            }
+          }
       }
       AptosApiType.INDEXER -> {
         indexer
@@ -154,8 +153,7 @@ internal class TransportConfig(settings: AptosSettings = AptosSettings()) {
             throw AptosConfigurationException(
               AptosError.Validation("Please provide a custom indexer URL")
             )
-          }
-          else
+          } else
             NetworkToIndexerAPI.getOrElse(network.name.lowercase()) {
               throw AptosConfigurationException(
                 AptosError.UnsupportedFeature("Indexer is not available for $network")
@@ -179,8 +177,7 @@ internal open class ClientHeadersType {
 internal data class FullNodeConfig(
   override val headers: Map<String, String> = emptyMap(),
   val requestHeaders: suspend () -> Map<String, String> = { emptyMap() },
-) :
-  ClientHeadersType()
+) : ClientHeadersType()
 
 /**
  * An Indexer only configuration object.
@@ -190,8 +187,7 @@ internal data class FullNodeConfig(
 internal data class IndexerConfig(
   override val headers: Map<String, String> = emptyMap(),
   val requestHeaders: suspend () -> Map<String, String> = { emptyMap() },
-) :
-  ClientHeadersType()
+) : ClientHeadersType()
 
 /**
  * A Faucet only configuration object

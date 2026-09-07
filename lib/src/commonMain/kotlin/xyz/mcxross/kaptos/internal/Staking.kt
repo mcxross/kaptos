@@ -23,8 +23,8 @@ import xyz.mcxross.kaptos.generated.GetNumberOfDelegatorsQuery
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.model.ActiveDelegatorPerPoolOrder
-import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.Result
+import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.types.numActiveDelegatorPerPoolFilter
 import xyz.mcxross.kaptos.model.types.stringFilter
 import xyz.mcxross.kaptos.util.toOptional
@@ -46,45 +46,40 @@ internal suspend fun getNumberOfDelegatorsData(
   aptosConfig: TransportConfig,
   poolAddress: AccountAddressInput,
   sortOrder: List<ActiveDelegatorPerPoolOrder>?,
-): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      val filter = numActiveDelegatorPerPoolFilter {
-        this.poolAddress =
-          stringFilter { eq = AccountAddress.from(poolAddress).toStringLong() }
-      }
+): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> = handleQuery {
+  val filter = numActiveDelegatorPerPoolFilter {
+    this.poolAddress = stringFilter { eq = AccountAddress.from(poolAddress).toStringLong() }
+  }
 
-      getGraphqlClient(aptosConfig)
-        .query(
-          GetNumberOfDelegatorsQuery(
-            where_condition = filter.toOptional(),
-            order_by = sortOrder.toOptional(),
-          )
-        )
-    }
-    .toResult()
+  getGraphqlClient(aptosConfig)
+    .query(
+      GetNumberOfDelegatorsQuery(
+        where_condition = filter.toOptional(),
+        order_by = sortOrder.toOptional(),
+      )
+    )
+}
+  .toResult()
 
 internal suspend fun getNumberOfDelegatorsForAllPools(
   aptosConfig: TransportConfig,
   sortOrder: List<ActiveDelegatorPerPoolOrder>?,
-): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(aptosConfig)
-        .query(GetNumberOfDelegatorsQuery(order_by = sortOrder.toOptional()))
-    }
-    .toResult()
+): Result<GetNumberOfDelegatorsQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(aptosConfig).query(GetNumberOfDelegatorsQuery(order_by = sortOrder.toOptional()))
+}
+  .toResult()
 
 internal suspend fun getDelegatedStakingActivities(
   aptosConfig: TransportConfig,
   poolAddress: AccountAddressInput,
   delegatorAddress: AccountAddressInput,
-): Result<GetDelegatedStakingActivitiesQuery.Data?, AptosIndexerError> =
-  handleQuery {
-      getGraphqlClient(aptosConfig)
-        .query(
-          GetDelegatedStakingActivitiesQuery(
-            poolAddress = AccountAddress.from(poolAddress).toStringLong().toOptional(),
-            delegatorAddress = AccountAddress.from(delegatorAddress).toStringLong().toOptional(),
-          )
-        )
-    }
-    .toResult()
+): Result<GetDelegatedStakingActivitiesQuery.Data?, AptosIndexerError> = handleQuery {
+  getGraphqlClient(aptosConfig)
+    .query(
+      GetDelegatedStakingActivitiesQuery(
+        poolAddress = AccountAddress.from(poolAddress).toStringLong().toOptional(),
+        delegatorAddress = AccountAddress.from(delegatorAddress).toStringLong().toOptional(),
+      )
+    )
+}
+  .toResult()
