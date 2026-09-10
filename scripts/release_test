@@ -1,0 +1,83 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+TEST_ROOT=$(mktemp -d)
+trap 'rm -rf "${TEST_ROOT}"' EXIT
+
+function fail() {
+  echo "release_test: $1" >&2
+  exit 1
+}
+
+function initialize_repository() {
+  local repository="$1"
+  local branch="$2"
+  git init -q -b "${branch}" "${repository}"
+  git -C "${repository}" config user.name "Release Test"
+  git -C "${repository}" config user.email "release-test@example.invalid"
+  mkdir -p "${repository}/scripts"
+  cp "${SCRIPT_DIR}/release" "${repository}/scripts/release"
+  cp "${SCRIPT_DIR}/inc.functions.sh" "${repository}/scripts/inc.functions.sh"
+  cat >"${repository}/gradlew" <<'EOF'
+#!/bin/bash
+echo "$*" >>"${RELEASE_TEST_LOG}"
+EOF
+  chmod +x "${repository}/gradlew" "${repository}/scripts/release"
+}
+
+function test_snapshot_release() {
+  local repository="${TEST_ROOT}/snapshot"
+  local log="${TEST_ROOT}/snapshot.log"
+  initialize_repository "${repository}" snapshot
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "release v9.9.9-SNAPSHOT"
+  local trusted_sha
+  trusted_sha=$(git -C "${repository}" rev-parse HEAD)
+  (cd "${repository}" && EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  grep -Fxq "publishToMavenCentral" "${log}" || fail "snapshot release was not published"
+}
+
+function test_stable_release() {
+  local repository="${TEST_ROOT}/stable"
+  local log="${TEST_ROOT}/stable.log"
+  initialize_repository "${repository}" main
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "release v9.9.9"
+  local trusted_sha
+  trusted_sha=$(git -C "${repository}" rev-parse HEAD)
+  (cd "${repository}" && EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  grep -Fxq "publishAndReleaseToMavenCentral --no-configuration-cache" "${log}" ||
+    fail "stable release was not published"
+}
+
+function test_main_merge_skips_snapshot_marker() {
+  local repository="${TEST_ROOT}/main-snapshot-merge"
+  local log="${TEST_ROOT}/main-snapshot-merge.log"
+  initialize_repository "${repository}" main
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "initial"
+  git -C "${repository}" checkout -q -b snapshot
+  git -C "${repository}" commit -q --allow-empty -m "release v9.9.9-SNAPSHOT"
+  git -C "${repository}" checkout -q main
+  git -C "${repository}" merge -q --no-ff snapshot -m "merge snapshot"
+  (cd "${repository}" && RELEASE_TEST_LOG="${log}" ./scripts/release)
+  [[ ! -e "${log}" ]] || fail "main published a merged snapshot marker"
+}
+
+function test_sha_mismatch_fails_closed() {
+  local repository="${TEST_ROOT}/sha-mismatch"
+  initialize_repository "${repository}" main
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "release v9.9.9"
+  if (cd "${repository}" && EXPECTED_RELEASE_SHA=invalid RELEASE_TEST_LOG="${TEST_ROOT}/mismatch.log" ./scripts/release); then
+    fail "release continued after a CI SHA mismatch"
+  fi
+}
+
+test_snapshot_release
+test_stable_release
+test_main_merge_skips_snapshot_marker
+test_sha_mismatch_fails_closed
+echo "release_test: all checks passed"
