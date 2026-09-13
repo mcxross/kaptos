@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.0        </div>
+1.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,7 +108,7 @@
   <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.account</a><span class="delimiter">/</span><span class="current">Account</span></div>
   <div class="cover ">
     <h1 class="cover"><span><span>Account</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">Account</a></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-ed25519-account/index.html">Ed25519Account</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-multi-key-account/index.html">MultiKeyAccount</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-single-key-account/index.html">SingleKeyAccount</a></div></span></div><div></div></div></div></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">Account</a> : <a href="../-transaction-signer/index.html">TransactionSigner</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-ed25519-account/index.html">Ed25519Account</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-multi-ed25519-account/index.html">MultiEd25519Account</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-multi-key-account/index.html">MultiKeyAccount</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-single-key-account/index.html">SingleKeyAccount</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -163,7 +163,22 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">val </span><a href="account-address.html">accountAddress</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address/index.html">AccountAddress</a></div><div class="brief "><p class="paragraph">Account address associated with the account</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="account-address.html">accountAddress</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address/index.html">AccountAddress</a></div><div class="brief "><p class="paragraph">Account address associated with the account</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2041140953%2FProperties%2F791495369" anchor-label="isPrivateKeyCleared" id="-2041140953%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-private-key-cleared.html"><span>is</span><wbr></wbr><span>Private</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Cleared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2041140953%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">val </span><a href="is-private-key-cleared.html">isPrivateKeyCleared</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether all private key material owned by this account has been cleared.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -178,7 +193,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">val </span><a href="public-key.html">publicKey</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-public-key/index.html">PublicKey</a></div><div class="brief "><p class="paragraph">Public key associated with the account</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="public-key.html">publicKey</a><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-account-public-key/index.html">AccountPublicKey</a></div><div class="brief "><p class="paragraph">Public key associated with the account</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -202,7 +217,37 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-1110757102%2FFunctions%2F791495369" anchor-label="sign" id="-1110757102%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+        <div class="table"><a data-name="1242860708%2FFunctions%2F791495369" anchor-label="clearPrivateKey" id="1242860708%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-private-key.html"><span>clear</span><wbr></wbr><span>Private</span><wbr></wbr><span><span>Key</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1242860708%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="clear-private-key.html"><span class="token function">clearPrivateKey</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Explicitly clear private key material owned by this account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="155742613%2FFunctions%2F791495369" anchor-label="close" id="155742613%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="close.html"><span><span>close</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="155742613%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Clears private key material when the account is owned by a managed SDK scope.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1110757102%2FFunctions%2F791495369" anchor-label="sign" id="-1110757102%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -217,17 +262,62 @@
               </div>
             </div>
           </div>
-<a data-name="-873573413%2FFunctions%2F791495369" anchor-label="signTransaction" id="-873573413%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+<a data-name="1747160507%2FFunctions%2F791495369" anchor-label="signBytes" id="1747160507%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="sign-transaction.html"><span>sign</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-873573413%2FFunctions%2F791495369"></span>
+                  <div><a href="sign-bytes.html"><span>sign</span><wbr></wbr><span><span>Bytes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1747160507%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="sign-transaction.html"><span class="token function">signTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="sign-bytes.html"><span class="token function">signBytes</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Signs arbitrary bytes without imposing a display encoding.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="506119745%2FFunctions%2F791495369" anchor-label="signText" id="506119745%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sign-text.html"><span>sign</span><wbr></wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="506119745%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="sign-text.html"><span class="token function">signText</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Signs UTF-8 text. Wallet implementations may present this text to the user.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1397521140%2FFunctions%2F791495369" anchor-label="signTransaction" id="1397521140%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sign-transaction.html"><span>sign</span><wbr></wbr><span><span>Transaction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1397521140%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">suspend override </span><span class="token keyword">fun </span><a href="sign-transaction.html"><span class="token function">signTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">transaction<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/index.html">UnsignedTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.transaction.authenticator/-account-authenticator/index.html">AccountAuthenticator</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Signs the correct domain-separated message for <a href="../-transaction-signer/sign-transaction.html">transaction</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1357639394%2FFunctions%2F791495369" anchor-label="signTransactionSignature" id="-1357639394%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sign-transaction-signature.html"><span>sign</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Signature</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1357639394%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="sign-transaction-signature.html"><span class="token function">signTransactionSignature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/index.html">UnsignedTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -242,7 +332,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="sign-with-authenticator.html"><span class="token function">signWithAuthenticator</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/index.html">AccountAuthenticator</a></div><div class="brief "><p class="paragraph">Sign a message using the available signing capabilities.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="sign-with-authenticator.html"><span class="token function">signWithAuthenticator</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.transaction.authenticator/-account-authenticator/index.html">AccountAuthenticator</a></div><div class="brief "><p class="paragraph">Sign a message using the available signing capabilities.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -262,17 +352,17 @@
               </div>
             </div>
           </div>
-<a data-name="308704157%2FFunctions%2F791495369" anchor-label="verifySignature" id="308704157%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+<a data-name="-1843060158%2FFunctions%2F791495369" anchor-label="verifySignature" id="-1843060158%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="verify-signature.html"><span>verify</span><wbr></wbr><span><span>Signature</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="308704157%2FFunctions%2F791495369"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1843060158%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="verify-signature.html"><span class="token function">verifySignature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a><span class="token punctuation">, </span></span><span class="parameter ">signature<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">fun </span><a href="verify-signature.html"><span class="token function">verifySignature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token punctuation">, </span></span><span class="parameter ">signature<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Verifies <a href="../-transaction-signer/verify-signature.html">signature</a> against arbitrary bytes using this signer's public key.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">fun </span><a href="verify-signature.html"><span class="token function">verifySignature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a><span class="token punctuation">, </span></span><span class="parameter ">signature<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
                 </div>
               </div>
             </div>

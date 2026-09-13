@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.0        </div>
+1.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -110,7 +110,7 @@
     <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="tableheader">Types</h2>
@@ -124,7 +124,86 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-aptos/index.html">Aptos</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>config<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-aptos-config/index.html">AptosConfig</a><span class="token operator"> = </span>AptosConfig()<span class="token punctuation">, </span></span><span class="parameter ">graceFull<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span>Application.graceFull</span></span><span class="token punctuation">)</span> : <a href="../xyz.mcxross.kaptos.protocol/-account/index.html">Account</a>, <a href="../xyz.mcxross.kaptos.protocol/-coin/index.html">Coin</a>, <a href="../xyz.mcxross.kaptos.protocol/-general/index.html">General</a>, <a href="../xyz.mcxross.kaptos.protocol/-transaction/index.html">Transaction</a>, <a href="../xyz.mcxross.kaptos.protocol/-table/index.html">Table</a>, <a href="../xyz.mcxross.kaptos.protocol/-object/index.html">Object</a>, <a href="../xyz.mcxross.kaptos.protocol/-staking/index.html">Staking</a>, <a href="../xyz.mcxross.kaptos.protocol/-digital-asset/index.html">DigitalAsset</a>, <a href="../xyz.mcxross.kaptos.protocol/-faucet/index.html">Faucet</a>, <a href="../xyz.mcxross.kaptos.protocol/-fungible-asset/index.html">FungibleAsset</a>, <a href="../xyz.mcxross.kaptos.protocol/-ans/index.html">Ans</a></div><div class="brief "><p class="paragraph"><a href="-aptos/index.html">Aptos</a> is the main entry point to the SDK's APIs. Instantiate to access all functionalities.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-aptos/index.html">Aptos</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>settings<span class="token operator">: </span><a href="-aptos-config/index.html">AptosConfig</a><span class="token operator"> = </span>AptosConfig()</span></span><span class="token punctuation">)</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a></div><div class="brief "><p class="paragraph">Kotlin-native, namespaced entry point for Aptos APIs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1299612109%2FClasslikes%2F791495369" anchor-label="AptosConfig" id="-1299612109%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-aptos-config/index.html"><span>Aptos</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1299612109%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-aptos-config/index.html">AptosConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>network<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-network/index.html">Network</a><span class="token operator"> = </span>Network.DEVNET<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>endpoints<span class="token operator">: </span><a href="-aptos-endpoints/index.html">AptosEndpoints</a><span class="token operator"> = </span>AptosEndpoints()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>commonHeaders<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyMap()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fullNode<span class="token operator">: </span><a href="-aptos-endpoint-config/index.html">AptosEndpointConfig</a><span class="token operator"> = </span>AptosEndpointConfig()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>indexer<span class="token operator">: </span><a href="-aptos-endpoint-config/index.html">AptosEndpointConfig</a><span class="token operator"> = </span>AptosEndpointConfig()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>faucet<span class="token operator">: </span><a href="-aptos-endpoint-config/index.html">AptosEndpointConfig</a><span class="token operator"> = </span>AptosEndpointConfig()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>requestTimeoutMillis<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>indexerWaitTimeoutMillis<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>archivalFallback<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>namesContractAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address/index.html">AccountAddress</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>transactionDefaults<span class="token operator">: </span><a href="-transaction-defaults/index.html">TransactionDefaults</a><span class="token operator"> = </span>TransactionDefaults()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>transport<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transport/-aptos-transport/index.html">AptosTransport</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>abiCachePolicy<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.move/-abi-cache-policy/index.html">AbiCachePolicy</a><span class="token operator"> = </span>xyz.mcxross.kaptos.move.AbiCachePolicy()</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Immutable configuration for the namespaced <a href="-aptos/index.html">Aptos</a> API.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-671112738%2FClasslikes%2F791495369" anchor-label="AptosEndpointConfig" id="-671112738%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-aptos-endpoint-config/index.html"><span>Aptos</span><wbr></wbr><span>Endpoint</span><wbr></wbr><span><span>Config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-671112738%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-aptos-endpoint-config/index.html">AptosEndpointConfig</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>headers<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyMap()<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>authToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>requestHeaders<span class="token operator">: </span><span class="token keyword">suspend </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>{ emptyMap() }</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Headers and optional bearer token applied to one Aptos endpoint.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="613490415%2FClasslikes%2F791495369" anchor-label="AptosEndpoints" id="613490415%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-aptos-endpoints/index.html"><span>Aptos</span><wbr></wbr><span><span>Endpoints</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="613490415%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-aptos-endpoints/index.html">AptosEndpoints</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>fullNode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>indexer<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>faucet<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Optional endpoint overrides. Unspecified endpoints are derived from <a href="-aptos-config/network.html">AptosConfig.network</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1849329426%2FClasslikes%2F791495369" anchor-label="TransactionDefaults" id="-1849329426%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transaction-defaults/index.html"><span>Transaction</span><wbr></wbr><span><span>Defaults</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1849329426%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-transaction-defaults/index.html">TransactionDefaults</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>maxGasAmount<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-u-long/index.html">ULong</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>expirationSecondsFromNow<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-u-long/index.html">ULong</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Defaults used when a transaction build does not provide per-request options.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1147049048%2FFunctions%2F791495369" anchor-label="aptos" id="1147049048%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="aptos.html"><span><span>aptos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1147049048%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="aptos.html">T</a><span class="token operator">&gt; </span><a href="aptos.html"><span class="token function">aptos</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">config<span class="token operator">: </span><a href="-aptos-config/index.html">AptosConfig</a><span class="token operator"> = </span>AptosConfig()<span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><a href="-aptos/index.html">Aptos</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="aptos.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="aptos.html">T</a></div><div class="brief "><p class="paragraph">Runs one Aptos workflow with managed lifecycle semantics.</p></div></div></div>
                 </div>
               </div>
             </div>

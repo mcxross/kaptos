@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.0        </div>
+1.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -108,7 +108,7 @@
   <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.account</a><span class="delimiter">/</span><span class="current">SingleKeyAccount</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Single</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Account</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SingleKeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-account/index.html">Account</a></div><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1.</p><p class="paragraph">Note: Generating a signer instance does not create the account on-chain.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">SingleKeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../-account/index.html">Account</a></div><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1. P-256 transaction signing uses <a href="../-passkey-account/index.html">PasskeyAccount</a>, because WebAuthn credential acquisition is application-owned.</p><p class="paragraph">Note: Generating a signer instance does not create the account on-chain.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -183,6 +183,21 @@
               </div>
             </div>
           </div>
+<a data-name="1615314978%2FProperties%2F791495369" anchor-label="isPrivateKeyCleared" id="1615314978%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-private-key-cleared.html"><span>is</span><wbr></wbr><span>Private</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Cleared</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1615314978%2FProperties%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="is-private-key-cleared.html">isPrivateKeyCleared</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether all private key material owned by this account has been cleared.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="1547851062%2FProperties%2F791495369" anchor-label="privateKey" id="1547851062%2FProperties%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
@@ -232,7 +247,22 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-1477402803%2FFunctions%2F791495369" anchor-label="sign" id="-1477402803%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+        <div class="table"><a data-name="-1022994145%2FFunctions%2F791495369" anchor-label="clearPrivateKey" id="-1022994145%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="clear-private-key.html"><span>clear</span><wbr></wbr><span>Private</span><wbr></wbr><span><span>Key</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1022994145%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="clear-private-key.html"><span class="token function">clearPrivateKey</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Explicitly clear private key material owned by this account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1477402803%2FFunctions%2F791495369" anchor-label="sign" id="-1477402803%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -247,17 +277,17 @@
               </div>
             </div>
           </div>
-<a data-name="-766421354%2FFunctions%2F791495369" anchor-label="signTransaction" id="-766421354%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+<a data-name="-555771005%2FFunctions%2F791495369" anchor-label="signTransactionSignature" id="-555771005%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="sign-transaction.html"><span>sign</span><wbr></wbr><span><span>Transaction</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-766421354%2FFunctions%2F791495369"></span>
+                  <div><a href="sign-transaction-signature.html"><span>sign</span><wbr></wbr><span>Transaction</span><wbr></wbr><span><span>Signature</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-555771005%2FFunctions%2F791495369"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sign-transaction.html"><span class="token function">signTransaction</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-any-raw-transaction/index.html">AnyRawTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sign-transaction-signature.html"><span class="token function">signTransactionSignature</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">tx<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/index.html">UnsignedTransaction</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.core.crypto/-signature/index.html">Signature</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -272,7 +302,7 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sign-with-authenticator.html"><span class="token function">signWithAuthenticator</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.transaction.authenticatior/-account-authenticator/index.html">AccountAuthenticator</a></div><div class="brief "><p class="paragraph">Sign a message using the available signing capabilities.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sign-with-authenticator.html"><span class="token function">signWithAuthenticator</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-hex-input/index.html">HexInput</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.transaction.authenticator/-account-authenticator/index.html">AccountAuthenticator</a></div><div class="brief "><p class="paragraph">Sign a message using the available signing capabilities.</p></div></div></div>
                 </div>
               </div>
             </div>

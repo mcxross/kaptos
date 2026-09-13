@@ -44,7 +44,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.2.0        </div>
+1.0.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -114,7 +114,37 @@
     <div class="tabs-section-body">
       <div data-togglable="TYPE">
         <h2 class="tableheader">Types</h2>
-        <div class="table"><a data-name="-735079470%2FClasslikes%2F791495369" anchor-label="Account" id="-735079470%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+        <div class="table"><a data-name="-663015757%2FClasslikes%2F791495369" anchor-label="AbstractedAccount" id="-663015757%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-abstracted-account/index.html"><span>Abstracted</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-663015757%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-abstracted-account/index.html">AbstractedAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>accountAddress<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address/index.html">AccountAddress</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>authenticationFunction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.authenticator/-authentication-function/index.html">AuthenticationFunction</a><span class="token punctuation">, </span></span><span class="parameter ">signer<span class="token operator">: </span><a href="-abstraction-signer/index.html">AbstractionSigner</a><span class="token punctuation">, </span></span><span class="parameter ">accountIdentity<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-transaction-signer/index.html">TransactionSigner</a></div><div class="brief "><p class="paragraph">A transaction signer whose authentication logic is implemented by a Move function.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-210273681%2FClasslikes%2F791495369" anchor-label="AbstractionSigner" id="-210273681%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-abstraction-signer/index.html"><span>Abstraction</span><wbr></wbr><span><span>Signer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-210273681%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-abstraction-signer/index.html">AbstractionSigner</a></div><div class="brief "><p class="paragraph">Application-owned callback that produces authentication data for an on-chain function.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-735079470%2FClasslikes%2F791495369" anchor-label="Account" id="-735079470%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -124,7 +154,112 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-account/index.html">Account</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-account/index.html">Account</a> : <a href="-transaction-signer/index.html">TransactionSigner</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="602914083%2FClasslikes%2F791495369" anchor-label="AccountAbstractionService" id="602914083%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-abstraction-service/index.html"><span>Account</span><wbr></wbr><span>Abstraction</span><wbr></wbr><span><span>Service</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="602914083%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-account-abstraction-service/index.html">AccountAbstractionService</a></div><div class="brief "><p class="paragraph">Account-abstraction operations exposed as <code class="lang-kotlin">client.abstraction</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1938077080%2FClasslikes%2F791495369" anchor-label="AccountAbstractionStatus" id="1938077080%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-abstraction-status/index.html"><span>Account</span><wbr></wbr><span>Abstraction</span><wbr></wbr><span><span>Status</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1938077080%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-account-abstraction-status/index.html">AccountAbstractionStatus</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>authenticationFunctions<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.transaction.authenticator/-authentication-function/index.html">AuthenticationFunction</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Current on-chain account-abstraction configuration for an account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1187625888%2FClasslikes%2F791495369" anchor-label="AccountAsset" id="-1187625888%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-asset/index.html"><span>Account</span><wbr></wbr><span><span>Asset</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1187625888%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-account-asset/index.html">AccountAsset</a></div><div class="brief "><p class="paragraph">A coin type or fungible-asset metadata object accepted by the unified balance endpoint.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1934026308%2FClasslikes%2F791495369" anchor-label="AccountInfo" id="1934026308%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-info/index.html"><span>Account</span><wbr></wbr><span><span>Info</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1934026308%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-account-info/index.html">AccountInfo</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address/index.html">AccountAddress</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>publicKey<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.core.crypto/-account-public-key/index.html">AccountPublicKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>lastTransactionVersion<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-u-long/index.html">ULong</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">An on-chain account associated with a public key.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="643120908%2FClasslikes%2F791495369" anchor-label="AccountLookupOptions" id="643120908%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-lookup-options/index.html"><span>Account</span><wbr></wbr><span>Lookup</span><wbr></wbr><span><span>Options</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="643120908%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-account-lookup-options/index.html">AccountLookupOptions</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>includeUnverified<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>includeMultiKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Controls public-key restoration queries without exposing GraphQL filter types.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-832932741%2FClasslikes%2F791495369" anchor-label="AccountService" id="-832932741%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-account-service/index.html"><span>Account</span><wbr></wbr><span><span>Service</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-832932741%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-account-service/index.html">AccountService</a></div><div class="brief "><p class="paragraph">Kotlin-native account lifecycle operations exposed as <code class="lang-kotlin">client.accounts</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1653867663%2FClasslikes%2F791495369" anchor-label="DerivableAbstractedAccount" id="1653867663%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-derivable-abstracted-account/index.html"><span>Derivable</span><wbr></wbr><span>Abstracted</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1653867663%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-derivable-abstracted-account/index.html">DerivableAbstractedAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">authenticationFunction<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.transaction.authenticator/-authentication-function/index.html">AuthenticationFunction</a><span class="token punctuation">, </span></span><span class="parameter ">abstractPublicKey<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token punctuation">, </span></span><span class="parameter ">signer<span class="token operator">: </span><a href="-abstraction-signer/index.html">AbstractionSigner</a></span></span><span class="token punctuation">)</span> : <a href="-abstracted-account/index.html">AbstractedAccount</a></div><div class="brief "><p class="paragraph">An abstracted account whose address is deterministically derived from an identity byte string.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -144,6 +279,21 @@
               </div>
             </div>
           </div>
+<a data-name="-39102924%2FClasslikes%2F791495369" anchor-label="MultiEd25519Account" id="-39102924%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-multi-ed25519-account/index.html"><span>Multi</span><wbr></wbr><span><span>Ed25519Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-39102924%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-multi-ed25519-account/index.html">MultiEd25519Account</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>publicKey<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.core.crypto/-multi-ed25519-public-key/index.html">MultiEd25519PublicKey</a><span class="token punctuation">, </span></span><span class="parameter ">privateKeys<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../xyz.mcxross.kaptos.core.crypto/-ed25519-private-key/index.html">Ed25519PrivateKey</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">address<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-account/index.html">Account</a></div><div class="brief "><p class="paragraph">A legacy K-of-N Ed25519 account with immutable signer ordering.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="324897880%2FClasslikes%2F791495369" anchor-label="MultiKeyAccount" id="324897880%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
@@ -159,6 +309,21 @@
               </div>
             </div>
           </div>
+<a data-name="476032644%2FClasslikes%2F791495369" anchor-label="PasskeyAccount" id="476032644%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-passkey-account/index.html"><span>Passkey</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="476032644%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-passkey-account/index.html">PasskeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">credentialPublicKey<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.core.crypto/-secp256r1-public-key/index.html">Secp256r1PublicKey</a><span class="token punctuation">, </span></span><span class="parameter ">signer<span class="token operator">: </span><a href="-web-authn-signer/index.html">WebAuthnSigner</a><span class="token punctuation">, </span></span><span class="parameter ">address<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-transaction-signer/index.html">TransactionSigner</a></div><div class="brief "><p class="paragraph">A transaction signer backed by an application-owned P-256 WebAuthn credential.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
 <a data-name="-1408780723%2FClasslikes%2F791495369" anchor-label="SingleKeyAccount" id="-1408780723%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
             <div class="main-subrow keyValue ">
@@ -169,7 +334,97 @@
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-single-key-account/index.html">SingleKeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-account/index.html">Account</a></div><div class="brief "><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-single-key-account/index.html">SingleKeyAccount</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>privateKey<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.core.crypto/-private-key/index.html">PrivateKey</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>address<span class="token operator">: </span><a href="../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-account/index.html">Account</a></div><div class="brief "><p class="paragraph">Signer implementation for the SingleKey authentication scheme. This extends a SingleKeyAccount by adding signing capabilities through a valid private key. Currently, the only supported signature schemes are Ed25519 and Secp256k1. P-256 transaction signing uses <a href="-passkey-account/index.html">PasskeyAccount</a>, because WebAuthn credential acquisition is application-owned.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2029420214%2FClasslikes%2F791495369" anchor-label="SolanaDerivableAccount" id="-2029420214%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-solana-derivable-account/index.html"><span>Solana</span><wbr></wbr><span>Derivable</span><wbr></wbr><span><span>Account</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2029420214%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-solana-derivable-account/index.html">SolanaDerivableAccount</a> : <a href="-derivable-abstracted-account/index.html">DerivableAbstractedAccount</a></div><div class="brief "><p class="paragraph">Framework-native Solana derivable account abstraction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1299553582%2FClasslikes%2F791495369" anchor-label="SolanaMessageSigner" id="-1299553582%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-solana-message-signer/index.html"><span>Solana</span><wbr></wbr><span>Message</span><wbr></wbr><span><span>Signer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1299553582%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-solana-message-signer/index.html">SolanaMessageSigner</a></div><div class="brief "><p class="paragraph">Application-owned Solana wallet callback. The input is the complete SIWS message to sign.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-718340809%2FClasslikes%2F791495369" anchor-label="TransactionSigner" id="-718340809%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transaction-signer/index.html"><span>Transaction</span><wbr></wbr><span><span>Signer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-718340809%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-transaction-signer/index.html">TransactionSigner</a></div><div class="brief "><p class="paragraph">Suspend-capable signer contract for local keys, wallets, passkeys, and remote custody systems.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-21648125%2FClasslikes%2F791495369" anchor-label="TransactionSignerKind" id="-21648125%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transaction-signer-kind/index.html"><span>Transaction</span><wbr></wbr><span>Signer</span><wbr></wbr><span><span>Kind</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-21648125%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-transaction-signer-kind/index.html">TransactionSignerKind</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-transaction-signer-kind/index.html">TransactionSignerKind</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Signer family used for feature compatibility checks before sensitive operations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="443251751%2FClasslikes%2F791495369" anchor-label="WebAuthnSigner" id="443251751%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-web-authn-signer/index.html"><span>Web</span><wbr></wbr><span>Authn</span><wbr></wbr><span><span>Signer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="443251751%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-web-authn-signer/index.html">WebAuthnSigner</a></div><div class="brief "><p class="paragraph">Application bridge to a platform passkey or external WebAuthn implementation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1431075207%2FClasslikes%2F791495369" anchor-label="WebAuthnSigningRequest" id="1431075207%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-web-authn-signing-request/index.html"><span>Web</span><wbr></wbr><span>Authn</span><wbr></wbr><span>Signing</span><wbr></wbr><span><span>Request</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1431075207%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-web-authn-signing-request/index.html">WebAuthnSigningRequest</a></div><div class="brief "><p class="paragraph">Input passed to application-owned passkey credential acquisition.</p></div></div></div>
                 </div>
               </div>
             </div>

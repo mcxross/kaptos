@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DigitalAssetService</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    Kaptos
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0.0        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":kaptos/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":kaptos/commonMain"
+                                       data-filter=":kaptos/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    Kaptos
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="Kaptos::xyz.mcxross.kaptos.digitalasset/DigitalAssetService///PointingToDeclaration//791495369">
+  <div class="breadcrumbs"><a href="../../../index.html">Kaptos</a><span class="delimiter">/</span><a href="../index.html">xyz.mcxross.kaptos.digitalasset</a><span class="delimiter">/</span><span class="current">DigitalAssetService</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Digital</span><wbr></wbr><span>Asset</span><wbr></wbr><span><span>Service</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">DigitalAssetService</a></div><p class="paragraph">Digital-asset operations exposed as <code class="lang-kotlin">client.digitalAssets</code>.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="149335489%2FClasslikes%2F791495369" anchor-label="Companion" id="149335489%2FClasslikes%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="149335489%2FClasslikes%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1907618756%2FFunctions%2F791495369" anchor-label="buildAddProperty" id="-1907618756%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-add-property.html"><span>build</span><wbr></wbr><span>Add</span><wbr></wbr><span><span>Property</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907618756%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-add-property.html"><span class="token function">buildAddProperty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">property<span class="token operator">: </span><a href="../-digital-asset-property/index.html">DigitalAssetProperty</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a typed property-add transaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1119698843%2FFunctions%2F791495369" anchor-label="buildBurn" id="1119698843%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-burn.html"><span>build</span><wbr></wbr><span><span>Burn</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1119698843%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-burn.html"><span class="token function">buildBurn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a burn transaction for <a href="build-burn.html">assetId</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="127189638%2FFunctions%2F791495369" anchor-label="buildCreateCollection" id="127189638%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-create-collection.html"><span>build</span><wbr></wbr><span>Create</span><wbr></wbr><span><span>Collection</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="127189638%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-create-collection.html"><span class="token function">buildCreateCollection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">collection<span class="token operator">: </span><a href="../-digital-asset-collection-options/index.html">DigitalAssetCollectionOptions</a><span class="token operator"> = </span>DigitalAssetCollectionOptions()<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a collection-creation transaction with explicit mutability and royalty options.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1032611176%2FFunctions%2F791495369" anchor-label="buildFreezeTransfer" id="1032611176%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-freeze-transfer.html"><span>build</span><wbr></wbr><span>Freeze</span><wbr></wbr><span><span>Transfer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1032611176%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-freeze-transfer.html"><span class="token function">buildFreezeTransfer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a creator-authorized transfer freeze for <a href="build-freeze-transfer.html">assetId</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1351450578%2FFunctions%2F791495369" anchor-label="buildMint" id="1351450578%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-mint.html"><span>build</span><wbr></wbr><span><span>Mint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1351450578%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-mint.html"><span class="token function">buildMint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">collection<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">properties<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-digital-asset-property/index.html">DigitalAssetProperty</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a mint transaction for a standard digital asset.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1638602996%2FFunctions%2F791495369" anchor-label="buildMintSoulbound" id="1638602996%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-mint-soulbound.html"><span>build</span><wbr></wbr><span>Mint</span><wbr></wbr><span><span>Soulbound</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1638602996%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-mint-soulbound.html"><span class="token function">buildMintSoulbound</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">recipient<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">collection<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">&quot;&quot;</span><span class="token punctuation">, </span></span><span class="parameter ">properties<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../-digital-asset-property/index.html">DigitalAssetProperty</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a mint transaction whose new asset is initially soulbound to <a href="build-mint-soulbound.html">recipient</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1488684780%2FFunctions%2F791495369" anchor-label="buildRemoveProperty" id="1488684780%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-remove-property.html"><span>build</span><wbr></wbr><span>Remove</span><wbr></wbr><span><span>Property</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1488684780%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-remove-property.html"><span class="token function">buildRemoveProperty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a transaction that removes property <a href="build-remove-property.html">key</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-67191541%2FFunctions%2F791495369" anchor-label="buildSetDescription" id="-67191541%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-set-description.html"><span>build</span><wbr></wbr><span>Set</span><wbr></wbr><span><span>Description</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-67191541%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-set-description.html"><span class="token function">buildSetDescription</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">description<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a transaction that changes an asset's description.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1586021850%2FFunctions%2F791495369" anchor-label="buildSetName" id="1586021850%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-set-name.html"><span>build</span><wbr></wbr><span>Set</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1586021850%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-set-name.html"><span class="token function">buildSetName</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a transaction that changes an asset's display name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-893227365%2FFunctions%2F791495369" anchor-label="buildSetUri" id="-893227365%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-set-uri.html"><span>build</span><wbr></wbr><span>Set</span><wbr></wbr><span><span>Uri</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-893227365%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-set-uri.html"><span class="token function">buildSetUri</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">uri<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a transaction that changes an asset's metadata URI.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1035606670%2FFunctions%2F791495369" anchor-label="buildTransfer" id="1035606670%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-transfer.html"><span>build</span><wbr></wbr><span><span>Transfer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1035606670%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-transfer.html"><span class="token function">buildTransfer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">recipient<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds an ownership transfer for <a href="build-transfer.html">assetId</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1561983471%2FFunctions%2F791495369" anchor-label="buildUnfreezeTransfer" id="1561983471%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-unfreeze-transfer.html"><span>build</span><wbr></wbr><span>Unfreeze</span><wbr></wbr><span><span>Transfer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1561983471%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-unfreeze-transfer.html"><span class="token function">buildUnfreezeTransfer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a creator-authorized transfer unfreeze for <a href="build-unfreeze-transfer.html">assetId</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1596535078%2FFunctions%2F791495369" anchor-label="buildUpdateProperty" id="1596535078%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build-update-property.html"><span>build</span><wbr></wbr><span>Update</span><wbr></wbr><span><span>Property</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1596535078%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="build-update-property.html"><span class="token function">buildUpdateProperty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">sender<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">property<span class="token operator">: </span><a href="../-digital-asset-property/index.html">DigitalAssetProperty</a><span class="token punctuation">, </span></span><span class="parameter ">assetType<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-struct-tag/index.html">StructTag</a><span class="token operator"> = </span>DEFAULT_DIGITAL_ASSET_TYPE<span class="token punctuation">, </span></span><span class="parameter ">options<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-transaction-options/index.html">TransactionOptions</a><span class="token operator"> = </span>TransactionOptions()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-unsigned-transaction/-simple/index.html">UnsignedTransaction.Simple</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Builds a typed property-update transaction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1685340525%2FFunctions%2F791495369" anchor-label="getActivity" id="1685340525%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-activity.html"><span>get</span><wbr></wbr><span><span>Activity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1685340525%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="get-activity.html"><span class="token function">getActivity</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">assetId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">page<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-page-request/index.html">PageRequest</a><span class="token operator"> = </span>PageRequest()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-aptos-page/index.html">AptosPage</a><span class="token operator">&lt;</span><a href="../-digital-asset-activity/index.html">DigitalAssetActivity</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a typed page of activity for <a href="get-activity.html">assetId</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="974256705%2FFunctions%2F791495369" anchor-label="getCollection" id="974256705%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-collection.html"><span>get</span><wbr></wbr><span><span>Collection</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="974256705%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="get-collection.html"><span class="token function">getCollection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">collectionId<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../-collection-record/index.html">CollectionRecord</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Looks up a collection by object address.</p></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="get-collection.html"><span class="token function">getCollection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">creator<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../-collection-record/index.html">CollectionRecord</a><span class="token operator">?</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Looks up a collection by its <a href="get-collection.html">creator</a> and display <a href="get-collection.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1889302513%2FFunctions%2F791495369" anchor-label="getOwned" id="1889302513%2FFunctions%2F791495369" data-filterable-set=":kaptos/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":kaptos/commonMain" data-filterable-set=":kaptos/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-owned.html"><span>get</span><wbr></wbr><span><span>Owned</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1889302513%2FFunctions%2F791495369"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":kaptos/commonMain"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="get-owned.html"><span class="token function">getOwned</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">owner<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-account-address-input/index.html">AccountAddressInput</a><span class="token punctuation">, </span></span><span class="parameter ">page<span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-page-request/index.html">PageRequest</a><span class="token operator"> = </span>PageRequest()</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../xyz.mcxross.kaptos.model/-aptos-result/index.html">AptosResult</a><span class="token operator">&lt;</span><a href="../../xyz.mcxross.kaptos.model/-aptos-page/index.html">AptosPage</a><span class="token operator">&lt;</span><a href="../-digital-asset-ownership/index.html">DigitalAssetOwnership</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a typed page of digital assets currently owned by <a href="get-owned.html">owner</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
