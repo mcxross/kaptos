@@ -260,24 +260,20 @@ class MoveArgumentCodec(
       return
     }
     when (type) {
-      TypeTagBool -> bool(expect<MoveArgument.Bool>(type, argument).value)
-      TypeTagU8 -> u8(expect<MoveArgument.U8>(type, argument).value)
-      TypeTagU16 -> u16(expect<MoveArgument.U16>(type, argument).value)
-      TypeTagU32 -> u32(expect<MoveArgument.U32>(type, argument).value)
-      TypeTagU64 -> u64(expect<MoveArgument.U64>(type, argument).value)
-      TypeTagU128 ->
-        fixed(unsignedDecimalToLittleEndian(expect<MoveArgument.U128>(type, argument).value, 16))
-      TypeTagU256 ->
-        fixed(unsignedDecimalToLittleEndian(expect<MoveArgument.U256>(type, argument).value, 32))
-      TypeTagI8 -> u8(expect<MoveArgument.I8>(type, argument).value.toUByte())
-      TypeTagI16 -> u16(expect<MoveArgument.I16>(type, argument).value.toUShort())
-      TypeTagI32 -> u32(expect<MoveArgument.I32>(type, argument).value.toUInt())
-      TypeTagI64 -> u64(expect<MoveArgument.I64>(type, argument).value.toULong())
-      TypeTagI128 ->
-        fixed(signedDecimalToLittleEndian(expect<MoveArgument.I128>(type, argument).value, 16))
-      TypeTagI256 ->
-        fixed(signedDecimalToLittleEndian(expect<MoveArgument.I256>(type, argument).value, 32))
-      TypeTagAddress -> accountAddress(expect<MoveArgument.Address>(type, argument).value)
+      TypeTagBool -> bool(coerceBool(argument))
+      TypeTagU8 -> u8(coerceU8(argument))
+      TypeTagU16 -> u16(coerceU16(argument))
+      TypeTagU32 -> u32(coerceU32(argument))
+      TypeTagU64 -> u64(coerceU64(argument))
+      TypeTagU128 -> fixed(unsignedDecimalToLittleEndian(coerceU128(argument), 16))
+      TypeTagU256 -> fixed(unsignedDecimalToLittleEndian(coerceU256(argument), 32))
+      TypeTagI8 -> u8(coerceI8(argument).toUByte())
+      TypeTagI16 -> u16(coerceI16(argument).toUShort())
+      TypeTagI32 -> u32(coerceI32(argument).toUInt())
+      TypeTagI64 -> u64(coerceI64(argument).toULong())
+      TypeTagI128 -> fixed(signedDecimalToLittleEndian(coerceI128(argument), 16))
+      TypeTagI256 -> fixed(signedDecimalToLittleEndian(coerceI256(argument), 32))
+      TypeTagAddress -> accountAddress(coerceAddress(argument))
       is TypeTagVector -> encodeVector(type, argument, depth)
       is TypeTagStruct -> encodeStruct(type, argument, depth)
       is TypeTagReference -> encodeValue(type.ref, argument, depth)
@@ -291,11 +287,34 @@ class MoveArgumentCodec(
     argument: MoveArgument,
     depth: Int,
   ) {
-    if (type.type == TypeTagU8 && argument is MoveArgument.Bytes) {
-      bytes(argument.value)
-      return
+    if (type.type == TypeTagU8) {
+      when (argument) {
+        is MoveArgument.Bytes -> {
+          bytes(argument.value)
+          return
+        }
+        is MoveArgument.StringValue -> {
+          val hexCandidate = argument.value.removePrefix("0x")
+          if (
+            argument.value.startsWith("0x") &&
+              hexCandidate.length % 2 == 0 &&
+              hexCandidate.all { it in "0123456789abcdefABCDEF" }
+          ) {
+            bytes(hexCandidate.chunked(2).map { it.toInt(16).toByte() }.toByteArray())
+            return
+          }
+        }
+        else -> Unit
+      }
     }
-    val values = expect<MoveArgument.Vector>(type, argument).values
+    val values =
+      when (argument) {
+        is MoveArgument.Vector -> argument.values
+        else ->
+          throw IllegalArgumentException(
+            "Expected MoveArgument.Vector for $type, got ${argument::class.simpleName}"
+          )
+      }
     require(values.size.toLong() <= UInt.MAX_VALUE.toLong()) { "Move vector is too large" }
     uleb128(values.size.toUInt())
     values.forEach { encodeValue(type.type, it, depth + 1) }
@@ -310,25 +329,252 @@ class MoveArgumentCodec(
     when {
       tag.isBuiltin("string", "String") -> {
         require(tag.typeArgs.isEmpty()) { "Move String does not accept type arguments" }
-        string(expect<MoveArgument.StringValue>(type, argument).value)
+        when (argument) {
+          is MoveArgument.StringValue -> string(argument.value)
+          is MoveArgument.Bytes -> string(argument.value.decodeToString())
+          else -> string(expect<MoveArgument.StringValue>(type, argument).value)
+        }
       }
       tag.isBuiltin("object", "Object") -> {
         require(tag.typeArgs.size == 1) { "Move Object requires one type argument" }
-        accountAddress(expect<MoveArgument.Address>(type, argument).value)
+        accountAddress(coerceAddress(argument))
       }
       tag.isBuiltin("option", "Option") -> {
         require(tag.typeArgs.size == 1) { "Move Option must have one type argument" }
-        val value = expect<MoveArgument.Option>(type, argument).value
-        if (value == null) {
-          uleb128(0u)
-        } else {
-          uleb128(1u)
-          encodeValue(tag.typeArgs.single(), value, depth + 1)
+        val innerType = tag.typeArgs.single()
+        when (argument) {
+          is MoveArgument.Option -> {
+            if (argument.value == null) {
+              uleb128(0u)
+            } else {
+              uleb128(1u)
+              encodeValue(innerType, argument.value, depth + 1)
+            }
+          }
+          else -> {
+            uleb128(1u)
+            encodeValue(innerType, argument, depth + 1)
+          }
         }
       }
       else -> encodeCustomStruct(tag, argument, depth)
     }
   }
+
+  private fun coerceAddress(argument: MoveArgument): AccountAddress =
+    when (argument) {
+      is MoveArgument.Address -> argument.value
+      is MoveArgument.StringValue ->
+        try {
+          AccountAddress.fromString(argument.value)
+        } catch (e: Exception) {
+          throw IllegalArgumentException("Cannot parse '${argument.value}' as an AccountAddress", e)
+        }
+      else ->
+        throw IllegalArgumentException(
+          "Expected AccountAddress or hex string, got ${argument::class.simpleName}"
+        )
+    }
+
+  private fun coerceU8(argument: MoveArgument): UByte =
+    when (argument) {
+      is MoveArgument.U8 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value in 0..UByte.MAX_VALUE.toInt()) {
+          "Value ${argument.value} out of range for u8"
+        }
+        argument.value.toUByte()
+      }
+      is MoveArgument.StringValue -> {
+        val num =
+          argument.value.toULongOrNull()
+            ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as u8")
+        require(num <= UByte.MAX_VALUE.toULong()) { "Value ${argument.value} exceeds u8 maximum" }
+        num.toUByte()
+      }
+      else ->
+        throw IllegalArgumentException("Expected u8 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceU16(argument: MoveArgument): UShort =
+    when (argument) {
+      is MoveArgument.U16 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value in 0..UShort.MAX_VALUE.toInt()) {
+          "Value ${argument.value} out of range for u16"
+        }
+        argument.value.toUShort()
+      }
+      is MoveArgument.StringValue -> {
+        val num =
+          argument.value.toULongOrNull()
+            ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as u16")
+        require(num <= UShort.MAX_VALUE.toULong()) {
+          "Value ${argument.value} exceeds u16 maximum"
+        }
+        num.toUShort()
+      }
+      else ->
+        throw IllegalArgumentException("Expected u16 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceU32(argument: MoveArgument): UInt =
+    when (argument) {
+      is MoveArgument.U32 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value >= 0) { "Negative value ${argument.value} cannot be coerced to u32" }
+        argument.value.toUInt()
+      }
+      is MoveArgument.StringValue -> {
+        val num =
+          argument.value.toULongOrNull()
+            ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as u32")
+        require(num <= UInt.MAX_VALUE.toULong()) { "Value ${argument.value} exceeds u32 maximum" }
+        num.toUInt()
+      }
+      else ->
+        throw IllegalArgumentException("Expected u32 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceU64(argument: MoveArgument): ULong =
+    when (argument) {
+      is MoveArgument.U64 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value >= 0) { "Negative value ${argument.value} cannot be coerced to u64" }
+        argument.value.toULong()
+      }
+      is MoveArgument.I64 -> {
+        require(argument.value >= 0) { "Negative value ${argument.value} cannot be coerced to u64" }
+        argument.value.toULong()
+      }
+      is MoveArgument.StringValue ->
+        argument.value.toULongOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as u64")
+      else ->
+        throw IllegalArgumentException("Expected u64 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceU128(argument: MoveArgument): String =
+    when (argument) {
+      is MoveArgument.U128 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value >= 0) {
+          "Negative value ${argument.value} cannot be coerced to u128"
+        }
+        argument.value.toString()
+      }
+      is MoveArgument.I64 -> {
+        require(argument.value >= 0) {
+          "Negative value ${argument.value} cannot be coerced to u128"
+        }
+        argument.value.toString()
+      }
+      is MoveArgument.StringValue -> argument.value
+      else ->
+        throw IllegalArgumentException("Expected u128 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceU256(argument: MoveArgument): String =
+    when (argument) {
+      is MoveArgument.U256 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value >= 0) {
+          "Negative value ${argument.value} cannot be coerced to u256"
+        }
+        argument.value.toString()
+      }
+      is MoveArgument.I64 -> {
+        require(argument.value >= 0) {
+          "Negative value ${argument.value} cannot be coerced to u256"
+        }
+        argument.value.toString()
+      }
+      is MoveArgument.StringValue -> argument.value
+      else ->
+        throw IllegalArgumentException("Expected u256 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI8(argument: MoveArgument): Byte =
+    when (argument) {
+      is MoveArgument.I8 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value in Byte.MIN_VALUE..Byte.MAX_VALUE) {
+          "Value ${argument.value} out of range for i8"
+        }
+        argument.value.toByte()
+      }
+      is MoveArgument.StringValue ->
+        argument.value.toByteOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as i8")
+      else ->
+        throw IllegalArgumentException("Expected i8 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI16(argument: MoveArgument): Short =
+    when (argument) {
+      is MoveArgument.I16 -> argument.value
+      is MoveArgument.I32 -> {
+        require(argument.value in Short.MIN_VALUE..Short.MAX_VALUE) {
+          "Value ${argument.value} out of range for i16"
+        }
+        argument.value.toShort()
+      }
+      is MoveArgument.StringValue ->
+        argument.value.toShortOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as i16")
+      else ->
+        throw IllegalArgumentException("Expected i16 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI32(argument: MoveArgument): Int =
+    when (argument) {
+      is MoveArgument.I32 -> argument.value
+      is MoveArgument.StringValue ->
+        argument.value.toIntOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as i32")
+      else ->
+        throw IllegalArgumentException("Expected i32 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI64(argument: MoveArgument): Long =
+    when (argument) {
+      is MoveArgument.I64 -> argument.value
+      is MoveArgument.I32 -> argument.value.toLong()
+      is MoveArgument.StringValue ->
+        argument.value.toLongOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as i64")
+      else ->
+        throw IllegalArgumentException("Expected i64 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI128(argument: MoveArgument): String =
+    when (argument) {
+      is MoveArgument.I128 -> argument.value
+      is MoveArgument.I32 -> argument.value.toString()
+      is MoveArgument.I64 -> argument.value.toString()
+      is MoveArgument.StringValue -> argument.value
+      else ->
+        throw IllegalArgumentException("Expected i128 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceI256(argument: MoveArgument): String =
+    when (argument) {
+      is MoveArgument.I256 -> argument.value
+      is MoveArgument.I32 -> argument.value.toString()
+      is MoveArgument.I64 -> argument.value.toString()
+      is MoveArgument.StringValue -> argument.value
+      else ->
+        throw IllegalArgumentException("Expected i256 number, got ${argument::class.simpleName}")
+    }
+
+  private fun coerceBool(argument: MoveArgument): Boolean =
+    when (argument) {
+      is MoveArgument.Bool -> argument.value
+      is MoveArgument.StringValue ->
+        argument.value.toBooleanStrictOrNull()
+          ?: throw IllegalArgumentException("Cannot parse '${argument.value}' as boolean")
+      else -> throw IllegalArgumentException("Expected boolean, got ${argument::class.simpleName}")
+    }
 
   private suspend fun AptosBcsWriter.encodeCustomStruct(
     tag: StructTag,

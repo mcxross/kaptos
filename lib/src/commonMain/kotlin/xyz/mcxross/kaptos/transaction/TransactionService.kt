@@ -37,6 +37,7 @@ import xyz.mcxross.kaptos.model.WaitForTransactionOptions
 import xyz.mcxross.kaptos.model.map
 import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.move.MoveArgumentCodec
+import xyz.mcxross.kaptos.move.toMoveArguments
 import xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.builder.generateRawTransaction
@@ -60,6 +61,21 @@ interface TransactionService {
     payload: TransactionPayload,
     options: TransactionOptions? = null,
   ): AptosResult<UnsignedTransaction.Simple>
+
+  /** Builds a single-sender transaction directly from a Move function name and arguments. */
+  suspend fun build(
+    sender: AccountAddressInput,
+    function: String,
+    arguments: List<Any?> = emptyList(),
+    typeArguments: List<TypeTag> = emptyList(),
+    options: TransactionOptions? = null,
+  ): AptosResult<UnsignedTransaction.Simple> =
+    when (
+      val payload = entryFunctionPayload(function, typeArguments, arguments.toMoveArguments())
+    ) {
+      is AptosResult.Failure -> payload
+      is AptosResult.Success -> build(sender, payload.value, options)
+    }
 
   /** Builds a transaction whose secondary signer order is preserved in the signing message. */
   suspend fun buildMultiAgent(
@@ -157,6 +173,33 @@ interface TransactionService {
     return submitPayload(signer, payload, options, secondarySigners, feePayer)
   }
 
+  /**
+   * Builds, signs, and submits directly from a Move function name and arguments. Arguments are
+   * automatically coerced against the on-chain function ABI.
+   */
+  suspend fun signAndSubmit(
+    signer: TransactionSigner,
+    function: String,
+    arguments: List<Any?> = emptyList(),
+    typeArguments: List<TypeTag> = emptyList(),
+    options: TransactionOptions? = null,
+    secondarySigners: List<TransactionSigner> = emptyList(),
+    feePayer: TransactionSigner? = null,
+  ): AptosResult<PendingTransactionResponse> =
+    when (
+      val payload = entryFunctionPayload(function, typeArguments, arguments.toMoveArguments())
+    ) {
+      is AptosResult.Failure -> payload
+      is AptosResult.Success ->
+        signAndSubmit(
+          signer = signer,
+          payload = payload.value,
+          options = options,
+          secondarySigners = secondarySigners,
+          feePayer = feePayer,
+        )
+    }
+
   /** Signs, submits, and waits for an already-built transaction. */
   suspend fun submitAndWait(
     signer: TransactionSigner,
@@ -199,6 +242,35 @@ interface TransactionService {
     ) {
       is AptosResult.Failure -> pending
       is AptosResult.Success -> waitForTransaction(pending.value, waitOptions)
+    }
+
+  /**
+   * Builds, signs, submits, and waits directly from a Move function name and arguments. Arguments
+   * are automatically coerced against the on-chain function ABI.
+   */
+  suspend fun submitAndWait(
+    signer: TransactionSigner,
+    function: String,
+    arguments: List<Any?> = emptyList(),
+    typeArguments: List<TypeTag> = emptyList(),
+    transactionOptions: TransactionOptions? = null,
+    secondarySigners: List<TransactionSigner> = emptyList(),
+    feePayer: TransactionSigner? = null,
+    waitOptions: WaitForTransactionOptions = WaitForTransactionOptions(),
+  ): AptosResult<TransactionResponse> =
+    when (
+      val payload = entryFunctionPayload(function, typeArguments, arguments.toMoveArguments())
+    ) {
+      is AptosResult.Failure -> payload
+      is AptosResult.Success ->
+        submitAndWait(
+          signer = signer,
+          payload = payload.value,
+          transactionOptions = transactionOptions,
+          secondarySigners = secondarySigners,
+          feePayer = feePayer,
+          waitOptions = waitOptions,
+        )
     }
 
   /** Waits until [hash] commits or the configured wait policy terminates. */

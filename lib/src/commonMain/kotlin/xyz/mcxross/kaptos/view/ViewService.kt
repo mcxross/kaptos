@@ -36,6 +36,29 @@ interface ViewService {
     ledgerVersion: ULong? = null,
   ): AptosResult<MoveViewResult>
 
+  /** Concise ABI-validated view call accepting vararg arguments inferred as [MoveArgument]s. */
+  suspend fun callOf(
+    function: String,
+    vararg arguments: Any?,
+  ): AptosResult<MoveViewResult> =
+    call(
+      function = function,
+      typeArguments = emptyList(),
+      arguments = MoveArgument.fromAll(*arguments),
+    )
+
+  /** Concise ABI-validated view call with type arguments and vararg arguments. */
+  suspend fun callOf(
+    function: String,
+    typeArguments: List<TypeTag>,
+    vararg arguments: Any?,
+  ): AptosResult<MoveViewResult> =
+    call(
+      function = function,
+      typeArguments = typeArguments,
+      arguments = MoveArgument.fromAll(*arguments),
+    )
+
   /**
    * Sends JSON as supplied, without ABI validation. The fullnode validates raw argument semantics.
    * Calls [function] at an optional historical [ledgerVersion] and preserves JSON return values.
