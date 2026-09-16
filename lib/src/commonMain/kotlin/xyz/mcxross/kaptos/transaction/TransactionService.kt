@@ -6,6 +6,7 @@
  */
 package xyz.mcxross.kaptos.transaction
 
+import kotlin.jvm.JvmName
 import xyz.mcxross.kaptos.account.TransactionSigner
 import xyz.mcxross.kaptos.core.Hex
 import xyz.mcxross.kaptos.core.crypto.PublicKey
@@ -35,6 +36,8 @@ import xyz.mcxross.kaptos.model.UnsignedTransaction
 import xyz.mcxross.kaptos.model.UserTransactionResponse
 import xyz.mcxross.kaptos.model.WaitForTransactionOptions
 import xyz.mcxross.kaptos.model.map
+import xyz.mcxross.kaptos.model.toTypeTags
+import xyz.mcxross.kaptos.model.typeTagOf
 import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.move.MoveArgumentCodec
 import xyz.mcxross.kaptos.move.toMoveArguments
@@ -604,3 +607,119 @@ internal fun createExternalFeePayerRequest(
     )
   }
 }
+
+/** Builds a single-sender transaction directly from string type arguments. */
+@JvmName("buildWithStrings")
+suspend fun TransactionService.build(
+  sender: AccountAddressInput,
+  function: String,
+  typeArguments: List<String>,
+  arguments: List<Any?> = emptyList(),
+  options: TransactionOptions? = null,
+): AptosResult<UnsignedTransaction.Simple> =
+  build(
+    sender = sender,
+    function = function,
+    arguments = arguments,
+    typeArguments = typeArguments.toTypeTags(),
+    options = options,
+  )
+
+/** Builds a single-sender transaction inferring a single type argument from [T1]. */
+suspend inline fun <reified T1> TransactionService.build(
+  sender: AccountAddressInput,
+  function: String,
+  arguments: List<Any?> = emptyList(),
+  options: TransactionOptions? = null,
+): AptosResult<UnsignedTransaction.Simple> =
+  build(
+    sender = sender,
+    function = function,
+    arguments = arguments,
+    typeArguments = listOf(typeTagOf<T1>()),
+    options = options,
+  )
+
+/** Builds, signs, and submits with string type arguments. */
+@JvmName("signAndSubmitWithStrings")
+suspend fun TransactionService.signAndSubmit(
+  signer: TransactionSigner,
+  function: String,
+  typeArguments: List<String>,
+  arguments: List<Any?> = emptyList(),
+  options: TransactionOptions? = null,
+  secondarySigners: List<TransactionSigner> = emptyList(),
+  feePayer: TransactionSigner? = null,
+): AptosResult<PendingTransactionResponse> =
+  signAndSubmit(
+    signer = signer,
+    function = function,
+    arguments = arguments,
+    typeArguments = typeArguments.toTypeTags(),
+    options = options,
+    secondarySigners = secondarySigners,
+    feePayer = feePayer,
+  )
+
+/** Builds, signs, and submits inferring a single type argument from [T1]. */
+suspend inline fun <reified T1> TransactionService.signAndSubmit(
+  signer: TransactionSigner,
+  function: String,
+  arguments: List<Any?> = emptyList(),
+  options: TransactionOptions? = null,
+  secondarySigners: List<TransactionSigner> = emptyList(),
+  feePayer: TransactionSigner? = null,
+): AptosResult<PendingTransactionResponse> =
+  signAndSubmit(
+    signer = signer,
+    function = function,
+    arguments = arguments,
+    typeArguments = listOf(typeTagOf<T1>()),
+    options = options,
+    secondarySigners = secondarySigners,
+    feePayer = feePayer,
+  )
+
+/** Builds, signs, submits, and waits with string type arguments. */
+@JvmName("submitAndWaitWithStrings")
+suspend fun TransactionService.submitAndWait(
+  signer: TransactionSigner,
+  function: String,
+  typeArguments: List<String>,
+  arguments: List<Any?> = emptyList(),
+  transactionOptions: TransactionOptions? = null,
+  secondarySigners: List<TransactionSigner> = emptyList(),
+  feePayer: TransactionSigner? = null,
+  waitOptions: WaitForTransactionOptions = WaitForTransactionOptions(),
+): AptosResult<TransactionResponse> =
+  submitAndWait(
+    signer = signer,
+    function = function,
+    arguments = arguments,
+    typeArguments = typeArguments.toTypeTags(),
+    transactionOptions = transactionOptions,
+    secondarySigners = secondarySigners,
+    feePayer = feePayer,
+    waitOptions = waitOptions,
+  )
+
+/** Builds, signs, submits, and waits inferring a single type argument from [T1]. */
+suspend inline fun <reified T1> TransactionService.submitAndWait(
+  signer: TransactionSigner,
+  function: String,
+  arguments: List<Any?> = emptyList(),
+  transactionOptions: TransactionOptions? = null,
+  secondarySigners: List<TransactionSigner> = emptyList(),
+  feePayer: TransactionSigner? = null,
+  waitOptions: WaitForTransactionOptions = WaitForTransactionOptions(),
+): AptosResult<TransactionResponse> =
+  submitAndWait(
+    signer = signer,
+    function = function,
+    arguments = arguments,
+    typeArguments = listOf(typeTagOf<T1>()),
+    transactionOptions = transactionOptions,
+    secondarySigners = secondarySigners,
+    feePayer = feePayer,
+    waitOptions = waitOptions,
+  )

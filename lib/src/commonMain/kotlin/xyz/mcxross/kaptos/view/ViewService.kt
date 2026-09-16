@@ -6,6 +6,7 @@
  */
 package xyz.mcxross.kaptos.view
 
+import kotlin.jvm.JvmName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
@@ -20,6 +21,8 @@ import xyz.mcxross.kaptos.model.MimeType
 import xyz.mcxross.kaptos.model.RequestOptions
 import xyz.mcxross.kaptos.model.TransportConfig
 import xyz.mcxross.kaptos.model.TypeTag
+import xyz.mcxross.kaptos.model.toTypeTags
+import xyz.mcxross.kaptos.model.typeTagOf
 import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.move.MoveArgumentCodec
 
@@ -70,6 +73,43 @@ interface ViewService {
     ledgerVersion: ULong? = null,
   ): AptosResult<MoveViewResult>
 }
+
+/** Concise ABI-validated view call with string type arguments and vararg arguments. */
+@JvmName("callOfStrings")
+suspend fun ViewService.callOf(
+  function: String,
+  typeArguments: List<String>,
+  vararg arguments: Any?,
+): AptosResult<MoveViewResult> =
+  callOf(
+    function = function,
+    typeArguments = typeArguments.toTypeTags(),
+    arguments = arguments,
+  )
+
+/** Concise ABI-validated view call inferring a single type argument from [T1]. */
+@JvmName("callOfReified")
+suspend inline fun <reified T1> ViewService.callOf(
+  function: String,
+  vararg arguments: Any?,
+): AptosResult<MoveViewResult> =
+  callOf(
+    function,
+    listOf(typeTagOf<T1>()),
+    *arguments,
+  )
+
+/** Concise ABI-validated view call inferring two type arguments from [T1] and [T2]. */
+@JvmName("callOfReified2")
+suspend inline fun <reified T1, reified T2> ViewService.callOf(
+  function: String,
+  vararg arguments: Any?,
+): AptosResult<MoveViewResult> =
+  callOf(
+    function,
+    listOf(typeTagOf<T1>(), typeTagOf<T2>()),
+    *arguments,
+  )
 
 @Serializable
 private data class MoveViewRequest(

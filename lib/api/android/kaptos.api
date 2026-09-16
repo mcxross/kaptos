@@ -1677,6 +1677,10 @@ public final class xyz/mcxross/kaptos/model/AnySignatureVariant : java/lang/Enum
 	public static fun values ()[Lxyz/mcxross/kaptos/model/AnySignatureVariant;
 }
 
+public final class xyz/mcxross/kaptos/model/AptosCoin : xyz/mcxross/kaptos/model/MoveStructType {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/model/AptosCoin;
+}
+
 public final class xyz/mcxross/kaptos/model/AptosConfigurationException : java/lang/IllegalArgumentException {
 	public fun <init> (Lxyz/mcxross/kaptos/model/AptosError;)V
 	public final fun getError ()Lxyz/mcxross/kaptos/model/AptosError;
@@ -3137,6 +3141,11 @@ public final class xyz/mcxross/kaptos/model/MoveStructField$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public abstract class xyz/mcxross/kaptos/model/MoveStructType : xyz/mcxross/kaptos/model/MoveType {
+	public fun <init> (Ljava/lang/String;)V
+	public fun getTypeTag ()Lxyz/mcxross/kaptos/model/TypeTag;
+}
+
 public final class xyz/mcxross/kaptos/model/MoveStructVariant {
 	public static final field Companion Lxyz/mcxross/kaptos/model/MoveStructVariant$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/util/List;)V
@@ -3164,6 +3173,16 @@ public final synthetic class xyz/mcxross/kaptos/model/MoveStructVariant$$seriali
 
 public final class xyz/mcxross/kaptos/model/MoveStructVariant$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class xyz/mcxross/kaptos/model/MoveType {
+	public abstract fun getTypeTag ()Lxyz/mcxross/kaptos/model/TypeTag;
+}
+
+public final class xyz/mcxross/kaptos/model/MoveTypeRegistry {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/model/MoveTypeRegistry;
+	public final fun find (Lkotlin/reflect/KClass;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun register (Lkotlin/reflect/KClass;Lxyz/mcxross/kaptos/model/TypeTag;)V
 }
 
 public abstract class xyz/mcxross/kaptos/model/MoveValue {
@@ -3983,10 +4002,12 @@ public final class xyz/mcxross/kaptos/model/StateCheckpointTransactionResponse$C
 public final class xyz/mcxross/kaptos/model/StructTag {
 	public static final field Companion Lxyz/mcxross/kaptos/model/StructTag$Companion;
 	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
 	public final fun getModuleName ()Ljava/lang/String;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getTypeArgs ()Ljava/util/List;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -4215,6 +4236,7 @@ public final class xyz/mcxross/kaptos/model/TransactionPayload$Companion {
 	public static synthetic fun entryFunction$default (Lxyz/mcxross/kaptos/model/TransactionPayload$Companion;Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
 	public final fun entryFunctionOf (Ljava/lang/String;Ljava/util/List;[Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
 	public final fun entryFunctionOf (Ljava/lang/String;[Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
+	public final fun entryFunctionOfStrings (Ljava/lang/String;Ljava/util/List;[Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
 	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/model/TransactionPayload;
 }
 
@@ -4397,10 +4419,41 @@ public abstract class xyz/mcxross/kaptos/model/TypeTag {
 }
 
 public final class xyz/mcxross/kaptos/model/TypeTag$Companion {
+	public final fun from (Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun fromAll (Ljava/lang/Iterable;)Ljava/util/List;
+	public final fun fromAll ([Ljava/lang/Object;)Ljava/util/List;
 	public final fun fromString (Ljava/lang/String;Z)Lxyz/mcxross/kaptos/model/TypeTag;
 	public static synthetic fun fromString$default (Lxyz/mcxross/kaptos/model/TypeTag$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getAPT ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getAddress ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getAptosCoin ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getBool ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI128 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI16 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI256 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI32 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI64 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getI8 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getSigner ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getString ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU128 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU16 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU256 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU32 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU64 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun getU8 ()Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun invoke (Ljava/lang/String;Z)Lxyz/mcxross/kaptos/model/TypeTag;
+	public static synthetic fun invoke$default (Lxyz/mcxross/kaptos/model/TypeTag$Companion;Ljava/lang/String;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun objectTag (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
+	public final fun objectTag (Lxyz/mcxross/kaptos/model/TypeTag;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
+	public final fun option (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
+	public final fun option (Lxyz/mcxross/kaptos/model/TypeTag;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public final fun struct (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
+	public final fun struct (Lxyz/mcxross/kaptos/model/StructTag;)Lxyz/mcxross/kaptos/model/TypeTagStruct;
 	public final fun valueOf (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public final fun vector (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TypeTagVector;
+	public final fun vector (Lxyz/mcxross/kaptos/model/TypeTag;)Lxyz/mcxross/kaptos/model/TypeTagVector;
 }
 
 public final class xyz/mcxross/kaptos/model/TypeTagAddress : xyz/mcxross/kaptos/model/TypeTag {
@@ -4421,8 +4474,10 @@ public final class xyz/mcxross/kaptos/model/TypeTagBool : xyz/mcxross/kaptos/mod
 
 public final class xyz/mcxross/kaptos/model/TypeTagGeneric : xyz/mcxross/kaptos/model/TypeTag {
 	public synthetic fun <init> (SLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getId-Mh2AYeg ()S
 	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -4479,12 +4534,19 @@ public final class xyz/mcxross/kaptos/model/TypeTagKt {
 	public static final fun objectStructTag (Lxyz/mcxross/kaptos/model/TypeTag;)Lxyz/mcxross/kaptos/model/StructTag;
 	public static final fun optionStructTag (Lxyz/mcxross/kaptos/model/TypeTag;)Lxyz/mcxross/kaptos/model/StructTag;
 	public static final fun stringStructTag ()Lxyz/mcxross/kaptos/model/StructTag;
+	public static final fun toTypeTag (Ljava/lang/String;Z)Lxyz/mcxross/kaptos/model/TypeTag;
+	public static synthetic fun toTypeTag$default (Ljava/lang/String;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TypeTag;
+	public static final fun toTypeTags (Ljava/lang/Iterable;Z)Ljava/util/List;
+	public static synthetic fun toTypeTags$default (Ljava/lang/Iterable;ZILjava/lang/Object;)Ljava/util/List;
+	public static final fun toTypeTagsFromAny (Ljava/lang/Iterable;)Ljava/util/List;
 }
 
 public final class xyz/mcxross/kaptos/model/TypeTagReference : xyz/mcxross/kaptos/model/TypeTag {
 	public fun <init> (Lxyz/mcxross/kaptos/model/TypeTag;)V
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getRef ()Lxyz/mcxross/kaptos/model/TypeTag;
 	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -4500,8 +4562,10 @@ public final class xyz/mcxross/kaptos/model/TypeTagStruct : xyz/mcxross/kaptos/m
 	public static final field Companion Lxyz/mcxross/kaptos/model/TypeTagStruct$Companion;
 	public fun <init> (Ljava/lang/String;)V
 	public fun <init> (Lxyz/mcxross/kaptos/model/StructTag;)V
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getType ()Lxyz/mcxross/kaptos/model/StructTag;
 	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
 	public final fun isString ()Z
 	public fun toString ()Ljava/lang/String;
 }
@@ -4602,8 +4666,10 @@ public final class xyz/mcxross/kaptos/model/TypeTagVariants$Companion {
 public final class xyz/mcxross/kaptos/model/TypeTagVector : xyz/mcxross/kaptos/model/TypeTag {
 	public static final field Companion Lxyz/mcxross/kaptos/model/TypeTagVector$Companion;
 	public fun <init> (Lxyz/mcxross/kaptos/model/TypeTag;)V
+	public fun equals (Ljava/lang/Object;)Z
 	public final fun getType ()Lxyz/mcxross/kaptos/model/TypeTag;
 	public fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -5866,6 +5932,15 @@ public final class xyz/mcxross/kaptos/transaction/TransactionService$DefaultImpl
 	public static synthetic fun waitForTransaction$default (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
+public final class xyz/mcxross/kaptos/transaction/TransactionServiceKt {
+	public static final fun buildWithStrings (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildWithStrings$default (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun signAndSubmitWithStrings (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmitWithStrings$default (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun submitAndWaitWithStrings (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun submitAndWaitWithStrings$default (Lxyz/mcxross/kaptos/transaction/TransactionService;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public final class xyz/mcxross/kaptos/transaction/TransactionWorker {
 	public static final field Companion Lxyz/mcxross/kaptos/transaction/TransactionWorker$Companion;
 	public static final field DEFAULT_CAPACITY I
@@ -6373,6 +6448,10 @@ public final class xyz/mcxross/kaptos/view/ViewService$DefaultImpls {
 	public static fun callOf (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;[Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static fun callOf (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;[Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun callRaw-o-gju8c$default (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/ULong;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/view/ViewServiceKt {
+	public static final fun callOfStrings (Lxyz/mcxross/kaptos/view/ViewService;Ljava/lang/String;Ljava/util/List;[Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class xyz/mcxross/kaptos/view/serialization/ViewDecodingKt {

@@ -15,6 +15,7 @@
  */
 package xyz.mcxross.kaptos.model
 
+import kotlin.jvm.JvmName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import xyz.mcxross.kaptos.extension.toStructTag
@@ -87,6 +88,10 @@ sealed class TypeTag {
   }
 
   companion object {
+    /** Parses [string] into a [TypeTag], allowing invoke syntax: `TypeTag("0x1::coin::Coin")`. */
+    operator fun invoke(string: String, allowGenerics: Boolean = false): TypeTag =
+      fromString(string, allowGenerics)
+
     fun fromString(string: String, allowGenerics: Boolean = false): TypeTag =
       TypeTagParser.parseTypeTag(string, allowGenerics)
 
@@ -110,6 +115,102 @@ sealed class TypeTag {
         else -> throw IllegalArgumentException("Invalid TypeTag string: $string")
       }
     }
+
+    /**
+     * Converts [value] to [TypeTag] from supported types ([TypeTag], [StructTag], [String],
+     * [MoveType]).
+     */
+    fun from(value: Any?): TypeTag =
+      when (value) {
+        is TypeTag -> value
+        is StructTag -> TypeTagStruct(value)
+        is String -> fromString(value)
+        is MoveType -> value.typeTag
+        else ->
+          throw IllegalArgumentException(
+            "Cannot convert ${value?.let { it::class.simpleName } ?: "null"} to TypeTag"
+          )
+      }
+
+    /** Converts each value in [values] to a [TypeTag]. */
+    fun fromAll(vararg values: Any?): List<TypeTag> = values.map { from(it) }
+
+    /** Converts each value in [values] to a [TypeTag]. */
+    fun fromAll(values: Iterable<Any?>): List<TypeTag> = values.map { from(it) }
+
+    // Predefined standard type singletons & constants
+    val Bool: TypeTag
+      get() = TypeTagBool
+
+    val U8: TypeTag
+      get() = TypeTagU8
+
+    val U16: TypeTag
+      get() = TypeTagU16
+
+    val U32: TypeTag
+      get() = TypeTagU32
+
+    val U64: TypeTag
+      get() = TypeTagU64
+
+    val U128: TypeTag
+      get() = TypeTagU128
+
+    val U256: TypeTag
+      get() = TypeTagU256
+
+    val I8: TypeTag
+      get() = TypeTagI8
+
+    val I16: TypeTag
+      get() = TypeTagI16
+
+    val I32: TypeTag
+      get() = TypeTagI32
+
+    val I64: TypeTag
+      get() = TypeTagI64
+
+    val I128: TypeTag
+      get() = TypeTagI128
+
+    val I256: TypeTag
+      get() = TypeTagI256
+
+    val Address: TypeTag
+      get() = TypeTagAddress
+
+    val Signer: TypeTag
+      get() = TypeTagSigner
+
+    val String: TypeTag
+      get() = TypeTagStruct(stringStructTag())
+
+    val AptosCoin: TypeTag
+      get() = TypeTagStruct(aptosCoinStructTag())
+
+    val APT: TypeTag
+      get() = AptosCoin
+
+    // Factory helpers
+    fun vector(elementType: TypeTag): TypeTagVector = TypeTagVector(elementType)
+
+    fun vector(elementType: String): TypeTagVector = TypeTagVector(fromString(elementType))
+
+    fun option(elementType: TypeTag): TypeTagStruct = TypeTagStruct(optionStructTag(elementType))
+
+    fun option(elementType: String): TypeTagStruct =
+      TypeTagStruct(optionStructTag(fromString(elementType)))
+
+    fun objectTag(elementType: TypeTag): TypeTagStruct = TypeTagStruct(objectStructTag(elementType))
+
+    fun objectTag(elementType: String): TypeTagStruct =
+      TypeTagStruct(objectStructTag(fromString(elementType)))
+
+    fun struct(type: String): TypeTagStruct = TypeTagStruct(type)
+
+    fun struct(type: StructTag): TypeTagStruct = TypeTagStruct(type)
   }
 }
 
@@ -134,6 +235,11 @@ class TypeTagGeneric(val id: UShort) : TypeTag() {
     get() = "$id"
 
   override fun toString(): String = "T$value"
+
+  override fun equals(other: Any?): Boolean =
+    this === other || (other is TypeTagGeneric && id == other.id)
+
+  override fun hashCode(): Int = id.hashCode()
 }
 
 class TypeTagReference(@Transient val ref: TypeTag) : TypeTag() {
@@ -142,6 +248,11 @@ class TypeTagReference(@Transient val ref: TypeTag) : TypeTag() {
     get() = "&$ref"
 
   override fun toString(): String = value
+
+  override fun equals(other: Any?): Boolean =
+    this === other || (other is TypeTagReference && ref == other.ref)
+
+  override fun hashCode(): Int = ref.hashCode()
 }
 
 data object TypeTagSigner : TypeTag() {
@@ -244,6 +355,11 @@ class TypeTagVector(val type: TypeTag) : TypeTag() {
     return "vector<${type}>"
   }
 
+  override fun equals(other: Any?): Boolean =
+    this === other || (other is TypeTagVector && type == other.type)
+
+  override fun hashCode(): Int = type.hashCode()
+
   companion object {
     fun u8(): TypeTagVector {
       return TypeTagVector(type = TypeTagU8)
@@ -277,6 +393,11 @@ class TypeTagStruct(val type: StructTag) : TypeTag() {
     }
     return "${this.type.address}::${this.type.moduleName}::${this.type.name}$typePredicate"
   }
+
+  override fun equals(other: Any?): Boolean =
+    this === other || (other is TypeTagStruct && type == other.type)
+
+  override fun hashCode(): Int = type.hashCode()
 }
 
 @Serializable
@@ -295,6 +416,22 @@ class StructTag(
     if (typeArgs.isNotEmpty()) {
       append(typeArgs.joinToString(prefix = "<", postfix = ">", separator = ","))
     }
+  }
+
+  override fun equals(other: Any?): Boolean =
+    this === other ||
+      (other is StructTag &&
+        address == other.address &&
+        moduleName == other.moduleName &&
+        name == other.name &&
+        typeArgs == other.typeArgs)
+
+  override fun hashCode(): Int {
+    var result = address.hashCode()
+    result = 31 * result + moduleName.hashCode()
+    result = 31 * result + name.hashCode()
+    result = 31 * result + typeArgs.hashCode()
+    return result
   }
 
   companion object {
@@ -341,3 +478,16 @@ fun objectStructTag(typeArg: TypeTag): StructTag {
     listOf(typeArg),
   )
 }
+
+/** Parses this string into a [TypeTag]. */
+fun String.toTypeTag(allowGenerics: Boolean = false): TypeTag =
+  TypeTag.fromString(this, allowGenerics)
+
+/** Parses each string in this iterable into a [TypeTag]. */
+fun Iterable<String>.toTypeTags(allowGenerics: Boolean = false): List<TypeTag> = map {
+  it.toTypeTag(allowGenerics)
+}
+
+/** Converts each element in this iterable to a [TypeTag]. */
+@JvmName("toTypeTagsFromAny")
+fun Iterable<Any?>.toTypeTags(): List<TypeTag> = map { TypeTag.from(it) }

@@ -509,6 +509,11 @@ abstract interface xyz.mcxross.kaptos.model/InputGenerateTransactionPayloadData 
 
 abstract interface xyz.mcxross.kaptos.model/InputGenerateTransactionPayloadDataWithRemoteABI // xyz.mcxross.kaptos.model/InputGenerateTransactionPayloadDataWithRemoteABI|null[0]
 
+abstract interface xyz.mcxross.kaptos.model/MoveType { // xyz.mcxross.kaptos.model/MoveType|null[0]
+    abstract val typeTag // xyz.mcxross.kaptos.model/MoveType.typeTag|{}typeTag[0]
+        abstract fun <get-typeTag>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/MoveType.typeTag.<get-typeTag>|<get-typeTag>(){}[0]
+}
+
 abstract interface xyz.mcxross.kaptos.names/NameService { // xyz.mcxross.kaptos.names/NameService|null[0]
     abstract suspend fun buildClearTarget(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.Simple> // xyz.mcxross.kaptos.names/NameService.buildClearTarget|buildClearTarget(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
     abstract suspend fun buildRegister(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.names/NameExpirationPolicy, kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.Simple> // xyz.mcxross.kaptos.names/NameService.buildRegister|buildRegister(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.names.NameExpirationPolicy;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
@@ -1143,6 +1148,7 @@ sealed interface xyz.mcxross.kaptos.model/TransactionPayload { // xyz.mcxross.ka
     final object Companion { // xyz.mcxross.kaptos.model/TransactionPayload.Companion|null[0]
         final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
         final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin/Function1<xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder, kotlin/Unit>): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.Function1<xyz.mcxross.kaptos.model.EntryFunctionArgumentBuilder,kotlin.Unit>){}[0]
+        final fun entryFunctionOf(kotlin/String, kotlin.collections/List<kotlin/String>, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunctionOf|entryFunctionOf(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.Array<out|kotlin.Any?>...){}[0]
         final fun entryFunctionOf(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag>, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunctionOf|entryFunctionOf(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.Array<out|kotlin.Any?>...){}[0]
         final fun entryFunctionOf(kotlin/String, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunctionOf|entryFunctionOf(kotlin.String;kotlin.Array<out|kotlin.Any?>...){}[0]
         final fun fromBcs(kotlin/ByteArray): xyz.mcxross.kaptos.model/TransactionPayload // xyz.mcxross.kaptos.model/TransactionPayload.Companion.fromBcs|fromBcs(kotlin.ByteArray){}[0]
@@ -1871,6 +1877,13 @@ abstract class xyz.mcxross.kaptos.core.crypto/Signature { // xyz.mcxross.kaptos.
     abstract fun toBcs(): kotlin/ByteArray // xyz.mcxross.kaptos.core.crypto/Signature.toBcs|toBcs(){}[0]
     abstract fun toByteArray(): kotlin/ByteArray // xyz.mcxross.kaptos.core.crypto/Signature.toByteArray|toByteArray(){}[0]
     open fun toString(): kotlin/String // xyz.mcxross.kaptos.core.crypto/Signature.toString|toString(){}[0]
+}
+
+abstract class xyz.mcxross.kaptos.model/MoveStructType : xyz.mcxross.kaptos.model/MoveType { // xyz.mcxross.kaptos.model/MoveStructType|null[0]
+    constructor <init>(kotlin/String) // xyz.mcxross.kaptos.model/MoveStructType.<init>|<init>(kotlin.String){}[0]
+
+    open val typeTag // xyz.mcxross.kaptos.model/MoveStructType.typeTag|{}typeTag[0]
+        open fun <get-typeTag>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/MoveStructType.typeTag.<get-typeTag>|<get-typeTag>(){}[0]
 }
 
 final class <#A: out kotlin/Any?> xyz.mcxross.kaptos.model/AptosPage { // xyz.mcxross.kaptos.model/AptosPage|null[0]
@@ -4657,6 +4670,8 @@ final class xyz.mcxross.kaptos.model/StructTag { // xyz.mcxross.kaptos.model/Str
     final val typeArgs // xyz.mcxross.kaptos.model/StructTag.typeArgs|{}typeArgs[0]
         final fun <get-typeArgs>(): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/StructTag.typeArgs.<get-typeArgs>|<get-typeArgs>(){}[0]
 
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/StructTag.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/StructTag.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/StructTag.toString|toString(){}[0]
 
     final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<xyz.mcxross.kaptos.model/StructTag> { // xyz.mcxross.kaptos.model/StructTag.$serializer|null[0]
@@ -4819,6 +4834,8 @@ final class xyz.mcxross.kaptos.model/TypeTagGeneric : xyz.mcxross.kaptos.model/T
     final val value // xyz.mcxross.kaptos.model/TypeTagGeneric.value|{}value[0]
         final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagGeneric.value.<get-value>|<get-value>(){}[0]
 
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTagGeneric.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/TypeTagGeneric.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagGeneric.toString|toString(){}[0]
 }
 
@@ -4830,6 +4847,8 @@ final class xyz.mcxross.kaptos.model/TypeTagReference : xyz.mcxross.kaptos.model
     final val value // xyz.mcxross.kaptos.model/TypeTagReference.value|{}value[0]
         final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagReference.value.<get-value>|<get-value>(){}[0]
 
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTagReference.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/TypeTagReference.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagReference.toString|toString(){}[0]
 }
 
@@ -4842,6 +4861,8 @@ final class xyz.mcxross.kaptos.model/TypeTagStruct : xyz.mcxross.kaptos.model/Ty
     final val value // xyz.mcxross.kaptos.model/TypeTagStruct.value|{}value[0]
         final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagStruct.value.<get-value>|<get-value>(){}[0]
 
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTagStruct.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/TypeTagStruct.hashCode|hashCode(){}[0]
     final fun isString(): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTagStruct.isString|isString(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagStruct.toString|toString(){}[0]
 
@@ -4867,6 +4888,8 @@ final class xyz.mcxross.kaptos.model/TypeTagVector : xyz.mcxross.kaptos.model/Ty
     final val value // xyz.mcxross.kaptos.model/TypeTagVector.value|{}value[0]
         final fun <get-value>(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagVector.value.<get-value>|<get-value>(){}[0]
 
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTagVector.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.model/TypeTagVector.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/TypeTagVector.toString|toString(){}[0]
 
     final object Companion { // xyz.mcxross.kaptos.model/TypeTagVector.Companion|null[0]
@@ -6465,9 +6488,58 @@ sealed class xyz.mcxross.kaptos.model/TypeTag { // xyz.mcxross.kaptos.model/Type
     final fun isVector(): kotlin/Boolean // xyz.mcxross.kaptos.model/TypeTag.isVector|isVector(){}[0]
 
     final object Companion { // xyz.mcxross.kaptos.model/TypeTag.Companion|null[0]
+        final val APT // xyz.mcxross.kaptos.model/TypeTag.Companion.APT|{}APT[0]
+            final fun <get-APT>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.APT.<get-APT>|<get-APT>(){}[0]
+        final val Address // xyz.mcxross.kaptos.model/TypeTag.Companion.Address|{}Address[0]
+            final fun <get-Address>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.Address.<get-Address>|<get-Address>(){}[0]
+        final val AptosCoin // xyz.mcxross.kaptos.model/TypeTag.Companion.AptosCoin|{}AptosCoin[0]
+            final fun <get-AptosCoin>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.AptosCoin.<get-AptosCoin>|<get-AptosCoin>(){}[0]
+        final val Bool // xyz.mcxross.kaptos.model/TypeTag.Companion.Bool|{}Bool[0]
+            final fun <get-Bool>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.Bool.<get-Bool>|<get-Bool>(){}[0]
+        final val I128 // xyz.mcxross.kaptos.model/TypeTag.Companion.I128|{}I128[0]
+            final fun <get-I128>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I128.<get-I128>|<get-I128>(){}[0]
+        final val I16 // xyz.mcxross.kaptos.model/TypeTag.Companion.I16|{}I16[0]
+            final fun <get-I16>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I16.<get-I16>|<get-I16>(){}[0]
+        final val I256 // xyz.mcxross.kaptos.model/TypeTag.Companion.I256|{}I256[0]
+            final fun <get-I256>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I256.<get-I256>|<get-I256>(){}[0]
+        final val I32 // xyz.mcxross.kaptos.model/TypeTag.Companion.I32|{}I32[0]
+            final fun <get-I32>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I32.<get-I32>|<get-I32>(){}[0]
+        final val I64 // xyz.mcxross.kaptos.model/TypeTag.Companion.I64|{}I64[0]
+            final fun <get-I64>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I64.<get-I64>|<get-I64>(){}[0]
+        final val I8 // xyz.mcxross.kaptos.model/TypeTag.Companion.I8|{}I8[0]
+            final fun <get-I8>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.I8.<get-I8>|<get-I8>(){}[0]
+        final val Signer // xyz.mcxross.kaptos.model/TypeTag.Companion.Signer|{}Signer[0]
+            final fun <get-Signer>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.Signer.<get-Signer>|<get-Signer>(){}[0]
+        final val String // xyz.mcxross.kaptos.model/TypeTag.Companion.String|{}String[0]
+            final fun <get-String>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.String.<get-String>|<get-String>(){}[0]
+        final val U128 // xyz.mcxross.kaptos.model/TypeTag.Companion.U128|{}U128[0]
+            final fun <get-U128>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U128.<get-U128>|<get-U128>(){}[0]
+        final val U16 // xyz.mcxross.kaptos.model/TypeTag.Companion.U16|{}U16[0]
+            final fun <get-U16>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U16.<get-U16>|<get-U16>(){}[0]
+        final val U256 // xyz.mcxross.kaptos.model/TypeTag.Companion.U256|{}U256[0]
+            final fun <get-U256>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U256.<get-U256>|<get-U256>(){}[0]
+        final val U32 // xyz.mcxross.kaptos.model/TypeTag.Companion.U32|{}U32[0]
+            final fun <get-U32>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U32.<get-U32>|<get-U32>(){}[0]
+        final val U64 // xyz.mcxross.kaptos.model/TypeTag.Companion.U64|{}U64[0]
+            final fun <get-U64>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U64.<get-U64>|<get-U64>(){}[0]
+        final val U8 // xyz.mcxross.kaptos.model/TypeTag.Companion.U8|{}U8[0]
+            final fun <get-U8>(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.U8.<get-U8>|<get-U8>(){}[0]
+
+        final fun from(kotlin/Any?): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.from|from(kotlin.Any?){}[0]
+        final fun fromAll(kotlin.collections/Iterable<kotlin/Any?>): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/TypeTag.Companion.fromAll|fromAll(kotlin.collections.Iterable<kotlin.Any?>){}[0]
+        final fun fromAll(kotlin/Array<out kotlin/Any?>...): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/TypeTag.Companion.fromAll|fromAll(kotlin.Array<out|kotlin.Any?>...){}[0]
         final fun fromString(kotlin/String, kotlin/Boolean = ...): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.fromString|fromString(kotlin.String;kotlin.Boolean){}[0]
+        final fun invoke(kotlin/String, kotlin/Boolean = ...): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.invoke|invoke(kotlin.String;kotlin.Boolean){}[0]
+        final fun objectTag(kotlin/String): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.objectTag|objectTag(kotlin.String){}[0]
+        final fun objectTag(xyz.mcxross.kaptos.model/TypeTag): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.objectTag|objectTag(xyz.mcxross.kaptos.model.TypeTag){}[0]
+        final fun option(kotlin/String): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.option|option(kotlin.String){}[0]
+        final fun option(xyz.mcxross.kaptos.model/TypeTag): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.option|option(xyz.mcxross.kaptos.model.TypeTag){}[0]
         final fun serializer(): kotlinx.serialization/KSerializer<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/TypeTag.Companion.serializer|serializer(){}[0]
+        final fun struct(kotlin/String): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.struct|struct(kotlin.String){}[0]
+        final fun struct(xyz.mcxross.kaptos.model/StructTag): xyz.mcxross.kaptos.model/TypeTagStruct // xyz.mcxross.kaptos.model/TypeTag.Companion.struct|struct(xyz.mcxross.kaptos.model.StructTag){}[0]
         final fun valueOf(kotlin/String): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/TypeTag.Companion.valueOf|valueOf(kotlin.String){}[0]
+        final fun vector(kotlin/String): xyz.mcxross.kaptos.model/TypeTagVector // xyz.mcxross.kaptos.model/TypeTag.Companion.vector|vector(kotlin.String){}[0]
+        final fun vector(xyz.mcxross.kaptos.model/TypeTag): xyz.mcxross.kaptos.model/TypeTagVector // xyz.mcxross.kaptos.model/TypeTag.Companion.vector|vector(xyz.mcxross.kaptos.model.TypeTag){}[0]
     }
 }
 
@@ -6476,6 +6548,15 @@ sealed class xyz.mcxross.kaptos.model/WriteSetChange { // xyz.mcxross.kaptos.mod
         final fun serializer(): kotlinx.serialization/KSerializer<xyz.mcxross.kaptos.model/WriteSetChange> // xyz.mcxross.kaptos.model/WriteSetChange.Companion.serializer|serializer(){}[0]
         final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // xyz.mcxross.kaptos.model/WriteSetChange.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
     }
+}
+
+final object xyz.mcxross.kaptos.model/AptosCoin : xyz.mcxross.kaptos.model/MoveStructType // xyz.mcxross.kaptos.model/AptosCoin|null[0]
+
+final object xyz.mcxross.kaptos.model/MoveTypeRegistry { // xyz.mcxross.kaptos.model/MoveTypeRegistry|null[0]
+    final fun find(kotlin.reflect/KClass<*>): xyz.mcxross.kaptos.model/TypeTag? // xyz.mcxross.kaptos.model/MoveTypeRegistry.find|find(kotlin.reflect.KClass<*>){}[0]
+    final fun register(kotlin.reflect/KClass<*>, xyz.mcxross.kaptos.model/TypeTag) // xyz.mcxross.kaptos.model/MoveTypeRegistry.register|register(kotlin.reflect.KClass<*>;xyz.mcxross.kaptos.model.TypeTag){}[0]
+    final inline fun <#A1: reified kotlin/Any> register(kotlin/String) // xyz.mcxross.kaptos.model/MoveTypeRegistry.register|register(kotlin.String){0§<kotlin.Any>}[0]
+    final inline fun <#A1: reified kotlin/Any> register(xyz.mcxross.kaptos.model/TypeTag) // xyz.mcxross.kaptos.model/MoveTypeRegistry.register|register(xyz.mcxross.kaptos.model.TypeTag){0§<kotlin.Any>}[0]
 }
 
 final object xyz.mcxross.kaptos.model/TypeTagAddress : xyz.mcxross.kaptos.model/TypeTag { // xyz.mcxross.kaptos.model/TypeTagAddress|null[0]
@@ -6803,7 +6884,9 @@ final val xyz.mcxross.kaptos.util/NetworkToNodeAPI // xyz.mcxross.kaptos.util/Ne
     final fun <get-NetworkToNodeAPI>(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.util/NetworkToNodeAPI.<get-NetworkToNodeAPI>|<get-NetworkToNodeAPI>(){}[0]
 
 final fun (io.ktor.client/HttpClient).xyz.mcxross.kaptos.transport.ktor/asAptosTransport(): xyz.mcxross.kaptos.transport/AptosTransport // xyz.mcxross.kaptos.transport.ktor/asAptosTransport|asAptosTransport@io.ktor.client.HttpClient(){}[0]
+final fun (kotlin.collections/Iterable<kotlin/Any?>).xyz.mcxross.kaptos.model/toTypeTags(): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/toTypeTags|toTypeTags@kotlin.collections.Iterable<kotlin.Any?>(){}[0]
 final fun (kotlin.collections/Iterable<kotlin/Any?>).xyz.mcxross.kaptos.move/toMoveArguments(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/toMoveArguments|toMoveArguments@kotlin.collections.Iterable<kotlin.Any?>(){}[0]
+final fun (kotlin.collections/Iterable<kotlin/String>).xyz.mcxross.kaptos.model/toTypeTags(kotlin/Boolean = ...): kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> // xyz.mcxross.kaptos.model/toTypeTags|toTypeTags@kotlin.collections.Iterable<kotlin.String>(kotlin.Boolean){}[0]
 final fun (kotlin/Any).xyz.mcxross.kaptos.extension/longOrNull(): kotlin/Long? // xyz.mcxross.kaptos.extension/longOrNull|longOrNull@kotlin.Any(){}[0]
 final fun (kotlin/Any?).xyz.mcxross.kaptos.move/toMoveArgument(): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.move/toMoveArgument|toMoveArgument@kotlin.Any?(){}[0]
 final fun (kotlin/Boolean).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/Bool // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Boolean(){}[0]
@@ -6819,6 +6902,7 @@ final fun (kotlin/String).xyz.mcxross.kaptos.extension/structParts(): kotlin/Tri
 final fun (kotlin/String).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U128 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.String(){}[0]
 final fun (kotlin/String).xyz.mcxross.kaptos.extension/toMoveType256(): xyz.mcxross.kaptos.model/U256 // xyz.mcxross.kaptos.extension/toMoveType256|toMoveType256@kotlin.String(){}[0]
 final fun (kotlin/String).xyz.mcxross.kaptos.extension/toStructTag(): xyz.mcxross.kaptos.model/StructTag // xyz.mcxross.kaptos.extension/toStructTag|toStructTag@kotlin.String(){}[0]
+final fun (kotlin/String).xyz.mcxross.kaptos.model/toTypeTag(kotlin/Boolean = ...): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/toTypeTag|toTypeTag@kotlin.String(kotlin.Boolean){}[0]
 final fun (kotlin/String).xyz.mcxross.kaptos.util/toAccountAddress(): xyz.mcxross.kaptos.model/HexInput // xyz.mcxross.kaptos.util/toAccountAddress|toAccountAddress@kotlin.String(){}[0]
 final fun (kotlin/UInt).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U32 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.UInt(){}[0]
 final fun (kotlin/UShort).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U16 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.UShort(){}[0]
@@ -6853,4 +6937,15 @@ final inline fun <#A: kotlin/Any?, #B: kotlin/Any?> (xyz.mcxross.kaptos.model/Ap
 final inline fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.model/AptosResult<#A>).xyz.mcxross.kaptos.model/getOrElse(kotlin/Function1<xyz.mcxross.kaptos.model/AptosError, #A>): #A // xyz.mcxross.kaptos.model/getOrElse|getOrElse@xyz.mcxross.kaptos.model.AptosResult<0:0>(kotlin.Function1<xyz.mcxross.kaptos.model.AptosError,0:0>){0§<kotlin.Any?>}[0]
 final inline fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.model/AptosResult<#A>).xyz.mcxross.kaptos.model/onFailure(kotlin/Function1<xyz.mcxross.kaptos.model/AptosError, kotlin/Unit>): xyz.mcxross.kaptos.model/AptosResult<#A> // xyz.mcxross.kaptos.model/onFailure|onFailure@xyz.mcxross.kaptos.model.AptosResult<0:0>(kotlin.Function1<xyz.mcxross.kaptos.model.AptosError,kotlin.Unit>){0§<kotlin.Any?>}[0]
 final inline fun <#A: kotlin/Any?> (xyz.mcxross.kaptos.model/AptosResult<#A>).xyz.mcxross.kaptos.model/onSuccess(kotlin/Function1<#A, kotlin/Unit>): xyz.mcxross.kaptos.model/AptosResult<#A> // xyz.mcxross.kaptos.model/onSuccess|onSuccess@xyz.mcxross.kaptos.model.AptosResult<0:0>(kotlin.Function1<0:0,kotlin.Unit>){0§<kotlin.Any?>}[0]
+final inline fun <#A: reified kotlin/Any?> xyz.mcxross.kaptos.model/typeTag(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/typeTag|typeTag(){0§<kotlin.Any?>}[0]
+final inline fun <#A: reified kotlin/Any?> xyz.mcxross.kaptos.model/typeTagOf(): xyz.mcxross.kaptos.model/TypeTag // xyz.mcxross.kaptos.model/typeTagOf|typeTagOf(){0§<kotlin.Any?>}[0]
+final suspend fun (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/build(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, kotlin.collections/List<kotlin/String>, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.Simple> // xyz.mcxross.kaptos.transaction/build|build@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
+final suspend fun (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, kotlin/String, kotlin.collections/List<kotlin/String>, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse> // xyz.mcxross.kaptos.transaction/signAndSubmit|signAndSubmit@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.account.TransactionSigner;kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?){}[0]
+final suspend fun (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, kotlin/String, kotlin.collections/List<kotlin/String>, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.transaction/submitAndWait|submitAndWait@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.account.TransactionSigner;kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+final suspend fun (xyz.mcxross.kaptos.view/ViewService).xyz.mcxross.kaptos.view/callOf(kotlin/String, kotlin.collections/List<kotlin/String>, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/callOf|callOf@xyz.mcxross.kaptos.view.ViewService(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.Array<out|kotlin.Any?>...){}[0]
 final suspend fun <#A: kotlin/Any?> xyz.mcxross.kaptos/aptos(xyz.mcxross.kaptos/AptosConfig = ..., kotlin.coroutines/SuspendFunction1<xyz.mcxross.kaptos/Aptos, #A>): #A // xyz.mcxross.kaptos/aptos|aptos(xyz.mcxross.kaptos.AptosConfig;kotlin.coroutines.SuspendFunction1<xyz.mcxross.kaptos.Aptos,0:0>){0§<kotlin.Any?>}[0]
+final suspend inline fun <#A: reified kotlin/Any?, #B: reified kotlin/Any?> (xyz.mcxross.kaptos.view/ViewService).xyz.mcxross.kaptos.view/callOf(kotlin/String, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/callOf|callOf@xyz.mcxross.kaptos.view.ViewService(kotlin.String;kotlin.Array<out|kotlin.Any?>...){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+final suspend inline fun <#A: reified kotlin/Any?> (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/build(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/UnsignedTransaction.Simple> // xyz.mcxross.kaptos.transaction/build|build@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?){0§<kotlin.Any?>}[0]
+final suspend inline fun <#A: reified kotlin/Any?> (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, kotlin/String, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/PendingTransactionResponse> // xyz.mcxross.kaptos.transaction/signAndSubmit|signAndSubmit@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.account.TransactionSigner;kotlin.String;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?){0§<kotlin.Any?>}[0]
+final suspend inline fun <#A: reified kotlin/Any?> (xyz.mcxross.kaptos.transaction/TransactionService).xyz.mcxross.kaptos.transaction/submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, kotlin/String, kotlin.collections/List<kotlin/Any?> = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.model/TransactionResponse> // xyz.mcxross.kaptos.transaction/submitAndWait|submitAndWait@xyz.mcxross.kaptos.transaction.TransactionService(xyz.mcxross.kaptos.account.TransactionSigner;kotlin.String;kotlin.collections.List<kotlin.Any?>;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.model.WaitForTransactionOptions){0§<kotlin.Any?>}[0]
+final suspend inline fun <#A: reified kotlin/Any?> (xyz.mcxross.kaptos.view/ViewService).xyz.mcxross.kaptos.view/callOf(kotlin/String, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.view/MoveViewResult> // xyz.mcxross.kaptos.view/callOf|callOf@xyz.mcxross.kaptos.view.ViewService(kotlin.String;kotlin.Array<out|kotlin.Any?>...){0§<kotlin.Any?>}[0]

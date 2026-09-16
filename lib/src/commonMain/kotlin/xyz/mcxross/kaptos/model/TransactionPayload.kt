@@ -6,6 +6,7 @@
  */
 package xyz.mcxross.kaptos.model
 
+import kotlin.jvm.JvmName
 import xyz.mcxross.kaptos.extension.parts
 import xyz.mcxross.kaptos.move.MoveArgument
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsReader
@@ -75,6 +76,22 @@ sealed interface TransactionPayload {
       entryFunction(
         function = function,
         typeArguments = typeArguments,
+        arguments = arguments.map { MoveArgument.from(it) },
+      )
+
+    /**
+     * Builds an entry-function payload with string [typeArguments] and vararg arguments inferred as
+     * [MoveArgument]s.
+     */
+    @JvmName("entryFunctionOfStrings")
+    fun entryFunctionOf(
+      function: String,
+      typeArguments: List<String>,
+      vararg arguments: Any?,
+    ): EntryFunction =
+      entryFunction(
+        function = function,
+        typeArguments = typeArguments.toTypeTags(),
         arguments = arguments.map { MoveArgument.from(it) },
       )
 
