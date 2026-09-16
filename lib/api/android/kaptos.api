@@ -2269,6 +2269,15 @@ public final class xyz/mcxross/kaptos/model/EntryFunctionArgument$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class xyz/mcxross/kaptos/model/EntryFunctionArgumentBuilder {
+	public fun <init> ()V
+	public final fun arg (Ljava/lang/Object;)V
+	public final fun args (Ljava/lang/Iterable;)V
+	public final fun args ([Ljava/lang/Object;)V
+	public final fun build ()Ljava/util/List;
+	public final fun unaryPlus (Ljava/lang/Object;)V
+}
+
 public final class xyz/mcxross/kaptos/model/EntryFunctionCall {
 	public fun <init> (Lxyz/mcxross/kaptos/model/ModuleId;Lxyz/mcxross/kaptos/model/Identifier;Ljava/util/List;Ljava/util/List;)V
 	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/ModuleId;Lxyz/mcxross/kaptos/model/Identifier;Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -4201,7 +4210,11 @@ public abstract interface class xyz/mcxross/kaptos/model/TransactionPayload {
 
 public final class xyz/mcxross/kaptos/model/TransactionPayload$Companion {
 	public final fun entryFunction (Ljava/lang/String;Ljava/util/List;Ljava/util/List;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
+	public final fun entryFunction (Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/functions/Function1;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
 	public static synthetic fun entryFunction$default (Lxyz/mcxross/kaptos/model/TransactionPayload$Companion;Ljava/lang/String;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
+	public static synthetic fun entryFunction$default (Lxyz/mcxross/kaptos/model/TransactionPayload$Companion;Ljava/lang/String;Ljava/util/List;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
+	public final fun entryFunctionOf (Ljava/lang/String;Ljava/util/List;[Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
+	public final fun entryFunctionOf (Ljava/lang/String;[Ljava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionPayload$EntryFunction;
 	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/model/TransactionPayload;
 }
 
@@ -5003,6 +5016,7 @@ public final class xyz/mcxross/kaptos/move/AbiCachePolicy {
 }
 
 public abstract interface class xyz/mcxross/kaptos/move/MoveArgument {
+	public static final field Companion Lxyz/mcxross/kaptos/move/MoveArgument$Companion;
 	public fun toBcs ()[B
 }
 
@@ -5037,6 +5051,12 @@ public final class xyz/mcxross/kaptos/move/MoveArgument$Bytes : xyz/mcxross/kapt
 	public fun hashCode ()I
 	public fun toBcs ()[B
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgument$Companion {
+	public final fun from (Ljava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun fromAll (Ljava/lang/Iterable;)Ljava/util/List;
+	public final fun fromAll ([Ljava/lang/Object;)Ljava/util/List;
 }
 
 public final class xyz/mcxross/kaptos/move/MoveArgument$DefaultImpls {
@@ -5270,6 +5290,11 @@ public final class xyz/mcxross/kaptos/move/MoveArgumentCodec {
 	public static synthetic fun entryFunctionPayload$default (Lxyz/mcxross/kaptos/move/MoveArgumentCodec;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun invalidateModule (Lxyz/mcxross/kaptos/model/AccountAddress;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun preload ([Lxyz/mcxross/kaptos/model/MoveModuleBytecode;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/move/MoveArgumentKt {
+	public static final fun toMoveArgument (Ljava/lang/Object;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public static final fun toMoveArguments (Ljava/lang/Iterable;)Ljava/util/List;
 }
 
 public abstract interface class xyz/mcxross/kaptos/move/MoveModuleLoader {

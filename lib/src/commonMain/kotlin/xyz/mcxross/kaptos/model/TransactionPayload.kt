@@ -52,11 +52,72 @@ sealed interface TransactionPayload {
       )
     }
 
+    /** Builds an entry-function payload with vararg arguments inferred as [MoveArgument]s. */
+    fun entryFunctionOf(
+      function: String,
+      vararg arguments: Any?,
+    ): EntryFunction =
+      entryFunction(
+        function = function,
+        typeArguments = emptyList(),
+        arguments = arguments.map { MoveArgument.from(it) },
+      )
+
+    /**
+     * Builds an entry-function payload with explicit [typeArguments] and vararg arguments inferred
+     * as [MoveArgument]s.
+     */
+    fun entryFunctionOf(
+      function: String,
+      typeArguments: List<TypeTag>,
+      vararg arguments: Any?,
+    ): EntryFunction =
+      entryFunction(
+        function = function,
+        typeArguments = typeArguments,
+        arguments = arguments.map { MoveArgument.from(it) },
+      )
+
+    /** Builds an entry-function payload using a type-safe DSL block. */
+    fun entryFunction(
+      function: String,
+      typeArguments: List<TypeTag> = emptyList(),
+      builder: EntryFunctionArgumentBuilder.() -> Unit,
+    ): EntryFunction =
+      entryFunction(
+        function = function,
+        typeArguments = typeArguments,
+        arguments = EntryFunctionArgumentBuilder().apply(builder).build(),
+      )
+
     fun fromBcs(bytes: ByteArray): TransactionPayload =
       AptosBcsReader(bytes).let { reader ->
         reader.transactionPayload().also { reader.ensureFinished() }
       }
   }
+}
+
+/** Builder for constructing entry-function arguments with inferred [MoveArgument] conversions. */
+class EntryFunctionArgumentBuilder {
+  private val arguments = mutableListOf<MoveArgument>()
+
+  operator fun Any?.unaryPlus() {
+    arguments += MoveArgument.from(this)
+  }
+
+  fun arg(value: Any?) {
+    arguments += MoveArgument.from(value)
+  }
+
+  fun args(vararg values: Any?) {
+    arguments.addAll(values.map { MoveArgument.from(it) })
+  }
+
+  fun args(values: Iterable<Any?>) {
+    arguments.addAll(values.map { MoveArgument.from(it) })
+  }
+
+  fun build(): List<MoveArgument> = arguments.toList()
 }
 
 data class EntryFunctionCall(

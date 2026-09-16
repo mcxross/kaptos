@@ -7,6 +7,7 @@
 package xyz.mcxross.kaptos.move
 
 import xyz.mcxross.kaptos.model.AccountAddress
+import xyz.mcxross.kaptos.model.AccountAddressInput
 import xyz.mcxross.kaptos.transaction.bcs.AptosBcsWriter
 import xyz.mcxross.kaptos.transaction.bcs.signedDecimalToLittleEndian
 import xyz.mcxross.kaptos.transaction.bcs.unsignedDecimalToLittleEndian
@@ -100,7 +101,76 @@ sealed interface MoveArgument {
 
     override fun toString(): String = "PreSerialized(${bytes.size})"
   }
+
+  companion object {
+    /**
+     * Converts a supported Kotlin value into its corresponding [MoveArgument].
+     *
+     * Mapping rules:
+     * - [MoveArgument] -> returned as-is
+     * - [AccountAddress] -> [MoveArgument.Address]
+     * - [AccountAddressInput] -> [MoveArgument.Address]
+     * - [Boolean] -> [MoveArgument.Bool]
+     * - [UByte] -> [MoveArgument.U8]
+     * - [UShort] -> [MoveArgument.U16]
+     * - [UInt] -> [MoveArgument.U32]
+     * - [ULong] -> [MoveArgument.U64]
+     * - [Byte] -> [MoveArgument.I8]
+     * - [Short] -> [MoveArgument.I16]
+     * - [Int] -> [MoveArgument.I32]
+     * - [Long] -> [MoveArgument.I64]
+     * - [ByteArray] -> [MoveArgument.Bytes]
+     * - [String] -> [MoveArgument.StringValue]
+     * - [Iterable] / [Array] -> [MoveArgument.Vector] (elements recursively mapped)
+     * - [Map] -> [MoveArgument.Struct] (field values recursively mapped)
+     * - `null` -> [MoveArgument.Option] with `null`
+     */
+    fun from(value: Any?): MoveArgument =
+      when (value) {
+        null -> MoveArgument.Option(null)
+        is MoveArgument -> value
+        is AccountAddress -> MoveArgument.Address(value)
+        is AccountAddressInput -> MoveArgument.Address(AccountAddress.from(value))
+        is Boolean -> MoveArgument.Bool(value)
+        is UByte -> MoveArgument.U8(value)
+        is UShort -> MoveArgument.U16(value)
+        is UInt -> MoveArgument.U32(value)
+        is ULong -> MoveArgument.U64(value)
+        is Byte -> MoveArgument.I8(value)
+        is Short -> MoveArgument.I16(value)
+        is Int -> MoveArgument.I32(value)
+        is Long -> MoveArgument.I64(value)
+        is ByteArray -> MoveArgument.Bytes(value)
+        is String -> MoveArgument.StringValue(value)
+        is Iterable<*> -> MoveArgument.Vector(value.map { from(it) })
+        is Array<*> -> MoveArgument.Vector(value.map { from(it) })
+        is Map<*, *> -> {
+          val fields =
+            value.entries.associate { (k, v) ->
+              require(k is String) { "Move struct field name must be a String, got $k" }
+              k to from(v)
+            }
+          MoveArgument.Struct(fields)
+        }
+        else ->
+          throw IllegalArgumentException(
+            "Cannot convert value of type ${value::class.simpleName ?: "unknown"} to MoveArgument"
+          )
+      }
+
+    /** Converts vararg Kotlin values into a list of [MoveArgument]s. */
+    fun fromAll(vararg values: Any?): List<MoveArgument> = values.map { from(it) }
+
+    /** Converts an iterable of Kotlin values into a list of [MoveArgument]s. */
+    fun fromAll(values: Iterable<Any?>): List<MoveArgument> = values.map { from(it) }
+  }
 }
+
+/** Converts any supported Kotlin value into a [MoveArgument]. */
+fun Any?.toMoveArgument(): MoveArgument = MoveArgument.from(this)
+
+/** Converts an iterable of supported Kotlin values into a list of [MoveArgument]s. */
+fun Iterable<Any?>.toMoveArguments(): List<MoveArgument> = map { it.toMoveArgument() }
 
 private fun MoveArgument.encode(writer: AptosBcsWriter) {
   when (this) {

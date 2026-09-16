@@ -13,7 +13,6 @@ import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosResult
 import xyz.mcxross.kaptos.model.Network
 import xyz.mcxross.kaptos.model.TransactionPayload
-import xyz.mcxross.kaptos.move.MoveArgument
 
 internal fun sampleConfig(): AptosConfig =
   AptosConfig(
@@ -30,9 +29,10 @@ internal fun aptTransfer(
   recipient: AccountAddress,
   amount: ULong,
 ): TransactionPayload.EntryFunction =
-  TransactionPayload.entryFunction(
-    function = "0x1::aptos_account::transfer",
-    arguments = listOf(MoveArgument.Address(recipient), MoveArgument.U64(amount)),
+  TransactionPayload.entryFunctionOf(
+    "0x1::aptos_account::transfer",
+    recipient,
+    amount,
   )
 
 internal fun requiredEnvironment(name: String): String =

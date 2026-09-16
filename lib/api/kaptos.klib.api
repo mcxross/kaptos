@@ -1137,6 +1137,9 @@ sealed interface xyz.mcxross.kaptos.model/TransactionPayload { // xyz.mcxross.ka
 
     final object Companion { // xyz.mcxross.kaptos.model/TransactionPayload.Companion|null[0]
         final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+        final fun entryFunction(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin/Function1<xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder, kotlin/Unit>): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunction|entryFunction(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.Function1<xyz.mcxross.kaptos.model.EntryFunctionArgumentBuilder,kotlin.Unit>){}[0]
+        final fun entryFunctionOf(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag>, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunctionOf|entryFunctionOf(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.Array<out|kotlin.Any?>...){}[0]
+        final fun entryFunctionOf(kotlin/String, kotlin/Array<out kotlin/Any?>...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.model/TransactionPayload.Companion.entryFunctionOf|entryFunctionOf(kotlin.String;kotlin.Array<out|kotlin.Any?>...){}[0]
         final fun fromBcs(kotlin/ByteArray): xyz.mcxross.kaptos.model/TransactionPayload // xyz.mcxross.kaptos.model/TransactionPayload.Companion.fromBcs|fromBcs(kotlin.ByteArray){}[0]
     }
 }
@@ -1475,6 +1478,12 @@ sealed interface xyz.mcxross.kaptos.move/MoveArgument { // xyz.mcxross.kaptos.mo
         final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.move/MoveArgument.Vector.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.move/MoveArgument.Vector.hashCode|hashCode(){}[0]
         final fun toString(): kotlin/String // xyz.mcxross.kaptos.move/MoveArgument.Vector.toString|toString(){}[0]
+    }
+
+    final object Companion { // xyz.mcxross.kaptos.move/MoveArgument.Companion|null[0]
+        final fun from(kotlin/Any?): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.move/MoveArgument.Companion.from|from(kotlin.Any?){}[0]
+        final fun fromAll(kotlin.collections/Iterable<kotlin/Any?>): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Companion.fromAll|fromAll(kotlin.collections.Iterable<kotlin.Any?>){}[0]
+        final fun fromAll(kotlin/Array<out kotlin/Any?>...): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/MoveArgument.Companion.fromAll|fromAll(kotlin.Array<out|kotlin.Any?>...){}[0]
     }
 }
 
@@ -3423,6 +3432,16 @@ final class xyz.mcxross.kaptos.model/EntryFunctionABI : xyz.mcxross.kaptos.model
         final fun <get-signers>(): kotlin/Int? // xyz.mcxross.kaptos.model/EntryFunctionABI.signers.<get-signers>|<get-signers>(){}[0]
 
     final fun toString(): kotlin/String // xyz.mcxross.kaptos.model/EntryFunctionABI.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder { // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder|null[0]
+    constructor <init>() // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.<init>|<init>(){}[0]
+
+    final fun (kotlin/Any?).unaryPlus() // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.unaryPlus|unaryPlus@kotlin.Any?(){}[0]
+    final fun arg(kotlin/Any?) // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.arg|arg(kotlin.Any?){}[0]
+    final fun args(kotlin.collections/Iterable<kotlin/Any?>) // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.args|args(kotlin.collections.Iterable<kotlin.Any?>){}[0]
+    final fun args(kotlin/Array<out kotlin/Any?>...) // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.args|args(kotlin.Array<out|kotlin.Any?>...){}[0]
+    final fun build(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.model/EntryFunctionArgumentBuilder.build|build(){}[0]
 }
 
 final class xyz.mcxross.kaptos.model/EntryFunctionCall { // xyz.mcxross.kaptos.model/EntryFunctionCall|null[0]
@@ -6779,7 +6798,9 @@ final val xyz.mcxross.kaptos.util/NetworkToNodeAPI // xyz.mcxross.kaptos.util/Ne
     final fun <get-NetworkToNodeAPI>(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.util/NetworkToNodeAPI.<get-NetworkToNodeAPI>|<get-NetworkToNodeAPI>(){}[0]
 
 final fun (io.ktor.client/HttpClient).xyz.mcxross.kaptos.transport.ktor/asAptosTransport(): xyz.mcxross.kaptos.transport/AptosTransport // xyz.mcxross.kaptos.transport.ktor/asAptosTransport|asAptosTransport@io.ktor.client.HttpClient(){}[0]
+final fun (kotlin.collections/Iterable<kotlin/Any?>).xyz.mcxross.kaptos.move/toMoveArguments(): kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> // xyz.mcxross.kaptos.move/toMoveArguments|toMoveArguments@kotlin.collections.Iterable<kotlin.Any?>(){}[0]
 final fun (kotlin/Any).xyz.mcxross.kaptos.extension/longOrNull(): kotlin/Long? // xyz.mcxross.kaptos.extension/longOrNull|longOrNull@kotlin.Any(){}[0]
+final fun (kotlin/Any?).xyz.mcxross.kaptos.move/toMoveArgument(): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.move/toMoveArgument|toMoveArgument@kotlin.Any?(){}[0]
 final fun (kotlin/Boolean).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/Bool // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Boolean(){}[0]
 final fun (kotlin/Byte).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U8 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Byte(){}[0]
 final fun (kotlin/Int).xyz.mcxross.kaptos.extension/toMoveType(): xyz.mcxross.kaptos.model/U32 // xyz.mcxross.kaptos.extension/toMoveType|toMoveType@kotlin.Int(){}[0]
