@@ -9,8 +9,9 @@ package xyz.mcxross.kaptos.names
 import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import xyz.mcxross.kaptos.client.getGraphqlClient
 import xyz.mcxross.kaptos.client.postAptosFullNodeAndGetData
@@ -666,7 +667,12 @@ internal class DefaultNameDataSource(
     }
 
   private fun AptosName.viewArguments(): List<JsonElement> =
-    listOf(JsonPrimitive(domain), subdomain?.let(::JsonPrimitive) ?: JsonNull)
+    listOf(
+      JsonPrimitive(domain),
+      JsonObject(
+        mapOf("vec" to JsonArray(subdomain?.let { listOf(JsonPrimitive(it)) } ?: emptyList()))
+      ),
+    )
 }
 
 @Serializable

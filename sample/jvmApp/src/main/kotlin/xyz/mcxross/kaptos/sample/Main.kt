@@ -20,6 +20,7 @@ fun main(arguments: Array<String>) {
     "confidential" -> confidentialAssetTransaction()
     "account" -> accountLifecycle()
     "multi-key" -> multiKeyAccount()
+    "ans" -> nameRegistration()
     else ->
       runBlocking {
         val aptos = Aptos()

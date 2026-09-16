@@ -17,10 +17,13 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.content.OutgoingContent
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlin.time.Instant
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 import xyz.mcxross.kaptos.generated.GetNamesQuery
 import xyz.mcxross.kaptos.model.AccountAddress
 import xyz.mcxross.kaptos.model.AptosError
@@ -163,6 +166,15 @@ class NameServiceTest :
         )
       val engine = MockEngine { httpRequest ->
         httpRequest.url.encodedPath shouldBe "/v1/view"
+        val arguments =
+          Json.parseToJsonElement(
+              (httpRequest.body as OutgoingContent.ByteArrayContent).bytes().decodeToString()
+            )
+            .jsonObject["arguments"]!!
+            .jsonArray
+        if (request < 3) {
+          arguments[1].jsonObject["vec"]!!.jsonArray shouldBe emptyList()
+        }
         respond(
           content = responses[request++],
           status = HttpStatusCode.OK,
