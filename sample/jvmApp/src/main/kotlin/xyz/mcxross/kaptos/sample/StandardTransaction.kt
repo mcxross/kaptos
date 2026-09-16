@@ -8,13 +8,31 @@ package xyz.mcxross.kaptos.sample
 
 import kotlinx.coroutines.runBlocking
 import xyz.mcxross.kaptos.aptos
+import xyz.mcxross.kaptos.model.AptosCoin
+import xyz.mcxross.kaptos.view.callOf
 
 /** Standard transfer using `Aptos.transactions`. */
 fun standardTransaction() = runBlocking {
   aptos(sampleConfig()) {
     val signer = sampleSigner()
-    val payload = aptTransfer(sampleAddress("APTOS_RECIPIENT"), 1_000_000uL)
-    val committed = transactions.submitAndWait(signer, payload).orThrow()
+    val recipient = sampleAddress("APTOS_RECIPIENT", default = signer.accountAddress.toString())
+
+    val balanceBefore = views.callOf<AptosCoin>("0x1::coin::balance", signer.accountAddress)
+    println("Account: ${signer.accountAddress}")
+    println("Balance before: $balanceBefore")
+
+    val committed =
+      transactions
+        .submitAndWait(
+          signer = signer,
+          function = "0x1::aptos_account::transfer",
+          arguments = listOf(recipient, 10_000),
+        )
+        .orThrow()
+
     println("Committed ${committed.hash}")
+
+    val balanceAfter = views.callOf<AptosCoin>("0x1::coin::balance", signer.accountAddress)
+    println("Balance after: $balanceAfter")
   }
 }

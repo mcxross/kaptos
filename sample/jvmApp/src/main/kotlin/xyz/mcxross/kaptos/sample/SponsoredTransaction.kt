@@ -13,12 +13,14 @@ import xyz.mcxross.kaptos.aptos
 fun sponsoredTransaction() = runBlocking {
   aptos(sampleConfig()) {
     val sender = sampleSigner()
-    val sponsor = sampleSigner("APTOS_SPONSOR_PRIVATE_KEY")
+    val sponsor = sampleSigner("APTOS_SPONSOR_PRIVATE_KEY", fallback = sender)
+    val recipient = sampleAddress("APTOS_RECIPIENT", default = sender.accountAddress.toString())
     val committed =
       transactions
         .submitAndWait(
           signer = sender,
-          payload = aptTransfer(sampleAddress("APTOS_RECIPIENT"), 1_000_000uL),
+          function = "0x1::aptos_account::transfer",
+          arguments = listOf(recipient, 10_000),
           feePayer = sponsor,
         )
         .orThrow()

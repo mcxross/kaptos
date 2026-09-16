@@ -24,17 +24,24 @@ fun abstractionTransaction() = runBlocking {
     transactions
       .submitAndWait(
         signer = fundingAccount,
-        payload = aptTransfer(abstracted.accountAddress, 20_000_000uL),
+        function = "0x1::aptos_account::transfer",
+        arguments = listOf(abstracted.accountAddress, 20_000_000),
       )
       .orThrow()
     val committed =
       transactions
         .submitAndWait(
           signer = abstracted,
-          payload = aptTransfer(sampleAddress("APTOS_RECIPIENT"), 1_000_000uL),
+          function = "0x1::aptos_account::transfer",
+          arguments =
+            listOf(
+              sampleAddress("APTOS_RECIPIENT", default = fundingAccount.accountAddress.toString()),
+              1_000_000,
+            ),
           transactionOptions = TransactionOptions(maxGasAmount = 50_000uL),
         )
         .orThrow()
+
     println("Committed ${committed.hash} from ${abstracted.accountAddress}")
   }
 }

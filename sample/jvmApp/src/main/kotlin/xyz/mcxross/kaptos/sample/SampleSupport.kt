@@ -19,11 +19,18 @@ internal fun sampleConfig(): AptosConfig =
     network = System.getenv("APTOS_NETWORK")?.uppercase()?.let(Network::valueOf) ?: Network.TESTNET
   )
 
-internal fun Aptos.sampleSigner(variable: String = "APTOS_PRIVATE_KEY"): Ed25519Account =
-  ed25519Account(requiredEnvironment(variable))
+internal fun Aptos.sampleSigner(
+  variable: String = "APTOS_PRIVATE_KEY",
+  fallback: Ed25519Account? = null,
+): Ed25519Account =
+  System.getenv(variable)?.takeIf(String::isNotBlank)?.let { ed25519Account(it) }
+    ?: fallback
+    ?: error("Set $variable before running this sample")
 
-internal fun sampleAddress(variable: String): AccountAddress =
-  AccountAddress.fromString(requiredEnvironment(variable))
+internal fun sampleAddress(variable: String, default: String? = null): AccountAddress =
+  System.getenv(variable)?.takeIf(String::isNotBlank)?.let(AccountAddress::fromString)
+    ?: default?.let(AccountAddress::fromString)
+    ?: error("Set $variable before running this sample")
 
 internal fun aptTransfer(
   recipient: AccountAddress,

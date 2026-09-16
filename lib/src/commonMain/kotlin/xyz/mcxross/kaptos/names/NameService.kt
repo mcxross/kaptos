@@ -656,6 +656,7 @@ internal class DefaultNameDataSource(
               body =
                 NameViewRequest(
                   function = "$contractAddress::router::$function",
+                  typeArguments = emptyList(),
                   arguments = arguments,
                 ),
             )
@@ -678,7 +679,7 @@ internal class DefaultNameDataSource(
 @Serializable
 private data class NameViewRequest(
   val function: String,
-  @SerialName("type_arguments") val typeArguments: List<String> = emptyList(),
+  @SerialName("type_arguments") val typeArguments: List<String>,
   val arguments: List<JsonElement>,
 )
 
