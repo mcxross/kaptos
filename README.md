@@ -180,21 +180,17 @@ by an external wallet remains caller-owned; Kaptos does not unexpectedly invalid
 
 ### Submit transaction
 
-The same service composes building, signing, submission, and confirmation. Amounts remain unsigned
-throughout the call.
+The same service composes building, signing, submission, and confirmation. Arguments are
+automatically coerced to `MoveArgument`s.
 
 ```kotlin
 aptos(AptosConfig(network = Network.TESTNET)) {
     val alice = ed25519Account("ed25519-priv-0x...")
-    val payload = TransactionPayload.entryFunction(
+    val committed = transactions.submitAndWait(
+        signer = alice,
         function = "0x1::aptos_account::transfer",
-        arguments = listOf(
-            MoveArgument.Address(recipient),
-            MoveArgument.U64(1_000_000u),
-        ),
-    )
-    val committed = transactions.submitAndWait(alice, payload)
-        .getOrElse { failure -> error(failure.message) }
+        arguments = listOf(recipient, 1_000_000uL),
+    ).getOrElse { failure -> error(failure.message) }
 
     println("Committed ${committed.hash}")
 }
@@ -202,8 +198,8 @@ aptos(AptosConfig(network = Network.TESTNET)) {
 
 ### Encrypted transactions
 
-Add `kaptos-encrypted-transactions` alongside the core SDK, using the same version. Import
-`encryptedTransactions` to create a service on an existing `Aptos` instance. The service encrypts
+Add `kaptos-encrypted-transactions` alongside the core SDK, using the same version. Call
+`encryptedTransactions()` to create a service on an existing `Aptos` instance. The service encrypts
 the executable payload, signs the encrypted transaction, and submits it through the shared transport.
 
 The configured fullnode must advertise an encryption key in its ledger response. Otherwise the
@@ -211,24 +207,18 @@ service returns `AptosError.UnsupportedFeature`. Use a funded standard signer; t
 submission helpers reject Keyless signers, and encrypted transactions cannot be simulated.
 
 ```kotlin
-import xyz.mcxross.kaptos.encrypted.encryptedTransactions
-import xyz.mcxross.kaptos.model.TransactionPayload
-import xyz.mcxross.kaptos.move.MoveArgument
-
 // config selects a network with encrypted-transaction support; recipient is an AccountAddress.
 aptos(config) {
     val sender = ed25519Account("ed25519-priv-0x...")
-    val encrypted = encryptedTransactions()
-    val committed = encrypted.submitAndWait(
+    val committed = encryptedTransactions().submitAndWait(
         sender = sender,
-        payload = TransactionPayload.entryFunction(
-            function = "0x1::aptos_account::transfer",
-            arguments = listOf(
-                MoveArgument.Address(recipient),
-                MoveArgument.U64(1_000_000uL),
-            ),
+        payload = TransactionPayload.entryFunctionOf(
+            "0x1::aptos_account::transfer",
+            recipient,
+            1_000_000uL,
         ),
     ).getOrElse { failure -> error(failure.message) }
+
     println("Committed ${committed.hash}")
 }
 ```
@@ -258,9 +248,6 @@ imports a canonical 32-byte key supplied by the application's key storage and re
 confidential balance. For an existing balance, import its registered key and omit registration.
 
 ```kotlin
-import xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey
-import xyz.mcxross.kaptos.confidential.confidentialAssets
-
 // config, token (AccountAddress), and storedDecryptionKeyBytes come from the application.
 aptos(config) {
     val signer = ed25519Account("ed25519-priv-0x...")
@@ -301,22 +288,15 @@ runs with `--args=confidential`. It registers a generated key and requires `APTO
 
 ### Typed view calls
 
-Transactions and views share `MoveArgument` from `xyz.mcxross.kaptos.move` and `TypeTag`.
+Transactions and views share `MoveArgument` and `TypeTag` coercions. `views.callOf` automatically
+coerces argument values and resolves type arguments from reified type parameters or strings.
 Typed views validate the function ABI and send BCS arguments; returned JSON values stay lossless.
 
 ```kotlin
-import xyz.mcxross.kaptos.view.serialization.decodeValue
-import kotlinx.serialization.builtins.serializer
-import xyz.mcxross.kaptos.move.MoveArgument
-import xyz.mcxross.kaptos.model.TypeTag
-import xyz.mcxross.kaptos.model.flatMap
-
 aptos {
-    val balance = views.call(
-        function = "0x1::coin::balance",
-        typeArguments = listOf(TypeTag.fromString("0x1::aptos_coin::AptosCoin")),
-        arguments = listOf(MoveArgument.Address(owner)),
-    ).flatMap { it.decodeValue(0, ULong.serializer()) }
+    val balance = views.callOf<AptosCoin>("0x1::coin::balance", owner)
+        .flatMap { it.decodeValue(0, ULong.serializer()) }
+        .getOrElse { failure -> error(failure.message) }
 }
 ```
 
@@ -348,8 +328,6 @@ Ktor injection is available through an explicit adapter. The application retains
 injected transport; the SDK manages its default transport.
 
 ```kotlin
-import xyz.mcxross.kaptos.transport.ktor.asAptosTransport
-
 val client = Aptos(AptosConfig(transport = httpClient.asAptosTransport()))
 ```
 
@@ -373,13 +351,8 @@ aptos(AptosConfig(network = Network.TESTNET)) {
 
     transactions.submitAndWait(
         signer = abstracted,
-        payload = TransactionPayload.entryFunction(
-            function = "0x1::aptos_account::transfer",
-            arguments = listOf(
-                MoveArgument.Address(recipient),
-                MoveArgument.U64(1_000_000u),
-            ),
-        ),
+        function = "0x1::aptos_account::transfer",
+        arguments = listOf(recipient, 1_000_000uL),
     )
 }
 ```
