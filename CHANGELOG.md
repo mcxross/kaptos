@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+**[1.0.0] - 2026-09-27**
+
+**Added**
+- Concise `MoveArgument` inference and payload builders
+- ABI-guided argument coercion, with high-level transaction and view APIs
+- `TypeTag` string overloads, shorthands and reified inference
+
+**Changed**
+- Build on FastKrypto 0.2.1
+
+**Fixed**
+- JVM on Linux: native crypto failed to load (`undefined symbol: blst_hash_to_g1`), fixed by
+  FastKrypto 0.2.1
+- ANS view request serialization
+
+---
+
 **[0.1.2-beta] - 2024-10-09**
 
 **Fixed**
