@@ -20,9 +20,9 @@ import java.security.SecureRandom
 import xyz.mcxross.fastkrypto.ed25519PublicKeyFromPrivate
 import xyz.mcxross.fastkrypto.ed25519Sign
 import xyz.mcxross.fastkrypto.ed25519Verify
-import xyz.mcxross.fastkrypto.secp256k1PublicKeyFromPrivate
-import xyz.mcxross.fastkrypto.secp256k1Sign
-import xyz.mcxross.fastkrypto.secp256k1Verify
+import xyz.mcxross.fastkrypto.secp256k1PublicKeyUncompressed
+import xyz.mcxross.fastkrypto.secp256k1SignSha3256
+import xyz.mcxross.fastkrypto.secp256k1VerifySha3256
 import xyz.mcxross.fastkrypto.secp256r1GenerateKeypair
 import xyz.mcxross.fastkrypto.secp256r1NormalizePublicKey
 import xyz.mcxross.fastkrypto.secp256r1PublicKeyFromPrivate
@@ -45,7 +45,7 @@ actual fun generateKeypair(scheme: SigningSchemeInput): KeyPair {
     SigningSchemeInput.Secp256k1 -> {
       val seed = ByteArray(32)
       SecureRandom().nextBytes(seed)
-      val pk = secp256k1PublicKeyFromPrivate(seed)
+      val pk = secp256k1PublicKeyUncompressed(seed)
       KeyPair(seed, pk)
     }
     SigningSchemeInput.Secp256r1 -> {
@@ -69,11 +69,11 @@ actual fun sign(message: ByteArray, privateKey: ByteArray): ByteArray {
 }
 
 actual fun secp256k1Sign(message: ByteArray, privateKey: ByteArray): ByteArray {
-  return secp256k1Sign(privateKey, message)
+  return secp256k1SignSha3256(privateKey, message)
 }
 
 actual fun generateSecp256k1PublicKey(privateKey: ByteArray): ByteArray {
-  return secp256k1PublicKeyFromPrivate(privateKey)
+  return secp256k1PublicKeyUncompressed(privateKey)
 }
 
 internal actual fun secp256r1SignAptos(
@@ -137,7 +137,7 @@ actual fun verifySignature(
     }
 
     is Secp256k1PublicKey -> {
-      secp256k1Verify(publicKey.hexInput.toByteArray(), message, signature)
+      secp256k1VerifySha3256(publicKey.hexInput.toByteArray(), message, signature)
     }
 
     is Secp256r1PublicKey -> {

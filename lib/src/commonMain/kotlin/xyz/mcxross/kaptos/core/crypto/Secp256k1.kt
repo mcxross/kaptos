@@ -69,8 +69,9 @@ class Secp256k1PrivateKey(key: ByteArray) : PrivateKey {
 
   override fun sign(message: HexInput): Secp256k1Signature {
     checkNotCleared()
-    val hash = sha3Hash(message.toByteArray())
-    return Secp256k1Signature(HexInput.fromByteArray(secp256k1Sign(hash, hex.toByteArray())))
+    return Secp256k1Signature(
+      HexInput.fromByteArray(secp256k1Sign(message.toByteArray(), hex.toByteArray()))
+    )
   }
 
   override fun publicKey(): Secp256k1PublicKey {
