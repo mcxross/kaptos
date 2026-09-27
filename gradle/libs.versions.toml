@@ -2,7 +2,7 @@
 agp = "9.1.1"
 apollo-runtime = "5.1.0"
 compose-plugin = "1.12.0"
-fastkrypto = "0.2.0"
+fastkrypto = "0.2.1"
 kotlin = "2.4.10"
 kotest = "6.2.4"
 kotlinx-datetime = "0.8.0"
