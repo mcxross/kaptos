@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+**[1.0.1] - 2026-09-27**
+
+**Fixed**
+- Secp256k1 keys now sign over SHA3-256 with 65-byte public keys, matching Aptos
+
+---
+
 **[1.0.0] - 2026-09-27**
 
 **Added**
