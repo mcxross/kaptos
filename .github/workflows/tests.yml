@@ -31,11 +31,11 @@ jobs:
       - name: Compile every Android artifact and instrumentation test
         run: >-
           ./gradlew
-          :kaptos:compileDebugKotlinAndroid
-          :kaptos-encrypted-transactions:compileDebugKotlinAndroid
-          :kaptos-confidential-assets:compileDebugKotlinAndroid
-          :kaptos:compileDebugAndroidTestKotlinAndroid
-          :kaptos-confidential-assets:compileDebugAndroidTestKotlinAndroid
+          :kaptos:compileAndroidMain
+          :kaptos-encrypted-transactions:compileAndroidMain
+          :kaptos-confidential-assets:compileAndroidMain
+          :kaptos:compileAndroidDeviceTest
+          :kaptos-confidential-assets:compileAndroidDeviceTest
           --console=plain
       - name: Run Android native crypto smoke tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -45,8 +45,8 @@ jobs:
           disable-animations: true
           script: >-
             ./gradlew
-            :kaptos:connectedDebugAndroidTest
-            :kaptos-confidential-assets:connectedDebugAndroidTest
+            :kaptos:connectedAndroidDeviceTest
+            :kaptos-confidential-assets:connectedAndroidDeviceTest
             --console=plain
 
   apple:
