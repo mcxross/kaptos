@@ -1,0 +1,65 @@
+name: "Kaptos Android"
+# The emulator run is slow, so only run it when something that can change the Android build or
+# fastkrypto's native libraries changes. Android main compilation is also covered by apiCheck.
+on:
+  pull_request:
+    types: [labeled, opened, synchronize, reopened, auto_merge_enabled]
+    paths:
+      - "gradle/libs.versions.toml"
+      - "gradle/wrapper/gradle-wrapper.properties"
+      - "gradle.properties"
+      - "**/*.gradle.kts"
+      - "**/src/androidMain/**"
+      - "**/src/androidDeviceTest/**"
+      - ".github/actions/cache-gradle/**"
+      - ".github/workflows/android.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "gradle/libs.versions.toml"
+      - "gradle/wrapper/gradle-wrapper.properties"
+      - "gradle.properties"
+      - "**/*.gradle.kts"
+      - "**/src/androidMain/**"
+      - "**/src/androidDeviceTest/**"
+      - ".github/actions/cache-gradle/**"
+      - ".github/workflows/android.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android-emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: ./.github/actions/cache-gradle
+      - name: Generate GraphQL client
+        run: ./gradlew generateApolloSources --console=plain
+      - name: Compile every Android artifact and instrumentation test
+        run: >-
+          ./gradlew
+          :kaptos:compileAndroidMain
+          :kaptos-encrypted-transactions:compileAndroidMain
+          :kaptos-confidential-assets:compileAndroidMain
+          :kaptos:compileAndroidDeviceTest
+          :kaptos-confidential-assets:compileAndroidDeviceTest
+          --console=plain
+      - name: Run Android native crypto smoke tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          disable-animations: true
+          script: >-
+            ./gradlew
+            :kaptos:connectedAndroidDeviceTest
+            :kaptos-confidential-assets:connectedAndroidDeviceTest
+            --console=plain
