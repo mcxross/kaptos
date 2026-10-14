@@ -26,7 +26,9 @@ kotlin {
     }
     minSdk = 24
     compilerOptions.jvmTarget = JvmTarget.JVM_17
-    withDeviceTestBuilder { sourceSetTreeName = "test" }
+    // Device tests are Android-only smoke tests. Sharing commonTest pulls in kotest's JVM engine
+    // (duplicate JNA classes) and backtick test names that cannot be dexed below API 30.
+    withDeviceTestBuilder {}
       .configure {
         instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
       }

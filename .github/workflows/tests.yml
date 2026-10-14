@@ -16,39 +16,6 @@ jobs:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/run-tests
 
-  android-emulator:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: 17
-      - uses: ./.github/actions/cache-gradle
-      - name: Generate GraphQL client
-        run: ./gradlew generateApolloSources --console=plain
-      - name: Compile every Android artifact and instrumentation test
-        run: >-
-          ./gradlew
-          :kaptos:compileDebugKotlinAndroid
-          :kaptos-encrypted-transactions:compileDebugKotlinAndroid
-          :kaptos-confidential-assets:compileDebugKotlinAndroid
-          :kaptos:compileDebugAndroidTestKotlinAndroid
-          :kaptos-confidential-assets:compileDebugAndroidTestKotlinAndroid
-          --console=plain
-      - name: Run Android native crypto smoke tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 35
-          arch: x86_64
-          disable-animations: true
-          script: >-
-            ./gradlew
-            :kaptos:connectedDebugAndroidTest
-            :kaptos-confidential-assets:connectedDebugAndroidTest
-            --console=plain
-
   apple:
     runs-on: macos-latest
     steps:

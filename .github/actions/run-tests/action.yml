@@ -8,14 +8,15 @@ runs:
     - uses: actions/setup-node@v6
       with:
         node-version-file: .node-version
-        registry-url: "https://registry.npmjs.org"
 
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 11.21.0
-
+    # The npm package downloads the CLI binary via the GitHub API; authenticate to avoid shared
+    # runner rate limits, and install here so failures surface before the background testnet.
     - name: Install Aptos CLI and wait-on
-      run: pnpm install -g @aptos-labs/aptos-cli@3.0.0 wait-on@9.1.0
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        npm install -g @aptos-labs/aptos-cli@3.0.0 wait-on@9.1.0
+        aptos --install
       shell: bash
 
     - name: Run a local testnet in the background
