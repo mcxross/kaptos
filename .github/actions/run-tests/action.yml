@@ -8,14 +8,9 @@ runs:
     - uses: actions/setup-node@v6
       with:
         node-version-file: .node-version
-        registry-url: "https://registry.npmjs.org"
-
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 11.21.0
 
     - name: Install Aptos CLI and wait-on
-      run: pnpm install -g @aptos-labs/aptos-cli@3.0.0 wait-on@9.1.0
+      run: npm install -g @aptos-labs/aptos-cli@3.0.0 wait-on@9.1.0
       shell: bash
 
     - name: Run a local testnet in the background
