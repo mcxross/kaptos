@@ -14,6 +14,7 @@ import java.util.Comparator
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.io.path.Path
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -81,10 +82,10 @@ class InstalledSwiftPackageTest {
   }
 }
 
-private fun requiredProperty(name: String): String =
+internal fun requiredProperty(name: String): String =
   checkNotNull(System.getProperty(name)) { "Missing Gradle test property $name" }
 
-private fun runCommand(
+internal fun runCommand(
   command: List<String>,
   log: Path,
   environment: Map<String, String> = emptyMap(),
@@ -106,8 +107,9 @@ private fun runCommand(
   }
 }
 
-private class SwiftHttpFixture : AutoCloseable {
+internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseable {
   val failures = ConcurrentLinkedQueue<Throwable>()
+  val binaryDownloads = AtomicInteger()
   private val executor = Executors.newCachedThreadPool()
   private val server =
     HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0).apply {
@@ -130,6 +132,7 @@ private class SwiftHttpFixture : AutoCloseable {
       start()
     }
   val url: String = "http://127.0.0.1:${server.address.port}/v1"
+  val binaryUrl: String = "http://127.0.0.1:${server.address.port}/binary/${binary?.fileName}"
 
   private fun handle(exchange: HttpExchange) {
     val path = exchange.requestURI.path
@@ -141,6 +144,13 @@ private class SwiftHttpFixture : AutoCloseable {
   }
 
   private fun get(exchange: HttpExchange, path: String) {
+    if (binary != null && path == "/binary/${binary.fileName}") {
+      binaryDownloads.incrementAndGet()
+      exchange.responseHeaders.set("Content-Type", "application/zip")
+      exchange.sendResponseHeaders(200, Files.size(binary))
+      exchange.responseBody.use { output -> Files.newInputStream(binary).use { it.copyTo(output) } }
+      return
+    }
     val response =
       when {
         path.trimEnd('/') == "/v1" ->
