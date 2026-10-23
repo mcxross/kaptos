@@ -19,6 +19,7 @@ multiple platforms.
 - [Usage](#usage)
 - [Encrypted transactions](#encrypted-transactions)
 - [Confidential assets](#confidential-assets)
+- [Swift developers](#swift-developers)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
@@ -375,6 +376,29 @@ APTOS_NETWORK='TESTNET' \
 Other accepted names are `sponsored`, `orderless`, `abstraction`, `encrypted`,
 `confidential`, `account`, and `multi-key`. Each sample reports any additional environment values
 it requires.
+
+## Swift developers
+
+Use **AptosKit** in iOS and macOS apps with `async`/`await`, throwing APIs, and typed Move arguments.
+In Xcode, add `https://github.com/mcxross/kaptos.git` through **Package Dependencies** and select
+the **AptosKitLibrary** product.
+
+```swift
+import AptosKit
+
+@MainActor
+func readBalance() async throws {
+    let client = try AptosClient(network: .devnet)
+    defer { try? client.close() }
+
+    let address = try AccountAddress("0x1")
+    let balance = try await client.accounts.balance(of: address)
+    print(balance)
+}
+```
+
+See the [Swift guide](swift/README.md) for SwiftPM installation, transactions, typed views, and
+client lifecycle guidance.
 
 ## Documentation and examples
 
