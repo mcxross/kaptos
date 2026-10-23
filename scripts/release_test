@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+unset EXPECTED_RELEASE_SHA RELEASE_BRANCH GITHUB_OUTPUT
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 TEST_ROOT=$(mktemp -d)
 trap 'rm -rf "${TEST_ROOT}"' EXIT
@@ -14,15 +15,18 @@ function fail() {
 function initialize_repository() {
   local repository="$1"
   local branch="$2"
+  local version="${3:-9.9.9}"
   git init -q -b "${branch}" "${repository}"
   git -C "${repository}" config user.name "Release Test"
   git -C "${repository}" config user.email "release-test@example.invalid"
   mkdir -p "${repository}/scripts"
   cp "${SCRIPT_DIR}/release" "${repository}/scripts/release"
   cp "${SCRIPT_DIR}/inc.functions.sh" "${repository}/scripts/inc.functions.sh"
+  printf 'version=%s\n' "${version}" >"${repository}/gradle.properties"
   cat >"${repository}/gradlew" <<'EOF'
 #!/bin/bash
 echo "$*" >>"${RELEASE_TEST_LOG}"
+if [[ "${RELEASE_TEST_FAIL_PUBLISH:-0}" = 1 && "$1" = publish* ]]; then exit 1; fi
 EOF
   chmod +x "${repository}/gradlew" "${repository}/scripts/release"
 }
@@ -30,26 +34,35 @@ EOF
 function test_snapshot_release() {
   local repository="${TEST_ROOT}/snapshot"
   local log="${TEST_ROOT}/snapshot.log"
-  initialize_repository "${repository}" snapshot
+  initialize_repository "${repository}" snapshot 1.5.3-SNAPSHOT
   git -C "${repository}" add .
-  git -C "${repository}" commit -q -m "release v9.9.9-SNAPSHOT"
+  git -C "${repository}" commit -q -m "release v1.5.3-SNAPSHOT"
   local trusted_sha
   trusted_sha=$(git -C "${repository}" rev-parse HEAD)
-  (cd "${repository}" && EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  local output="${TEST_ROOT}/snapshot.outputs"
+  (cd "${repository}" && GITHUB_OUTPUT="${output}" EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
   grep -Fxq "publishToMavenCentral" "${log}" || fail "snapshot release was not published"
+  grep -Fxq "published=true" "${output}" || fail "snapshot did not enable Swift publication"
+  grep -Fxq "version=1.5.3-SNAPSHOT" "${output}" || fail "snapshot version was changed"
+  grep -Fxq "channel=snapshot" "${output}" || fail "snapshot channel was lost"
+  grep -Fxq "source_revision=${trusted_sha}" "${output}" || fail "snapshot source revision was lost"
 }
 
 function test_stable_release() {
   local repository="${TEST_ROOT}/stable"
   local log="${TEST_ROOT}/stable.log"
-  initialize_repository "${repository}" main
+  initialize_repository "${repository}" main 1.0.2
   git -C "${repository}" add .
-  git -C "${repository}" commit -q -m "release v9.9.9"
+  git -C "${repository}" commit -q -m "release v1.0.2"
   local trusted_sha
   trusted_sha=$(git -C "${repository}" rev-parse HEAD)
-  (cd "${repository}" && EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  local output="${TEST_ROOT}/stable.outputs"
+  (cd "${repository}" && GITHUB_OUTPUT="${output}" EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
   grep -Fxq "publishAndReleaseToMavenCentral --no-configuration-cache" "${log}" ||
     fail "stable release was not published"
+  grep -Fxq "published=true" "${output}" || fail "stable release did not enable Swift publication"
+  grep -Fxq "version=1.0.2" "${output}" || fail "stable version was changed"
+  grep -Fxq "channel=stable" "${output}" || fail "stable channel was lost"
 }
 
 function test_main_merge_skips_snapshot_marker() {
@@ -76,8 +89,88 @@ function test_sha_mismatch_fails_closed() {
   fi
 }
 
+function test_ordinary_commit_does_not_publish_swift() {
+  local repository="${TEST_ROOT}/ordinary"
+  local log="${TEST_ROOT}/ordinary.log"
+  local output="${TEST_ROOT}/ordinary.outputs"
+  initialize_repository "${repository}" snapshot
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "docs: update examples"
+  (cd "${repository}" && GITHUB_OUTPUT="${output}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  [[ ! -e "${log}" ]] || fail "ordinary commit published to Maven"
+  grep -Fxq "published=false" "${output}" || fail "ordinary commit did not disable Swift publication"
+  if grep -Fxq "published=true" "${output}"; then fail "ordinary commit enabled Swift publication"; fi
+}
+
+function test_maven_failure_does_not_publish_swift() {
+  local repository="${TEST_ROOT}/maven-failure"
+  local output="${TEST_ROOT}/maven-failure.outputs"
+  initialize_repository "${repository}" main
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "release v9.9.9"
+  if (cd "${repository}" && GITHUB_OUTPUT="${output}" RELEASE_TEST_FAIL_PUBLISH=1 \
+      RELEASE_TEST_LOG="${TEST_ROOT}/maven-failure.log" ./scripts/release); then
+    fail "Maven failure was ignored"
+  fi
+  if grep -Fxq "published=true" "${output}"; then fail "Maven failure enabled Swift publication"; fi
+}
+
+function test_version_mismatch_fails_before_publication() {
+  local repository="${TEST_ROOT}/version-mismatch"
+  local log="${TEST_ROOT}/version-mismatch.log"
+  initialize_repository "${repository}" main 1.0.2
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "release v1.0.3"
+  if (cd "${repository}" && RELEASE_TEST_LOG="${log}" ./scripts/release); then
+    fail "release marker and SDK version mismatch was ignored"
+  fi
+  [[ ! -e "${log}" ]] || fail "mismatched version published to Maven"
+}
+
+function test_wrong_channel_fails_before_publication() {
+  local branch version repository log
+  for branch in main snapshot; do
+    if [[ "${branch}" = main ]]; then version=1.5.3-SNAPSHOT; else version=1.0.2; fi
+    repository="${TEST_ROOT}/wrong-channel-${branch}"
+    log="${TEST_ROOT}/wrong-channel-${branch}.log"
+    initialize_repository "${repository}" "${branch}" "${version}"
+    git -C "${repository}" add .
+    git -C "${repository}" commit -q -m "release v${version}"
+    if (cd "${repository}" && RELEASE_TEST_LOG="${log}" ./scripts/release); then
+      fail "${branch} published the other channel"
+    fi
+    [[ ! -e "${log}" ]] || fail "wrong-channel version published to Maven"
+  done
+}
+
+function test_detached_merge_publishes_trusted_revision() {
+  local repository="${TEST_ROOT}/snapshot-merge"
+  local log="${TEST_ROOT}/snapshot-merge.log"
+  local output="${TEST_ROOT}/snapshot-merge.outputs"
+  initialize_repository "${repository}" snapshot 1.5.4-SNAPSHOT
+  git -C "${repository}" add .
+  git -C "${repository}" commit -q -m "initial"
+  git -C "${repository}" checkout -q -b prepare-release
+  git -C "${repository}" commit -q --allow-empty -m "release v1.5.4-SNAPSHOT"
+  git -C "${repository}" checkout -q snapshot
+  git -C "${repository}" merge -q --no-ff prepare-release -m "merge release"
+  local trusted_sha
+  trusted_sha=$(git -C "${repository}" rev-parse HEAD)
+  git -C "${repository}" checkout -q --detach "${trusted_sha}"
+  (cd "${repository}" && GITHUB_OUTPUT="${output}" RELEASE_BRANCH=snapshot \
+    EXPECTED_RELEASE_SHA="${trusted_sha}" RELEASE_TEST_LOG="${log}" ./scripts/release)
+  grep -Fxq "published=true" "${output}" || fail "detached merge did not publish"
+  grep -Fxq "source_revision=${trusted_sha}" "${output}" || fail "merge published the marker instead of trusted HEAD"
+  [[ "$(git -C "${repository}" rev-parse HEAD)" = "${trusted_sha}" ]] || fail "release changed HEAD"
+}
+
 test_snapshot_release
 test_stable_release
 test_main_merge_skips_snapshot_marker
 test_sha_mismatch_fails_closed
+test_ordinary_commit_does_not_publish_swift
+test_maven_failure_does_not_publish_swift
+test_version_mismatch_fails_before_publication
+test_wrong_channel_fails_before_publication
+test_detached_merge_publishes_trusted_revision
 echo "release_test: all checks passed"

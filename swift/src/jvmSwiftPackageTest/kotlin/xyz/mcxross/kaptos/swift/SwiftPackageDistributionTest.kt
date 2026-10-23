@@ -82,7 +82,7 @@ class SwiftPackageDistributionTest {
           git("add", ".")
           git("commit", "-m", "SDK source branch")
           assertFalse(Files.exists(repository.resolve("Package.swift")))
-          git("checkout", "--orphan", "swift-package")
+          git("checkout", "--orphan", metadata.getValue("distributionBranch").jsonPrimitive.content)
           git("rm", "-f", "README.md")
           copyTree(distribution, repository)
           Files.walk(repository).use { paths ->
@@ -96,6 +96,8 @@ class SwiftPackageDistributionTest {
           git("add", ".")
           git("commit", "-m", "AptosKit $version distribution")
           git("tag", "v$version")
+          // Stable requirements must ignore snapshots, even from a higher independent version line.
+          git("tag", "v${version.substringBefore('.')}.999999.999999-SNAPSHOT.1.gfixture")
           git("checkout", "main")
           assertFalse(Files.exists(repository.resolve("Package.swift")))
           fun mirror(original: String, replacement: String, name: String) =
@@ -112,19 +114,11 @@ class SwiftPackageDistributionTest {
           mapOf(
             "APTOSKIT_PACKAGE_URL" to "https://github.com/mcxross/kaptos.git",
             "APTOSKIT_PACKAGE_VERSION" to version,
+            // Pin prereleases explicitly; retain a stable range to test snapshot exclusion.
+            "APTOSKIT_PACKAGE_EXACT" to (remote || '-' in version).toString(),
             "KAPTOS_TEST_URL" to fixture.url,
           )
         // A local install override inherited from the caller must not bypass Git resolution.
-        if (remote) {
-          // Verify this release even when a newer compatible tag has already been published.
-          runSwift(
-            listOf("swift", "package") +
-              arguments +
-              listOf("resolve", "kaptos", "--version", version),
-            logs.resolve("resolve.log"),
-            environment,
-          )
-        }
         runSwift(
           listOf("swift", "test") + arguments,
           logs.resolve("consumer-tests.log"),

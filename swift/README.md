@@ -20,6 +20,10 @@ Then add the product to your target's dependencies:
 .product(name: "AptosKitLibrary", package: "kaptos")
 ```
 
+For a snapshot, select its complete version from GitHub Releases using Xcode's **Exact Version**
+rule. Snapshot versions contain `-SNAPSHOT`, a commit timestamp, and a commit hash; they follow
+a separate version sequence from stable releases.
+
 Requires iOS 18+ or macOS 15+ on Apple Silicon. Both Apple Silicon and Intel iOS simulators are
 supported.
 

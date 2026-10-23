@@ -3,14 +3,27 @@ on:
   push:
     branches: [ main, snapshot ]
 
+permissions:
+  contents: read
+
 jobs:
   release:
     runs-on: macos-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/snapshot'
     environment: Sonatype
+    concurrency:
+      group: kaptos-maven-${{ github.ref_name }}
+      queue: max
+      cancel-in-progress: false
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+      version: ${{ steps.publish.outputs.version }}
+      channel: ${{ steps.publish.outputs.channel }}
+      source_revision: ${{ steps.publish.outputs.source_revision }}
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v6
@@ -23,11 +36,24 @@ jobs:
         shell: bash
         run: bash ./scripts/release_test
       - name: Publish
+        id: publish
         shell: bash
         env:
           EXPECTED_RELEASE_SHA: ${{ github.sha }}
+          RELEASE_BRANCH: ${{ github.ref_name }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SONATYPE_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SONATYPE_SIGNING_KEY_PASSWORD }}
         run: ./scripts/release
+
+  aptoskit:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/swift-package.yml
+    with:
+      source_ref: ${{ needs.release.outputs.source_revision }}
+      version: ${{ needs.release.outputs.version }}
+      publish: true

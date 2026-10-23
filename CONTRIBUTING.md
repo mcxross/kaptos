@@ -39,3 +39,21 @@ local hooks alone can be bypassed with `--no-verify`.
 Run `./scripts/format-kotlin --all --check` to audit all tracked Kotlin files. The default
 workflow checks changed files, avoiding unrelated formatting edits. Non-Kotlin files and
 ignored generated build output are outside ktfmt's scope.
+
+## Releases
+
+Maintain `version` in `gradle.properties` independently on each release branch. A commit titled
+`release v<version>` on `main` publishes a stable Maven version; a commit titled
+`release v<version>-SNAPSHOT` on `snapshot` publishes a Maven snapshot. The marker must match the
+checked-out version. Ordinary commits do not publish either package.
+
+After Maven publication succeeds, the same workflow publishes AptosKit from the same SDK commit
+and verifies installation through SwiftPM. Stable Swift versions retain the SDK version and use
+the `swift-package` distribution branch. Snapshot versions use `swift-package-snapshot` and append
+the source commit's Unix timestamp and hash, such as `1.5.3-SNAPSHOT.1790000000.g0123456789ab`.
+Swift tags and binary URLs are immutable, so successive Maven snapshots need distinct Swift versions.
+
+If Maven succeeds but AptosKit fails, rerun the failed jobs in the release workflow. The
+**SwiftPM distribution** workflow also supports manual recovery: use the original SDK commit as
+`source_ref`, its unchanged Kaptos version as `version`, and enable `publish`. Existing tags and
+release assets are checked rather than overwritten.

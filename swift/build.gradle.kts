@@ -123,15 +123,35 @@ registerInstalledPackageCheck("checkSwiftPackage", "Debug")
 
 registerInstalledPackageCheck("checkReleaseSwiftPackage", "Release")
 
-val swiftReleaseVersion = project.version.toString()
+val swiftSdkVersion = project.version.toString()
+val swiftSourceRevision =
+  providers.exec { commandLine("git", "rev-parse", "HEAD") }.standardOutput.asText.map { it.trim() }
+val swiftSnapshot = swiftSdkVersion.endsWith("-SNAPSHOT")
+val swiftSourceTimestamp =
+  providers
+    .exec { commandLine("git", "show", "-s", "--format=%ct", "HEAD") }
+    .standardOutput
+    .asText
+    .map { it.trim() }
+// Maven snapshots can be replaced. SwiftPM tags and binary URLs must identify one source commit.
+val swiftReleaseVersion =
+  if (swiftSnapshot)
+    "$swiftSdkVersion.${swiftSourceTimestamp.get()}.g${swiftSourceRevision.get().take(12)}"
+  else swiftSdkVersion
+val swiftReleaseChannel = if (swiftSnapshot) "snapshot" else "stable"
+val swiftDistributionBranch = if (swiftSnapshot) "swift-package-snapshot" else "swift-package"
 val swiftReleaseTag = "v$swiftReleaseVersion"
 val swiftRepository = "mcxross/kaptos"
 val swiftBinaryName = "AptosKitKotlin-$swiftReleaseVersion.xcframework.zip"
 val swiftBinaryUrl =
   "https://github.com/$swiftRepository/releases/download/$swiftReleaseTag/$swiftBinaryName"
-val swiftSourceRevision =
-  providers.exec { commandLine("git", "rev-parse", "HEAD") }.standardOutput.asText.map { it.trim() }
 val releaseExport = layout.buildDirectory.dir("swift-package/Release")
+val swiftIdentityJson = swiftSourceRevision.map { revision ->
+  """
+    {"version":"$swiftReleaseVersion","sdkVersion":"$swiftSdkVersion","channel":"$swiftReleaseChannel","distributionBranch":"$swiftDistributionBranch","tag":"$swiftReleaseTag","repository":"$swiftRepository","sourceRevision":"$revision"}
+    """
+    .trimIndent()
+}
 
 val validateSwiftPackageVersion =
   tasks.register("validateSwiftPackageVersion") {
@@ -158,6 +178,22 @@ val validateSwiftPackageVersion =
     }
   }
 
+val swiftIdentityFile = layout.buildDirectory.file("swift-distribution/identity.json")
+val writeSwiftPackageReleaseIdentity =
+  tasks.register("writeSwiftPackageReleaseIdentity") {
+    group = "distribution"
+    description = "Writes the SDK version, SwiftPM version, channel and source revision for CI."
+    dependsOn(validateSwiftPackageVersion)
+    inputs.property("identity", swiftIdentityJson)
+    outputs.file(swiftIdentityFile)
+    doLast {
+      swiftIdentityFile.get().asFile.apply {
+        parentFile.mkdirs()
+        writeText(swiftIdentityJson.get() + "\n")
+      }
+    }
+  }
+
 val zipReleaseSwiftPackageBinary =
   tasks.register<Zip>("zipReleaseSwiftPackageBinary") {
     group = "distribution"
@@ -177,7 +213,7 @@ val prepareSwiftPackageRelease =
     group = "distribution"
     description =
       "Prepares the source-only SwiftPM distribution with immutable binary URL/checksum."
-    dependsOn(zipReleaseSwiftPackageBinary)
+    dependsOn(zipReleaseSwiftPackageBinary, writeSwiftPackageReleaseIdentity)
     inputs.file(zipReleaseSwiftPackageBinary.flatMap { it.archiveFile })
     inputs.property("version", swiftReleaseVersion)
     inputs.property("sourceRevision", swiftSourceRevision)
@@ -221,10 +257,9 @@ val prepareSwiftPackageRelease =
       destinationDir
         .resolve("release-metadata.json")
         .writeText(
-          """
-      {"version":"$swiftReleaseVersion","tag":"$swiftReleaseTag","repository":"$swiftRepository","sourceRevision":"${swiftSourceRevision.get()}","binary":"$swiftBinaryName","binaryUrl":"$swiftBinaryUrl","checksum":"$checksum"}
-    """
-            .trimIndent() + "\n"
+          swiftIdentityJson.get().dropLast(1) +
+            ""","binary":"$swiftBinaryName","binaryUrl":"$swiftBinaryUrl","checksum":"$checksum"}""" +
+            "\n"
         )
     }
   }

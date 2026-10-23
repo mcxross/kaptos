@@ -9,8 +9,13 @@ if let localPackage = environment["KAPTOS_SWIFT_PACKAGE"] {
     aptosDependency = .package(name: "AptosKitExport", path: localPackage)
     aptosIdentity = "AptosKitExport"
 } else {
-    aptosDependency = .package(url: environment["APTOSKIT_PACKAGE_URL"] ?? "https://github.com/mcxross/kaptos.git",
-                               from: Version(environment["APTOSKIT_PACKAGE_VERSION"] ?? "1.0.1")!)
+    let url = environment["APTOSKIT_PACKAGE_URL"] ?? "https://github.com/mcxross/kaptos.git"
+    let version = Version(environment["APTOSKIT_PACKAGE_VERSION"] ?? "1.0.1")!
+    if environment["APTOSKIT_PACKAGE_EXACT"] == "true" {
+        aptosDependency = .package(url: url, exact: version)
+    } else {
+        aptosDependency = .package(url: url, from: version)
+    }
     aptosIdentity = "kaptos"
 }
 

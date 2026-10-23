@@ -9,7 +9,12 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 . "${SCRIPT_DIR}/inc.functions.sh"
 
 function current_branch() {
-  git rev-parse --abbrev-ref HEAD
+  # CI checks out the triggering SHA, which leaves HEAD detached.
+  if [[ -n "${RELEASE_BRANCH:-}" ]]; then
+    printf '%s\n' "${RELEASE_BRANCH}"
+  else
+    git rev-parse --abbrev-ref HEAD
+  fi
 }
 
 function is_release_commit() {
@@ -21,7 +26,9 @@ function is_release_commit() {
 function contains_snapshot() {
   local commit_message
   commit_message=$(git log --format=%B -n 1 "$1" | head -n 1)
-  [[ "${commit_message}" == *"SNAPSHOT"* ]]
+  local version="${commit_message#release v}"
+  version="${version%% *}"
+  [[ "${version}" == *-SNAPSHOT ]]
 }
 
 function is_release_commit_for_branch() {
@@ -72,18 +79,39 @@ function publish_commit() {
     die "Checked out commit does not match the CI release SHA."
   fi
 
+  local commit_message marker_version version channel
+  commit_message=$(git log --format=%B -n 1 "${release_commit}" | head -n 1)
+  marker_version="${commit_message#release v}"
+  marker_version="${marker_version%% *}"
+  version=$(get_version_name gradle.properties)
+  if [[ "${version}" != "${marker_version}" ]]; then
+    die "Release marker ${marker_version} does not match checked-out SDK version ${version}."
+  fi
+
   approve "Release marker found at ${release_commit} on branch ${branch}; publishing trusted HEAD ${trusted_commit}..."
   safe chmod +x ./gradlew
   safe ./gradlew generateApolloSources
 
   if contains_snapshot "${release_commit}"; then
+    channel=snapshot
     approve "Snapshot release, publishing snapshot artifact..."
     safe ./gradlew publishToMavenCentral
   else
+    channel=stable
     approve "Stable release, publishing to Maven Central..."
     safe ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
   fi
+
+  # Downstream publication is eligible only after Maven publication succeeds.
+  if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
+    printf 'published=true\nversion=%s\nchannel=%s\nsource_revision=%s\n' \
+      "${version}" "${channel}" "${trusted_commit}" >> "${GITHUB_OUTPUT}"
+  fi
 }
+
+if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
+  printf 'published=false\n' >> "${GITHUB_OUTPUT}"
+fi
 
 git_head_commit=$(git rev-parse HEAD)
 git_branch=$(current_branch)

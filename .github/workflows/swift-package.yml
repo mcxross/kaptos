@@ -11,6 +11,9 @@ on:
       - 'gradle/**'
       - '*.gradle.kts'
       - 'gradle.properties'
+      - 'scripts/release'
+      - 'scripts/release_test'
+      - '.github/workflows/release.yml'
       - '.github/workflows/swift-package.yml'
   push:
     branches: [main, snapshot]
@@ -22,12 +25,23 @@ on:
         required: true
         type: string
       version:
-        description: Expected version from gradle.properties
+        description: Expected Kaptos version from gradle.properties (including -SNAPSHOT)
         required: true
         type: string
       publish:
         description: Publish the validated SwiftPM version and Release assets
         default: false
+        type: boolean
+  workflow_call:
+    inputs:
+      source_ref:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      publish:
+        required: true
         type: boolean
 
 permissions:
@@ -39,6 +53,9 @@ jobs:
     timeout-minutes: 60
     outputs:
       version: ${{ steps.metadata.outputs.version }}
+      sdk_version: ${{ steps.metadata.outputs.sdk_version }}
+      channel: ${{ steps.metadata.outputs.channel }}
+      distribution_branch: ${{ steps.metadata.outputs.distribution_branch }}
       source_revision: ${{ steps.metadata.outputs.source_revision }}
     steps:
       - uses: actions/checkout@v7
@@ -60,17 +77,28 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version=$(sed -n 's/^version=//p' gradle.properties)
+          ./gradlew :kaptos-swift:writeSwiftPackageReleaseIdentity --console=plain
+          identity=swift/build/swift-distribution/identity.json
+          version=$(jq -r .version "$identity")
+          sdk_version=$(jq -r .sdkVersion "$identity")
+          channel=$(jq -r .channel "$identity")
+          distribution_branch=$(jq -r .distributionBranch "$identity")
           test -n "$version"
-          if [[ -n "$EXPECTED_VERSION" ]]; then test "$EXPECTED_VERSION" = "$version"; fi
+          if [[ -n "$EXPECTED_VERSION" ]]; then test "$EXPECTED_VERSION" = "$sdk_version"; fi
           source_revision=$(git rev-parse HEAD)
+          test "$(jq -r .sourceRevision "$identity")" = "$source_revision"
           if [[ "$PUBLISH" = true ]]; then
             test "$GITHUB_REPOSITORY" = mcxross/kaptos
             [[ "$GITHUB_REF" = refs/heads/main || "$GITHUB_REF" = refs/heads/snapshot ]]
-            git merge-base --is-ancestor "$source_revision" origin/main ||
-              git merge-base --is-ancestor "$source_revision" origin/snapshot
+            case "$channel" in
+              stable) source_branch=main ;;
+              snapshot) source_branch=snapshot ;;
+              *) exit 1 ;;
+            esac
+            git merge-base --is-ancestor "$source_revision" "origin/$source_branch"
           fi
-          printf 'version=%s\nsource_revision=%s\n' "$version" "$source_revision" >> "$GITHUB_OUTPUT"
+          printf 'version=%s\nsdk_version=%s\nchannel=%s\ndistribution_branch=%s\nsource_revision=%s\n' \
+            "$version" "$sdk_version" "$channel" "$distribution_branch" "$source_revision" >> "$GITHUB_OUTPUT"
           xcodebuild -version
           swift --version
       - name: Build and verify Release SwiftPM distribution
@@ -87,11 +115,13 @@ jobs:
           path: build/distributions/swift-package/*
           if-no-files-found: error
           compression-level: 0
+          overwrite: true
       - name: Upload consumer and fixture reports
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: aptoskit-swiftpm-reports
+          overwrite: true
           path: |
             swift/build/reports/swift-package/
             swift/build/reports/tests/checkReleaseSwiftPackage/
@@ -100,13 +130,14 @@ jobs:
             swift/build/test-results/checkSwiftPackageDistribution/
 
   publish:
-    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.repository == 'mcxross/kaptos'
+    if: inputs.publish && github.repository == 'mcxross/kaptos' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: validate
     runs-on: ubuntu-latest
     permissions:
       contents: write
     concurrency:
       group: aptoskit-swiftpm-publication
+      queue: max
       cancel-in-progress: false
     steps:
       - uses: actions/download-artifact@v8
@@ -117,12 +148,19 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ needs.validate.outputs.version }}
+          SDK_VERSION: ${{ needs.validate.outputs.sdk_version }}
+          CHANNEL: ${{ needs.validate.outputs.channel }}
+          DISTRIBUTION_BRANCH: ${{ needs.validate.outputs.distribution_branch }}
           SOURCE_REVISION: ${{ needs.validate.outputs.source_revision }}
         shell: bash
         run: |
           set -euo pipefail
           test "$GITHUB_REPOSITORY" = mcxross/kaptos
           [[ "$GITHUB_REF" = refs/heads/main || "$GITHUB_REF" = refs/heads/snapshot ]]
+          case "$CHANNEL:$DISTRIBUTION_BRANCH" in
+            stable:swift-package|snapshot:swift-package-snapshot) ;;
+            *) exit 1 ;;
+          esac
           tag="v$VERSION"
           prerelease=false
           if [[ "$VERSION" = *-* ]]; then prerelease=true; fi
@@ -140,8 +178,10 @@ jobs:
           done
           tar -xzf "$sources" -C "$payload"
           metadata="$payload/release-metadata.json"
-          jq -e --arg version "$VERSION" --arg tag "$tag" --arg sha "$SOURCE_REVISION" '
-            .version == $version and .tag == $tag and .sourceRevision == $sha and
+          jq -e --arg version "$VERSION" --arg tag "$tag" --arg sha "$SOURCE_REVISION" \
+            --arg sdk "$SDK_VERSION" --arg channel "$CHANNEL" --arg branch "$DISTRIBUTION_BRANCH" '
+            .version == $version and .sdkVersion == $sdk and .channel == $channel and
+            .distributionBranch == $branch and .tag == $tag and .sourceRevision == $sha and
             .repository == "mcxross/kaptos" and
             .binary == ("AptosKitKotlin-" + $version + ".xcframework.zip") and
             .binaryUrl == ("https://github.com/mcxross/kaptos/releases/download/" + $tag + "/" + .binary)
@@ -149,14 +189,14 @@ jobs:
           expected=$(jq -r .checksum "$metadata")
           actual=$(sha256sum "$binary" | cut -d ' ' -f 1)
           test "$expected" = "$actual"
-          git init --initial-branch=swift-package "$repository"
+          git init --initial-branch="$DISTRIBUTION_BRANCH" "$repository"
           git -C "$repository" config user.name github-actions\[bot\]
           git -C "$repository" config user.email 41898282+github-actions\[bot\]@users.noreply.github.com
           git -C "$repository" config credential.helper '!gh auth git-credential'
           git -C "$repository" remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
-          branch_ref=$(git -C "$repository" ls-remote --heads origin refs/heads/swift-package)
+          branch_ref=$(git -C "$repository" ls-remote --heads origin "refs/heads/$DISTRIBUTION_BRANCH")
           if [[ -n "$branch_ref" ]]; then
-            git -C "$repository" fetch --depth=1 origin swift-package
+            git -C "$repository" fetch --depth=1 origin "$DISTRIBUTION_BRANCH"
             git -C "$repository" reset --hard FETCH_HEAD
             git -C "$repository" rm -r --ignore-unmatch .
           fi
@@ -174,14 +214,15 @@ jobs:
               git -C "$repository" -c commit.gpgsign=false commit -m "AptosKit $tag from $SOURCE_REVISION"
             fi
             package_commit=$(git -C "$repository" rev-parse HEAD)
-            git -C "$repository" push origin HEAD:refs/heads/swift-package
+            git -C "$repository" push origin "HEAD:refs/heads/$DISTRIBUTION_BRANCH"
           fi
           release_json="$RUNNER_TEMP/aptoskit-release.json"
           if ! gh api "repos/$GITHUB_REPOSITORY/releases/tags/$tag" > "$release_json" 2> "$RUNNER_TEMP/release-error"; then
             if ! grep -q 'HTTP 404' "$RUNNER_TEMP/release-error"; then
               cat "$RUNNER_TEMP/release-error" >&2; exit 1
             fi
-            printf 'AptosKit %s\nSDK source: %s\nBinary SHA-256: %s\n' "$VERSION" "$SOURCE_REVISION" "$expected" > "$RUNNER_TEMP/release-notes"
+            printf 'AptosKit %s\nKaptos: %s\nChannel: %s\nSDK source: %s\nBinary SHA-256: %s\n' \
+              "$VERSION" "$SDK_VERSION" "$CHANNEL" "$SOURCE_REVISION" "$expected" > "$RUNNER_TEMP/release-notes"
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$package_commit" --draft \
               --prerelease="$prerelease" --latest=false \
               --title "AptosKit $VERSION" --notes-file "$RUNNER_TEMP/release-notes"
@@ -232,4 +273,5 @@ jobs:
         if: always()
         with:
           name: aptoskit-swiftpm-published-reports
+          overwrite: true
           path: swift/build/reports/swift-package/Remote/
