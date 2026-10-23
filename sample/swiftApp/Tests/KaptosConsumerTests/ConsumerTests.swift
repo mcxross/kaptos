@@ -8,6 +8,9 @@ struct ConsumerTests {
     func testLocalTransportStagesErrorsAndWorker() async throws {
         let url = try #require(ProcessInfo.processInfo.environment["KAPTOS_TEST_URL"], "Run ./gradlew :kaptos-swift:checkSwiftPackage to start the local fixture")
         let client = try AptosClient(configuration: .init(network: .custom, fullNode: URL(string: url)))
+        let ledger = try await client.ledger.info()
+        #expect(ledger.chainId.chainId == 4)
+        #expect(ledger.version == 1)
         let account = try client.importAccount(privateKey: "ed25519-priv-0x" + String(repeating: "11", count: 32), address: AccountAddress("0x1"))
         let address = try AccountAddress("0xa")
         let state = try await client.accounts.get(address)

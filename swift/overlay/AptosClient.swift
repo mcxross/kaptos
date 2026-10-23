@@ -75,7 +75,7 @@ public final class AptosClient {
     public var indexer: AptosIndexer { AptosIndexer(state) }
     public var tables: AptosTables { AptosTables(state) }
 
-    public var ledger: Ledger { state.raw.ledger }
+    public var ledger: AptosLedger { AptosLedger(state) }
     public var objects: Objects { state.raw.objects }
     public var staking: Staking { state.raw.staking }
     public var digitalAssets: DigitalAssets { state.raw.digitalAssets }
@@ -133,6 +133,27 @@ public final class AptosClient {
         defer { state.closing = false }
         try await aptosCall { try await state.raw.closeAsync() }
         state.closed = true
+    }
+}
+
+@MainActor
+public struct AptosLedger {
+    private let state: ClientState
+    internal init(_ state: ClientState) { self.state = state }
+
+    public func info() async throws -> ExportedKotlinPackages.xyz.mcxross.kaptos.ledger.LedgerState {
+        try state.requireOpen()
+        return try await aptosCall { try await state.raw.ledger.info() }
+    }
+
+    public func blockAtHeight(height: UInt64) async throws -> ExportedKotlinPackages.xyz.mcxross.kaptos.ledger.LedgerBlock {
+        try state.requireOpen()
+        return try await aptosCall { try await state.raw.ledger.blockAtHeight(height: height) }
+    }
+
+    public func blockAtVersion(version: UInt64) async throws -> ExportedKotlinPackages.xyz.mcxross.kaptos.ledger.LedgerBlock {
+        try state.requireOpen()
+        return try await aptosCall { try await state.raw.ledger.blockAtVersion(version: version) }
     }
 }
 
