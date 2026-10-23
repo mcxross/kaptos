@@ -1,0 +1,431 @@
+public final class xyz/mcxross/kaptos/swift/Abstraction {
+	public final fun buildDisable (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/transaction/authenticator/AuthenticationFunction;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildDisable$default (Lxyz/mcxross/kaptos/swift/Abstraction;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/transaction/authenticator/AuthenticationFunction;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildEnable (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/transaction/authenticator/AuthenticationFunction;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildEnable$default (Lxyz/mcxross/kaptos/swift/Abstraction;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/transaction/authenticator/AuthenticationFunction;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun isEnabled (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/transaction/authenticator/AuthenticationFunction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun status (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Accounts {
+	public final fun buildUnverifiedRotation (Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildUnverifiedRotation$default (Lxyz/mcxross/kaptos/swift/Accounts;Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildVerifiedRotation (Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildVerifiedRotation$default (Lxyz/mcxross/kaptos/swift/Accounts;Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun deriveOwned (Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/account/AccountLookupOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deriveOwned$default (Lxyz/mcxross/kaptos/swift/Accounts;Lxyz/mcxross/kaptos/account/Account;Lxyz/mcxross/kaptos/account/AccountLookupOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun findByPublicKey (Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;Lxyz/mcxross/kaptos/account/AccountLookupOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun findByPublicKey$default (Lxyz/mcxross/kaptos/swift/Accounts;Lxyz/mcxross/kaptos/core/crypto/AccountPublicKey;Lxyz/mcxross/kaptos/account/AccountLookupOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun get (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getBalance-qJGtvoU (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/account/AccountAsset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Addresses {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/swift/Addresses;
+	public final fun parse (Ljava/lang/String;)Lxyz/mcxross/kaptos/model/AccountAddress;
+}
+
+public final class xyz/mcxross/kaptos/swift/AptosException : java/lang/RuntimeException {
+	public final fun getApiCode ()Ljava/lang/String;
+	public final fun getCategory ()Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public final fun getVmCode ()Ljava/lang/Long;
+}
+
+public final class xyz/mcxross/kaptos/swift/ByteCodec {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/swift/ByteCodec;
+	public final fun fromOctets (Ljava/util/List;)[B
+	public final fun toOctets ([B)Ljava/util/List;
+}
+
+public final class xyz/mcxross/kaptos/swift/CallbackSigner : xyz/mcxross/kaptos/account/TransactionSigner {
+	public fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;Lxyz/mcxross/kaptos/core/crypto/PublicKey;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;)V
+	public fun getAccountAddress ()Lxyz/mcxross/kaptos/model/AccountAddress;
+	public fun getKind ()Lxyz/mcxross/kaptos/account/TransactionSignerKind;
+	public fun getPublicKey ()Lxyz/mcxross/kaptos/core/crypto/PublicKey;
+	public fun signBytes ([BLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun signText (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun signTransaction (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun verifySignature ([BLxyz/mcxross/kaptos/core/crypto/Signature;)Z
+}
+
+public final class xyz/mcxross/kaptos/swift/Client {
+	public fun <init> (Lxyz/mcxross/kaptos/swift/Configuration;)V
+	public final fun clearAbiCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun close ()V
+	public final fun closeAsync (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun generateAccount (Lxyz/mcxross/kaptos/model/SigningSchemeInput;)Lxyz/mcxross/kaptos/account/Account;
+	public static synthetic fun generateAccount$default (Lxyz/mcxross/kaptos/swift/Client;Lxyz/mcxross/kaptos/model/SigningSchemeInput;ILjava/lang/Object;)Lxyz/mcxross/kaptos/account/Account;
+	public final fun generateConfidentialKey ()Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;
+	public final fun getAbstraction ()Lxyz/mcxross/kaptos/swift/Abstraction;
+	public final fun getAccounts ()Lxyz/mcxross/kaptos/swift/Accounts;
+	public final fun getCoins ()Lxyz/mcxross/kaptos/swift/Coins;
+	public final fun getConfidentialAssets ()Lxyz/mcxross/kaptos/swift/ConfidentialAssets;
+	public final fun getDigitalAssets ()Lxyz/mcxross/kaptos/swift/DigitalAssets;
+	public final fun getEncryptedTransactions ()Lxyz/mcxross/kaptos/swift/EncryptedTransactions;
+	public final fun getFaucet ()Lxyz/mcxross/kaptos/swift/Faucet;
+	public final fun getFungibleAssets ()Lxyz/mcxross/kaptos/swift/FungibleAssets;
+	public final fun getIndexer ()Lxyz/mcxross/kaptos/swift/Indexer;
+	public final fun getLedger ()Lxyz/mcxross/kaptos/swift/Ledger;
+	public final fun getNames ()Lxyz/mcxross/kaptos/swift/Names;
+	public final fun getObjects ()Lxyz/mcxross/kaptos/swift/Objects;
+	public final fun getStaking ()Lxyz/mcxross/kaptos/swift/Staking;
+	public final fun getTables ()Lxyz/mcxross/kaptos/swift/Tables;
+	public final fun getTransactions ()Lxyz/mcxross/kaptos/swift/Transactions;
+	public final fun getViews ()Lxyz/mcxross/kaptos/swift/Views;
+	public final fun importAccount (Ljava/lang/String;Ljava/lang/String;)Lxyz/mcxross/kaptos/account/Account;
+	public static synthetic fun importAccount$default (Lxyz/mcxross/kaptos/swift/Client;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/account/Account;
+	public final fun worker (Lxyz/mcxross/kaptos/account/TransactionSigner;I)Lxyz/mcxross/kaptos/swift/Worker;
+	public static synthetic fun worker$default (Lxyz/mcxross/kaptos/swift/Client;Lxyz/mcxross/kaptos/account/TransactionSigner;IILjava/lang/Object;)Lxyz/mcxross/kaptos/swift/Worker;
+}
+
+public final class xyz/mcxross/kaptos/swift/Coins {
+	public final fun buildTransfer-7hoFjp4 (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLjava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer-7hoFjp4$default (Lxyz/mcxross/kaptos/swift/Coins;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLjava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/ConfidentialActivityPage {
+	public fun <init> (Ljava/util/List;ILxyz/mcxross/kaptos/model/PageRequest;Z)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()I
+	public final fun component3 ()Lxyz/mcxross/kaptos/model/PageRequest;
+	public final fun component4 ()Z
+	public final fun copy (Ljava/util/List;ILxyz/mcxross/kaptos/model/PageRequest;Z)Lxyz/mcxross/kaptos/swift/ConfidentialActivityPage;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/swift/ConfidentialActivityPage;Ljava/util/List;ILxyz/mcxross/kaptos/model/PageRequest;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/swift/ConfidentialActivityPage;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHasNextPage ()Z
+	public final fun getItems ()Ljava/util/List;
+	public final fun getRequest ()Lxyz/mcxross/kaptos/model/PageRequest;
+	public final fun getTotalCount ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/swift/ConfidentialAssets {
+	public final fun buildDeposit-bdvP6-E (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildDeposit-bdvP6-E$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildNormalizeBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildNormalizeBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRegisterBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRegisterBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRolloverPendingBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRolloverPendingBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRotateEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRotateEncryptionKey$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetIncomingTransfersPaused (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildTransfer-7Np0EYI (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer-7Np0EYI$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildWithdraw-GPQ0J6g (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildWithdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun clearCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun deposit-bdvP6-E (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deposit-bdvP6-E$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getActivities (Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getActivities$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/confidential/ConfidentialActivityQuery;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getAssetAuditorEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getAssetAuditorEncryptionKey$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getBalance (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getEffectiveAuditorHint (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getEncryptionKey (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getEncryptionKey$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getStatus (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun isEmergencyPaused (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun normalizeBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun normalizeBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun registerBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun registerBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun rolloverPendingBalance (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun rolloverPendingBalance$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun rotateEncryptionKey (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun rotateEncryptionKey$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;ZZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun setIncomingTransfersPaused (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun setIncomingTransfersPaused$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;ZLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun transfer-7Np0EYI (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun transfer-7Np0EYI$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLjava/util/List;[BLxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun withdraw-GPQ0J6g (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun withdraw-GPQ0J6g$default (Lxyz/mcxross/kaptos/swift/ConfidentialAssets;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialDecryptionKey;JLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/confidential/ConfidentialTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Configuration {
+	public fun <init> ()V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/Network;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;JJJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/Network;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;JJJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/model/Network;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/util/Map;
+	public final fun component6 ()J
+	public final fun component7 ()J
+	public final fun component8-s-VKNKU ()J
+	public final fun component9-s-VKNKU ()J
+	public final fun copy-c1Np34E (Lxyz/mcxross/kaptos/model/Network;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;JJJJ)Lxyz/mcxross/kaptos/swift/Configuration;
+	public static synthetic fun copy-c1Np34E$default (Lxyz/mcxross/kaptos/swift/Configuration;Lxyz/mcxross/kaptos/model/Network;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;JJJJILjava/lang/Object;)Lxyz/mcxross/kaptos/swift/Configuration;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExpirationSecondsFromNow-s-VKNKU ()J
+	public final fun getFaucet ()Ljava/lang/String;
+	public final fun getFullNode ()Ljava/lang/String;
+	public final fun getHeaders ()Ljava/util/Map;
+	public final fun getIndexer ()Ljava/lang/String;
+	public final fun getIndexerWaitTimeoutMillis ()J
+	public final fun getMaxGasAmount-s-VKNKU ()J
+	public final fun getNetwork ()Lxyz/mcxross/kaptos/model/Network;
+	public final fun getRequestTimeoutMillis ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/swift/DigitalAssets {
+	public final fun buildAddProperty (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetProperty;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildAddProperty$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetProperty;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildBurn (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildBurn$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildCreateCollection (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetCollectionOptions;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildCreateCollection$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetCollectionOptions;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildFreezeTransfer (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildFreezeTransfer$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildMint (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildMint$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildMintSoulbound (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildMintSoulbound$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRemoveProperty (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRemoveProperty$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetDescription (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetDescription$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetName (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetName$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetUri (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetUri$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildTransfer (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildUnfreezeTransfer (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildUnfreezeTransfer$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildUpdateProperty (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetProperty;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildUpdateProperty$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/digitalasset/DigitalAssetProperty;Lxyz/mcxross/kaptos/model/StructTag;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getActivity (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getActivity$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCollection (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getCollection (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getOwned (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getOwned$default (Lxyz/mcxross/kaptos/swift/DigitalAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/EncryptedTransactions {
+	public final fun clearCache (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encrypt (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lxyz/mcxross/kaptos/swift/EncryptedTransactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun signAndSubmit (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun signAndSubmit (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/swift/EncryptedTransactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/swift/EncryptedTransactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/account/TransactionSigner;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun submitAndWait (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun submitAndWait$default (Lxyz/mcxross/kaptos/swift/EncryptedTransactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lxyz/mcxross/kaptos/encrypted/EncryptedTransactionOptions;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/ErrorCategory : java/lang/Enum {
+	public static final field Api Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Crypto Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Indexer Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Serialization Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Timeout Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Transport Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field UnsupportedFeature Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static final field Validation Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lxyz/mcxross/kaptos/swift/ErrorCategory;
+	public static fun values ()[Lxyz/mcxross/kaptos/swift/ErrorCategory;
+}
+
+public final class xyz/mcxross/kaptos/swift/Faucet {
+	public final fun fund-32etgaw (Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun fund-32etgaw$default (Lxyz/mcxross/kaptos/swift/Faucet;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/FungibleAssets {
+	public final fun buildStoreTransfer-EC5Vqqo (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildStoreTransfer-EC5Vqqo$default (Lxyz/mcxross/kaptos/swift/FungibleAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildTransfer-EC5Vqqo (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildTransfer-EC5Vqqo$default (Lxyz/mcxross/kaptos/swift/FungibleAssets;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;JLxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Indexer {
+	public final fun query (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun query$default (Lxyz/mcxross/kaptos/swift/Indexer;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Ledger {
+	public final fun blockAtHeight-4PLdz1A (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun blockAtVersion-4PLdz1A (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun info (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Move {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/swift/Move;
+	public final fun address (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun bool (Z)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun bytes ([B)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun option (Lxyz/mcxross/kaptos/move/MoveArgument;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun preSerialized ([B)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun string (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun struct (Ljava/util/Map;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u128 (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u16-xj2QHRw (S)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u256 (Ljava/lang/String;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u32-WZ4Q5Ns (I)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u64-VKZWuLQ (J)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun u8-7apg3OU (B)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun variant (Ljava/lang/String;Ljava/util/Map;)Lxyz/mcxross/kaptos/move/MoveArgument;
+	public final fun vector (Ljava/util/List;)Lxyz/mcxross/kaptos/move/MoveArgument;
+}
+
+public final class xyz/mcxross/kaptos/swift/Names {
+	public final fun buildClearTarget (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildClearTarget$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRegister (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/names/NameExpirationPolicy;ZLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRegister$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/names/NameExpirationPolicy;ZLxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildRenew (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildRenew$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetPrimary (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetPrimary$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildSetTarget (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildSetTarget$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/lang/String;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun expiration-ZIaKswc (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getAccountDomains (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getAccountDomains$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getAccountNames (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getAccountNames$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getAccountSubdomains (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getAccountSubdomains$default (Lxyz/mcxross/kaptos/swift/Names;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getDomainSubdomains (Ljava/lang/String;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getDomainSubdomains$default (Lxyz/mcxross/kaptos/swift/Names;Ljava/lang/String;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getName (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun owner (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun primaryName (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun target (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Objects {
+	public final fun get (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/OptionValues {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/swift/OptionValues;
+	public final fun transaction (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lxyz/mcxross/kaptos/model/TransactionOptions;
+	public static synthetic fun transaction$default (Lxyz/mcxross/kaptos/swift/OptionValues;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/TransactionOptions;
+}
+
+public final class xyz/mcxross/kaptos/swift/ResponseValues {
+	public static final field INSTANCE Lxyz/mcxross/kaptos/swift/ResponseValues;
+	public final fun transactionHash (Lxyz/mcxross/kaptos/model/TransactionResponse;)Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/swift/Staking {
+	public final fun getActivities (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getDelegatorCount-ZIaKswc (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getDelegatorCounts (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Submission {
+	public final fun await (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/TablePage {
+	public fun <init> (Ljava/util/List;Z)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Z
+	public final fun copy (Ljava/util/List;Z)Lxyz/mcxross/kaptos/swift/TablePage;
+	public static synthetic fun copy$default (Lxyz/mcxross/kaptos/swift/TablePage;Ljava/util/List;ZILjava/lang/Object;)Lxyz/mcxross/kaptos/swift/TablePage;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHasNextPage ()Z
+	public final fun getItems ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/swift/Tables {
+	public final fun getItem (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getItem$default (Lxyz/mcxross/kaptos/swift/Tables;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getItems (Ljava/lang/String;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getItems$default (Lxyz/mcxross/kaptos/swift/Tables;Ljava/lang/String;Lxyz/mcxross/kaptos/model/PageRequest;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getMetadata (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Transactions {
+	public final fun build (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun build$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildFeePayer (Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionPayload;Ljava/util/List;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildFeePayer$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionPayload;Ljava/util/List;Lxyz/mcxross/kaptos/model/AccountAddressInput;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun buildMultiAgent (Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun buildMultiAgent$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/AccountAddressInput;Ljava/util/List;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun entryFunctionPayload (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun entryFunctionPayload$default (Lxyz/mcxross/kaptos/swift/Transactions;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun externalFeePayerRequest (Lxyz/mcxross/kaptos/model/UnsignedTransaction$FeePayer;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;)Lxyz/mcxross/kaptos/model/ExternalFeePayerRequest;
+	public static synthetic fun externalFeePayerRequest$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction$FeePayer;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;ILjava/lang/Object;)Lxyz/mcxross/kaptos/model/ExternalFeePayerRequest;
+	public final fun fromBcs ([B)Lxyz/mcxross/kaptos/model/UnsignedTransaction$Simple;
+	public final fun sign (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun signAndSubmit (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun signAndSubmit (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun signAndSubmit$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun simulate (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/core/crypto/PublicKey;Ljava/util/List;Lxyz/mcxross/kaptos/core/crypto/PublicKey;Lxyz/mcxross/kaptos/model/SimulationOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun simulate$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/core/crypto/PublicKey;Ljava/util/List;Lxyz/mcxross/kaptos/core/crypto/PublicKey;Lxyz/mcxross/kaptos/model/SimulationOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun submit (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun submit$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun submitAndWait (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun submitAndWait (Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun submitAndWait$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/TransactionPayload;Lxyz/mcxross/kaptos/model/TransactionOptions;Ljava/util/List;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun submitAndWait$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/account/TransactionSigner;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun userTransactionHash (Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;)Ljava/lang/String;
+	public static synthetic fun userTransactionHash$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/UnsignedTransaction;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;Ljava/util/List;Lxyz/mcxross/kaptos/transaction/authenticator/AccountAuthenticator;ILjava/lang/Object;)Ljava/lang/String;
+	public final fun waitForTransaction (Ljava/lang/String;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun waitForTransaction (Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun waitForTransaction$default (Lxyz/mcxross/kaptos/swift/Transactions;Ljava/lang/String;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun waitForTransaction$default (Lxyz/mcxross/kaptos/swift/Transactions;Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/model/WaitForTransactionOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Views {
+	public final fun call (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun call$default (Lxyz/mcxross/kaptos/swift/Views;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun callRaw (Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun callRaw$default (Lxyz/mcxross/kaptos/swift/Views;Ljava/lang/String;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/Worker {
+	public final fun getEvents ()Lkotlinx/coroutines/flow/Flow;
+	public final fun shutdown (ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun shutdown$default (Lxyz/mcxross/kaptos/swift/Worker;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun submit (Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class xyz/mcxross/kaptos/swift/WorkerEvent {
+	public synthetic fun <init> (Lxyz/mcxross/kaptos/swift/WorkerEventKind;Lkotlin/ULong;Lkotlin/ULong;Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/swift/AptosException;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public final fun component2-6VbMDqA ()Lkotlin/ULong;
+	public final fun component3-6VbMDqA ()Lkotlin/ULong;
+	public final fun component4 ()Lxyz/mcxross/kaptos/model/PendingTransactionResponse;
+	public final fun component5 ()Lxyz/mcxross/kaptos/swift/AptosException;
+	public final fun copy-VeHMy-o (Lxyz/mcxross/kaptos/swift/WorkerEventKind;Lkotlin/ULong;Lkotlin/ULong;Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/swift/AptosException;)Lxyz/mcxross/kaptos/swift/WorkerEvent;
+	public static synthetic fun copy-VeHMy-o$default (Lxyz/mcxross/kaptos/swift/WorkerEvent;Lxyz/mcxross/kaptos/swift/WorkerEventKind;Lkotlin/ULong;Lkotlin/ULong;Lxyz/mcxross/kaptos/model/PendingTransactionResponse;Lxyz/mcxross/kaptos/swift/AptosException;ILjava/lang/Object;)Lxyz/mcxross/kaptos/swift/WorkerEvent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getError ()Lxyz/mcxross/kaptos/swift/AptosException;
+	public final fun getKind ()Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public final fun getRequestId-6VbMDqA ()Lkotlin/ULong;
+	public final fun getSequenceNumber-6VbMDqA ()Lkotlin/ULong;
+	public final fun getTransaction ()Lxyz/mcxross/kaptos/model/PendingTransactionResponse;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class xyz/mcxross/kaptos/swift/WorkerEventKind : java/lang/Enum {
+	public static final field Building Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static final field Cancelled Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static final field Drained Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static final field Failed Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static final field Queued Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static final field Submitted Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+	public static fun values ()[Lxyz/mcxross/kaptos/swift/WorkerEventKind;
+}
+

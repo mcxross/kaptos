@@ -118,6 +118,7 @@ public final class xyz/mcxross/kaptos/AptosKt {
 }
 
 public final class xyz/mcxross/kaptos/TransactionDefaults {
+	public fun <init> ()V
 	public synthetic fun <init> (JJILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (JJLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-s-VKNKU ()J
@@ -613,6 +614,7 @@ public abstract class xyz/mcxross/kaptos/core/crypto/AptosDerivationPath {
 }
 
 public final class xyz/mcxross/kaptos/core/crypto/AptosDerivationPath$Ecdsa : xyz/mcxross/kaptos/core/crypto/AptosDerivationPath {
+	public fun <init> ()V
 	public synthetic fun <init> (IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-pVg5ArA ()I
@@ -629,6 +631,7 @@ public final class xyz/mcxross/kaptos/core/crypto/AptosDerivationPath$Ecdsa : xy
 }
 
 public final class xyz/mcxross/kaptos/core/crypto/AptosDerivationPath$Ed25519 : xyz/mcxross/kaptos/core/crypto/AptosDerivationPath {
+	public fun <init> ()V
 	public synthetic fun <init> (IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-pVg5ArA ()I
@@ -1097,6 +1100,7 @@ public final class xyz/mcxross/kaptos/digitalasset/DigitalAssetActivity {
 }
 
 public final class xyz/mcxross/kaptos/digitalasset/DigitalAssetCollectionOptions {
+	public fun <init> ()V
 	public synthetic fun <init> (JZZZZZZZZZJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (JZZZZZZZZZJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-s-VKNKU ()J
@@ -4190,6 +4194,7 @@ public final class xyz/mcxross/kaptos/model/TransactionExtraConfig$DefaultImpls 
 }
 
 public final class xyz/mcxross/kaptos/model/TransactionExtraConfig$V1 : xyz/mcxross/kaptos/model/TransactionExtraConfig {
+	public fun <init> ()V
 	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;Lkotlin/ULong;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lxyz/mcxross/kaptos/model/AccountAddress;Lkotlin/ULong;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lxyz/mcxross/kaptos/model/AccountAddress;
@@ -4205,6 +4210,7 @@ public final class xyz/mcxross/kaptos/model/TransactionExtraConfig$V1 : xyz/mcxr
 }
 
 public final class xyz/mcxross/kaptos/model/TransactionOptions {
+	public fun <init> ()V
 	public synthetic fun <init> (Lkotlin/ULong;Lkotlin/ULong;Lkotlin/ULong;Lkotlin/ULong;Lxyz/mcxross/kaptos/model/ReplayProtection;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun <init> (Lkotlin/ULong;Lkotlin/ULong;Lkotlin/ULong;Lkotlin/ULong;Lxyz/mcxross/kaptos/model/ReplayProtection;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1-6VbMDqA ()Lkotlin/ULong;

@@ -38,6 +38,7 @@ jobs:
           :kaptos:macosArm64Test
           :kaptos-encrypted-transactions:macosArm64Test
           :kaptos-confidential-assets:macosArm64Test
-          :kaptos:linkDebugFrameworkIosSimulatorArm64
+          :kaptos-swift:iosSimulatorArm64Test
+          :kaptos-swift:macosArm64Test
           apiCheck
           --console=plain

@@ -63,6 +63,7 @@ runs:
           :kaptos:jvmTest
           :kaptos-encrypted-transactions:jvmTest
           :kaptos-confidential-assets:jvmTest
+          :kaptos-swift:jvmTest
           :sample:jvmApp:compileKotlin
           apiCheck
           --console=plain

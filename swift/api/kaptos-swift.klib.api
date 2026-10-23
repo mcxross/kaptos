@@ -1,0 +1,403 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64, macosArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <kaptos-build:kaptos-swift>
+final enum class xyz.mcxross.kaptos.swift/ErrorCategory : kotlin/Enum<xyz.mcxross.kaptos.swift/ErrorCategory> { // xyz.mcxross.kaptos.swift/ErrorCategory|null[0]
+    enum entry Api // xyz.mcxross.kaptos.swift/ErrorCategory.Api|null[0]
+    enum entry Crypto // xyz.mcxross.kaptos.swift/ErrorCategory.Crypto|null[0]
+    enum entry Indexer // xyz.mcxross.kaptos.swift/ErrorCategory.Indexer|null[0]
+    enum entry Serialization // xyz.mcxross.kaptos.swift/ErrorCategory.Serialization|null[0]
+    enum entry Timeout // xyz.mcxross.kaptos.swift/ErrorCategory.Timeout|null[0]
+    enum entry Transport // xyz.mcxross.kaptos.swift/ErrorCategory.Transport|null[0]
+    enum entry UnsupportedFeature // xyz.mcxross.kaptos.swift/ErrorCategory.UnsupportedFeature|null[0]
+    enum entry Validation // xyz.mcxross.kaptos.swift/ErrorCategory.Validation|null[0]
+
+    final val entries // xyz.mcxross.kaptos.swift/ErrorCategory.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<xyz.mcxross.kaptos.swift/ErrorCategory> // xyz.mcxross.kaptos.swift/ErrorCategory.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): xyz.mcxross.kaptos.swift/ErrorCategory // xyz.mcxross.kaptos.swift/ErrorCategory.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<xyz.mcxross.kaptos.swift/ErrorCategory> // xyz.mcxross.kaptos.swift/ErrorCategory.values|values#static(){}[0]
+}
+
+final enum class xyz.mcxross.kaptos.swift/WorkerEventKind : kotlin/Enum<xyz.mcxross.kaptos.swift/WorkerEventKind> { // xyz.mcxross.kaptos.swift/WorkerEventKind|null[0]
+    enum entry Building // xyz.mcxross.kaptos.swift/WorkerEventKind.Building|null[0]
+    enum entry Cancelled // xyz.mcxross.kaptos.swift/WorkerEventKind.Cancelled|null[0]
+    enum entry Drained // xyz.mcxross.kaptos.swift/WorkerEventKind.Drained|null[0]
+    enum entry Failed // xyz.mcxross.kaptos.swift/WorkerEventKind.Failed|null[0]
+    enum entry Queued // xyz.mcxross.kaptos.swift/WorkerEventKind.Queued|null[0]
+    enum entry Submitted // xyz.mcxross.kaptos.swift/WorkerEventKind.Submitted|null[0]
+
+    final val entries // xyz.mcxross.kaptos.swift/WorkerEventKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<xyz.mcxross.kaptos.swift/WorkerEventKind> // xyz.mcxross.kaptos.swift/WorkerEventKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): xyz.mcxross.kaptos.swift/WorkerEventKind // xyz.mcxross.kaptos.swift/WorkerEventKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<xyz.mcxross.kaptos.swift/WorkerEventKind> // xyz.mcxross.kaptos.swift/WorkerEventKind.values|values#static(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Abstraction { // xyz.mcxross.kaptos.swift/Abstraction|null[0]
+    final suspend fun buildDisable(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.transaction.authenticator/AuthenticationFunction? = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Abstraction.buildDisable|buildDisable(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction?;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildEnable(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.transaction.authenticator/AuthenticationFunction, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Abstraction.buildEnable|buildEnable(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun isEnabled(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.transaction.authenticator/AuthenticationFunction): kotlin/Boolean // xyz.mcxross.kaptos.swift/Abstraction.isEnabled|isEnabled(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.transaction.authenticator.AuthenticationFunction){}[0]
+    final suspend fun status(xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.account/AccountAbstractionStatus // xyz.mcxross.kaptos.swift/Abstraction.status|status(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Accounts { // xyz.mcxross.kaptos.swift/Accounts|null[0]
+    final suspend fun buildUnverifiedRotation(xyz.mcxross.kaptos.account/Account, xyz.mcxross.kaptos.core.crypto/AccountPublicKey, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Accounts.buildUnverifiedRotation|buildUnverifiedRotation(xyz.mcxross.kaptos.account.Account;xyz.mcxross.kaptos.core.crypto.AccountPublicKey;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildVerifiedRotation(xyz.mcxross.kaptos.account/Account, xyz.mcxross.kaptos.account/Account, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Accounts.buildVerifiedRotation|buildVerifiedRotation(xyz.mcxross.kaptos.account.Account;xyz.mcxross.kaptos.account.Account;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun deriveOwned(xyz.mcxross.kaptos.account/Account, xyz.mcxross.kaptos.account/AccountLookupOptions = ...): kotlin.collections/List<xyz.mcxross.kaptos.account/Account> // xyz.mcxross.kaptos.swift/Accounts.deriveOwned|deriveOwned(xyz.mcxross.kaptos.account.Account;xyz.mcxross.kaptos.account.AccountLookupOptions){}[0]
+    final suspend fun findByPublicKey(xyz.mcxross.kaptos.core.crypto/AccountPublicKey, xyz.mcxross.kaptos.account/AccountLookupOptions = ...): kotlin.collections/List<xyz.mcxross.kaptos.account/AccountInfo> // xyz.mcxross.kaptos.swift/Accounts.findByPublicKey|findByPublicKey(xyz.mcxross.kaptos.core.crypto.AccountPublicKey;xyz.mcxross.kaptos.account.AccountLookupOptions){}[0]
+    final suspend fun get(xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.model/AccountData // xyz.mcxross.kaptos.swift/Accounts.get|get(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun getBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.account/AccountAsset): kotlin/ULong // xyz.mcxross.kaptos.swift/Accounts.getBalance|getBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.account.AccountAsset){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/AptosException : kotlin/RuntimeException { // xyz.mcxross.kaptos.swift/AptosException|null[0]
+    final val apiCode // xyz.mcxross.kaptos.swift/AptosException.apiCode|{}apiCode[0]
+        final fun <get-apiCode>(): kotlin/String? // xyz.mcxross.kaptos.swift/AptosException.apiCode.<get-apiCode>|<get-apiCode>(){}[0]
+    final val category // xyz.mcxross.kaptos.swift/AptosException.category|{}category[0]
+        final fun <get-category>(): xyz.mcxross.kaptos.swift/ErrorCategory // xyz.mcxross.kaptos.swift/AptosException.category.<get-category>|<get-category>(){}[0]
+    final val vmCode // xyz.mcxross.kaptos.swift/AptosException.vmCode|{}vmCode[0]
+        final fun <get-vmCode>(): kotlin/Long? // xyz.mcxross.kaptos.swift/AptosException.vmCode.<get-vmCode>|<get-vmCode>(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/CallbackSigner : xyz.mcxross.kaptos.account/TransactionSigner { // xyz.mcxross.kaptos.swift/CallbackSigner|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/AccountAddress, xyz.mcxross.kaptos.core.crypto/PublicKey, kotlin.coroutines/SuspendFunction1<kotlin/ByteArray, xyz.mcxross.kaptos.core.crypto/Signature>, kotlin.coroutines/SuspendFunction1<kotlin/String, xyz.mcxross.kaptos.core.crypto/Signature>, kotlin.coroutines/SuspendFunction1<xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator>) // xyz.mcxross.kaptos.swift/CallbackSigner.<init>|<init>(xyz.mcxross.kaptos.model.AccountAddress;xyz.mcxross.kaptos.core.crypto.PublicKey;kotlin.coroutines.SuspendFunction1<kotlin.ByteArray,xyz.mcxross.kaptos.core.crypto.Signature>;kotlin.coroutines.SuspendFunction1<kotlin.String,xyz.mcxross.kaptos.core.crypto.Signature>;kotlin.coroutines.SuspendFunction1<xyz.mcxross.kaptos.model.UnsignedTransaction,xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>){}[0]
+
+    final val accountAddress // xyz.mcxross.kaptos.swift/CallbackSigner.accountAddress|{}accountAddress[0]
+        final fun <get-accountAddress>(): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.swift/CallbackSigner.accountAddress.<get-accountAddress>|<get-accountAddress>(){}[0]
+    final val publicKey // xyz.mcxross.kaptos.swift/CallbackSigner.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): xyz.mcxross.kaptos.core.crypto/PublicKey // xyz.mcxross.kaptos.swift/CallbackSigner.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun verifySignature(kotlin/ByteArray, xyz.mcxross.kaptos.core.crypto/Signature): kotlin/Boolean // xyz.mcxross.kaptos.swift/CallbackSigner.verifySignature|verifySignature(kotlin.ByteArray;xyz.mcxross.kaptos.core.crypto.Signature){}[0]
+    final suspend fun signBytes(kotlin/ByteArray): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.core.crypto/Signature> // xyz.mcxross.kaptos.swift/CallbackSigner.signBytes|signBytes(kotlin.ByteArray){}[0]
+    final suspend fun signText(kotlin/String): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.core.crypto/Signature> // xyz.mcxross.kaptos.swift/CallbackSigner.signText|signText(kotlin.String){}[0]
+    final suspend fun signTransaction(xyz.mcxross.kaptos.model/UnsignedTransaction): xyz.mcxross.kaptos.model/AptosResult<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> // xyz.mcxross.kaptos.swift/CallbackSigner.signTransaction|signTransaction(xyz.mcxross.kaptos.model.UnsignedTransaction){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Client { // xyz.mcxross.kaptos.swift/Client|null[0]
+    constructor <init>(xyz.mcxross.kaptos.swift/Configuration) // xyz.mcxross.kaptos.swift/Client.<init>|<init>(xyz.mcxross.kaptos.swift.Configuration){}[0]
+
+    final val abstraction // xyz.mcxross.kaptos.swift/Client.abstraction|{}abstraction[0]
+        final fun <get-abstraction>(): xyz.mcxross.kaptos.swift/Abstraction // xyz.mcxross.kaptos.swift/Client.abstraction.<get-abstraction>|<get-abstraction>(){}[0]
+    final val accounts // xyz.mcxross.kaptos.swift/Client.accounts|{}accounts[0]
+        final fun <get-accounts>(): xyz.mcxross.kaptos.swift/Accounts // xyz.mcxross.kaptos.swift/Client.accounts.<get-accounts>|<get-accounts>(){}[0]
+    final val coins // xyz.mcxross.kaptos.swift/Client.coins|{}coins[0]
+        final fun <get-coins>(): xyz.mcxross.kaptos.swift/Coins // xyz.mcxross.kaptos.swift/Client.coins.<get-coins>|<get-coins>(){}[0]
+    final val confidentialAssets // xyz.mcxross.kaptos.swift/Client.confidentialAssets|{}confidentialAssets[0]
+        final fun <get-confidentialAssets>(): xyz.mcxross.kaptos.swift/ConfidentialAssets // xyz.mcxross.kaptos.swift/Client.confidentialAssets.<get-confidentialAssets>|<get-confidentialAssets>(){}[0]
+    final val digitalAssets // xyz.mcxross.kaptos.swift/Client.digitalAssets|{}digitalAssets[0]
+        final fun <get-digitalAssets>(): xyz.mcxross.kaptos.swift/DigitalAssets // xyz.mcxross.kaptos.swift/Client.digitalAssets.<get-digitalAssets>|<get-digitalAssets>(){}[0]
+    final val encryptedTransactions // xyz.mcxross.kaptos.swift/Client.encryptedTransactions|{}encryptedTransactions[0]
+        final fun <get-encryptedTransactions>(): xyz.mcxross.kaptos.swift/EncryptedTransactions // xyz.mcxross.kaptos.swift/Client.encryptedTransactions.<get-encryptedTransactions>|<get-encryptedTransactions>(){}[0]
+    final val faucet // xyz.mcxross.kaptos.swift/Client.faucet|{}faucet[0]
+        final fun <get-faucet>(): xyz.mcxross.kaptos.swift/Faucet // xyz.mcxross.kaptos.swift/Client.faucet.<get-faucet>|<get-faucet>(){}[0]
+    final val fungibleAssets // xyz.mcxross.kaptos.swift/Client.fungibleAssets|{}fungibleAssets[0]
+        final fun <get-fungibleAssets>(): xyz.mcxross.kaptos.swift/FungibleAssets // xyz.mcxross.kaptos.swift/Client.fungibleAssets.<get-fungibleAssets>|<get-fungibleAssets>(){}[0]
+    final val indexer // xyz.mcxross.kaptos.swift/Client.indexer|{}indexer[0]
+        final fun <get-indexer>(): xyz.mcxross.kaptos.swift/Indexer // xyz.mcxross.kaptos.swift/Client.indexer.<get-indexer>|<get-indexer>(){}[0]
+    final val ledger // xyz.mcxross.kaptos.swift/Client.ledger|{}ledger[0]
+        final fun <get-ledger>(): xyz.mcxross.kaptos.swift/Ledger // xyz.mcxross.kaptos.swift/Client.ledger.<get-ledger>|<get-ledger>(){}[0]
+    final val names // xyz.mcxross.kaptos.swift/Client.names|{}names[0]
+        final fun <get-names>(): xyz.mcxross.kaptos.swift/Names // xyz.mcxross.kaptos.swift/Client.names.<get-names>|<get-names>(){}[0]
+    final val objects // xyz.mcxross.kaptos.swift/Client.objects|{}objects[0]
+        final fun <get-objects>(): xyz.mcxross.kaptos.swift/Objects // xyz.mcxross.kaptos.swift/Client.objects.<get-objects>|<get-objects>(){}[0]
+    final val staking // xyz.mcxross.kaptos.swift/Client.staking|{}staking[0]
+        final fun <get-staking>(): xyz.mcxross.kaptos.swift/Staking // xyz.mcxross.kaptos.swift/Client.staking.<get-staking>|<get-staking>(){}[0]
+    final val tables // xyz.mcxross.kaptos.swift/Client.tables|{}tables[0]
+        final fun <get-tables>(): xyz.mcxross.kaptos.swift/Tables // xyz.mcxross.kaptos.swift/Client.tables.<get-tables>|<get-tables>(){}[0]
+    final val transactions // xyz.mcxross.kaptos.swift/Client.transactions|{}transactions[0]
+        final fun <get-transactions>(): xyz.mcxross.kaptos.swift/Transactions // xyz.mcxross.kaptos.swift/Client.transactions.<get-transactions>|<get-transactions>(){}[0]
+    final val views // xyz.mcxross.kaptos.swift/Client.views|{}views[0]
+        final fun <get-views>(): xyz.mcxross.kaptos.swift/Views // xyz.mcxross.kaptos.swift/Client.views.<get-views>|<get-views>(){}[0]
+
+    final fun close() // xyz.mcxross.kaptos.swift/Client.close|close(){}[0]
+    final fun generateAccount(xyz.mcxross.kaptos.model/SigningSchemeInput = ...): xyz.mcxross.kaptos.account/Account // xyz.mcxross.kaptos.swift/Client.generateAccount|generateAccount(xyz.mcxross.kaptos.model.SigningSchemeInput){}[0]
+    final fun generateConfidentialKey(): xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey // xyz.mcxross.kaptos.swift/Client.generateConfidentialKey|generateConfidentialKey(){}[0]
+    final fun importAccount(kotlin/String, kotlin/String? = ...): xyz.mcxross.kaptos.account/Account // xyz.mcxross.kaptos.swift/Client.importAccount|importAccount(kotlin.String;kotlin.String?){}[0]
+    final fun worker(xyz.mcxross.kaptos.account/TransactionSigner, kotlin/Int = ...): xyz.mcxross.kaptos.swift/Worker // xyz.mcxross.kaptos.swift/Client.worker|worker(xyz.mcxross.kaptos.account.TransactionSigner;kotlin.Int){}[0]
+    final suspend fun clearAbiCache() // xyz.mcxross.kaptos.swift/Client.clearAbiCache|clearAbiCache(){}[0]
+    final suspend fun closeAsync() // xyz.mcxross.kaptos.swift/Client.closeAsync|closeAsync(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Coins { // xyz.mcxross.kaptos.swift/Coins|null[0]
+    final suspend fun buildTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, kotlin/String = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Coins.buildTransfer|buildTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;kotlin.String;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/ConfidentialActivityPage { // xyz.mcxross.kaptos.swift/ConfidentialActivityPage|null[0]
+    constructor <init>(kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity>, kotlin/Int, xyz.mcxross.kaptos.model/PageRequest, kotlin/Boolean) // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.<init>|<init>(kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialAssetActivity>;kotlin.Int;xyz.mcxross.kaptos.model.PageRequest;kotlin.Boolean){}[0]
+
+    final val hasNextPage // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.hasNextPage|{}hasNextPage[0]
+        final fun <get-hasNextPage>(): kotlin/Boolean // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.hasNextPage.<get-hasNextPage>|<get-hasNextPage>(){}[0]
+    final val items // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.items|{}items[0]
+        final fun <get-items>(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity> // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.items.<get-items>|<get-items>(){}[0]
+    final val request // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.request|{}request[0]
+        final fun <get-request>(): xyz.mcxross.kaptos.model/PageRequest // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.request.<get-request>|<get-request>(){}[0]
+    final val totalCount // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.totalCount|{}totalCount[0]
+        final fun <get-totalCount>(): kotlin/Int // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.totalCount.<get-totalCount>|<get-totalCount>(){}[0]
+
+    final fun component1(): kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity> // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.component2|component2(){}[0]
+    final fun component3(): xyz.mcxross.kaptos.model/PageRequest // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.component3|component3(){}[0]
+    final fun component4(): kotlin/Boolean // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.component4|component4(){}[0]
+    final fun copy(kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialAssetActivity> = ..., kotlin/Int = ..., xyz.mcxross.kaptos.model/PageRequest = ..., kotlin/Boolean = ...): xyz.mcxross.kaptos.swift/ConfidentialActivityPage // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.copy|copy(kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialAssetActivity>;kotlin.Int;xyz.mcxross.kaptos.model.PageRequest;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.swift/ConfidentialActivityPage.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/ConfidentialAssets { // xyz.mcxross.kaptos.swift/ConfidentialAssets|null[0]
+    final suspend fun buildDeposit(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildDeposit|buildDeposit(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildNormalizeBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildNormalizeBalance|buildNormalizeBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildRegisterBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildRegisterBalance|buildRegisterBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildRolloverPendingBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildRolloverPendingBalance|buildRolloverPendingBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildRotateEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildRotateEncryptionKey|buildRotateEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildSetIncomingTransfersPaused(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildSetIncomingTransfersPaused|buildSetIncomingTransfersPaused(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey> = ..., kotlin/ByteArray = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildTransfer|buildTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialEncryptionKey>;kotlin.ByteArray;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun buildWithdraw(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, xyz.mcxross.kaptos.model/AccountAddressInput = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/ConfidentialAssets.buildWithdraw|buildWithdraw(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun clearCache() // xyz.mcxross.kaptos.swift/ConfidentialAssets.clearCache|clearCache(){}[0]
+    final suspend fun deposit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.deposit|deposit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun getActivities(xyz.mcxross.kaptos.confidential/ConfidentialActivityQuery = ...): xyz.mcxross.kaptos.swift/ConfidentialActivityPage // xyz.mcxross.kaptos.swift/ConfidentialAssets.getActivities|getActivities(xyz.mcxross.kaptos.confidential.ConfidentialActivityQuery){}[0]
+    final suspend fun getAssetAuditorEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ...): xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey? // xyz.mcxross.kaptos.swift/ConfidentialAssets.getAssetAuditorEncryptionKey|getAssetAuditorEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean){}[0]
+    final suspend fun getBalance(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ...): xyz.mcxross.kaptos.confidential/ConfidentialBalance // xyz.mcxross.kaptos.swift/ConfidentialAssets.getBalance|getBalance(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean){}[0]
+    final suspend fun getEffectiveAuditorHint(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.confidential/EffectiveAuditorHint? // xyz.mcxross.kaptos.swift/ConfidentialAssets.getEffectiveAuditorHint|getEffectiveAuditorHint(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun getEncryptionKey(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ...): xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey // xyz.mcxross.kaptos.swift/ConfidentialAssets.getEncryptionKey|getEncryptionKey(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean){}[0]
+    final suspend fun getStatus(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.confidential/ConfidentialAssetStatus // xyz.mcxross.kaptos.swift/ConfidentialAssets.getStatus|getStatus(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun isEmergencyPaused(): kotlin/Boolean // xyz.mcxross.kaptos.swift/ConfidentialAssets.isEmergencyPaused|isEmergencyPaused(){}[0]
+    final suspend fun normalizeBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.normalizeBalance|normalizeBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun registerBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.registerBalance|registerBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun rolloverPendingBalance(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.rolloverPendingBalance|rolloverPendingBalance(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun rotateEncryptionKey(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/Boolean = ..., kotlin/Boolean = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.rotateEncryptionKey|rotateEncryptionKey(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.Boolean;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun setIncomingTransfersPaused(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/Boolean, xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.setIncomingTransfersPaused|setIncomingTransfersPaused(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.Boolean;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun transfer(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, kotlin.collections/List<xyz.mcxross.kaptos.confidential/ConfidentialEncryptionKey> = ..., kotlin/ByteArray = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.transfer|transfer(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;kotlin.collections.List<xyz.mcxross.kaptos.confidential.ConfidentialEncryptionKey>;kotlin.ByteArray;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+    final suspend fun withdraw(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.confidential/ConfidentialDecryptionKey, kotlin/ULong, xyz.mcxross.kaptos.model/AccountAddressInput = ..., xyz.mcxross.kaptos.confidential/ConfidentialTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/ConfidentialAssets.withdraw|withdraw(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialDecryptionKey;kotlin.ULong;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.confidential.ConfidentialTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Configuration { // xyz.mcxross.kaptos.swift/Configuration|null[0]
+    constructor <init>(xyz.mcxross.kaptos.model/Network = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/ULong = ..., kotlin/ULong = ...) // xyz.mcxross.kaptos.swift/Configuration.<init>|<init>(xyz.mcxross.kaptos.model.Network;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Long;kotlin.Long;kotlin.ULong;kotlin.ULong){}[0]
+
+    final val expirationSecondsFromNow // xyz.mcxross.kaptos.swift/Configuration.expirationSecondsFromNow|{}expirationSecondsFromNow[0]
+        final fun <get-expirationSecondsFromNow>(): kotlin/ULong // xyz.mcxross.kaptos.swift/Configuration.expirationSecondsFromNow.<get-expirationSecondsFromNow>|<get-expirationSecondsFromNow>(){}[0]
+    final val faucet // xyz.mcxross.kaptos.swift/Configuration.faucet|{}faucet[0]
+        final fun <get-faucet>(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.faucet.<get-faucet>|<get-faucet>(){}[0]
+    final val fullNode // xyz.mcxross.kaptos.swift/Configuration.fullNode|{}fullNode[0]
+        final fun <get-fullNode>(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.fullNode.<get-fullNode>|<get-fullNode>(){}[0]
+    final val headers // xyz.mcxross.kaptos.swift/Configuration.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.swift/Configuration.headers.<get-headers>|<get-headers>(){}[0]
+    final val indexer // xyz.mcxross.kaptos.swift/Configuration.indexer|{}indexer[0]
+        final fun <get-indexer>(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.indexer.<get-indexer>|<get-indexer>(){}[0]
+    final val indexerWaitTimeoutMillis // xyz.mcxross.kaptos.swift/Configuration.indexerWaitTimeoutMillis|{}indexerWaitTimeoutMillis[0]
+        final fun <get-indexerWaitTimeoutMillis>(): kotlin/Long // xyz.mcxross.kaptos.swift/Configuration.indexerWaitTimeoutMillis.<get-indexerWaitTimeoutMillis>|<get-indexerWaitTimeoutMillis>(){}[0]
+    final val maxGasAmount // xyz.mcxross.kaptos.swift/Configuration.maxGasAmount|{}maxGasAmount[0]
+        final fun <get-maxGasAmount>(): kotlin/ULong // xyz.mcxross.kaptos.swift/Configuration.maxGasAmount.<get-maxGasAmount>|<get-maxGasAmount>(){}[0]
+    final val network // xyz.mcxross.kaptos.swift/Configuration.network|{}network[0]
+        final fun <get-network>(): xyz.mcxross.kaptos.model/Network // xyz.mcxross.kaptos.swift/Configuration.network.<get-network>|<get-network>(){}[0]
+    final val requestTimeoutMillis // xyz.mcxross.kaptos.swift/Configuration.requestTimeoutMillis|{}requestTimeoutMillis[0]
+        final fun <get-requestTimeoutMillis>(): kotlin/Long // xyz.mcxross.kaptos.swift/Configuration.requestTimeoutMillis.<get-requestTimeoutMillis>|<get-requestTimeoutMillis>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.model/Network // xyz.mcxross.kaptos.swift/Configuration.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // xyz.mcxross.kaptos.swift/Configuration.component4|component4(){}[0]
+    final fun component5(): kotlin.collections/Map<kotlin/String, kotlin/String> // xyz.mcxross.kaptos.swift/Configuration.component5|component5(){}[0]
+    final fun component6(): kotlin/Long // xyz.mcxross.kaptos.swift/Configuration.component6|component6(){}[0]
+    final fun component7(): kotlin/Long // xyz.mcxross.kaptos.swift/Configuration.component7|component7(){}[0]
+    final fun component8(): kotlin/ULong // xyz.mcxross.kaptos.swift/Configuration.component8|component8(){}[0]
+    final fun component9(): kotlin/ULong // xyz.mcxross.kaptos.swift/Configuration.component9|component9(){}[0]
+    final fun copy(xyz.mcxross.kaptos.model/Network = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Long = ..., kotlin/Long = ..., kotlin/ULong = ..., kotlin/ULong = ...): xyz.mcxross.kaptos.swift/Configuration // xyz.mcxross.kaptos.swift/Configuration.copy|copy(xyz.mcxross.kaptos.model.Network;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Long;kotlin.Long;kotlin.ULong;kotlin.ULong){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.swift/Configuration.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.swift/Configuration.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.swift/Configuration.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/DigitalAssets { // xyz.mcxross.kaptos.swift/DigitalAssets|null[0]
+    final suspend fun buildAddProperty(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.digitalasset/DigitalAssetProperty, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildAddProperty|buildAddProperty(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.digitalasset.DigitalAssetProperty;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildBurn(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildBurn|buildBurn(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildCreateCollection(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, kotlin/String = ..., kotlin/String = ..., xyz.mcxross.kaptos.digitalasset/DigitalAssetCollectionOptions = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildCreateCollection|buildCreateCollection(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;kotlin.String;kotlin.String;xyz.mcxross.kaptos.digitalasset.DigitalAssetCollectionOptions;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildFreezeTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildFreezeTransfer|buildFreezeTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildMint(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, kotlin/String, kotlin/String = ..., kotlin/String = ..., kotlin.collections/List<xyz.mcxross.kaptos.digitalasset/DigitalAssetProperty> = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildMint|buildMint(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;kotlin.String;kotlin.String;kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.digitalasset.DigitalAssetProperty>;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildMintSoulbound(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, kotlin/String, kotlin/String = ..., kotlin/String = ..., kotlin.collections/List<xyz.mcxross.kaptos.digitalasset/DigitalAssetProperty> = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildMintSoulbound|buildMintSoulbound(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;kotlin.String;kotlin.String;kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.digitalasset.DigitalAssetProperty>;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildRemoveProperty(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildRemoveProperty|buildRemoveProperty(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildSetDescription(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildSetDescription|buildSetDescription(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildSetName(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildSetName|buildSetName(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildSetUri(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildSetUri|buildSetUri(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildTransfer|buildTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildUnfreezeTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildUnfreezeTransfer|buildUnfreezeTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildUpdateProperty(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.digitalasset/DigitalAssetProperty, xyz.mcxross.kaptos.model/StructTag = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/DigitalAssets.buildUpdateProperty|buildUpdateProperty(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.digitalasset.DigitalAssetProperty;xyz.mcxross.kaptos.model.StructTag;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun getActivity(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.digitalasset/DigitalAssetActivity> // xyz.mcxross.kaptos.swift/DigitalAssets.getActivity|getActivity(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getCollection(xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.digitalasset/CollectionRecord? // xyz.mcxross.kaptos.swift/DigitalAssets.getCollection|getCollection(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun getCollection(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String): xyz.mcxross.kaptos.digitalasset/CollectionRecord? // xyz.mcxross.kaptos.swift/DigitalAssets.getCollection|getCollection(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String){}[0]
+    final suspend fun getOwned(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.digitalasset/DigitalAssetOwnership> // xyz.mcxross.kaptos.swift/DigitalAssets.getOwned|getOwned(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.PageRequest){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/EncryptedTransactions { // xyz.mcxross.kaptos.swift/EncryptedTransactions|null[0]
+    final suspend fun clearCache() // xyz.mcxross.kaptos.swift/EncryptedTransactions.clearCache|clearCache(){}[0]
+    final suspend fun encrypt(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction // xyz.mcxross.kaptos.swift/EncryptedTransactions.encrypt|encrypt(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    final suspend fun signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/EncryptedTransactions.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    final suspend fun signAndSubmit(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.account/TransactionSigner, kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ...): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/EncryptedTransactions.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.account.TransactionSigner;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions){}[0]
+    final suspend fun submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., xyz.mcxross.kaptos.encrypted/EncryptedTransactionOptions = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/EncryptedTransactions.submitAndWait|submitAndWait(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;xyz.mcxross.kaptos.encrypted.EncryptedTransactionOptions;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Faucet { // xyz.mcxross.kaptos.swift/Faucet|null[0]
+    final suspend fun fund(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/Faucet.fund|fund(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/FungibleAssets { // xyz.mcxross.kaptos.swift/FungibleAssets|null[0]
+    final suspend fun buildStoreTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/FungibleAssets.buildStoreTransfer|buildStoreTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildTransfer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/ULong, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/FungibleAssets.buildTransfer|buildTransfer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.ULong;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Indexer { // xyz.mcxross.kaptos.swift/Indexer|null[0]
+    final suspend fun query(kotlin/String, kotlin/String = ...): kotlin/String // xyz.mcxross.kaptos.swift/Indexer.query|query(kotlin.String;kotlin.String){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Ledger { // xyz.mcxross.kaptos.swift/Ledger|null[0]
+    final suspend fun blockAtHeight(kotlin/ULong): xyz.mcxross.kaptos.ledger/LedgerBlock // xyz.mcxross.kaptos.swift/Ledger.blockAtHeight|blockAtHeight(kotlin.ULong){}[0]
+    final suspend fun blockAtVersion(kotlin/ULong): xyz.mcxross.kaptos.ledger/LedgerBlock // xyz.mcxross.kaptos.swift/Ledger.blockAtVersion|blockAtVersion(kotlin.ULong){}[0]
+    final suspend fun info(): xyz.mcxross.kaptos.ledger/LedgerState // xyz.mcxross.kaptos.swift/Ledger.info|info(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Names { // xyz.mcxross.kaptos.swift/Names|null[0]
+    final suspend fun buildClearTarget(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Names.buildClearTarget|buildClearTarget(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildRegister(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.names/NameExpirationPolicy, kotlin/Boolean = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Names.buildRegister|buildRegister(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.names.NameExpirationPolicy;kotlin.Boolean;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildRenew(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Names.buildRenew|buildRenew(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildSetPrimary(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String? = ..., xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Names.buildSetPrimary|buildSetPrimary(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String?;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun buildSetTarget(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin/String, xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/TransactionOptions = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Names.buildSetTarget|buildSetTarget(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.String;xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.TransactionOptions){}[0]
+    final suspend fun expiration(kotlin/String): kotlin/ULong // xyz.mcxross.kaptos.swift/Names.expiration|expiration(kotlin.String){}[0]
+    final suspend fun getAccountDomains(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.names/NameRecord> // xyz.mcxross.kaptos.swift/Names.getAccountDomains|getAccountDomains(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getAccountNames(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.names/NameRecord> // xyz.mcxross.kaptos.swift/Names.getAccountNames|getAccountNames(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getAccountSubdomains(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.names/NameRecord> // xyz.mcxross.kaptos.swift/Names.getAccountSubdomains|getAccountSubdomains(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getDomainSubdomains(kotlin/String, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.model/AptosPage<xyz.mcxross.kaptos.names/NameRecord> // xyz.mcxross.kaptos.swift/Names.getDomainSubdomains|getDomainSubdomains(kotlin.String;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getName(kotlin/String): xyz.mcxross.kaptos.names/NameRecord? // xyz.mcxross.kaptos.swift/Names.getName|getName(kotlin.String){}[0]
+    final suspend fun owner(kotlin/String): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.swift/Names.owner|owner(kotlin.String){}[0]
+    final suspend fun primaryName(xyz.mcxross.kaptos.model/AccountAddressInput): kotlin/String? // xyz.mcxross.kaptos.swift/Names.primaryName|primaryName(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun target(kotlin/String): xyz.mcxross.kaptos.model/AccountAddress? // xyz.mcxross.kaptos.swift/Names.target|target(kotlin.String){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Objects { // xyz.mcxross.kaptos.swift/Objects|null[0]
+    final suspend fun get(xyz.mcxross.kaptos.model/AccountAddressInput): xyz.mcxross.kaptos.objects/ObjectRecord? // xyz.mcxross.kaptos.swift/Objects.get|get(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Staking { // xyz.mcxross.kaptos.swift/Staking|null[0]
+    final suspend fun getActivities(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/AccountAddressInput): kotlin.collections/List<xyz.mcxross.kaptos.staking/DelegatedStakingActivity> // xyz.mcxross.kaptos.swift/Staking.getActivities|getActivities(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun getDelegatorCount(xyz.mcxross.kaptos.model/AccountAddressInput): kotlin/ULong // xyz.mcxross.kaptos.swift/Staking.getDelegatorCount|getDelegatorCount(xyz.mcxross.kaptos.model.AccountAddressInput){}[0]
+    final suspend fun getDelegatorCounts(): kotlin.collections/List<xyz.mcxross.kaptos.staking/StakingPoolDelegatorCount> // xyz.mcxross.kaptos.swift/Staking.getDelegatorCounts|getDelegatorCounts(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Submission { // xyz.mcxross.kaptos.swift/Submission|null[0]
+    final suspend fun await(): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/Submission.await|await(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/TablePage { // xyz.mcxross.kaptos.swift/TablePage|null[0]
+    constructor <init>(kotlin.collections/List<xyz.mcxross.kaptos.table/TableItem>, kotlin/Boolean) // xyz.mcxross.kaptos.swift/TablePage.<init>|<init>(kotlin.collections.List<xyz.mcxross.kaptos.table.TableItem>;kotlin.Boolean){}[0]
+
+    final val hasNextPage // xyz.mcxross.kaptos.swift/TablePage.hasNextPage|{}hasNextPage[0]
+        final fun <get-hasNextPage>(): kotlin/Boolean // xyz.mcxross.kaptos.swift/TablePage.hasNextPage.<get-hasNextPage>|<get-hasNextPage>(){}[0]
+    final val items // xyz.mcxross.kaptos.swift/TablePage.items|{}items[0]
+        final fun <get-items>(): kotlin.collections/List<xyz.mcxross.kaptos.table/TableItem> // xyz.mcxross.kaptos.swift/TablePage.items.<get-items>|<get-items>(){}[0]
+
+    final fun component1(): kotlin.collections/List<xyz.mcxross.kaptos.table/TableItem> // xyz.mcxross.kaptos.swift/TablePage.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // xyz.mcxross.kaptos.swift/TablePage.component2|component2(){}[0]
+    final fun copy(kotlin.collections/List<xyz.mcxross.kaptos.table/TableItem> = ..., kotlin/Boolean = ...): xyz.mcxross.kaptos.swift/TablePage // xyz.mcxross.kaptos.swift/TablePage.copy|copy(kotlin.collections.List<xyz.mcxross.kaptos.table.TableItem>;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.swift/TablePage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.swift/TablePage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.swift/TablePage.toString|toString(){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Tables { // xyz.mcxross.kaptos.swift/Tables|null[0]
+    final suspend fun getItem(kotlin/String, kotlin/String, kotlin/String, kotlin/String, kotlin/String? = ...): kotlin/String // xyz.mcxross.kaptos.swift/Tables.getItem|getItem(kotlin.String;kotlin.String;kotlin.String;kotlin.String;kotlin.String?){}[0]
+    final suspend fun getItems(kotlin/String, xyz.mcxross.kaptos.model/PageRequest = ...): xyz.mcxross.kaptos.swift/TablePage // xyz.mcxross.kaptos.swift/Tables.getItems|getItems(kotlin.String;xyz.mcxross.kaptos.model.PageRequest){}[0]
+    final suspend fun getMetadata(kotlin/String): kotlin.collections/List<xyz.mcxross.kaptos.table/TableMetadata> // xyz.mcxross.kaptos.swift/Tables.getMetadata|getMetadata(kotlin.String){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Transactions { // xyz.mcxross.kaptos.swift/Transactions|null[0]
+    final fun externalFeePayerRequest(xyz.mcxross.kaptos.model/UnsignedTransaction.FeePayer, xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ...): xyz.mcxross.kaptos.model/ExternalFeePayerRequest // xyz.mcxross.kaptos.swift/Transactions.externalFeePayerRequest|externalFeePayerRequest(xyz.mcxross.kaptos.model.UnsignedTransaction.FeePayer;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>){}[0]
+    final fun fromBcs(kotlin/ByteArray): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Transactions.fromBcs|fromBcs(kotlin.ByteArray){}[0]
+    final fun userTransactionHash(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ..., xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator? = ...): kotlin/String // xyz.mcxross.kaptos.swift/Transactions.userTransactionHash|userTransactionHash(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator?){}[0]
+    final suspend fun build(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.Simple // xyz.mcxross.kaptos.swift/Transactions.build|build(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
+    final suspend fun buildFeePayer(xyz.mcxross.kaptos.model/AccountAddressInput, xyz.mcxross.kaptos.model/TransactionPayload, kotlin.collections/List<xyz.mcxross.kaptos.model/AccountAddressInput> = ..., xyz.mcxross.kaptos.model/AccountAddressInput? = ..., xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.FeePayer // xyz.mcxross.kaptos.swift/Transactions.buildFeePayer|buildFeePayer(xyz.mcxross.kaptos.model.AccountAddressInput;xyz.mcxross.kaptos.model.TransactionPayload;kotlin.collections.List<xyz.mcxross.kaptos.model.AccountAddressInput>;xyz.mcxross.kaptos.model.AccountAddressInput?;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
+    final suspend fun buildMultiAgent(xyz.mcxross.kaptos.model/AccountAddressInput, kotlin.collections/List<xyz.mcxross.kaptos.model/AccountAddressInput>, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ...): xyz.mcxross.kaptos.model/UnsignedTransaction.MultiAgent // xyz.mcxross.kaptos.swift/Transactions.buildMultiAgent|buildMultiAgent(xyz.mcxross.kaptos.model.AccountAddressInput;kotlin.collections.List<xyz.mcxross.kaptos.model.AccountAddressInput>;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?){}[0]
+    final suspend fun entryFunctionPayload(kotlin/String, kotlin.collections/List<xyz.mcxross.kaptos.model/TypeTag> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ...): xyz.mcxross.kaptos.model/TransactionPayload.EntryFunction // xyz.mcxross.kaptos.swift/Transactions.entryFunctionPayload|entryFunctionPayload(kotlin.String;kotlin.collections.List<xyz.mcxross.kaptos.model.TypeTag>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+    final suspend fun sign(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/UnsignedTransaction): xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator // xyz.mcxross.kaptos.swift/Transactions.sign|sign(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.UnsignedTransaction){}[0]
+    final suspend fun signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ...): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/Transactions.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?){}[0]
+    final suspend fun signAndSubmit(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/UnsignedTransaction, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ..., xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator? = ...): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/Transactions.signAndSubmit|signAndSubmit(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.UnsignedTransaction;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator?){}[0]
+    final suspend fun simulate(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.core.crypto/PublicKey, kotlin.collections/List<xyz.mcxross.kaptos.core.crypto/PublicKey> = ..., xyz.mcxross.kaptos.core.crypto/PublicKey? = ..., xyz.mcxross.kaptos.model/SimulationOptions = ...): kotlin.collections/List<xyz.mcxross.kaptos.model/UserTransactionResponse> // xyz.mcxross.kaptos.swift/Transactions.simulate|simulate(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.core.crypto.PublicKey;kotlin.collections.List<xyz.mcxross.kaptos.core.crypto.PublicKey>;xyz.mcxross.kaptos.core.crypto.PublicKey?;xyz.mcxross.kaptos.model.SimulationOptions){}[0]
+    final suspend fun submit(xyz.mcxross.kaptos.model/UnsignedTransaction, xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ..., xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator? = ...): xyz.mcxross.kaptos.model/PendingTransactionResponse // xyz.mcxross.kaptos.swift/Transactions.submit|submit(xyz.mcxross.kaptos.model.UnsignedTransaction;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator?){}[0]
+    final suspend fun submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/TransactionPayload, xyz.mcxross.kaptos.model/TransactionOptions? = ..., kotlin.collections/List<xyz.mcxross.kaptos.account/TransactionSigner> = ..., xyz.mcxross.kaptos.account/TransactionSigner? = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/Transactions.submitAndWait|submitAndWait(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.TransactionPayload;xyz.mcxross.kaptos.model.TransactionOptions?;kotlin.collections.List<xyz.mcxross.kaptos.account.TransactionSigner>;xyz.mcxross.kaptos.account.TransactionSigner?;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+    final suspend fun submitAndWait(xyz.mcxross.kaptos.account/TransactionSigner, xyz.mcxross.kaptos.model/UnsignedTransaction, kotlin.collections/List<xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator> = ..., xyz.mcxross.kaptos.transaction.authenticator/AccountAuthenticator? = ..., xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/Transactions.submitAndWait|submitAndWait(xyz.mcxross.kaptos.account.TransactionSigner;xyz.mcxross.kaptos.model.UnsignedTransaction;kotlin.collections.List<xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator>;xyz.mcxross.kaptos.transaction.authenticator.AccountAuthenticator?;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+    final suspend fun waitForTransaction(kotlin/String, xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/Transactions.waitForTransaction|waitForTransaction(kotlin.String;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+    final suspend fun waitForTransaction(xyz.mcxross.kaptos.model/PendingTransactionResponse, xyz.mcxross.kaptos.model/WaitForTransactionOptions = ...): xyz.mcxross.kaptos.model/TransactionResponse // xyz.mcxross.kaptos.swift/Transactions.waitForTransaction|waitForTransaction(xyz.mcxross.kaptos.model.PendingTransactionResponse;xyz.mcxross.kaptos.model.WaitForTransactionOptions){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Views { // xyz.mcxross.kaptos.swift/Views|null[0]
+    final suspend fun call(kotlin/String, kotlin.collections/List<kotlin/String> = ..., kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument> = ..., kotlin/String? = ...): kotlin/String // xyz.mcxross.kaptos.swift/Views.call|call(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>;kotlin.String?){}[0]
+    final suspend fun callRaw(kotlin/String, kotlin.collections/List<kotlin/String> = ..., kotlin/String = ..., kotlin/String? = ...): kotlin/String // xyz.mcxross.kaptos.swift/Views.callRaw|callRaw(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.String;kotlin.String?){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/Worker { // xyz.mcxross.kaptos.swift/Worker|null[0]
+    final val events // xyz.mcxross.kaptos.swift/Worker.events|{}events[0]
+        final fun <get-events>(): kotlinx.coroutines.flow/Flow<xyz.mcxross.kaptos.swift/WorkerEvent> // xyz.mcxross.kaptos.swift/Worker.events.<get-events>|<get-events>(){}[0]
+
+    final suspend fun shutdown(kotlin/Boolean = ...) // xyz.mcxross.kaptos.swift/Worker.shutdown|shutdown(kotlin.Boolean){}[0]
+    final suspend fun submit(kotlin.coroutines/SuspendFunction1<kotlin/ULong, xyz.mcxross.kaptos.model/UnsignedTransaction>): xyz.mcxross.kaptos.swift/Submission // xyz.mcxross.kaptos.swift/Worker.submit|submit(kotlin.coroutines.SuspendFunction1<kotlin.ULong,xyz.mcxross.kaptos.model.UnsignedTransaction>){}[0]
+}
+
+final class xyz.mcxross.kaptos.swift/WorkerEvent { // xyz.mcxross.kaptos.swift/WorkerEvent|null[0]
+    final val error // xyz.mcxross.kaptos.swift/WorkerEvent.error|{}error[0]
+        final fun <get-error>(): xyz.mcxross.kaptos.swift/AptosException? // xyz.mcxross.kaptos.swift/WorkerEvent.error.<get-error>|<get-error>(){}[0]
+    final val kind // xyz.mcxross.kaptos.swift/WorkerEvent.kind|{}kind[0]
+        final fun <get-kind>(): xyz.mcxross.kaptos.swift/WorkerEventKind // xyz.mcxross.kaptos.swift/WorkerEvent.kind.<get-kind>|<get-kind>(){}[0]
+    final val requestId // xyz.mcxross.kaptos.swift/WorkerEvent.requestId|{}requestId[0]
+        final fun <get-requestId>(): kotlin/ULong? // xyz.mcxross.kaptos.swift/WorkerEvent.requestId.<get-requestId>|<get-requestId>(){}[0]
+    final val sequenceNumber // xyz.mcxross.kaptos.swift/WorkerEvent.sequenceNumber|{}sequenceNumber[0]
+        final fun <get-sequenceNumber>(): kotlin/ULong? // xyz.mcxross.kaptos.swift/WorkerEvent.sequenceNumber.<get-sequenceNumber>|<get-sequenceNumber>(){}[0]
+    final val transaction // xyz.mcxross.kaptos.swift/WorkerEvent.transaction|{}transaction[0]
+        final fun <get-transaction>(): xyz.mcxross.kaptos.model/PendingTransactionResponse? // xyz.mcxross.kaptos.swift/WorkerEvent.transaction.<get-transaction>|<get-transaction>(){}[0]
+
+    final fun component1(): xyz.mcxross.kaptos.swift/WorkerEventKind // xyz.mcxross.kaptos.swift/WorkerEvent.component1|component1(){}[0]
+    final fun component2(): kotlin/ULong? // xyz.mcxross.kaptos.swift/WorkerEvent.component2|component2(){}[0]
+    final fun component3(): kotlin/ULong? // xyz.mcxross.kaptos.swift/WorkerEvent.component3|component3(){}[0]
+    final fun component4(): xyz.mcxross.kaptos.model/PendingTransactionResponse? // xyz.mcxross.kaptos.swift/WorkerEvent.component4|component4(){}[0]
+    final fun component5(): xyz.mcxross.kaptos.swift/AptosException? // xyz.mcxross.kaptos.swift/WorkerEvent.component5|component5(){}[0]
+    final fun copy(xyz.mcxross.kaptos.swift/WorkerEventKind = ..., kotlin/ULong? = ..., kotlin/ULong? = ..., xyz.mcxross.kaptos.model/PendingTransactionResponse? = ..., xyz.mcxross.kaptos.swift/AptosException? = ...): xyz.mcxross.kaptos.swift/WorkerEvent // xyz.mcxross.kaptos.swift/WorkerEvent.copy|copy(xyz.mcxross.kaptos.swift.WorkerEventKind;kotlin.ULong?;kotlin.ULong?;xyz.mcxross.kaptos.model.PendingTransactionResponse?;xyz.mcxross.kaptos.swift.AptosException?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // xyz.mcxross.kaptos.swift/WorkerEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // xyz.mcxross.kaptos.swift/WorkerEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // xyz.mcxross.kaptos.swift/WorkerEvent.toString|toString(){}[0]
+}
+
+final object xyz.mcxross.kaptos.swift/Addresses { // xyz.mcxross.kaptos.swift/Addresses|null[0]
+    final fun parse(kotlin/String): xyz.mcxross.kaptos.model/AccountAddress // xyz.mcxross.kaptos.swift/Addresses.parse|parse(kotlin.String){}[0]
+}
+
+final object xyz.mcxross.kaptos.swift/ByteCodec { // xyz.mcxross.kaptos.swift/ByteCodec|null[0]
+    final fun fromOctets(kotlin.collections/List<kotlin/Int>): kotlin/ByteArray // xyz.mcxross.kaptos.swift/ByteCodec.fromOctets|fromOctets(kotlin.collections.List<kotlin.Int>){}[0]
+    final fun toOctets(kotlin/ByteArray): kotlin.collections/List<kotlin/Int> // xyz.mcxross.kaptos.swift/ByteCodec.toOctets|toOctets(kotlin.ByteArray){}[0]
+}
+
+final object xyz.mcxross.kaptos.swift/Move { // xyz.mcxross.kaptos.swift/Move|null[0]
+    final fun address(kotlin/String): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.address|address(kotlin.String){}[0]
+    final fun bool(kotlin/Boolean): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.bool|bool(kotlin.Boolean){}[0]
+    final fun bytes(kotlin/ByteArray): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.bytes|bytes(kotlin.ByteArray){}[0]
+    final fun option(xyz.mcxross.kaptos.move/MoveArgument?): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.option|option(xyz.mcxross.kaptos.move.MoveArgument?){}[0]
+    final fun preSerialized(kotlin/ByteArray): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.preSerialized|preSerialized(kotlin.ByteArray){}[0]
+    final fun string(kotlin/String): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.string|string(kotlin.String){}[0]
+    final fun struct(kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument>): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.struct|struct(kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+    final fun u128(kotlin/String): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u128|u128(kotlin.String){}[0]
+    final fun u16(kotlin/UShort): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u16|u16(kotlin.UShort){}[0]
+    final fun u256(kotlin/String): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u256|u256(kotlin.String){}[0]
+    final fun u32(kotlin/UInt): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u32|u32(kotlin.UInt){}[0]
+    final fun u64(kotlin/ULong): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u64|u64(kotlin.ULong){}[0]
+    final fun u8(kotlin/UByte): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.u8|u8(kotlin.UByte){}[0]
+    final fun variant(kotlin/String, kotlin.collections/Map<kotlin/String, xyz.mcxross.kaptos.move/MoveArgument>): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.variant|variant(kotlin.String;kotlin.collections.Map<kotlin.String,xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+    final fun vector(kotlin.collections/List<xyz.mcxross.kaptos.move/MoveArgument>): xyz.mcxross.kaptos.move/MoveArgument // xyz.mcxross.kaptos.swift/Move.vector|vector(kotlin.collections.List<xyz.mcxross.kaptos.move.MoveArgument>){}[0]
+}
+
+final object xyz.mcxross.kaptos.swift/OptionValues { // xyz.mcxross.kaptos.swift/OptionValues|null[0]
+    final fun transaction(kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ..., kotlin/String? = ...): xyz.mcxross.kaptos.model/TransactionOptions // xyz.mcxross.kaptos.swift/OptionValues.transaction|transaction(kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?;kotlin.String?){}[0]
+}
+
+final object xyz.mcxross.kaptos.swift/ResponseValues { // xyz.mcxross.kaptos.swift/ResponseValues|null[0]
+    final fun transactionHash(xyz.mcxross.kaptos.model/TransactionResponse): kotlin/String // xyz.mcxross.kaptos.swift/ResponseValues.transactionHash|transactionHash(xyz.mcxross.kaptos.model.TransactionResponse){}[0]
+}

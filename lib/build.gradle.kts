@@ -3,7 +3,6 @@ import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SourcesJar
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
   alias(libs.plugins.android.kotlin.multiplatform.library)
@@ -34,20 +33,10 @@ kotlin {
       }
   }
 
-  val xcframeworkName = "AptosKit"
-  val xcf = XCFramework(xcframeworkName)
-
-  listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach {
-    it.binaries.framework {
-      baseName = xcframeworkName
-      binaryOption("bundleId", "xyz.mcxross.${xcframeworkName}")
-      xcf.add(this)
-      isStatic = true
-    }
-  }
-
+  iosX64()
+  iosArm64()
+  iosSimulatorArm64()
   macosArm64()
-  macosX64()
 
   applyDefaultHierarchyTemplate()
 
@@ -105,7 +94,6 @@ kotlin {
     iosX64Main.dependencies { implementation(libs.fastkrypto.iosx64) }
     iosSimulatorArm64Main.dependencies { implementation(libs.fastkrypto.iossimulatorarm64) }
     macosArm64Main.dependencies { implementation(libs.fastkrypto.macosarm64) }
-    macosX64Main.dependencies { implementation(libs.fastkrypto.macosx64) }
   }
 }
 
