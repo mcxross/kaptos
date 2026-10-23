@@ -48,6 +48,7 @@ internal final class ClientState {
     let raw: Client
     var closed = false
     var closing = false
+    var closeTask: Task<Void, Error>?
     init(_ raw: Client) { self.raw = raw }
     func requireOpen() throws {
         guard !closed && !closing else {
@@ -125,14 +126,19 @@ public final class AptosClient {
         state.closed = true
     }
 
-    /// Cancels and joins workers before clearing client-owned private keys.
+    /// Cancels and joins workers before clearing client-owned private keys. Concurrent callers
+    /// share cleanup; cancelling a waiter does not interrupt resource cleanup.
     public func closeAsync() async throws {
         if state.closed { return }
-        try state.requireOpen()
+        if let closing = state.closeTask { return try await closing.value }
         state.closing = true
-        defer { state.closing = false }
-        try await aptosCall { try await state.raw.closeAsync() }
-        state.closed = true
+        let closing = Task { @MainActor [state] in
+            defer { state.closing = false; state.closeTask = nil }
+            try await aptosCall { try await state.raw.closeAsync() }
+            state.closed = true
+        }
+        state.closeTask = closing
+        try await closing.value
     }
 }
 

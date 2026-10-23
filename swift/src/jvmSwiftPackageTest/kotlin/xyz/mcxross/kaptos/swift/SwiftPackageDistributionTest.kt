@@ -120,7 +120,7 @@ class SwiftPackageDistributionTest {
           )
         // A local install override inherited from the caller must not bypass Git resolution.
         runSwift(
-          listOf("swift", "test") + arguments,
+          listOf("swift", "test") + arguments + swiftTestRepeatArguments(),
           logs.resolve("consumer-tests.log"),
           environment,
         )

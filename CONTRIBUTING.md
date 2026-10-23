@@ -40,6 +40,22 @@ Run `./scripts/format-kotlin --all --check` to audit all tracked Kotlin files. T
 workflow checks changed files, avoiding unrelated formatting edits. Non-Kotlin files and
 ignored generated build output are outside ktfmt's scope.
 
+## Swift consumer regressions
+
+Run `./gradlew :kaptos-swift:checkReleaseSwiftPackage` on macOS to install the Release archive
+and test its Swift 6 consumer against an isolated HTTP server. The suite covers ledger and account
+reads, numeric boundaries, transaction stages, signing callbacks, cancellation, and key cleanup.
+It uses synthetic keys and never submits to a public network.
+
+To repeat the suite up to ten times, stopping on the first failing iteration:
+
+```sh
+./gradlew :kaptos-swift:checkReleaseSwiftPackage -PswiftPackageTestRepetitions=10
+```
+
+`checkSwiftPackageDistribution` runs the same suite after resolving a Git version and downloading
+the checksummed binary. It accepts the same repetition option.
+
 ## Releases
 
 Maintain `version` in `gradle.properties` independently on each release branch. A commit titled

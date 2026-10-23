@@ -87,6 +87,7 @@ val swiftPackageArchives =
 val swiftPackageTestCompilation =
   kotlin.targets.getByName<KotlinJvmTarget>("jvm").compilations.getByName("swiftPackageTest")
 val swiftConsumerProject = rootProject.layout.projectDirectory.dir("sample/swiftApp")
+val swiftTestRepetitions = providers.gradleProperty("swiftPackageTestRepetitions").getOrElse("1")
 
 fun registerInstalledPackageCheck(name: String, configuration: String) =
   tasks.register<Test>(name) {
@@ -111,6 +112,7 @@ fun registerInstalledPackageCheck(name: String, configuration: String) =
       archive.get().archiveFile.get().asFile.absolutePath,
     )
     systemProperty("kaptos.swift.consumer", swiftConsumerProject.asFile.absolutePath)
+    systemProperty("kaptos.swift.repetitions", swiftTestRepetitions)
     systemProperty(
       "kaptos.swift.logs",
       layout.buildDirectory.dir("reports/swift-package/$configuration").get().asFile.absolutePath,
@@ -318,6 +320,7 @@ fun registerDistributionCheck(name: String, remote: Boolean) =
       providers.gradleProperty("swiftPackageVersion").getOrElse(swiftReleaseVersion),
     )
     systemProperty("kaptos.swift.consumer", swiftConsumerProject.asFile.absolutePath)
+    systemProperty("kaptos.swift.repetitions", swiftTestRepetitions)
     systemProperty(
       "kaptos.swift.logs",
       layout.buildDirectory

@@ -104,6 +104,41 @@ class ServiceExecutionTest :
       }
     }
 
+    for (body in
+      listOf(
+        "not json",
+        "",
+        """{"sequence_number":[],"authentication_key":"0x1"}""",
+        """{"sequence_number":"18446744073709551616","authentication_key":"0x1"}""",
+        """{"sequence_number":"-1","authentication_key":"0x1"}""",
+      )) {
+      "malformed account GET is a serialization failure: $body" {
+        val http =
+          HttpClient(
+            MockEngine {
+              respond(
+                body,
+                HttpStatusCode.OK,
+                headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
+              )
+            }
+          ) {
+            install(ContentNegotiation) { json(Json { ignoreUnknownKeys = true }) }
+          }
+        val aptos = Aptos(AptosConfig(network = Network.LOCAL, transport = http.asAptosTransport()))
+        try {
+          aptos.accounts
+            .get(AccountAddress.ONE)
+            .shouldBeInstanceOf<AptosResult.Failure>()
+            .error
+            .shouldBeInstanceOf<AptosError.Serialization>()
+        } finally {
+          aptos.close()
+          http.close()
+        }
+      }
+    }
+
     "malformed indexer responses are serialization failures" {
       val http =
         HttpClient(

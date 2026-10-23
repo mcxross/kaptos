@@ -200,7 +200,7 @@ internal suspend inline fun <reified T> getAptosFullNode(
       Ok(body)
     } catch (e: Exception) {
       e.rethrowCancellation()
-      Err(AptosSdkError.UnknownError(e))
+      Err(AptosSdkError.DeserializationError(e))
     }
   }
 }

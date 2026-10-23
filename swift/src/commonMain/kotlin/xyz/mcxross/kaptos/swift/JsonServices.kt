@@ -6,8 +6,10 @@
  */
 package xyz.mcxross.kaptos.swift
 
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import xyz.mcxross.kaptos.indexer.IndexerService
 import xyz.mcxross.kaptos.model.AptosError
@@ -49,7 +51,7 @@ class Views internal constructor(private val service: ViewService) {
     ledgerVersionDecimal: String? = null,
   ): String {
     val arguments =
-      Json.parseToJsonElement(argumentsJson) as? JsonArray
+      parseJsonInput(argumentsJson, "View arguments") as? JsonArray
         ?: throw AptosException(AptosError.Validation("View arguments must be a JSON array"))
     return JsonArray(
         service
@@ -70,7 +72,7 @@ class Indexer internal constructor(private val service: IndexerService) {
   @Throws(Throwable::class)
   suspend fun query(document: String, variablesJson: String = "{}"): String {
     val variables =
-      Json.parseToJsonElement(variablesJson) as? JsonObject
+      parseJsonInput(variablesJson, "GraphQL variables") as? JsonObject
         ?: throw AptosException(AptosError.Validation("GraphQL variables must be a JSON object"))
     return service.query(document, variables).swiftValue().toString()
   }
@@ -93,7 +95,7 @@ class Tables internal constructor(private val service: TableService) {
         handle,
         keyType,
         valueType,
-        Json.parseToJsonElement(keyJson),
+        parseJsonInput(keyJson, "Table key"),
         unsigned(ledgerVersionDecimal, "ledgerVersion"),
       )
       .swiftValue()
@@ -109,3 +111,10 @@ class Tables internal constructor(private val service: TableService) {
   suspend fun getMetadata(handle: String): List<TableMetadata> =
     service.getMetadata(handle).swiftValue().items
 }
+
+private fun parseJsonInput(value: String, label: String): JsonElement =
+  try {
+    Json.parseToJsonElement(value)
+  } catch (error: SerializationException) {
+    throw AptosException(AptosError.Validation("$label must be valid JSON", error))
+  }

@@ -11,6 +11,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.security.MessageDigest
 import java.util.Comparator
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -63,7 +64,7 @@ class InstalledSwiftPackageTest {
             "KAPTOS_TEST_URL" to fixture.url,
           )
         runCommand(
-          listOf("swift", "test") + swiftArguments,
+          listOf("swift", "test") + swiftArguments + swiftTestRepeatArguments(),
           logs.resolve("consumer-tests.log"),
           environment,
         )
@@ -84,6 +85,13 @@ class InstalledSwiftPackageTest {
 
 internal fun requiredProperty(name: String): String =
   checkNotNull(System.getProperty(name)) { "Missing Gradle test property $name" }
+
+internal fun swiftTestRepeatArguments(): List<String> {
+  val repetitions = (System.getProperty("kaptos.swift.repetitions") ?: "1").toInt()
+  require(repetitions in 1..100) { "Swift test repetitions must be between 1 and 100" }
+  return if (repetitions == 1) emptyList()
+  else listOf("--maximum-repetitions", repetitions.toString(), "--repeat-until", "fail")
+}
 
 internal fun runCommand(
   command: List<String>,
@@ -110,6 +118,7 @@ internal fun runCommand(
 internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseable {
   val failures = ConcurrentLinkedQueue<Throwable>()
   val binaryDownloads = AtomicInteger()
+  private val counts = ConcurrentHashMap<String, ConcurrentHashMap<String, AtomicInteger>>()
   private val executor = Executors.newCachedThreadPool()
   private val server =
     HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0).apply {
@@ -136,6 +145,30 @@ internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseabl
 
   private fun handle(exchange: HttpExchange) {
     val path = exchange.requestURI.path
+    if (path.startsWith("/control/")) {
+      val id = path.substringAfterLast('/')
+      respond(
+        exchange,
+        buildJsonObject { counts[id]?.forEach { (key, value) -> put(key, value.get()) } },
+      )
+      return
+    }
+    val kind =
+      when {
+        path.trimEnd('/') == "/v1/transactions" && exchange.requestMethod == "POST" -> "submissions"
+        "/transactions/by_hash/" in path -> "polls"
+        "/transactions/simulate" in path -> "simulations"
+        "/module/" in path -> "abis"
+        path == "/v1/view" -> "views"
+        "/balance/" in path -> "balances"
+        "/accounts/" in path -> "accounts"
+        else -> "ledger"
+      }
+    val id = exchange.requestHeaders.getFirst("X-AptosKit-Test-ID") ?: "default"
+    counts
+      .computeIfAbsent(id) { ConcurrentHashMap() }
+      .computeIfAbsent(kind) { AtomicInteger() }
+      .incrementAndGet()
     when (exchange.requestMethod) {
       "GET" -> get(exchange, path)
       "POST" -> post(exchange, path)
@@ -172,9 +205,53 @@ internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseabl
           }
         "/module/test" in path -> testModule()
         "/balance/" in path -> JsonPrimitive(ULong.MAX_VALUE.toString())
-        "/transactions/by_hash/" in path -> committed(path.substringAfterLast('/'))
+        "/transactions/by_hash/" in path -> {
+          val hash = path.substringAfterLast('/')
+          when (scenario(exchange)) {
+            "pending" -> pending(hash)
+            "slow-poll" -> {
+              Thread.sleep(3_000)
+              pending(hash)
+            }
+            "failed-execution" -> committed(hash, success = false)
+            "not-found-then-commit" -> {
+              if (count(exchange, "polls") <= 2) {
+                respond(exchange, apiFailure("transaction_not_found"), 404)
+                return
+              }
+              committed(hash)
+            }
+            else -> committed(hash)
+          }
+        }
         "/accounts/" in path -> {
           val address = path.substringAfterLast('/').removePrefix("0x").toBigInteger(16)
+          when (scenario(exchange)) {
+            "malformed-json" -> {
+              respondRaw(exchange, "{broken")
+              return
+            }
+            "empty-body" -> {
+              respondRaw(exchange, "")
+              return
+            }
+            "wrong-shape" -> {
+              respond(exchange, buildJsonObject { put("sequence_number", JsonArray(emptyList())) })
+              return
+            }
+            "rate-limit" -> {
+              respond(exchange, apiFailure("rate_limited"), 429)
+              return
+            }
+            "unavailable" -> {
+              respond(exchange, apiFailure("internal_error"), 503)
+              return
+            }
+            "unsupported" -> {
+              respond(exchange, apiFailure("feature_under_gating"), 400)
+              return
+            }
+          }
           if (address == 0x404.toBigInteger()) {
             respond(
               exchange,
@@ -191,9 +268,17 @@ internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseabl
           buildJsonObject {
             put(
               "sequence_number",
-              if (address == 10.toBigInteger()) ULong.MAX_VALUE.toString() else "7",
+              when (scenario(exchange)) {
+                "u64-overflow" -> "18446744073709551616"
+                "u64-negative" -> "-1"
+                "sequence-retry",
+                "sequence-always-reject" -> if (count(exchange, "accounts") == 1) "7" else "9"
+                else -> if (address == 10.toBigInteger()) ULong.MAX_VALUE.toString() else "7"
+              },
             )
             put("authentication_key", "0x" + "11".repeat(32))
+            if (scenario(exchange) == "unknown-fields")
+              put("future_field", buildJsonObject { put("v", JsonNull) })
           }
         }
         else -> error("Unexpected fixture GET $path")
@@ -216,16 +301,43 @@ internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseabl
       "/transactions/simulate" in path ->
         respond(exchange, JsonArray(listOf(committed("0x" + "11".repeat(32)))))
       path.trimEnd('/') == "/v1/transactions" -> {
+        when (scenario(exchange)) {
+          "sequence-retry",
+          "sequence-always-reject" -> {
+            if (
+              count(exchange, "submissions") == 1 || scenario(exchange) == "sequence-always-reject"
+            ) {
+              respond(exchange, apiFailure("sequence_number_too_old"), 400)
+              return
+            }
+          }
+          "reject-submit" -> {
+            respond(exchange, apiFailure("invalid_signature"), 400)
+            return
+          }
+        }
         fun sha3(bytes: ByteArray): ByteArray = MessageDigest.getInstance("SHA3-256").digest(bytes)
         val hash =
           "0x" +
             sha3(sha3("APTOS::Transaction".toByteArray(UTF_8)) + byteArrayOf(0) + body)
               .joinToString("") { it.toUByte().toString(16).padStart(2, '0') }
-        respond(exchange, pending(hash), 202)
+        check(body.size >= 40) { "Signed transaction is truncated" }
+        val sequence =
+          (0..<8).fold(0uL) { value, index ->
+            value or (body[32 + index].toUByte().toULong() shl (8 * index))
+          }
+        respond(exchange, pending(hash, sequence.toString()), 202)
       }
       else -> error("Unexpected fixture POST $path")
     }
   }
+
+  private fun scenario(exchange: HttpExchange): String? =
+    exchange.requestHeaders.getFirst("X-AptosKit-Test-Scenario")
+
+  private fun count(exchange: HttpExchange, kind: String): Int =
+    counts[exchange.requestHeaders.getFirst("X-AptosKit-Test-ID") ?: "default"]?.get(kind)?.get()
+      ?: 0
 
   override fun close() {
     server.stop(0)
@@ -234,17 +346,23 @@ internal class SwiftHttpFixture(private val binary: Path? = null) : AutoCloseabl
   }
 }
 
-private fun pending(hash: String): JsonObject = buildJsonObject {
+private fun apiFailure(code: String): JsonObject = buildJsonObject {
+  put("message", "fixture $code")
+  put("error_code", code)
+  put("vm_error_code", Long.MAX_VALUE)
+}
+
+private fun pending(hash: String, sequence: String = "7"): JsonObject = buildJsonObject {
   put("type", "pending_transaction")
   put("hash", hash)
   put("sender", "0x1")
-  put("sequence_number", "7")
+  put("sequence_number", sequence)
   put("max_gas_amount", "2000000")
   put("gas_unit_price", "100")
   put("expiration_timestamp_secs", "9999999999")
 }
 
-private fun committed(hash: String): JsonObject = buildJsonObject {
+private fun committed(hash: String, success: Boolean = true): JsonObject = buildJsonObject {
   pending(hash).forEach { (key, value) -> put(key, value) }
   put("type", "user_transaction")
   put("version", "1")
@@ -252,8 +370,8 @@ private fun committed(hash: String): JsonObject = buildJsonObject {
   put("event_root_hash", hash)
   put("state_checkpoint_hash", JsonNull)
   put("gas_used", "2")
-  put("success", true)
-  put("vm_status", "Executed successfully")
+  put("success", success)
+  put("vm_status", if (success) "Executed successfully" else "Move abort: fixture rejection")
   put("accumulator_root_hash", hash)
   put("events", JsonArray(emptyList()))
   put("timestamp", "1")
@@ -298,7 +416,11 @@ private fun testModule(): JsonObject = buildJsonObject {
 }
 
 private fun respond(exchange: HttpExchange, response: JsonElement, status: Int = 200) {
-  val bytes = response.toString().toByteArray(UTF_8)
+  respondRaw(exchange, response.toString(), status)
+}
+
+private fun respondRaw(exchange: HttpExchange, response: String, status: Int = 200) {
+  val bytes = response.toByteArray(UTF_8)
   exchange.responseHeaders.set("Content-Type", "application/json")
   exchange.sendResponseHeaders(status, bytes.size.toLong())
   exchange.responseBody.use { it.write(bytes) }
