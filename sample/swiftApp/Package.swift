@@ -5,14 +5,14 @@ import Foundation
 let package = Package(
     name: "KaptosSwiftSample",
     platforms: [.macOS(.v15), .iOS(.v18)],
-    dependencies: [.package(name: "KaptosExport", path: ProcessInfo.processInfo.environment["KAPTOS_SWIFT_PACKAGE"] ?? "../../swift/build/swift-package/Debug")],
+    dependencies: [.package(name: "AptosKitExport", path: ProcessInfo.processInfo.environment["KAPTOS_SWIFT_PACKAGE"] ?? "../../build/distributions/AptosKit")],
     targets: [
         .executableTarget(name: "KaptosSample", dependencies: [
-            .product(name: "KaptosLibrary", package: "KaptosExport")
+            .product(name: "AptosKitLibrary", package: "AptosKitExport")
         ]),
         .testTarget(name: "KaptosConsumerTests", dependencies: [
-            .product(name: "KaptosLibrary", package: "KaptosExport")
+            .product(name: "AptosKitLibrary", package: "AptosKitExport")
         ])
     ],
-    swiftLanguageModes: [.v5]
+    swiftLanguageModes: [.v6]
 )

@@ -106,6 +106,7 @@ class Client internal constructor(internal val kotlin: Aptos) {
   fun close() {
     if (closed) return
     check(workers.all { it.isStopped }) { "Shutdown workers or await closeAsync before closing" }
+    workers.clear()
     closed = true
     kotlin.close()
   }

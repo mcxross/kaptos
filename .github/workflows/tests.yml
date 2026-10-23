@@ -42,3 +42,5 @@ jobs:
           :kaptos-swift:macosArm64Test
           apiCheck
           --console=plain
+      - name: Build and test the installed Swift package
+        run: ./gradlew :kaptos-swift:checkSwiftPackage --console=plain

@@ -2,12 +2,12 @@ import Foundation
 @_exported import XyzMcxrossKaptosKaptos
 import KotlinStdlib
 
-public typealias Network = ExportedKotlinPackages.xyz.mcxross.kaptos.model.Network
-public typealias AccountAddress = ExportedKotlinPackages.xyz.mcxross.kaptos.model.AccountAddress
+public typealias RawNetwork = ExportedKotlinPackages.xyz.mcxross.kaptos.model.Network
+public typealias RawAccountAddress = ExportedKotlinPackages.xyz.mcxross.kaptos.model.AccountAddress
 public typealias Account = ExportedKotlinPackages.xyz.mcxross.kaptos.account.Account
 public typealias TransactionSigner = ExportedKotlinPackages.xyz.mcxross.kaptos.account.TransactionSigner
 public typealias UnsignedTransaction = ExportedKotlinPackages.xyz.mcxross.kaptos.model.UnsignedTransaction
-public typealias TransactionOptions = ExportedKotlinPackages.xyz.mcxross.kaptos.model.TransactionOptions
+public typealias RawTransactionOptions = ExportedKotlinPackages.xyz.mcxross.kaptos.model.TransactionOptions
 public typealias SimulationOptions = ExportedKotlinPackages.xyz.mcxross.kaptos.model.SimulationOptions
 public typealias WaitForTransactionOptions = ExportedKotlinPackages.xyz.mcxross.kaptos.model.WaitForTransactionOptions
 public typealias PendingTransaction = ExportedKotlinPackages.xyz.mcxross.kaptos.model.PendingTransactionResponse
@@ -19,10 +19,10 @@ public extension TransactionResponse {
     var transactionHash: String { ResponseValues.shared.transactionHash(response: self) }
 }
 
-public extension TransactionOptions {
+public extension RawTransactionOptions {
     static func make(maxGasAmount: UInt64? = nil, gasUnitPrice: UInt64? = nil,
                      expirationTimestampSecs: UInt64? = nil, expirationSecondsFromNow: UInt64? = nil,
-                     sequenceNumber: UInt64? = nil, nonce: UInt64? = nil) throws -> TransactionOptions {
+                     sequenceNumber: UInt64? = nil, nonce: UInt64? = nil) throws -> RawTransactionOptions {
         try OptionValues.shared.transaction(
             maxGasAmountDecimal: maxGasAmount.map(String.init),
             gasUnitPriceDecimal: gasUnitPrice.map(String.init),
@@ -56,7 +56,7 @@ public extension Tables {
 
 public extension Configuration {
     static func make(
-        network: Network = .DEVNET,
+        network: RawNetwork = .DEVNET,
         fullNode: String? = nil,
         indexer: String? = nil,
         faucet: String? = nil,
@@ -93,7 +93,7 @@ public enum AptosJSON {
 }
 
 public extension Accounts {
-    func balance(address: AccountAddress) async throws -> UInt64 {
+    func balance(address: RawAccountAddress) async throws -> UInt64 {
         let asset = XyzMcxrossKaptosKaptos._ExportedKotlinPackages_xyz_mcxross_kaptos_account_AccountAsset_Companion.shared
             .coin(type: "0x1::aptos_coin::AptosCoin")
         return try await getBalance(address: address, asset: asset)
