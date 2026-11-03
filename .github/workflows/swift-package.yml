@@ -217,8 +217,13 @@ jobs:
             git -C "$repository" push origin "HEAD:refs/heads/$DISTRIBUTION_BRANCH"
           fi
           release_json="$RUNNER_TEMP/aptoskit-release.json"
-          if ! gh api "repos/$GITHUB_REPOSITORY/releases/tags/$tag" > "$release_json" 2> "$RUNNER_TEMP/release-error"; then
-            if ! grep -q 'HTTP 404' "$RUNNER_TEMP/release-error"; then
+          find_release() {
+            # The REST tag endpoint only finds published releases. The CLI also finds drafts.
+            gh release view "$tag" --repo "$GITHUB_REPOSITORY" \
+              --json tagName,isDraft,targetCommitish,assets
+          }
+          if ! find_release > "$release_json" 2> "$RUNNER_TEMP/release-error"; then
+            if ! grep -Fxq 'release not found' "$RUNNER_TEMP/release-error"; then
               cat "$RUNNER_TEMP/release-error" >&2; exit 1
             fi
             printf 'AptosKit %s\nKaptos: %s\nChannel: %s\nSDK source: %s\nBinary SHA-256: %s\n' \
@@ -226,11 +231,12 @@ jobs:
             gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$package_commit" --draft \
               --prerelease="$prerelease" --latest=false \
               --title "AptosKit $VERSION" --notes-file "$RUNNER_TEMP/release-notes"
-            gh api "repos/$GITHUB_REPOSITORY/releases/tags/$tag" > "$release_json"
+            find_release > "$release_json"
           fi
-          draft=$(jq -r .draft "$release_json")
+          jq -e --arg tag "$tag" '.tagName == $tag' "$release_json" >/dev/null
+          draft=$(jq -r .isDraft "$release_json")
           if [[ -z "$tag_ref" ]]; then
-            test "$(jq -r .target_commitish "$release_json")" = "$package_commit"
+            test "$(jq -r .targetCommitish "$release_json")" = "$package_commit"
           fi
           for asset in "$binary" "$sources" "$metadata"; do
             name=$(basename "$asset")
