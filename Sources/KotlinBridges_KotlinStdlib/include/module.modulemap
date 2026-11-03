@@ -1,0 +1,5 @@
+module "KotlinBridges_KotlinStdlib" {
+    umbrella "."
+    export *
+    link "KotlinStdlib"
+}

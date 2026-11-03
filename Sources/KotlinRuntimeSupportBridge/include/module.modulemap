@@ -1,0 +1,5 @@
+module "KotlinRuntimeSupportBridge" {
+    umbrella "."
+    export *
+    link "KotlinRuntimeSupport"
+}

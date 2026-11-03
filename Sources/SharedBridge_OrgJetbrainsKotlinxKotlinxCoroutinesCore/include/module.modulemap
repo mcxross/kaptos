@@ -1,0 +1,5 @@
+module "SharedBridge_OrgJetbrainsKotlinxKotlinxCoroutinesCore" {
+    umbrella "."
+    export *
+    link "OrgJetbrainsKotlinxKotlinxCoroutinesCore"
+}

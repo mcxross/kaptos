@@ -1,0 +1,2684 @@
+#include <Foundation/Foundation.h>
+#include <stdint.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+_Bool XyzMcxrossKaptosKaptos_internal_functional_type_callee_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder__(void * pointerToClosure, void * _1);
+
+_Bool XyzMcxrossKaptosKaptos_internal_functional_type_callee_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_Error___(void * pointerToClosure, void * _Nullable _1);
+
+_Bool XyzMcxrossKaptosKaptos_internal_functional_type_callee_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AptosResult__(void * pointerToClosure, void * _1);
+
+NSString * xyz_mcxross_kaptos_account_AccountAsset_value_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_accountAddress_get__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_clearPrivateKey__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_isPrivateKeyCleared_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_publicKey_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_signTransactionSignature__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction____reverse_swift(void * self, void * tx);
+
+_Bool xyz_mcxross_kaptos_account_Account_signTransaction__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction____reverse_swift(void * self, void * transaction, void * continuation, void * exception, void * cancellation);
+
+void * xyz_mcxross_kaptos_account_Account_signWithAuthenticator__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput____reverse_swift(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_Account_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput____reverse_swift(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_Account_signingScheme_get__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature____reverse_swift(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_accountAddress_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_kind_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_publicKey_get__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray____reverse_swift(void * self, void * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signText__TypesOfArguments__Swift_String____reverse_swift(void * self, NSString * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signTransaction__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction____reverse_swift(void * self, void * transaction, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_verifySignature__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature____reverse_swift(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_core_crypto_AccountPublicKey_authKey__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PrivateKey_clear__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PrivateKey_isCleared_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_publicKey__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput____reverse_swift(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_toAip80__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_toByteArray__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PublicKey_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PublicKey_toByteArray__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature____reverse_swift(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_core_crypto_Signature_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Signature_toByteArray__reverse_swift(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_getSigsRequired__reverse_swift(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_publicKeys_get__reverse_swift(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddressInput_value_get__reverse_swift(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_cause_get__reverse_swift(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_message_get__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isFailure_get__reverse_swift(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isSuccess_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionResponse_type_get__reverse_swift(void * self);
+
+NSString * xyz_mcxross_kaptos_model_TypeTag_value_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_rawTransaction_get__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingMessage__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_toBcs__reverse_swift(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_toBcs__reverse_swift(void * self);
+
+_Bool XyzMcxrossKaptosKaptos_internal_functional_type_caller_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AptosResult__(void * pointerToBlock, void * _1);
+
+_Bool XyzMcxrossKaptosKaptos_internal_functional_type_caller_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_Error___(void * pointerToBlock, void * _Nullable _1);
+
+NSArray<id> * xyz_mcxross_kaptos_account_AccountAbstractionStatus_authenticationFunctions_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountAbstractionStatus_copy__TypesOfArguments__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction___(void * self, NSArray<id> * authenticationFunctions);
+
+void * xyz_mcxross_kaptos_account_AccountAbstractionStatus_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_AccountAbstractionStatus_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction___(void * __kt, NSArray<id> * authenticationFunctions);
+
+_Bool xyz_mcxross_kaptos_account_AccountAbstractionStatus_isEnabled_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Coin_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_StructTag__(void * self, void * type);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Coin_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_AccountAsset_Coin_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_StructTag__(void * __kt, void * type);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Coin_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_account_AccountAsset_Coin_value_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Companion_coin__TypesOfArguments__Swift_String__(void * self, NSString * type);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Companion_fungibleAsset__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__(void * self, void * metadataAddress);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Companion_fungibleAsset__TypesOfArguments__Swift_String__(void * self, NSString * metadataAddress);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_Companion_get();
+
+void * xyz_mcxross_kaptos_account_AccountAsset_FungibleAsset_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * self, void * metadataAddress);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_FungibleAsset_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_AccountAsset_FungibleAsset_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * __kt, void * metadataAddress);
+
+void * xyz_mcxross_kaptos_account_AccountAsset_FungibleAsset_metadataAddress_get(void * self);
+
+NSString * xyz_mcxross_kaptos_account_AccountAsset_FungibleAsset_value_get(void * self);
+
+NSString * xyz_mcxross_kaptos_account_AccountAsset_value_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountInfo_address_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountInfo_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AccountPublicKey_Swift_UInt64__(void * self, void * address, void * publicKey, uint64_t lastTransactionVersion);
+
+void * xyz_mcxross_kaptos_account_AccountInfo_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_AccountInfo_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AccountPublicKey_Swift_UInt64__(void * __kt, void * address, void * publicKey, uint64_t lastTransactionVersion);
+
+uint64_t xyz_mcxross_kaptos_account_AccountInfo_lastTransactionVersion_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountInfo_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountLookupOptions_copy__TypesOfArguments__Swift_Bool_Swift_Bool__(void * self, _Bool includeUnverified, _Bool includeMultiKey);
+
+_Bool xyz_mcxross_kaptos_account_AccountLookupOptions_includeMultiKey_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_AccountLookupOptions_includeUnverified_get(void * self);
+
+void * xyz_mcxross_kaptos_account_AccountLookupOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_AccountLookupOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool_Swift_Bool__(void * __kt, _Bool includeUnverified, _Bool includeMultiKey);
+
+void * xyz_mcxross_kaptos_account_Account_Companion_fromPrivateKey__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PrivateKey_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * self, void * privateKey, void * _Nullable address);
+
+void * xyz_mcxross_kaptos_account_Account_Companion_fromSingleKey__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PrivateKey_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * self, void * privateKey, void * _Nullable address);
+
+void * xyz_mcxross_kaptos_account_Account_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_Companion_get();
+
+void * xyz_mcxross_kaptos_account_Account_accountAddress_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_clearPrivateKey(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_close(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer__(void * __kt);
+
+_Bool xyz_mcxross_kaptos_account_Account_isPrivateKeyCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_Account_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+_Bool xyz_mcxross_kaptos_account_Account_signBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_Account_signText__TypesOfArguments__Swift_String__(void * self, NSString * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_Account_signTransaction__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction__(void * self, void * transaction, void * continuation, void * exception, void * cancellation);
+
+void * xyz_mcxross_kaptos_account_Account_signTransactionSignature__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction__(void * self, void * tx);
+
+_Bool xyz_mcxross_kaptos_account_Account_signTransaction__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction___direct(void * self, void * transaction, void * continuation, void * exception, void * cancellation);
+
+void * xyz_mcxross_kaptos_account_Account_signWithAuthenticator__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_Account_signingScheme_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Account_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+_Bool xyz_mcxross_kaptos_account_Account_verifySignature__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_Companion_fromMnemonic__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_Swift_String__(void * self, void * mnemonic, void * path, NSString * passphrase);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_Companion_get();
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_accountAddress_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_account_Ed25519Account_address_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Ed25519Account_clearPrivateKey(void * self);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_Ed25519Account_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * __kt, void * privateKey, void * _Nullable address);
+
+_Bool xyz_mcxross_kaptos_account_Ed25519Account_isPrivateKeyCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_privateKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_signTransactionSignature__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction__(void * self, void * tx);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_signWithAuthenticator__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_Ed25519Account_signingScheme_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_Ed25519Account_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_Companion_fromMnemonic__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_Swift_String__(void * self, void * mnemonic, void * path, NSString * passphrase);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_Companion_fromSecp256k1Mnemonic__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_Swift_String__(void * self, void * mnemonic, void * path, NSString * passphrase);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_Companion_generate__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_SigningSchemeInput__(void * self, void * scheme);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_Companion_get();
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_accountAddress_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_account_SingleKeyAccount_address_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_SingleKeyAccount_clearPrivateKey(void * self);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_init_allocate();
+
+_Bool xyz_mcxross_kaptos_account_SingleKeyAccount_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PrivateKey_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * __kt, void * privateKey, void * _Nullable address);
+
+_Bool xyz_mcxross_kaptos_account_SingleKeyAccount_isPrivateKeyCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_privateKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_signTransactionSignature__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction__(void * self, void * tx);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_signWithAuthenticator__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_account_SingleKeyAccount_signingScheme_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_SingleKeyAccount_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_account_TransactionSignerKind_FederatedKeyless();
+
+void * xyz_mcxross_kaptos_account_TransactionSignerKind_Keyless();
+
+void * xyz_mcxross_kaptos_account_TransactionSignerKind_Standard();
+
+int32_t xyz_mcxross_kaptos_account_TransactionSignerKind_ordinal(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_accountAddress_get(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_kind_get(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_kind_get_direct(void * self);
+
+void * xyz_mcxross_kaptos_account_TransactionSigner_publicKey_get(void * self);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signText__TypesOfArguments__Swift_String__(void * self, NSString * message, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_signTransaction__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_UnsignedTransaction__(void * self, void * transaction, void * continuation, void * exception, void * cancellation);
+
+_Bool xyz_mcxross_kaptos_account_TransactionSigner_verifySignature__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_AuthenticationKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_AuthenticationKey_Companion_fromSchemeAndBytes__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AuthenticationKeyScheme_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * scheme, void * input);
+
+void * xyz_mcxross_kaptos_core_AuthenticationKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_AuthenticationKey_deriveAddress(void * self);
+
+void * xyz_mcxross_kaptos_core_AuthenticationKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_AuthenticationKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * data);
+
+void * xyz_mcxross_kaptos_core_AuthenticationKey_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AccountPublicKey_authKey(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_AccountPublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer__(void * __kt);
+
+void * xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey_Companion_parse__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey_value_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_authKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_AnyPublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PublicKey__(void * __kt, void * publicKey);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnyPublicKey_variant_get(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_AnyPublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_core_crypto_AnySignature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_AnySignature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * __kt, void * signature);
+
+void * xyz_mcxross_kaptos_core_crypto_AnySignature_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnySignature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnySignature_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AnySignature_variant_get(void * self);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_accountIndex_get(void * self);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_addressIndex_get(void * self);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_changeIndex_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_copy__TypesOfArguments__Swift_UInt32_Swift_UInt32_Swift_UInt32__(void * self, uint32_t accountIndex, uint32_t changeIndex, uint32_t addressIndex);
+
+void * xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt32_Swift_UInt32_Swift_UInt32__(void * __kt, uint32_t accountIndex, uint32_t changeIndex, uint32_t addressIndex);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_accountIndex_get(void * self);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_addressIndex_get(void * self);
+
+uint32_t xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_changeIndex_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_copy__TypesOfArguments__Swift_UInt32_Swift_UInt32_Swift_UInt32__(void * self, uint32_t accountIndex, uint32_t changeIndex, uint32_t addressIndex);
+
+void * xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt32_Swift_UInt32_Swift_UInt32__(void * __kt, uint32_t accountIndex, uint32_t changeIndex, uint32_t addressIndex);
+
+NSString * xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_value_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_fromAip80__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_fromAip80__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_fromLegacyHex__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_Companion_get();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_clear(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * data);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_isCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_publicKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_toAip80(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PrivateKey_toByteArray(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_authKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_data_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * data);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * data);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * pk);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Ed25519Signature_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519Signature_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519Signature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * hexInput);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Ed25519Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * hexInput);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519Signature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Ed25519Signature_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_Companion_generate__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MnemonicWordCount__(void * self, void * wordCount);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_Companion_parse__TypesOfArguments__Swift_String__(void * self, NSString * phrase);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_derivePrivateKey__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ed25519_Swift_String__(void * self, void * path, NSString * passphrase);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_deriveSecp256k1PrivateKey__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_Swift_String__(void * self, void * path, NSString * passphrase);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_deriveSecp256r1PrivateKey__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AptosDerivationPath_Ecdsa_Swift_String__(void * self, void * path, NSString * passphrase);
+
+NSString * xyz_mcxross_kaptos_core_crypto_MnemonicPhrase_reveal(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_Words12();
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_Words15();
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_Words18();
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_Words21();
+
+void * xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_Words24();
+
+uint32_t xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_count_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_MnemonicWordCount_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_Companion_MAX_KEYS_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_Companion_MIN_KEYS_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_authKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey__Swift_UInt8__(void * __kt, NSArray<id> * publicKeys, uint8_t threshold);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_publicKeys_get(void * self);
+
+uint8_t xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_threshold_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_Companion_BITMAP_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_bitmap_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519Signature__ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, NSArray<id> * signatures, void * bitmap);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_signatures_get(void * self);
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_signerIndices_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKeyType_Ed25519();
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKeyType_Secp256k1();
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKeyType_Secp256r1();
+
+int32_t xyz_mcxross_kaptos_core_crypto_PrivateKeyType_ordinal(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PrivateKey_clear(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PrivateKey_isCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_publicKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_toAip80(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PrivateKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer__(void * __kt);
+
+void * xyz_mcxross_kaptos_core_crypto_PublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_PublicKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_fromAip80__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_fromAip80__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_fromLegacyHex__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_Companion_get();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_clear(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * key);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_isCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_publicKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_toAip80(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PrivateKey_toByteArray(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_hexInput_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * hexInput);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * pk);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * hexInput);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256k1Signature_toByteArray(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_fromAip80__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_fromAip80__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Aip80PrivateKey__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_fromLegacyHex__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_Companion_get();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_clear(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * key);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * key);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * key);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_isCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_publicKey(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_sign__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_signBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * message);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_signText__TypesOfArguments__Swift_String__(void * self, NSString * message);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_toAip80(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PrivateKey_toByteArray(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_Companion_COMPRESSED_LENGTH_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * key);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_verifyBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Secp256r1Signature__(void * self, void * message, void * signature);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1PublicKey_verifyText__TypesOfArguments__Swift_String_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Secp256r1Signature__(void * self, NSString * message, void * signature);
+
+int32_t xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_Companion_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_Companion_get();
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * signature);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * signature);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * signature);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Secp256r1Signature_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_Signature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer__(void * __kt);
+
+void * xyz_mcxross_kaptos_core_crypto_Signature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_Signature_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_createBitmap__TypesOfArguments__Swift_Array_Swift_Int32___(void * self, NSArray<NSNumber *> * bits);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_getSigsRequired(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_index__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PublicKey__(void * self, void * publicKey);
+
+_Bool xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PublicKey___(void * __kt, NSArray<id> * publicKeys);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_publicKeys_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_AbstractMultiKey_publicKeys_get_direct(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_Companion_BITMAP_LEN_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_Companion_MAX_SIGNATURES_SUPPORTED_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_Companion_createBitmap__TypesOfArguments__Swift_Array_Swift_Int32___(void * self, NSArray<NSNumber *> * bits);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_Companion_get();
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_bitMapToSignerIndices(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_bitmap_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AnySignature__ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, NSArray<id> * signatures, void * bitmap);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_signatures_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_Companion_get();
+
+_Bool xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_Companion_isInstance__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PublicKey__(void * self, void * publicKey);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_authKey(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_getSigsRequired(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_PublicKey__Swift_Int32__(void * __kt, NSArray<id> * pks, int32_t signaturesRequired);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_pks_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_publicKeys_get(void * self);
+
+int32_t xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_signaturesRequired_get(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_toByteArray(void * self);
+
+_Bool xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_verifySignature__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Signature__(void * self, void * message, void * signature);
+
+void * xyz_mcxross_kaptos_digitalasset_CollectionRecord_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_String_Swift_String_Swift_String_Swift_String_Swift_UInt64_Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_Bool__Swift_Optional_Swift_Bool__Swift_UInt64_ExportedKotlinPackages_kotlin_time_Instant__(void * self, void * id_, void * creator, NSString * name, NSString * description, NSString * uri, NSString * tokenStandard, uint64_t currentSupply, NSNumber * _Nullable maxSupply, NSNumber * _Nullable totalMinted, NSNumber * _Nullable mutableDescription, NSNumber * _Nullable mutableUri, uint64_t lastTransactionVersion, void * lastTransactionTimestamp);
+
+void * xyz_mcxross_kaptos_digitalasset_CollectionRecord_creator_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_CollectionRecord_currentSupply_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_CollectionRecord_id_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_CollectionRecord_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_CollectionRecord_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_String_Swift_String_Swift_String_Swift_String_Swift_UInt64_Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_Bool__Swift_Optional_Swift_Bool__Swift_UInt64_ExportedKotlinPackages_kotlin_time_Instant__(void * __kt, void * id_, void * creator, NSString * name, NSString * description, NSString * uri, NSString * tokenStandard, uint64_t currentSupply, NSNumber * _Nullable maxSupply, NSNumber * _Nullable totalMinted, NSNumber * _Nullable mutableDescription, NSNumber * _Nullable mutableUri, uint64_t lastTransactionVersion, void * lastTransactionTimestamp);
+
+void * xyz_mcxross_kaptos_digitalasset_CollectionRecord_lastTransactionTimestamp_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_CollectionRecord_lastTransactionVersion_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_digitalasset_CollectionRecord_maxSupply_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_digitalasset_CollectionRecord_mutableDescription_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_digitalasset_CollectionRecord_mutableUri_get(void * self);
+
+NSString * xyz_mcxross_kaptos_digitalasset_CollectionRecord_name_get(void * self);
+
+NSString * xyz_mcxross_kaptos_digitalasset_CollectionRecord_tokenStandard_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_digitalasset_CollectionRecord_totalMinted_get(void * self);
+
+NSString * xyz_mcxross_kaptos_digitalasset_CollectionRecord_uri_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_assetsBurnableByCreator_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_assetsFreezableByCreator_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_copy__TypesOfArguments__Swift_UInt64_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_UInt64_Swift_UInt64__(void * self, uint64_t maxSupply, _Bool mutableDescription, _Bool mutableRoyalty, _Bool mutableUri, _Bool mutableAssetDescription, _Bool mutableAssetName, _Bool mutableAssetProperties, _Bool mutableAssetUri, _Bool assetsBurnableByCreator, _Bool assetsFreezableByCreator, uint64_t royaltyNumerator, uint64_t royaltyDenominator);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_Bool_Swift_UInt64_Swift_UInt64__(void * __kt, uint64_t maxSupply, _Bool mutableDescription, _Bool mutableRoyalty, _Bool mutableUri, _Bool mutableAssetDescription, _Bool mutableAssetName, _Bool mutableAssetProperties, _Bool mutableAssetUri, _Bool assetsBurnableByCreator, _Bool assetsFreezableByCreator, uint64_t royaltyNumerator, uint64_t royaltyDenominator);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_maxSupply_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableAssetDescription_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableAssetName_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableAssetProperties_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableAssetUri_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableDescription_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableRoyalty_get(void * self);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_mutableUri_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_royaltyDenominator_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_DigitalAssetCollectionOptions_royaltyNumerator_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Address_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Address_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Address_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Address_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bool_copy__TypesOfArguments__Swift_Bool__(void * self, _Bool value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bool_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bool_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool__(void * __kt, _Bool value);
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bool_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bytes_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bytes_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Bytes_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Text_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Text_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Text_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_Text_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U128_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U128_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U128_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U16_copy__TypesOfArguments__Swift_UInt16__(void * self, uint16_t value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U16_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U16_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt16__(void * __kt, uint16_t value);
+
+uint16_t xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U256_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U256_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U256_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U32_copy__TypesOfArguments__Swift_UInt32__(void * self, uint32_t value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U32_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U32_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt32__(void * __kt, uint32_t value);
+
+uint32_t xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U64_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U64_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U64_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t value);
+
+uint64_t xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U8_copy__TypesOfArguments__Swift_UInt8__(void * self, uint8_t value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U8_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U8_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt8__(void * __kt, uint8_t value);
+
+uint8_t xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue_U8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetProperty_copy__TypesOfArguments__Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue__(void * self, NSString * key, void * value);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetProperty_init_allocate();
+
+_Bool xyz_mcxross_kaptos_digitalasset_DigitalAssetProperty_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_digitalasset_DigitalAssetPropertyValue__(void * __kt, NSString * key, void * value);
+
+NSString * xyz_mcxross_kaptos_digitalasset_DigitalAssetProperty_key_get(void * self);
+
+void * xyz_mcxross_kaptos_digitalasset_DigitalAssetProperty_value_get(void * self);
+
+void * xyz_mcxross_kaptos_ledger_LedgerBlock_copy__TypesOfArguments__Swift_UInt64_Swift_String_Swift_UInt64_Swift_UInt64_Swift_UInt64__(void * self, uint64_t height, NSString * hash, uint64_t timestampMicros, uint64_t firstVersion, uint64_t lastVersion);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerBlock_firstVersion_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerBlock_height_get(void * self);
+
+void * xyz_mcxross_kaptos_ledger_LedgerBlock_init_allocate();
+
+_Bool xyz_mcxross_kaptos_ledger_LedgerBlock_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64_Swift_String_Swift_UInt64_Swift_UInt64_Swift_UInt64__(void * __kt, uint64_t height, NSString * hash, uint64_t timestampMicros, uint64_t firstVersion, uint64_t lastVersion);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerBlock_lastVersion_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerBlock_timestampMicros_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_blockHeight_get(void * self);
+
+void * xyz_mcxross_kaptos_ledger_LedgerState_chainId_get(void * self);
+
+void * xyz_mcxross_kaptos_ledger_LedgerState_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_ChainId_Swift_UInt64_Swift_UInt64_Swift_UInt64_Swift_UInt64_Swift_String_Swift_UInt64_Swift_UInt64_Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString___(void * self, void * chainId, uint64_t epoch, uint64_t version, uint64_t oldestVersion, uint64_t timestampMicros, NSString * nodeRole, uint64_t oldestBlockHeight, uint64_t blockHeight, NSString * _Nullable gitHash, void * _Nullable encryptionKey);
+
+void * _Nullable xyz_mcxross_kaptos_ledger_LedgerState_encryptionKey_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_epoch_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_ledger_LedgerState_gitHash_get(void * self);
+
+void * xyz_mcxross_kaptos_ledger_LedgerState_init_allocate();
+
+_Bool xyz_mcxross_kaptos_ledger_LedgerState_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_ChainId_Swift_UInt64_Swift_UInt64_Swift_UInt64_Swift_UInt64_Swift_String_Swift_UInt64_Swift_UInt64_Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString___(void * __kt, void * chainId, uint64_t epoch, uint64_t version, uint64_t oldestVersion, uint64_t timestampMicros, NSString * nodeRole, uint64_t oldestBlockHeight, uint64_t blockHeight, NSString * _Nullable gitHash, void * _Nullable encryptionKey);
+
+NSString * xyz_mcxross_kaptos_ledger_LedgerState_nodeRole_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_oldestBlockHeight_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_oldestVersion_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_timestampMicros_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_ledger_LedgerState_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddressInput_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_FOUR_get(void * self);
+
+int32_t xyz_mcxross_kaptos_model_AccountAddress_Companion_LENGTH_get(void * self);
+
+int32_t xyz_mcxross_kaptos_model_AccountAddress_Companion_LONG_STRING_LENGTH_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_ONE_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_THREE_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_TWO_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_ZERO_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_from__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__(void * self, void * input);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_fromString__TypesOfArguments__Swift_String__(void * self, NSString * input);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_fromStringStrict__TypesOfArguments__Swift_String__(void * self, NSString * input);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_Companion_get();
+
+_Bool xyz_mcxross_kaptos_model_AccountAddress_Companion_isValid__TypesOfArguments__Swift_String_Swift_Bool__(void * self, NSString * input, _Bool strict);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_copy__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * data);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_data_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AccountAddress_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * data);
+
+_Bool xyz_mcxross_kaptos_model_AccountAddress_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * hex);
+
+_Bool xyz_mcxross_kaptos_model_AccountAddress_isSpecial(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountAddress_toLongAddress(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddress_toStringLong(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddress_toStringLongWithoutPrefix(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddress_toStringWithoutPrefix(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AccountAddress_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountData_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_AccountData_authenticationKey_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AccountData_copy__TypesOfArguments__Swift_UInt64_Swift_String__(void * self, uint64_t sequenceNumber, NSString * authenticationKey);
+
+void * xyz_mcxross_kaptos_model_AccountData_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AccountData_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64_Swift_String__(void * __kt, uint64_t sequenceNumber, NSString * authenticationKey);
+
+uint64_t xyz_mcxross_kaptos_model_AccountData_sequenceNumber_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_Ed25519();
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_FederatedKeyless();
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_Keyless();
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_Secp256k1();
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_Secp256r1();
+
+void * xyz_mcxross_kaptos_model_AnyPublicKeyVariant_SlhDsaSha2_128s();
+
+int32_t xyz_mcxross_kaptos_model_AnyPublicKeyVariant_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_model_AnyPublicKeyVariant_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AnySignatureVariant_Ed25519();
+
+void * xyz_mcxross_kaptos_model_AnySignatureVariant_Keyless();
+
+void * xyz_mcxross_kaptos_model_AnySignatureVariant_Secp256k1();
+
+void * xyz_mcxross_kaptos_model_AnySignatureVariant_SlhDsaSha2_128s();
+
+void * xyz_mcxross_kaptos_model_AnySignatureVariant_WebAuthn();
+
+int32_t xyz_mcxross_kaptos_model_AnySignatureVariant_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_model_AnySignatureVariant_value_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Api_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Api_copy__TypesOfArguments__Swift_String_Swift_String_Swift_Optional_Swift_Int64__Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, NSString * errorCode, NSNumber * _Nullable vmErrorCode, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Api_errorCode_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Api_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Api_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_String_Swift_Optional_Swift_Int64__Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, NSString * errorCode, NSNumber * _Nullable vmErrorCode, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Api_message_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_AptosError_Api_vmErrorCode_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Cancelled_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Cancelled_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Cancelled_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Cancelled_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Cancelled_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Crypto_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Crypto_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Crypto_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Crypto_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Crypto_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Indexer_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Indexer_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Indexer_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Indexer_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Indexer_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Serialization_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Serialization_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Serialization_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Serialization_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Serialization_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Timeout_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Timeout_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Timeout_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Timeout_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Timeout_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Transport_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Transport_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Transport_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Transport_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Transport_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable__Swift_Optional_Swift_String__Swift_Optional_Swift_Int64___(void * self, NSString * message, void * _Nullable cause, NSString * _Nullable errorCode, NSNumber * _Nullable vmErrorCode);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_errorCode_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable__Swift_Optional_Swift_String__Swift_Optional_Swift_Int64___(void * __kt, NSString * message, void * _Nullable cause, NSString * _Nullable errorCode, NSNumber * _Nullable vmErrorCode);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_message_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_AptosError_UnsupportedFeature_vmErrorCode_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_Validation_cause_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosError_Validation_copy__TypesOfArguments__Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * self, NSString * message, void * _Nullable cause);
+
+void * xyz_mcxross_kaptos_model_AptosError_Validation_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosError_Validation_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlin_Throwable___(void * __kt, NSString * message, void * _Nullable cause);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_Validation_message_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosError_cause_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_AptosError_message_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosPage_copy__TypesOfArguments__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Swift_Int32_ExportedKotlinPackages_xyz_mcxross_kaptos_model_PageRequest__(void * self, NSArray<id> * items, int32_t totalCount, void * request);
+
+_Bool xyz_mcxross_kaptos_model_AptosPage_hasNextPage_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosPage_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosPage_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Swift_Int32_ExportedKotlinPackages_xyz_mcxross_kaptos_model_PageRequest__(void * __kt, NSArray<id> * items, int32_t totalCount, void * request);
+
+NSArray<id> * xyz_mcxross_kaptos_model_AptosPage_items_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosPage_request_get(void * self);
+
+int32_t xyz_mcxross_kaptos_model_AptosPage_totalCount_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosResult_Failure_copy__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AptosError__(void * self, void * error);
+
+void * xyz_mcxross_kaptos_model_AptosResult_Failure_error_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AptosResult_Failure_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_Failure_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AptosError__(void * __kt, void * error);
+
+void * xyz_mcxross_kaptos_model_AptosResult_Success_copy__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable value);
+
+void * xyz_mcxross_kaptos_model_AptosResult_Success_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_Success_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * __kt, void * _Nullable value);
+
+void * _Nullable xyz_mcxross_kaptos_model_AptosResult_Success_value_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isFailure_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isFailure_get_direct(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isSuccess_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_AptosResult_isSuccess_get_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Derive_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_DeriveScheme__(void * self, void * scheme);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Derive_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Derive_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_DeriveScheme__(void * __kt, void * scheme);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Derive_scheme_get(void * self);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Signing_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_SigningScheme__(void * self, void * scheme);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Signing_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Signing_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_SigningScheme__(void * __kt, void * scheme);
+
+void * xyz_mcxross_kaptos_model_AuthenticationKeyScheme_Signing_scheme_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_body_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes16_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes12_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString__(void * self, void * id_, void * threeG2Points, void * paddedKey, void * nonce, void * body);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_id_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_BibeCiphertext_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes16_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes12_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString__(void * __kt, void * id_, void * threeG2Points, void * paddedKey, void * nonce, void * body);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_nonce_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_paddedKey_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BibeCiphertext_threeG2Points_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String__(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_eventRootHash_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_gasUsed_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String__(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_stateCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_success_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_timestamp_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockEpilogueTransactionResponse_vmStatus_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_Array_Swift_Int64__Swift_String_Swift_Array_Swift_Int64__Swift_String__(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * id_, NSString * epoch, NSString * round, NSArray<id> * events, NSArray<NSNumber *> * previousBlockVotesBitvec, NSString * proposer, NSArray<NSNumber *> * failedProposerIndices, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_epoch_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_eventRootHash_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_events_get(void * self);
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_failedProposerIndices_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_gasUsed_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_id_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_Array_Swift_Int64__Swift_String_Swift_Array_Swift_Int64__Swift_String__(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * id_, NSString * epoch, NSString * round, NSArray<id> * events, NSArray<NSNumber *> * previousBlockVotesBitvec, NSString * proposer, NSArray<NSNumber *> * failedProposerIndices, NSString * timestamp);
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_previousBlockVotesBitvec_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_proposer_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_round_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_stateCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_success_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_timestamp_get(void * self);
+
+void * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_BlockMetadataTransactionResponse_vmStatus_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Bool_Companion_get();
+
+void * xyz_mcxross_kaptos_model_Bool_copy__TypesOfArguments__Swift_Bool__(void * self, _Bool value);
+
+void * xyz_mcxross_kaptos_model_Bool_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_Bool_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool__(void * __kt, _Bool value);
+
+_Bool xyz_mcxross_kaptos_model_Bool_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ByteString_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ByteString_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+int32_t xyz_mcxross_kaptos_model_ByteString_size_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ByteString_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_model_ClaimedEntryFunction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier___(void * self, void * module, void * _Nullable function);
+
+void * _Nullable xyz_mcxross_kaptos_model_ClaimedEntryFunction_function_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ClaimedEntryFunction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ClaimedEntryFunction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier___(void * __kt, void * module, void * _Nullable function);
+
+void * xyz_mcxross_kaptos_model_ClaimedEntryFunction_module_get(void * self);
+
+void * xyz_mcxross_kaptos_model_DeriveScheme_DeriveAuid();
+
+void * xyz_mcxross_kaptos_model_DeriveScheme_DeriveObjectAddressFromGuid();
+
+void * xyz_mcxross_kaptos_model_DeriveScheme_DeriveObjectAddressFromObject();
+
+void * xyz_mcxross_kaptos_model_DeriveScheme_DeriveObjectAddressFromSeed();
+
+void * xyz_mcxross_kaptos_model_DeriveScheme_DeriveResourceAccountAddress();
+
+int32_t xyz_mcxross_kaptos_model_DeriveScheme_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_model_DeriveScheme_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_Companion_get();
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_associatedData_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_bibeCiphertext_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes32_ExportedKotlinPackages_xyz_mcxross_kaptos_model_BibeCiphertext_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes64__(void * self, void * verificationKey, void * bibeCiphertext, void * associatedData, void * signature);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_EncryptedCiphertext_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes32_ExportedKotlinPackages_xyz_mcxross_kaptos_model_BibeCiphertext_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes64__(void * __kt, void * verificationKey, void * bibeCiphertext, void * associatedData, void * signature);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedCiphertext_verificationKey_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedTransactionPayload_ciphertext_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_EncryptedTransactionPayload_claimedEntryFunction_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedTransactionPayload_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_EncryptedCiphertext_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExtraConfig_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes32_Swift_UInt64_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ClaimedEntryFunction___(void * self, void * ciphertext, void * extraConfig, void * payloadHash, uint64_t encryptionEpoch, void * _Nullable claimedEntryFunction);
+
+uint64_t xyz_mcxross_kaptos_model_EncryptedTransactionPayload_encryptionEpoch_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedTransactionPayload_extraConfig_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EncryptedTransactionPayload_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_EncryptedTransactionPayload_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EncryptedCiphertext_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExtraConfig_ExportedKotlinPackages_xyz_mcxross_kaptos_model_FixedBytes32_Swift_UInt64_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ClaimedEntryFunction___(void * __kt, void * ciphertext, void * extraConfig, void * payloadHash, uint64_t encryptionEpoch, void * _Nullable claimedEntryFunction);
+
+void * xyz_mcxross_kaptos_model_EncryptedTransactionPayload_payloadHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_arg__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable value);
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_args__TypesOfArguments__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSArray<id> * values);
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_args__TypesOfArguments__anyU20ExportedKotlinPackages_kotlin_collections_Iterable__(void * self, void * values);
+
+NSArray<id> * xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_build(void * self);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer__(void * __kt);
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilder_unaryPlus__TypesOfArgumentsE__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable receiver);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionArgument_Companion_get();
+
+NSArray<id> * xyz_mcxross_kaptos_model_EntryFunctionCall_arguments_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionCall_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, void * module, void * function, NSArray<id> * typeArguments, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionCall_function_get(void * self);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionCall_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_EntryFunctionCall_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, void * module, void * function, NSArray<id> * typeArguments, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_EntryFunctionCall_module_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_EntryFunctionCall_typeArguments_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Event_Companion_get();
+
+void * xyz_mcxross_kaptos_model_Event_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_Guid_Swift_Optional_Swift_String__Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement___(void * self, void * guid, NSString * _Nullable sequenceNumber, NSString * _Nullable type, void * _Nullable data);
+
+void * _Nullable xyz_mcxross_kaptos_model_Event_data_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Event_guid_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Event_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_Event_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Guid_Swift_Optional_Swift_String__Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement___(void * __kt, void * guid, NSString * _Nullable sequenceNumber, NSString * _Nullable type, void * _Nullable data);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_Event_sequenceNumber_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_Event_type_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_additionalSignersAuthenticatorBytes_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_copy__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_kotlin_ByteArray_Swift_Array_ExportedKotlinPackages_kotlin_ByteArray__Swift_String__(void * self, void * transactionBytes, void * senderAuthenticatorBytes, NSArray<id> * additionalSignersAuthenticatorBytes, NSString * fingerprint);
+
+NSString * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_fingerprint_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ExternalFeePayerRequest_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_kotlin_ByteArray_Swift_Array_ExportedKotlinPackages_kotlin_ByteArray__Swift_String__(void * __kt, void * transactionBytes, void * senderAuthenticatorBytes, NSArray<id> * additionalSignersAuthenticatorBytes, NSString * fingerprint);
+
+void * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_senderAuthenticatorBytes_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ExternalFeePayerRequest_transactionBytes_get(void * self);
+
+void * xyz_mcxross_kaptos_model_FixedBytes12_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_FixedBytes12_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes16_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_FixedBytes16_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes32_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_FixedBytes32_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes64_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_FixedBytes64_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes_Companion_get();
+
+void * xyz_mcxross_kaptos_model_FixedBytes_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_FixedBytes_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_model_FixedBytes_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_GenesisTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_GenesisTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event___(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, void * payload, NSArray<id> * events);
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_eventRootHash_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_GenesisTransactionResponse_events_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_gasUsed_get(void * self);
+
+void * xyz_mcxross_kaptos_model_GenesisTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_GenesisTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event___(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, void * payload, NSArray<id> * events);
+
+void * xyz_mcxross_kaptos_model_GenesisTransactionResponse_payload_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_GenesisTransactionResponse_stateCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_GenesisTransactionResponse_success_get(void * self);
+
+void * xyz_mcxross_kaptos_model_GenesisTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_GenesisTransactionResponse_vmStatus_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Guid_Companion_get();
+
+NSString * _Nullable xyz_mcxross_kaptos_model_Guid_accountAddress_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Guid_copy__TypesOfArguments__Swift_Optional_Swift_String__Swift_Optional_Swift_String___(void * self, NSString * _Nullable creationNumber, NSString * _Nullable accountAddress);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_Guid_creationNumber_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Guid_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_Guid_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_String__Swift_Optional_Swift_String___(void * __kt, NSString * _Nullable creationNumber, NSString * _Nullable accountAddress);
+
+void * xyz_mcxross_kaptos_model_HexInput_Companion_fromByteArray__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * byteArray);
+
+void * xyz_mcxross_kaptos_model_HexInput_Companion_fromString__TypesOfArguments__Swift_String__(void * self, NSString * string);
+
+void * xyz_mcxross_kaptos_model_HexInput_Companion_get();
+
+void * xyz_mcxross_kaptos_model_HexInput_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_model_HexInput_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_HexInput_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+void * xyz_mcxross_kaptos_model_HexInput_toByteArray(void * self);
+
+NSString * xyz_mcxross_kaptos_model_HexInput_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Identifier_Companion_get();
+
+void * xyz_mcxross_kaptos_model_Identifier_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_model_Identifier_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_Identifier_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+void * xyz_mcxross_kaptos_model_ModuleId_Companion_fromString__TypesOfArguments__Swift_String__(void * self, NSString * moduleId);
+
+void * xyz_mcxross_kaptos_model_ModuleId_Companion_get();
+
+void * xyz_mcxross_kaptos_model_ModuleId_address_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ModuleId_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier__(void * self, void * address, void * name);
+
+void * xyz_mcxross_kaptos_model_ModuleId_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ModuleId_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier__(void * __kt, void * address, void * name);
+
+void * xyz_mcxross_kaptos_model_ModuleId_name_get(void * self);
+
+void * xyz_mcxross_kaptos_model_MoveOption_Companion_get();
+
+void * xyz_mcxross_kaptos_model_MoveOption_copy__TypesOfArguments__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgument___(void * self, void * _Nullable value);
+
+void * xyz_mcxross_kaptos_model_MoveOption_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_MoveOption_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgument___(void * __kt, void * _Nullable value);
+
+void * xyz_mcxross_kaptos_model_MoveOption_unwrap(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_MoveOption_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_MoveString_Companion_get();
+
+void * xyz_mcxross_kaptos_model_MoveString_bcsBytes(void * self);
+
+void * xyz_mcxross_kaptos_model_MoveString_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_model_MoveString_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_MoveString_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_model_MoveString_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_bool__TypesOfArguments__Swift_Array_Swift_Bool___(void * self, NSArray<NSNumber *> * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_get();
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_string__TypesOfArguments__Swift_Array_Swift_String___(void * self, NSArray<NSString *> * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_u16__TypesOfArguments__Swift_Array_Swift_UInt16___(void * self, NSArray<NSNumber *> * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_u32__TypesOfArguments__Swift_Array_Swift_UInt32___(void * self, NSArray<NSNumber *> * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_u64__TypesOfArguments__Swift_Array_Swift_UInt64___(void * self, NSArray<NSNumber *> * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_u8__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_HexInput__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_Companion_u8__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_model_MoveVector_copy__TypesOfArguments__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgument___(void * self, NSArray<id> * values);
+
+void * xyz_mcxross_kaptos_model_MoveVector_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_MoveVector_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgument___(void * __kt, NSArray<id> * values);
+
+void * xyz_mcxross_kaptos_model_MoveVector_serialize(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_MoveVector_values_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_MoveVector_values_set__TypesOfArguments__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgument___(void * self, NSArray<id> * newValue);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_EntryFunction_call_get(void * self);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_EntryFunction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * self, void * call);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_EntryFunction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_MultisigPayload_EntryFunction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * __kt, void * call);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_Script_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * self, void * script);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_Script_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_MultisigPayload_Script_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * __kt, void * script);
+
+void * xyz_mcxross_kaptos_model_MultisigPayload_Script_script_get(void * self);
+
+void * xyz_mcxross_kaptos_model_Network_CUSTOM();
+
+void * xyz_mcxross_kaptos_model_Network_DEVNET();
+
+void * xyz_mcxross_kaptos_model_Network_LOCAL();
+
+void * xyz_mcxross_kaptos_model_Network_MAINNET();
+
+void * xyz_mcxross_kaptos_model_Network_NETNA();
+
+void * xyz_mcxross_kaptos_model_Network_SHELBYNET();
+
+void * xyz_mcxross_kaptos_model_Network_TESTNET();
+
+int32_t xyz_mcxross_kaptos_model_Network_ordinal(void * self);
+
+void * xyz_mcxross_kaptos_model_PageRequest_copy__TypesOfArguments__Swift_Int32_Swift_Int32__(void * self, int32_t offset, int32_t limit);
+
+void * xyz_mcxross_kaptos_model_PageRequest_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_PageRequest_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int32_Swift_Int32__(void * __kt, int32_t offset, int32_t limit);
+
+int32_t xyz_mcxross_kaptos_model_PageRequest_limit_get(void * self);
+
+int32_t xyz_mcxross_kaptos_model_PageRequest_offset_get(void * self);
+
+void * xyz_mcxross_kaptos_model_PendingTransactionResponse_Companion_get();
+
+void * xyz_mcxross_kaptos_model_PendingTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String__(void * self, void * type, NSString * hash, NSString * sender, NSString * sequenceNumber, NSString * maxGasAmount, NSString * gasUnitPrice, NSString * expirationTimestampSecs);
+
+NSString * xyz_mcxross_kaptos_model_PendingTransactionResponse_expirationTimestampSecs_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_PendingTransactionResponse_gasUnitPrice_get(void * self);
+
+void * xyz_mcxross_kaptos_model_PendingTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_PendingTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String__(void * __kt, void * type, NSString * hash, NSString * sender, NSString * sequenceNumber, NSString * maxGasAmount, NSString * gasUnitPrice, NSString * expirationTimestampSecs);
+
+NSString * xyz_mcxross_kaptos_model_PendingTransactionResponse_maxGasAmount_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_PendingTransactionResponse_sender_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_PendingTransactionResponse_sequenceNumber_get(void * self);
+
+void * xyz_mcxross_kaptos_model_PendingTransactionResponse_type_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ReplayProtection_Nonce_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t value);
+
+void * xyz_mcxross_kaptos_model_ReplayProtection_Nonce_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ReplayProtection_Nonce_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t value);
+
+uint64_t xyz_mcxross_kaptos_model_ReplayProtection_Nonce_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ReplayProtection_SequenceNumber_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t value);
+
+void * xyz_mcxross_kaptos_model_ReplayProtection_SequenceNumber_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ReplayProtection_SequenceNumber_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t value);
+
+uint64_t xyz_mcxross_kaptos_model_ReplayProtection_SequenceNumber_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ScriptFunctionArgument_Companion_get();
+
+NSArray<id> * xyz_mcxross_kaptos_model_ScriptPayload_arguments_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ScriptPayload_bytecode_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ScriptPayload_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ScriptPayload_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, void * bytecode, NSArray<id> * typeArguments, NSArray<id> * arguments);
+
+NSArray<id> * xyz_mcxross_kaptos_model_ScriptPayload_typeArguments_get(void * self);
+
+void * xyz_mcxross_kaptos_model_SigningSchemeInput_Ed25519();
+
+void * xyz_mcxross_kaptos_model_SigningSchemeInput_Secp256k1();
+
+void * xyz_mcxross_kaptos_model_SigningSchemeInput_Secp256r1();
+
+int32_t xyz_mcxross_kaptos_model_SigningSchemeInput_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_model_SigningSchemeInput_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_SigningScheme_Ed25519();
+
+void * xyz_mcxross_kaptos_model_SigningScheme_MultiEd25519();
+
+void * xyz_mcxross_kaptos_model_SigningScheme_MultiKey();
+
+void * xyz_mcxross_kaptos_model_SigningScheme_SingleKey();
+
+int32_t xyz_mcxross_kaptos_model_SigningScheme_ordinal(void * self);
+
+int32_t xyz_mcxross_kaptos_model_SigningScheme_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_SimulationOptions_copy__TypesOfArguments__Swift_Bool_Swift_Bool_Swift_Bool__(void * self, _Bool estimateGasUnitPrice, _Bool estimateMaxGasAmount, _Bool estimatePrioritizedGasUnitPrice);
+
+_Bool xyz_mcxross_kaptos_model_SimulationOptions_estimateGasUnitPrice_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_SimulationOptions_estimateMaxGasAmount_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_SimulationOptions_estimatePrioritizedGasUnitPrice_get(void * self);
+
+void * xyz_mcxross_kaptos_model_SimulationOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_SimulationOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool_Swift_Bool_Swift_Bool__(void * __kt, _Bool estimateGasUnitPrice, _Bool estimateMaxGasAmount, _Bool estimatePrioritizedGasUnitPrice);
+
+void * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String__(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_eventRootHash_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_gasUsed_get(void * self);
+
+void * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String__(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_stateCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_success_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_timestamp_get(void * self);
+
+void * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_StateCheckpointTransactionResponse_vmStatus_get(void * self);
+
+void * xyz_mcxross_kaptos_model_StructTag_Companion_fromString__TypesOfArguments__Swift_String__(void * self, NSString * string);
+
+void * xyz_mcxross_kaptos_model_StructTag_Companion_get();
+
+void * xyz_mcxross_kaptos_model_StructTag_address_get(void * self);
+
+void * xyz_mcxross_kaptos_model_StructTag_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_StructTag_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag___(void * __kt, void * address, NSString * moduleName, NSString * name, NSArray<id> * typeArgs);
+
+NSString * xyz_mcxross_kaptos_model_StructTag_moduleName_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_StructTag_name_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_StructTag_typeArgs_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionArgument_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Empty_get();
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Encrypted_get();
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_EntryFunction_call_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_EntryFunction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * self, void * call);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_EntryFunction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionExecutable_EntryFunction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * __kt, void * call);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Script_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * self, void * script);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Script_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionExecutable_Script_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * __kt, void * script);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_Script_script_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExecutable_toBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_V1_copy__TypesOfArguments__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_UInt64___(void * self, void * _Nullable multisigAddress, NSNumber * _Nullable replayProtectionNonce);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_V1_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionExtraConfig_V1_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_UInt64___(void * __kt, void * _Nullable multisigAddress, NSNumber * _Nullable replayProtectionNonce);
+
+void * _Nullable xyz_mcxross_kaptos_model_TransactionExtraConfig_V1_multisigAddress_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_TransactionExtraConfig_V1_replayProtectionNonce_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionExtraConfig_toBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionOptions_copy__TypesOfArguments__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_ReplayProtection___(void * self, NSNumber * _Nullable maxGasAmount, NSNumber * _Nullable gasUnitPrice, NSNumber * _Nullable expirationTimestampSecs, NSNumber * _Nullable expirationSecondsFromNow, void * _Nullable replayProtection);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_TransactionOptions_expirationSecondsFromNow_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_TransactionOptions_expirationTimestampSecs_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_TransactionOptions_gasUnitPrice_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_UInt64__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_ReplayProtection___(void * __kt, NSNumber * _Nullable maxGasAmount, NSNumber * _Nullable gasUnitPrice, NSNumber * _Nullable expirationTimestampSecs, NSNumber * _Nullable expirationSecondsFromNow, void * _Nullable replayProtection);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_TransactionOptions_maxGasAmount_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_TransactionOptions_replayProtection_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_entryFunction__TypesOfArguments__Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, NSString * function, NSArray<id> * typeArguments, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_entryFunction__TypesOfArguments__Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__U28ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionArgumentBuilderU29202D_U20Swift_Void__(void * self, NSString * function, NSArray<id> * typeArguments, void * builder);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_entryFunctionOf__TypesOfArguments__Swift_String_Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSString * function, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_entryFunctionOf__TypesOfArguments__Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSString * function, NSArray<id> * typeArguments, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_entryFunctionOf__TypesOfArguments__Swift_String_Swift_Array_Swift_String__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSString * function, NSArray<NSString *> * typeArguments, NSArray<id> * arguments);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Encrypted_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_EncryptedTransactionPayload__(void * self, void * payload);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Encrypted_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionPayload_Encrypted_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EncryptedTransactionPayload__(void * __kt, void * payload);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Encrypted_payload_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_EntryFunction_call_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_EntryFunction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * self, void * call);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_EntryFunction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionPayload_EntryFunction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_EntryFunctionCall__(void * __kt, void * call);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_InnerV1_copy__TypesOfArguments__anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExecutable_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExtraConfig__(void * self, void * executable, void * extraConfig);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_InnerV1_executable_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_InnerV1_extraConfig_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_InnerV1_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionPayload_InnerV1_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExecutable_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionExtraConfig__(void * __kt, void * executable, void * extraConfig);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Multisig_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_MultisigPayload___(void * self, void * multisigAddress, void * _Nullable payload);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Multisig_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionPayload_Multisig_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_MultisigPayload___(void * __kt, void * multisigAddress, void * _Nullable payload);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Multisig_multisigAddress_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_model_TransactionPayload_Multisig_payload_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Script_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * self, void * script);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Script_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TransactionPayload_Script_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ScriptPayload__(void * __kt, void * script);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_Script_script_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionPayload_toBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_BLOCK_EPILOGUE();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_BLOCK_METADATA();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_GENESIS();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_PENDING();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_STATE_CHECKPOINT();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_USER();
+
+void * xyz_mcxross_kaptos_model_TransactionResponseType_VALIDATOR();
+
+int32_t xyz_mcxross_kaptos_model_TransactionResponseType_ordinal(void * self);
+
+void * xyz_mcxross_kaptos_model_TransactionResponse_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TransactionResponse_type_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagAddress_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagAddress_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagBool_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagBool_value_get(void * self);
+
+uint16_t xyz_mcxross_kaptos_model_TypeTagGeneric_id_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagGeneric_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TypeTagGeneric_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt16__(void * __kt, uint16_t id_);
+
+NSString * xyz_mcxross_kaptos_model_TypeTagGeneric_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI128_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI16_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI256_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI32_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI64_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagI8_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagI8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagReference_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TypeTagReference_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__(void * __kt, void * ref);
+
+void * xyz_mcxross_kaptos_model_TypeTagReference_ref_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_TypeTagReference_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagSigner_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagSigner_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagStruct_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TypeTagStruct_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TypeTagStruct_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_StructTag__(void * __kt, void * type);
+
+_Bool xyz_mcxross_kaptos_model_TypeTagStruct_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * type);
+
+_Bool xyz_mcxross_kaptos_model_TypeTagStruct_isString(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagStruct_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_TypeTagStruct_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU128_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU16_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU256_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU32_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU64_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagU8_get();
+
+NSString * xyz_mcxross_kaptos_model_TypeTagU8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagVector_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TypeTagVector_Companion_u8(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTagVector_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_TypeTagVector_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__(void * __kt, void * type);
+
+void * xyz_mcxross_kaptos_model_TypeTagVector_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_TypeTagVector_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_APT_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_Address_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_AptosCoin_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_Bool_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I128_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I16_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I256_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I32_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I64_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_I8_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_Signer_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_String_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U128_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U16_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U256_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U32_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U64_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_U8_get(void * self);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_from__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable value);
+
+NSArray<id> * xyz_mcxross_kaptos_model_TypeTag_Companion_fromAll__TypesOfArguments__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSArray<id> * values);
+
+NSArray<id> * xyz_mcxross_kaptos_model_TypeTag_Companion_fromAll__TypesOfArguments__anyU20ExportedKotlinPackages_kotlin_collections_Iterable__(void * self, void * values);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_fromString__TypesOfArguments__Swift_String_Swift_Bool__(void * self, NSString * string, _Bool allowGenerics);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_get();
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_invoke__TypesOfArguments__Swift_String_Swift_Bool__(void * self, NSString * string, _Bool allowGenerics);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_objectTag__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__(void * self, void * elementType);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_objectTag__TypesOfArguments__Swift_String__(void * self, NSString * elementType);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_option__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__(void * self, void * elementType);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_option__TypesOfArguments__Swift_String__(void * self, NSString * elementType);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_struct__TypesOfArguments__Swift_String__(void * self, NSString * type);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_struct__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_StructTag__(void * self, void * type);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_valueOf__TypesOfArguments__Swift_String__(void * self, NSString * string);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_vector__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TypeTag__(void * self, void * elementType);
+
+void * xyz_mcxross_kaptos_model_TypeTag_Companion_vector__TypesOfArguments__Swift_String__(void * self, NSString * elementType);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isAddress(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isBool(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isGeneric(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isReference(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isSignedInteger(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isSigner(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isStruct(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU128(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU16(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU256(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU32(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU64(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isU8(void * self);
+
+_Bool xyz_mcxross_kaptos_model_TypeTag_isVector(void * self);
+
+NSString * xyz_mcxross_kaptos_model_TypeTag_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U128_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U128_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_model_U128_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U128_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_model_U128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U16_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U16_copy__TypesOfArguments__Swift_UInt16__(void * self, uint16_t value);
+
+void * xyz_mcxross_kaptos_model_U16_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U16_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt16__(void * __kt, uint16_t value);
+
+uint16_t xyz_mcxross_kaptos_model_U16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U256_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U256_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_model_U256_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U256_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_model_U256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U32_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U32_copy__TypesOfArguments__Swift_UInt32__(void * self, uint32_t value);
+
+void * xyz_mcxross_kaptos_model_U32_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U32_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt32__(void * __kt, uint32_t value);
+
+uint32_t xyz_mcxross_kaptos_model_U32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U64_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U64_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t value);
+
+void * xyz_mcxross_kaptos_model_U64_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U64_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t value);
+
+uint64_t xyz_mcxross_kaptos_model_U64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_U8_Companion_get();
+
+void * xyz_mcxross_kaptos_model_U8_copy__TypesOfArguments__Swift_Int8__(void * self, int8_t value);
+
+void * xyz_mcxross_kaptos_model_U8_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_U8_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int8__(void * __kt, int8_t value);
+
+int8_t xyz_mcxross_kaptos_model_U8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_Companion_EXTERNAL_FEE_PAYER_PLACEHOLDER_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_Companion_get();
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * self, void * rawTransaction, NSArray<id> * secondarySignerAddresses, void * feePayerAddress);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_feePayerAddress_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * __kt, void * rawTransaction, NSArray<id> * secondarySignerAddresses, void * feePayerAddress);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_rawTransaction_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_UnsignedTransaction_FeePayer_secondarySignerAddresses_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_MultiAgent_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress___(void * self, void * rawTransaction, NSArray<id> * secondarySignerAddresses);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_MultiAgent_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_UnsignedTransaction_MultiAgent_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress___(void * __kt, void * rawTransaction, NSArray<id> * secondarySignerAddresses);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_MultiAgent_rawTransaction_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_UnsignedTransaction_MultiAgent_secondarySignerAddresses_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_Simple_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction__(void * self, void * rawTransaction);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_Simple_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_UnsignedTransaction_Simple_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_RawTransaction__(void * __kt, void * rawTransaction);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_Simple_rawTransaction_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_rawTransaction_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingBcs(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingMessage(void * self);
+
+void * xyz_mcxross_kaptos_model_UnsignedTransaction_signingMessage_direct(void * self);
+
+void * xyz_mcxross_kaptos_model_UserTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UserTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_String__(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable statecCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * sender, NSString * sequenceNumber, NSString * maxGasAmount, NSString * gasUnitPrice, NSString * expirationTimestampSecs, NSArray<id> * events, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_eventRootHash_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_UserTransactionResponse_events_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_expirationTimestampSecs_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_gasUnitPrice_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_gasUsed_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UserTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_UserTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_String__(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable statecCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSString * sender, NSString * sequenceNumber, NSString * maxGasAmount, NSString * gasUnitPrice, NSString * expirationTimestampSecs, NSArray<id> * events, NSString * timestamp);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_maxGasAmount_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_sender_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_sequenceNumber_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_UserTransactionResponse_statecCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_UserTransactionResponse_success_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_timestamp_get(void * self);
+
+void * xyz_mcxross_kaptos_model_UserTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_UserTransactionResponse_vmStatus_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_Companion_get();
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_accumulatorRootHash_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_String_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement___(void * self, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSArray<id> * events, NSString * timestamp, NSString * validatorTransactionType, void * _Nullable dkgTranscript);
+
+void * _Nullable xyz_mcxross_kaptos_model_ValidatorTransactionResponse_dkgTranscript_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_eventRootHash_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_events_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_gasUsed_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_ValidatorTransactionResponse_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionResponseType_Swift_String_Swift_String_Swift_String_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_Bool_Swift_String_Swift_String_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Event__Swift_String_Swift_String_Swift_Optional_ExportedKotlinPackages_kotlinx_serialization_json_JsonElement___(void * __kt, void * type, NSString * version, NSString * hash, NSString * stateChangeHash, NSString * eventRootHash, NSString * _Nullable stateCheckpointHash, NSString * gasUsed, _Bool success, NSString * vmStatus, NSString * accumulatorRootHash, NSArray<id> * events, NSString * timestamp, NSString * validatorTransactionType, void * _Nullable dkgTranscript);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_stateChangeHash_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_model_ValidatorTransactionResponse_stateCheckpointHash_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_ValidatorTransactionResponse_success_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_timestamp_get(void * self);
+
+void * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_type_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_validatorTransactionType_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_version_get(void * self);
+
+NSString * xyz_mcxross_kaptos_model_ValidatorTransactionResponse_vmStatus_get(void * self);
+
+_Bool xyz_mcxross_kaptos_model_WaitForTransactionOptions_checkSuccess_get(void * self);
+
+void * xyz_mcxross_kaptos_model_WaitForTransactionOptions_copy__TypesOfArguments__Swift_Int32_Swift_Bool_Swift_Optional_Swift_Bool___(void * self, int32_t timeoutSecs, _Bool checkSuccess, NSNumber * _Nullable waitForIndexer);
+
+void * xyz_mcxross_kaptos_model_WaitForTransactionOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_model_WaitForTransactionOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int32_Swift_Bool_Swift_Optional_Swift_Bool___(void * __kt, int32_t timeoutSecs, _Bool checkSuccess, NSNumber * _Nullable waitForIndexer);
+
+int32_t xyz_mcxross_kaptos_model_WaitForTransactionOptions_timeoutSecs_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_model_WaitForTransactionOptions_waitForIndexer_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Address_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * self, void * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Address_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Address_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Address_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Bool_copy__TypesOfArguments__Swift_Bool__(void * self, _Bool value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Bool_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Bool_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool__(void * __kt, _Bool value);
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Bool_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Bytes_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Bytes_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Bytes_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Companion_from__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable value);
+
+NSArray<id> * xyz_mcxross_kaptos_move_MoveArgument_Companion_fromAll__TypesOfArguments__Swift_Array_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___Vararg___(void * self, NSArray<id> * values);
+
+NSArray<id> * xyz_mcxross_kaptos_move_MoveArgument_Companion_fromAll__TypesOfArguments__anyU20ExportedKotlinPackages_kotlin_collections_Iterable__(void * self, void * values);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Companion_get();
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Enum_copy__TypesOfArguments__Swift_String_Swift_Dictionary_Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, NSString * variant, NSDictionary<NSString *, id> * fields);
+
+NSDictionary<NSString *, id> * xyz_mcxross_kaptos_move_MoveArgument_Enum_fields_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Enum_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Enum_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Dictionary_Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, NSString * variant, NSDictionary<NSString *, id> * fields);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_Enum_variant_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I128_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I128_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I128_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_I128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I16_copy__TypesOfArguments__Swift_Int16__(void * self, int16_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I16_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I16_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int16__(void * __kt, int16_t value);
+
+int16_t xyz_mcxross_kaptos_move_MoveArgument_I16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I256_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I256_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I256_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_I256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I32_copy__TypesOfArguments__Swift_Int32__(void * self, int32_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I32_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I32_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int32__(void * __kt, int32_t value);
+
+int32_t xyz_mcxross_kaptos_move_MoveArgument_I32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I64_copy__TypesOfArguments__Swift_Int64__(void * self, int64_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I64_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I64_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int64__(void * __kt, int64_t value);
+
+int64_t xyz_mcxross_kaptos_move_MoveArgument_I64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I8_copy__TypesOfArguments__Swift_Int8__(void * self, int8_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_I8_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_I8_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Int8__(void * __kt, int8_t value);
+
+int8_t xyz_mcxross_kaptos_move_MoveArgument_I8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Option_copy__TypesOfArguments__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, void * _Nullable value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Option_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Option_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, void * _Nullable value);
+
+void * _Nullable xyz_mcxross_kaptos_move_MoveArgument_Option_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_PreSerialized_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_PreSerialized_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_PreSerialized_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_StringValue_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_StringValue_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_StringValue_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_StringValue_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Struct_copy__TypesOfArguments__Swift_Dictionary_Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, NSDictionary<NSString *, id> * fields);
+
+NSDictionary<NSString *, id> * xyz_mcxross_kaptos_move_MoveArgument_Struct_fields_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Struct_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Struct_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Dictionary_Swift_String_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, NSDictionary<NSString *, id> * fields);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U128_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U128_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U128_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_U128_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U16_copy__TypesOfArguments__Swift_UInt16__(void * self, uint16_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U16_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U16_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt16__(void * __kt, uint16_t value);
+
+uint16_t xyz_mcxross_kaptos_move_MoveArgument_U16_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U256_copy__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U256_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U256_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String__(void * __kt, NSString * value);
+
+NSString * xyz_mcxross_kaptos_move_MoveArgument_U256_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U32_copy__TypesOfArguments__Swift_UInt32__(void * self, uint32_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U32_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U32_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt32__(void * __kt, uint32_t value);
+
+uint32_t xyz_mcxross_kaptos_move_MoveArgument_U32_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U64_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U64_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U64_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t value);
+
+uint64_t xyz_mcxross_kaptos_move_MoveArgument_U64_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U8_copy__TypesOfArguments__Swift_UInt8__(void * self, uint8_t value);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_U8_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_U8_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt8__(void * __kt, uint8_t value);
+
+uint8_t xyz_mcxross_kaptos_move_MoveArgument_U8_value_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Vector_copy__TypesOfArguments__Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * self, NSArray<id> * values);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_Vector_init_allocate();
+
+_Bool xyz_mcxross_kaptos_move_MoveArgument_Vector_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_move_MoveArgument___(void * __kt, NSArray<id> * values);
+
+NSArray<id> * xyz_mcxross_kaptos_move_MoveArgument_Vector_values_get(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_move_MoveArgument_toBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_names_AptosName_Companion_get();
+
+_Bool xyz_mcxross_kaptos_names_AptosName_Companion_isValidSegment__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_names_AptosName_Companion_parse__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_names_AptosName_copy__TypesOfArguments__Swift_String_Swift_Optional_Swift_String___(void * self, NSString * domain, NSString * _Nullable subdomain);
+
+NSString * xyz_mcxross_kaptos_names_AptosName_domain_get(void * self);
+
+void * xyz_mcxross_kaptos_names_AptosName_init_allocate();
+
+_Bool xyz_mcxross_kaptos_names_AptosName_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_Swift_String___(void * __kt, NSString * domain, NSString * _Nullable subdomain);
+
+NSString * _Nullable xyz_mcxross_kaptos_names_AptosName_subdomain_get(void * self);
+
+NSString * xyz_mcxross_kaptos_names_AptosName_value_get(void * self);
+
+void * xyz_mcxross_kaptos_names_NameExpirationPolicy_Domain_get();
+
+void * xyz_mcxross_kaptos_names_NameExpirationPolicy_FollowDomain_get();
+
+void * xyz_mcxross_kaptos_names_NameExpirationPolicy_Independent_copy__TypesOfArguments__Swift_UInt64__(void * self, uint64_t expirationTimestampSecs);
+
+uint64_t xyz_mcxross_kaptos_names_NameExpirationPolicy_Independent_expirationTimestampSecs_get(void * self);
+
+void * xyz_mcxross_kaptos_names_NameExpirationPolicy_Independent_init_allocate();
+
+_Bool xyz_mcxross_kaptos_names_NameExpirationPolicy_Independent_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64__(void * __kt, uint64_t expirationTimestampSecs);
+
+void * xyz_mcxross_kaptos_names_NameRecord_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_names_AptosName_Swift_Optional_ExportedKotlinPackages_kotlin_time_Instant__Swift_Optional_ExportedKotlinPackages_kotlin_time_Instant__Swift_Optional_Swift_Bool__Swift_Optional_Swift_Bool__Swift_Optional_Swift_UInt64__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_String__Swift_Optional_Swift_String___(void * self, void * name, void * _Nullable expiration, void * _Nullable domainExpiration, NSNumber * _Nullable isActive, NSNumber * _Nullable isPrimary, NSNumber * _Nullable lastTransactionVersion, void * _Nullable owner, void * _Nullable registeredAddress, NSNumber * _Nullable subdomainExpirationPolicy, NSString * _Nullable tokenName, NSString * _Nullable tokenStandard);
+
+void * _Nullable xyz_mcxross_kaptos_names_NameRecord_domainExpiration_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_names_NameRecord_expiration_get(void * self);
+
+void * xyz_mcxross_kaptos_names_NameRecord_init_allocate();
+
+_Bool xyz_mcxross_kaptos_names_NameRecord_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_names_AptosName_Swift_Optional_ExportedKotlinPackages_kotlin_time_Instant__Swift_Optional_ExportedKotlinPackages_kotlin_time_Instant__Swift_Optional_Swift_Bool__Swift_Optional_Swift_Bool__Swift_Optional_Swift_UInt64__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_UInt64__Swift_Optional_Swift_String__Swift_Optional_Swift_String___(void * __kt, void * name, void * _Nullable expiration, void * _Nullable domainExpiration, NSNumber * _Nullable isActive, NSNumber * _Nullable isPrimary, NSNumber * _Nullable lastTransactionVersion, void * _Nullable owner, void * _Nullable registeredAddress, NSNumber * _Nullable subdomainExpirationPolicy, NSString * _Nullable tokenName, NSString * _Nullable tokenStandard);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_names_NameRecord_isActive_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_names_NameRecord_isPrimary_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_names_NameRecord_lastTransactionVersion_get(void * self);
+
+void * xyz_mcxross_kaptos_names_NameRecord_name_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_names_NameRecord_owner_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_names_NameRecord_registeredAddress_get(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_names_NameRecord_subdomainExpirationPolicy_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_names_NameRecord_tokenName_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_names_NameRecord_tokenStandard_get(void * self);
+
+void * xyz_mcxross_kaptos_objects_ObjectRecord_address_get(void * self);
+
+_Bool xyz_mcxross_kaptos_objects_ObjectRecord_allowUngatedTransfer_get(void * self);
+
+void * xyz_mcxross_kaptos_objects_ObjectRecord_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_String_Swift_Bool_Swift_UInt64_Swift_UInt64_Swift_Bool__(void * self, void * address, void * owner, NSString * stateKeyHash, _Bool allowUngatedTransfer, uint64_t lastTransactionVersion, uint64_t lastGuidCreationNumber, _Bool isDeleted);
+
+void * xyz_mcxross_kaptos_objects_ObjectRecord_init_allocate();
+
+_Bool xyz_mcxross_kaptos_objects_ObjectRecord_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_String_Swift_Bool_Swift_UInt64_Swift_UInt64_Swift_Bool__(void * __kt, void * address, void * owner, NSString * stateKeyHash, _Bool allowUngatedTransfer, uint64_t lastTransactionVersion, uint64_t lastGuidCreationNumber, _Bool isDeleted);
+
+_Bool xyz_mcxross_kaptos_objects_ObjectRecord_isDeleted_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_objects_ObjectRecord_lastGuidCreationNumber_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_objects_ObjectRecord_lastTransactionVersion_get(void * self);
+
+void * xyz_mcxross_kaptos_objects_ObjectRecord_owner_get(void * self);
+
+NSString * xyz_mcxross_kaptos_objects_ObjectRecord_stateKeyHash_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_staking_DelegatedStakingActivity_amount_get(void * self);
+
+void * xyz_mcxross_kaptos_staking_DelegatedStakingActivity_copy__TypesOfArguments__Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64_Swift_String_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64__(void * self, uint64_t amount, void * delegator, uint64_t eventIndex, NSString * eventType, void * pool, uint64_t transactionVersion);
+
+void * xyz_mcxross_kaptos_staking_DelegatedStakingActivity_delegator_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_staking_DelegatedStakingActivity_eventIndex_get(void * self);
+
+NSString * xyz_mcxross_kaptos_staking_DelegatedStakingActivity_eventType_get(void * self);
+
+void * xyz_mcxross_kaptos_staking_DelegatedStakingActivity_init_allocate();
+
+_Bool xyz_mcxross_kaptos_staking_DelegatedStakingActivity_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64_Swift_String_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64__(void * __kt, uint64_t amount, void * delegator, uint64_t eventIndex, NSString * eventType, void * pool, uint64_t transactionVersion);
+
+void * xyz_mcxross_kaptos_staking_DelegatedStakingActivity_pool_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_staking_DelegatedStakingActivity_transactionVersion_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_staking_StakingPoolDelegatorCount_activeDelegators_get(void * self);
+
+void * xyz_mcxross_kaptos_staking_StakingPoolDelegatorCount_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64__(void * self, void * pool, uint64_t activeDelegators);
+
+void * xyz_mcxross_kaptos_staking_StakingPoolDelegatorCount_init_allocate();
+
+_Bool xyz_mcxross_kaptos_staking_StakingPoolDelegatorCount_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64__(void * __kt, void * pool, uint64_t activeDelegators);
+
+void * xyz_mcxross_kaptos_staking_StakingPoolDelegatorCount_pool_get(void * self);
+
+void * xyz_mcxross_kaptos_table_TableItem_copy__TypesOfArguments__Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_String_Swift_UInt64_Swift_UInt64__(void * self, NSString * decodedKey, NSString * _Nullable decodedValue, NSString * key, NSString * tableHandle, uint64_t transactionVersion, uint64_t writeSetChangeIndex);
+
+NSString * xyz_mcxross_kaptos_table_TableItem_decodedKey_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_table_TableItem_decodedValue_get(void * self);
+
+void * xyz_mcxross_kaptos_table_TableItem_init_allocate();
+
+_Bool xyz_mcxross_kaptos_table_TableItem_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_Optional_Swift_String__Swift_String_Swift_String_Swift_UInt64_Swift_UInt64__(void * __kt, NSString * decodedKey, NSString * _Nullable decodedValue, NSString * key, NSString * tableHandle, uint64_t transactionVersion, uint64_t writeSetChangeIndex);
+
+NSString * xyz_mcxross_kaptos_table_TableItem_key_get(void * self);
+
+NSString * xyz_mcxross_kaptos_table_TableItem_tableHandle_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_table_TableItem_transactionVersion_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_table_TableItem_writeSetChangeIndex_get(void * self);
+
+void * xyz_mcxross_kaptos_table_TableMetadata_copy__TypesOfArguments__Swift_String_Swift_String_Swift_String__(void * self, NSString * handle, NSString * keyType, NSString * valueType);
+
+NSString * xyz_mcxross_kaptos_table_TableMetadata_handle_get(void * self);
+
+void * xyz_mcxross_kaptos_table_TableMetadata_init_allocate();
+
+_Bool xyz_mcxross_kaptos_table_TableMetadata_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_String_Swift_String_Swift_String__(void * __kt, NSString * handle, NSString * keyType, NSString * valueType);
+
+NSString * xyz_mcxross_kaptos_table_TableMetadata_keyType_get(void * self);
+
+NSString * xyz_mcxross_kaptos_table_TableMetadata_valueType_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_accountIdentity_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString___(void * self, void * function, void * signingMessageDigest, void * signature, void * _Nullable accountIdentity);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_function_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString_Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ByteString___(void * __kt, void * function, void * signingMessageDigest, void * signature, void * _Nullable accountIdentity);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Abstraction_signingMessageDigest_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Companion_get();
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Ed25519_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519Signature__(void * self, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Ed25519_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Ed25519_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519PublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_Ed25519Signature__(void * __kt, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Ed25519_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_Ed25519_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiEd25519_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature__(void * self, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiEd25519_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiEd25519_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MultiEd25519PublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_MultiEd25519Signature__(void * __kt, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiEd25519_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiEd25519_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiKey_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature__(void * self, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_multikey_MultiKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_multikey_MultiKeySignature__(void * __kt, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiKey_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_MultiKey_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_NoAccount_get();
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_SingleKey_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AnyPublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AnySignature__(void * self, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_SingleKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_SingleKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AnyPublicKey_ExportedKotlinPackages_xyz_mcxross_kaptos_core_crypto_AnySignature__(void * __kt, void * publicKey, void * signature);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_SingleKey_publicKey_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_SingleKey_signature_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_toBcs(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AccountAuthenticator_toBcs_direct(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_Companion_get();
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_Companion_parse__TypesOfArguments__Swift_String__(void * self, NSString * value);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier__(void * self, void * module, void * function);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_function_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_ModuleId_ExportedKotlinPackages_xyz_mcxross_kaptos_model_Identifier__(void * __kt, void * module, void * function);
+
+void * xyz_mcxross_kaptos_transaction_authenticator_AuthenticationFunction_module_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_ChainId_Companion_get();
+
+uint8_t xyz_mcxross_kaptos_transaction_instances_ChainId_chainId_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_ChainId_copy__TypesOfArguments__Swift_UInt8__(void * self, uint8_t chainId);
+
+void * xyz_mcxross_kaptos_transaction_instances_ChainId_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_instances_ChainId_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt8__(void * __kt, uint8_t chainId);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_Companion_fromBcs__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_Companion_get();
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_chainId_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionPayload_Swift_UInt64_Swift_UInt64_Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_ChainId__(void * self, void * sender, uint64_t sequenceNumber, void * payload, uint64_t maxGasAmount, uint64_t gasUnitPrice, uint64_t expirationTimestampSecs, void * chainId);
+
+uint64_t xyz_mcxross_kaptos_transaction_instances_RawTransaction_expirationTimestampSecs_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_transaction_instances_RawTransaction_gasUnitPrice_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_init_allocate();
+
+_Bool xyz_mcxross_kaptos_transaction_instances_RawTransaction_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_UInt64_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionPayload_Swift_UInt64_Swift_UInt64_Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_transaction_instances_ChainId__(void * __kt, void * sender, uint64_t sequenceNumber, void * payload, uint64_t maxGasAmount, uint64_t gasUnitPrice, uint64_t expirationTimestampSecs, void * chainId);
+
+uint64_t xyz_mcxross_kaptos_transaction_instances_RawTransaction_maxGasAmount_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_payload_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_sender_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_transaction_instances_RawTransaction_sequenceNumber_get(void * self);
+
+void * xyz_mcxross_kaptos_transaction_instances_RawTransaction_toBcs(void * self);
+
+NS_ASSUME_NONNULL_END

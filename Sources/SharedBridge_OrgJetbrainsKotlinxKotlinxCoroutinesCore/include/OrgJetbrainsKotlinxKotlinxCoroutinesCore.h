@@ -1,0 +1,26 @@
+#include <Foundation/Foundation.h>
+#include <stdint.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+_Bool OrgJetbrainsKotlinxKotlinxCoroutinesCore_internal_functional_type_callee_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_Error___(void * pointerToClosure, void * _Nullable _1);
+
+_Bool OrgJetbrainsKotlinxKotlinxCoroutinesCore_internal_functional_type_callee_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Void__(void * pointerToClosure, _Bool _1);
+
+_Bool OrgJetbrainsKotlinxKotlinxCoroutinesCore_internal_functional_type_callee_async_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * pointerToClosure, void * _Nullable _1, void * continuation, void * exception, void * cancellation);
+
+_Bool kotlinx_coroutines_flow_FlowCollector_emit__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable_____reverse_swift(void * self, void * _Nullable value, void * continuation, void * exception, void * cancellation);
+
+_Bool kotlinx_coroutines_flow_Flow_collect__TypesOfArguments__anyU20ExportedKotlinPackages_kotlinx_coroutines_flow_FlowCollector____reverse_swift(void * self, void * collector, void * continuation, void * exception, void * cancellation);
+
+_Bool OrgJetbrainsKotlinxKotlinxCoroutinesCore_internal_functional_type_caller_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Void__(void * pointerToBlock, _Bool _1);
+
+_Bool OrgJetbrainsKotlinxKotlinxCoroutinesCore_internal_functional_type_caller_SwiftU2EVoid__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_Swift_Error___(void * pointerToBlock, void * _Nullable _1);
+
+void * kotlinx_coroutines_flow_FlowCollector__TypesOfArguments__U28Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable_U2920asyncU20throwsU202D_U20Swift_Void__(void * function);
+
+_Bool kotlinx_coroutines_flow_FlowCollector_emit__TypesOfArguments__Swift_Optional_anyU20KotlinRuntimeSupport__KotlinBridgeable___(void * self, void * _Nullable value, void * continuation, void * exception, void * cancellation);
+
+_Bool kotlinx_coroutines_flow_Flow_collect__TypesOfArguments__anyU20ExportedKotlinPackages_kotlinx_coroutines_flow_FlowCollector__(void * self, void * collector, void * continuation, void * exception, void * cancellation);
+
+NS_ASSUME_NONNULL_END

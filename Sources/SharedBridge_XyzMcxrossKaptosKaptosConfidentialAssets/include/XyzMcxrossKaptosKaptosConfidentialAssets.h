@@ -1,0 +1,180 @@
+#include <Foundation/Foundation.h>
+#include <stdint.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_asset_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_copy__TypesOfArguments__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__Swift_Set_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialActivityType__ExportedKotlinPackages_xyz_mcxross_kaptos_model_PageRequest__(void * self, void * _Nullable owner, void * _Nullable asset, NSSet<id> * types, void * page);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput__Swift_Set_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialActivityType__ExportedKotlinPackages_xyz_mcxross_kaptos_model_PageRequest__(void * __kt, void * _Nullable owner, void * _Nullable asset, NSSet<id> * types, void * page);
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_owner_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_page_get(void * self);
+
+NSSet<id> * xyz_mcxross_kaptos_confidential_ConfidentialActivityQuery_types_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_AllowListingChanged();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_AssetSpecificAuditorChanged();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Companion_get();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_ConfidentialityForAssetTypeChanged();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Deposited();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_GlobalAuditorChanged();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_IncomingTransfersPauseChanged();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_KeyRotated();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Normalized();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Registered();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_RolledOver();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Transferred();
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_Withdrawn();
+
+int32_t xyz_mcxross_kaptos_confidential_ConfidentialActivityType_ordinal(void * self);
+
+NSString * xyz_mcxross_kaptos_confidential_ConfidentialActivityType_wireName_get(void * self);
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_confidential_ConfidentialAmount_chunks_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAmount_copy__TypesOfArguments__Swift_Array_Swift_UInt32___(void * self, NSArray<NSNumber *> * chunks);
+
+NSString * xyz_mcxross_kaptos_confidential_ConfidentialAmount_decimal_get(void * self);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAmount_fitsInULong(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAmount_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAmount_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_Swift_UInt32___(void * __kt, NSArray<NSNumber *> * chunks);
+
+NSArray<NSNumber *> * xyz_mcxross_kaptos_confidential_ConfidentialAmount_normalizedChunks_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_confidential_ConfidentialAmount_toULong(void * self);
+
+NSNumber * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_amount_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_asset_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_blockHeight_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_copy__TypesOfArguments__Swift_UInt64_Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialActivityType_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_String__Swift_Optional_Swift_UInt64__ExportedKotlinPackages_kotlinx_serialization_json_JsonObject_Swift_String_Swift_UInt64_Swift_Bool_Swift_Optional_Swift_String__Swift_String__(void * self, uint64_t transactionVersion, uint64_t eventIndex, void * type, void * owner, NSString * _Nullable ownerPrimaryName, void * _Nullable asset, void * _Nullable counterparty, NSString * _Nullable counterpartyPrimaryName, NSNumber * _Nullable amount, void * eventData, NSString * eventDataVersion, uint64_t blockHeight, _Bool transactionSucceeded, NSString * _Nullable entryFunction, NSString * timestamp);
+
+NSString * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_counterpartyPrimaryName_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_counterparty_get(void * self);
+
+NSString * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_entryFunction_get(void * self);
+
+NSString * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_eventDataVersion_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_eventData_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_eventIndex_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_UInt64_Swift_UInt64_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialActivityType_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress_Swift_Optional_Swift_String__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddress__Swift_Optional_Swift_String__Swift_Optional_Swift_UInt64__ExportedKotlinPackages_kotlinx_serialization_json_JsonObject_Swift_String_Swift_UInt64_Swift_Bool_Swift_Optional_Swift_String__Swift_String__(void * __kt, uint64_t transactionVersion, uint64_t eventIndex, void * type, void * owner, NSString * _Nullable ownerPrimaryName, void * _Nullable asset, void * _Nullable counterparty, NSString * _Nullable counterpartyPrimaryName, NSNumber * _Nullable amount, void * eventData, NSString * eventDataVersion, uint64_t blockHeight, _Bool transactionSucceeded, NSString * _Nullable entryFunction, NSString * timestamp);
+
+NSString * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_ownerPrimaryName_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_owner_get(void * self);
+
+NSString * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_timestamp_get(void * self);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_transactionSucceeded_get(void * self);
+
+uint64_t xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_transactionVersion_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetActivity_type_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_copy__TypesOfArguments__Swift_Bool_Swift_Bool_Swift_Bool__(void * self, _Bool registered, _Bool normalized, _Bool incomingTransfersPaused);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_incomingTransfersPaused_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool_Swift_Bool_Swift_Bool__(void * __kt, _Bool registered, _Bool normalized, _Bool incomingTransfersPaused);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_normalized_get(void * self);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialAssetStatus_registered_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialBalance_availableAmount_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_confidential_ConfidentialBalance_available_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialBalance_copy__TypesOfArguments__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialCiphertext__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialCiphertext__ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialAmount_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialAmount__(void * self, NSArray<id> * available, NSArray<id> * pending, void * availableAmount, void * pendingAmount);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialBalance_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialBalance_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialCiphertext__Swift_Array_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialCiphertext__ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialAmount_ExportedKotlinPackages_xyz_mcxross_kaptos_confidential_ConfidentialAmount__(void * __kt, NSArray<id> * available, NSArray<id> * pending, void * availableAmount, void * pendingAmount);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialBalance_pendingAmount_get(void * self);
+
+NSArray<id> * xyz_mcxross_kaptos_confidential_ConfidentialBalance_pending_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialCiphertext_commitment_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialCiphertext_handle_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialCiphertext_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialCiphertext_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * commitment, void * handle);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_Companion_fromBytes__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * bytes);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_Companion_fromSignature__TypesOfArguments__ExportedKotlinPackages_kotlin_ByteArray__(void * self, void * signature);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_Companion_generate(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_Companion_get();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_clear(void * self);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_close(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_encryptionKey_get(void * self);
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialDecryptionKey_isCleared_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialEncryptionKey_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialEncryptionKey_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_kotlin_ByteArray__(void * __kt, void * bytes);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialEncryptionKey_toByteArray(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_copy__TypesOfArguments__ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionOptions_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_account_TransactionSigner__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * self, void * transaction, void * _Nullable feePayer, void * _Nullable externalFeePayerAddress);
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_externalFeePayerAddress_get(void * self);
+
+void * _Nullable xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_feePayer_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_ExportedKotlinPackages_xyz_mcxross_kaptos_model_TransactionOptions_Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_account_TransactionSigner__Swift_Optional_anyU20ExportedKotlinPackages_xyz_mcxross_kaptos_model_AccountAddressInput___(void * __kt, void * transaction, void * _Nullable feePayer, void * _Nullable externalFeePayerAddress);
+
+void * xyz_mcxross_kaptos_confidential_ConfidentialTransactionOptions_transaction_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_EffectiveAuditorHint_copy__TypesOfArguments__Swift_Bool_Swift_UInt64__(void * self, _Bool isGlobal, uint64_t epoch);
+
+uint64_t xyz_mcxross_kaptos_confidential_EffectiveAuditorHint_epoch_get(void * self);
+
+void * xyz_mcxross_kaptos_confidential_EffectiveAuditorHint_init_allocate();
+
+_Bool xyz_mcxross_kaptos_confidential_EffectiveAuditorHint_init_initialize__TypesOfArguments__Swift_UnsafeMutableRawPointer_Swift_Bool_Swift_UInt64__(void * __kt, _Bool isGlobal, uint64_t epoch);
+
+_Bool xyz_mcxross_kaptos_confidential_EffectiveAuditorHint_isGlobal_get(void * self);
+
+NS_ASSUME_NONNULL_END

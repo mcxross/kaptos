@@ -1,0 +1,5 @@
+module "SharedBridge_XyzMcxrossKaptosKaptosEncryptedTransactions" {
+    umbrella "."
+    export *
+    link "XyzMcxrossKaptosKaptosEncryptedTransactions"
+}
