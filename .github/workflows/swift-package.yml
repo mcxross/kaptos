@@ -32,6 +32,10 @@ on:
         description: Publish the validated SwiftPM version and Release assets
         default: false
         type: boolean
+      recovery_run_id:
+        description: Release workflow run whose validated artifact should be reused
+        required: false
+        type: string
   workflow_call:
     inputs:
       source_ref:
@@ -102,6 +106,7 @@ jobs:
           xcodebuild -version
           swift --version
       - name: Build and verify Release SwiftPM distribution
+        if: ${{ !inputs.recovery_run_id }}
         run: >-
           ./gradlew
           :kaptos-swift:assembleSwiftPackageRelease
@@ -109,6 +114,7 @@ jobs:
           :kaptos-swift:checkSwiftPackageDistribution
           --console=plain
       - name: Upload validated publication artifacts
+        if: ${{ !inputs.recovery_run_id }}
         uses: actions/upload-artifact@v7
         with:
           name: aptoskit-swiftpm
@@ -117,7 +123,7 @@ jobs:
           compression-level: 0
           overwrite: true
       - name: Upload consumer and fixture reports
-        if: always()
+        if: always() && !inputs.recovery_run_id
         uses: actions/upload-artifact@v7
         with:
           name: aptoskit-swiftpm-reports
@@ -135,15 +141,42 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read
     concurrency:
       group: aptoskit-swiftpm-publication
       queue: max
       cancel-in-progress: false
     steps:
+      - name: Verify recovery artifact provenance
+        if: inputs.recovery_run_id
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RECOVERY_RUN_ID: ${{ inputs.recovery_run_id }}
+          SOURCE_REVISION: ${{ needs.validate.outputs.source_revision }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RECOVERY_RUN_ID" =~ ^[0-9]+$ ]]
+          run="repos/$GITHUB_REPOSITORY/actions/runs/$RECOVERY_RUN_ID"
+          gh api "$run" | jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$SOURCE_REVISION" '
+            .event == "push" and .path == ".github/workflows/release.yml" and
+            .head_repository.full_name == $repo and .head_sha == $sha and .status == "completed"
+          '
+          gh api --paginate "$run/jobs" | jq -es '
+            any(.[].jobs[]; .name == "aptoskit / validate" and .conclusion == "success")
+          '
       - uses: actions/download-artifact@v8
+        if: ${{ !inputs.recovery_run_id }}
         with:
           name: aptoskit-swiftpm
           path: distribution-artifacts
+      - uses: actions/download-artifact@v8
+        if: inputs.recovery_run_id
+        with:
+          name: aptoskit-swiftpm
+          path: distribution-artifacts
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.recovery_run_id }}
       - name: Publish immutable version without replacing existing tags or assets
         env:
           GH_TOKEN: ${{ github.token }}
